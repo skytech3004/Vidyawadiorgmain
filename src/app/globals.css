@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sandstone: #E2C792;
+  --color-sandstone-light: #F0DDB8;
+  --color-sandstone-dark: #C9A870;
+
+  --color-oxford: #0C2C55;
+  --color-oxford-dark: #061831;
+  --color-teal-blue: #296374;
+  --color-teal-blue-light: #3A8196;
+
+  --font-playfair: "Playfair Display", serif;
+  --font-inter: "Inter", sans-serif;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter);
+}
+
+.hero-bg {
+  background: linear-gradient(135deg, #0C2C55 0%, #296374 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%230C2C55" width="1200" height="600"/><g fill="%23296374" fill-opacity="0.1"><polygon points="1200 0 800 600 1200 600"/><polygon points="0 600 400 0 0 0"/></g></svg>');
+  background-size: cover;
+  opacity: 0.3;
+}
+
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-ticker {
+  display: inline-block;
+  animation: ticker 30s linear infinite;
+}
+
+.animate-ticker:hover {
+  animation-play-state: paused;
+}
