@@ -65,7 +65,8 @@ export async function GET(request: NextRequest) {
             "Accept-Ranges": "bytes",
             "Content-Length": chunksize.toString(),
             "Content-Type": "video/mp4",
-            "Cache-Control": "public, max-age=31536000, immutable",
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
         },
     });
 }
