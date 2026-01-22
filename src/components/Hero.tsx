@@ -75,10 +75,10 @@ export default function Hero() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1 }}
                     className="mb-12"
-                >
-                    <h2 className="text-sandstone text-2xl md:text-3xl font-black uppercase tracking-[0.4em] mb-4">
+                ><h2 className="text-sandstone text-2xl md:text-3xl font-black tracking-normal normal-case mb-4 font-['Noto_Sans_Devanagari']">
                         शिक्षा भी, संस्कार भी
                     </h2>
+
                     <div className="w-24 h-1 bg-sandstone mx-auto rounded-full" />
                 </motion.div>
 
