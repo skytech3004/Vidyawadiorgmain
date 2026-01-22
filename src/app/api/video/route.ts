@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 
 export async function GET(request: NextRequest) {
-    const videoPath = path.join(process.cwd(), "public", "ritu_vaishnav_created.mp4");
+    const videoPath = path.join(process.cwd(), "public", "ritu_vaishnav_created.webm");
 
     if (!fs.existsSync(videoPath)) {
         return new NextResponse("Video not found", { status: 404 });
@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
         return new NextResponse(file, {
             headers: {
                 "Content-Length": fileSize.toString(),
-                "Content-Type": "video/mp4",
+                "Content-Type": "video/webm",
             },
         });
     }

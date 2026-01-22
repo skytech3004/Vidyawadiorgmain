@@ -19,7 +19,7 @@ const institutions = [
         title: "Marudhar Balika Vidyapeeth (Sr. Sec.) Vidyawadi (RBSE)",
         type: "School",
         description: "Co-educational Senior Secondary School with both Hindi and English Medium options under the RBSE board.",
-        icon: <Users className="w-6 h-6" />,
+        icon: <GraduationCap className="w-6 h-6" />,
         stats: "Hindi & English Medium",
         image: "/marudhar_balika.jpg",
         tags: ["Dual Medium", "Boarding Available"]
@@ -28,7 +28,7 @@ const institutions = [
         title: "Leeladevi Parasmall Sancheti English Medium Sr.Sec.School",
         type: "School",
         description: "Elite English Medium Senior Secondary School focused on international standards and student-centric learning.",
-        icon: <School className="w-6 h-6" />,
+        icon: <GraduationCap className="w-6 h-6" />,
         stats: "English Medium Only",
         image: "/lps.jpg",
         tags: ["CBSE Standards", "Modern Tech"]
@@ -37,7 +37,7 @@ const institutions = [
         title: "Hostel",
         type: "Overview",
         description: "information about our Hostel facilities",
-        icon: <BookOpen className="w-6 h-6" />,
+        icon: <School className="w-6 h-6" />,
         stats: "Hostel Overview",
         image: "/hostel.jpg",
         tags: ["Hostel", "Facilities"],
