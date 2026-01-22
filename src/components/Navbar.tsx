@@ -200,7 +200,7 @@ export default function Navbar() {
                                                                 className={cn(
                                                                     "rounded-lg transition-all whitespace-nowrap flex items-center justify-between gap-4",
                                                                     sub.isBrochure
-                                                                        ? "px-4 py-2 bg-oxford text-white rounded-md font-bold text-[12px] shadow-md mb-2 w-full mt-1"
+                                                                        ? "px-4 py-2 bg-oxford text-white rounded-md font-bold text-[12px] shadow-md mb-2 w-fit ml-auto mr-2 mt-1"
                                                                         : "flex-1 px-4 py-3 text-sm font-semibold text-oxford hover:bg-oxford hover:text-white"
                                                                 )}
                                                             >
