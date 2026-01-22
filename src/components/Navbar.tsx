@@ -154,7 +154,6 @@ export default function Navbar() {
                                 scrolled ? "text-oxford/70" : "text-white/70"
                             )}>
                                 Marudhar Mahila Shikshan Sangh
-                                x
                             </p>
                         </div>
                     </motion.div>
