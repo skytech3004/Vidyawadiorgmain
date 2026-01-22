@@ -9,7 +9,8 @@ function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
 }
 
-import { Menu, X, Phone, Mail, Facebook, Instagram, Youtube, ChevronDown, GraduationCap } from "lucide-react";
+import { Menu, X, Phone, Mail, Facebook, Instagram, Youtube, ChevronDown } from "lucide-react";
+import Image from "next/image";
 
 const navLinks = [
     { name: "Home", href: "#home" },
@@ -86,19 +87,19 @@ export default function Navbar() {
                         </div>
                     </div>
 
-                    <div className="flex-1 px-12 overflow-hidden">
-                        <div className="animate-ticker whitespace-nowrap">
-                            <span className="inline-block px-4">Best Girls Boarding School In Rajasthan | Admission Open For 2026-27 | Shiksha bhi, Sanskar bhi</span>
-                            <span className="inline-block px-4">Nurturing Leaders of Tomorrow | Focused Education & Indian Values | Apply Today</span>
+                    <div className="flex-1 px-1 overflow-hidden">
+                        <div className="whitespace-nowrap">
+                            <span className="inline-block px-4">Best Girls Boarding School In Rajasthan | Best Girls’ Boarding School in Rajasthan | Admissions Open from Prep to Postgraduation</span>
+                            {/* <span className="inline-block px-4">Nurturing Leaders of Tomorrow | Focused Education & Indian Values | Apply Today</span> */}
                         </div>
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <a href="#" className="hover:text-sandstone transition-colors"><Facebook size={14} /></a>
-                        <a href="#" className="hover:text-sandstone transition-colors"><Instagram size={14} /></a>
-                        <a href="#" className="hover:text-sandstone transition-colors"><Youtube size={14} /></a>
-                        <div className="w-px h-3 bg-white/20 mx-2" />
-                        <span className="uppercase tracking-widest text-[10px] font-bold">Enrollment Open</span>
+                        <a href="#" className="hover:text-sandstone transition-colors"><Facebook size={20} /></a>
+                        <a href="#" className="hover:text-sandstone transition-colors"><Instagram size={20} /></a>
+                        <a href="#" className="hover:text-sandstone transition-colors"><Youtube size={20} /></a>
+                        {/* <div className="w-px h-3 bg-white/20 mx-2" > */}
+                        {/* <span className="uppercase tracking-widest text-[10px] font-bold">Enrollment Open</span> */}
                     </div>
                 </div>
             </div>
@@ -112,29 +113,53 @@ export default function Navbar() {
                         : (isDarkSection ? "bg-transparent py-4 border-white/10" : "bg-white py-4 border-oxford/10")
                 )}
             >
-                <div className="max-w-[1400px] mx-auto px-6 flex justify-between items-center">
-                    {/* Logo Section */}
+                <div className="max-w-[1400px] mx-auto px-5 flex justify-between items-center">
+
+                    {/* LOGO + BRAND (BADGE STYLE) */}
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className="flex items-center gap-3 cursor-pointer"
-                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        className="relative flex items-center cursor-pointer" style={{ marginRight: "18px" }}
+
+                        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                     >
-                        <div className="w-12 h-12 bg-oxford rounded-xl flex items-center justify-center text-white relative overflow-hidden group">
-                            <GraduationCap size={28} />
-                            <div className="absolute inset-0 bg-sandstone scale-x-0 group-hover:scale-x-100 transition-transform origin-left opacity-20" />
+                        {/* BADGE LOGO */}
+                        <div className="absolute -top-6 -left-4 z-50">
+                            <div className={cn(
+                                "relative transition-all duration-300",
+                                scrolled
+                                    ? "h-20 w-14 md:h-30 md:w-16"   // big even when scrolled
+                                    : "h-24 w-20 md:h-32 md:w-20"  // VERY BIG at top
+                            )}>
+                                <Image
+                                    src="/111rrrdd.png"
+                                    alt="Vidyawadi Logo"
+                                    fill
+                                    className="object-contain drop-shadow-lg"
+                                    priority
+                                />
+                            </div>
                         </div>
-                        <div>
+
+                        {/* BRAND TEXT */}
+                        <div className="pl-20 leading-tight">
                             <h1 className={cn(
-                                "text-xl font-bold tracking-tight leading-none",
-                                scrolled || !isDarkSection ? "text-oxford" : "text-white"
-                            )}>VIDYAWADI</h1>
+                                "font-bold tracking-tight leading-none",
+                                scrolled ? "text-lg text-oxford" : "text-xl text-white"
+                            )}>
+                                VIDYAWADI
+                            </h1>
                             <p className={cn(
-                                "text-[10px] font-bold uppercase tracking-[0.2em] mt-1 opacity-70",
-                                scrolled || !isDarkSection ? "text-oxford" : "text-white"
-                            )}>Shiksha & Sanskar</p>
+                                "text-[10px] font-bold uppercase tracking-[0.2em] mt-1",
+                                scrolled ? "text-oxford/70" : "text-white/70"
+                            )}>
+                                Marudhar Mahila Shikshan Sangh
+                                x
+                            </p>
                         </div>
                     </motion.div>
+
+                    {/* REST OF NAV (unchanged) */}
 
                     {/* Desktop Links */}
                     <div className="hidden lg:flex items-center gap-1">
@@ -262,6 +287,6 @@ export default function Navbar() {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </header>
+        </header >
     );
 }
