@@ -30,13 +30,31 @@ export async function GET(request: NextRequest) {
 
     const file = fs.createReadStream(videoPath, { start, end });
 
-    // Convert ReadableStream to what Next.js Response expects
-    // Note: In Next.js 13+ App Router, we can pass a ReadableStream
     const stream = new ReadableStream({
         start(controller) {
-            file.on("data", (chunk) => controller.enqueue(chunk));
-            file.on("end", () => controller.close());
-            file.on("error", (err) => controller.error(err));
+            file.on("data", (chunk) => {
+                if (controller.desiredSize !== null) {
+                    try {
+                        controller.enqueue(chunk);
+                    } catch (e) {
+                        file.destroy();
+                    }
+                }
+            });
+            file.on("end", () => {
+                try {
+                    controller.close();
+                } catch (e) { }
+            });
+            file.on("error", (err) => {
+                try {
+                    controller.error(err);
+                } catch (e) { }
+                file.destroy();
+            });
+        },
+        cancel() {
+            file.destroy();
         },
     });
 
