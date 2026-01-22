@@ -7,6 +7,7 @@ import Heritage from "@/components/Heritage";
 import HostelSection from "@/components/HostelSection";
 import Staff from "@/components/Staff";
 import BlogSection from "@/components/BlogSection";
+import Academics from "@/components/Academics";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import { initDB } from "@/lib/init-db";
@@ -26,6 +27,7 @@ export default async function Home() {
       <HostelSection />
       <Staff />
       <BlogSection />
+      <Academics />
       <ContactForm />
       <Footer />
     </main>

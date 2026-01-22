@@ -47,7 +47,7 @@ export default function HostelSection() {
                             className="relative aspect-square rounded-[3rem] overflow-hidden border-8 border-white/5 shadow-2xl"
                         >
                             <Image
-                                src="https://images.unsplash.com/photo-1555854817-2b826df94b81?q=80&w=2070&auto=format&fit=crop"
+                                src="/hostel.jpg"
                                 alt="Vidyawadi Hostel Life"
                                 fill
                                 className="object-cover"

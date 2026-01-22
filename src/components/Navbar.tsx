@@ -9,7 +9,7 @@ function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
 }
 
-import { Menu, X, Phone, Mail, Facebook, Instagram, Youtube, ChevronDown } from "lucide-react";
+import { Menu, X, Phone, Mail, Facebook, Instagram, Youtube, ChevronDown, Download } from "lucide-react";
 import Image from "next/image";
 
 const navLinks = [
@@ -24,15 +24,16 @@ const navLinks = [
         ]
     },
     {
-        name: "Institutions",
-        href: "#institutions",
+        name: "Admissions",
+        href: "#Admissions",
         subLinks: [
-            { name: "College Education", href: "#institutions" },
-            { name: "Senior Secondary Schools", href: "#institutions" },
-            { name: "Skill Development", href: "#institutions" }
+            { name: "Download Brochure (PDF)", href: "/brochures/prospectus.pdf", isBrochure: true },
+            { name: "Leeladevi Parasmall Sancheti Kanya Mahavidyalaya", href: "#institutions" },
+            { name: "Marudhar Balika Vidyapeeth (Sr. Sec.) Vidyawadi Hindi/English Medium (RBSE)", href: "#institutions" },
+            { name: "Leeladevi Parasmall Sancheti English Medium Sr.Sec.School", href: "#institutions" }
         ]
     },
-    { name: "Academics", href: "#home" },
+    { name: "Amenities", href: "#home" },
     { name: "Hostel", href: "#hostel" },
     { name: "Gallery", href: "#facilities" },
     { name: "Blog", href: "#blog" },
@@ -74,9 +75,9 @@ export default function Navbar() {
     return (
         <header className="fixed top-0 w-full z-[100] font-inter">
             {/* Top Bar */}
-            <div className="bg-oxford text-white py-2 px-6 hidden md:block">
-                <div className="max-w-[1400px] mx-auto flex justify-between items-center text-[13px] font-medium">
-                    <div className="flex items-center gap-6">
+            <div className="bg-oxford text-white py-2 px-10 hidden md:block">
+                <div className="max-w-[1600px] mx-auto flex justify-between items-center text-[13px] font-medium px-4">
+                    <div className="flex items-center gap-6 pl-32">
                         <div className="flex items-center gap-2">
                             <Phone size={14} className="text-sandstone" />
                             <span>Have any Question?</span>
@@ -89,7 +90,7 @@ export default function Navbar() {
 
                     <div className="flex-1 px-1 overflow-hidden">
                         <div className="whitespace-nowrap">
-                            <span className="inline-block px-4">Best Girls Boarding School In Rajasthan | Best Girls’ Boarding School in Rajasthan | Admissions Open from Prep to Postgraduation</span>
+                            <span className="inline-block px-4 text-yellow-200"> Best Girls’ Boarding School in India | Admissions Open from Prep to Postgraduation</span>
                             {/* <span className="inline-block px-4">Nurturing Leaders of Tomorrow | Focused Education & Indian Values | Apply Today</span> */}
                         </div>
                     </div>
@@ -113,7 +114,7 @@ export default function Navbar() {
                         : (isDarkSection ? "bg-transparent py-4 border-white/10" : "bg-white py-4 border-oxford/10")
                 )}
             >
-                <div className="max-w-[1400px] mx-auto px-5 flex justify-between items-center">
+                <div className="max-w-[1600px] mx-auto px-5 flex justify-between items-center">
 
                     {/* LOGO + BRAND (BADGE STYLE) */}
                     <motion.div
@@ -124,12 +125,12 @@ export default function Navbar() {
                         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                     >
                         {/* BADGE LOGO */}
-                        <div className="absolute -top-6 -left-4 z-50">
+                        <div className="absolute -top-12 -left-8 z-50">
                             <div className={cn(
                                 "relative transition-all duration-300",
                                 scrolled
-                                    ? "h-20 w-14 md:h-30 md:w-16"   // big even when scrolled
-                                    : "h-24 w-20 md:h-32 md:w-20"  // VERY BIG at top
+                                    ? "h-32 w-20 md:h-48 md:w-32"
+                                    : "h-32 w-20 md:h-48 md:w-32"
                             )}>
                                 <Image
                                     src="/111rrrdd.png"
@@ -142,16 +143,16 @@ export default function Navbar() {
                         </div>
 
                         {/* BRAND TEXT */}
-                        <div className="pl-20 leading-tight">
+                        <div className="pl-32 leading-tight">
                             <h1 className={cn(
-                                "font-bold tracking-tight leading-none",
-                                scrolled ? "text-lg text-oxford" : "text-xl text-white"
+                                "font-black tracking-[0.1em] leading-none",
+                                scrolled ? "text-2xl text-oxford" : "text-3xl text-white"
                             )}>
                                 VIDYAWADI
                             </h1>
                             <p className={cn(
-                                "text-[10px] font-bold uppercase tracking-[0.2em] mt-1",
-                                scrolled ? "text-oxford/70" : "text-white/70"
+                                "text-[11px] font-bold uppercase tracking-[0.2em] mt-1 whitespace-nowrap",
+                                scrolled ? "text-oxford/90" : "text-white/90"
                             )}>
                                 Marudhar Mahila Shikshan Sangh
                             </p>
@@ -161,7 +162,7 @@ export default function Navbar() {
                     {/* REST OF NAV (unchanged) */}
 
                     {/* Desktop Links */}
-                    <div className="hidden lg:flex items-center gap-1">
+                    <div className="hidden lg:flex items-center gap-4">
                         {navLinks.map((link) => (
                             <div
                                 key={link.name}
@@ -188,17 +189,25 @@ export default function Navbar() {
                                                 initial={{ opacity: 0, y: 10 }}
                                                 animate={{ opacity: 1, y: 0 }}
                                                 exit={{ opacity: 0, y: 10 }}
-                                                className="absolute top-full left-0 w-64 pt-4"
+                                                className="absolute top-full left-0 pt-4"
                                             >
-                                                <div className="bg-white rounded-xl shadow-2xl border border-oxford/5 overflow-hidden p-2">
-                                                    {link.subLinks.map((sub) => (
-                                                        <a
-                                                            key={sub.name}
-                                                            href={sub.href}
-                                                            className="block px-4 py-3 text-sm font-semibold text-oxford hover:bg-oxford hover:text-white rounded-lg transition-all"
-                                                        >
-                                                            {sub.name}
-                                                        </a>
+                                                <div className="bg-white rounded-xl shadow-2xl border border-oxford/5 overflow-hidden p-2 min-w-max">
+                                                    {link.subLinks.map((sub: any) => (
+                                                        <div key={sub.name} className="flex items-center gap-2">
+                                                            <a
+                                                                href={sub.href}
+                                                                download={sub.isBrochure}
+                                                                className={cn(
+                                                                    "rounded-lg transition-all whitespace-nowrap flex items-center justify-between gap-4",
+                                                                    sub.isBrochure
+                                                                        ? "px-4 py-2 bg-oxford text-white rounded-md font-bold text-[12px] shadow-md mb-2 w-full mt-1"
+                                                                        : "flex-1 px-4 py-3 text-sm font-semibold text-oxford hover:bg-oxford hover:text-white"
+                                                                )}
+                                                            >
+                                                                <span>{sub.name}</span>
+                                                                {sub.isBrochure && <Download size={14} />}
+                                                            </a>
+                                                        </div>
                                                     ))}
                                                 </div>
                                             </motion.div>
@@ -243,7 +252,7 @@ export default function Navbar() {
                         className="lg:hidden fixed inset-0 bg-oxford z-[110] p-6 flex flex-col"
                     >
                         <div className="flex justify-between items-center mb-12">
-                            <h2 className="text-2xl font-bold text-white tracking-widest uppercase">Vidyawadi</h2>
+                            <h2 className="text-3xl font-black text-white tracking-widest uppercase">Vidyawadi</h2>
                             <button onClick={() => setIsOpen(false)} className="text-white p-2">
                                 <X size={32} />
                             </button>
@@ -262,14 +271,21 @@ export default function Navbar() {
                                     </a>
                                     {link.subLinks && (
                                         <div className="mt-4 pl-4 border-l border-white/20 flex flex-col gap-3">
-                                            {link.subLinks.map(sub => (
+                                            {link.subLinks.map((sub: any) => (
                                                 <a
                                                     key={sub.name}
                                                     href={sub.href}
+                                                    download={sub.isBrochure}
                                                     onClick={() => setIsOpen(false)}
-                                                    className="text-white/60 hover:text-white font-medium"
+                                                    className={cn(
+                                                        "flex items-center justify-between gap-4 px-4 py-3 rounded-xl transition-all font-medium text-sm",
+                                                        sub.isBrochure
+                                                            ? "bg-sandstone text-oxford"
+                                                            : "text-white/60 hover:text-white"
+                                                    )}
                                                 >
                                                     {sub.name}
+                                                    {sub.isBrochure && <Download size={18} />}
                                                 </a>
                                             ))}
                                         </div>

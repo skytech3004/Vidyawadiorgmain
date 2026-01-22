@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
+import FloatingButtons from "@/components/FloatingButtons";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -24,10 +26,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+      </head>
       <body
         className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-sandstone-light text-oxford overflow-x-hidden w-full`}
       >
         {children}
+        <FloatingButtons />
+        <Script src="https://cdn.botpress.cloud/webchat/v2.2/shareable.js" strategy="lazyOnload" />
+        <Script src="https://files.bpcontent.cloud/2025/01/15/06/20250115061642-XN0Z8Q9Z.js" strategy="lazyOnload" />
       </body>
     </html>
   );

@@ -2,45 +2,47 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { BookOpen, GraduationCap, School, Users, ArrowRight, Star } from "lucide-react";
+import { BookOpen, GraduationCap, School, Users, ArrowRight, Star, Download } from "lucide-react";
 import Image from "next/image";
 
 const institutions = [
     {
-        title: "L.D. Sancheti Kanya Mahavidyalaya",
+        title: "Leeladevi Parasmall Sancheti Kanya Mahavidyalaya",
         type: "College",
         description: "A premier NAAC B++ accredited girls college offering quality UG education with a focus on holistic development.",
         icon: <GraduationCap className="w-6 h-6" />,
         stats: "NAAC B++ Grade",
-        image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop",
-        tags: ["UG Courses", "Empowering Girls"]
+        image: "/leeladevi.jpg",
+        tags: ["UG Courses", "Scholarships"]
     },
     {
-        title: "ITEP Teacher Training College",
-        type: "College",
-        description: "Pioneering the Integrated Teacher Education Programme in Rajasthan. Offering B.Sc. B.Ed, B.Com. B.Ed, and B.A. B.Ed.",
-        icon: <BookOpen className="w-6 h-6" />,
-        stats: "First in Rajasthan",
-        image: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=2073&auto=format&fit=crop",
-        tags: ["ITEP Program", "Future Educators"]
-    },
-    {
-        title: "Vidyawadi CBSE School",
+        title: "Marudhar Balika Vidyapeeth (Sr. Sec.) Vidyawadi (RBSE)",
         type: "School",
-        description: "English medium Senior Secondary School following the CBSE curriculum, focused on modern pedagogy and academic excellence.",
-        icon: <School className="w-6 h-6" />,
-        stats: "English Medium",
-        image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=2132&auto=format&fit=crop",
-        tags: ["CBSE Curriculum", "Holistic Growth"]
-    },
-    {
-        title: "Vidyawadi RBSE Schools",
-        type: "School",
-        description: "Dual medium (Hindi & English) Senior Secondary Schools offering value-based education under the State Board.",
+        description: "Co-educational Senior Secondary School with both Hindi and English Medium options under the RBSE board.",
         icon: <Users className="w-6 h-6" />,
-        stats: "Hindi & English",
-        image: "https://images.unsplash.com/photo-1577891729319-f48710d3a929?q=80&w=2070&auto=format&fit=crop",
-        tags: ["RBSE Board", "Cultural Values"]
+        stats: "Hindi & English Medium",
+        image: "/marudhar_balika.jpg",
+        tags: ["Dual Medium", "Boarding Available"]
+    },
+    {
+        title: "Leeladevi Parasmall Sancheti English Medium Sr.Sec.School",
+        type: "School",
+        description: "Elite English Medium Senior Secondary School focused on international standards and student-centric learning.",
+        icon: <School className="w-6 h-6" />,
+        stats: "English Medium Only",
+        image: "/lps.jpg",
+        tags: ["CBSE Standards", "Modern Tech"]
+    },
+    {
+        title: "Hostel",
+        type: "Overview",
+        description: "information about our Hostel facilities",
+        icon: <BookOpen className="w-6 h-6" />,
+        stats: "Hostel Overview",
+        image: "/hostel.jpg",
+        tags: ["Hostel", "Facilities"],
+        isBrochure: false,
+        href: "/brochures/hostel.pdf"
     }
 ];
 
@@ -67,7 +69,7 @@ export default function Institutions() {
                         viewport={{ once: true }}
                         className="text-4xl md:text-6xl font-bold text-oxford leading-tight"
                     >
-                        Our Institutions
+                        Our Units
                     </motion.h2>
                     <motion.div
                         initial={{ scaleX: 0 }}
@@ -127,10 +129,17 @@ export default function Institutions() {
                                     <div className="w-12 h-12 rounded-2xl bg-oxford/5 flex items-center justify-center text-oxford group-hover:bg-oxford group-hover:text-white transition-all duration-300">
                                         {inst.icon}
                                     </div>
-                                    <button className="flex items-center gap-2 font-black text-xs uppercase tracking-widest text-oxford group-hover:gap-4 transition-all overflow-hidden relative pr-8">
-                                        Explore More
-                                        <ArrowRight size={16} className="absolute right-0 group-hover:-right-2 transition-all" />
-                                    </button>
+                                    {inst.isBrochure ? (
+                                        <a href={inst.href} download className="flex items-center gap-2 font-black text-xs uppercase tracking-widest text-oxford group-hover:gap-4 transition-all overflow-hidden relative pr-8">
+                                            Download Now
+                                            <Download size={16} className="absolute right-0 group-hover:-right-2 transition-all" />
+                                        </a>
+                                    ) : (
+                                        <button className="flex items-center gap-2 font-black text-xs uppercase tracking-widest text-oxford group-hover:gap-4 transition-all overflow-hidden relative pr-8">
+                                            Explore More
+                                            <ArrowRight size={16} className="absolute right-0 group-hover:-right-2 transition-all" />
+                                        </button>
+                                    )}
                                 </div>
                             </div>
 
