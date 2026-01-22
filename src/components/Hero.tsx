@@ -67,8 +67,10 @@ export default function Hero() {
                     playsInline
                     preload="auto"
                     className="h-full w-full object-cover opacity-80"
+                    poster="/ritu_vaishnav_created-ezgif.com-video-to-webp-converter.webp"
                 >
-                    <source src="/ritu_vaishnav_created.mp4" type="video/mp4" />
+                    <source src="/ritu_vaishnav_created-ezgif.com-video-to-webp-converter.webp" type="image/webp" />
+                    <source src="/api/video" type="video/mp4" />
                 </video>
 
                 {/* Cool Blue Cinematic Grade */}
