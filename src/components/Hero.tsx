@@ -67,9 +67,8 @@ export default function Hero() {
                     playsInline
                     preload="auto"
                     className="h-full w-full object-cover opacity-80"
-                    poster="/ritu_vaishnav_created-ezgif.com-video-to-webp-converter.webp"
+                    poster="/hostel.jpg"
                 >
-                    <source src="/ritu_vaishnav_created-ezgif.com-video-to-webp-converter.webp" type="image/webp" />
                     <source src="/api/video" type="video/mp4" />
                 </video>
 
