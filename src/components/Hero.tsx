@@ -77,7 +77,7 @@ export default function Hero() {
                     className="mb-12"
                 >
                     <h2 className="text-sandstone text-2xl md:text-3xl font-black uppercase tracking-[0.4em] mb-4">
-                        Shiksha bhi, Sanskar bhi
+                        शिक्षा भी, संस्कार भी
                     </h2>
                     <div className="w-24 h-1 bg-sandstone mx-auto rounded-full" />
                 </motion.div>
