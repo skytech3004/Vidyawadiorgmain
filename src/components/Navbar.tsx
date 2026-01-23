@@ -122,7 +122,7 @@ export default function Navbar() {
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className="relative flex items-center cursor-pointer" style={{ marginRight: "18px" }}
+                        className="relative flex items-center cursor-pointer"
 
                         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                     >
