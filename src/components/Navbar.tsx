@@ -16,11 +16,13 @@ const navLinks = [
     { name: "Home", href: "#home" },
     {
         name: "About Us",
-        href: "#about",
+        href: "/about",
         subLinks: [
-            { name: "Vision & Mission", href: "#about" },
-            { name: "Legacy Since 1956", href: "#heritage" },
-            { name: "Management", href: "#staff" }
+            { name: "About Vidyawadi", href: "/about" },
+            { name: "About the Trust", href: "/about/trust" },
+            { name: "Vision & Mission", href: "/about/vision-mission" },
+            { name: "Legacy Since 1956", href: "/about/legacy" },
+            { name: "Management", href: "/about/management" }
         ]
     },
     {
@@ -249,53 +251,82 @@ export default function Navbar() {
                         initial={{ opacity: 0, x: "100%" }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: "100%" }}
-                        className="lg:hidden fixed inset-0 bg-oxford z-[110] p-6 flex flex-col"
+                        transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                        className="lg:hidden fixed inset-0 bg-oxford z-[110] p-6 flex flex-col h-screen overflow-hidden"
                     >
-                        <div className="flex justify-between items-center mb-12">
-                            <h2 className="text-3xl font-black text-white tracking-widest uppercase">Vidyawadi</h2>
-                            <button onClick={() => setIsOpen(false)} className="text-white p-2">
+                        <div className="flex justify-between items-center mb-10">
+                            <div className="flex flex-col">
+                                <h2 className="text-3xl font-black text-white tracking-widest uppercase">Vidyawadi</h2>
+                                <p className="text-[10px] text-sandstone font-bold uppercase tracking-widest mt-1">Marudhar Mahila Shikshan Sangh</p>
+                            </div>
+                            <button onClick={() => setIsOpen(false)} className="text-white p-2 hover:bg-white/10 rounded-full transition-colors">
                                 <X size={32} />
                             </button>
                         </div>
 
-                        <div className="flex flex-col gap-6 overflow-y-auto">
+                        <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar flex flex-col gap-4 pb-10">
                             {navLinks.map((link) => (
-                                <div key={link.name}>
-                                    <a
-                                        href={link.href}
-                                        onClick={() => !link.subLinks && setIsOpen(false)}
-                                        className="text-2xl font-bold text-white/90 hover:text-sandstone flex justify-between items-center"
+                                <div key={link.name} className="border-b border-white/5 pb-4">
+                                    <div
+                                        className="flex justify-between items-center cursor-pointer group"
+                                        onClick={() => link.subLinks ? setActiveDropdown(activeDropdown === link.name ? null : link.name) : setIsOpen(false)}
                                     >
-                                        {link.name}
-                                        {/* Simplified mobile sublinks */}
-                                    </a>
+                                        <a
+                                            href={link.subLinks ? undefined : link.href}
+                                            className="text-xl font-bold text-white/90 group-hover:text-sandstone transition-colors"
+                                        >
+                                            {link.name}
+                                        </a>
+                                        {link.subLinks && (
+                                            <ChevronDown
+                                                size={20}
+                                                className={cn(
+                                                    "text-white/40 transition-transform duration-300",
+                                                    activeDropdown === link.name && "rotate-180 text-sandstone"
+                                                )}
+                                            />
+                                        )}
+                                    </div>
+
                                     {link.subLinks && (
-                                        <div className="mt-4 pl-4 border-l border-white/20 flex flex-col gap-3">
-                                            {link.subLinks.map((sub: any) => (
-                                                <a
-                                                    key={sub.name}
-                                                    href={sub.href}
-                                                    download={sub.isBrochure}
-                                                    onClick={() => setIsOpen(false)}
-                                                    className={cn(
-                                                        "flex items-center justify-between gap-4 px-4 py-3 rounded-xl transition-all font-medium text-sm",
-                                                        sub.isBrochure
-                                                            ? "bg-sandstone text-oxford"
-                                                            : "text-white/60 hover:text-white"
-                                                    )}
+                                        <AnimatePresence>
+                                            {activeDropdown === link.name && (
+                                                <motion.div
+                                                    initial={{ height: 0, opacity: 0 }}
+                                                    animate={{ height: "auto", opacity: 1 }}
+                                                    exit={{ height: 0, opacity: 0 }}
+                                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                                    className="overflow-hidden"
                                                 >
-                                                    {sub.name}
-                                                    {sub.isBrochure && <Download size={18} />}
-                                                </a>
-                                            ))}
-                                        </div>
+                                                    <div className="mt-4 pl-4 border-l-2 border-sandstone/30 flex flex-col gap-2">
+                                                        {link.subLinks.map((sub: any) => (
+                                                            <a
+                                                                key={sub.name}
+                                                                href={sub.href}
+                                                                download={sub.isBrochure}
+                                                                onClick={() => setIsOpen(false)}
+                                                                className={cn(
+                                                                    "flex items-center justify-between gap-4 px-4 py-3 rounded-lg transition-all font-semibold text-sm leading-snug",
+                                                                    sub.isBrochure
+                                                                        ? "bg-sandstone text-oxford shadow-lg"
+                                                                        : "text-white/60 hover:text-white hover:bg-white/5"
+                                                                )}
+                                                            >
+                                                                <span className="flex-1">{sub.name}</span>
+                                                                {sub.isBrochure && <Download size={16} />}
+                                                            </a>
+                                                        ))}
+                                                    </div>
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
                                     )}
                                 </div>
                             ))}
                         </div>
 
-                        <div className="mt-auto pt-12 border-t border-white/10">
-                            <button className="w-full py-5 bg-sandstone text-oxford font-black text-xl rounded-2xl">
+                        <div className="mt-auto pt-6 bg-oxford border-t border-white/10">
+                            <button className="w-full py-4 bg-sandstone text-oxford font-black text-lg rounded-xl shadow-[0_4px_15px_rgba(226,199,146,0.3)] transition-transform active:scale-[0.98]">
                                 ENROLL NOW
                             </button>
                         </div>

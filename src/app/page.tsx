@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import About from "@/components/About";
 import Stats from "@/components/Stats";
 import Institutions from "@/components/Institutions";
 import Facilities from "@/components/Facilities";
@@ -20,6 +21,7 @@ export default async function Home() {
     <main className="min-h-screen">
       <Navbar />
       <Hero />
+      <About />
       <Stats />
       <Institutions />
       <Facilities />
