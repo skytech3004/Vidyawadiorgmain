@@ -121,7 +121,7 @@ export default function Hero() {
                         transition={{ duration: 1.2, delay: 1.5, ease: "easeOut" }}
                         className="text-4xl md:text-7xl font-black text-white mb-12 font-devanagari relative py-4"
                     >
-                        <span className="relative z-10 bg-clip-text text-transparent bg-gradient-to-r from-white via-sandstone-light to-white bg-[length:200%_auto] animate-shimmer drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
+                        <span className="relative z-10 bg-clip-text text-transparent bg-gradient-to-r from-white via-sandstone-light to-white bg-[length:200%_auto] animate-shimmer drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] py-3 block leading-relaxed">
                             शिक्षा भी, संस्कार भी
                         </span>
                         {/* Subtle Glow Behind Hindi Text */}

@@ -13,7 +13,7 @@ import { Menu, X, Phone, Mail, Facebook, Instagram, Youtube, ChevronDown, Downlo
 import Image from "next/image";
 
 const navLinks = [
-    { name: "Home", href: "#home" },
+    { name: "Home", href: "/" },
     {
         name: "About Us",
         href: "/about",
@@ -127,12 +127,12 @@ export default function Navbar() {
                         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                     >
                         {/* BADGE LOGO */}
-                        <div className="absolute -top-12 -left-8 z-50">
+                        <div className="absolute -top-12 -left-5 z-50">
                             <div className={cn(
                                 "relative transition-all duration-300",
                                 scrolled
-                                    ? "h-32 w-20 md:h-48 md:w-32"
-                                    : "h-32 w-20 md:h-48 md:w-32"
+                                    ? "h-48 w-20 md:h-48 md:w-32"
+                                    : "h-48 w-20 md:h-48 md:w-32"
                             )}>
                                 <Image
                                     src="/111rrrdd.png"
@@ -145,7 +145,7 @@ export default function Navbar() {
                         </div>
 
                         {/* BRAND TEXT */}
-                        <div className="pl-32 leading-tight">
+                        <div className="pl-[68px] md:pl-32 leading-tight">
                             <h1 className={cn(
                                 "font-black tracking-[0.1em] leading-none",
                                 scrolled ? "text-2xl text-oxford" : "text-3xl text-white"
