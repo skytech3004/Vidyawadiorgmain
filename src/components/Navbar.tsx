@@ -116,7 +116,7 @@ export default function Navbar() {
                         : (isDarkSection ? "bg-transparent py-4 border-white/10" : "bg-white py-4 border-oxford/10")
                 )}
             >
-                <div className="max-w-[1600px] mx-auto px-5 flex justify-between items-center">
+                <div className="max-w-[1600px] mx-auto px-3 md:px-5 flex justify-between items-center">
 
                     {/* LOGO + BRAND (BADGE STYLE) */}
                     <motion.div
@@ -145,15 +145,15 @@ export default function Navbar() {
                         </div>
 
                         {/* BRAND TEXT */}
-                        <div className="pl-[68px] md:pl-32 leading-tight">
+                        <div className="pl-[68px] md:pl-32 leading-tight flex-1 min-w-0">
                             <h1 className={cn(
-                                "font-black tracking-[0.1em] leading-none",
-                                scrolled ? "text-2xl text-oxford" : "text-3xl text-white"
+                                "font-black tracking-[0.1em] leading-none transition-all truncate pr-2",
+                                scrolled ? "text-[clamp(18px,4.5vw,24px)] text-oxford" : "text-[clamp(18px,4.5vw,30px)] text-white"
                             )}>
                                 VIDYAWADI
                             </h1>
                             <p className={cn(
-                                "text-[11px] font-bold uppercase tracking-[0.2em] mt-1 whitespace-nowrap",
+                                "text-[9px] sm:text-[11px] font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] mt-1 truncate",
                                 scrolled ? "text-oxford/90" : "text-white/90"
                             )}>
                                 Marudhar Mahila Shikshan Sangh
@@ -221,7 +221,7 @@ export default function Navbar() {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
                         <button className={cn(
                             "hidden sm:flex items-center gap-2 px-6 py-2.5 rounded-full font-bold text-sm tracking-wider uppercase transition-all shadow-md active:scale-95",
                             scrolled || !isDarkSection
