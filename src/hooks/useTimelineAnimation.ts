@@ -11,29 +11,22 @@ export const useTimelineAnimation = () => {
     const pathRef = useRef<SVGPathElement>(null);
 
     useEffect(() => {
-        if (!pathRef.current || !svgRef.current) return;
+        if (!pathRef.current) return;
 
         const path = pathRef.current;
-
-        // Calculate total length of the path
         const length = path.getTotalLength();
 
-        // Set up the start position of the drawing
-        gsap.set(path, {
-            strokeDasharray: length,
-            strokeDashoffset: length,
-        });
+        // Set initial state
+        path.style.strokeDasharray = `${length}`;
+        path.style.strokeDashoffset = `${length}`;
 
         // Create the drawing animation synced with scroll
         const tl = gsap.timeline({
             scrollTrigger: {
-                trigger: "#heritage", // Target the main section
-                start: "top center",
-                end: "bottom center",
-                scrub: 1.5, // Smoother follow
-                once: false, // User requested "Animate only once per scroll session" - but scrub usually needs scrolling back and forth. 
-                // If they strictly want "draw and stay", scrub isn't ideal, but they requested scrubbed (scroll-synced).
-                // I will stick with scrub as requested.
+                trigger: "#heritage",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 2,
             },
         });
 

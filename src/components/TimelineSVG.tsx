@@ -42,7 +42,7 @@ const TimelineSVG = forwardRef<SVGPathElement, TimelineSVGProps>((props, ref) =>
                     C 50,1250 200,1350 200,1400"
                     fill="none"
                     stroke="#c9a870"
-                    strokeWidth="12"
+                    strokeWidth="100"
                     strokeLinecap="round"
                     className="opacity-100 drop-shadow-[0_0_15px_rgba(201,168,112,0.4)]"
                 />
