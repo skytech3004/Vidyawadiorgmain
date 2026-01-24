@@ -44,15 +44,22 @@ export default function Footer() {
                         <ul className="space-y-4">
                             <li className="flex gap-4 text-white/60">
                                 <MapPin className="text-sandstone shrink-0" size={20} />
-                                <span>Ahmedabad, Gujarat, India</span>
+                                <span className="text-sm">
+                                    LEELA DEVI PARASMAL SANCHETI KANYA MAHAVIDYALAYA (P.G.)<br />
+                                    (A Unit of Marudhar Mahila Sikshan Sangh, Vidyawadi),<br />
+                                    Post - Vidyawadi, Khimel, St. Rani,<br />
+                                    Tehsil- Bali, Dist. Pali,<br />
+                                    State - Rajasthan (India)<br />
+                                    PIN – 306115
+                                </span>
                             </li>
                             <li className="flex gap-4 text-white/60">
                                 <Phone className="text-sandstone shrink-0" size={20} />
-                                <span>+91 98765 43210</span>
+                                <span className="text-sm">+91-8764185993 / 02934-222994</span>
                             </li>
                             <li className="flex gap-4 text-white/60">
                                 <Mail className="text-sandstone shrink-0" size={20} />
-                                <span>info@vidyawadi.org</span>
+                                <span className="text-sm">ldpsvidhyawadi@gmail.com</span>
                             </li>
                         </ul>
                     </div>
