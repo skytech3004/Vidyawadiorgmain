@@ -48,7 +48,7 @@ export default function About() {
 
                         <div className="space-y-6 text-oxford/70 text-lg leading-relaxed">
                             <p>
-                                <span className="font-bold text-oxford">Vidyawadi</span> is an educational initiative of Marudhar Mahila Shikshan Sangh, established with the vision of empowering girls through education.
+                                <span className="font-bold text-oxford">Vidyawadi</span> is an educational initiative of <span className="bg-sandstone text-oxford px-1.5 py-0.5 rounded shadow-sm font-bold">Marudhar Mahila Shikshan Sangh</span>, established with the vision of empowering girls through education.
                             </p>
                             <p>
                                 Since <span className="text-sandstone font-bold underline decoration-2 underline-offset-4">1956</span>, Vidyawadi has continuously evolved to meet modern educational needs while preserving its core values of discipline, safety, and holistic development.

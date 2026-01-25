@@ -156,7 +156,9 @@ export default function Navbar() {
                                 "text-[9px] sm:text-[11px] font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] mt-1 truncate",
                                 scrolled ? "text-oxford/90" : "text-white/90"
                             )}>
-                                Marudhar Mahila Shikshan Sangh
+                                <span className="bg-sandstone text-oxford px-1.5 py-0.5 rounded shadow-sm inline-block">
+                                    Marudhar Mahila Shikshan Sangh
+                                </span>
                             </p>
                         </div>
                     </motion.div>
@@ -257,7 +259,11 @@ export default function Navbar() {
                         <div className="flex justify-between items-center mb-10">
                             <div className="flex flex-col">
                                 <h2 className="text-3xl font-black text-white tracking-widest uppercase">Vidyawadi</h2>
-                                <p className="text-[10px] text-sandstone font-bold uppercase tracking-widest mt-1">Marudhar Mahila Shikshan Sangh</p>
+                                <p className="text-[10px] text-sandstone font-bold uppercase tracking-widest mt-1">
+                                    <span className="bg-sandstone text-oxford px-1.5 py-0.5 rounded shadow-sm">
+                                        Marudhar Mahila Shikshan Sangh
+                                    </span>
+                                </p>
                             </div>
                             <button onClick={() => setIsOpen(false)} className="text-white p-2 hover:bg-white/10 rounded-full transition-colors">
                                 <X size={32} />

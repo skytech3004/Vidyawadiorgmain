@@ -62,9 +62,9 @@ export default function AnnouncementPage() {
 
     // Events Data (Mock Data - ideally filtered by date)
     const events = [
-        { id: '1', title: 'Meeting with friends', desc: 'Travel Destination Discussion', time: '10:00 - 11:00', date: 'Jan 10, 2024', day: 3, month: 0, year: 2024, type: 'oxford', dotClass: 'bg-oxford', textClass: 'hover:text-oxford' },
-        { id: '2', title: 'Visiting online course', desc: 'Checks updates for design course', time: '05:40 - 13:00', date: 'Jan 10, 2024', day: 7, month: 0, year: 2024, type: 'teal-blue', dotClass: 'bg-teal-blue', textClass: 'hover:text-teal-blue' },
-        { id: '3', title: 'Development meet', desc: 'Discussion with developer', time: '10:00 - 11:00', date: 'Jan 14, 2024', day: 19, month: 0, year: 2024, type: 'sandstone', dotClass: 'bg-sandstone', textClass: 'hover:text-sandstone-dark' }
+        { id: '1', title: 'Meeting with friends', desc: 'Travel Destination Discussion', time: '10:00 - 11:00', date: 'Jan 10, 2026', day: 3, month: 0, year: 2026, type: 'oxford', dotClass: 'bg-oxford', textClass: 'hover:text-oxford' },
+        { id: '2', title: 'Visiting online course', desc: 'Checks updates for design course', time: '05:40 - 13:00', date: 'Jan 10, 2026', day: 7, month: 0, year: 2026, type: 'teal-blue', dotClass: 'bg-teal-blue', textClass: 'hover:text-teal-blue' },
+        { id: '3', title: 'Development meet', desc: 'Discussion with developer', time: '10:00 - 11:00', date: 'Jan 14, 2026', day: 19, month: 0, year: 2026, type: 'sandstone', dotClass: 'bg-sandstone', textClass: 'hover:text-sandstone-dark' }
     ];
 
     const getEventForDay = (day: number) => {
@@ -107,7 +107,7 @@ export default function AnnouncementPage() {
                                 <h2 className="font-manrope text-3xl leading-tight text-white mb-1.5 font-bold">Upcoming Events</h2>
                                 <p className="text-lg font-normal text-white/80 mb-8">Don’t miss schedule</p>
                                 {/* Scrollable Container */}
-                                <div className="h-[600px] overflow-hidden relative mask-gradient-b">
+                                <div className="h-[600px] overflow-hidden relative mask-gradient-b rounded-[40px]">
                                     {/* Gradient Masks for smooth fade in/out */}
                                     {/* <div className="absolute top-0 left-0 right-0 h-10 bg-gradient-to-b from-oxford to-transparent z-10 pointer-events-none"></div> */}
                                     {/* <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-oxford to-transparent z-10 pointer-events-none"></div> */}
@@ -118,7 +118,7 @@ export default function AnnouncementPage() {
                                     >
                                         {/* Duplicating events for seamless loop */}
                                         {[...events, ...events, ...events].map((item, index) => (
-                                            <div key={`${item.id}-${index}`} className="p-6 rounded-xl bg-white shadow-sm border border-gray-100 shrink-0">
+                                            <div key={`${item.id}-${index}`} className="p-6 rounded-[40px] bg-white shadow-sm border border-oxford shrink-0">
                                                 <div className="flex items-center justify-between mb-3">
                                                     <div className="flex items-center gap-2.5">
                                                         <span className={`w-2.5 h-2.5 rounded-full ${item.dotClass}`}></span>
@@ -179,9 +179,9 @@ export default function AnnouncementPage() {
                                         </div>
                                     </div>
                                     <div className="flex items-center rounded-md p-1 bg-gray-50 gap-px">
-                                        <button className="py-2.5 px-5 rounded-lg bg-gray-50 text-oxford text-sm font-medium transition-all duration-300 hover:bg-oxford hover:text-white">Day</button>
-                                        <button className="py-2.5 px-5 rounded-lg bg-oxford text-white text-sm font-medium transition-all duration-300 hover:bg-oxford hover:text-white">Week</button>
-                                        <button className="py-2.5 px-5 rounded-lg bg-gray-50 text-oxford text-sm font-medium transition-all duration-300 hover:bg-oxford hover:text-white">Month</button>
+                                        {/* <button className="py-2.5 px-5 rounded-lg bg-gray-50 text-oxford text-sm font-medium transition-all duration-300 hover:bg-oxford hover:text-white">Day</button> */}
+                                        {/* <button className="py-2.5 px-5 rounded-lg bg-oxford text-white text-sm font-medium transition-all duration-300 hover:bg-oxford hover:text-white">Week</button> */}
+                                        <button className="py-2.5 px-5 rounded-lg bg-oxford text-white text-sm font-medium transition-all duration-300 hover:bg-oxford hover:text-white">Month</button>
                                     </div>
                                 </div>
                                 <div className="border border-indigo-100 rounded-xl">
@@ -209,15 +209,26 @@ export default function AnnouncementPage() {
                                             let textClass = "text-oxford";
 
                                             return (
-                                                <div key={`curr-${day}`} className="flex xl:aspect-square max-xl:min-h-[60px] p-3.5 bg-white relative border-r border-b border-indigo-100 transition-all duration-300 hover:bg-indigo-50 cursor-pointer">
-                                                    <span className={`text-xs font-semibold ${isToday ? 'bg-oxford text-white w-6 h-6 flex items-center justify-center rounded-full' : 'text-gray-900'}`}>{day}</span>
+                                                <div key={`curr-${day}`} className="flex flex-col xl:aspect-square max-xl:min-h-[60px] p-3.5 bg-white relative border-r border-b border-indigo-100 transition-all duration-300 hover:bg-indigo-50 cursor-pointer group">
+                                                    <div className="flex items-start justify-between">
+                                                        <span className={`text-xs font-semibold ${isToday ? 'bg-oxford text-white w-6 h-6 flex items-center justify-center rounded-full' : 'text-gray-900'}`}>{day}</span>
+                                                        {event && (
+                                                            <span className={`w-2 h-2 rounded-full ${colors[event.type as keyof typeof colors].bg} xl:hidden`}></span>
+                                                        )}
+                                                    </div>
 
                                                     {event && (
-                                                        <div className={`absolute top-9 bottom-1 left-3.5 right-1 p-1.5 xl:px-2.5 h-max rounded ${colors[event.type as keyof typeof colors].lightBg} `}>
-                                                            <p className={`hidden xl:block text-xs font-bold mb-px whitespace-nowrap truncate ${colors[event.type as keyof typeof colors].text}`}>{event.title}</p>
-                                                            <span className={`hidden xl:block text-[10px] font-normal whitespace-nowrap ${colors[event.type as keyof typeof colors].text}`}>{event.time}</span>
-                                                            <p className={`xl:hidden w-2 h-2 rounded-full ${colors[event.type as keyof typeof colors].bg}`}></p>
-                                                        </div>
+                                                        <>
+                                                            {/* Dot for all screens near the date or separate */}
+                                                            <div className="mt-1 xl:mt-2 hidden xl:block">
+                                                                <span className={`block w-1.5 h-1.5 rounded-full ${colors[event.type as keyof typeof colors].bg} mb-1`}></span>
+                                                            </div>
+
+                                                            <div className={`absolute top-9 bottom-1 left-3.5 right-1 p-1.5 xl:px-2.5 h-max rounded ${colors[event.type as keyof typeof colors].lightBg} group-hover:block hidden xl:block`}>
+                                                                <p className={`hidden xl:block text-xs font-bold mb-px whitespace-nowrap truncate ${colors[event.type as keyof typeof colors].text}`}>{event.title}</p>
+                                                                <span className={`hidden xl:block text-[10px] font-normal whitespace-nowrap ${colors[event.type as keyof typeof colors].text}`}>{event.time}</span>
+                                                            </div>
+                                                        </>
                                                     )}
                                                 </div>
                                             );

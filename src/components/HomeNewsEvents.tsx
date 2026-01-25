@@ -19,6 +19,23 @@ export default function HomeNewsEvents() {
 
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
+    // Mock Events Data
+    const events = [
+        { id: 1, title: "Annual Sports Meet", date: "January 10th, 2026 at 5:00 PM", location: "School Ground", image: "/events/sports.jpg", avatarFn: "S", rawDate: new Date(2026, 0, 10) },
+        { id: 2, title: "Science Exhibition", date: "January 12th, 2026 at 3:00 PM", location: "Auditorium", image: "/events/science.jpg", avatarFn: "M", rawDate: new Date(2026, 0, 12) },
+        { id: 3, title: "Parent Teacher Meeting", date: "January 14th, 2026 at 10:00 AM", location: "Main Hall", image: "/events/ptm.jpg", avatarFn: "D", rawDate: new Date(2026, 0, 14) },
+        { id: 4, title: "Cultural Fest", date: "January 20th, 2026 at 5:00 PM", location: "Open Air Theatre", image: "/events/cultural.jpg", avatarFn: "L", rawDate: new Date(2026, 0, 20) },
+        { id: 5, title: "Alumni Meet", date: "February 5th, 2026 at 12:00 PM", location: "Conference Hall", image: "/events/alumni.jpg", avatarFn: "C", rawDate: new Date(2026, 1, 5) },
+    ];
+
+    const hasEvent = (day: number) => {
+        return events.some(e =>
+            e.rawDate.getDate() === day &&
+            e.rawDate.getMonth() === currentDate.getMonth() &&
+            e.rawDate.getFullYear() === currentDate.getFullYear()
+        );
+    };
+
     const calendarGrid = [];
     // Empty slots for prev month
     for (let i = 0; i < firstDayOfMonth; i++) {
@@ -27,21 +44,19 @@ export default function HomeNewsEvents() {
     // Days
     for (let i = 1; i <= daysInMonth; i++) {
         const isToday = i === new Date().getDate() && currentDate.getMonth() === new Date().getMonth() && currentDate.getFullYear() === new Date().getFullYear();
+        const eventExists = hasEvent(i);
+
         calendarGrid.push(
-            <div key={`day-${i}`} className="h-10 w-10 flex items-center justify-center text-sm font-medium relative cursor-pointer hover:bg-gray-100 rounded-full transition-colors">
-                <span className={isToday ? "bg-oxford text-white h-8 w-8 flex items-center justify-center rounded-full" : "text-gray-700"}>{i}</span>
+            <div key={`day-${i}`} className="h-10 w-10 flex flex-col items-center justify-center relative cursor-pointer hover:bg-gray-100 rounded-full transition-colors">
+                <span className={`text-sm font-medium h-7 w-7 flex items-center justify-center rounded-full ${isToday ? "bg-oxford text-white" : "text-gray-700"}`}>
+                    {i}
+                </span>
+                {eventExists && (
+                    <span className="h-1 w-1 rounded-full bg-oxford mt-0.5"></span>
+                )}
             </div>
         );
     }
-
-    // Mock Events Data
-    const events = [
-        { id: 1, title: "Annual Sports Meet", date: "January 10th, 2026 at 5:00 PM", location: "School Ground", image: "/events/sports.jpg", avatarFn: "S" },
-        { id: 2, title: "Science Exhibition", date: "January 12th, 2026 at 3:00 PM", location: "Auditorium", image: "/events/science.jpg", avatarFn: "M" },
-        { id: 3, title: "Parent Teacher Meeting", date: "January 14th, 2026 at 10:00 AM", location: "Main Hall", image: "/events/ptm.jpg", avatarFn: "D" },
-        { id: 4, title: "Cultural Fest", date: "January 20th, 2026 at 5:00 PM", location: "Open Air Theatre", image: "/events/cultural.jpg", avatarFn: "L" },
-        { id: 5, title: "Alumni Meet", date: "February 5th, 2026 at 12:00 PM", location: "Conference Hall", image: "/events/alumni.jpg", avatarFn: "C" },
-    ];
 
     return (
         <section className="py-20 bg-stone-50">
@@ -59,12 +74,12 @@ export default function HomeNewsEvents() {
                             <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-stone-50 to-transparent z-10 pointer-events-none"></div>
 
                             <div
-                                className="flex flex-col gap-0 animate-scroll-up"
+                                className="flex flex-col gap-4 animate-scroll-up"
                                 style={{ height: "max-content" }}
                             >
                                 {/* Triple Duplication for smooth loop */}
                                 {[...events, ...events, ...events].map((event, idx) => (
-                                    <div key={`${event.id}-${idx}`} className="group py-6 border-b border-gray-100 dark:border-gray-700/50 flex flex-col sm:flex-row gap-6 items-start sm:items-center hover:bg-white hover:shadow-sm hover:px-4 hover:rounded-xl transition-all duration-300">
+                                    <div key={`${event.id}-${idx}`} className="group p-6 bg-white border border-oxford rounded-2xl flex flex-col sm:flex-row gap-6 items-start sm:items-center hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300">
                                         {/* Avatar / Image Placeholder */}
                                         <div className="h-12 w-12 rounded-full bg-sandstone/20 text-oxford flex items-center justify-center font-bold text-xl shrink-0">
                                             {event.avatarFn}
@@ -84,9 +99,9 @@ export default function HomeNewsEvents() {
                                             </div>
                                         </div>
 
-                                        <button className="text-gray-400 hover:text-oxford transition-colors p-2">
+                                        {/* <button className="text-gray-400 hover:text-oxford transition-colors p-2">
                                             <MoreHorizontal size={20} />
-                                        </button>
+                                        </button> */}
                                     </div>
                                 ))}
                             </div>
@@ -95,7 +110,7 @@ export default function HomeNewsEvents() {
 
                     {/* RIGHT COLUMN: CALENDAR */}
                     <div className="lg:col-span-5 xl:col-span-4">
-                        <div className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-8 border border-gray-100">
+                        <div className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-8 border border-oxford">
                             {/* Calendar Header */}
                             <div className="flex items-center justify-between mb-8">
                                 <button onClick={prevMonth} className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-600">

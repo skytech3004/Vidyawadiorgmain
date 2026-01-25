@@ -188,7 +188,7 @@ export default function Staff() {
                                     </div>
                                 </div>
 
-                                <div className="mt-10 pt-8 border-t border-gray-100">
+                                <div className="mt-10 pt-8 border-t border-oxford">
                                     <p className="text-gray-600 leading-relaxed italic">
                                         "{selectedStaff.bio}"
                                     </p>

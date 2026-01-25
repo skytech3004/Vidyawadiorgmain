@@ -45,7 +45,7 @@ export default function Footer() {
                             <li className="flex gap-4 text-white/60">
                                 <MapPin className="text-sandstone shrink-0" size={20} />
                                 <span className="text-sm">
-                                    LEELA DEVI PARASMAL SANCHETI KANYA MAHAVIDYALAYA (P.G.)<br />
+                                    VIDYAWADI<br />
                                     (A Unit of Marudhar Mahila Sikshan Sangh, Vidyawadi),<br />
                                     Post - Vidyawadi, Khimel, St. Rani,<br />
                                     Tehsil- Bali, Dist. Pali,<br />

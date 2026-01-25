@@ -67,7 +67,7 @@ export default function ContactForm() {
                             <h3 className="text-2xl font-bold text-white uppercase tracking-widest border-b border-white/10 pb-4">Our Location</h3>
                             <div className="space-y-6 text-white/80 leading-relaxed">
                                 <p>
-                                    <strong className="text-sandstone block mb-2">LEELA DEVI PARASMAL SANCHETI KANYA MAHAVIDYALAYA (P.G.)</strong>
+                                    <strong className="text-sandstone block mb-2">VIDYAWADI</strong>
                                     (A Unit of Marudhar Mahila Sikshan Sangh, Vidyawadi),<br />
                                     Post - Vidyawadi, Khimel, St. Rani,<br />
                                     Tehsil- Bali, Dist. Pali,<br />
