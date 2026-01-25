@@ -39,7 +39,7 @@ const navLinks = [
     { name: "Hostel", href: "/hostel" },
     { name: "Gallery", href: "#facilities" },
     { name: "Blog", href: "#blog" },
-    { name: "Contact", href: "#contact" },
+    { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {

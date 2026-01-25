@@ -24,9 +24,9 @@ export const useTimelineAnimation = () => {
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#heritage",
-                start: "top top",
-                end: "bottom bottom",
-                scrub: 2,
+                start: "top center", // Starts when top of section hits center of viewport
+                end: "bottom center",
+                scrub: 1,
             },
         });
 

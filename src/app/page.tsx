@@ -11,6 +11,7 @@ import BlogSection from "@/components/BlogSection";
 import Academics from "@/components/Academics";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
+import HomeNewsEvents from "@/components/HomeNewsEvents";
 import { initDB } from "@/lib/init-db";
 
 export default async function Home() {
@@ -26,6 +27,7 @@ export default async function Home() {
       <Institutions />
       <Facilities />
       <Heritage />
+      <HomeNewsEvents />
       <HostelSection />
       <Staff />
       <BlogSection />
