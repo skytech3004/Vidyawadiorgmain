@@ -25,12 +25,9 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug: 
     // 2. Fetch Sections
     const sectionsRaw = await Section.find({ pageId: page._id, isVisible: true }).sort({ order: 1 }).lean();
 
-    // 3. Serialize Data (Convert ObjectIds to strings)
-    const sections = sectionsRaw.map((section: any) => ({
-        ...section,
-        _id: section._id.toString(),
-        pageId: section.pageId.toString()
-    }));
+    // 3. Serialize Data (Bulletproof serialization for Next.js Client Components)
+    const sections = JSON.parse(JSON.stringify(sectionsRaw));
+    const page = JSON.parse(JSON.stringify(pageRaw));
 
     return (
         <main className="min-h-screen">
