@@ -4,16 +4,31 @@ import React from "react";
 import { motion } from "framer-motion";
 import { BookOpen, GraduationCap, School, Users, ArrowRight, Star, Download } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
-const institutions = [
+interface Institution {
+    title: string;
+    type: "College" | "School" | "Overview";
+    description: string;
+    icon: React.ReactNode;
+    stats: string;
+    image: string;
+    tags: string[];
+    isBrochure?: boolean;
+    href?: string;
+}
+
+const institutions: Institution[] = [
     {
-        title: "Leeladevi Parasmall Sancheti Kanya Mahavidyalaya",
+        title: "Leeladevi Parasmal Sancheti Kanya Mahavidyalaya",
         type: "College",
         description: "A premier NAAC B++ accredited girls college offering quality UG education with a focus on holistic development.",
         icon: <GraduationCap className="w-6 h-6" />,
         stats: "NAAC B++ Grade",
         image: "/leeladevi.jpg",
-        tags: ["UG Courses", "Scholarships"]
+        tags: ["UG Courses", "Scholarships"],
+        href: "/institutions/leela-devi-college",
+        isBrochure: false
     },
     {
         title: "Marudhar Balika Vidyapeeth (Sr. Sec.) Vidyawadi (RBSE)",
@@ -22,28 +37,30 @@ const institutions = [
         icon: <GraduationCap className="w-6 h-6" />,
         stats: "Hindi & English Medium",
         image: "/marudhar_balika.jpg",
-        tags: ["Dual Medium", "Boarding Available"]
+        tags: ["Dual Medium", "Boarding Available"],
+        href: "/institutions/marudhar-balika-vidyapeeth",
+        isBrochure: false
     },
     {
-        title: "Leeladevi Parasmall Sancheti English Medium Sr.Sec.School",
+        title: "Leeladevi Parasmal Sancheti English Medium Sr.Sec.School",
         type: "School",
         description: "Elite English Medium Senior Secondary School focused on international standards and student-centric learning.",
         icon: <GraduationCap className="w-6 h-6" />,
         stats: "English Medium Only",
         image: "/lps.jpg",
-        tags: ["CBSE Standards", "Modern Tech"]
+        tags: ["CBSE Standards", "Modern Tech"],
+        isBrochure: false
     },
     {
-        title: "Hostel",
-        type: "Overview",
-        description: "information about our Hostel facilities",
-        icon: <School className="w-6 h-6" />,
-        stats: "Hostel Overview",
-        image: "/hostel.jpg",
-        tags: ["Hostel", "Facilities"],
-        isBrochure: false,
-        href: "/brochures/hostel.pdf"
-    }
+        title: "Sushiladevi Prakashraj Modi Primary School",
+        type: "School",
+        description: "Elite English Medium Senior Secondary School focused on international standards and student-centric learning.",
+        icon: <GraduationCap className="w-6 h-6" />,
+        stats: "English Medium Only",
+        image: "/lps.jpg",
+        tags: ["CBSE Standards", "Modern Tech"],
+        isBrochure: false
+    },
 ];
 
 export default function Institutions() {
@@ -135,10 +152,17 @@ export default function Institutions() {
                                             <Download size={16} className="absolute right-0 group-hover:-right-2 transition-all" />
                                         </a>
                                     ) : (
-                                        <button className="flex items-center gap-2 font-black text-xs uppercase tracking-widest text-oxford group-hover:gap-4 transition-all overflow-hidden relative pr-8">
-                                            Explore More
-                                            <ArrowRight size={16} className="absolute right-0 group-hover:-right-2 transition-all" />
-                                        </button>
+                                        inst.href ? (
+                                            <Link href={inst.href} className="flex items-center gap-2 font-black text-xs uppercase tracking-widest text-oxford group-hover:gap-4 transition-all overflow-hidden relative pr-8">
+                                                Explore More
+                                                <ArrowRight size={16} className="absolute right-0 group-hover:-right-2 transition-all" />
+                                            </Link>
+                                        ) : (
+                                            <button className="flex items-center gap-2 font-black text-xs uppercase tracking-widest text-oxford group-hover:gap-4 transition-all overflow-hidden relative pr-8">
+                                                Explore More
+                                                <ArrowRight size={16} className="absolute right-0 group-hover:-right-2 transition-all" />
+                                            </button>
+                                        )
                                     )}
                                 </div>
                             </div>

@@ -1,15 +1,24 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ArrowDown } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Hero() {
     const heroRef = useRef<HTMLDivElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
     const subtitleRef = useRef<HTMLParagraphElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
+    const [textIndex, setTextIndex] = useState(0);
+    const texts = ["शिक्षा भी, संस्कार भी", "Nurturing Minds, Shaping Futures"];
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setTextIndex((prev) => (prev + 1) % texts.length);
+        }, 4000);
+        return () => clearInterval(timer);
+    }, []);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -116,16 +125,25 @@ export default function Hero() {
 
 
                     <motion.h2
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1.2, delay: 1.5, ease: "easeOut" }}
-                        className="text-4xl md:text-7xl font-black text-white mb-12 font-devanagari relative py-4"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1.2, delay: 1, ease: "easeOut" }}
+                        className="text-4xl md:text-7xl font-black text-white mb-12 font-devanagari relative py-4 min-h-[120px] flex items-center justify-center"
                     >
-                        <span className="relative z-10 bg-clip-text text-transparent bg-gradient-to-r from-white via-sandstone-light to-white bg-[length:200%_auto] animate-shimmer drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] py-3 block leading-relaxed">
-                            शिक्षा भी, संस्कार भी
-                        </span>
+                        <AnimatePresence mode="wait">
+                            <motion.span
+                                key={textIndex}
+                                initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                                exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
+                                transition={{ duration: 0.8, ease: "circOut" }}
+                                className="relative z-10 bg-clip-text text-transparent bg-gradient-to-r from-white via-sandstone-light to-white bg-[length:200%_auto] animate-shimmer drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] py-3 block leading-relaxed whitespace-nowrap text-3xl md:text-5xl lg:text-7xl"
+                            >
+                                {texts[textIndex]}
+                            </motion.span>
+                        </AnimatePresence>
                         {/* Subtle Glow Behind Hindi Text */}
-                        <div className="absolute inset-0 blur-2xl bg-sandstone/10 -z-0 rounded-full scale-150 opacity-50" />
+                        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-32 blur-3xl bg-sandstone/10 -z-0 rounded-full scale-150 opacity-50" />
                     </motion.h2>
 
                     <div className="flex flex-col sm:flex-row gap-6">

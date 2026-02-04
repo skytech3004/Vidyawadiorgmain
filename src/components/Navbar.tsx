@@ -30,9 +30,10 @@ const navLinks = [
         href: "#Admissions",
         subLinks: [
             { name: "Download Brochure (PDF)", href: "/brochures/prospectus.pdf", isBrochure: true },
-            { name: "Leeladevi Parasmall Sancheti Kanya Mahavidyalaya", href: "#institutions" },
-            { name: "Marudhar Balika Vidyapeeth (Sr. Sec.) Vidyawadi Hindi/English Medium (RBSE)", href: "#institutions" },
-            { name: "Leeladevi Parasmall Sancheti English Medium Sr.Sec.School", href: "#institutions" }
+            { name: "Leeladevi Parasmal Sancheti Kanya Mahavidyalaya", href: "/institutions/leela-devi-college" },
+            { name: "Marudhar Balika Vidyapeeth (Sr. Sec.) Vidyawadi Hindi/English Medium (RBSE)", href: "/institutions/marudhar-balika-vidyapeeth" },
+            { name: "Leeladevi Parasmal Sancheti English Medium Sr.Sec.School", href: "/institutions/leeladevi-english-medium" },
+            { name: "Sushiladevi Prakashraj Modi Primary School", href: "" }
         ]
     },
     { name: "Amenities", href: "#home" },

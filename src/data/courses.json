@@ -1,0 +1,1321 @@
+{
+    "courses": [
+        {
+            "slug": "distance",
+            "category": {
+                "slug": "distance",
+                "name": "Distance Education"
+            },
+            "degree": "Bachelor of Arts",
+            "duration": "3 Years",
+            "facultyDepartment": "Faculty of Arts",
+            "fees": {
+                "total": "\u20b9 22800",
+                "installments": {
+                    "first": "\u20b9 11400",
+                    "second": "\u20b9 11400"
+                }
+            },
+            "name": "B.sc.",
+            "optionalPapers": [
+                "History",
+                "Political Science",
+                "Hindi",
+                "English",
+                "Economics",
+                "Sociology",
+                "Geography",
+                "Home Science",
+                "Musics",
+                "Fine Art"
+            ],
+            "id": "6968be139576c50d24eab2f1",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/ug/ba"
+        },
+        {
+            "slug": "distance",
+            "category": {
+                "slug": "distance",
+                "name": "Distance Education"
+            },
+            "degree": "Bachelor of Arts",
+            "duration": "3 Years",
+            "facultyDepartment": "Faculty of Arts",
+            "fees": {
+                "total": "\u20b9 22800",
+                "installments": {
+                    "first": "\u20b9 11400",
+                    "second": "\u20b9 11400"
+                }
+            },
+            "name": "B.com.",
+            "optionalPapers": [
+                "History",
+                "Political Science",
+                "Hindi",
+                "English",
+                "Economics",
+                "Sociology",
+                "Geography",
+                "Home Science",
+                "Musics",
+                "Fine Art"
+            ],
+            "id": "6968be139576c50d24eab2f1",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/ug/ba"
+        },
+        {
+            "slug": "distance",
+            "category": {
+                "slug": "distance",
+                "name": "Distance Education"
+            },
+            "degree": "Bachelor of Arts",
+            "duration": "3 Years",
+            "facultyDepartment": "Faculty of Arts",
+            "fees": {
+                "total": "\u20b9 22800",
+                "installments": {
+                    "first": "\u20b9 11400",
+                    "second": "\u20b9 11400"
+                }
+            },
+            "name": "B. A.",
+            "optionalPapers": [
+                "History",
+                "Political Science",
+                "Hindi",
+                "English",
+                "Economics",
+                "Sociology",
+                "Geography",
+                "Home Science",
+                "Musics",
+                "Fine Art"
+            ],
+            "id": "6968be139576c50d24eab2f1",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/ug/ba"
+        },
+        {
+            "slug": "advanceddiplomaincomputerapplication",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Advanced Diploma in Computer Application",
+            "duration": "1 Year",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Advanced Diploma in Computer Application",
+            "id": "6968be149576c50d24eab2f9",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/advanceddiplomaincomputerapplication"
+        },
+        {
+            "slug": "advanceddiplomaininteriordesigning",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Advanced Diploma in Interior Designing",
+            "duration": "1 Year",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "\u20b9 4850",
+                "installments": {
+                    "first": "\u20b9 4850",
+                    "second": "\u20b9 0"
+                }
+            },
+            "name": "Advanced Diploma in Interior Designing",
+            "id": "6968be149576c50d24eab2ff",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/advanceddiplomaininteriordesigning"
+        },
+        {
+            "slug": "ba",
+            "category": {
+                "slug": "ug",
+                "name": "Undergraduate (UG)"
+            },
+            "degree": "Bachelor of Arts",
+            "duration": "3 Years",
+            "facultyDepartment": "Faculty of Arts",
+            "fees": {
+                "total": "\u20b9 22800",
+                "installments": {
+                    "first": "\u20b9 11400",
+                    "second": "\u20b9 11400"
+                }
+            },
+            "name": "B. A.",
+            "optionalPapers": [
+                "History",
+                "Political Science",
+                "Hindi",
+                "English",
+                "Economics",
+                "Sociology",
+                "Geography",
+                "Home Science",
+                "Musics",
+                "Fine Art"
+            ],
+            "id": "6968be139576c50d24eab2f1",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/ug/ba"
+        },
+        {
+            "slug": "babed",
+            "category": {
+                "slug": "ug",
+                "name": "Undergraduate (UG)"
+            },
+            "degree": "Bachelor of Arts & Bachelor of Education",
+            "duration": "4 Years",
+            "facultyDepartment": "Faculty of Education",
+            "fees": {
+                "total": "\u20b9 27000",
+                "installments": {
+                    "first": "\u20b9 27000",
+                    "second": "\u20b9 undefined"
+                },
+                "remarks": "as per Government Norms"
+            },
+            "name": "B.A. B.Ed.",
+            "optionalPapers": [
+                "History",
+                "Political Science",
+                "Hindi",
+                "English",
+                "Sociology",
+                "Geography"
+            ],
+            "id": "6968be139576c50d24eab2f5",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/ug/babed"
+        },
+        {
+            "slug": "bcom",
+            "category": {
+                "slug": "ug",
+                "name": "Undergraduate (UG)"
+            },
+            "degree": "Bachelor of Commerce",
+            "duration": "3 Years",
+            "facultyDepartment": "Faculty of Commerce",
+            "fees": {
+                "total": "\u20b9 22000",
+                "installments": {
+                    "first": "\u20b9 11000",
+                    "second": "\u20b9 11000"
+                }
+            },
+            "name": "B.Com.",
+            "optionalPapers": [
+                "Business Economics and Finance",
+                "Accounting",
+                "Business Administration"
+            ],
+            "id": "6968be139576c50d24eab2f3",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/ug/bcom"
+        },
+        {
+            "slug": "bsc",
+            "category": {
+                "slug": "ug",
+                "name": "Undergraduate (UG)"
+            },
+            "degree": "Bachelor of Science",
+            "duration": "3 Years",
+            "facultyDepartment": "Faculty of Science",
+            "fees": {
+                "total": "\u20b9 32500",
+                "installments": {
+                    "first": "\u20b9 16250",
+                    "second": "\u20b9 16250"
+                }
+            },
+            "name": "B.Sc.",
+            "optionalPapers": [
+                "Chemistry",
+                "Botany",
+                "Zoology",
+                "Physics",
+                "Mathematics"
+            ],
+            "id": "6968be139576c50d24eab2f7",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/ug/bsc"
+        },
+        {
+            "slug": "bscbed",
+            "category": {
+                "slug": "ug",
+                "name": "Undergraduate (UG)"
+            },
+            "degree": "Bachelor of Science & Bachelor of Education",
+            "duration": "4 Years",
+            "facultyDepartment": "Faculty of Education",
+            "fees": {
+                "total": "\u20b9 27000",
+                "installments": {
+                    "first": "\u20b9 27000",
+                    "second": "\u20b9 undefined"
+                }
+            },
+            "name": "B.Sc. B.Ed.",
+            "optionalPapers": [
+                "Chemistry",
+                "Botany",
+                "Zoology",
+                "Physics",
+                "Mathematics"
+            ],
+            "id": "6968be139576c50d24eab2f6",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/ug/bscbed"
+        },
+        {
+            "slug": "basiccertificateinenglishspoken",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Basic Certificate in English Spoken",
+            "duration": "3 Months",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Basic Certificate in English Spoken",
+            "id": "6968be149576c50d24eab2fa",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/basiccertificateinenglishspoken"
+        },
+        {
+            "slug": "certificatecourseinawssolutionsarchitectassociate",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Certificate Course in AWS Solutions Architect Associate",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Certificate Course in AWS Solutions Architect Associate",
+            "id": "6968be169576c50d24eab31c",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/certificatecourseinawssolutionsarchitectassociate"
+        },
+        {
+            "slug": "certificatecourseincsrforpractitioners",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Certificate Course in CSR for Practitioners",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Certificate Course in CSR for Practitioners",
+            "id": "6968be179576c50d24eab31d",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/certificatecourseincsrforpractitioners"
+        },
+        {
+            "slug": "certificatecourseinesgmanagementandreporting",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Certificate Course in ESG Management and Reporting",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Certificate Course in ESG Management and Reporting",
+            "id": "6968be179576c50d24eab320",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/certificatecourseinesgmanagementandreporting"
+        },
+        {
+            "slug": "certificatecourseinintellectualpropertyrights",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Certificate Course in Intellectual Property Rights",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Certificate Course in Intellectual Property Rights",
+            "id": "6968be169576c50d24eab31b",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/certificatecourseinintellectualpropertyrights"
+        },
+        {
+            "slug": "certificatecourses",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Certificate Courses",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Certificate Courses",
+            "id": "6968be169576c50d24eab31a",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/certificatecourses"
+        },
+        {
+            "slug": "certificatetraininginjava",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Certificate Training in JAVA",
+            "duration": "3 Months",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Certificate Training in JAVA",
+            "id": "6968be149576c50d24eab2fb",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/certificatetraininginjava"
+        },
+        {
+            "slug": "certificateinagenticaiandsoftwaresolutions",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Certificate in Agentic AI and Software Solutions",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Certificate in Agentic AI and Software Solutions",
+            "id": "6968be169576c50d24eab318",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/certificateinagenticaiandsoftwaresolutions"
+        },
+        {
+            "slug": "certificateincreativewritingandcorporatecommunication",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Certificate in Creative Writing and Corporate Communication",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Certificate in Creative Writing and Corporate Communication",
+            "id": "6968be179576c50d24eab323",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/certificateincreativewritingandcorporatecommunication"
+        },
+        {
+            "slug": "certificateindesignthinkingandinnovationforprofessionals",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Certificate in Design Thinking and Innovation for Professionals",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Certificate in Design Thinking and Innovation for Professionals",
+            "id": "6968be179576c50d24eab322",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/certificateindesignthinkingandinnovationforprofessionals"
+        },
+        {
+            "slug": "certificateinearlychildhoodeducationandcare",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Certificate in Early Childhood Education and Care",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Certificate in Early Childhood Education and Care",
+            "id": "6968be179576c50d24eab327",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/certificateinearlychildhoodeducationandcare"
+        },
+        {
+            "slug": "certificateineducationalleadership-administration",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Certificate in Educational Leadership & Administration",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Certificate in Educational Leadership & Administration",
+            "id": "6968be179576c50d24eab326",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/certificateineducationalleadership-administration"
+        },
+        {
+            "slug": "certificateinguidanceandcounselling",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Certificate in Guidance and Counselling",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Certificate in Guidance and Counselling",
+            "id": "6968be179576c50d24eab321",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/certificateinguidanceandcounselling"
+        },
+        {
+            "slug": "certificateininstructionaldesign-coursedevelopment",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Certificate in Instructional Design & Course Development",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Certificate in Instructional Design & Course Development",
+            "id": "6968be179576c50d24eab31f",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/certificateininstructionaldesign-coursedevelopment"
+        },
+        {
+            "slug": "certificateinjournalism-mediacommunication",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Certificate in Journalism & Media Communication",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Certificate in Journalism & Media Communication",
+            "id": "6968be179576c50d24eab325",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/certificateinjournalism-mediacommunication"
+        },
+        {
+            "slug": "certificateinschoolcounsellingandstudentwellbeing",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Certificate in School Counselling and Student Wellbeing",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Certificate in School Counselling and Student Wellbeing",
+            "id": "6968be179576c50d24eab324",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/certificateinschoolcounsellingandstudentwellbeing"
+        },
+        {
+            "slug": "computeraccounting",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Computer Accounting",
+            "duration": "1 Year",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Computer Accounting",
+            "id": "6968be149576c50d24eab2fe",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/computeraccounting"
+        },
+        {
+            "slug": "diplomaincreativewritinginenglish",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Diploma in Creative Writing in English",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Diploma in Creative Writing in English",
+            "id": "6968be179576c50d24eab32b",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/diplomaincreativewritinginenglish"
+        },
+        {
+            "slug": "diplomainenglishlanguageteaching",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Diploma in English Language Teaching",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Diploma in English Language Teaching",
+            "id": "6968be189576c50d24eab332",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/diplomainenglishlanguageteaching"
+        },
+        {
+            "slug": "diplomainnurseryteachertraining",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Diploma in Nursery Teacher Training",
+            "duration": "2 Years",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "\u20b9 13250",
+                "installments": {
+                    "first": "\u20b9 6800",
+                    "second": "\u20b9 6450"
+                }
+            },
+            "name": "Diploma in Nursery Teacher Training",
+            "id": "6968be149576c50d24eab2fc",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/diplomainnurseryteachertraining"
+        },
+        {
+            "slug": "diplomainprimaryteachertraining",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Diploma in Primary Teacher Training",
+            "duration": "2 Years",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "\u20b9 13250",
+                "installments": {
+                    "first": "\u20b9 6800",
+                    "second": "\u20b9 6450"
+                }
+            },
+            "name": "Diploma in Primary Teacher Training",
+            "id": "6968be149576c50d24eab2fd",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/diplomainprimaryteachertraining"
+        },
+        {
+            "slug": "edu-humanities-socsci",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Edu, Humanities & Soc. Sci.",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Edu, Humanities & Soc. Sci.",
+            "id": "6968be179576c50d24eab32d",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/edu-humanities-socsci"
+        },
+        {
+            "slug": "executivepostgraduatediplomainmanagement",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Executive Post Graduate Diploma in Management",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Executive Post Graduate Diploma in Management",
+            "id": "6968be149576c50d24eab301",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/executivepostgraduatediplomainmanagement"
+        },
+        {
+            "slug": "ma",
+            "category": {
+                "slug": "pg",
+                "name": "Postgraduate (PG)"
+            },
+            "degree": "Master of Arts",
+            "duration": "2 Years",
+            "facultyDepartment": "Faculty of Arts",
+            "fees": {
+                "total": "\u20b9 15000",
+                "installments": {
+                    "first": "\u20b9 7500",
+                    "second": "\u20b9 7500"
+                }
+            },
+            "name": "M.A.",
+            "optionalPapers": [
+                "History",
+                "Political Science",
+                "Hindi",
+                "English",
+                "Geography"
+            ],
+            "id": "6968be139576c50d24eab2f2",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/pg/ma"
+        },
+        {
+            "slug": "mcom",
+            "category": {
+                "slug": "pg",
+                "name": "Postgraduate (PG)"
+            },
+            "degree": "Master of Commerce",
+            "duration": "2 Years",
+            "facultyDepartment": "Faculty of Commerce",
+            "fees": {
+                "total": "\u20b9 15000",
+                "installments": {
+                    "first": "\u20b9 7500",
+                    "second": "\u20b9 7500"
+                }
+            },
+            "name": "M.Com.",
+            "optionalPapers": [
+                "Business Administration"
+            ],
+            "id": "6968be139576c50d24eab2f4",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/pg/mcom"
+        },
+        {
+            "slug": "msc",
+            "category": {
+                "slug": "pg",
+                "name": "Postgraduate (PG)"
+            },
+            "degree": "Master of Science",
+            "duration": "2 Years",
+            "facultyDepartment": "Faculty of Science",
+            "fees": {
+                "total": "\u20b9 31200",
+                "installments": {
+                    "first": "\u20b9 15600",
+                    "second": "\u20b9 15600"
+                }
+            },
+            "name": "M.Sc.",
+            "optionalPapers": [
+                "Chemistry & Mathematics"
+            ],
+            "id": "6968be139576c50d24eab2f8",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/pg/msc"
+        },
+        {
+            "slug": "postgraduatecertificateinbusinessanalytics",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Certificate in Business Analytics",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Certificate in Business Analytics",
+            "id": "6968be169576c50d24eab316",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatecertificateinbusinessanalytics"
+        },
+        {
+            "slug": "postgraduatecertificateincybersecurity",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Certificate in Cyber Security",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Certificate in Cyber Security",
+            "id": "6968be169576c50d24eab319",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatecertificateincybersecurity"
+        },
+        {
+            "slug": "postgraduatecertificateindesignthinking",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Certificate in Design Thinking",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Certificate in Design Thinking",
+            "id": "6968be179576c50d24eab32a",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatecertificateindesignthinking"
+        },
+        {
+            "slug": "postgraduatecertificateinfintech",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Certificate in FinTech",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Certificate in FinTech",
+            "id": "6968be169576c50d24eab311",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatecertificateinfintech"
+        },
+        {
+            "slug": "postgraduatecertificateinfinance-managementaccounting",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Certificate in Finance (Management Accounting)",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Certificate in Finance (Management Accounting)",
+            "id": "6968be169576c50d24eab312",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatecertificateinfinance-managementaccounting"
+        },
+        {
+            "slug": "postgraduatecertificateinfinance-taxationlaws",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Certificate in Finance (Taxation Laws)",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Certificate in Finance (Taxation Laws)",
+            "id": "6968be169576c50d24eab313",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatecertificateinfinance-taxationlaws"
+        },
+        {
+            "slug": "postgraduatecertificateinhealthcaremanagement",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Certificate in Healthcare Management",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Certificate in Healthcare Management",
+            "id": "6968be169576c50d24eab30c",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatecertificateinhealthcaremanagement"
+        },
+        {
+            "slug": "postgraduatecertificateinmanagement-cyberlaw",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Certificate in Management (Cyber Law)",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Certificate in Management (Cyber Law)",
+            "id": "6968be189576c50d24eab335",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatecertificateinmanagement-cyberlaw"
+        },
+        {
+            "slug": "postgraduatecertificateinmanagement-digitalmarketing",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Certificate in Management (Digital Marketing)",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Certificate in Management (Digital Marketing)",
+            "id": "6968be159576c50d24eab305",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatecertificateinmanagement-digitalmarketing"
+        },
+        {
+            "slug": "postgraduatecertificateinmanagement-entrepreneurshipdevelopment",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Certificate in Management (Entrepreneurship Development)",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Certificate in Management (Entrepreneurship Development)",
+            "id": "6968be169576c50d24eab30d",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatecertificateinmanagement-entrepreneurshipdevelopment"
+        },
+        {
+            "slug": "postgraduatecertificateinmanagement-eventmanagement",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Certificate in Management (Event Management)",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Certificate in Management (Event Management)",
+            "id": "6968be169576c50d24eab30e",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatecertificateinmanagement-eventmanagement"
+        },
+        {
+            "slug": "postgraduatediplomainbankingandfinancialservices",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Diploma in Banking and Financial Services",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Diploma in Banking and Financial Services",
+            "id": "6968be169576c50d24eab310",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatediplomainbankingandfinancialservices"
+        },
+        {
+            "slug": "postgraduatediplomainbusinessadministration",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Diploma in Business Administration",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Diploma in Business Administration",
+            "id": "6968be149576c50d24eab300",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatediplomainbusinessadministration"
+        },
+        {
+            "slug": "postgraduatediplomainbusinessandcorporatelaws",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Diploma in Business and Corporate Laws",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Diploma in Business and Corporate Laws",
+            "id": "6968be189576c50d24eab334",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatediplomainbusinessandcorporatelaws"
+        },
+        {
+            "slug": "postgraduatediplomaincustomerrelationshipmanagement",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Diploma in Customer Relationship Management",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Diploma in Customer Relationship Management",
+            "id": "6968be159576c50d24eab307",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatediplomaincustomerrelationshipmanagement"
+        },
+        {
+            "slug": "postgraduatediplomaindatascience",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Diploma in Data Science",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Diploma in Data Science",
+            "id": "6968be169576c50d24eab315",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatediplomaindatascience"
+        },
+        {
+            "slug": "postgraduatediplomaineducationaladministration",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Diploma in Educational Administration",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Diploma in Educational Administration",
+            "id": "6968be189576c50d24eab32e",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatediplomaineducationaladministration"
+        },
+        {
+            "slug": "postgraduatediplomainenergymanagement-renewableenergy",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Diploma in Energy Management (Renewable Energy)",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Diploma in Energy Management (Renewable Energy)",
+            "id": "6968be159576c50d24eab309",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatediplomainenergymanagement-renewableenergy"
+        },
+        {
+            "slug": "postgraduatediplomainexportandimportmanagement",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Diploma in Export and Import Management",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Diploma in Export and Import Management",
+            "id": "6968be159576c50d24eab308",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatediplomainexportandimportmanagement"
+        },
+        {
+            "slug": "postgraduatediplomainguidanceandcounselling",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Diploma in Guidance and Counselling",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Diploma in Guidance and Counselling",
+            "id": "6968be189576c50d24eab32f",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatediplomainguidanceandcounselling"
+        },
+        {
+            "slug": "postgraduatediplomainhumanresourcemanagement",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Diploma in Human Resource Management",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Diploma in Human Resource Management",
+            "id": "6968be159576c50d24eab303",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatediplomainhumanresourcemanagement"
+        },
+        {
+            "slug": "postgraduatediplomaininformationtechnology",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Diploma in Information Technology",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Diploma in Information Technology",
+            "id": "6968be169576c50d24eab317",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatediplomaininformationtechnology"
+        },
+        {
+            "slug": "postgraduatediplomaininstructionaldesign",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Diploma in Instructional Design",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Diploma in Instructional Design",
+            "id": "6968be179576c50d24eab328",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatediplomaininstructionaldesign"
+        },
+        {
+            "slug": "postgraduatediplomaininsurancebusinessmanagement",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Diploma in Insurance Business Management",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Diploma in Insurance Business Management",
+            "id": "6968be169576c50d24eab314",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatediplomaininsurancebusinessmanagement"
+        },
+        {
+            "slug": "postgraduatediplomaininternationalbusiness",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Diploma in International Business",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Diploma in International Business",
+            "id": "6968be159576c50d24eab30a",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatediplomaininternationalbusiness"
+        },
+        {
+            "slug": "postgraduatediplomainjournalismandmasscommunication",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Diploma in Journalism and Mass Communication",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Diploma in Journalism and Mass Communication",
+            "id": "6968be179576c50d24eab329",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatediplomainjournalismandmasscommunication"
+        },
+        {
+            "slug": "postgraduatediplomainpersonnelandhumanresourcemanagement-labourlaws",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Diploma in Personnel and Human Resource Management (Labour Laws)",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Diploma in Personnel and Human Resource Management (Labour Laws)",
+            "id": "6968be189576c50d24eab333",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatediplomainpersonnelandhumanresourcemanagement-labourlaws"
+        },
+        {
+            "slug": "postgraduatediplomainpre-primaryteacherstraining",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Diploma in Pre-primary Teachers Training",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Diploma in Pre-primary Teachers Training",
+            "id": "6968be189576c50d24eab330",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatediplomainpre-primaryteacherstraining"
+        },
+        {
+            "slug": "postgraduatediplomainprojectmanagement",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Diploma in Project Management",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Diploma in Project Management",
+            "id": "6968be159576c50d24eab302",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatediplomainprojectmanagement"
+        },
+        {
+            "slug": "postgraduatediplomainretailmanagement",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Diploma in Retail Management",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Diploma in Retail Management",
+            "id": "6968be159576c50d24eab304",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatediplomainretailmanagement"
+        },
+        {
+            "slug": "postgraduatediplomainschoolcounselling",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Diploma in School Counselling",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Diploma in School Counselling",
+            "id": "6968be189576c50d24eab331",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatediplomainschoolcounselling"
+        },
+        {
+            "slug": "postgraduatediplomainsupplychainmanagement",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Diploma in Supply Chain Management",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Diploma in Supply Chain Management",
+            "id": "6968be159576c50d24eab306",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatediplomainsupplychainmanagement"
+        },
+        {
+            "slug": "postgraduatediplomaintechnicalwritinginbusinessmanagement",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Diploma in Technical Writing in Business Management",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Diploma in Technical Writing in Business Management",
+            "id": "6968be179576c50d24eab32c",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduatediplomaintechnicalwritinginbusinessmanagement"
+        },
+        {
+            "slug": "postgraduateprograminagribusinessmanagement",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Program in Agribusiness Management",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Program in Agribusiness Management",
+            "id": "6968be169576c50d24eab30f",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduateprograminagribusinessmanagement"
+        },
+        {
+            "slug": "postgraduateprograminstrategicmanagement",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Post Graduate Program in Strategic Management",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Post Graduate Program in Strategic Management",
+            "id": "6968be169576c50d24eab30b",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/postgraduateprograminstrategicmanagement"
+        },
+        {
+            "slug": "singlecourses-upskillsmarter",
+            "category": {
+                "slug": "skill",
+                "name": "Skill Courses"
+            },
+            "degree": "Single Courses - Upskill Smarter",
+            "facultyDepartment": "Skill Courses",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "Single Courses - Upskill Smarter",
+            "id": "6968be179576c50d24eab31e",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/skill/singlecourses-upskillsmarter"
+        },
+        {
+            "slug": "itep-ba-bed",
+            "category": {
+                "slug": "integrated-ug",
+                "name": "Integrated Undergraduate"
+            },
+            "degree": "Integrated Teacher Education Programme (ITEP)",
+            "duration": "Contact for info",
+            "facultyDepartment": "Integrated Undergraduate",
+            "fees": {
+                "total": "As per norms",
+                "installments": {}
+            },
+            "name": "B.A.B.Ed. (ITEP)",
+            "externalLink": "https://vidyawadicollege.org/admissions/courses/integrated-ug/itep-bsc-bed"
+        }
+    ]
+}
