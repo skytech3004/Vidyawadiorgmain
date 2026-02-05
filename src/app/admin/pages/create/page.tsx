@@ -11,7 +11,7 @@ import {
     Loader2
 } from "lucide-react";
 import Link from "next/link";
-import AdminNavbar from "@/components/AdminNavbar";
+import Navbar from "@/components/Navbar";
 
 export default function CreatePage() {
     const router = useRouter();
@@ -52,7 +52,7 @@ export default function CreatePage() {
 
     return (
         <main className="min-h-screen bg-gray-50 pb-20 pt-24">
-            <AdminNavbar />
+            <Navbar />
 
             <div className="max-w-2xl mx-auto px-6">
                 <Link

@@ -12,7 +12,7 @@ import {
     ChevronRight,
     Loader2
 } from "lucide-react";
-import AdminNavbar from "@/components/AdminNavbar";
+import Navbar from "@/components/Navbar";
 
 export default function AdminPages() {
     const [pages, setPages] = useState<any[]>([]);
@@ -55,7 +55,7 @@ export default function AdminPages() {
 
     return (
         <main className="min-h-screen bg-gray-50 pb-20 pt-24">
-            <AdminNavbar />
+            <Navbar />
 
             <div className="max-w-7xl mx-auto px-6">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">

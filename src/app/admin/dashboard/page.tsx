@@ -1,6 +1,5 @@
 "use client";
 
-import AdminNavbar from "@/components/AdminNavbar";
 import Link from "next/link";
 import { LogOut, Layout, FileText, Settings, ExternalLink } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -33,8 +32,20 @@ export default function AdminDashboard() {
     ];
 
     return (
-        <div className="min-h-screen bg-gray-50 pt-24">
-            <AdminNavbar />
+        <div className="min-h-screen bg-gray-50">
+            {/* Header */}
+            <header className="bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center">
+                <div className="flex items-center gap-3">
+                    <Layout className="text-oxford" />
+                    <h1 className="text-xl font-bold text-oxford">Vidyawadi Admin</h1>
+                </div>
+                <button
+                    onClick={handleLogout}
+                    className="flex items-center gap-2 text-sm font-medium text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-colors"
+                >
+                    <LogOut size={16} /> Sign Out
+                </button>
+            </header>
 
             <main className="max-w-7xl mx-auto p-8">
                 <div className="mb-12">

@@ -20,144 +20,7 @@ import {
     Eye
 } from "lucide-react";
 import Link from "next/link";
-import AdminNavbar from "@/components/AdminNavbar";
-
-// --- Recursive JSON Editor Component ---
-const RecursiveJsonEditor = ({ data, onChange, depth = 0, fieldKey = "" }: { data: any, onChange: (val: any) => void, depth?: number, fieldKey?: string }) => {
-    const isArray = Array.isArray(data);
-    const isObject = typeof data === 'object' && data !== null && !isArray;
-
-    const addItem = () => {
-        if (isArray) {
-            const firstItem = data.length > 0 ? data[0] : "";
-            let newItem = typeof firstItem === 'object' && firstItem !== null ? { ...firstItem } : "";
-            if (typeof newItem === 'object' && newItem !== null) {
-                Object.keys(newItem).forEach(k => {
-                    if (Array.isArray(newItem[k])) newItem[k] = [];
-                    else if (typeof newItem[k] === 'object' && newItem[k] !== null) newItem[k] = {};
-                    else newItem[k] = "";
-                });
-            }
-            onChange([...data, newItem]);
-        }
-    };
-
-    const removeItem = (index: number) => {
-        if (isArray) {
-            const copy = [...data];
-            copy.splice(index, 1);
-            onChange(copy);
-        }
-    };
-
-    const updateItem = (index: number | string, val: any) => {
-        if (isArray) {
-            const copy = [...data];
-            copy[Number(index)] = val;
-            onChange(copy);
-        } else if (isObject) {
-            onChange({ ...data, [index]: val });
-        }
-    };
-
-    const handleUpload = async (file: File) => {
-        const formData = new FormData();
-        formData.append("file", file);
-        try {
-            const res = await fetch("/api/upload", { method: "POST", body: formData });
-            const data = await res.json();
-            if (data.url) onChange(data.url);
-        } catch (error) {
-            console.error("Upload failed", error);
-        }
-    };
-
-    if (isArray) {
-        return (
-            <div className={`space-y-4 ${depth > 0 ? 'border-l-2 border-gray-200 pl-4 mt-2' : ''}`}>
-                <div className="flex justify-between items-center bg-gray-50/50 p-2 rounded-lg border border-gray-100">
-                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                        List ({data.length} items)
-                    </span>
-                    <button
-                        onClick={addItem}
-                        className="text-[10px] bg-white border border-gray-200 px-3 py-1 rounded-lg shadow-sm hover:bg-oxford hover:text-white transition-all font-bold flex items-center gap-1"
-                    >
-                        <Plus size={12} /> Add Item
-                    </button>
-                </div>
-                <div className="space-y-3">
-                    {data.map((item, idx) => (
-                        <div key={idx} className="relative group bg-white p-3 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all">
-                            <button
-                                onClick={() => removeItem(idx)}
-                                className="absolute -top-2 -right-2 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-10 shadow-lg"
-                            >
-                                <Trash2 size={12} />
-                            </button>
-                            <RecursiveJsonEditor
-                                data={item}
-                                onChange={(val) => updateItem(idx, val)}
-                                depth={depth + 1}
-                                fieldKey={fieldKey}
-                            />
-                        </div>
-                    ))}
-                </div>
-            </div>
-        );
-    }
-
-    if (isObject) {
-        return (
-            <div className="grid grid-cols-1 gap-4">
-                {Object.keys(data).map((key) => (
-                    <div key={key} className="space-y-1">
-                        <label className="text-[10px] text-gray-400 uppercase font-black tracking-wider flex items-center gap-1">
-                            <Settings size={10} /> {key}
-                        </label>
-                        <RecursiveJsonEditor
-                            data={data[key]}
-                            onChange={(val) => updateItem(key, val)}
-                            depth={depth + 1}
-                            fieldKey={key}
-                        />
-                    </div>
-                ))}
-            </div>
-        );
-    }
-
-    // Default: Text Input or Image Upload
-    const isImageField = fieldKey.toLowerCase().includes("image") ||
-        fieldKey.toLowerCase().includes("img") ||
-        fieldKey.toLowerCase().includes("thumbnail") ||
-        fieldKey.toLowerCase().includes("photo") ||
-        (fieldKey.toLowerCase().includes("url") && (data === null || data === undefined || String(data).match(/\.(jpg|jpeg|png|webp|gif|svg)/i)));
-
-    return (
-        <div className="relative group/input">
-            <input
-                type="text"
-                value={data === null || data === undefined ? "" : String(data)}
-                onChange={(e) => onChange(e.target.value)}
-                className={`w-full text-xs p-3 rounded-xl border border-gray-200 outline-none focus:border-oxford focus:ring-4 focus:ring-oxford/5 transition-all bg-gray-50/30 font-medium ${isImageField ? 'pr-10' : ''}`}
-                placeholder={isImageField ? "Image URL or upload..." : "Type value..."}
-            />
-            {isImageField && (
-                <label className="absolute right-2 top-1/2 -translate-y-1/2 p-2 hover:bg-gray-100 rounded-lg cursor-pointer transition-colors text-gray-400 hover:text-oxford">
-                    <Upload size={14} />
-                    <input
-                        type="file"
-                        className="hidden"
-                        accept="image/*"
-                        onChange={(e) => e.target.files?.[0] && handleUpload(e.target.files[0])}
-                    />
-                </label>
-            )}
-        </div>
-    );
-};
+import Navbar from "@/components/Navbar";
 
 // --- Default Schemas for Hints ---
 const SECTION_TEMPLATES: any = {
@@ -170,73 +33,12 @@ const SECTION_TEMPLATES: any = {
         { key: "images", label: "Images", type: "gallery" }
     ],
     "text-content": [
-        { key: "title", label: "Section Title", type: "text" },
-        { key: "content", label: "Body Text", type: "textarea" }
+        { key: "title", label: "Title", type: "text" },
+        { key: "content", label: "Content", type: "textarea" }
     ],
     features: [
         { key: "title", label: "Section Title", type: "text" },
-        { key: "description", label: "Subtitle", type: "text" },
-        { key: "items", label: "Tabs/Items (JSON)", type: "json" },
-        { key: "dark", label: "Dark Layout", type: "checkbox" }
-    ],
-    food: [
-        { key: "title", label: "Section Title", type: "text" },
-        { key: "description", label: "Main Text", type: "textarea" },
-        { key: "images", label: "Slider Images", type: "gallery" }
-    ],
-    "grid-features": [
-        { key: "title", label: "Section Title", type: "text" },
-        { key: "description", label: "Section Subtitle", type: "textarea" },
-        { key: "items", label: "Grid Items (JSON)", type: "json" },
-        { key: "dark", label: "Dark Mode", type: "checkbox" }
-    ],
-    video: [
-        { key: "title", label: "Section Title", type: "text" },
-        { key: "thumbnail", label: "Video Thumbnail", type: "image" }
-    ],
-    "program-icons": [
-        { key: "title", label: "Section Title", type: "text" },
-        { key: "description", label: "Introduction", type: "textarea" },
-        { key: "items", label: "Icons & Labels (JSON)", type: "json" }
-    ],
-    academics: [
-        { key: "title", label: "Section Title", type: "text" },
-        { key: "stages", label: "Stages (JSON Array)", type: "json" },
-        { key: "secondaryTitle", label: "Grid Title", type: "text" },
-        { key: "streams", label: "Streams (JSON)", type: "json" }
-    ],
-    toppers: [
-        { key: "title", label: "Section Title", type: "text" },
-        { key: "categories", label: "Topper Categories (JSON)", type: "json" }
-    ],
-    staff: [
-        { key: "title", label: "Section Title", type: "text" },
-        { key: "staff", label: "Staff List (JSON)", type: "json" }
-    ],
-    rules: [
-        { key: "title", label: "Section Title", type: "text" },
-        { key: "groups", label: "Rule Groups (JSON)", type: "json" },
-        { key: "general", label: "General Points (JSON Array)", type: "json" }
-    ],
-    "side-by-side": [
-        { key: "title", label: "Section Title", type: "text" },
-        { key: "description", label: "Main Description", type: "textarea" },
-        { key: "secondaryDescription", label: "Secondary Text", type: "textarea" },
-        { key: "image", label: "Main Image", type: "image" },
-        { key: "images", label: "Slider Images (Optional)", type: "gallery" },
-        { key: "reverse", label: "Reverse Layout", type: "checkbox" }
-    ],
-    amenities: [
-        { key: "title", label: "Section Title", type: "text" },
-        { key: "description", label: "Subtitle", type: "text" },
-        { key: "items", label: "Amenity Items (JSON)", type: "json" }
-    ],
-    pillars: [
-        { key: "title", label: "Main Title", type: "text" },
-        { key: "description", label: "Intro Text", type: "textarea" },
-        { key: "secondaryHeading", label: "Secondary Heading", type: "text" },
-        { key: "secondaryDescription", label: "Secondary Content", type: "textarea" },
-        { key: "image", label: "Section Image", type: "image" }
+        { key: "items", label: "Feature Items (JSON)", type: "json" }
     ]
 };
 
@@ -305,25 +107,12 @@ function EditorContent() {
         setSections(sections.map(s => s._id === activeSection._id ? updatedSection : s));
     };
 
-    const handleImageUpload = async (key: string, file: File) => {
-        const formData = new FormData();
-        formData.append("file", file);
-
-        try {
-            const res = await fetch("/api/upload", {
-                method: "POST",
-                body: formData,
-            });
-            const data = await res.json();
-            if (data.url) {
-                handleFieldChange(key, data.url);
-            } else {
-                alert("Upload failed: " + data.error);
-            }
-        } catch (error) {
-            console.error("Upload error:", error);
-            alert("Error uploading image");
-        }
+    const handleImageUpload = (key: string, file: File) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            handleFieldChange(key, reader.result);
+        };
     };
 
     const saveSection = async () => {
@@ -391,7 +180,7 @@ function EditorContent() {
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
-            <AdminNavbar />
+            <Navbar />
 
             {/* Toolbar */}
             <header className="bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center sticky top-20 z-10 shadow-sm">
@@ -461,36 +250,13 @@ function EditorContent() {
                             <h2 className="text-xs font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2">
                                 <Layout size={14} /> Page Sections
                             </h2>
-                            <div className="relative group">
-                                <button
-                                    className="p-1 text-oxford hover:bg-oxford/5 rounded-md transition-colors"
-                                    title="Add Section"
-                                >
-                                    <Plus size={18} />
-                                </button>
-                                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-100 rounded-xl shadow-xl opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all z-20 overflow-hidden">
-                                    <div className="p-2 max-h-60 overflow-y-auto no-scrollbar">
-                                        {Object.keys(SECTION_TEMPLATES).map(type => (
-                                            <button
-                                                key={type}
-                                                onClick={() => addSection(type)}
-                                                className="w-full text-left px-3 py-2 text-xs font-bold text-gray-600 hover:bg-gray-50 hover:text-oxford rounded-lg transition-colors capitalize"
-                                            >
-                                                {type.replace(/-/g, " ")}
-                                            </button>
-                                        ))}
-                                        <button
-                                            onClick={() => {
-                                                const type = prompt("Custom section type:");
-                                                if (type) addSection(type);
-                                            }}
-                                            className="w-full text-left px-3 py-2 text-xs font-bold text-oxford hover:bg-oxford/5 rounded-lg transition-colors border-t border-gray-50 mt-1"
-                                        >
-                                            + Custom Type
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                            <button
+                                onClick={() => addSection("text-content")}
+                                className="p-1 text-oxford hover:bg-oxford/5 rounded-md transition-colors"
+                                title="Add Section"
+                            >
+                                <Plus size={18} />
+                            </button>
                         </div>
 
                         <div className="space-y-2">
@@ -643,50 +409,37 @@ function EditorContent() {
                                                                 className="hidden"
                                                                 accept="image/*"
                                                                 multiple
-                                                                onChange={async (e) => {
+                                                                onChange={(e) => {
                                                                     const files = Array.from(e.target.files || []);
-                                                                    for (const file of files) {
-                                                                        const formData = new FormData();
-                                                                        formData.append("file", file);
-                                                                        try {
-                                                                            const res = await fetch("/api/upload", {
-                                                                                method: "POST",
-                                                                                body: formData,
-                                                                            });
-                                                                            const data = await res.json();
-                                                                            if (data.url) {
-                                                                                const current = Array.isArray(activeSection.content[field.key]) ? activeSection.content[field.key] : [];
-                                                                                handleFieldChange(field.key, [...current, data.url]);
-                                                                            }
-                                                                        } catch (error) {
-                                                                            console.error("Gallery upload error:", error);
-                                                                        }
-                                                                    }
+                                                                    files.forEach(file => {
+                                                                        const reader = new FileReader();
+                                                                        reader.readAsDataURL(file);
+                                                                        reader.onloadend = () => {
+                                                                            const current = Array.isArray(activeSection.content[field.key]) ? activeSection.content[field.key] : [];
+                                                                            handleFieldChange(field.key, [...current, reader.result]);
+                                                                        };
+                                                                    });
                                                                 }}
                                                             />
                                                         </label>
                                                     </div>
                                                 )}
 
-                                                {field.type === "checkbox" && (
-                                                    <div className="flex items-center gap-3 bg-gray-50 p-4 rounded-xl border border-gray-100 w-fit">
-                                                        <input
-                                                            type="checkbox"
-                                                            checked={!!val}
-                                                            onChange={(e) => handleFieldChange(field.key, e.target.checked)}
-                                                            className="w-5 h-5 accent-oxford cursor-pointer"
-                                                        />
-                                                        <span className="text-sm font-medium text-gray-700">{field.label}</span>
-                                                    </div>
-                                                )}
-
                                                 {field.type === "json" && (
-                                                    <div className="space-y-4">
-                                                        <RecursiveJsonEditor
-                                                            data={val}
-                                                            onChange={(newVal) => handleFieldChange(field.key, newVal)}
-                                                        />
-                                                    </div>
+                                                    <textarea
+                                                        value={typeof val === 'object' ? JSON.stringify(val, null, 2) : val}
+                                                        onChange={(e) => {
+                                                            try {
+                                                                const json = JSON.parse(e.target.value);
+                                                                handleFieldChange(field.key, json);
+                                                            } catch (err) {
+                                                                // Allow typing
+                                                                handleFieldChange(field.key, e.target.value);
+                                                            }
+                                                        }}
+                                                        rows={10}
+                                                        className="w-full px-5 py-4 rounded-2xl border border-gray-200 font-mono text-sm focus:border-oxford focus:ring-4 focus:ring-oxford/5 outline-none transition-all leading-relaxed"
+                                                    />
                                                 )}
                                             </div>
                                         );
