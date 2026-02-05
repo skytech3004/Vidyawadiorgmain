@@ -526,7 +526,7 @@ export default function SectionRenderer({ sections }: { sections: any[] }) {
         <>
             {sections.filter(s => s.isVisible).map((section) => {
                 const Component = COMPONENT_MAP[section.type] || TextContent;
-                return <Component key={section._id} content={section.content} settings={section.settings} />;
+                return <Component key={section._id} content={section.content || {}} settings={section.settings || {}} />;
             })}
         </>
     );
