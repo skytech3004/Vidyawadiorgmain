@@ -21,11 +21,11 @@ export default function HomeNewsEvents() {
 
     // Mock Events Data
     const events = [
-        { id: 1, title: "Annual Sports Meet", date: "January 10th, 2026 at 5:00 PM", location: "School Ground", image: "/events/sports.jpg", avatarFn: "S", rawDate: new Date(2026, 0, 10) },
-        { id: 2, title: "Science Exhibition", date: "January 12th, 2026 at 3:00 PM", location: "Auditorium", image: "/events/science.jpg", avatarFn: "M", rawDate: new Date(2026, 0, 12) },
-        { id: 3, title: "Parent Teacher Meeting", date: "January 14th, 2026 at 10:00 AM", location: "Main Hall", image: "/events/ptm.jpg", avatarFn: "D", rawDate: new Date(2026, 0, 14) },
-        { id: 4, title: "Cultural Fest", date: "January 20th, 2026 at 5:00 PM", location: "Open Air Theatre", image: "/events/cultural.jpg", avatarFn: "L", rawDate: new Date(2026, 0, 20) },
-        { id: 5, title: "Alumni Meet", date: "February 5th, 2026 at 12:00 PM", location: "Conference Hall", image: "/events/alumni.jpg", avatarFn: "C", rawDate: new Date(2026, 1, 5) },
+        { id: 1, title: "Annual Sports Meet", date: "January 10th, 2026 at 5:00 PM", location: "School Ground", image: "/images/Physics Laboratory.png", avatarFn: "S", rawDate: new Date(2026, 0, 10) },
+        { id: 2, title: "Science Exhibition", date: "January 12th, 2026 at 3:00 PM", location: "Auditorium", image: "/images/Chemistry Laboratory.png", avatarFn: "M", rawDate: new Date(2026, 0, 12) },
+        { id: 3, title: "Parent Teacher Meeting", date: "January 14th, 2026 at 10:00 AM", location: "Main Hall", image: "/images/Biology Laboratory.png", avatarFn: "D", rawDate: new Date(2026, 0, 14) },
+        { id: 4, title: "Cultural Fest", date: "January 20th, 2026 at 5:00 PM", location: "Open Air Theatre", image: "/images/ART-LAB.png", avatarFn: "L", rawDate: new Date(2026, 0, 20) },
+        { id: 5, title: "Alumni Meet", date: "February 5th, 2026 at 12:00 PM", location: "Conference Hall", image: "/images/Geography Laboratory.png", avatarFn: "C", rawDate: new Date(2026, 1, 5) },
     ];
 
     const hasEvent = (day: number) => {

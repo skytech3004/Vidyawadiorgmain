@@ -1,7 +1,4 @@
 "use server";
-// Wait, Server Actions should be "use server".
-
-import pool from "@/lib/db";
 
 export async function submitInquiry(formData: FormData) {
 
@@ -15,16 +12,8 @@ export async function submitInquiry(formData: FormData) {
         return { success: false, error: "All fields are required" };
     }
 
-    try {
-        const connection = await pool.getConnection();
-        await connection.query(
-            "INSERT INTO inquiries (fullName, email, phone, grade, message) VALUES (?, ?, ?, ?, ?)",
-            [fullName, email, phone, grade, message]
-        );
-        connection.release();
-        return { success: true };
-    } catch (error) {
-        console.error("Database error:", error);
-        return { success: false, error: "Database connection failed. Please ensure MySQL is running." };
-    }
+    // Simulate delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    return { success: true };
 }

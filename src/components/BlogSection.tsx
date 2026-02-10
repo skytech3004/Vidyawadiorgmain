@@ -13,7 +13,7 @@ const recentPosts = [
         author: "Admin",
         readTime: "5 min read",
         category: "Academics",
-        image: "https://images.unsplash.com/photo-1544928147-3949a2cd7a72?q=80&w=1974&auto=format&fit=crop"
+        image: "/images/RS-CIT IT Computer Center.png"
     },
     {
         title: "Shiksha bhi, Sanskar bhi: Our Core Philosophy in Action",
@@ -22,7 +22,7 @@ const recentPosts = [
         author: "Principal",
         readTime: "4 min read",
         category: "Philosophy",
-        image: "https://images.unsplash.com/photo-1544717297-fa95b35c7a36?q=80&w=2070&auto=format&fit=crop"
+        image: "/images/devika_sharma.png"
     },
     {
         title: "Ensuring 100% Safety: A Look into Our Residential Protocols",
@@ -31,7 +31,7 @@ const recentPosts = [
         author: "Hostel Warden",
         readTime: "7 min read",
         category: "Safety",
-        image: "https://images.unsplash.com/photo-1527689368864-3a821dbccc34?q=80&w=2070&auto=format&fit=crop"
+        image: "/images/garima_kawar.png"
     }
 ];
 

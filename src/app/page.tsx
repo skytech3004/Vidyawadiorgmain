@@ -12,11 +12,9 @@ import Academics from "@/components/Academics";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import HomeNewsEvents from "@/components/HomeNewsEvents";
-import { initDB } from "@/lib/init-db";
-
 export default async function Home() {
   // Initialize DB table on first load
-  await initDB();
+  // await initDB();
 
   return (
     <main className="min-h-screen">

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import {
     BookOpen, Trophy, School, Users, Star, Microscope,
     Medal, Phone, MapPin, Mail, CheckCircle2,
-    Music, Calendar, User, FileText, Sparkles
+    Music, Calendar, User, FileText, Sparkles, ShieldCheck
 } from "lucide-react";
 import Image from "next/image";
 
