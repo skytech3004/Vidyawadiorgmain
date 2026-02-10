@@ -378,12 +378,42 @@ const ScatteredGrid = ({ content }: any) => {
                 <div className="absolute inset-0 bg-[radial-gradient(#002147_1px,transparent_1px)] [background-size:20px_20px]" />
             </div>
             <div className="max-w-7xl mx-auto relative z-10">
+                <div className="text-center mb-20 relative flex flex-col items-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                    >
+                        <div className="overflow-hidden">
+                            <motion.h2
+                                initial={{ y: 100 }}
+                                whileInView={{ y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 1, ease: "easeOut" }}
+                                className="text-4xl md:text-6xl font-serif text-oxford mb-6 font-medium"
+                            >
+                                <SafeText value={content.title} />
+                            </motion.h2>
+                        </div>
+                        <motion.div
+                            initial={{ scaleX: 0 }}
+                            whileInView={{ scaleX: 1 }}
+                            transition={{ duration: 1, delay: 0.5 }}
+                            className="w-16 h-1 bg-sandstone mb-8 mx-auto"
+                        />
+                        <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto font-light leading-relaxed">
+                            <SafeText value={content.description} />
+                        </p>
+                    </motion.div>
+                </div>
+
                 <motion.div
                     initial="initial"
                     whileInView="whileInView"
                     viewport={{ once: true }}
                     transition={{ staggerChildren: 0.1 }}
-                    className="columns-2 md:columns-4 lg:columns-5 gap-6 space-y-6 mb-20"
+                    className="columns-2 md:columns-4 lg:columns-5 gap-6 space-y-6"
                 >
                     {images.map((img: string, i: number) => (
                         <motion.div
@@ -397,38 +427,15 @@ const ScatteredGrid = ({ content }: any) => {
                             }}
                             className="relative group rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 break-inside-avoid ring-1 ring-black/5"
                         >
-                            <img src={img} alt={`Sport ${i}`} className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110" />
+                            <img
+                                src={img}
+                                alt={`Gallery ${i}`}
+                                className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110"
+                            />
                             <div className="absolute inset-0 border border-white/20 group-hover:border-white/40 rounded-3xl pointer-events-none transition-colors" />
                         </motion.div>
                     ))}
                 </motion.div>
-                <div className="text-center mt-12 relative flex flex-col items-center">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        <div className="overflow-hidden">
-                            <motion.h2
-                                initial={{ y: 100 }}
-                                whileInView={{ y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 1, ease: "easeOut" }}
-                                className="text-6xl md:text-8xl font-serif text-oxford mb-6 font-medium"
-                            >
-                                <SafeText value={content.title} />
-                            </motion.h2>
-                        </div>
-                        <motion.div
-                            initial={{ scaleX: 0 }}
-                            whileInView={{ scaleX: 1 }}
-                            transition={{ duration: 1, delay: 0.5 }}
-                            className="w-16 h-1 bg-sandstone mb-8 mx-auto"
-                        />
-                        <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto font-light leading-relaxed"><SafeText value={content.description} /></p>
-                    </motion.div>
-                </div>
             </div>
         </section>
     );

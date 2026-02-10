@@ -149,13 +149,13 @@ export default function Navbar() {
                         <div className="pl-[68px] md:pl-32 leading-tight flex-1 min-w-0">
                             <h1 className={cn(
                                 "font-black tracking-[0.1em] leading-none transition-all truncate pr-2",
-                                scrolled ? "text-[clamp(18px,4.5vw,24px)] text-oxford" : "text-[clamp(18px,4.5vw,30px)] text-white"
+                                scrolled || !isDarkSection ? "text-oxford" : "text-white"
                             )}>
                                 VIDYAWADI
                             </h1>
                             <p className={cn(
                                 "text-[9px] sm:text-[11px] font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] mt-1 truncate",
-                                scrolled ? "text-oxford/90" : "text-white/90"
+                                scrolled || !isDarkSection ? "text-oxford/90" : "text-white/90"
                             )}>
                                 <span className="bg-sandstone text-oxford px-1.5 py-0.5 rounded shadow-sm inline-block">
                                     Marudhar Mahila Shikshan Sangh
