@@ -38,8 +38,8 @@ const navLinks = [
     },
     { name: "Amenities", href: "#home" },
     { name: "Hostel", href: "/hostel" },
-    { name: "Gallery", href: "#facilities" },
-    { name: "Blog", href: "#blog" },
+    { name: "Gallery", href: "/gallery" },
+    { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
 ];
 
