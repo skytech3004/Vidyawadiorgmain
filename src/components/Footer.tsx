@@ -11,7 +11,7 @@ export default function Footer() {
                     <div className="space-y-6">
                         <h3 className="text-3xl font-bold text-sandstone">Vidyawadi</h3>
                         <p className="text-white/60 leading-relaxed">
-                            Excellence in education since 1960. Nurturing the next generation of leaders with values and vision.
+                            Excellence in education since 1956. Nurturing the next generation of leaders with values and vision.
                         </p>
                         <div className="flex gap-4">
                             <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-sandstone hover:text-oxford transition-all">
@@ -55,11 +55,11 @@ export default function Footer() {
                             </li>
                             <li className="flex gap-4 text-white/60">
                                 <Phone className="text-sandstone shrink-0" size={20} />
-                                <span className="text-sm">+91-8764185993 / 02934-222994</span>
+                                <span className="text-sm">+91 6377204218</span>
                             </li>
                             <li className="flex gap-4 text-white/60">
                                 <Mail className="text-sandstone shrink-0" size={20} />
-                                <span className="text-sm">ldpsvidhyawadi@gmail.com</span>
+                                <span className="text-sm">marudharmahila@gmail.com</span>
                             </li>
                         </ul>
                     </div>
@@ -81,7 +81,7 @@ export default function Footer() {
                 </div>
 
                 <div className="pt-8 border-t border-white/5 flex flex-col md:row justify-between items-center gap-4 text-white/40 text-xs">
-                    <p>&copy; 2026 Vidyawadi School. All rights reserved.</p>
+                    <p>&copy; 2026 Vidyawadi. All rights reserved.</p>
                     <div className="flex gap-8">
                         <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
                         <a href="#" className="hover:text-white transition-colors">Terms of Service</a>

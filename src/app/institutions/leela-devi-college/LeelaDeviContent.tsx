@@ -310,7 +310,7 @@ export default function LeelaDeviContent() {
                         <h2 className="text-3xl md:text-4xl font-bold text-oxford mb-6">About the College</h2>
                         <div className="prose text-gray-600 leading-relaxed space-y-4">
                             <p>
-                                Leela Devi Parasmal Sancheti Kanya Mahavidyalaya is a women-only higher education institution managed by **Marudhar Mahila Shikshan Sangh**.
+                                Leela Devi Parasmal Sancheti Kanya Mahavidyalaya is a women-only higher education institution managed by <b>Marudhar Mahila Shikshan Sangh,Vidyawadi </b>.
                                 Established to empower girls in academics, leadership, and career preparedness, we provide a transformative learning experience.
                             </p>
                             <p>

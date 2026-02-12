@@ -77,11 +77,11 @@ export default function ContactForm() {
                                 <div className="space-y-2">
                                     <p className="flex items-center gap-3">
                                         <span className="text-sandstone font-bold">Phone:</span>
-                                        +91-8764185993 / 02934-222994
+                                        +91 6377204218
                                     </p>
                                     <p className="flex items-center gap-3">
                                         <span className="text-sandstone font-bold">Email:</span>
-                                        ldpsvidhyawadi@gmail.com
+                                        marudharmahila@gmail.com
                                     </p>
                                 </div>
                                 <p className="text-sm italic text-white/60">

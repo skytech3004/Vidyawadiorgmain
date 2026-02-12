@@ -44,13 +44,13 @@ export default function AboutPage() {
                 <div className="max-w-4xl mx-auto px-6 text-center">
                     <h2 className="text-3xl font-black text-oxford mb-8">Nurturing Excellence Since 1956</h2>
                     <p className="text-oxford/70 text-lg leading-relaxed mb-12">
-                        Vidyawadi is more than just a school; it is a community dedicated to the holistic development of girls.
+                        Vidyawadi is more than just a school and college; it is a community dedicated to the holistic development of girls.
                         Our campus is spread over 50 acres of lush greenery, providing an ideal environment for learning and growth.
                         With a legacy of over 65 years, we have consistently produced leaders who excel in various fields across the globe.
                     </p>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         <div>
-                            <div className="text-4xl font-black text-sandstone mb-2">50+</div>
+                            <div className="text-4xl font-black text-sandstone mb-2">65+</div>
                             <div className="text-sm font-bold text-oxford/60 uppercase tracking-widest">Acres Campus</div>
                         </div>
                         <div>
@@ -58,7 +58,7 @@ export default function AboutPage() {
                             <div className="text-sm font-bold text-oxford/60 uppercase tracking-widest">Students</div>
                         </div>
                         <div>
-                            <div className="text-4xl font-black text-sandstone mb-2">65+</div>
+                            <div className="text-4xl font-black text-sandstone mb-2">70+</div>
                             <div className="text-sm font-bold text-oxford/60 uppercase tracking-widest">Years Legacy</div>
                         </div>
                         <div>

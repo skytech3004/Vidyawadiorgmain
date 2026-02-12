@@ -1,5 +1,8 @@
 "use server";
 
+import dbConnect from "@/lib/mongodb";
+import Inquiry from "@/models/Inquiry";
+
 export async function submitInquiry(formData: FormData) {
 
     const fullName = formData.get("fullName") as string;
@@ -12,8 +15,20 @@ export async function submitInquiry(formData: FormData) {
         return { success: false, error: "All fields are required" };
     }
 
-    // Simulate delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+        await dbConnect();
+        await Inquiry.create({
+            fullName,
+            email,
+            phone,
+            grade,
+            message,
+            status: "new"
+        });
 
-    return { success: true };
+        return { success: true };
+    } catch (error) {
+        console.error("INQUIRY_SUBMIT_ERROR:", error);
+        return { success: false, error: "Failed to submit inquiry. Please try again." };
+    }
 }

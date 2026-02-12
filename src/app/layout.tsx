@@ -21,7 +21,7 @@ const notoDevaragari = Noto_Sans_Devanagari({
 });
 
 export const metadata: Metadata = {
-  title: "Vidyawadi School - Excellence Since 1960",
+  title: "Vidyawadi School - Excellence Since 1956",
   description: "Shaping Leaders of Tomorrow. Educational excellence for over 65 years.",
 };
 

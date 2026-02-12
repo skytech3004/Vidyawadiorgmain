@@ -101,6 +101,68 @@ export default function ManagementPage() {
                 </div>
             </section>
 
+            {/* Office Bearers Section */}
+            <section className="py-24 bg-white">
+                <div className="max-w-7xl mx-auto px-6">
+                    <div className="text-center mb-16">
+                        <motion.h2
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="text-4xl md:text-5xl font-black text-oxford mb-4"
+                        >
+                            OFFICE BEARERS (2024-2027)
+                        </motion.h2>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 }}
+                            className="space-y-2"
+                        >
+                            <h3 className="text-xl font-bold text-sandstone uppercase tracking-widest">Marudhar Mahila Shikshan Sangh, Vidyawaadi (Khimel)</h3>
+                            <p className="text-oxford/60 font-medium">Station Rani, Dist-Pali 306115 (Rajasthan)</p>
+                        </motion.div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                        {[
+                            { name: "Shri Kantilal Nagraj Mehta", post: "President" },
+                            { name: "Shri Pradeep Ghisulal Rathod", post: "Vice President" },
+                            { name: "Shri Chandan Magraj Parmar", post: "Vice President" },
+                            { name: "Shri Kantilal Multanmal Mehta", post: "Vice President" },
+                            { name: "Shri Arvind kumar Pannalal Ranawat", post: "Vice President" },
+                            { name: "Shri Kailash Tejraj Kaveria", post: "Secretary" },
+                            { name: "Mrs. Chandra Pradeep Mehta", post: "Joint Secretary" },
+                            { name: "Shri Hasmukhlal Ramanlal Sanghvi", post: "Joint Secretary" },
+                            { name: "Shri Mahendra Kumar Dhoka", post: "Treasurer" },
+                            { name: "Shri Bharat Bakhtawarmal Rathod", post: "JT. Treasurer" },
+                            { name: "Shri Popatlal Fulchand Sundesha", post: "Past President" }
+                        ].map((bearer, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.05 }}
+                                className="group bg-white rounded-3xl p-8 border border-oxford/5 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
+                            >
+                                <div className="aspect-square w-full mb-6 relative overflow-hidden rounded-2xl bg-sandstone-light/20 flex items-center justify-center grayscale group-hover:grayscale-0 transition-all duration-500">
+                                    <div className="absolute inset-0 bg-gradient-to-t from-oxford/20 to-transparent" />
+                                    <Users size={64} className="text-oxford/20" />
+                                </div>
+                                <h4 className="text-xl font-black text-oxford mb-2 group-hover:text-sandstone transition-colors truncate" title={bearer.name}>
+                                    {bearer.name}
+                                </h4>
+                                <p className="text-sandstone font-black uppercase tracking-widest text-xs">
+                                    {bearer.post}
+                                </p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             {/* Meet the Faculty / Management Team */}
             <Staff />
 

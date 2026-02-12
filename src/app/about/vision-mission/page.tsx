@@ -52,13 +52,17 @@ export default function VisionMissionPage() {
                                 </span>
                                 <h2 className="text-4xl font-black text-oxford tracking-wide uppercase">Vision</h2>
                             </div>
-                            <p className="text-oxford/70 text-2xl font-medium leading-relaxed italic border-l-4 border-sandstone pl-8 bg-sandstone-light/10 py-8 rounded-r-3xl pr-8 shadow-sm">
-                                "To empower girls through quality education, strong values, and a safe environment, enabling them to become confident, responsible, and self-reliant citizens."
-                            </p>
-                            <p className="mt-8 text-oxford/70 leading-relaxed text-lg">
-                                We envision a world where every girl is a leader, equipped with the knowledge, skills, and values to thrive and contribute meaningfully to society.
-                                Our commitment is to provide an educational foundation that is both robust and compassionate.
-                            </p>
+                            <div className="space-y-6">
+                                <p className="text-oxford/70 text-xl font-medium leading-relaxed italic border-l-4 border-sandstone pl-8 bg-sandstone-light/10 py-8 rounded-r-3xl pr-8 shadow-sm">
+                                    "To provide affordable quality education, while equipping students with knowledge and skills in their chosen stream, inculcate values, identify hidden talents, provide opportunities for students to realize their full potential and thus shape them into future leaders, entrepreneurs and above all good human beings."
+                                </p>
+                                <p className="text-oxford/70 leading-relaxed text-lg">
+                                    As a leader it will help create an inclusive environment to encourage progress and collaboration in order to improve instructional outcomes for all students. I will communicate high expectations while providing support to school community members in order to achieve the best possible outcomes for student.
+                                </p>
+                                <p className="text-oxford/70 leading-relaxed text-lg">
+                                    To be a leading world class academic institute, in the delivery of education and creating an environment conductive for the students overall growth and development. To provide a culture of inspiration, innovation & synergy for all the stakeholder- especially students, by emphasizing the spirit of lifelong learning and having them contribute to the development of a sustainable world, both as a job seeker and creator.
+                                </p>
+                            </div>
                         </motion.div>
 
                         <motion.div
@@ -117,10 +121,11 @@ export default function VisionMissionPage() {
 
                             <ul className="space-y-6">
                                 {[
-                                    { icon: BookOpen, text: "To provide affordable and quality education for girls." },
-                                    { icon: Award, text: "To promote academic excellence with moral values." },
-                                    { icon: Heart, text: "To ensure safety, discipline, and holistic development." },
-                                    { icon: Users, text: "To prepare students for professional and social responsibilities." }
+                                    { icon: BookOpen, text: "To strive for quality education in keeping with the motto of the education, 'Excellence in Education' and prepare young minds for imbibing knowledge, skills and sensitivity." },
+                                    { icon: Award, text: "Impart education of the highest standard through value based holistic teaching and learning by integrating traditional and innovative practices." },
+                                    { icon: Target, text: "Create a platform for students for exploring their creative potential and nurturing the spirit of entrepreneurship and critical thinking." },
+                                    { icon: Heart, text: "Inculcate a strong belief in hard work and core values of gender equality, human rights and ecology in order to make them socially responsible citizens." },
+                                    { icon: Users, text: "Equip students with the skills needed to adapt better to the changing global scenario and gain access to multiple career opportunities." }
                                 ].map((item, i) => (
                                     <motion.li
                                         key={i}
@@ -128,12 +133,12 @@ export default function VisionMissionPage() {
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ delay: i * 0.1 }}
-                                        className="flex items-center gap-6 group"
+                                        className="flex items-start gap-6 group"
                                     >
                                         <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-sandstone shrink-0 group-hover:bg-sandstone group-hover:text-oxford transition-all">
                                             <item.icon size={24} />
                                         </div>
-                                        <span className="text-xl font-bold text-white/90 leading-tight">{item.text}</span>
+                                        <span className="text-lg font-bold text-white/90 leading-tight pt-2">{item.text}</span>
                                     </motion.li>
                                 ))}
                             </ul>

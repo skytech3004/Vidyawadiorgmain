@@ -33,11 +33,11 @@ const institutions: Institution[] = [
     {
         title: "Marudhar Balika Vidyapeeth (Sr. Sec.) Vidyawadi (RBSE)",
         type: "School",
-        description: "Co-educational Senior Secondary School with both Hindi and English Medium options under the RBSE board.",
+        description: " Senior Secondary School with both Hindi and English Medium options under the RBSE board.",
         icon: <GraduationCap className="w-6 h-6" />,
         stats: "Hindi & English Medium",
         image: "/marudhar_balika.jpg",
-        tags: ["Dual Medium", "Boarding Available"],
+        tags: ["RBSE", "Boarding Available"],
         href: "/institutions/marudhar-balika-vidyapeeth",
         isBrochure: false
     },
@@ -54,7 +54,7 @@ const institutions: Institution[] = [
     {
         title: "Sushiladevi Prakashraj Modi Primary School",
         type: "School",
-        description: "Elite English Medium Senior Secondary School focused on international standards and student-centric learning.",
+        description: "Elite English Primary Senior Secondary School focused on international standards and student-centric learning.",
         icon: <GraduationCap className="w-6 h-6" />,
         stats: "English Medium Only",
         image: "/lps.jpg",

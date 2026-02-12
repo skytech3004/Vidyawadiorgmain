@@ -6,7 +6,7 @@ import { useTimelineAnimation } from "@/hooks/useTimelineAnimation";
 
 const timelineEvents = [
     {
-        year: "1960",
+        year: "1956",
         title: "The Foundation",
         description: "Vidyawadi School established with 50 students and 5 teachers in a small building.",
         side: "left"

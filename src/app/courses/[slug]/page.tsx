@@ -20,10 +20,9 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import coursesData from "@/data/courses.json";
 
-export default function CourseDetailPage() {
-    const params = useParams();
+export default function CourseDetailPage({ params }: { params: Promise<{ slug: string }> }) {
     const router = useRouter();
-    const slug = params.slug as string;
+    const { slug } = React.use(params);
 
     const course = coursesData.courses.find((c: any) => c.slug === slug || c.id === slug);
 
