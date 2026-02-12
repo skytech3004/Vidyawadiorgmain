@@ -147,12 +147,6 @@ export default function Navbar() {
 
                         {/* BRAND TEXT */}
                         <div className="pl-[68px] md:pl-32 leading-tight flex-1 min-w-0">
-                            <h1 className={cn(
-                                "font-black tracking-[0.1em] leading-none transition-all truncate pr-2",
-                                scrolled || !isDarkSection ? "text-oxford" : "text-white"
-                            )}>
-                                VIDYAWADI
-                            </h1>
                             <p className={cn(
                                 "text-[9px] sm:text-[11px] font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] mt-1 truncate",
                                 scrolled || !isDarkSection ? "text-oxford/90" : "text-white/90"
@@ -161,6 +155,13 @@ export default function Navbar() {
                                     Marudhar Mahila Shikshan Sangh
                                 </span>
                             </p>
+                            <h1 className={cn(
+                                "font-black tracking-[0.1em] leading-none transition-all truncate pr-2",
+                                scrolled || !isDarkSection ? "text-oxford" : "text-white"
+                            )}>
+                                VIDYAWADI
+                            </h1>
+
                         </div>
                     </motion.div>
 
@@ -262,7 +263,7 @@ export default function Navbar() {
                                 <h2 className="text-3xl font-black text-white tracking-widest uppercase">Vidyawadi</h2>
                                 <p className="text-[10px] text-sandstone font-bold uppercase tracking-widest mt-1">
                                     <span className="bg-sandstone text-oxford px-1.5 py-0.5 rounded shadow-sm">
-                                        Marudhar Mahila Shikshan Sangh
+                                        Marudhar Mahila Shikshan Sangh,Vidyawadi
                                     </span>
                                 </p>
                             </div>

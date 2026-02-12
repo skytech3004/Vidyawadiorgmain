@@ -31,7 +31,7 @@ export default function AboutPage() {
                         transition={{ delay: 0.1 }}
                         className="text-5xl md:text-7xl font-black text-white"
                     >
-                        ABOUT VIDYAWADI
+                        ABOUT  US
                     </motion.h1>
                 </div>
             </div>

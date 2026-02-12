@@ -296,7 +296,7 @@ export default function LeelaDeviContent() {
                         className="order-2 lg:order-1"
                     >
                         <div className="relative">
-                            <img src="/lps.jpg" alt="College Campus" className="rounded-3xl shadow-2xl relative z-10" />
+                            <img src="/leeladevi.jpg" alt="College Campus" className="rounded-3xl shadow-2xl relative z-10" />
                             <div className="absolute -top-6 -left-6 w-full h-full border-2 border-sandstone rounded-3xl -z-10" />
                             <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-oxford/5 rounded-full -z-10 blur-2xl" />
                         </div>
@@ -310,12 +310,12 @@ export default function LeelaDeviContent() {
                         <h2 className="text-3xl md:text-4xl font-bold text-oxford mb-6">About the College</h2>
                         <div className="prose text-gray-600 leading-relaxed space-y-4">
                             <p>
-                                Leela Devi Parasmal Sancheti Kanya Mahavidyalaya is a women-only higher education institution managed by <b>Marudhar Mahila Shikshan Sangh,Vidyawadi </b>.
+                                Leela Devi Parasmal Sancheti Kanya Mahavidyalaya is a women-only higher education institution managed by <b>Marudhar Mahila Shikshan Sangh,Vidyawadi</b>.
                                 Established to empower girls in academics, leadership, and career preparedness, we provide a transformative learning experience.
                             </p>
                             <p>
-                                Our institution is affiliated with **Jai Narain Vyas University (JNVU), Jodhpur**, and is recognized by the University Grants Commission (UGC).
-                                We are proud to hold a **NAAC B++ grade** (valid through March 2028), reflecting our commitment to quality education.
+                                Our institution is affiliated with <b>Jai Narain Vyas University (JNVU), Jodhpur</b>, and is recognized by the University Grants Commission (UGC).
+                                We are proud to hold a <b>NAAC B++ grade</b> (valid through March 2028), reflecting our commitment to quality education.
                             </p>
                             <div className="pt-6 grid grid-cols-2 gap-4">
                                 <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100">

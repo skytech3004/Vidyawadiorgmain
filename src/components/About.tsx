@@ -6,19 +6,19 @@ import { History, Shield, Target, GraduationCap, Users } from "lucide-react";
 
 const features = [
     {
-        title: "Senior Secondary Schools",
+        title: "Leeladevi Parasmal Sancheti Kanya Mahavidyalaya",
         icon: GraduationCap,
     },
     {
-        title: "College Education",
+        title: "Marudhar Balika Vidyapeeth (Sr. Sec.) – Vidyawadi (RBSE Hindi & English)",
         icon: GraduationCap,
     },
     {
-        title: "Skill Development",
-        icon: Users,
+        title: "Leeladevi Parasmal Sancheti English Medium Sr. Sec. School",
+        icon: GraduationCap,
     },
     {
-        title: "Girls’ Hostel Facilities",
+        title: "Girls’ Hostel (A.C. & Non A.C. )",
         icon: Shield,
     }
 ];
@@ -42,19 +42,20 @@ export default function About() {
                         <span className="text-sandstone font-black uppercase tracking-[0.3em] text-sm mb-4 block">
                             Our Journey
                         </span>
-                        <h2 className="text-4xl md:text-5xl font-black text-oxford mb-8 leading-tight">
-                            ABOUT VIDYAWADI
-                        </h2>
+                        <h5 className="text-2xl md:text-3xl font-black leading-tight mb-8">
+                            <span className="text-sandstone">ABOUT</span> <br />
+                            <span className="text-oxford">Marudhar Mahila Shikshan Sangh, Vidyawadi</span>
+                        </h5>
 
                         <div className="space-y-6 text-oxford/70 text-lg leading-relaxed">
                             <p>
-                                <span className="font-bold text-oxford">Vidyawadi</span> is an educational initiative of <span className="bg-sandstone text-oxford px-1.5 py-0.5 rounded shadow-sm font-bold">Marudhar Mahila Shikshan Sangh</span>, established with the vision of empowering girls through education.
+                                <span className="font-bold text-oxford">Marudhar Mahila Shikshan Sangh, Vidyawadi</span> is a prestigious girls’ educational campus established with the vision of empowering young women through quality education, strong values, and holistic development.
                             </p>
                             <p>
-                                Since <span className="text-sandstone font-bold underline decoration-2 underline-offset-4">1956</span>, Vidyawadi has continuously evolved to meet modern educational needs while preserving its core values of discipline, safety, and holistic development.
+                                Since <span className="text-oxford font-bold underline decoration-2 underline-offset-4">1956</span>, the institution has continuously evolved to meet modern academic standards while preserving its core principles of discipline, safety, and character building.
                             </p>
                             <p>
-                                Today, Vidyawadi stands as a comprehensive residential education campus for girls, offering world-class infrastructure and a nurturing environment.
+                                Today, <span className="font-bold text-oxford">Marudhar Mahila Shikshan Sangh, Vidyawadi</span> stands as a comprehensive residential education campus for girls, offering excellent infrastructure and a nurturing academic environment.
                             </p>
                         </div>
 
@@ -96,7 +97,7 @@ export default function About() {
                                 </span>
                                 <h3 className="text-3xl font-black mb-6 tracking-wide">VISION</h3>
                                 <p className="text-white/80 leading-relaxed text-lg italic">
-                                    "To empower girls through quality education, strong values, and a safe environment, enabling them to become confident, responsible, and self-reliant citizens."
+                                    "To provide affordable, high-quality education that empowers students with knowledge, skills, and strong values. We aim to nurture hidden talents, encourage innovation, and create future leaders, entrepreneurs, and responsible citizens."
                                 </p>
                             </div>
                         </motion.div>
@@ -114,24 +115,14 @@ export default function About() {
                                     <Shield className="text-white" size={24} />
                                 </span>
                                 <h3 className="text-3xl font-black mb-6 tracking-wide">MISSION</h3>
-                                <ul className="space-y-4">
-                                    {[
-                                        "To provide affordable and quality education for girls",
-                                        "To promote academic excellence with moral values",
-                                        "To ensure safety, discipline, and holistic development",
-                                        "To prepare students for professional and social responsibilities"
-                                    ].map((text, i) => (
-                                        <li key={i} className="flex items-start gap-4 font-bold text-oxford/70">
-                                            <div className="mt-1.5 w-2 h-2 rounded-full bg-oxford shrink-0" />
-                                            <span>{text}</span>
-                                        </li>
-                                    ))}
-                                </ul>
+                                <p className="text-oxford/80 leading-relaxed text-lg italic">
+                                    "Our mission is to deliver excellence in education through value-based and holistic learning. We focus on developing creativity, critical thinking, and entrepreneurial skills while promoting gender equality, social responsibility, and environmental awareness."
+                                </p>
                             </div>
                         </motion.div>
                     </div>
                 </div>
             </div>
-        </section>
+        </section >
     );
 }

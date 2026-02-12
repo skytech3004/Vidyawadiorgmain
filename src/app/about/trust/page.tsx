@@ -32,7 +32,7 @@ export default function TrustPage() {
                         className="text-5xl md:text-7xl font-black text-white"
                     >
                         <span className="text-sandstone">
-                            MARUDHAR MAHILA SHIKSHAN SANGH
+                            Marudhar Mahila Shikshan Sangh,Vidyawadi
                         </span>
                     </motion.h1>
                 </div>
@@ -49,7 +49,7 @@ export default function TrustPage() {
                         >
                             <h2 className="text-4xl font-black text-oxford mb-8">The Visionaries Behind Vidyawadi</h2>
                             <p className="text-oxford/70 text-lg leading-relaxed mb-6">
-                                <span className="bg-sandstone text-oxford px-1.5 py-0.5 rounded shadow-sm font-bold">Marudhar Mahila Shikshan Sangh</span> is a charitable educational trust dedicated to the upliftment and empowerment of women in Rajasthan and beyond.
+                                <span className="bg-sandstone text-oxford px-1.5 py-0.5 rounded shadow-sm font-bold">Marudhar Mahila Shikshan Sangh,Vidyawadi</span> is a charitable educational trust dedicated to the upliftment and empowerment of women in Rajasthan and beyond.
                                 Established with a philanthropic spirit, the trust has been the driving force behind the creation and evolution of Vidyawadi.
                             </p>
                             <p className="text-oxford/70 text-lg leading-relaxed mb-8">

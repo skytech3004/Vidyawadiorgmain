@@ -65,7 +65,7 @@ export default function MarudharContent() {
                         <h2 className="text-3xl md:text-4xl font-bold text-oxford mb-6">Shaping Bright Futures for Girls (Class VI–XII)</h2>
                         <div className="prose text-gray-600 leading-relaxed space-y-4">
                             <p>
-                                Marudhar Balika Vidyapeeth is a premier girls’ senior secondary school dedicated to academic excellence, character building, and all-round development. Managed by Marudhar Mahila Shikshan Sangh, our institution provides quality education in Hindi & English Medium under RBSE.
+                                Marudhar Balika Vidyapeeth is a premier girls’ senior secondary school dedicated to academic excellence, character building, and all-round development. Managed by Marudhar Mahila Shikshan Sangh,Vidyawadi, our institution provides quality education in Hindi & English Medium under RBSE.
                             </p>
                             <p className="text-lg font-medium text-oxford">
                                 "We believe that educated girls build stronger families, communities, and the nation."

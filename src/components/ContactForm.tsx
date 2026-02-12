@@ -109,7 +109,7 @@ export default function ContactForm() {
                                     <ul className="text-white/70 text-sm space-y-1 list-disc list-inside ml-2">
                                         <li>Sanderao on Pali-Ahmdabad Route</li>
                                         <li>Falna on Jodhpur-Udaipur Route</li>
-                                        <li>Vidhyawadi on Jodhpur-Sadri Route</li>
+                                        <li>Vidyawadi on Jodhpur-Sadri Route</li>
                                     </ul>
                                 </div>
 

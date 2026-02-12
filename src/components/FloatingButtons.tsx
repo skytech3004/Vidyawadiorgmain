@@ -5,7 +5,7 @@ import { Info } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function FloatingButtons() {
-    const whatsappNumber = "+919414115115";
+    const whatsappNumber = "+916377204218";
     const whatsappMessage = "Hello Vidyawadi, I would like to inquire about admissions.";
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 

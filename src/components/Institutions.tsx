@@ -26,7 +26,7 @@ const institutions: Institution[] = [
         icon: <GraduationCap className="w-6 h-6" />,
         stats: "NAAC B++ Grade",
         image: "/leeladevi.jpg",
-        tags: ["UG Courses", "Scholarships"],
+        tags: ["UG/PG/INTEGRATED COURSES", "Boarding Available"],
         href: "/institutions/leela-devi-college",
         isBrochure: false
     },
@@ -48,7 +48,7 @@ const institutions: Institution[] = [
         icon: <GraduationCap className="w-6 h-6" />,
         stats: "English Medium Only",
         image: "/lps.jpg",
-        tags: ["CBSE Standards", "Modern Tech"],
+        tags: ["CBSE Standards", "Boarding Available"],
         isBrochure: false
     },
     {
@@ -58,7 +58,7 @@ const institutions: Institution[] = [
         icon: <GraduationCap className="w-6 h-6" />,
         stats: "English Medium Only",
         image: "/lps.jpg",
-        tags: ["CBSE Standards", "Modern Tech"],
+        tags: ["CBSE Standards", "Boarding Available"],
         isBrochure: false
     },
 ];
@@ -132,7 +132,7 @@ export default function Institutions() {
                             <div className="p-8 md:p-10">
                                 <div className="flex gap-3 mb-4">
                                     {inst.tags.map(tag => (
-                                        <span key={tag} className="text-[10px] font-bold text-sand-dark opacity-60 uppercase tracking-widest">{tag}</span>
+                                        <span key={tag} className="text-[10px] font-bold text-sand-dark opacity-60 uppercase tracking-widest border border-oxford rounded-[20px] p-2">{tag}</span>
                                     ))}
                                 </div>
                                 <h3 className="text-2xl md:text-3xl font-bold text-oxford mb-4 group-hover:text-sandstone transition-colors leading-tight">

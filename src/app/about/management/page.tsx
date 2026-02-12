@@ -120,7 +120,7 @@ export default function ManagementPage() {
                             transition={{ delay: 0.1 }}
                             className="space-y-2"
                         >
-                            <h3 className="text-xl font-bold text-sandstone uppercase tracking-widest">Marudhar Mahila Shikshan Sangh, Vidyawaadi (Khimel)</h3>
+                            <h3 className="text-xl font-bold text-sandstone uppercase tracking-widest">Marudhar Mahila Shikshan Sangh,Vidyawadi, Vidyawaadi (Khimel)</h3>
                             <p className="text-oxford/60 font-medium">Station Rani, Dist-Pali 306115 (Rajasthan)</p>
                         </motion.div>
                     </div>
