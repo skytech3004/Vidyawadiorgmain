@@ -78,7 +78,8 @@ export default function Hero() {
                     className="h-full w-full object-cover opacity-80"
                     poster="/hostel.jpg"
                 >
-                    <source src="/api/video" type="video/mp4" />
+                    <source src="/ritu_vaishnav_created.webm" type="video/webm" />
+                    <source src="/ritu_vaishnav_created.mp4" type="video/mp4" />
                 </video>
 
                 {/* Cool Blue Cinematic Grade */}
