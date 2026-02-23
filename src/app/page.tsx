@@ -23,11 +23,12 @@ export default async function Home() {
       <About />
       <Stats />
       <Institutions />
+      <HostelSection />
+
       <Facilities />
       <Heritage />
       <HomeNewsEvents />
-      <HostelSection />
-      <Staff />
+      {/* <Staff /> */}
       <BlogSection />
       <Academics />
       <ContactForm />

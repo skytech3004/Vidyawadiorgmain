@@ -24,8 +24,8 @@ const labsData = [
         "id": 1,
         "name": "Chemistry Laboratory",
         "slug": "chemistry",
-        "icon": "🧪",
-        "gradient": "from-red-500 to-orange-500",
+        "icon": <Microscope className="w-8 h-8 text-oxford" />,
+        "gradient": "from-sandstone to-sandstone-dark",
         "description": "A well-equipped and student-friendly facility designed to support teaching and learning in inorganic, organic, and physical chemistry.",
         "fullDescription": "The Chemistry Laboratory of Leela Devi Parasmal Sancheti Kanya Mahavidyalaya is a well-equipped and student-friendly facility designed to support teaching and learning in inorganic, organic, and physical chemistry. The laboratory provides a safe and enriched environment where students can practically explore the fundamental principles of chemical science. Equipped with high-quality glassware, analytical balances, heating mantles, distillation units, colorimeters, and pH meters, the laboratory enables students to conduct a wide variety of experiments with precision. Adequate storage systems, fume hoods, and safety devices such as fire extinguishers, first-aid kits, and proper ventilation ensure a secure working environment. Practical sessions are structured to develop students' analytical abilities, experimental skills, and scientific temper. From basic qualitative and quantitative analysis to complex synthesis and titration procedures, the laboratory provides hands-on experience that strengthens conceptual understanding. The laboratory also houses reference charts, models, safety guidelines, and access to chemical databases to encourage self-learning. Faculty members and lab assistants offer continuous guidance, ensuring adherence to safety protocols and scientific ethics. Regular maintenance and stock updates keep the laboratory fully functional throughout the academic year. The space is also used for project work, demonstrations, and skill-based learning activities that enhance students' preparedness for higher education and competitive examinations. Overall, the Chemistry Laboratory plays a crucial role in fostering scientific inquiry, accuracy, and problem-solving skills, enabling students to gain confidence in laboratory practices and pursue careers in science with strong foundational knowledge.",
         "keyFeatures": [
@@ -43,8 +43,8 @@ const labsData = [
         "id": 2,
         "name": "Botany Laboratory",
         "slug": "botany",
-        "icon": "🌱",
-        "gradient": "from-green-500 to-emerald-500",
+        "icon": <Star className="w-8 h-8 text-oxford" />,
+        "gradient": "from-sandstone to-sandstone-dark",
         "description": "A dynamic space designed to explore the vast diversity of the plant world with modern instruments and botanical resources.",
         "fullDescription": "The Botany Laboratory of Leela Devi Parasmal Sancheti Kanya Mahavidyalaya is a dynamic space designed to explore the vast diversity of the plant world. Equipped with compound and dissecting microscopes, microtomes, plant specimens, herbarium sheets, permanent slides, botanical charts, and modern instruments, the laboratory supports comprehensive learning in plant anatomy, taxonomy, physiology, ecology, and economic botany. The facility provides students with direct exposure to plant structures and processes through hands-on experiments and microscopic observations. A well-maintained botanical garden complements the laboratory by offering live plant material for study. Students engage in activities such as specimen collection, herbarium preparation, germination studies, and biochemical tests. The laboratory fosters scientific curiosity by encouraging exploration of plant adaptations, environmental interactions, and ecological balance. The workspace is organized to ensure smooth conduct of practical sessions, with provision for safe storage of chemicals and equipment. Faculty members guide students in conducting experiments with precision, maintaining laboratory notebooks, and understanding the scientific relevance of each activity. Reference books, charts, and digital resources further enrich their learning experience. The Botany Laboratory serves as a foundation for advanced study in life sciences and research oriented learning. It nurtures awareness of biodiversity conservation and promotes environmental responsibility among students. Through its practical orientation and supportive environment, the laboratory helps students develop observational skills, scientific reasoning, and a deep appreciation for the plant kingdom.",
         "keyFeatures": [
@@ -62,8 +62,8 @@ const labsData = [
         "id": 3,
         "name": "Zoology Laboratory",
         "slug": "zoology",
-        "icon": "🔬",
-        "gradient": "from-blue-500 to-cyan-500",
+        "icon": <Microscope className="w-8 h-8 text-oxford" />,
+        "gradient": "from-sandstone to-sandstone-dark",
         "description": "An excellent platform for the scientific study of animal life with comprehensive resources for hands-on learning.",
         "fullDescription": "The Zoology Laboratory at Leela Devi Parasmal Sancheti Kanya Mahavidyalaya provides an excellent platform for the scientific study of animal life. It is equipped with microscopes, prepared slides, dissecting instruments, models, charts, museum specimens, and audiovisual resources that support learning in anatomy, physiology, taxonomy, cell biology, genetics, and ecology. The laboratory is designed to offer students hands-on experience that strengthens their theoretical understanding through direct observation and experimentation. Students engage in activities such as microscopic examination of tissues, study of animal diversity, slide preparation, dissections (where applicable), and physiological experiments. The laboratory also houses well-preserved specimens representing major animal groups, enabling learners to gain insight into comparative anatomy and evolutionary relationships. Hygienic and ethical practices are strictly followed during all activities. Safety is a top priority, with proper workspaces, ventilation, first-aid facilities, and guidelines for instrument handling. Faculty members ensure that students conduct experiments responsibly while developing skills in data collection, analysis, and scientific documentation. The laboratory encourages critical thinking by integrating project work, field visits, and interactive demonstrations. Students learn to appreciate ecological balance, wildlife conservation, and the significance of animal studies in human welfare. Through practical training, learners build a strong foundation for careers in life sciences, biotechnology, education, and research. The Zoology Laboratory, through its comprehensive resources and academic support, plays a vital role in shaping students into knowledgeable and skilled young biologists.",
         "keyFeatures": [
@@ -81,8 +81,8 @@ const labsData = [
         "id": 4,
         "name": "Physics Laboratory",
         "slug": "physics",
-        "icon": "⚛️",
-        "gradient": "from-purple-500 to-pink-500",
+        "icon": <BookOpen className="w-8 h-8 text-oxford" />,
+        "gradient": "from-sandstone to-sandstone-dark",
         "description": "A well-organized facility enabling students to explore principles of classical and modern physics through experiment-based learning.",
         "fullDescription": "The Physics Laboratory of Leela Devi Parasmal Sancheti Kanya Mahavidyalaya is a well-organized facility that enables students to explore the principles of classical and modern physics through experiment-based learning. The laboratory is equipped with high-quality instruments such as optical benches, galvanometers, voltmeters, ammeters, vernier calipers, micrometers, spectrometers, potentiometers, pendulums, and various electrical, optical, and mechanical apparatus used for standard undergraduate experiments. The environment encourages precision, observation, and analytical thinking. Students conduct experiments in mechanics, electricity, magnetism, optics, electronics, and thermodynamics. Through these activities, they develop essential laboratory skills such as error analysis, data interpretation, and scientific reporting. The structured practical sessions complement classroom teaching, helping students connect theoretical concepts with real-world applications. Safety measures including insulated wiring, safety charts, fire extinguishers, and well-ventilated workspaces ensure a secure laboratory experience. The faculty provides guidance on instrument handling, experimental setup, calibration, and interpretation of results, encouraging students to think logically and critically. The laboratory is also used for project-based learning and demonstrations of innovative scientific phenomena. This fosters creativity and strengthens problem-solving abilities, preparing students for higher studies in physics, engineering, and related fields. Overall, the Physics Laboratory plays a vital role in nurturing scientific temper, promoting curiosity, and enhancing technical competence. Its systematic approach to practical education ensures that students gain confidence in experimentation and develop a strong foundational understanding of physical science.",
         "keyFeatures": [
@@ -100,8 +100,8 @@ const labsData = [
         "id": 5,
         "name": "Geography Laboratory",
         "slug": "geography",
-        "icon": "🌍",
-        "gradient": "from-teal-500 to-green-500",
+        "icon": <Globe className="w-8 h-8 text-oxford" />,
+        "gradient": "from-sandstone to-sandstone-dark",
         "description": "Essential facility supporting practical learning in physical, human, and environmental geography with modern tools.",
         "fullDescription": "The Geography Laboratory at Leela Devi Parasmal Sancheti Kanya Mahavidyalaya is an essential facility that supports practical learning in physical, human, and environmental geography. It is equipped with topographical maps, aerial photographs, satellite imagery, tracing tables, weather instruments, survey equipment, GIS resources, globes, models, atlases, and thematic charts that enable students to understand spatial patterns and geographical concepts effectively. Students engage in activities such as map reading, contour interpretation, landform analysis, and weather data recording, and surveying techniques using instruments like plane tables, compasses, and clinometers. The laboratory also introduces students to modern tools such as GIS and remote sensing, enhancing their technical proficiency and spatial analytical skills. The environment encourages hands-on exploration, critical observation, and interpretation of geographical information. Faculty mentors ensure that students learn practical skills such as map drawing, data representation, field survey methods, and preparation of geographical reports. The laboratory also supports fieldwork, a significant component of geography education, by helping students analyze environmental conditions and human-land interactions. Safety, cleanliness, and proper equipment storage are maintained to ensure smooth and effective functioning. The lab promotes environmental awareness by encouraging students to study climate patterns, soil characteristics, natural resource distribution, and sustainable development issues. Through its comprehensive resources and activity-based learning approach, the Geography Laboratory enhances students' conceptual clarity, research aptitude, and understanding of the dynamic relationship between people and their environment.",
         "keyFeatures": [
@@ -119,8 +119,8 @@ const labsData = [
         "id": 6,
         "name": "Home Science Laboratory",
         "slug": "home-science",
-        "icon": "🏠",
-        "gradient": "from-pink-500 to-rose-500",
+        "icon": <Utensils className="w-8 h-8 text-oxford" />,
+        "gradient": "from-sandstone to-sandstone-dark",
         "description": "Multifunctional space supporting training in nutrition, food science, clothing, textiles, and resource management.",
         "fullDescription": "The Home Science Laboratory of Leela Devi Parasmal Sancheti Kanya Mahavidyalaya is a multifunctional space that supports training in nutrition, food science, clothing and textiles, human development, and resource management. The laboratory is equipped with modern kitchen appliances, weighing scales, cooking tools, sewing machines, measuring instruments, fabric samples, nutrition charts, and child development materials that enable hands-on learning. Students participate in activities such as food preparation, nutritional assessment, diet planning, textile testing, garment construction, interior decoration exercises, and creative craftwork. These practical experiences strengthen students' understanding of health, hygiene, family resource management, and scientific cooking methods. The laboratory emphasizes safety, with proper ventilation, fire extinguishers, and hygienic workstations. Through guided practical sessions, students learn essential life skills, technical processes, and scientific principles that build confidence and self-reliance. Faculty members provide continuous support in conducting experiments, using instruments correctly, and maintaining laboratory records. The laboratory also encourages innovation through project work such as recipe development, nutritional surveys, fabric analysis, and design activities. Students gain exposure to real-life applications, preparing them for fields such as nutrition, childcare, fashion design, home management, and social service. The Home Science Laboratory fosters creativity, critical thinking, and problem-solving abilities, making it a vital component of holistic education. It empowers students with knowledge and practical experience essential for personal development and professional growth.",
         "keyFeatures": [
@@ -138,8 +138,8 @@ const labsData = [
         "id": 7,
         "name": "Music Laboratory",
         "slug": "music",
-        "icon": "🎵",
-        "gradient": "from-indigo-500 to-purple-500",
+        "icon": <Music className="w-8 h-8 text-oxford" />,
+        "gradient": "from-sandstone to-sandstone-dark",
         "description": "A vibrant space that nurtures creativity, rhythm, and musical expression with classical and contemporary instruments.",
         "fullDescription": "The Music Laboratory at Leela Devi Parasmal Sancheti Kanya Mahavidyalaya is a vibrant space that nurtures creativity, rhythm, and musical expression. The lab is equipped with classical and contemporary musical instruments including harmoniums, tablas, tanpuras, keyboards, and percussion instruments. Audio systems, microphones, practice modules, and digital tools support both theoretical and practical training in vocal and instrumental music. Students explore classical ragas, folk traditions, notation systems, rhythm patterns, and performance techniques. The laboratory environment encourages practice, experimentation, and artistic growth. Sessions include individual training, group rehearsals, and performance-based activities that help students improve vocal clarity, rhythm sense, and instrumental skills. The laboratory is acoustically arranged to provide a conducive space for music learning. Faculty members guide students in mastering techniques, understanding musical theory, and developing stage confidence. Recordings and digital resources are used to help learners analyze performances and refine their musical abilities. Workshops, demonstrations, and cultural events further enhance the learning experience by exposing students to diverse musical traditions and professional artistry. The lab also encourages participation in college events, competitions, and community programs. Through its creative environment and strong academic foundation, the Music Laboratory fosters cultural appreciation, artistic expression, and holistic development. It plays a key role in shaping confident performers, informed musicians, and culturally enriched individuals.",
         "keyFeatures": [
@@ -157,8 +157,8 @@ const labsData = [
         "id": 8,
         "name": "Fine Arts Laboratory",
         "slug": "fine-art",
-        "icon": "🎨",
-        "gradient": "from-yellow-500 to-orange-500",
+        "icon": <Star className="w-8 h-8 text-oxford" />,
+        "gradient": "from-sandstone to-sandstone-dark",
         "description": "A creative hub designed to support artistic expression and skill development with diverse art materials.",
         "fullDescription": "The Fine Arts Laboratory of Leela Devi Parasmal Sancheti Kanya Mahavidyalaya is a creative hub designed to support artistic expression and skill development. The laboratory is equipped with drawing boards, easels, painting materials, craft tools, sculpting resources, color media, and display facilities that allow students to work with diverse art forms. Students engage in activities such as sketching, painting, clay modeling, fabric arts, craftwork, design projects, and mixed-media compositions. The environment encourages imagination and experimentation, enabling learners to explore various techniques and develop their unique artistic style. Wall displays, sample works, and reference materials further inspire creativity. Faculty mentors provide personalized guidance, helping students understand concepts such as color theory, composition, shading, texture, and aesthetic balance. The laboratory also offers opportunities for project-based learning, exhibitions, and collaborative artwork that enhance confidence and communication skills. The lab is maintained with cleanliness, proper lighting, and organized storage, ensuring a comfortable and productive workspace. Students are encouraged to think critically, observe their surroundings, and translate ideas into visual forms. Through practical engagement, the Fine Arts Laboratory helps students develop artistic sensitivity, technical proficiency, and appreciation for visual culture. It plays a significant role in nurturing creative professionals and enriching the cultural environment of the college.",
         "keyFeatures": [
@@ -176,8 +176,8 @@ const labsData = [
         "id": 9,
         "name": "ICT Laboratory",
         "slug": "ict",
-        "icon": "💻",
-        "gradient": "from-blue-600 to-indigo-600",
+        "icon": <Monitor className="w-8 h-8 text-oxford" />,
+        "gradient": "from-sandstone to-sandstone-dark",
         "description": "Modern digital learning space supporting computer education and technological skill development.",
         "fullDescription": "The ICT Laboratory of Leela Devi Parasmal Sancheti Kanya Mahavidyalaya is a modern digital learning space that supports computer education and technological skill development. The lab is equipped with updated desktop systems, internet connectivity, projectors, educational software, and printers, enabling students to gain hands-on experience with essential ICT tools and applications. Students learn computer fundamentals, office automation, data handling, digital literacy, internet research, and basic programming skills. The laboratory enhances their understanding of modern technologies such as cloud tools, e-learning platforms, digital communication, and information management systems. The spacious, well-ventilated lab environment allows every learner individual access to computers. Regular maintenance ensures uninterrupted performance. Trained faculty members guide students through practical sessions, emphasize responsible digital behavior, and promote cyber-awareness. ICT skills are integrated across various disciplines to support research, presentations, and project based learning. The lab also provides access to online educational resources through platforms like DELNET, enhancing academic engagement. The ICT Laboratory plays a vital role in preparing students for a technology-driven world. It helps them develop digital competence, problem-solving abilities, and confidence in using modern tools, making it an essential component of contemporary education.",
         "keyFeatures": [
@@ -195,8 +195,8 @@ const labsData = [
         "id": 10,
         "name": "Psychology Laboratory",
         "slug": "psychology",
-        "icon": "🧠",
-        "gradient": "from-violet-500 to-purple-500",
+        "icon": <Trophy className="w-8 h-8 text-oxford" />,
+        "gradient": "from-sandstone to-sandstone-dark",
         "description": "Interactive space to understand human behavior through scientific methods and psychological assessments.",
         "fullDescription": "The Psychology Laboratory at Leela Devi Parasmal Sancheti Kanya Mahavidyalaya provides students an interactive space to understand human behavior through scientific methods. It is equipped with psychological tests, personality inventories, aptitude scales, reaction time apparatus, memory instruments, perceptual tools, and audio-visual resources for conducting experiments. Students learn to administer, score, and interpret psychological assessments related to intelligence, personality, learning, motivation, attention, and mental processes. Activities include experiments on memory, problem-solving, motor skills, sensory perception, and emotional responses. These experiences help students connect theoretical concepts with real-life human behavior. The laboratory is arranged to ensure privacy, concentration, and ethical conduct during assessments. Faculty members guide students in research methodology, data analysis, and report writing, emphasizing confidentiality and professional ethics. Through project work, case studies, and demonstrations, the lab encourages critical thinking and scientific inquiry. Students gain confidence in understanding psychological processes and develop skills useful for careers in education, counseling, social work, and human resource management. The Psychology Laboratory provides a foundation for exploring mental functions through structured and engaging activities. It nurtures empathy, observational skills, and analytical abilities, making it an integral part of the academic and personal development of students.",
         "keyFeatures": [
@@ -332,8 +332,8 @@ export default function LeelaDeviContent() {
                 </div>
             </section>
 
-            {/* University Toppers Section */}
-            <section className="py-24 px-6 bg-white overflow-hidden">
+            {/* Laboratories Section */}
+            <section className="py-24 px-6 bg-white overflow-hidden scroll-mt-20" id="laboratories">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <motion.span
@@ -341,126 +341,51 @@ export default function LeelaDeviContent() {
                             whileInView={{ opacity: 1 }}
                             className="text-sandstone-dark font-black uppercase tracking-[0.2em] text-xs mb-3 block"
                         >
-                            Academic Toppers
+                            Advanced Learning Hubs
                         </motion.span>
                         <motion.h2
                             initial={{ opacity: 0, y: 10 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             className="text-4xl md:text-5xl font-black text-oxford mt-2"
                         >
-                            University Topper
+                            Laboratories & Research
                         </motion.h2>
                         <motion.p
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
                             className="text-gray-500 mt-4 max-w-2xl mx-auto font-medium"
                         >
-                            Celebrating the academic excellence and hard work of our students who achieved the highest honors at the university level.
+                            State-of-the-art facilities designed to foster scientific inquiry, creative expression, and technical proficiency.
                         </motion.p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {[
-                            {
-                                name: "Ratan Rathore",
-                                father: "Shri Mahaveer Singh Rathore (Jalap, Barmer)",
-                                course: "Bachelor of Arts, 2013",
-                                result: "First (Gold Medalist)"
-                            },
-                            {
-                                name: "Anjali Rathore",
-                                father: "Shri Dheerendra Singh Rathore (Malari, Bali)",
-                                course: "Bachelor of Arts, 2014",
-                                result: "First (Gold Medalist)"
-                            },
-                            {
-                                name: "Ankita Kumari Jain",
-                                father: "Shri Sohanraj Ji (Ana)",
-                                course: "Bachelor of Science, 2018",
-                                result: "First (Gold Medalist)"
-                            },
-                            {
-                                name: "Ankita Rajpurohit",
-                                father: "Shri Mangilal Ji Rajpurohit (Mada)",
-                                course: "Bachelor of Commerce, 2018",
-                                result: "First (Gold Medalist)"
-                            },
-                            {
-                                name: "Sanju Kanwar",
-                                father: "Amar Singh (Shri Sela)",
-                                course: "B.Sc., B.Ed., 2022",
-                                result: "First (Gold Medalist)"
-                            },
-                            {
-                                name: "Gracy Soni",
-                                father: "Naresh Kumar Soni (Dhola Sasan)",
-                                course: "Bachelor of Commerce, 2024",
-                                result: "First (Gold Medalist)"
-                            }
-                        ].map((topper, i) => (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {labsData.map((lab, i) => (
                             <motion.div
-                                key={i}
+                                key={lab.id}
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                                className="group relative bg-gray-50 rounded-[2.5rem] p-8 hover:bg-white hover:shadow-2xl transition-all duration-500 border border-transparent hover:border-sandstone/20"
+                                transition={{ delay: i * 0.05 }}
+                                onClick={() => setSelectedLab(lab)}
+                                className="group cursor-pointer bg-gray-50 rounded-[2.5rem] p-8 hover:bg-white hover:shadow-2xl transition-all duration-500 border border-transparent hover:border-sandstone/20 overflow-hidden relative"
                             >
-                                <div className="flex items-center gap-6 mb-8">
-                                    <div className="w-20 h-20 rounded-full bg-sandstone/10 flex items-center justify-center shrink-0 group-hover:bg-sandstone group-hover:text-oxford transition-all duration-300">
-                                        <div className="w-16 h-16 rounded-full overflow-hidden flex items-center justify-center bg-gray-200">
-                                            {/* SVG Placeholder for Topper Image */}
-                                            <svg className="w-full h-full text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="flex items-center gap-2 mb-1">
-                                            <Trophy size={14} className="text-sandstone" fill="currentColor" />
-                                            <span className="text-[10px] font-black uppercase tracking-widest text-sandstone">Gold Medalist</span>
-                                        </div>
-                                        <h3 className="text-xl font-black text-oxford leading-tight group-hover:text-sandstone transition-colors">
-                                            {topper.name}
-                                        </h3>
-                                    </div>
+                                <div className={`aspect-square w-16 rounded-2xl bg-gradient-to-br ${lab.gradient} flex items-center justify-center text-3xl mb-8 group-hover:scale-110 transition-transform duration-500`}>
+                                    {lab.icon}
+                                </div>
+                                <h3 className="text-2xl font-black text-oxford mb-4 group-hover:text-sandstone transition-colors leading-tight">
+                                    {lab.name}
+                                </h3>
+                                <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3">
+                                    {lab.description}
+                                </p>
+                                <div className="flex items-center gap-2 text-oxford font-black text-[10px] uppercase tracking-widest group-hover:gap-4 transition-all">
+                                    View Details
+                                    <ArrowRight size={14} className="text-sandstone" />
                                 </div>
 
-                                <div className="space-y-4 relative z-10">
-                                    <div className="flex items-start gap-3">
-                                        <div className="w-5 h-5 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
-                                            <Users size={12} className="text-gray-400" />
-                                        </div>
-                                        <div>
-                                            <p className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Daughter of</p>
-                                            <p className="text-sm font-semibold text-oxford/70 truncate">{topper.father}</p>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-start gap-3">
-                                        <div className="w-5 h-5 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
-                                            <School size={12} className="text-gray-400" />
-                                        </div>
-                                        <div>
-                                            <p className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Program & Batch</p>
-                                            <p className="text-sm font-semibold text-oxford/70">{topper.course}</p>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-start gap-3">
-                                        <div className="w-5 h-5 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
-                                            <Medal size={12} className="text-sandstone" />
-                                        </div>
-                                        <div>
-                                            <p className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Achievement</p>
-                                            <p className="text-sm font-black text-sandstone uppercase tracking-tight">{topper.result}</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="absolute top-6 right-8 text-oxford/5 font-black text-7xl select-none group-hover:text-sandstone/10 transition-colors">
-                                    {i + 1}
-                                </div>
+                                {/* Abstract background circle */}
+                                <div className={`absolute -bottom-10 -right-10 w-32 h-32 bg-gradient-to-br ${lab.gradient} opacity-[0.03] group-hover:opacity-[0.08] rounded-full blur-2xl transition-opacity`} />
                             </motion.div>
                         ))}
                     </div>
@@ -615,36 +540,12 @@ export default function LeelaDeviContent() {
                         </div>
                     )}
 
-                    <div className="mt-20 bg-white p-8 md:p-12 rounded-[2.5rem] border border-dashed border-gray-300 flex flex-col md:flex-row items-center gap-8 shadow-sm">
-                        <div className="flex-1">
-                            <h4 className="font-bold text-2xl text-oxford mb-4 flex items-center gap-3">
-                                <Star className="text-sandstone" size={24} fill="currentColor" />
-                                Admission Criteria
-                            </h4>
-                            <ul className="space-y-4 text-base text-gray-600">
-                                <li className="flex items-start gap-4">
-                                    <div className="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0 mt-0.5">
-                                        <CheckCircle2 size={14} />
-                                    </div>
-                                    <span>Admissions are generally merit-based on previous qualifying exam scores.</span>
-                                </li>
-                                <li className="flex items-start gap-4">
-                                    <div className="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0 mt-0.5">
-                                        <CheckCircle2 size={14} />
-                                    </div>
-                                    <span>Integrated B.Ed programs may include entrance criteria set by the university or state.</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <Link href="/contact" className="px-8 py-4 bg-sandstone text-oxford rounded-full font-black text-xs uppercase tracking-widest hover:scale-105 transition-all shadow-lg shrink-0">
-                            Apply for Admission
-                        </Link>
-                    </div>
+
                 </div>
             </section>
 
-            {/* Laboratories Section */}
-            <section className="py-24 px-6 bg-white overflow-hidden scroll-mt-20" id="laboratories">
+            {/* University Toppers Section */}
+            <section className="py-24 px-6 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <motion.span
@@ -652,51 +553,126 @@ export default function LeelaDeviContent() {
                             whileInView={{ opacity: 1 }}
                             className="text-sandstone-dark font-black uppercase tracking-[0.2em] text-xs mb-3 block"
                         >
-                            Advanced Learning Hubs
+                            Academic Toppers
                         </motion.span>
                         <motion.h2
                             initial={{ opacity: 0, y: 10 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             className="text-4xl md:text-5xl font-black text-oxford mt-2"
                         >
-                            Laboratories & Research
+                            University Topper
                         </motion.h2>
                         <motion.p
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
                             className="text-gray-500 mt-4 max-w-2xl mx-auto font-medium"
                         >
-                            State-of-the-art facilities designed to foster scientific inquiry, creative expression, and technical proficiency.
+                            Celebrating the academic excellence and hard work of our students who achieved the highest honors at the university level.
                         </motion.p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {labsData.map((lab, i) => (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {[
+                            {
+                                name: "Ratan Rathore",
+                                father: "Shri Mahaveer Singh Rathore (Jalap, Barmer)",
+                                course: "Bachelor of Arts, 2013",
+                                result: "First (Gold Medalist)"
+                            },
+                            {
+                                name: "Anjali Rathore",
+                                father: "Shri Dheerendra Singh Rathore (Malari, Bali)",
+                                course: "Bachelor of Arts, 2014",
+                                result: "First (Gold Medalist)"
+                            },
+                            {
+                                name: "Ankita Kumari Jain",
+                                father: "Shri Sohanraj Ji (Ana)",
+                                course: "Bachelor of Science, 2018",
+                                result: "First (Gold Medalist)"
+                            },
+                            {
+                                name: "Ankita Rajpurohit",
+                                father: "Shri Mangilal Ji Rajpurohit (Mada)",
+                                course: "Bachelor of Commerce, 2018",
+                                result: "First (Gold Medalist)"
+                            },
+                            {
+                                name: "Sanju Kanwar",
+                                father: "Amar Singh (Shri Sela)",
+                                course: "B.Sc., B.Ed., 2022",
+                                result: "First (Gold Medalist)"
+                            },
+                            {
+                                name: "Gracy Soni",
+                                father: "Naresh Kumar Soni (Dhola Sasan)",
+                                course: "Bachelor of Commerce, 2024",
+                                result: "First (Gold Medalist)"
+                            }
+                        ].map((topper, i) => (
                             <motion.div
-                                key={lab.id}
+                                key={i}
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: i * 0.05 }}
-                                onClick={() => setSelectedLab(lab)}
-                                className="group cursor-pointer bg-gray-50 rounded-[2.5rem] p-8 hover:bg-white hover:shadow-2xl transition-all duration-500 border border-transparent hover:border-sandstone/20 overflow-hidden relative"
+                                transition={{ delay: i * 0.1 }}
+                                className="group relative bg-gray-50 rounded-[2.5rem] p-8 hover:bg-white hover:shadow-2xl transition-all duration-500 border border-transparent hover:border-sandstone/20"
                             >
-                                <div className={`aspect-square w-16 rounded-2xl bg-gradient-to-br ${lab.gradient} flex items-center justify-center text-3xl mb-8 group-hover:scale-110 transition-transform duration-500`}>
-                                    {lab.icon}
-                                </div>
-                                <h3 className="text-2xl font-black text-oxford mb-4 group-hover:text-sandstone transition-colors leading-tight">
-                                    {lab.name}
-                                </h3>
-                                <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3">
-                                    {lab.description}
-                                </p>
-                                <div className="flex items-center gap-2 text-oxford font-black text-[10px] uppercase tracking-widest group-hover:gap-4 transition-all">
-                                    View Details
-                                    <ArrowRight size={14} className="text-sandstone" />
+                                <div className="flex items-center gap-6 mb-8">
+                                    <div className="w-20 h-20 rounded-full bg-sandstone/10 flex items-center justify-center shrink-0 group-hover:bg-sandstone group-hover:text-oxford transition-all duration-300">
+                                        <div className="w-16 h-16 rounded-full overflow-hidden flex items-center justify-center bg-gray-200">
+                                            {/* SVG Placeholder for Topper Image */}
+                                            <svg className="w-full h-full text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div className="flex items-center gap-2 mb-1">
+                                            <Trophy size={14} className="text-sandstone" fill="currentColor" />
+                                            <span className="text-[10px] font-black uppercase tracking-widest text-sandstone">Gold Medalist</span>
+                                        </div>
+                                        <h3 className="text-xl font-black text-oxford leading-tight group-hover:text-sandstone transition-colors">
+                                            {topper.name}
+                                        </h3>
+                                    </div>
                                 </div>
 
-                                {/* Abstract background circle */}
-                                <div className={`absolute -bottom-10 -right-10 w-32 h-32 bg-gradient-to-br ${lab.gradient} opacity-[0.03] group-hover:opacity-[0.08] rounded-full blur-2xl transition-opacity`} />
+                                <div className="space-y-4 relative z-10">
+                                    <div className="flex items-start gap-3">
+                                        <div className="w-5 h-5 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+                                            <Users size={12} className="text-oxford/70" />
+                                        </div>
+                                        <div>
+                                            <p className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Daughter of</p>
+                                            <p className="text-sm font-semibold text-oxford/70 truncate">{topper.father}</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-start gap-3">
+                                        <div className="w-5 h-5 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+                                            <School size={12} className="text-oxford/70" />
+                                        </div>
+                                        <div>
+                                            <p className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Program & Batch</p>
+                                            <p className="text-sm font-semibold text-oxford/70">{topper.course}</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-start gap-3">
+                                        <div className="w-5 h-5 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+                                            <Medal size={12} className="text-sandstone" />
+                                        </div>
+                                        <div>
+                                            <p className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Achievement</p>
+                                            <p className="text-sm font-black text-sandstone uppercase tracking-tight">{topper.result}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="absolute top-6 right-8 text-oxford/5 font-black text-7xl select-none group-hover:text-sandstone/10 transition-colors">
+                                    {i + 1}
+                                </div>
                             </motion.div>
                         ))}
                     </div>
@@ -847,6 +823,33 @@ export default function LeelaDeviContent() {
                                 <h3 className="font-bold text-oxford leading-tight">{facility.name}</h3>
                             </motion.div>
                         ))}
+                    </div>
+                    <div className="container mx-auto">
+                        <div className="mt-20 bg-white p-8 md:p-12 rounded-[2.5rem] border border-dashed border-gray-300 flex flex-col md:flex-row items-center gap-8 shadow-sm">
+                            <div className="flex-1">
+                                <h4 className="font-bold text-2xl text-oxford mb-4 flex items-center gap-3">
+                                    <Star className="text-sandstone" size={24} fill="currentColor" />
+                                    Admission Criteria
+                                </h4>
+                                <ul className="space-y-4 text-base text-gray-600">
+                                    <li className="flex items-start gap-4">
+                                        <div className="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0 mt-0.5">
+                                            <CheckCircle2 size={14} />
+                                        </div>
+                                        <span>Admissions are generally merit-based on previous qualifying exam scores.</span>
+                                    </li>
+                                    <li className="flex items-start gap-4">
+                                        <div className="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0 mt-0.5">
+                                            <CheckCircle2 size={14} />
+                                        </div>
+                                        <span>Integrated B.Ed programs may include entrance criteria set by the university or state.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <Link href="/contact" className="px-8 py-4 bg-sandstone text-oxford rounded-full font-black text-xs uppercase tracking-widest hover:scale-105 transition-all shadow-lg shrink-0">
+                                Apply for Admission
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </section>

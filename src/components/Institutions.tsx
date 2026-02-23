@@ -54,7 +54,7 @@ const institutions: Institution[] = [
     {
         title: "Sushiladevi Prakashraj Modi Primary School",
         type: "School",
-        description: "Elite English Primary Senior Secondary School focused on international standards and student-centric learning.",
+        description: "Elite English Primary School  CBSE focused on international standards and student-centric learning. ",
         icon: <GraduationCap className="w-6 h-6" />,
         stats: "English Medium Only",
         image: "/lps.jpg",
@@ -174,7 +174,7 @@ export default function Institutions() {
                 </div>
 
                 <div className="mt-20 text-center">
-                    <p className="text-oxford/60 font-medium italic mb-8">
+                    <p className="text-oxford font-medium italic mb-8">
                         "Empowering daughters with modern knowledge and traditional values since 1956."
                     </p>
                     <button className="px-10 py-4 bg-oxford text-white rounded-full font-black text-sm uppercase tracking-[0.2em] shadow-xl hover:bg-sandstone hover:text-oxford transition-all">

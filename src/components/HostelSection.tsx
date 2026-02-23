@@ -66,6 +66,34 @@ export default function HostelSection() {
                             </div>
                         </motion.div>
 
+                        {/* Campus Infrastructure & Facilities List */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.3 }}
+                            className="mt-12 bg-white/5 p-8 rounded-[2rem] border border-white/10 backdrop-blur-sm"
+                        >
+                            <h4 className="text-xl font-bold text-sandstone mb-6 uppercase tracking-wider">Campus Infrastructure & Facilities:</h4>
+                            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                                {[
+                                    "4 Academic Educational Units",
+                                    "8 Fully Operational Hostels (700+ Capacity)",
+                                    "24×7 CCTV Surveillance for Safety",
+                                    "RO Water Purification Plant",
+                                    "Spacious Sports Ground",
+                                    "Kids Activity Park",
+                                    "Modern Science & Computer Labs",
+                                    "16 School Buses serving 83+ villages"
+                                ].map((item, idx) => (
+                                    <li key={idx} className="flex items-start gap-3 text-white/70 font-medium group">
+                                        <div className="w-2 h-2 rounded-full bg-sandstone shrink-0 mt-2 group-hover:scale-125 transition-transform" />
+                                        <span className="text-sm leading-relaxed">{item}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </motion.div>
+
                         {/* Decorative Badge */}
                         <motion.div
                             initial={{ rotate: -15, opacity: 0 }}
@@ -82,11 +110,11 @@ export default function HostelSection() {
                     <div className="space-y-12">
                         <div>
                             <span className="text-sandstone-light font-bold uppercase tracking-[0.4em] text-sm block mb-4">Hostel & Residential Life</span>
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
-                                A Legacy of <span className="text-sandstone">Trust & Safety</span>
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6 uppercase">
+                                8 <span className="text-sandstone">Residential Hostels</span>
                             </h2>
                             <p className="text-white/60 text-lg leading-relaxed">
-                                Vidyawadi provides exclusive hostel facilities for girls, designed to ensure safety, comfort, discipline, and emotional well-being for students coming from all corners of India.
+                                From just 2 hostels in 1985 to today’s 8 fully operational hostels with 700+ student capacity, Vidyawadi provides a safe, disciplined, and nurturing environment for girls from across India.
                             </p>
                         </div>
 

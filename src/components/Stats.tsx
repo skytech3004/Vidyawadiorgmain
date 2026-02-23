@@ -33,11 +33,11 @@ const StatItem = ({ target, label, suffix = "" }: StatItemProps) => {
     }, [isInView, target]);
 
     return (
-        <div ref={ref} className="text-center p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm">
-            <div className="text-5xl md:text-7xl font-bold text-sandstone mb-2">
+        <div ref={ref} className="text-center p-8 rounded-4xl bg-white/5 border border-white/10 backdrop-blur-sm">
+            <div className="text-5xl md:text-4xl font-bold text-sandstone mb-2">
                 {count}{suffix}
             </div>
-            <p className="text-white/70 text-lg md:text-xl font-medium uppercase tracking-wider">{label}</p>
+            <p className="text-white/70 text-lg md:text-xl font-medium uppercase tracking-wider whitespace-nowrap">{label}</p>
         </div>
     );
 };
@@ -45,14 +45,16 @@ const StatItem = ({ target, label, suffix = "" }: StatItemProps) => {
 export default function Stats() {
     const stats = [
         { target: 2500, label: "Students", suffix: "+" },
-        { target: 50, label: "Acres Campus", suffix: "A" },
+        { target: 65, label: "Acres Campus", suffix: "+" },
         { target: 70, label: "Years Legacy", suffix: "+" },
         { target: 5000, label: "Alumni", suffix: "+" },
+        { target: 8, label: "Hostel", suffix: "+" },
+        { target: 16, label: "School Buses", suffix: "" },
     ];
 
     return (
         <section id="about" data-theme="dark" className="py-32 bg-oxford relative overflow-hidden scroll-mt-24">
-            <div className="max-w-7xl mx-auto px-6 relative z-10">
+            <div className="max-w-7xl mx-auto  relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -60,11 +62,11 @@ export default function Stats() {
                     transition={{ duration: 0.8 }}
                     className="text-center mb-20"
                 >
-                    <h2 className="text-4xl md:text-6xl font-bold text-sandstone mb-6">Our Legacy in Numbers</h2>
+                    <h2 className="text-4xl md:text-5xl font-bold text-sandstone mb-6">Our Legacy in Numbers</h2>
                     <div className="w-24 h-1 bg-sandstone mx-auto rounded-full" />
                 </motion.div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-2">
                     {stats.map((stat, index) => (
                         <motion.div
                             key={stat.label}

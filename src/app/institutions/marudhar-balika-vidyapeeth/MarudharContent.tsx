@@ -100,7 +100,56 @@ export default function MarudharContent() {
                     </div>
                 </div>
             </section>
+            <section className="py-24 px-6">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mb-6">Modern Labs & Facilities</h2>
+                        <p className="text-gray-600 max-w-2xl mx-auto text-lg italic">
+                            “Well-equipped laboratories with modern and best technological facilities”
+                        </p>
+                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+                            The school provides hand-on practical learning in a safe and modern environment.
+                        </p>
+                    </div>
 
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {[
+                            { name: "Physics Laboratory", icon: Microscope, img: "/images/Physics Laboratory.png" },
+                            { name: "Chemistry Laboratory", icon: Microscope, img: "/images/Chemistry Laboratory.png" },
+                            { name: "Biology Laboratory", icon: Microscope, img: "/images/Biology Laboratory.png" },
+                            { name: "Geography Laboratory", icon: Globe, img: "/images/Geography Laboratory.png" },
+                            { name: "Art & Craft Lab", icon: Trophy, img: "/images/Art & Craft Lab.png" },
+                            { name: "RS-CIT IT Computer Center", icon: School, img: "/images/RS-CIT IT Computer Center.png" },
+                            { name: "CCTV Camera Surveillance", icon: CheckCircle2, img: null },
+                            { name: "Fire Safety Systems", icon: CheckCircle2, img: null },
+                            { name: "Practical Equipment (All Subjects)", icon: BookOpen, img: null }
+                        ].map((facility, i) => (
+                            <div key={i} className="group overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all border border-gray-100">
+                                {facility.img ? (
+                                    <div className="h-48 overflow-hidden relative">
+                                        <div className="absolute inset-0 bg-oxford/20 group-hover:bg-transparent transition-colors z-10" />
+                                        <img
+                                            src={facility.img}
+                                            alt={facility.name}
+                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                        />
+                                    </div>
+                                ) : (
+                                    <div className="h-48 bg-gray-50 flex items-center justify-center">
+                                        <facility.icon className="text-gray-300 group-hover:text-sandstone transition-colors" size={64} />
+                                    </div>
+                                )}
+                                <div className="p-6 relative">
+                                    <div className="flex items-start gap-4">
+                                        {!facility.img && <facility.icon className="text-sandstone shrink-0 mt-1" size={24} />}
+                                        <h3 className="font-bold text-oxford text-lg">{facility.name}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
             {/* Academic Results */}
             <section className="py-20 px-6 bg-gray-50">
                 <div className="max-w-7xl mx-auto">
@@ -596,56 +645,7 @@ export default function MarudharContent() {
             </section>
 
             {/* Infrastructure */}
-            <section className="py-24 px-6">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mb-6">Modern Labs & Facilities</h2>
-                        <p className="text-gray-600 max-w-2xl mx-auto text-lg italic">
-                            “Well-equipped laboratories with modern and best technological facilities”
-                        </p>
-                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-                            The school provides hand-on practical learning in a safe and modern environment.
-                        </p>
-                    </div>
 
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {[
-                            { name: "Physics Laboratory", icon: Microscope, img: "/images/Physics Laboratory.png" },
-                            { name: "Chemistry Laboratory", icon: Microscope, img: "/images/Chemistry Laboratory.png" },
-                            { name: "Biology Laboratory", icon: Microscope, img: "/images/Biology Laboratory.png" },
-                            { name: "Geography Laboratory", icon: Globe, img: "/images/Geography Laboratory.png" },
-                            { name: "Art & Craft Lab", icon: Trophy, img: "/images/Art & Craft Lab.png" },
-                            { name: "RS-CIT IT Computer Center", icon: School, img: "/images/RS-CIT IT Computer Center.png" },
-                            { name: "CCTV Camera Surveillance", icon: CheckCircle2, img: null },
-                            { name: "Fire Safety Systems", icon: CheckCircle2, img: null },
-                            { name: "Practical Equipment (All Subjects)", icon: BookOpen, img: null }
-                        ].map((facility, i) => (
-                            <div key={i} className="group overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all border border-gray-100">
-                                {facility.img ? (
-                                    <div className="h-48 overflow-hidden relative">
-                                        <div className="absolute inset-0 bg-oxford/20 group-hover:bg-transparent transition-colors z-10" />
-                                        <img
-                                            src={facility.img}
-                                            alt={facility.name}
-                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                        />
-                                    </div>
-                                ) : (
-                                    <div className="h-48 bg-gray-50 flex items-center justify-center">
-                                        <facility.icon className="text-gray-300 group-hover:text-sandstone transition-colors" size={64} />
-                                    </div>
-                                )}
-                                <div className="p-6 relative">
-                                    <div className="flex items-start gap-4">
-                                        {!facility.img && <facility.icon className="text-sandstone shrink-0 mt-1" size={24} />}
-                                        <h3 className="font-bold text-oxford text-lg">{facility.name}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
             {/* CTA */}
             <section className="py-20 px-6 bg-sandstone">

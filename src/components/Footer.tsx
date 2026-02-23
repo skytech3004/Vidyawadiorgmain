@@ -7,7 +7,7 @@ export default function Footer() {
     return (
         <footer data-theme="dark" className="bg-oxford-dark text-white py-20 px-6 border-t border-white/5">
             <div className="max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
                     <div className="space-y-6">
                         <h3 className="text-3xl font-bold text-sandstone">Vidyawadi</h3>
                         <p className="text-white/60 leading-relaxed">
@@ -80,7 +80,7 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="pt-8 border-t border-white/5 flex flex-col md:row justify-between items-center gap-4 text-white/40 text-xs">
+                <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-white/40 text-xs">
                     <p>&copy; 2026 Vidyawadi. All rights reserved.</p>
                     <div className="flex gap-8">
                         <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>

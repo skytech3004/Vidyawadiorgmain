@@ -14,10 +14,18 @@ import {
 const facilities = [
     {
         title: "Equestrian Center",
-        description: "State-of-the-art horse riding facilities with trained instructors and 12 horses.",
+        description: "Holistic Development & Skill-Based Education for Girls. We focus on complete personality development along with academic excellence.",
         icon: "🐴",
         className: "md:col-span-2 md:row-span-2 bg-oxford text-white",
-        features: ["12 Well-trained Horses", "Professional Instructors", "Competition Track"]
+        features: [
+            "Horse Riding",
+            "Karate & Self-Defense",
+            "Cycling & Driving Skills",
+            "Kathak & Shuffle Dance",
+            "Baking & Culinary Training",
+            "Embroidery & Stitching",
+            "Personal Grooming"
+        ]
     },
     {
         title: "NCC Training",

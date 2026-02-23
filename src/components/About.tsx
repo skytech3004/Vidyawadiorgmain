@@ -14,12 +14,17 @@ const features = [
         icon: GraduationCap,
     },
     {
+        title: "Sushiladevi Prakashraj Modi Primary School",
+        icon: GraduationCap,
+    },
+    {
         title: "Leeladevi Parasmal Sancheti English Medium Sr. Sec. School",
         icon: GraduationCap,
     },
     {
         title: "Girls’ Hostel (A.C. & Non A.C. )",
         icon: Shield,
+        highlight: true,
     }
 ];
 
@@ -42,37 +47,50 @@ export default function About() {
                         <span className="text-sandstone font-black uppercase tracking-[0.3em] text-sm mb-4 block">
                             Our Journey
                         </span>
-                        <h5 className="text-2xl md:text-3xl font-black leading-tight mb-8">
-                            <span className="text-sandstone">ABOUT</span> <br />
-                            <span className="text-oxford">Marudhar Mahila Shikshan Sangh, Vidyawadi</span>
+                        <h5 className="text-2xl md:text-3xl font-black leading-tight mb-8 uppercase">
+                            <span className="text-sandstone">Vidyawadi</span> <br />
+                            <span className="text-oxford">Best Residential Girls’ Education Campus in Khimel Rani</span>
                         </h5>
 
                         <div className="space-y-6 text-oxford/70 text-lg leading-relaxed">
                             <p>
-                                <span className="font-bold text-oxford">Marudhar Mahila Shikshan Sangh, Vidyawadi</span> is a prestigious girls’ educational campus established with the vision of empowering young women through quality education, strong values, and holistic development.
+                                Located at <span className="font-bold text-oxford">Khimel Rani Station, District Pali, Rajasthan (306115)</span>, Marudhar Mahila Shikshan Sangh Vidyawadi is one of the most trusted and established residential girls’ education campuses in Rajasthan.
                             </p>
                             <p>
-                                Since <span className="text-oxford font-bold underline decoration-2 underline-offset-4">1956</span>, the institution has continuously evolved to meet modern academic standards while preserving its core principles of discipline, safety, and character building.
+                                Spread across a massive <span className="text-oxford font-bold underline decoration-2 underline-offset-4 tracking-tight">65-acre green campus</span>, the institute is dedicated to academic excellence, character building, and holistic development. Our campus is designed to provide a safe, disciplined, and growth-oriented learning environment for girls.
                             </p>
-                            <p>
-                                Today, <span className="font-bold text-oxford">Marudhar Mahila Shikshan Sangh, Vidyawadi</span> stands as a comprehensive residential education campus for girls, offering excellent infrastructure and a nurturing academic environment.
-                            </p>
+                            <div className="bg-sandstone/5 p-6 rounded-2xl border border-sandstone/10 mt-8">
+                                <h4 className="font-black text-oxford mb-4 uppercase tracking-wider text-sm">Campus Infrastructure & Facilities:</h4>
+                                <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 text-sm font-medium text-oxford/80">
+                                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-sandstone" /> 4 Academic Educational Units</li>
+                                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-sandstone" /> 8 Fully Operational Hostels (700+ Capacity)</li>
+                                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-sandstone" /> 24×7 CCTV Surveillance for Safety</li>
+                                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-sandstone" /> RO Water Purification Plant</li>
+                                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-sandstone" /> Spacious Sports Ground</li>
+                                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-sandstone" /> Kids Activity Park</li>
+                                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-sandstone" /> Modern Science & Computer Labs</li>
+                                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-sandstone" /> 16 School Buses serving 83+ villages</li>
+                                </ul>
+                            </div>
                         </div>
 
                         <div className="grid grid-cols-2 gap-4 mt-12">
-                            {features.map((item, idx) => (
+                            {features.map((item: any, idx) => (
                                 <motion.div
                                     key={idx}
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: idx * 0.1 }}
-                                    className="flex items-center gap-3 p-4 bg-sandstone-light/20 rounded-xl border border-sandstone/10"
+                                    className={`flex items-center gap-3 p-4 rounded-xl border transition-all duration-300 ${item.highlight
+                                        ? "bg-sandstone text-oxford border-oxford/20 shadow-lg scale-105 z-10"
+                                        : "bg-sandstone-light/20 border-sandstone/10"
+                                        }`}
                                 >
-                                    <div className="p-2 bg-white rounded-lg shadow-sm text-sandstone">
-                                        <GraduationCap size={20} />
+                                    <div className={`p-2 rounded-lg shadow-sm ${item.highlight ? "bg-oxford text-sandstone" : "bg-white text-sandstone"}`}>
+                                        <item.icon size={20} />
                                     </div>
-                                    <span className="text-sm font-bold text-oxford/80">{item.title}</span>
+                                    <span className={`text-sm font-bold ${item.highlight ? "text-oxford" : "text-oxford/80"}`}>{item.title}</span>
                                 </motion.div>
                             ))}
                         </div>

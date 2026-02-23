@@ -137,7 +137,7 @@ export default function Hero() {
                                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                                 exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
                                 transition={{ duration: 0.8, ease: "circOut" }}
-                                className="relative z-10 bg-clip-text text-transparent bg-gradient-to-r from-white via-sandstone-light to-white bg-[length:200%_auto] animate-shimmer drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] py-3 block leading-relaxed whitespace-nowrap text-3xl md:text-5xl lg:text-7xl"
+                                className="relative z-10 bg-clip-text text-transparent bg-gradient-to-r from-white via-sandstone-light to-white bg-[length:200%_auto] animate-shimmer drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] py-3 block leading-relaxed text-2xl sm:text-4xl md:text-5xl lg:text-7xl px-4"
                             >
                                 {texts[textIndex]}
                             </motion.span>

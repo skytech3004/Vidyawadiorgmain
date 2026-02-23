@@ -4,8 +4,8 @@ import Footer from "@/components/Footer";
 import SectionRenderer from "@/components/SectionRenderer";
 
 export const metadata = {
-    title: "Hostel & Residential Life | Vidyawadi",
-    description: "Your home away from home — a safe, caring, and structured environment for girls.",
+    title: "Best Residential Girls’ Education Campus in Rajasthan | Vidyawadi",
+    description: "Vidyawadi offers a 65-acre secure residential campus with 8 fully operational hostels (700+ capacity) in Khimel Rani, District Pali.",
 };
 
 const pageContent = [
@@ -25,7 +25,7 @@ const pageContent = [
         isVisible: true,
         content: {
             variant: "orange",
-            content: "At Vidyawadi, over 300 girls from across India live in a safe, caring, and structured environment — fostering growth, independence, and lifelong friendships."
+            content: "From just 2 hostels in 1985 to today’s 8 residential hostels with 700+ student capacity, Vidyawadi reflects steady growth and strong management vision. Our 65-acre secure campus provides a disciplined and growth-oriented learning environment."
         }
     },
     {

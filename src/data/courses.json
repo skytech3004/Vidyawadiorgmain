@@ -1,7 +1,7 @@
 {
     "courses": [
         {
-            "slug": "distance",
+            "slug": "distance-bsc",
             "category": {
                 "slug": "distance",
                 "name": "Distance Education"
@@ -29,11 +29,11 @@
                 "Musics",
                 "Fine Art"
             ],
-            "id": "6968be139576c50d24eab2f1",
+            "id": "distance-bsc-id",
             "externalLink": "https://vidyawadicollege.org/admissions/courses/ug/ba"
         },
         {
-            "slug": "distance",
+            "slug": "distance-bcom",
             "category": {
                 "slug": "distance",
                 "name": "Distance Education"
@@ -61,11 +61,11 @@
                 "Musics",
                 "Fine Art"
             ],
-            "id": "6968be139576c50d24eab2f1",
+            "id": "distance-bcom-id",
             "externalLink": "https://vidyawadicollege.org/admissions/courses/ug/ba"
         },
         {
-            "slug": "distance",
+            "slug": "distance-ba",
             "category": {
                 "slug": "distance",
                 "name": "Distance Education"
@@ -93,7 +93,7 @@
                 "Musics",
                 "Fine Art"
             ],
-            "id": "6968be139576c50d24eab2f1",
+            "id": "distance-ba-id",
             "externalLink": "https://vidyawadicollege.org/admissions/courses/ug/ba"
         },
         {

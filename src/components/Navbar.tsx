@@ -128,12 +128,12 @@ export default function Navbar() {
                         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                     >
                         {/* BADGE LOGO */}
-                        <div className="absolute -top-12 -left-5 z-50">
+                        <div className="absolute -top-10 -left-4 md:-top-12 md:-left-5 z-50">
                             <div className={cn(
                                 "relative transition-all duration-300",
                                 scrolled
-                                    ? "h-48 w-20 md:h-48 md:w-32"
-                                    : "h-48 w-20 md:h-48 md:w-32"
+                                    ? "h-32 w-16 md:h-48 md:w-32"
+                                    : "h-40 w-20 md:h-48 md:w-32"
                             )}>
                                 <Image
                                     src="/111rrrdd.png"
@@ -146,9 +146,9 @@ export default function Navbar() {
                         </div>
 
                         {/* BRAND TEXT */}
-                        <div className="pl-[68px] md:pl-32 leading-tight flex-1 min-w-0">
+                        <div className="pl-16 sm:pl-20 md:pl-32 leading-tight flex-1 min-w-0">
                             <p className={cn(
-                                "text-[9px] sm:text-[11px] font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] mt-1 truncate",
+                                "text-[8px] sm:text-[11px] font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] mt-1 truncate",
                                 scrolled || !isDarkSection ? "text-oxford/90" : "text-white/90"
                             )}>
                                 <span className="bg-sandstone text-oxford px-1.5 py-0.5 rounded shadow-sm inline-block">
@@ -156,7 +156,7 @@ export default function Navbar() {
                                 </span>
                             </p>
                             <h1 className={cn(
-                                "font-black tracking-[0.1em] leading-none transition-all truncate pr-2",
+                                "text-lg sm:text-2xl md:text-3xl font-black tracking-[0.1em] leading-none transition-all truncate pr-2",
                                 scrolled || !isDarkSection ? "text-oxford" : "text-white"
                             )}>
                                 VIDYAWADI
@@ -260,15 +260,15 @@ export default function Navbar() {
                     >
                         <div className="flex justify-between items-center mb-10">
                             <div className="flex flex-col">
-                                <h2 className="text-3xl font-black text-white tracking-widest uppercase">Vidyawadi</h2>
-                                <p className="text-[10px] text-sandstone font-bold uppercase tracking-widest mt-1">
+                                <h2 className="text-2xl font-black text-white tracking-widest uppercase">Vidyawadi</h2>
+                                <p className="text-[9px] text-sandstone font-bold uppercase tracking-widest mt-1">
                                     <span className="bg-sandstone text-oxford px-1.5 py-0.5 rounded shadow-sm">
-                                        Marudhar Mahila Shikshan Sangh,Vidyawadi
+                                        Marudhar Mahila Shikshan Sangh
                                     </span>
                                 </p>
                             </div>
                             <button onClick={() => setIsOpen(false)} className="text-white p-2 hover:bg-white/10 rounded-full transition-colors">
-                                <X size={32} />
+                                <X size={28} />
                             </button>
                         </div>
 
