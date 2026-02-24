@@ -30,7 +30,7 @@ export default async function Home() {
       <HomeNewsEvents />
       {/* <Staff /> */}
       <BlogSection />
-      <Academics />
+      {/* <Academics /> */}
       <ContactForm />
       <Footer />
     </main>

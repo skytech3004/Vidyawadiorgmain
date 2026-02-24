@@ -10,6 +10,7 @@ import StudentModal from "@/components/StudentModal";
 export default function MarudharContent() {
     const [selectedStudent, setSelectedStudent] = useState<any>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [visibleStaff, setVisibleStaff] = useState(10);
 
     const openModal = (student: any) => {
         setSelectedStudent(student);
@@ -30,7 +31,7 @@ export default function MarudharContent() {
             <section className="relative pt-40 pb-20 px-6 bg-oxford/90 text-white overflow-hidden">
                 <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-sandstone/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
                 <div className="max-w-7xl mx-auto relative z-10">
-                    <span className="text-sandstone font-bold uppercase tracking-widest text-sm mb-4 block">Senior Secondary School (RBSE)</span>
+                    <span className="text-sandstone font-bold uppercase tracking-widest text-sm mb-4 block">Hindi & English Meduim Senior Secondary School (RBSE)</span>
                     <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight">
                         Marudhar Balika Vidyapeeth
                     </h1>
@@ -57,7 +58,82 @@ export default function MarudharContent() {
                     </div>
                 </div>
             </section>
+            <section className="py-20 px-6">
+                <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
+                    <div>
+                        <h2 className="text-3xl md:text-4xl font-bold text-oxford mb-6">Principal’s Message</h2>
+                        <div className="prose text-gray-600 leading-relaxed space-y-4 mb-8">
+                            <p className="italic text-lg text-oxford/80">
+                                “Education is the most powerful weapon which you can use to change the world.” – Nelson Mandela
+                            </p>
+                            <p>
+                                Dear Students, Parents and Well-Wishers,
+                            </p>
+                            <p>
+                                It gives me immense pleasure to welcome you to <span className="text-oxford font-bold">Marudhar Balika Vidyapeeth (Sr. Sec.) School, Vidyawadi</span>. Our institution stands as a symbol of <span className="text-oxford font-bold">dedication, discipline and excellence</span> in girls’ education. We believe that education is not merely the acquisition of knowledge, but the development of character, confidence and compassion.
+                            </p>
+                            <p>
+                                Our aim is to provide a <span className="text-oxford font-bold">safe, supportive and inspiring environment</span> where every child can discover her potential and grow into a responsible and capable individual. We focus on <span className="text-oxford font-bold">academic excellence</span> along with moral values, leadership qualities and life skills. With the support of qualified and committed teachers, we strive to nurture creativity, critical thinking and a spirit of inquiry among our students.
+                            </p>
+                            <p>
+                                In this rapidly changing world, we continuously update our teaching methods and <span className="text-oxford font-bold">integrate digital learning</span> to prepare our students for future challenges. We encourage participation in co-curricular and extracurricular activities to ensure the <span className="text-oxford font-bold">holistic development</span> of every learner.
+                            </p>
+                            <p>
+                                I am confident that with the cooperation of parents and the dedication of our staff, we will continue to scale new heights of success and bring pride to our institution.
+                            </p>
+                            <p>
+                                Let us work together to <span className="text-oxford font-bold">empower our daughters with knowledge, confidence and strong values</span> so that they may shine brightly in every sphere of life.
+                            </p>
+                        </div>
 
+                        <div className="flex items-center gap-4">
+                            <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-sandstone shadow-lg">
+                                <img
+                                    src="/hindi-principal.png"
+                                    alt="Principal Priya Sangeeta"
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+                            <div className="font-bold text-oxford">
+                                <p className="text-lg">Ms. Priya Sangeeta</p>
+                                <p className="text-xs text-sandstone uppercase tracking-widest">Principal</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="relative">
+                        <div className="bg-oxford/5 rounded-3xl p-8 border border-oxford/10">
+                            <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3">
+                                <Star className="text-sandstone fill-sandstone" />
+                                Our Core Values
+                            </h3>
+                            <ul className="space-y-4">
+                                {[
+                                    { title: "Discover Yourself", desc: "Explore unique talents and interests." },
+                                    { title: "Be Your Own Light", desc: "Lead with integrity and wisdom." },
+                                    { title: "Make Your Own Path", desc: "Inspire independent thinking and courage." }
+                                ].map((item, i) => (
+                                    <li key={i} className="flex items-start gap-3 text-gray-700">
+                                        <CheckCircle2 size={18} className="text-green-600 shrink-0 mt-1" />
+                                        <div>
+                                            <span className="font-bold text-oxford block">{item.title}</span>
+                                            <span className="text-sm">{item.desc}</span>
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        <div className="mt-8 bg-oxford rounded-3xl p-8 text-white relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-sandstone/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                            <h3 className="text-xl font-bold mb-4 relative z-10">Our School</h3>
+                            <p className="text-white/80 text-sm leading-relaxed relative z-10">
+                                Marudhar Balika Vidyapeeth is known for its reputation and adherence to quality education, State of the Art Infrastructure, and a nurturing environment. We offer a comprehensive curriculum and engage students in traditional and innovative educational methods to empower them for future success.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
             {/* About Section */}
             <section className="py-20 px-6">
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
@@ -639,6 +715,166 @@ export default function MarudharContent() {
                                     </table>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Faculty Section */}
+            <section className="py-20 px-6 bg-gray-50">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Our Faculty</span>
+                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2">Marudhar Balika Vidyapeeth Navigators</h2>
+                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto">Meet our dedicated faculty and staff members committed to excellence.</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        {[
+
+
+                            // 🏫 School Leadership
+                            { no: 1, name: "Priya Sangeeta", designation: "Principal", image: "/staff/priya-sangeeta.png" },
+                            { no: 2, name: "Alka Tak", designation: "Vice Principal", image: "/staff/alka-tak.png" },
+
+                            // 👩‍🏫 PGT Teachers
+                            { no: 3, name: "Kushal Kunwar", designation: "PGT - History", image: "/staff/kushal-kunwar.png" },
+                            { no: 4, name: "Prakash Gehlot", designation: "PGT - Mathematics", image: "/staff/prakash-gehlot.png" },
+                            { no: 5, name: "Uttam Kunwar", designation: "PGT - English Literature", image: "/staff/uttam-kunwar.png" },
+                            { no: 6, name: "Vishnu Kanwar", designation: "PGT - Drawing", image: "/staff/vishnu-kanwar.png" },
+                            { no: 7, name: "Santosh Kanwar", designation: "PGT - Economics", image: "/staff/santosh-kanwar.png" },
+                            { no: 8, name: "Dimpal Kumari Sharma", designation: "PGT - Political Science", image: "/staff/dimpal-kumari-sharma.png" },
+                            { no: 9, name: "Chandra Kunwar", designation: "PGT - Chemistry", image: "/staff/chandra-kunwar.png" },
+                            { no: 10, name: "Suman Kanwar", designation: "PGT - Geography", image: "/staff/suman-kanwar.png" },
+                            { no: 11, name: "Jitendra Singh", designation: "PGT - Accounts", image: "/staff/jitendra-singh.png" },
+                            { no: 12, name: "Vandana Sharma", designation: "PGT - Hindi Literature", image: "/staff/vandana-sharma.png" },
+                            { no: 13, name: "Dinesh Kumar", designation: "PGT - Physics", image: "/staff/dinesh-kumar.png" },
+
+                            // 👨‍🏫 TGT Teachers
+                            { no: 14, name: "Shruti Sharma", designation: "TGT - Sanskrit", image: "/staff/shruti-sharma.png" },
+                            { no: 15, name: "Heena Chouhan", designation: "TGT - Hindi", image: "/staff/heena-chouhan.png" },
+                            { no: 16, name: "Kamlesh", designation: "TGT - Computer", image: "/staff/kamlesh.png" },
+                            { no: 17, name: "Harshita Soni", designation: "TGT - Science", image: "/staff/harshita-soni.png" },
+                            { no: 18, name: "Jitendra Kumar", designation: "TGT - Biology", image: "/staff/jitendra-kumar.png" },
+                            { no: 19, name: "Neha Ashawat", designation: "TGT - English", image: "/staff/neha-ashawat.png" },
+                            { no: 20, name: "Yogita Malviya", designation: "TGT - Mathematics", image: "/staff/yogita-malviya.png" },
+                            { no: 21, name: "Soniya Kumari", designation: "TGT - Social Science", image: "/staff/soniya-kumari.png" },
+
+                            // 🧪 Academic Support
+                            { no: 22, name: "Uday Narayan Shukla", designation: "Science Lab Assistant", image: "/staff/uday-narayan-shukla.png" },
+                            { no: 23, name: "Baby Kunwar", designation: "Librarian", image: "/staff/baby-kunwar.png" },
+                            { no: 24, name: "Monika", designation: "P.T.I.", image: "/staff/monika.png" },
+
+                            // 🏢 Administrative Staff
+                            { no: 25, name: "Himmat Singh Rathore", designation: "U.D.C.", image: "/staff/himmat-singh-rathore.png" },
+                            { no: 26, name: "Dilip Kumar", designation: "L.D.C.", image: "/staff/dilip-kumar.png" },
+
+                            // 🛠 Support Staff
+                            { no: 27, name: "Arvind Kumar", designation: "Office Boy", image: "/staff/arvind-kumar.png" },
+                            { no: 28, name: "Rekha", designation: "Peon", image: "/staff/rekha.png" },
+                            { no: 29, name: "Bhima Ram", designation: "Gardener", image: "/staff/bhima-ram.png" },
+                            { no: 30, name: "Gordhan Singh Sisodia", designation: "Peon", image: "/staff/gordhan-singh-sisodia.png" },
+                            { no: 31, name: "Dilip", designation: "Peon", image: "/staff/dilip.png" },
+                            { no: 32, name: "Hirwanti", designation: "Sweeper", image: "/staff/hirwanti.png" }
+
+
+                        ].slice(0, visibleStaff).map((staff, i) => (
+                            <div
+                                key={staff.no}
+                                className="bg-white p-4 rounded-xl shadow-sm border border-oxford/10 flex items-center gap-3 hover:border-sandstone transition-colors group"
+                            >
+                                <div className="w-12 h-12 rounded-full bg-oxford/5 flex items-center justify-center overflow-hidden border border-oxford/10 group-hover:border-sandstone transition-colors shrink-0">
+                                    {staff.image ? (
+                                        <img src={staff.image} alt={staff.name} className="w-full h-full object-cover" />
+                                    ) : (
+                                        <span className="text-oxford font-bold text-xs">{staff.no}</span>
+                                    )}
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-oxford text-xs">{staff.name}</h4>
+                                    <p className="text-[10px] text-gray-500 uppercase tracking-wider">{staff.designation}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {visibleStaff < 32 && (
+                        <div className="mt-12 text-center">
+                            <button
+                                onClick={() => setVisibleStaff(prev => prev + 12)}
+                                className="px-8 py-3 bg-oxford text-white rounded-full font-bold uppercase tracking-wider text-sm hover:bg-sandstone hover:text-oxford transition-all shadow-lg"
+                            >
+                                Show More Faculty
+                            </button>
+                        </div>
+                    )}
+                </div>
+            </section>
+
+            {/* School Uniform & General Instructions Section */}
+            <section className="py-20 px-6 bg-white">
+                <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
+                    <div className="bg-oxford/5 rounded-3xl p-8 md:p-12 border border-oxford/10">
+                        <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3">
+                            <Star className="text-sandstone fill-sandstone" />
+                            UNIFORM
+                        </h3>
+                        <div className="space-y-8 text-gray-700">
+                            <div>
+                                <h4 className="font-bold text-oxford text-lg mb-4 border-b border-oxford/10 pb-2">Class VI to VIII (Tunic-shirt)</h4>
+                                <ul className="space-y-3 text-sm">
+                                    <li className="flex gap-3 items-start">
+                                        <CheckCircle2 size={18} className="text-green-600 mt-0.5 shrink-0" />
+                                        <span>Maroon checked shirt and grey tunic, black ribbon or hair band, black shoes and grey socks.</span>
+                                    </li>
+                                    <li className="flex gap-3 items-start italic text-oxford/80 ml-7">
+                                        <span>Two days a week (Wednesday &amp; Saturday): White skirt and white shirt, white ribbon, black shoes and white socks.</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h4 className="font-bold text-oxford text-lg mb-4 border-b border-oxford/10 pb-2">Class IX to XII (Salwar-kurta and Dupatta)</h4>
+                                <ul className="space-y-3 text-sm">
+                                    <li className="flex gap-3 items-start">
+                                        <CheckCircle2 size={18} className="text-green-600 mt-0.5 shrink-0" />
+                                        <span>Maroon checked kurta, white salwar and white dupatta, black ribbon, black shoes and grey socks.</span>
+                                    </li>
+                                    <li className="flex gap-3 items-start italic text-oxford/80 ml-7">
+                                        <span>Two days a week (Wednesday &amp; Saturday): White salwar Kurta and maroon dupatta, white ribbon, black shoes and white socks.</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div className="pt-4 border-t border-oxford/10">
+                                <h4 className="font-bold text-oxford flex items-center gap-2">
+                                    <Medal size={20} className="text-sandstone" />
+                                    Winter Code
+                                </h4>
+                                <p className="text-sm mt-2 ml-7">Class VI to XII: Navy Blue Blazer</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="space-y-8">
+                        <h2 className="text-3xl md:text-4xl font-bold text-oxford">General Instructions</h2>
+                        <div className="grid gap-4">
+                            {[
+                                { title: "Regularity", desc: "Minimum 75% attendance is mandatory." },
+                                { title: "Mobile Phones", desc: "Strictly prohibited on campus." },
+                                { title: "Bullying", desc: "Zero tolerance policy for any form of harassment." },
+                                { title: "Hygiene", desc: "Nails trimmed, clean uniform, no makeup/jewelry." }
+                            ].map((rule, i) => (
+                                <div key={i} className="flex gap-4 items-start">
+                                    <div className="w-8 h-8 rounded-full bg-sandstone/10 flex items-center justify-center shrink-0 mt-1">
+                                        <span className="text-oxford font-bold text-xs">{i + 1}</span>
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-oxford">{rule.title}</h4>
+                                        <p className="text-sm text-gray-600">{rule.desc}</p>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>

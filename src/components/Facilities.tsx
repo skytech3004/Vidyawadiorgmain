@@ -2,115 +2,169 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 import {
     Dna,
     BookOpen,
     Home,
     Palette,
-    ShieldCheck,
-    Component
 } from "lucide-react";
 
-const facilities = [
+interface Facility {
+    title: string;
+    description: string;
+    icon: React.ReactNode | string;
+    theme?: string;
+    features?: string[];
+    image?: string;
+}
+
+const facilities: Facility[] = [
     {
         title: "Equestrian Center",
-        description: "Holistic Development & Skill-Based Education for Girls. We focus on complete personality development along with academic excellence.",
+        description: "Professional horse riding training for personality development and confidence.",
         icon: "🐴",
-        className: "md:col-span-2 md:row-span-2 bg-oxford text-white",
-        features: [
-            "Horse Riding",
-            "Karate & Self-Defense",
-            "Cycling & Driving Skills",
-            "Kathak & Shuffle Dance",
-            "Baking & Culinary Training",
-            "Embroidery & Stitching",
-            "Personal Grooming"
-        ]
+        theme: "bg-oxford",
+        features: ["Horse Riding", "Stable Management"]
     },
     {
         title: "NCC Training",
-        description: "Building discipline and leadership through National Cadet Corps.",
+        description: "Building discipline and leadership through Army and Navy wings.",
         icon: "🎖️",
-        className: "md:col-span-2 bg-sandstone text-oxford",
+        theme: "bg-sandstone",
         features: ["Army Wing", "Navy Wing"]
     },
     {
-        title: "Science Laboratories",
-        description: "Fully equipped physics, chemistry, and biology labs for practical excellence.",
-        icon: <Dna className="w-12 h-12" />,
-        className: "md:col-span-2 bg-white border-2 border-oxford/10 text-oxford",
+        title: "Science Labs",
+        description: "Advanced physics, chemistry, and biology labs for practical excellence.",
+        icon: <Dna className="w-12 h-12 text-white/30" />,
+        image: "/Chemistry Laboratory.jpg",
+        theme: "bg-teal-blue",
         features: ["Physics", "Chemistry", "Biology"]
     },
     {
         title: "Digital Library",
-        description: "10,000+ books and global digital resources.",
-        icon: <BookOpen className="w-10 h-10" />,
-        className: "bg-teal-blue text-white"
+        description: "10,000+ books and global digital resources for research.",
+        icon: <BookOpen className="w-12 h-12 text-white/30" />,
+        theme: "bg-oxford-dark",
+        features: ["Digital Access", "Offline Study"]
     },
     {
-        title: "Hostel",
-        description: "24/7 care, security, and a home-away-from-home.",
-        icon: <Home className="w-10 h-10" />,
-        className: "bg-sandstone-dark text-white"
+        title: "Skill Center",
+        description: "Life skills training including Baking, Culinary, and Grooming.",
+        icon: "🍰",
+        theme: "bg-sandstone-dark",
+        features: ["Baking", "Culinary", "Grooming"]
     },
     {
         title: "Arts & Culture",
-        description: "Creative spaces for holistic development through music, dance, and art.",
-        icon: <Palette className="w-12 h-12 md:col-span-2" />,
-        className: "md:col-span-2 bg-oxford-dark text-white",
-        features: ["Art Studio", "Music Room", "Dance Hall"]
+        description: "Creative spaces for music, dance, and fine arts excellence.",
+        icon: <Palette className="w-12 h-12 text-white/30" />,
+        image: "/Music Laboratory.jpg",
+        theme: "bg-oxford",
+        features: ["Music", "Dance", "Art"]
+    },
+    {
+        title: "Self Defense",
+        description: "Empowering girls with Karate and advanced self-defense techniques.",
+        icon: "🥋",
+        theme: "bg-teal-blue",
+        features: ["Karate", "Safety Drills"]
+    },
+    {
+        title: "Hostel Life",
+        description: "Safe and nurturing environment with 24/7 care and security.",
+        icon: <Home className="w-12 h-12 text-white/30" />,
+        image: "/hostel.jpg",
+        theme: "bg-sandstone",
+        features: ["24/7 Care", "Security"]
     }
 ];
 
 export default function Facilities() {
     return (
-        <section id="facilities" data-theme="light" className="py-32 px-6 bg-[#fcf9f2] scroll-mt-24">
+        <section id="facilities" data-theme="light" className="py-24 px-6 bg-[#fcf9f2] scroll-mt-24 font-inter">
             <div className="max-w-7xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
-                    className="text-center mb-16"
+                    className="text-center mb-20"
                 >
-                    <h2 className="text-4xl md:text-6xl font-bold text-oxford mb-4">World-Class Facilities</h2>
-                    <p className="text-xl text-oxford/70 max-w-2xl mx-auto">
-                        Empowering students with comprehensive learning environments that foster growth and excellence.
+                    <span className="text-sandstone font-bold uppercase tracking-[0.3em] text-sm mb-4 block">Our Infrastructure</span>
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-oxford mb-6 uppercase tracking-tight">
+                        World-Class <span className="text-sandstone">Facilities</span>
+                    </h2>
+                    <div className="w-24 h-1.5 bg-sandstone mx-auto rounded-full mb-8" />
+                    <p className="text-lg text-oxford/70 max-w-2xl mx-auto leading-relaxed">
+                        Providing an exceptional environment that nurtures academic brilliance and holistic growth in every student.
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:auto-rows-[240px]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     {facilities.map((fac, i) => (
                         <motion.div
                             key={fac.title}
-                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            initial={{ opacity: 0, scale: 0.95, y: 30 }}
                             whileInView={{ opacity: 1, scale: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: i * 0.1 }}
+                            transition={{ delay: i * 0.1, duration: 0.5 }}
                             whileHover={{ y: -10 }}
-                            className={`rounded-[2.5rem] p-8 md:p-8 flex flex-col shadow-xl transition-shadow hover:shadow-2xl w-full min-h-[400px] md:min-h-0 ${fac.className}`}
+                            className={cn(
+                                "group rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col",
+                                fac.theme || "bg-white"
+                            )}
                         >
-                            <div className="flex-1">
-                                <div className="mb-8 text-6xl">
-                                    {typeof fac.icon === 'string' ? fac.icon : fac.icon}
-                                </div>
-                                <h3 className="text-3xl font-bold mb-4">{fac.title}</h3>
-                                <p className="text-base opacity-95 leading-relaxed max-w-full md:max-w-sm">{fac.description}</p>
+                            <div className="h-48 relative">
+                                {fac.image ? (
+                                    <img src={fac.image} alt={fac.title} className="w-full h-full object-cover" />
+                                ) : (
+                                    <div className="w-full h-full flex items-center justify-center text-5xl bg-white/10 backdrop-blur-sm">
+                                        {fac.icon}
+                                    </div>
+                                )}
                             </div>
-
-                            <div className="mt-8 pt-6 border-t border-current/10 flex flex-col gap-6">
-                                {fac.features && (
+                            <div className="p-8 flex-grow flex flex-col justify-between">
+                                <div className="space-y-3">
+                                    <h3 className={cn(
+                                        "text-2xl font-black tracking-tight",
+                                        fac.theme === "bg-sandstone" ? "text-oxford" : "text-white"
+                                    )}>
+                                        {fac.title}
+                                    </h3>
+                                    <p className={cn(
+                                        "text-sm leading-relaxed",
+                                        fac.theme === "bg-sandstone" ? "text-oxford/80" : "text-white/80"
+                                    )}>
+                                        {fac.description}
+                                    </p>
+                                </div>
+                                <div className="space-y-6 mt-6">
                                     <div className="flex flex-wrap gap-2">
-                                        {fac.features.map(feat => (
-                                            <span key={feat} className="px-3 py-1 rounded-full bg-white/20 text-[10px] uppercase tracking-widest font-bold">
+                                        {fac.features?.map(feat => (
+                                            <span key={feat} className={cn(
+                                                "px-3 py-1 rounded-full text-[10px] uppercase tracking-widest font-bold border",
+                                                fac.theme === "bg-sandstone"
+                                                    ? "bg-oxford/5 border-oxford/10 text-oxford"
+                                                    : "bg-white/10 border-white/10 text-white"
+                                            )}>
                                                 {feat}
                                             </span>
                                         ))}
                                     </div>
-                                )}
-                                <button className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.2em] group/btn self-start">
-                                    <span>Enquire Now</span>
-                                    <span className="w-8 h-px bg-current transition-all group-hover/btn:w-12" />
-                                </button>
+
+                                    <button className={cn(
+                                        "w-full py-4 rounded-xl font-black text-xs uppercase tracking-widest transition-all shadow-md active:scale-95 group/btn",
+                                        fac.theme === "bg-sandstone"
+                                            ? "bg-oxford text-white hover:bg-oxford-dark"
+                                            : "bg-white text-oxford hover:bg-sandstone hover:text-oxford"
+                                    )}>
+                                        <span className="flex items-center justify-center gap-2">
+                                            Explore More
+                                            <div className="w-4 h-px bg-current group-hover/btn:w-6 transition-all" />
+                                        </span>
+                                    </button>
+                                </div>
                             </div>
                         </motion.div>
                     ))}

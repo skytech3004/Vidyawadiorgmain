@@ -195,7 +195,7 @@ export default function LPSContent() {
                             </p>
                         </div>
                         <div className="flex items-center gap-4">
-                            <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-sandstone shadow-lg">
+                            <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-sandstone shadow-lg">
                                 <Image
                                     src="/images/english school/principle.jpg"
                                     alt="Principal"

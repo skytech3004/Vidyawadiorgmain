@@ -57,7 +57,7 @@ const institutions: Institution[] = [
         description: "Elite English Primary School  CBSE focused on international standards and student-centric learning. ",
         icon: <GraduationCap className="w-6 h-6" />,
         stats: "English Medium Only",
-        image: "/lps.jpg",
+        image: "/shushiladevi.jpg",
         tags: ["CBSE Standards", "Boarding Available"],
         isBrochure: false
     },

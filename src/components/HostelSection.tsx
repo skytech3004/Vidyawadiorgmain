@@ -84,7 +84,7 @@ export default function HostelSection() {
                                     "Spacious Sports Ground",
                                     "Kids Activity Park",
                                     "Modern Science & Computer Labs",
-                                    "16 School Buses serving 83+ villages"
+                                    "16 Buses serving 83+ villages"
                                 ].map((item, idx) => (
                                     <li key={idx} className="flex items-start gap-3 text-white/70 font-medium group">
                                         <div className="w-2 h-2 rounded-full bg-sandstone shrink-0 mt-2 group-hover:scale-125 transition-transform" />
@@ -114,7 +114,7 @@ export default function HostelSection() {
                                 8 <span className="text-sandstone">Residential Hostels</span>
                             </h2>
                             <p className="text-white/60 text-lg leading-relaxed">
-                                From just 2 hostels in 1985 to today’s 8 fully operational hostels with 700+ student capacity, Vidyawadi provides a safe, disciplined, and nurturing environment for girls from across India.
+                                <span className=" p-2 text-oxford bg-sandstone font-bold rounded">8 fully operational AC/Non-AC hostels with 700+ student capacity,</span> Vidyawadi provides a safe, disciplined, and nurturing environment for girls from across India.
                             </p>
                         </div>
 

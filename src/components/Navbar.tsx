@@ -81,14 +81,14 @@ export default function Navbar() {
             <div className="bg-oxford text-white py-2 px-10 hidden md:block">
                 <div className="max-w-[1600px] mx-auto flex justify-between items-center text-[13px] font-medium px-4">
                     <div className="flex items-center gap-6 pl-32">
-                        <div className="flex items-center gap-2">
-                            <Phone size={14} className="text-sandstone" />
+                        <a href="tel:+916377204218" className="flex items-center gap-2 hover:text-sandstone transition-colors group">
+                            <Phone size={14} className="text-sandstone group-hover:scale-110 transition-transform" />
                             <span>Have any Question?</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <Mail size={14} className="text-sandstone" />
+                        </a>
+                        <a href="mailto:info@vidyawadi.org" className="flex items-center gap-2 hover:text-sandstone transition-colors group">
+                            <Mail size={14} className="text-sandstone group-hover:scale-110 transition-transform" />
                             <span>info@vidyawadi.org</span>
-                        </div>
+                        </a>
                     </div>
 
                     <div className="flex-1 px-1 overflow-hidden">

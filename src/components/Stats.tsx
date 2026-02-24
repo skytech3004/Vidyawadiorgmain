@@ -49,7 +49,7 @@ export default function Stats() {
         { target: 70, label: "Years Legacy", suffix: "+" },
         { target: 5000, label: "Alumni", suffix: "+" },
         { target: 8, label: "Hostel", suffix: "+" },
-        { target: 16, label: "School Buses", suffix: "" },
+        { target: 16, label: "Buses", suffix: "+" },
     ];
 
     return (

@@ -25,7 +25,7 @@ const pageContent = [
         isVisible: true,
         content: {
             variant: "orange",
-            content: "From just 2 hostels in 1985 to today’s 8 residential hostels with 700+ student capacity, Vidyawadi reflects steady growth and strong management vision. Our 65-acre secure campus provides a disciplined and growth-oriented learning environment."
+            content: "8 residential hostels with 700+ student capacity, Vidyawadi reflects steady growth and strong management vision. Our 65-acre secure campus provides a disciplined and growth-oriented learning environment."
         }
     },
     {

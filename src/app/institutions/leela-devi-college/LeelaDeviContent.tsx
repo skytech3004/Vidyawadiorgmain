@@ -24,6 +24,7 @@ const labsData = [
         "id": 1,
         "name": "Chemistry Laboratory",
         "slug": "chemistry",
+        "image": "/Chemistry Laboratory.jpg",
         "icon": <Microscope className="w-8 h-8 text-oxford" />,
         "gradient": "from-sandstone to-sandstone-dark",
         "description": "A well-equipped and student-friendly facility designed to support teaching and learning in inorganic, organic, and physical chemistry.",
@@ -43,6 +44,7 @@ const labsData = [
         "id": 2,
         "name": "Botany Laboratory",
         "slug": "botany",
+        "image": "/Botany Laboratory.jpg",
         "icon": <Star className="w-8 h-8 text-oxford" />,
         "gradient": "from-sandstone to-sandstone-dark",
         "description": "A dynamic space designed to explore the vast diversity of the plant world with modern instruments and botanical resources.",
@@ -62,6 +64,7 @@ const labsData = [
         "id": 3,
         "name": "Zoology Laboratory",
         "slug": "zoology",
+        "image": "/Zoology Laboratory.jpg",
         "icon": <Microscope className="w-8 h-8 text-oxford" />,
         "gradient": "from-sandstone to-sandstone-dark",
         "description": "An excellent platform for the scientific study of animal life with comprehensive resources for hands-on learning.",
@@ -81,6 +84,7 @@ const labsData = [
         "id": 4,
         "name": "Physics Laboratory",
         "slug": "physics",
+        "image": "/Physics Laboratory.png",
         "icon": <BookOpen className="w-8 h-8 text-oxford" />,
         "gradient": "from-sandstone to-sandstone-dark",
         "description": "A well-organized facility enabling students to explore principles of classical and modern physics through experiment-based learning.",
@@ -100,6 +104,7 @@ const labsData = [
         "id": 5,
         "name": "Geography Laboratory",
         "slug": "geography",
+        "image": "/Geography.jpg",
         "icon": <Globe className="w-8 h-8 text-oxford" />,
         "gradient": "from-sandstone to-sandstone-dark",
         "description": "Essential facility supporting practical learning in physical, human, and environmental geography with modern tools.",
@@ -119,6 +124,7 @@ const labsData = [
         "id": 6,
         "name": "Home Science Laboratory",
         "slug": "home-science",
+        "image": "/Home Science Laboratory.jpg",
         "icon": <Utensils className="w-8 h-8 text-oxford" />,
         "gradient": "from-sandstone to-sandstone-dark",
         "description": "Multifunctional space supporting training in nutrition, food science, clothing, textiles, and resource management.",
@@ -138,6 +144,7 @@ const labsData = [
         "id": 7,
         "name": "Music Laboratory",
         "slug": "music",
+        "image": "/Music Laboratory.jpg",
         "icon": <Music className="w-8 h-8 text-oxford" />,
         "gradient": "from-sandstone to-sandstone-dark",
         "description": "A vibrant space that nurtures creativity, rhythm, and musical expression with classical and contemporary instruments.",
@@ -157,6 +164,7 @@ const labsData = [
         "id": 8,
         "name": "Fine Arts Laboratory",
         "slug": "fine-art",
+        "image": "/Fine Arts Laboratory.jpg",
         "icon": <Star className="w-8 h-8 text-oxford" />,
         "gradient": "from-sandstone to-sandstone-dark",
         "description": "A creative hub designed to support artistic expression and skill development with diverse art materials.",
@@ -176,6 +184,7 @@ const labsData = [
         "id": 9,
         "name": "ICT Laboratory",
         "slug": "ict",
+        "image": "/ICT Laboratory.jpg",
         "icon": <Monitor className="w-8 h-8 text-oxford" />,
         "gradient": "from-sandstone to-sandstone-dark",
         "description": "Modern digital learning space supporting computer education and technological skill development.",
@@ -368,20 +377,32 @@ export default function LeelaDeviContent() {
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.05 }}
                                 onClick={() => setSelectedLab(lab)}
-                                className="group cursor-pointer bg-gray-50 rounded-[2.5rem] p-8 hover:bg-white hover:shadow-2xl transition-all duration-500 border border-transparent hover:border-sandstone/20 overflow-hidden relative"
+                                className="group cursor-pointer bg-gray-50 rounded-[2.5rem] overflow-hidden hover:bg-white hover:shadow-2xl transition-all duration-500 border border-oxford hover:border-sandstone/10  0 relative"
                             >
-                                <div className={`aspect-square w-16 rounded-2xl bg-gradient-to-br ${lab.gradient} flex items-center justify-center text-3xl mb-8 group-hover:scale-110 transition-transform duration-500`}>
-                                    {lab.icon}
-                                </div>
-                                <h3 className="text-2xl font-black text-oxford mb-4 group-hover:text-sandstone transition-colors leading-tight">
-                                    {lab.name}
-                                </h3>
-                                <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3">
-                                    {lab.description}
-                                </p>
-                                <div className="flex items-center gap-2 text-oxford font-black text-[10px] uppercase tracking-widest group-hover:gap-4 transition-all">
-                                    View Details
-                                    <ArrowRight size={14} className="text-sandstone" />
+                                {/* Lab Image */}
+                                {lab.image && (
+                                    <div className="w-full h-48 overflow-hidden">
+                                        <img
+                                            src={lab.image}
+                                            alt={lab.name}
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                        />
+                                    </div>
+                                )}
+                                <div className="p-8">
+                                    <div className={`aspect-square w-14 rounded-2xl bg-gradient-to-br ${lab.gradient} flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-500`}>
+                                        {lab.icon}
+                                    </div>
+                                    <h3 className="text-2xl font-black text-oxford mb-4 group-hover:text-sandstone transition-colors leading-tight">
+                                        {lab.name}
+                                    </h3>
+                                    <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3">
+                                        {lab.description}
+                                    </p>
+                                    <div className="flex items-center gap-2 text-oxford font-black text-[10px] uppercase tracking-widest group-hover:gap-4 transition-all">
+                                        View Details
+                                        <ArrowRight size={14} className="text-sandstone" />
+                                    </div>
                                 </div>
 
                                 {/* Abstract background circle */}
@@ -469,7 +490,7 @@ export default function LeelaDeviContent() {
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0.95 }}
                                     transition={{ duration: 0.3 }}
-                                    className="group bg-white rounded-[2rem] border border-gray-100 shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col"
+                                    className="group bg-white rounded-[2rem] border border-gray-100 shadow-xl border-oxford hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col"
                                 >
                                     <div className="p-8 pb-0">
                                         <div className="flex justify-between items-start mb-6">
@@ -616,7 +637,7 @@ export default function LeelaDeviContent() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.1 }}
-                                className="group relative bg-gray-50 rounded-[2.5rem] p-8 hover:bg-white hover:shadow-2xl transition-all duration-500 border border-transparent hover:border-sandstone/20"
+                                className="group relative bg-gray-50 rounded-[2.5rem] p-8 hover:bg-white hover:shadow-2xl transition-all duration-500 border border-oxford hover:border-sandstone/20"
                             >
                                 <div className="flex items-center gap-6 mb-8">
                                     <div className="w-20 h-20 rounded-full bg-sandstone/10 flex items-center justify-center shrink-0 group-hover:bg-sandstone group-hover:text-oxford transition-all duration-300">
@@ -815,7 +836,7 @@ export default function LeelaDeviContent() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.1 }}
-                                className="group p-8 rounded-3xl bg-gray-50 hover:bg-white hover:shadow-2xl transition-all border border-transparent hover:border-sandstone/20 text-center flex flex-col items-center"
+                                className="group p-8 rounded-3xl bg-gray-50 hover:bg-white hover:shadow-2xl transition-all border border-oxford hover:border-sandstone/20 text-center flex flex-col items-center"
                             >
                                 <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-6 group-hover:bg-sandstone group-hover:text-white transition-colors">
                                     <facility.icon size={32} strokeWidth={1.5} />
@@ -913,6 +934,109 @@ export default function LeelaDeviContent() {
                 </div>
             </section>
 
+            {/* Faculty Section */}
+            <section className="py-24 px-6 bg-gray-50">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <motion.span
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            className="text-sandstone font-bold uppercase tracking-widest text-sm"
+                        >
+                            Our Faculty
+                        </motion.span>
+                        <motion.h2
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            className="text-3xl md:text-5xl font-bold text-oxford mt-2"
+                        >
+                            LPS School Navigators
+                        </motion.h2>
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            className="text-gray-600 mt-4 max-w-2xl mx-auto"
+                        >
+                            Meet our dedicated faculty and staff members committed to excellence.
+                        </motion.p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        {[
+                            { no: 1, name: "Ms. Jyoti Nath", designation: "Principal" },
+                            { no: 2, name: "Ms. Kusum Vaishnav", designation: "PGT (History)" },
+                            { no: 3, name: "Dr. Nidhi Upadhyay", designation: "PGT (Painting)" },
+                            { no: 4, name: "Ms. Bhagwanti", designation: "PGT (Maths)" },
+                            { no: 5, name: "Mr. Ghanshyam Singh", designation: "PGT (English)" },
+                            { no: 6, name: "Ms. Mamta Rajpurohit", designation: "PGT (B.St.)" },
+                            { no: 7, name: "Mr. Mahendra Kumar", designation: "PGT (Physics)" },
+                            { no: 8, name: "Ms. Deepshikha Khangarot", designation: "PGT (Biology)" },
+                            { no: 9, name: "Ms. Priya Sharma", designation: "PGT (Hindi)" },
+                            { no: 10, name: "Mr. Ronak Singh", designation: "PGT (Accountancy)" },
+                            { no: 11, name: "Ms. Priyanka Lakhawat", designation: "PGT (Pol. Sci.)" },
+                            { no: 12, name: "Ms. Dimpal", designation: "PGT (Chemistry)" },
+                            { no: 13, name: "Dr. Purnima Bhati", designation: "PGT (English)" },
+                            { no: 14, name: "Mr. Rahul Joshi", designation: "PGT (Geography)" },
+                            { no: 15, name: "Ms. Neha Srivastva", designation: "PGT (English)" },
+                            { no: 16, name: "Ms. Roshni Bano", designation: "PGT (Music)" },
+                            { no: 17, name: "Mr. Pradeep Singh", designation: "PGT (Comp. Sci.)" },
+                            { no: 18, name: "Ms. Deepa Tolani", designation: "TGT (S.St.)" },
+                            { no: 19, name: "Ms. Rajkumari Choudhary", designation: "TGT (Science)" },
+                            { no: 20, name: "Ms. Varsha Palrecha", designation: "TGT (Hindi)" },
+                            { no: 21, name: "Ms. Krishana Kanta Pareek", designation: "TGT (Sanskrit)" },
+                            { no: 22, name: "Mr. Kantilal Prajapat", designation: "TGT (Maths)" },
+                            { no: 23, name: "Ms. Veena Kumari", designation: "TGT (English)" },
+                            { no: 24, name: "Ms. Divya Soni", designation: "TGT (Maths)" },
+                            { no: 25, name: "Ms. Manglem Singh", designation: "TGT (Science)" },
+                            { no: 26, name: "Ms. Priyanka Saxena", designation: "TGT (Sanskrit)" },
+                            { no: 27, name: "Ms. Bhawna", designation: "TGT (Hindi)" },
+                            { no: 28, name: "Ms. Mamta Kanwar", designation: "TGT (Maths)" },
+                            { no: 29, name: "Ms. Kalal Nilam", designation: "TGT (Comp. Sci.)" },
+                            { no: 30, name: "Ms. Neelam Parihar", designation: "TGT (English)" },
+                            { no: 31, name: "Ms. Kalpna Vaishnav", designation: "TGT" },
+                            { no: 32, name: "Ms. Meena Sirvi", designation: "TGT (S.St.)" },
+                            { no: 33, name: "Ms. Rashmi Tripathi", designation: "PET" },
+                            { no: 34, name: "Ms. Suman", designation: "PET" },
+                            { no: 35, name: "Ms. Megha Arora", designation: "PRT Co-ordinator" },
+                            { no: 36, name: "Ms. Sunder Dewasi", designation: "PRT (Hindi)" },
+                            { no: 37, name: "Ms. Rathod Gopal Kunwar", designation: "PRT (M.T.)" },
+                            { no: 38, name: "Ms. Anjali Rathore", designation: "PRT (EVS)" },
+                            { no: 39, name: "Ms. Yumnum Reena Devi", designation: "PRT (English)" },
+                            { no: 40, name: "Ms. Monika", designation: "PRT" },
+                            { no: 41, name: "Ms. Jyoti Choudhary", designation: "PRT" },
+                            { no: 42, name: "Ms. Hemlata Suthar", designation: "PRT" },
+                            { no: 43, name: "Ms. Gracy Soni", designation: "PRT" },
+                            { no: 44, name: "Ms. Chitrakshi Kalet", designation: "PRT" },
+                            { no: 45, name: "Ms. Bharti Mali", designation: "PRT" },
+                            { no: 46, name: "Mr. Md Asfak", designation: "Office Superintendent" },
+                            { no: 47, name: "Mr. Niranjan Gehlot", designation: "Accountant" },
+                            { no: 48, name: "Ms. Jaya Gehlot", designation: "Librarian" },
+                            { no: 49, name: "Ms. Soniya Arya", designation: "Sci. Lab Asst." },
+                            { no: 50, name: "Ms. Chanchal Suthar", designation: "Comp. Lab Asst." },
+                        ].map((staff, i) => (
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: (i % 12) * 0.05 }}
+                                key={staff.no}
+                                className="bg-white p-4 rounded-xl shadow-sm border border-oxford/10 flex items-center gap-3 hover:border-sandstone transition-colors group"
+                            >
+                                <div className="w-10 h-10 rounded-full bg-oxford/5 flex items-center justify-center text-oxford font-bold text-xs shrink-0 group-hover:bg-sandstone group-hover:text-white transition-colors">
+                                    {staff.no}
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-oxford text-xs">{staff.name}</h4>
+                                    <p className="text-[10px] text-gray-500 uppercase tracking-wider">{staff.designation}</p>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* School Uniform & General Instructions Section */}
+
             {/* Final CTA */}
             <section className="py-24 px-6 bg-sandstone">
                 <div className="max-w-4xl mx-auto text-center">
@@ -924,7 +1048,7 @@ export default function LeelaDeviContent() {
                         <a href="tel:+918764185993" className="px-10 py-5 bg-oxford text-white rounded-full font-bold uppercase tracking-wider shadow-2xl hover:bg-white hover:text-oxford transition-all">
                             Call: 8764185993
                         </a>
-                        <Link href="/contact" className="px-10 py-5 bg-white text-oxford rounded-full font-bold uppercase tracking-wider shadow-2xl hover:scale-105 transition-all">
+                        <Link href="https://vidyawadicollege.org/admissions/apply" className="px-10 py-5 bg-white text-oxford rounded-full font-bold uppercase tracking-wider shadow-2xl hover:scale-105 transition-all">
                             Apply for Admission
                         </Link>
                     </div>
