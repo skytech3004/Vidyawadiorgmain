@@ -70,7 +70,7 @@ export default function Staff() {
                     className="text-center mb-16"
                 >
                     <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm">Recognition</span>
-                    <h2 className="text-4xl md:text-6xl font-bold text-oxford mt-4">Awards & Accolades</h2>
+                    <h2 className="text-4xl md:text-6xl font-bold text-oxford mt-4 font-serif">Awards & Accolades</h2>
                 </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
@@ -95,7 +95,7 @@ export default function Staff() {
                                 </div>
                             </div>
                             <div className="text-center px-4">
-                                <h3 className="text-2xl font-bold text-oxford mb-1">{award.name}</h3>
+                                <h3 className="text-2xl font-bold text-oxford mb-1 font-serif">{award.name}</h3>
                                 <p className="text-sandstone-dark font-semibold uppercase tracking-widest text-xs mb-3">{award.role}</p>
                                 <div className="flex items-center justify-center gap-2 text-gray-400 text-sm">
                                     <Medal size={14} />
@@ -143,7 +143,7 @@ export default function Staff() {
                             <div className="w-full md:w-3/5 p-8 md:p-12 overflow-y-auto">
                                 <div className="mb-8">
                                     <span className="text-sandstone-dark font-bold uppercase tracking-widest text-xs">{selectedAward.role}</span>
-                                    <h3 className="text-4xl font-bold text-oxford mt-2">{selectedAward.name}</h3>
+                                    <h3 className="text-4xl font-bold text-oxford mt-2 font-serif">{selectedAward.name}</h3>
                                 </div>
 
                                 <div className="grid gap-8">
@@ -179,7 +179,7 @@ export default function Staff() {
                                 </div>
 
                                 <div className="mt-10 pt-8 border-t border-oxford">
-                                    <p className="text-gray-600 leading-relaxed italic">
+                                    <p className="text-gray-600 leading-relaxed">
                                         "{selectedAward.bio}"
                                     </p>
                                 </div>

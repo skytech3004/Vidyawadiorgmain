@@ -43,7 +43,7 @@ export default function MarudharContent() {
                         </div>
                         <div>
                             <span className="text-sandstone font-bold uppercase tracking-widest text-sm mb-4 block">Hindi & English Meduim Senior Secondary School (RBSE)</span>
-                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 leading-tight">
+                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 leading-tight font-serif">
                                 Marudhar Balika Vidyapeeth
                             </h1>
                             <p className="text-xl md:text-2xl text-white/90 font-light max-w-3xl">
@@ -74,9 +74,9 @@ export default function MarudharContent() {
             <section className="py-20 px-6">
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
                     <div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-oxford mb-6">Principal’s Message</h2>
+                        <h2 className="text-3xl md:text-4xl font-bold text-oxford mb-6 font-serif">Principal’s Message</h2>
                         <div className="prose text-gray-600 leading-relaxed space-y-4 mb-8">
-                            <p className="italic text-lg text-oxford/80">
+                            <p className="text-lg text-oxford/80">
                                 “Education is the most powerful weapon which you can use to change the world.” – Nelson Mandela
                             </p>
                             <p>
@@ -116,7 +116,7 @@ export default function MarudharContent() {
 
                     <div className="relative">
                         <div className="bg-oxford/5 rounded-3xl p-8 border border-oxford/10">
-                            <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3">
+                            <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3 font-serif">
                                 <Star className="text-sandstone fill-sandstone" />
                                 Our Core Values
                             </h3>
@@ -139,7 +139,7 @@ export default function MarudharContent() {
 
                         <div className="mt-8 bg-oxford rounded-3xl p-8 text-white relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-sandstone/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-                            <h3 className="text-xl font-bold mb-4 relative z-10">Our School</h3>
+                            <h3 className="text-xl font-bold mb-4 relative z-10 font-serif">Our School</h3>
                             <p className="text-white/80 text-sm leading-relaxed relative z-10">
                                 Marudhar Balika Vidyapeeth is known for its reputation and adherence to quality education, State of the Art Infrastructure, and a nurturing environment. We offer a comprehensive curriculum and engage students in traditional and innovative educational methods to empower them for future success.
                             </p>
@@ -151,7 +151,7 @@ export default function MarudharContent() {
             <section className="py-20 px-6">
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
                     <div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-oxford mb-6">Shaping Bright Futures for Girls (Class VI–XII)</h2>
+                        <h2 className="text-3xl md:text-4xl font-bold text-oxford mb-6 font-serif">Shaping Bright Futures for Girls (Class VI–XII)</h2>
                         <div className="prose text-gray-600 leading-relaxed space-y-4">
                             <p>
                                 Marudhar Balika Vidyapeeth is a premier girls’ senior secondary school dedicated to academic excellence, character building, and all-round development. Managed by Marudhar Mahila Shikshan Sangh,Vidyawadi, our institution provides quality education in Hindi & English Medium under RBSE.
@@ -166,7 +166,7 @@ export default function MarudharContent() {
                     </div>
                     <div className="relative">
                         <div className="bg-oxford/5 rounded-3xl p-8 border border-oxford/10">
-                            <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3">
+                            <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3 font-serif">
                                 <Star className="text-sandstone fill-sandstone" />
                                 Why Choose Us?
                             </h3>
@@ -192,8 +192,8 @@ export default function MarudharContent() {
             <section className="py-24 px-6">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mb-6">Modern Labs & Facilities</h2>
-                        <p className="text-gray-600 max-w-2xl mx-auto text-lg italic">
+                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mb-6 font-serif">Modern Labs & Facilities</h2>
+                        <p className="text-gray-600 max-w-2xl mx-auto text-lg">
                             “Well-equipped laboratories with modern and best technological facilities”
                         </p>
                         <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
@@ -231,7 +231,7 @@ export default function MarudharContent() {
                                 <div className="p-6 relative">
                                     <div className="flex items-start gap-4">
                                         {!facility.img && <facility.icon className="text-sandstone shrink-0 mt-1" size={24} />}
-                                        <h3 className="font-bold text-oxford text-lg">{facility.name}</h3>
+                                        <h3 className="font-bold text-oxford text-lg font-serif">{facility.name}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -244,7 +244,7 @@ export default function MarudharContent() {
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Academic Excellence</span>
-                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2">Outstanding Results</h2>
+                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2 font-serif">Outstanding Results</h2>
                         <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
                             Our students consistently achieve top results at district and state levels, proving our commitment to quality education.
                         </p>
@@ -258,7 +258,7 @@ export default function MarudharContent() {
                             { class: "X & VIII (All)", score: "100%" },
                         ].map((stat, i) => (
                             <div key={i} className="bg-white p-8 rounded-2xl shadow-lg border-b-4 border-sandstone text-center hover:-translate-y-2 transition-transform">
-                                <h3 className="text-gray-500 font-bold uppercase text-sm tracking-wider mb-2">{stat.class}</h3>
+                                <h3 className="text-gray-500 font-bold uppercase text-sm tracking-wider mb-2 font-serif">{stat.class}</h3>
                                 <p className="text-5xl font-black text-oxford">{stat.score}</p>
                                 <p className="text-xs text-green-600 font-bold mt-2 uppercase">Pass Percentage</p>
                             </div>
@@ -268,12 +268,12 @@ export default function MarudharContent() {
                     <div className="grid md:grid-cols-2 gap-8">
                         <div className="bg-oxford text-white p-8 rounded-2xl flex flex-col justify-center items-center text-center">
                             <Star size={48} className="text-sandstone mb-4" />
-                            <h3 className="text-3xl font-bold mb-2">34 Students</h3>
+                            <h3 className="text-3xl font-bold mb-2 font-serif">34 Students</h3>
                             <p className="text-white/80">Scored above 90% in board exams</p>
                         </div>
                         <div className="bg-oxford text-white p-8 rounded-2xl flex flex-col justify-center items-center text-center">
                             <Medal size={48} className="text-sandstone mb-4" />
-                            <h3 className="text-3xl font-bold mb-2">Perfect Scores</h3>
+                            <h3 className="text-3xl font-bold mb-2 font-serif">Perfect Scores</h3>
                             <p className="text-white/80">Multiple students achieved 100/100 marks in subjects</p>
                         </div>
                     </div>
@@ -285,7 +285,7 @@ export default function MarudharContent() {
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Meritorious Students</span>
-                        <h2 className="text-3xl md:text-4xl font-bold text-oxford mt-2">Board Exam Toppers (2024-25)</h2>
+                        <h2 className="text-3xl md:text-4xl font-bold text-oxford mt-2 font-serif">Board Exam Toppers (2024-25)</h2>
                         <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
                             Celebrating the dedication and hard work of our top performers.
                         </p>
@@ -299,7 +299,7 @@ export default function MarudharContent() {
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Recognition & Rewards</span>
-                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2">Scholarships & Merit Awards</h2>
+                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2 font-serif">Scholarships & Merit Awards</h2>
                         <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
                             By Balika Shiksha Foundation, Government of Rajasthan (Jaipur)
                         </p>
@@ -307,7 +307,7 @@ export default function MarudharContent() {
 
                     {/* EWS Scheme */}
                     <div className="mb-20">
-                        <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3">
+                        <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3 font-serif">
                             <Star className="text-sandstone fill-sandstone" />
                             EWS Merit Promotion Scheme (State Level)
                         </h3>
@@ -367,7 +367,7 @@ export default function MarudharContent() {
 
                     {/* Padmakshi Award Scheme */}
                     <div>
-                        <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3">
+                        <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3 font-serif">
                             <Medal className="text-sandstone fill-sandstone" />
                             Padmakshi (Merit) Award Scheme – District Level Toppers
                         </h3>
@@ -429,7 +429,7 @@ export default function MarudharContent() {
                     <div className="mt-20 bg-oxford text-white rounded-3xl p-8 md:p-12 relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-64 h-64 bg-sandstone/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
                         <div className="relative z-10 text-center">
-                            <h3 className="text-3xl font-bold mb-4 flex items-center justify-center gap-3">
+                            <h3 className="text-3xl font-bold mb-4 flex items-center justify-center gap-3 font-serif">
                                 <Trophy className="text-sandstone" size={32} />
                                 GARGI Award
                             </h3>
@@ -460,7 +460,7 @@ export default function MarudharContent() {
                     <div className="mt-20">
                         <div className="text-center mb-10">
                             <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Academic Excellence</span>
-                            <h3 className="text-3xl font-bold text-oxford mt-2">Perfect Score Achievers</h3>
+                            <h3 className="text-3xl font-bold text-oxford mt-2 font-serif">Perfect Score Achievers</h3>
                             <p className="text-gray-600 mt-2">Students who scored 100 out of 100 marks in Board Exams</p>
                         </div>
 
@@ -500,7 +500,7 @@ export default function MarudharContent() {
                                 </tbody>
                             </table>
                         </div>
-                        <p className="text-center text-gray-500 italic mt-6 max-w-2xl mx-auto text-sm">
+                        <p className="text-center text-gray-500 mt-6 max-w-2xl mx-auto text-sm">
                             "These students achieved full marks in their respective subjects, bringing pride to the school through their outstanding academic excellence."
                         </p>
                     </div>
@@ -512,7 +512,7 @@ export default function MarudharContent() {
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Co-Curricular Excellence</span>
-                        <h2 className="text-3xl md:text-5xl font-bold mt-2">Beyond Academics</h2>
+                        <h2 className="text-3xl md:text-5xl font-bold mt-2 font-serif">Beyond Academics</h2>
                         <p className="text-white/80 mt-4 max-w-2xl mx-auto">
                             “With wings of courage and dreams, the sky is the limit.”
                         </p>
@@ -534,14 +534,14 @@ export default function MarudharContent() {
                                 <div className="w-48 h-48 mx-auto rounded-full bg-sandstone/20 overflow-hidden mb-6 border-4 border-sandstone/30 relative">
                                     <img src="/images/harishta.png" alt="Cadet Harshita" className="w-full h-full object-cover" />
                                 </div>
-                                <h3 className="text-2xl font-bold text-white mb-1">Cadet Harshita</h3>
+                                <h3 className="text-2xl font-bold text-white mb-1 font-serif">Cadet Harshita</h3>
                                 <p className="text-sandstone font-medium mb-4">Class: IX A</p>
                                 <div className="inline-block px-4 py-2 bg-white/10 rounded-lg text-sm font-bold uppercase tracking-wider text-white">
                                     Selected for AITSC 2025
                                 </div>
                             </div>
                             <div className="md:w-2/3">
-                                <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                                <h3 className="text-2xl font-bold mb-6 flex items-center gap-3 font-serif">
                                     <Medal className="text-sandstone" />
                                     NCC Achievement – National Thal Sainik Camp
                                 </h3>
@@ -580,7 +580,7 @@ export default function MarudharContent() {
                     <div className="grid lg:grid-cols-2 gap-12">
                         {/* Sports Achievements */}
                         <div>
-                            <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                            <h3 className="text-2xl font-bold mb-6 flex items-center gap-3 font-serif">
                                 <Trophy className="text-sandstone" />
                                 District, State & National Level Talents
                             </h3>
@@ -679,7 +679,7 @@ export default function MarudharContent() {
 
                         {/* Science Achievements */}
                         <div>
-                            <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                            <h3 className="text-2xl font-bold mb-6 flex items-center gap-3 font-serif">
                                 <Microscope className="text-sandstone" />
                                 Science Models & Quiz
                             </h3>
@@ -738,7 +738,7 @@ export default function MarudharContent() {
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Our Faculty</span>
-                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2">Marudhar Balika Vidyapeeth Navigators</h2>
+                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2 font-serif">Marudhar Balika Vidyapeeth Navigators</h2>
                         <p className="text-gray-600 mt-4 max-w-2xl mx-auto">Meet our dedicated faculty and staff members committed to excellence.</p>
                     </div>
 
@@ -828,7 +828,7 @@ export default function MarudharContent() {
             <section className="py-20 px-6 bg-white">
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
                     <div className="bg-oxford/5 rounded-3xl p-8 md:p-12 border border-oxford/10">
-                        <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3">
+                        <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3 font-serif">
                             <Star className="text-sandstone fill-sandstone" />
                             UNIFORM
                         </h3>
@@ -840,7 +840,7 @@ export default function MarudharContent() {
                                         <CheckCircle2 size={18} className="text-green-600 mt-0.5 shrink-0" />
                                         <span>Maroon checked shirt and grey tunic, black ribbon or hair band, black shoes and grey socks.</span>
                                     </li>
-                                    <li className="flex gap-3 items-start italic text-oxford/80 ml-7">
+                                    <li className="flex gap-3 items-start text-oxford/80 ml-7">
                                         <span>Two days a week (Wednesday &amp; Saturday): White skirt and white shirt, white ribbon, black shoes and white socks.</span>
                                     </li>
                                 </ul>
@@ -853,7 +853,7 @@ export default function MarudharContent() {
                                         <CheckCircle2 size={18} className="text-green-600 mt-0.5 shrink-0" />
                                         <span>Maroon checked kurta, white salwar and white dupatta, black ribbon, black shoes and grey socks.</span>
                                     </li>
-                                    <li className="flex gap-3 items-start italic text-oxford/80 ml-7">
+                                    <li className="flex gap-3 items-start text-oxford/80 ml-7">
                                         <span>Two days a week (Wednesday &amp; Saturday): White salwar Kurta and maroon dupatta, white ribbon, black shoes and white socks.</span>
                                     </li>
                                 </ul>
@@ -870,7 +870,7 @@ export default function MarudharContent() {
                     </div>
 
                     <div className="space-y-8">
-                        <h2 className="text-3xl md:text-4xl font-bold text-oxford">General Instructions</h2>
+                        <h2 className="text-3xl md:text-4xl font-bold text-oxford font-serif">General Instructions</h2>
                         <div className="grid gap-4">
                             {[
                                 { title: "Regularity", desc: "Minimum 75% attendance is mandatory." },
@@ -899,7 +899,7 @@ export default function MarudharContent() {
             {/* CTA */}
             <section className="py-20 px-6 bg-sandstone">
                 <div className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-4xl font-black text-oxford mb-6 uppercase tracking-tight">Admissions Open</h2>
+                    <h2 className="text-4xl font-black text-oxford mb-6 uppercase tracking-tight font-serif">Admissions Open</h2>
                     <p className="text-xl text-oxford/80 font-medium mb-10">
                         Give your daughter the opportunity to grow into a confident, educated, and successful individual.
                     </p>

@@ -103,7 +103,7 @@ export default function About() {
                                     <Target className="text-oxford" size={24} />
                                 </span>
                                 <h3 className="text-3xl font-black mb-6 tracking-wide">VISION</h3>
-                                <p className="text-white/80 leading-relaxed text-lg italic">
+                                <p className="text-white/80 leading-relaxed text-lg">
                                     "To provide affordable, high-quality education that empowers students with knowledge, skills, and strong values. We aim to nurture hidden talents, encourage innovation, and create future leaders, entrepreneurs, and responsible citizens."
                                 </p>
                             </div>
@@ -122,7 +122,7 @@ export default function About() {
                                     <Shield className="text-white" size={24} />
                                 </span>
                                 <h3 className="text-3xl font-black mb-6 tracking-wide">MISSION</h3>
-                                <p className="text-oxford/80 leading-relaxed text-lg italic">
+                                <p className="text-oxford/80 leading-relaxed text-lg">
                                     "Our mission is to deliver excellence in education through value-based and holistic learning. We focus on developing creativity, critical thinking, and entrepreneurial skills while promoting gender equality, social responsibility, and environmental awareness."
                                 </p>
                             </div>

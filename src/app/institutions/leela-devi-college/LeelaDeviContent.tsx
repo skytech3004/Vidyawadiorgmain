@@ -256,7 +256,7 @@ export default function LeelaDeviContent() {
                         </div>
                         <div>
                             <span className="text-sandstone font-bold uppercase tracking-widest text-sm mb-4 block">A Premier Women’s College in Western Rajasthan</span>
-                            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 leading-tight">
+                            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 leading-tight font-serif">
                                 Leela Devi Parasmal Sancheti Kanya Mahavidyalaya
                             </h1>
                             <div className="flex flex-wrap gap-4 items-center text-white/80">
@@ -316,7 +316,7 @@ export default function LeelaDeviContent() {
                         viewport={{ once: true }}
                         className="order-1 lg:order-2"
                     >
-                        <h2 className="text-3xl md:text-4xl font-bold text-oxford mb-6">About the College</h2>
+                        <h2 className="text-3xl md:text-4xl font-bold text-oxford mb-6 font-serif">About the College</h2>
                         <div className="prose text-gray-600 leading-relaxed space-y-4">
                             <p>
                                 Leela Devi Parasmal Sancheti Kanya Mahavidyalaya is a women-only higher education institution managed by <b>Marudhar Mahila Shikshan Sangh,Vidyawadi</b>.
@@ -355,7 +355,7 @@ export default function LeelaDeviContent() {
                         <motion.h2
                             initial={{ opacity: 0, y: 10 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            className="text-4xl md:text-5xl font-black text-oxford mt-2"
+                            className="text-4xl md:text-5xl font-black text-oxford mt-2 font-serif"
                         >
                             Laboratories & Research
                         </motion.h2>
@@ -393,7 +393,7 @@ export default function LeelaDeviContent() {
                                     <div className={`aspect-square w-14 rounded-2xl bg-gradient-to-br ${lab.gradient} flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-500`}>
                                         {lab.icon}
                                     </div>
-                                    <h3 className="text-2xl font-black text-oxford mb-4 group-hover:text-sandstone transition-colors leading-tight">
+                                    <h3 className="text-2xl font-black text-oxford mb-4 group-hover:text-sandstone transition-colors leading-tight font-serif">
                                         {lab.name}
                                     </h3>
                                     <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3">
@@ -427,7 +427,7 @@ export default function LeelaDeviContent() {
                         <motion.h2
                             initial={{ opacity: 0, y: 10 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            className="text-3xl md:text-5xl font-black text-oxford mt-2"
+                            className="text-3xl md:text-5xl font-black text-oxford mt-2 font-serif"
                         >
                             Courses Offered
                         </motion.h2>
@@ -501,7 +501,7 @@ export default function LeelaDeviContent() {
                                                 {course.category.name}
                                             </span>
                                         </div>
-                                        <h3 className="text-xl font-bold text-oxford mb-2 group-hover:text-sandstone transition-colors min-h-[3.5rem] line-clamp-2">
+                                        <h3 className="text-xl font-bold text-oxford mb-2 group-hover:text-sandstone transition-colors min-h-[3.5rem] line-clamp-2 font-serif">
                                             {course.name}
                                         </h3>
                                         <p className="text-sm text-gray-500 font-medium mb-6">
@@ -579,7 +579,7 @@ export default function LeelaDeviContent() {
                         <motion.h2
                             initial={{ opacity: 0, y: 10 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            className="text-4xl md:text-5xl font-black text-oxford mt-2"
+                            className="text-4xl md:text-5xl font-black text-oxford mt-2 font-serif"
                         >
                             University Topper
                         </motion.h2>
@@ -653,7 +653,7 @@ export default function LeelaDeviContent() {
                                             <Trophy size={14} className="text-sandstone" fill="currentColor" />
                                             <span className="text-[10px] font-black uppercase tracking-widest text-sandstone">Gold Medalist</span>
                                         </div>
-                                        <h3 className="text-xl font-black text-oxford leading-tight group-hover:text-sandstone transition-colors">
+                                        <h3 className="text-xl font-black text-oxford leading-tight group-hover:text-sandstone transition-colors font-serif">
                                             {topper.name}
                                         </h3>
                                     </div>
@@ -730,7 +730,7 @@ export default function LeelaDeviContent() {
                                         {selectedLab.icon}
                                     </div>
                                     <div className="flex-1">
-                                        <h2 className="text-3xl md:text-5xl font-black mb-4 leading-tight">{selectedLab.name}</h2>
+                                        <h2 className="text-3xl md:text-5xl font-black mb-4 leading-tight font-serif">{selectedLab.name}</h2>
                                         <p className="text-white/90 text-lg font-medium max-w-2xl leading-relaxed">
                                             {selectedLab.description}
                                         </p>
@@ -811,7 +811,7 @@ export default function LeelaDeviContent() {
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Facilities & Campus Life</span>
-                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2">Supporting Your Growth</h2>
+                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2 font-serif">Supporting Your Growth</h2>
                         <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
                             The college provides a learner-friendly environment designed for academics, sports, and overall well-being.
                         </p>
@@ -841,14 +841,14 @@ export default function LeelaDeviContent() {
                                 <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-6 group-hover:bg-sandstone group-hover:text-white transition-colors">
                                     <facility.icon size={32} strokeWidth={1.5} />
                                 </div>
-                                <h3 className="font-bold text-oxford leading-tight">{facility.name}</h3>
+                                <h3 className="font-bold text-oxford leading-tight font-serif">{facility.name}</h3>
                             </motion.div>
                         ))}
                     </div>
                     <div className="container mx-auto">
                         <div className="mt-20 bg-white p-8 md:p-12 rounded-[2.5rem] border border-dashed border-gray-300 flex flex-col md:flex-row items-center gap-8 shadow-sm">
                             <div className="flex-1">
-                                <h4 className="font-bold text-2xl text-oxford mb-4 flex items-center gap-3">
+                                <h4 className="font-bold text-2xl text-oxford mb-4 flex items-center gap-3 font-serif">
                                     <Star className="text-sandstone" size={24} fill="currentColor" />
                                     Admission Criteria
                                 </h4>
@@ -880,7 +880,7 @@ export default function LeelaDeviContent() {
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-20">
                         <span className="text-sandstone font-bold uppercase tracking-widest text-sm">WANT TO JOIN US?</span>
-                        <h2 className="text-3xl md:text-5xl font-bold mt-2">Admission Process</h2>
+                        <h2 className="text-3xl md:text-5xl font-bold mt-2 font-serif">Admission Process</h2>
                     </div>
 
                     <div className="grid lg:grid-cols-5 gap-4 relative">
@@ -903,14 +903,14 @@ export default function LeelaDeviContent() {
                                 <div className="w-14 h-14 rounded-full bg-oxford border-4 border-sandstone flex items-center justify-center font-black text-sandstone text-xl mb-6 shadow-xl">
                                     {step.step}
                                 </div>
-                                <h3 className="font-bold text-xl mb-3">{step.title}</h3>
+                                <h3 className="font-bold text-xl mb-3 font-serif">{step.title}</h3>
                                 <p className="text-white/60 text-sm leading-relaxed">{step.desc}</p>
                             </motion.div>
                         ))}
                     </div>
 
                     <div className="mt-20 bg-white/5 rounded-3xl p-8 md:p-12 border border-white/10">
-                        <h3 className="text-2xl font-bold mb-8 flex items-center gap-3">
+                        <h3 className="text-2xl font-bold mb-8 flex items-center gap-3 font-serif">
                             <Trophy className="text-sandstone" />
                             Required Documents
                         </h3>
@@ -948,7 +948,7 @@ export default function LeelaDeviContent() {
                         <motion.h2
                             initial={{ opacity: 0, y: 10 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            className="text-3xl md:text-5xl font-bold text-oxford mt-2"
+                            className="text-3xl md:text-5xl font-bold text-oxford mt-2 font-serif"
                         >
                             LPS School Navigators
                         </motion.h2>
@@ -1026,7 +1026,7 @@ export default function LeelaDeviContent() {
                                     {staff.no}
                                 </div>
                                 <div>
-                                    <h4 className="font-bold text-oxford text-xs">{staff.name}</h4>
+                                    <h4 className="font-bold text-oxford text-xs font-serif">{staff.name}</h4>
                                     <p className="text-[10px] text-gray-500 uppercase tracking-wider">{staff.designation}</p>
                                 </div>
                             </motion.div>
@@ -1040,7 +1040,7 @@ export default function LeelaDeviContent() {
             {/* Final CTA */}
             <section className="py-24 px-6 bg-sandstone">
                 <div className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-4xl md:text-5xl font-black text-oxford mb-8 uppercase tracking-tight leading-tight">Empowering Women Through Excellence</h2>
+                    <h2 className="text-4xl md:text-5xl font-black text-oxford mb-8 uppercase tracking-tight leading-tight font-serif">Empowering Women Through Excellence</h2>
                     <p className="text-xl text-oxford/80 font-medium mb-12">
                         Invest in your future. Join a community of leaders, thinkers, and changemakers. Admissions are now open.
                     </p>

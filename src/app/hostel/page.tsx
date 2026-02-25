@@ -133,10 +133,9 @@ export default function Page() {
                         <span className="inline-block px-4 py-1.5 bg-sandstone text-oxford text-[10px] font-black uppercase tracking-[0.2em] rounded-full mb-6">
                             Education with Sanskar
                         </span>
-                        <h1 className="text-5xl md:text-8xl font-serif mb-8 leading-tight">
-                            Safe & Secure <br />
-                            <span className="text-sandstone">Girls Hostel</span>
-                        </h1>
+                        {/* <h1 className="text-5xl md:text-8xl font-serif mb-8 leading-tight">
+                            Hostel <span className="text-sandstone">Life</span>
+                        </h1> */}
                         <p className="text-lg md:text-2xl font-light mb-12 max-w-2xl mx-auto text-white/90">
                             A home away from home where traditional values meet modern excellence.
                         </p>
@@ -203,7 +202,7 @@ export default function Page() {
                                 </span>
                                 <h2 className="text-4xl md:text-6xl font-serif text-oxford leading-tight">
                                     Your Second Home for <br />
-                                    <span className="italic">Holistic Growth.</span>
+                                    <span>Holistic Growth.</span>
                                 </h2>
                             </div>
 
@@ -248,18 +247,18 @@ export default function Page() {
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {[
-                            { image: "/brain/6b900df7-aa65-4ec6-bd8e-f46f553fd5fa/safety_cctv_premium_png_1772008998501.png", title: "Safety & CCTV", desc: "Round-the-clock security with full CCTV coverage." },
-                            { image: "/uploads/mess/0a3b3c6a-ba90-4f95-9178-07da39ea9062.jpg", title: "Pure Jain Food", desc: "Nutritious Satvik meals with 5 servings per day." },
-                            { icon: <Droplets size={32} />, title: "RO Drinking Water", desc: "Pure and safe RO purified drinking water available 24/7." },
-                            { icon: <Thermometer size={32} />, title: "Hot Water", desc: "Constant supply of hot water during winter months." },
-                            { icon: <School size={32} />, title: "Digital Library", desc: "24/7 access to educational resources and quiet study space." },
-                            { icon: <Lightbulb size={32} />, title: "Yoga & Meditation", desc: "Daily morning sessions for physical and mental well-being." },
-                            { icon: <Trophy size={32} />, title: "Sports Facilities", desc: "International standard stadium and sports ground." },
-                            { image: "/uploads/mess/1874c392-da1c-4681-8c07-8e31281c3c8c.jpg", title: "Health Care 24x7", desc: "On-campus medical assistance and annual checkups." },
-                            { icon: <Wind size={32} />, title: "AC / Air Cooled", desc: "Well-ventilated rooms with central cooling options." },
-                            { icon: <Shirt size={32} />, title: "Laundry Services", desc: "Professional and hassle-free laundry services for all students." },
-                            { image: "/uploads/mess/f27fa7c2-c977-4c9e-b60d-02a968600294.jpg", title: "Canteen Facility", desc: "Safe and hygienic canteen for snacks and refreshments." },
-                            { image: "/uploads/mess/048edf25-9d80-4fcf-a5ac-72030b98abfc.jpg", title: "Tuck Shop", desc: "On-campus tuck shop for all daily essentials and stationery." }
+                            { image: "/uploads/mess/security.jpg", title: "Safety & CCTV", desc: "Round-the-clock security with full CCTV coverage." },
+                            { image: "/uploads/mess/Mess.jpg", title: "Pure Jain Food", desc: "Nutritious Satvik meals with 5 servings per day." },
+                            { image: "/uploads/mess/RO.jpg", title: "RO Drinking Water", desc: "Pure and safe RO purified drinking water available 24/7." },
+                            { image: "/uploads/mess/HOT.jpg", title: "Hot Water", desc: "Constant supply of hot water during winter months." },
+                            { image: "/images/RS-CIT IT Computer Center.png", title: "Digital Library", desc: "24/7 access to educational resources and quiet study space." },
+                            { image: "/uploads/mess/yoga.jpeg", title: "Yoga & Meditation", desc: "Daily morning sessions for physical and mental well-being." },
+                            { image: "/uploads/mess/sport.jpg", title: "Sports Facilities", desc: "International standard stadium and sports ground." },
+                            { image: "/uploads/mess/Health.jpg", title: "Health Care 24x7", desc: "On-campus medical assistance and annual checkups." },
+                            { image: "/uploads/mess/AC.jpg", title: "AC / Air Cooled", desc: "Well-ventilated rooms with central cooling options." },
+                            { image: "/uploads/mess/laundry.jpg", title: "Laundry Services", desc: "Professional and hassle-free laundry services for all students." },
+                            { image: "/uploads/mess/kitchen2.jpg", title: "Canteen Facility", desc: "Safe and hygienic canteen for snacks and refreshments." },
+                            { image: "/uploads/mess/tuck.jpg", title: "Tuck Shop", desc: "On-campus tuck shop for all daily essentials and stationery." }
                         ].map((item: any, i) => (
                             <motion.div
                                 key={i}
@@ -267,19 +266,31 @@ export default function Page() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.1 }}
-                                className="bg-white p-10 rounded-[2.5rem] shadow-sm border border-black/5 hover:shadow-xl hover:shadow-sandstone/10 transition-all group"
+                                className="group relative flex flex-col bg-slate-50 rounded-[2rem] overflow-hidden border border-black/5 hover:shadow-2xl transition-all duration-500"
                             >
-                                <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-sandstone mb-8 group-hover:bg-sandstone group-hover:text-white transition-colors overflow-hidden">
+                                <div className="relative aspect-[4/3] overflow-hidden bg-slate-100 flex items-center justify-center">
                                     {item.image ? (
-                                        <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                                        <img
+                                            src={item.image}
+                                            alt={item.title}
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        />
                                     ) : (
-                                        item.icon
+                                        <div className="text-sandstone group-hover:scale-110 transition-transform duration-700">
+                                            {React.cloneElement(item.icon, { size: 64 })}
+                                        </div>
                                     )}
+                                    <div className="absolute inset-0 bg-black/5 group-hover:bg-black/20 transition-colors" />
                                 </div>
-                                <h3 className="text-xl font-bold text-oxford mb-4">{item.title}</h3>
-                                <p className="text-sm text-gray-500 leading-relaxed font-light">
-                                    {item.desc}
-                                </p>
+
+                                <div className="p-8 flex flex-col flex-1">
+                                    <h3 className="text-2xl font-serif text-oxford mb-3 group-hover:text-sandstone transition-colors">
+                                        {item.title}
+                                    </h3>
+                                    <p className="text-gray-500 font-light text-sm leading-relaxed">
+                                        {item.desc}
+                                    </p>
+                                </div>
                             </motion.div>
                         ))}
                     </div>
@@ -342,7 +353,7 @@ export default function Page() {
                                 </div>
                                 <div className="p-8 bg-sandstone/5 rounded-3xl border border-sandstone/10">
                                     <h4 className="font-black uppercase tracking-widest text-xs text-sandstone mb-4">What to bring</h4>
-                                    <p className="text-sm text-gray-500 leading-relaxed italic">
+                                    <p className="text-sm text-gray-500 leading-relaxed">
                                         Students must bring: 2 Bedsheets, Pillow Cover, Quilt/Blanket, Towel, Napkins, Bucket & Mug, Toiletries, Personal Medicines.
                                     </p>
                                 </div>

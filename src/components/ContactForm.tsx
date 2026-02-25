@@ -84,7 +84,7 @@ export default function ContactForm() {
                                         marudharmahila@gmail.com
                                     </p>
                                 </div>
-                                <p className="text-sm italic text-white/60">
+                                <p className="text-sm text-white/60">
                                     We come under Khimel village panchayat, located in Pali district. The campus is on Rani-Falna route, 3 kms away from Rani and 11 kms from Falna station.
                                 </p>
                             </div>

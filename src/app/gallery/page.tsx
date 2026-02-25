@@ -19,15 +19,15 @@ export default function GalleryPage() {
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-5xl md:text-7xl font-serif mb-6"
+                        className="text-5xl md:text-8xl font-serif mb-6"
                     >
-                        Our Gallery
+                        Our <span className="text-sandstone">Gallery</span>
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="text-xl text-white/70 max-w-2xl font-light"
+                        className="text-lg md:text-2xl text-white/70 max-w-2xl font-light"
                     >
                         Witness the journey of excellence, creativity, and joy through our curated collection of moments.
                     </motion.p>

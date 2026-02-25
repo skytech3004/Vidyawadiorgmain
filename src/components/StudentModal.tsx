@@ -117,7 +117,7 @@ export default function StudentModal({ isOpen, onClose, student }: StudentModalP
                     {/* Description if any */}
                     {student.description && (
                         <div className="pt-4 border-t border-gray-100">
-                            <p className="text-gray-600 italic">"{student.description}"</p>
+                            <p className="text-gray-600">"{student.description}"</p>
                         </div>
                     )}
                 </div>
