@@ -248,7 +248,7 @@ export default function Page() {
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {[
-                            { icon: <ShieldCheck size={32} />, title: "Safety & CCTV", desc: "Round-the-clock security with full CCTV coverage." },
+                            { image: "/brain/6b900df7-aa65-4ec6-bd8e-f46f553fd5fa/safety_cctv_premium_png_1772008998501.png", title: "Safety & CCTV", desc: "Round-the-clock security with full CCTV coverage." },
                             { image: "/uploads/mess/0a3b3c6a-ba90-4f95-9178-07da39ea9062.jpg", title: "Pure Jain Food", desc: "Nutritious Satvik meals with 5 servings per day." },
                             { icon: <Droplets size={32} />, title: "RO Drinking Water", desc: "Pure and safe RO purified drinking water available 24/7." },
                             { icon: <Thermometer size={32} />, title: "Hot Water", desc: "Constant supply of hot water during winter months." },

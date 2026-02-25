@@ -7,9 +7,10 @@ import ImageUploadField from "./ImageUploadField";
 
 interface StaffFormProps {
     initialData?: any;
+    isEditing?: boolean;
 }
 
-export default function StaffForm({ initialData }: StaffFormProps) {
+export default function StaffForm({ initialData, isEditing }: StaffFormProps) {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState(initialData || {
