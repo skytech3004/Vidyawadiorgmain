@@ -75,25 +75,17 @@ export default function LPSContent() {
     const [visibleToppers, setVisibleToppers] = useState(10);
     const [visibleStaff, setVisibleStaff] = useState(12);
     const [selectedCategory, setSelectedCategory] = useState("XII");
-    const [allResults, setAllResults] = useState<any[]>([]);
-    const [loadingResults, setLoadingResults] = useState(true);
 
-    useEffect(() => {
-        const fetchResults = async () => {
-            try {
-                const res = await fetch("/api/results?institution=lps");
-                const data = await res.json();
-                if (data.success) {
-                    setAllResults(data.results);
-                }
-            } catch (err) {
-                console.error("Failed to fetch LPS results:", err);
-            } finally {
-                setLoadingResults(false);
-            }
-        };
-        fetchResults();
-    }, []);
+    // --- Mock Results Data ---
+    const allResults = [
+        { name: "Antra Prajapat", class: "X", percentage: "93.33", image: null, resultType: "Board" },
+        { name: "Poonam Kanwar", class: "X", percentage: "92.17", image: null, resultType: "Board" },
+        { name: "Kirtika Kanwar", class: "XII", percentage: "95.80", stream: "Science", image: null, resultType: "Board" },
+        { name: "Sanjana", class: "XII", percentage: "95.00", stream: "Science", image: null, resultType: "Board" },
+        { name: "Mahima Surana", class: "XII", percentage: "96.00", stream: "Arts", image: null, resultType: "Board" },
+        { name: "Himanshi Kanwar", class: "XII", percentage: "95.40", stream: "Arts", image: null, resultType: "Board" },
+        { name: "Gudiya Kumari", class: "XII", percentage: "90.60", stream: "Commerce", image: null, resultType: "Board" }
+    ];
 
     // Filtered results based on category
     const getFilteredResults = () => {

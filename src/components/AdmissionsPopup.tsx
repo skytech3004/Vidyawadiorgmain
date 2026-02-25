@@ -2,26 +2,34 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, GraduationCap, ArrowRight, Sparkles } from "lucide-react";
+import { X, GraduationCap, ArrowRight, Sparkles, ChevronDown } from "lucide-react";
 
 export default function AdmissionsPopup() {
     const [isOpen, setIsOpen] = useState(false);
+    const [selectedType, setSelectedType] = useState("School");
 
     useEffect(() => {
         // Show popup after a small delay
         const timer = setTimeout(() => {
-            const hasSeenPopup = sessionStorage.getItem("hasSeenAdmissionsPopup");
-            if (!hasSeenPopup) {
-                setIsOpen(true);
-            }
-        }, 1500);
+            setIsOpen(true);
+        }, 1000);
 
         return () => clearTimeout(timer);
     }, []);
 
     const handleClose = () => {
         setIsOpen(false);
-        sessionStorage.setItem("hasSeenAdmissionsPopup", "true");
+    };
+
+    const handleApply = () => {
+        handleClose();
+        if (selectedType === "College") {
+            window.open("https://vidyawadicollege.org/admissions/apply", "_blank");
+        } else if (selectedType === "Hostel") {
+            window.location.href = "/hostel";
+        } else {
+            window.location.href = "/contact";
+        }
     };
 
     return (
@@ -58,14 +66,14 @@ export default function AdmissionsPopup() {
                                     initial={{ y: 10, opacity: 0 }}
                                     animate={{ y: 0, opacity: 1 }}
                                     transition={{ delay: 0.2 }}
-                                    className="inline-flex items-center gap-2 bg-sandstone/20 text-sandstone px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-3 backdrop-blur-md border border-sandstone/30"
+                                    className="inline-flex items-center gap-2 bg-sandstone/20 text-sandstone px-4 py-1.5 rounded-full text-xl font-bold uppercase tracking-widest mb-3 backdrop-blur-md border border-sandstone/30"
                                 >
                                     <Sparkles size={14} />
                                     Admissions Now Open
                                 </motion.div>
                                 <h2 className="text-3xl font-black text-white uppercase tracking-tight leading-none">
                                     Academic Year <br />
-                                    <span className="text-sandstone">2025 - 2026</span>
+                                    <span className="text-sandstone">2026 - 2027</span>
                                 </h2>
                             </div>
 
@@ -91,26 +99,34 @@ export default function AdmissionsPopup() {
                                 </p>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4 text-xs font-bold uppercase tracking-wider text-oxford/70">
-                                <div className="px-4 py-3 bg-gray-50 rounded-2xl border border-gray-100 flex items-center justify-center gap-2">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-sandstone" />
-                                    Std. I to XII
-                                </div>
-                                <div className="px-4 py-3 bg-gray-50 rounded-2xl border border-gray-100 flex items-center justify-center gap-2">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-sandstone" />
-                                    Boarding Facility
+                            <div className="relative group/select">
+                                <label className="block text-xs font-bold uppercase tracking-widest text-oxford/40 text-left mb-2 ml-4">
+                                    I am interested in
+                                </label>
+                                <div className="relative">
+                                    <select
+                                        value={selectedType}
+                                        onChange={(e) => setSelectedType(e.target.value)}
+                                        className="w-full bg-gray-50 border-2 border-gray-100 text-oxford font-bold py-4 px-6 rounded-2xl appearance-none cursor-pointer focus:outline-none focus:border-sandstone transition-colors"
+                                    >
+                                        <option value="School">School Admission</option>
+                                        <option value="College">College Admission</option>
+                                        <option value="Hostel">Hostel / Boarding</option>
+                                    </select>
+                                    <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-oxford/40 group-focus-within/select:text-sandstone transition-colors">
+                                        <ChevronDown size={20} />
+                                    </div>
                                 </div>
                             </div>
 
                             <div className="pt-4 flex flex-col sm:flex-row gap-4">
-                                <a
-                                    href="/contact"
-                                    onClick={handleClose}
+                                <button
+                                    onClick={handleApply}
                                     className="flex-1 bg-oxford text-white py-4 rounded-2xl font-black uppercase tracking-widest shadow-xl shadow-oxford/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-2 group"
                                 >
                                     Apply Now
                                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                                </a>
+                                </button>
                                 <button
                                     onClick={handleClose}
                                     className="flex-1 bg-white border-2 border-oxford/10 text-oxford/60 py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-gray-50 transition-all active:scale-95"
@@ -120,7 +136,7 @@ export default function AdmissionsPopup() {
                             </div>
 
                             <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">
-                                Limited Seats Available • Call +91 94140 XXXXX
+                                Limited Seats Available • Call +91 6377204218
                             </p>
                         </div>
                     </motion.div>

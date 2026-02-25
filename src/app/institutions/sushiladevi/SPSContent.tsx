@@ -72,25 +72,17 @@ export default function SPSContent() {
     const [visibleToppers, setVisibleToppers] = useState(10);
     const [visibleStaff, setVisibleStaff] = useState(12);
     const [selectedCategory, setSelectedCategory] = useState("XII");
-    const [allResults, setAllResults] = useState<any[]>([]);
-    const [loadingResults, setLoadingResults] = useState(true);
 
-    useEffect(() => {
-        const fetchResults = async () => {
-            try {
-                const res = await fetch("/api/results?institution=sushiladevi");
-                const data = await res.json();
-                if (data.success) {
-                    setAllResults(data.results);
-                }
-            } catch (err) {
-                console.error("Failed to fetch SPS results:", err);
-            } finally {
-                setLoadingResults(false);
-            }
-        };
-        fetchResults();
-    }, []);
+    // --- Mock Results Data ---
+    const allResults = [
+        { name: "Anjali Prajapat", class: "X", percentage: "93.33", image: null, resultType: "Board" },
+        { name: "Poonam Kanwar", class: "X", percentage: "92.17", image: null, resultType: "Board" },
+        { name: "Kirtika Kanwar", class: "XII", percentage: "95.80", stream: "Science", image: null, resultType: "Board" },
+        { name: "Sanjana", class: "XII", percentage: "95.00", stream: "Science", image: null, resultType: "Board" },
+        { name: "Mahima Surana", class: "XII", percentage: "96.00", stream: "Arts", image: null, resultType: "Board" },
+        { name: "Himanshi Kanwar", class: "XII", percentage: "95.40", stream: "Arts", image: null, resultType: "Board" },
+        { name: "Gudiya Kumari", class: "XII", percentage: "90.60", stream: "Commerce", image: null, resultType: "Board" }
+    ];
 
     // Filtered results based on category
     const getFilteredResults = () => {
@@ -316,6 +308,51 @@ export default function SPSContent() {
                             ))}
                         </div>
                     </div> */}
+                </div>
+            </section>
+
+            {/* Student Life Gallery Section */}
+            <section className="py-20 px-6 bg-white overflow-hidden">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Student Life</span>
+                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2 uppercase">Our Vibrant Campus</h2>
+                        <div className="w-24 h-1.5 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
+                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+                            Glimpses of daily life, activities, and the joy of learning at SPS.
+                        </p>
+                    </div>
+
+                    <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
+                        {[
+                            "/images/childern/003a7719-8bae-4407-9429-1585f4ac5dc9.jpg",
+                            "/images/childern/8a899886-71df-4f7a-8ca1-4b3c8c83407f.jpg",
+                            "/images/childern/93b4f897-0aca-4189-a717-16c13f8372d5.jpg",
+                            "/images/childern/9e95aa2a-d491-4f6a-ab87-97894a9529f0.jpg",
+                            "/images/childern/e128b918-b695-43f8-a7d7-fed49ae70294.jpg",
+                            "/images/childern/1290780e-b8e3-4a73-86c2-035a68ef944c.jpg",
+                            "/images/childern/1c926537-394f-4233-be78-ed6a3c980eb7.jpg",
+                            "/images/childern/3c98151a-177a-411c-a689-96fb2a6bc7fb.jpg",
+                            "/images/childern/85c9f954-079d-4803-b3b4-7acf4b451544.jpg",
+                            "/images/childern/c5f0ebd8-5b00-4a0f-8a1c-f53e1ff65aee.jpg",
+                            "/images/childern/f865022a-1f6c-409f-9866-8b073b608d3f.jpg"
+                        ].map((src, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.05 }}
+                                className="break-inside-avoid rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group"
+                            >
+                                <img
+                                    src={src}
+                                    alt={`Gallery detail ${i}`}
+                                    className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
+                                />
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
             </section>
 

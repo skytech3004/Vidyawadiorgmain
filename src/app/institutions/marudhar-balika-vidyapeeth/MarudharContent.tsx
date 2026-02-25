@@ -603,7 +603,7 @@ export default function MarudharContent() {
                                             {[
                                                 { name: "Kanchan Kanwar", cls: "IX A", sport: "Volleyball", img: "/images/kanchan_kawar.png" },
                                                 { name: "Umrao Kanwar", cls: "X B", sport: "Volleyball", img: "/images/kamraw_kawar.png" },
-                                                { name: "Durkisha Solanki", cls: "XII B", sport: "Rifle Shooting", img: "/images/duvisha_solanki.png" },
+                                                { name: "Durvisha Solanki", cls: "XII B", sport: "Rifle Shooting", img: "/images/duvisha_solanki.png" },
                                                 { name: "Hemu Kanwar", cls: "XI B", sport: "Wrestling", img: "/images/hemu_kawar.png" }
                                             ].map((row, i) => (
                                                 <tr
