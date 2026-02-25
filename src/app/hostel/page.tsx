@@ -137,7 +137,7 @@ export default function Page() {
                             Hostel <span className="text-sandstone">Life</span>
                         </h1> */}
                         <p className="text-lg md:text-2xl font-light mb-12 max-w-2xl mx-auto text-white/90">
-                            A home away from home where traditional values meet modern excellence.
+                            Students can experience a home away from home where traditional values meet modern excellence.
                         </p>
                         <div className="flex flex-wrap justify-center gap-6">
                             <motion.button
@@ -229,7 +229,7 @@ export default function Page() {
                                     <ShieldCheck size={24} />
                                 </div>
                                 <div>
-                                    <h4 className="font-bold text-oxford mb-1">Professional Caretaking</h4>
+                                    <h4 className="font-bold text-oxford mb-1 font-serif">Professional Caretaking</h4>
                                     <p className="text-sm text-gray-500 leading-relaxed">
                                         Each hostel is managed by 2 dedicated wardens, 2 maids, and a dedicated sweeper to ensure constant support and hygiene.
                                     </p>
@@ -268,7 +268,7 @@ export default function Page() {
                                 transition={{ delay: i * 0.1 }}
                                 className="group relative flex flex-col bg-slate-50 rounded-[2rem] overflow-hidden border border-black/5 hover:shadow-2xl transition-all duration-500"
                             >
-                                <div className="relative aspect-[4/3] overflow-hidden bg-slate-100 flex items-center justify-center">
+                                <div className="relative aspect-[4/3] overflow-hidden">
                                     {item.image ? (
                                         <img
                                             src={item.image}
@@ -276,11 +276,11 @@ export default function Page() {
                                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                         />
                                     ) : (
-                                        <div className="text-sandstone group-hover:scale-110 transition-transform duration-700">
+                                        <div className="w-full h-full bg-slate-100 flex items-center justify-center text-sandstone group-hover:scale-110 transition-transform duration-700">
                                             {React.cloneElement(item.icon, { size: 64 })}
                                         </div>
                                     )}
-                                    <div className="absolute inset-0 bg-black/5 group-hover:bg-black/20 transition-colors" />
+                                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
                                 </div>
 
                                 <div className="p-8 flex flex-col flex-1">
@@ -386,7 +386,7 @@ export default function Page() {
                                     { class: "B.Ed 1st & 2nd Year", nonAc: "₹80,500", ac: "₹1,10,500" }
                                 ].map((row, i) => (
                                     <tr key={i} className="hover:bg-slate-50 transition-colors">
-                                        <td className="p-10 font-bold text-oxford">{row.class}</td>
+                                        <td className="p-10 font-bold text-oxford font-serif">{row.class}</td>
                                         <td className="p-10 text-gray-500 font-medium">{row.nonAc} / Year</td>
                                         <td className="p-10">
                                             {row.ac !== "-" ? (
@@ -407,7 +407,7 @@ export default function Page() {
                                 <CreditCard size={24} />
                             </div>
                             <div>
-                                <h4 className="font-bold text-oxford mb-2">Short Duration Stay</h4>
+                                <h4 className="font-bold text-oxford mb-2 font-serif">Short Duration Stay</h4>
                                 <p className="text-sm text-gray-500">Non AC: ₹10,000 / Month • AC: ₹12,000 / Month</p>
                             </div>
                         </div>
@@ -416,7 +416,7 @@ export default function Page() {
                                 <Banknote size={24} />
                             </div>
                             <div>
-                                <h4 className="font-bold text-oxford mb-2">Cancellation Policy</h4>
+                                <h4 className="font-bold text-oxford mb-2 font-serif">Cancellation Policy</h4>
                                 <p className="text-sm text-gray-500">₹10,000 deduction if cancelled after deposit. Deadline: Aug 15 (School), Oct 30 (College).</p>
                             </div>
                         </div>
@@ -440,7 +440,7 @@ export default function Page() {
                                         <div className={`p-3 rounded-xl transition-colors ${activeAccordion === rule.id ? "bg-sandstone text-white" : "bg-slate-50 text-sandstone group-hover:bg-sandstone/10"}`}>
                                             {rule.icon}
                                         </div>
-                                        <span className="text-xl font-bold text-oxford">{rule.title}</span>
+                                        <span className="text-xl font-bold text-oxford font-serif">{rule.title}</span>
                                     </div>
                                     <div className={`transition-transform duration-300 ${activeAccordion === rule.id ? "rotate-45" : ""}`}>
                                         <Plus size={24} className="text-sandstone" />
@@ -488,7 +488,7 @@ export default function Page() {
                                             <Trophy size={20} />
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-white mb-1">{item.title}</h4>
+                                            <h4 className="font-bold text-white mb-1 font-serif">{item.title}</h4>
                                             <p className="text-sm text-white/50 leading-relaxed">{item.desc}</p>
                                         </div>
                                     </div>

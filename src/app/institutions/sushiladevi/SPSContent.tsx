@@ -116,6 +116,21 @@ export default function SPSContent() {
         setTimeout(() => setSelectedStudent(null), 300);
     };
 
+    const classToppers = [
+        { name: "Ms. Shivgami Chouhan", rank: "I" },
+        { name: "Ms. Priyadarshni", rank: "II" },
+        { name: "Ms. Kinjal Dewasi", rank: "III" },
+        { name: "Ms. Poorvi Pareek", rank: "IV" },
+        { name: "Ms. Chetnya Rathore", rank: "V" },
+        { name: "Ms. Abhigya", rank: "VI" },
+        { name: "Ms. Dimpy Malviya", rank: "VII" },
+        { name: "Ms. Tamanna", rank: "VIII" },
+        { name: "Ms. Preksha", rank: "IX" },
+        { name: "Ms. Tanisha Jain", rank: "XI Sci" },
+        { name: "Ms. Mehak Jain", rank: "XI Com" },
+        { name: "Ms. Jaishree", rank: "XI Hum" },
+    ];
+
     const categories = [
         { id: "XII", name: "Class XII", icon: Trophy, count: allResults.filter(r => r.class === "XII").length, desc: "Aissce Board Result" },
         { id: "X", name: "Class X", icon: Medal, count: allResults.filter(r => r.class === "X").length, desc: "Aisse Board Result" },
@@ -335,7 +350,24 @@ export default function SPSContent() {
                             "/images/childern/3c98151a-177a-411c-a689-96fb2a6bc7fb.jpg",
                             "/images/childern/85c9f954-079d-4803-b3b4-7acf4b451544.jpg",
                             "/images/childern/c5f0ebd8-5b00-4a0f-8a1c-f53e1ff65aee.jpg",
-                            "/images/childern/f865022a-1f6c-409f-9866-8b073b608d3f.jpg"
+                            "/images/childern/f865022a-1f6c-409f-9866-8b073b608d3f.jpg",
+                            "/images/childern/01c2c50c-98b7-46bd-b44f-af8f897e0c7e.jpg",
+                            "/images/childern/1c96c2da-8eb7-4af9-a61e-09b1cec14802.jpg",
+                            "/images/childern/2da6f752-6901-4999-9fab-b80e216618c1.jpg",
+                            "/images/childern/488b49a5-f698-41f2-a478-9a3666798d84.jpg",
+                            "/images/childern/4f25b7f8-9ac3-4c38-b04a-9acbd28f7d29.jpg",
+                            "/images/childern/550b7d5a-c8d4-4500-aa1f-fd2ab566ee25.jpg",
+                            "/images/childern/93947ad7-766e-4633-acc4-2f9ec377f41d.jpg",
+                            "/images/childern/940bf23d-9913-4b47-b0be-1793145cc0b1.jpg",
+                            "/images/childern/WhatsApp Image 2026-02-25 at 18.27.53.jpeg",
+                            "/images/childern/WhatsApp Image 2026-02-25 at 18.34.15 (1).jpeg",
+                            "/images/childern/WhatsApp Image 2026-02-25 at 18.34.15.jpeg",
+                            "/images/childern/WhatsApp Image 2026-02-25 at 18.34.16 (1).jpeg",
+                            "/images/childern/WhatsApp Image 2026-02-25 at 18.34.16 (2).jpeg",
+                            "/images/childern/WhatsApp Image 2026-02-25 at 18.34.16 (3).jpeg",
+                            "/images/childern/WhatsApp Image 2026-02-25 at 18.34.16.jpeg",
+                            "/images/childern/a723594c-f4ac-4b1b-a847-d7a461e8a1cc.jpg",
+                            "/images/childern/b53ef50d-d9a5-4dd8-bb30-1c894b06611a.jpg"
                         ].map((src, i) => (
                             <motion.div
                                 key={i}
@@ -356,134 +388,45 @@ export default function SPSContent() {
                 </div>
             </section>
 
-            {/* Meritorious Students Section */}
-            <section className="py-20 px-6 bg-white">
-                <div className="max-w-7xl mx-auto">
+            {/* Class Toppers (Non-Board) Section */}
+            <section className="py-24 px-6 bg-oxford relative overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-sandstone/10 via-transparent to-transparent opacity-50" />
+
+                <div className="max-w-7xl mx-auto relative z-10">
                     <div className="text-center mb-16">
-                        <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Meritorious Students</span>
-                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2 font-serif">Result Highlights</h2>
-                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-                            Celebrating the academic excellence and dedication of our top performers.
-                        </p>
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            className="flex items-center justify-center gap-3 mb-4"
+                        >
+                            <Star className="text-sandstone fill-sandstone" size={28} />
+                            <h2 className="text-3xl md:text-5xl font-black text-white font-serif uppercase tracking-tight">
+                                Class Toppers <span className="text-sandstone">(Non-Board)</span>
+                            </h2>
+                        </motion.div>
+                        <div className="w-24 h-1 bg-sandstone mx-auto rounded-full" />
                     </div>
 
-                    {/* Category Cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                        {categories.map((cat) => (
-                            <motion.button
-                                key={cat.id}
-                                whileHover={{ y: -5 }}
-                                whileTap={{ scale: 0.98 }}
-                                onClick={() => {
-                                    setSelectedCategory(cat.id);
-                                    setVisibleToppers(10);
-                                }}
-                                className={`relative p-8 rounded-3xl text-left transition-all overflow-hidden border ${selectedCategory === cat.id
-                                    ? "bg-oxford text-white border-oxford shadow-2xl"
-                                    : "bg-gray-50 text-oxford border-gray-100 hover:bg-white hover:shadow-xl"
-                                    }`}
+                    <div className="flex flex-wrap justify-center gap-6 max-w-6xl mx-auto">
+                        {classToppers.map((topper, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.05 }}
+                                whileHover={{ scale: 1.05 }}
+                                className="flex items-center gap-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-6 py-3 hover:bg-white/10 transition-all cursor-default shadow-lg"
                             >
-                                {selectedCategory === cat.id && (
-                                    <motion.div
-                                        layoutId="activeGlow"
-                                        className="absolute top-0 right-0 w-32 h-32 bg-sandstone/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"
-                                    />
-                                )}
-                                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${selectedCategory === cat.id ? "bg-sandstone text-oxford" : "bg-oxford/5 text-sandstone"
-                                    }`}>
-                                    <cat.icon size={28} />
+                                <span className="text-white font-bold whitespace-nowrap">{topper.name}</span>
+                                <div className="bg-sandstone px-2 py-0.5 rounded-md min-w-[32px] text-center">
+                                    <span className="text-oxford font-black text-[10px] uppercase tracking-tighter">
+                                        {topper.rank}
+                                    </span>
                                 </div>
-                                <h3 className="text-2xl font-black mb-1 font-serif">{cat.name}</h3>
-                                <p className={`text-sm uppercase tracking-widest font-bold mb-4 ${selectedCategory === cat.id ? "text-sandstone" : "text-gray-500"
-                                    }`}>{cat.desc}</p>
-                                <div className="flex items-center gap-2 mt-auto">
-                                    <span className={`text-4xl font-black ${selectedCategory === cat.id ? "text-white" : "text-oxford"
-                                        }`}>{cat.count}</span>
-                                    <span className={`text-xs uppercase tracking-tighter font-bold ${selectedCategory === cat.id ? "text-white/60" : "text-gray-400"
-                                        }`}>Students</span>
-                                </div>
-                            </motion.button>
+                            </motion.div>
                         ))}
-                    </div>
-
-                    <div className="space-y-8">
-                        {/* Results Table */}
-                        {allResults.length > 0 ? (
-                            <div className="overflow-x-auto rounded-[2rem] border border-oxford/10 shadow-xl bg-white overflow-hidden">
-                                <table className="w-full text-left border-collapse">
-                                    <thead>
-                                        <tr className="bg-oxford text-white">
-                                            <th className="p-6 font-bold uppercase tracking-wider text-[10px]">S.No.</th>
-                                            <th className="p-6 font-bold uppercase tracking-wider text-[10px]">Student Name</th>
-                                            <th className="p-6 font-bold uppercase tracking-wider text-[10px]">
-                                                Class
-                                            </th>
-                                            <th className="p-6 font-bold uppercase tracking-wider text-[10px] text-right">
-                                                Result
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="divide-y divide-gray-100">
-                                        {displayResults.slice(0, visibleToppers).map((student, i) => (
-                                            <motion.tr
-                                                initial={{ opacity: 0, x: -10 }}
-                                                animate={{ opacity: 1, x: 0 }}
-                                                transition={{ delay: i * 0.05 }}
-                                                key={i}
-                                                className="hover:bg-oxford/5 transition-colors group cursor-pointer"
-                                                onClick={() => openModal(student)}
-                                            >
-                                                <td className="p-6 text-sm text-gray-500 font-medium">{i + 1}</td>
-                                                <td className="p-6">
-                                                    <div className="flex items-center gap-4">
-                                                        <div className="w-12 h-12 rounded-full bg-gray-100 overflow-hidden border-2 border-transparent group-hover:border-sandstone transition-all shadow-sm">
-                                                            {student.image ? (
-                                                                <img src={student.image} alt={student.name} className="w-full h-full object-cover" />
-                                                            ) : (
-                                                                <div className="w-full h-full flex items-center justify-center bg-oxford/5 text-oxford/20">
-                                                                    <User size={20} />
-                                                                </div>
-                                                            )}
-                                                        </div>
-                                                        <div>
-                                                            <span className="font-bold text-oxford group-hover:text-sandstone transition-colors block leading-none mb-1">{student.name}</span>
-                                                            <span className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Vidyawadi Student</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td className="p-6">
-                                                    <span className="px-3 py-1 bg-oxford/5 text-oxford text-xs font-black rounded-lg uppercase">Class {student.class}</span>
-                                                </td>
-                                                <td className="p-6 text-right">
-                                                    <span className="inline-flex items-center justify-center px-4 py-1.5 bg-sandstone/10 text-sandstone font-black rounded-xl text-sm border border-sandstone/20">
-                                                        {student.percentage ? `${student.percentage}%` : "A+"}
-                                                    </span>
-                                                </td>
-                                            </motion.tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                        ) : (
-                            <div className="text-center py-20 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200">
-                                <Trophy size={48} className="text-gray-200 mx-auto mb-4" />
-                                <p className="text-gray-400 font-bold uppercase tracking-widest text-xs">Primary Results To Be Updated</p>
-                            </div>
-                        )}
-
-                        {visibleToppers < displayResults.length && (
-                            <div className="flex justify-center mt-8">
-                                <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    onClick={() => setVisibleToppers(prev => prev + 10)}
-                                    className="px-10 py-4 bg-oxford text-white rounded-full font-bold uppercase tracking-widest shadow-xl hover:bg-sandstone transition-all flex items-center gap-3 text-sm"
-                                >
-                                    View More Results
-                                    <ArrowRight size={18} />
-                                </motion.button>
-                            </div>
-                        )}
                     </div>
                 </div>
             </section>
