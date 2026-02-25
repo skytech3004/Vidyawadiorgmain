@@ -272,17 +272,54 @@ export default function SPSContent() {
                         {[
                             { title: "Foundational", level: "Nursery – II", icon: Star },
                             { title: "Preparatory", level: "III to V", icon: BookOpen },
-                            // { title: "Primary", level: "VI to VIII", icon: School },
-                            // { title: "Excellence", level: "Holistic", icon: Trophy },
                         ].map((stat, i) => (
-                            <div key={i} className="bg-white p-8 rounded-2xl shadow-lg  border-2  border-b-4  border-oxford text-center hover:-translate-y-2 transition-transform group">
-                                <div className="w-12 h-12 bg-oxford/5 rounded-full flex items-center   justify-center mx-auto mb-4 group-hover:bg-sandstone transition-colors">
+                            <div key={i} className="bg-white p-8 rounded-2xl shadow-lg border-2 border-b-4 border-oxford text-center hover:-translate-y-2 transition-transform group">
+                                <div className="w-12 h-12 bg-oxford/5 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-sandstone transition-colors">
                                     <stat.icon className="text-sandstone group-hover:text-white transition-colors" size={24} />
                                 </div>
                                 <h3 className="text-gray-500 font-bold uppercase text-xs tracking-wider mb-2 font-serif">{stat.title}</h3>
                                 <p className="text-2xl font-black text-oxford">{stat.level}</p>
                             </div>
                         ))}
+                    </div>
+
+                    <div className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-oxford/10 shadow-oxford/40 shadow-lg">
+                        <h3 className="text-3xl font-bold text-oxford mb-8 flex items-center gap-3 font-serif">
+                            <Sparkles className="text-sandstone" />
+                            Senior Secondary Streams (XI & XII)
+                        </h3>
+                        <div className="grid md:grid-cols-3 gap-8">
+                            {[
+                                {
+                                    title: "Science",
+                                    color: "bg-blue-500",
+                                    subjects: ["English", "Hindi", "Physics", "Chemistry", "Biology / Maths"]
+                                },
+                                {
+                                    title: "Arts",
+                                    color: "bg-purple-500",
+                                    subjects: ["English", "Hindi", "Drawing / History", "Political Science / Geography", "Hindi Literature / English Literature"]
+                                },
+                                {
+                                    title: "Commerce",
+                                    color: "bg-emerald-500",
+                                    subjects: ["English", "Hindi", "Accountancy", "Business Studies", "Economics"]
+                                }
+                            ].map((stream, i) => (
+                                <div key={i} className="relative p-6 rounded-2xl bg-gray-50 hover:shadow-md transition-shadow border-1 border-oxford">
+                                    <div className={`h-1.5 w-12 ${stream.color} rounded-full mb-4`} />
+                                    <h4 className="text-xl font-black text-oxford mb-4 uppercase tracking-tight">{stream.title}</h4>
+                                    <ul className="space-y-3">
+                                        {stream.subjects.map((sub, j) => (
+                                            <li key={j} className="flex items-start gap-2 text-gray-600 text-sm">
+                                                <div className={`w-1.5 h-1.5 rounded-full ${stream.color} shrink-0 mt-1.5`} />
+                                                <span>{sub}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
                     </div>
 
                     {/* <div className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-oxford/10">
@@ -421,7 +458,7 @@ export default function SPSContent() {
                             >
                                 <span className="text-white font-bold whitespace-nowrap">{topper.name}</span>
                                 <div className="bg-sandstone px-2 py-0.5 rounded-md min-w-[32px] text-center">
-                                    <span className="text-oxford font-black text-[10px] uppercase tracking-tighter">
+                                    <span className="text-oxford font-black text-[15px] gap-2 uppercase tracking-tighter">
                                         {topper.rank}
                                     </span>
                                 </div>

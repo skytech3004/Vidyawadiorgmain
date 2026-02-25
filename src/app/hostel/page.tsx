@@ -255,9 +255,9 @@ export default function Page() {
                             { image: "/uploads/mess/yoga.jpeg", title: "Yoga & Meditation", desc: "Daily morning sessions for physical and mental well-being." },
                             { image: "/uploads/mess/sport.jpg", title: "Sports Facilities", desc: "International standard stadium and sports ground." },
                             { image: "/uploads/mess/Health.jpg", title: "Health Care 24x7", desc: "On-campus medical assistance and annual checkups." },
-                            { image: "/uploads/mess/AC.jpg", title: "AC / Air Cooled", desc: "Well-ventilated rooms with central cooling options." },
+                            { image: "/uploads/mess/ac.jpg", title: "AC / Air Cooled", desc: "Well-ventilated rooms with central cooling options." },
                             { image: "/uploads/mess/laundry.jpg", title: "Laundry Services", desc: "Professional and hassle-free laundry services for all students." },
-                            { image: "/uploads/mess/kitchen2.jpg", title: "Canteen Facility", desc: "Safe and hygienic canteen for snacks and refreshments." },
+                            { image: "/uploads/mess/Kitchen2.jpg", title: "Canteen Facility", desc: "Safe and hygienic canteen for snacks and refreshments." },
                             { image: "/uploads/mess/tuck.jpg", title: "Tuck Shop", desc: "On-campus tuck shop for all daily essentials and stationery." }
                         ].map((item: any, i) => (
                             <motion.div
