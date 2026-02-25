@@ -47,7 +47,7 @@ export default function About() {
                         <span className="text-sandstone font-black uppercase tracking-[0.3em] text-sm mb-4 block">
                             Our Journey
                         </span>
-                        <h5 className="text-2xl md:text-3xl font-black leading-tight mb-8 uppercase">
+                        <h5 className="text-2xl md:text-3xl font-black leading-tight mb-8 uppercase font-serif">
                             <span className="text-sandstone">Vidyawadi</span> <br />
                             <span className="text-oxford">Best Residential Girls’ Education Campus in  <span className="text-sandstone bg-oxford rounded p-1 px-2">rajasthan</span> (India)</span>
                         </h5>
@@ -102,7 +102,7 @@ export default function About() {
                                 <span className="inline-flex items-center justify-center w-12 h-12 bg-sandstone rounded-full mb-6">
                                     <Target className="text-oxford" size={24} />
                                 </span>
-                                <h3 className="text-3xl font-black mb-6 tracking-wide">VISION</h3>
+                                <h3 className="text-3xl font-black mb-6 tracking-wide font-serif">VISION</h3>
                                 <p className="text-white/80 leading-relaxed text-lg">
                                     "To provide affordable, high-quality education that empowers students with knowledge, skills, and strong values. We aim to nurture hidden talents, encourage innovation, and create future leaders, entrepreneurs, and responsible citizens."
                                 </p>
@@ -121,7 +121,7 @@ export default function About() {
                                 <span className="inline-flex items-center justify-center w-12 h-12 bg-oxford rounded-full mb-6">
                                     <Shield className="text-white" size={24} />
                                 </span>
-                                <h3 className="text-3xl font-black mb-6 tracking-wide">MISSION</h3>
+                                <h3 className="text-3xl font-black mb-6 tracking-wide font-serif">MISSION</h3>
                                 <p className="text-oxford/80 leading-relaxed text-lg">
                                     "Our mission is to deliver excellence in education through value-based and holistic learning. We focus on developing creativity, critical thinking, and entrepreneurial skills while promoting gender equality, social responsibility, and environmental awareness."
                                 </p>
