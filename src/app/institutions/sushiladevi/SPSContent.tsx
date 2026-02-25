@@ -3,10 +3,9 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
-    BookOpen, Trophy, School, Users, Star, Microscope,
+    BookOpen, Trophy, Star, Microscope,
     Medal, Phone, MapPin, Mail, CheckCircle2,
-    Music, Calendar, User, FileText, Sparkles, ShieldCheck,
-    Globe, ArrowRight
+    User, Sparkles, ShieldCheck, ArrowRight
 } from "lucide-react";
 import Image from "next/image";
 import StudentModal from "@/components/StudentModal";
