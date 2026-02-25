@@ -52,7 +52,7 @@ const SectionHeader = ({ title, subtitle, light = false }: any) => (
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className={`block text-xs font-black uppercase tracking-[0.3em] mb-4 ${light ? "text-sandstone/80" : "text-sandstone"}`}
+            className={`block text-sm font-bold uppercase tracking-[0.4em] mb-4 ${light ? "text-sandstone-light" : "text-sandstone-dark"}`}
         >
             {subtitle}
         </motion.span>
@@ -60,7 +60,7 @@ const SectionHeader = ({ title, subtitle, light = false }: any) => (
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className={`text-4xl md:text-6xl font-serif ${light ? "text-white" : "text-oxford"}`}
+            className={`text-4xl md:text-6xl font-bold leading-tight font-serif ${light ? "text-white" : "text-oxford"}`}
         >
             {title}
         </motion.h2>
@@ -68,7 +68,7 @@ const SectionHeader = ({ title, subtitle, light = false }: any) => (
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
-            className="w-20 h-1 bg-sandstone mx-auto mt-8 rounded-full"
+            className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full"
         />
     </div>
 );
@@ -105,7 +105,7 @@ export default function Page() {
     ];
 
     return (
-        <main className="min-h-screen bg-white">
+        <main className="min-h-screen bg-white font-devanagari">
             <Navbar />
 
             {/* 1. Hero Section */}

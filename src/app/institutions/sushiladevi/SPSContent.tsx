@@ -5,7 +5,9 @@ import { motion } from "framer-motion";
 import {
     BookOpen, Trophy, Star, Microscope,
     Medal, Phone, MapPin, Mail, CheckCircle2,
-    User, Sparkles, ShieldCheck, ArrowRight
+    User, Sparkles, ShieldCheck, ArrowRight,
+    Users, Leaf, FlaskConical, HeartHandshake,
+    Globe, Music, Palette, GraduationCap
 } from "lucide-react";
 import Image from "next/image";
 import StudentModal from "@/components/StudentModal";
@@ -138,7 +140,7 @@ export default function SPSContent() {
     ];
 
     return (
-        <main className="min-h-screen bg-white">
+        <main className="min-h-screen bg-white font-devanagari">
             <StudentModal isOpen={isModalOpen} onClose={closeModal} student={selectedStudent} />
 
             {/* Hero Section */}
@@ -185,10 +187,12 @@ export default function SPSContent() {
             </section>
 
             {/* About Section (Principal's Message & Vision) */}
-            <section className="py-20 px-6">
+            <section className="py-24 px-6 bg-white relative overflow-hidden">
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
                     <div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-oxford mb-6 font-serif">Principal’s Message</h2>
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Leadership</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight font-serif">Principal’s Message</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mt-6 rounded-full mb-10" />
                         <div className="prose text-gray-600 leading-relaxed space-y-4 mb-8">
                             <p className="">
                                 "Welcome to SPS, Vidyawadi, where we take pride in fostering a nurturing environment that empowers every learner to grow into a confident, compassionate, and globally-minded citizen."
@@ -224,11 +228,13 @@ export default function SPSContent() {
                     </div>
 
                     <div className="relative">
-                        <div className="bg-oxford/5 rounded-3xl p-8 border border-oxford/10">
-                            <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3 font-serif">
+                        <div className="bg-oxford/5 rounded-[2.5rem] p-10 border border-oxford/10 shadow-xl">
+                            <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-xs block mb-4 text-center">Our Ethos</span>
+                            <h3 className="text-3xl font-bold text-oxford mb-6 flex justify-center items-center gap-3 font-serif">
                                 <Star className="text-sandstone fill-sandstone" />
                                 Our Core Values
                             </h3>
+                            <div className="h-1 bg-sandstone w-16 mx-auto mb-8 rounded-full" />
                             <ul className="space-y-4">
                                 {[
                                     { title: "Discover Yourself", desc: "Explore unique talents and interests." },
@@ -258,11 +264,12 @@ export default function SPSContent() {
             </section>
 
             {/* Academics Section */}
-            <section className="py-20 px-6 bg-gray-50">
+            <section className="py-24 px-6 bg-gray-50 overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
-                        <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Academic Excellence</span>
-                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2 font-serif">Curriculum & Structure</h2>
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Academic Excellence</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight font-serif">Curriculum & Structure</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
                         <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
                             Providing a comprehensive and balanced educational framework from foundational to primary levels.
                         </p>
@@ -273,21 +280,23 @@ export default function SPSContent() {
                             { title: "Foundational", level: "Nursery – II", icon: Star },
                             { title: "Preparatory", level: "III to V", icon: BookOpen },
                         ].map((stat, i) => (
-                            <div key={i} className="bg-white p-8 rounded-2xl shadow-lg border-2 border-b-4 border-oxford text-center hover:-translate-y-2 transition-transform group">
-                                <div className="w-12 h-12 bg-oxford/5 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-sandstone transition-colors">
-                                    <stat.icon className="text-sandstone group-hover:text-white transition-colors" size={24} />
+                            <div key={i} className="bg-white p-10 rounded-[2rem] shadow-xl border border-oxford/5 text-center hover:-translate-y-2 transition-transform group">
+                                <div className="w-14 h-14 bg-oxford/5 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-sandstone transition-colors">
+                                    <stat.icon className="text-sandstone group-hover:text-white transition-colors" size={28} />
                                 </div>
-                                <h3 className="text-gray-500 font-bold uppercase text-xs tracking-wider mb-2 font-serif">{stat.title}</h3>
-                                <p className="text-2xl font-black text-oxford">{stat.level}</p>
+                                <h3 className="text-sandstone-dark font-bold uppercase text-xs tracking-[0.2em] mb-4 font-serif">{stat.title}</h3>
+                                <p className="text-3xl font-black text-oxford leading-tight">{stat.level}</p>
                             </div>
                         ))}
                     </div>
 
-                    <div className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-oxford/10 shadow-oxford/40 shadow-lg">
-                        <h3 className="text-3xl font-bold text-oxford mb-8 flex items-center gap-3 font-serif">
+                    <div className="bg-white p-10 md:p-14 rounded-[2.5rem] shadow-xl border border-oxford/5">
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-xs block mb-4 text-center">Comprehensive Curriculum</span>
+                        <h3 className="text-3xl md:text-4xl font-bold text-oxford mb-6 flex justify-center items-center gap-3 font-serif text-center">
                             <Sparkles className="text-sandstone" />
-                            Senior Secondary Streams (XI & XII)
+                            Senior Secondary Streams
                         </h3>
+                        <div className="h-1 bg-sandstone w-16 mx-auto mb-10 rounded-full" />
                         <div className="grid md:grid-cols-3 gap-8">
                             {[
                                 {
@@ -322,54 +331,51 @@ export default function SPSContent() {
                         </div>
                     </div>
 
-                    {/* <div className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-oxford/10">
-                        <h3 className="text-3xl font-bold text-oxford mb-8 flex items-center gap-3 font-serif">
-                            <Sparkles className="text-sandstone" />
-                            Academic Streams & Focus Areas
-                        </h3>
-                        <div className="grid md:grid-cols-3 gap-12">
+                    <div className="mt-16 bg-white p-10 md:p-14 rounded-[2.5rem] shadow-xl border border-oxford/5">
+                        <div className="text-center mb-12">
+                            <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-xs block mb-4">Extracurricular</span>
+                            <h3 className="text-3xl md:text-4xl font-bold text-oxford flex justify-center items-center gap-3 font-serif">
+                                <Users className="text-sandstone" />
+                                Clubs & Activities
+                            </h3>
+                            <div className="h-1 bg-sandstone w-16 mx-auto mt-6 rounded-full" />
+                            <p className="text-gray-500 mt-4 text-sm italic">Fostering all-round development through extracurricular engagement.</p>
+                        </div>
+                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
                             {[
-                                {
-                                    title: "Curriculum",
-                                    color: "bg-blue-500",
-                                    subjects: ["English Core", "Mathematics", "EVS / Science", "Social Studies", "Hindi & Sanskrit", "Value Education"]
-                                },
-                                {
-                                    title: "Co-Curricular",
-                                    color: "bg-green-500",
-                                    subjects: ["Art & Craft", "Music & Dance", "Physical Education", "Computer Literacy", "Library Skills", "Yoga"]
-                                },
-                                {
-                                    title: "Development",
-                                    color: "bg-orange-500",
-                                    subjects: ["Personality Development", "Communication Skills", "Ethical Studies", "Storytelling", "Nature Walks", "Activity Based Learning"]
-                                }
-                            ].map((stream, i) => (
-                                <div key={i} className="relative">
-                                    <div className={`h-2 w-12 ${stream.color} rounded-full mb-6`} />
-                                    <h4 className="text-2xl font-black text-oxford mb-4">{stream.title}</h4>
-                                    <ul className="space-y-3">
-                                        {stream.subjects.map((sub, j) => (
-                                            <li key={j} className="flex items-center gap-2 text-gray-600 text-sm">
-                                                <div className={`w-1.5 h-1.5 rounded-full ${stream.color} shrink-0`} />
-                                                {sub}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
+                                { name: "Literary", icon: BookOpen, color: "text-blue-500" },
+                                { name: "Eco Friendly", icon: Leaf, color: "text-green-500" },
+                                { name: "Career Guidance", icon: GraduationCap, color: "text-purple-500" },
+                                { name: "Science", icon: FlaskConical, color: "text-orange-500" },
+                                { name: "Art & Craft", icon: Palette, color: "text-pink-500" },
+                                { name: "Music", icon: Music, color: "text-indigo-500" },
+                                { name: "Social Welfare", icon: HeartHandshake, color: "text-red-500" },
+                                { name: "General Knowledge", icon: Globe, color: "text-emerald-500" }
+                            ].map((club, i) => (
+                                <motion.div
+                                    key={i}
+                                    whileHover={{ y: -5 }}
+                                    className="p-6 rounded-2xl bg-gray-50 border border-gray-100 flex flex-col items-center text-center group hover:bg-white hover:shadow-xl transition-all"
+                                >
+                                    <div className={`w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center mb-4 ${club.color} group-hover:scale-110 transition-transform`}>
+                                        <club.icon size={24} />
+                                    </div>
+                                    <span className="font-bold text-oxford text-sm uppercase tracking-tight">{club.name}</span>
+                                </motion.div>
                             ))}
                         </div>
-                    </div> */}
+                    </div>
+
                 </div>
             </section>
 
             {/* Student Life Gallery Section */}
-            <section className="py-20 px-6 bg-white overflow-hidden">
+            <section className="py-24 px-6 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
-                        <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Student Life</span>
-                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2 uppercase">Our Vibrant Campus</h2>
-                        <div className="w-24 h-1.5 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Student Life</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight font-serif">Our Vibrant Campus</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
                         <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
                             Glimpses of daily life, activities, and the joy of learning at SPS.
                         </p>
@@ -423,10 +429,10 @@ export default function SPSContent() {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Class Toppers (Non-Board) Section */}
-            <section className="py-24 px-6 bg-oxford relative overflow-hidden">
+            < section className="py-24 px-6 bg-oxford relative overflow-hidden" >
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-sandstone/10 via-transparent to-transparent opacity-50" />
 
                 <div className="max-w-7xl mx-auto relative z-10">
@@ -466,10 +472,10 @@ export default function SPSContent() {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Beyond Academics (Facilities & Activities) */}
-            <section className="py-20 px-6 bg-oxford text-white">
+            < section className="py-20 px-6 bg-oxford text-white" >
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Co-Curricular Excellence</span>
@@ -553,10 +559,10 @@ export default function SPSContent() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Staff Section */}
-            <section className="py-20 px-6 bg-gray-50">
+            < section className="py-20 px-6 bg-gray-50" >
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Our Faculty</span>
@@ -598,10 +604,10 @@ export default function SPSContent() {
                         </div>
                     )}
                 </div>
-            </section>
+            </section >
 
             {/* Rules & Uniform Section */}
-            <section className="py-20 px-6 bg-white">
+            < section className="py-20 px-6 bg-white" >
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
                     <div className="bg-oxford/5 rounded-3xl p-8 md:p-12 border border-oxford/10">
                         <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3">
@@ -642,10 +648,10 @@ export default function SPSContent() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* CTA Section */}
-            <section className="py-20 px-6 bg-sandstone">
+            < section className="py-20 px-6 bg-sandstone" >
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-4xl font-black text-oxford mb-6 uppercase tracking-tight font-serif">Enroll Her Potential</h2>
                     <p className="text-xl text-oxford/80 font-medium mb-10">
@@ -662,7 +668,7 @@ export default function SPSContent() {
                         </a>
                     </div>
                 </div>
-            </section>
-        </main>
+            </section >
+        </main >
     );
 }

@@ -24,7 +24,7 @@ export default function MarudharContent() {
     };
 
     return (
-        <main className="min-h-screen bg-white">
+        <main className="min-h-screen bg-white font-devanagari">
             <StudentModal isOpen={isModalOpen} onClose={closeModal} student={selectedStudent} />
             <Navbar />
 
@@ -71,10 +71,13 @@ export default function MarudharContent() {
                     </div>
                 </div>
             </section>
-            <section className="py-20 px-6">
+            {/* About Section */}
+            <section className="py-24 px-6 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
                     <div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-oxford mb-6 font-serif">Principal’s Message</h2>
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Leadership</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight font-serif">Principal’s Message</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mt-6 rounded-full mb-10" />
                         <div className="prose text-gray-600 leading-relaxed space-y-4 mb-8">
                             <p className="text-lg text-oxford/80">
                                 “Education is the most powerful weapon which you can use to change the world.” – Nelson Mandela
@@ -115,11 +118,13 @@ export default function MarudharContent() {
                     </div>
 
                     <div className="relative">
-                        <div className="bg-oxford/5 rounded-3xl p-8 border border-oxford/10">
-                            <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3 font-serif">
+                        <div className="bg-oxford/5 rounded-[2.5rem] p-10 border border-oxford/10 shadow-xl">
+                            <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-xs block mb-4 text-center">Our Ethos</span>
+                            <h3 className="text-3xl font-bold text-oxford mb-6 flex justify-center items-center gap-3 font-serif">
                                 <Star className="text-sandstone fill-sandstone" />
                                 Our Core Values
                             </h3>
+                            <div className="h-1 bg-sandstone w-16 mx-auto mb-8 rounded-full" />
                             <ul className="space-y-4">
                                 {[
                                     { title: "Discover Yourself", desc: "Explore unique talents and interests." },
@@ -147,11 +152,13 @@ export default function MarudharContent() {
                     </div>
                 </div>
             </section>
-            {/* About Section */}
-            <section className="py-20 px-6">
+            {/* Why Choose Us Section */}
+            <section className="py-24 px-6 bg-gray-50 overflow-hidden">
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
                     <div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-oxford mb-6 font-serif">Shaping Bright Futures for Girls (Class VI–XII)</h2>
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Why Choose Us?</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight font-serif">Shaping Bright Futures</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mt-6 rounded-full mb-10" />
                         <div className="prose text-gray-600 leading-relaxed space-y-4">
                             <p>
                                 Marudhar Balika Vidyapeeth is a premier girls’ senior secondary school dedicated to academic excellence, character building, and all-round development. Managed by Marudhar Mahila Shikshan Sangh,Vidyawadi, our institution provides quality education in Hindi & English Medium under RBSE.
@@ -165,11 +172,13 @@ export default function MarudharContent() {
                         </button>
                     </div>
                     <div className="relative">
-                        <div className="bg-oxford/5 rounded-3xl p-8 border border-oxford/10">
-                            <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3 font-serif">
+                        <div className="bg-white rounded-[2.5rem] p-10 border border-oxford/5 shadow-xl">
+                            <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-xs block mb-4 text-center">Excellence</span>
+                            <h3 className="text-3xl font-bold text-oxford mb-6 flex justify-center items-center gap-3 font-serif">
                                 <Star className="text-sandstone fill-sandstone" />
-                                Why Choose Us?
+                                Why Vidyawadi?
                             </h3>
+                            <div className="h-1 bg-sandstone w-16 mx-auto mb-8 rounded-full" />
                             <ul className="space-y-4">
                                 {[
                                     "100% Board Results",
@@ -189,15 +198,14 @@ export default function MarudharContent() {
                     </div>
                 </div>
             </section>
-            <section className="py-24 px-6">
+            <section className="py-24 px-6 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mb-6 font-serif">Modern Labs & Facilities</h2>
-                        <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Infrastructure</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight font-serif text-center">Modern Labs & Facilities</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
+                        <p className="text-gray-600 max-w-2xl mx-auto text-lg italic">
                             “Well-equipped laboratories with modern and best technological facilities”
-                        </p>
-                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-                            The school provides hand-on practical learning in a safe and modern environment.
                         </p>
                     </div>
 
@@ -213,7 +221,7 @@ export default function MarudharContent() {
                             { name: "Fire Safety Systems", icon: CheckCircle2, img: null },
                             { name: "Practical Equipment (All Subjects)", icon: BookOpen, img: null }
                         ].map((facility, i) => (
-                            <div key={i} className="group overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all border border-gray-100">
+                            <div key={i} className="group overflow-hidden rounded-[2rem] bg-white shadow-xl hover:shadow-2xl transition-all border border-oxford/5">
                                 {facility.img ? (
                                     <div className="h-48 overflow-hidden relative">
                                         <div className="absolute inset-0 bg-oxford/20 group-hover:bg-transparent transition-colors z-10" />
@@ -257,10 +265,10 @@ export default function MarudharContent() {
                             { class: "XII Commerce", score: "100%" },
                             { class: "X & VIII (All)", score: "100%" },
                         ].map((stat, i) => (
-                            <div key={i} className="bg-white p-8 rounded-2xl shadow-lg border-b-4 border-sandstone text-center hover:-translate-y-2 transition-transform">
-                                <h3 className="text-gray-500 font-bold uppercase text-sm tracking-wider mb-2 font-serif">{stat.class}</h3>
-                                <p className="text-5xl font-black text-oxford">{stat.score}</p>
-                                <p className="text-xs text-green-600 font-bold mt-2 uppercase">Pass Percentage</p>
+                            <div key={i} className="bg-white p-10 rounded-[2rem] shadow-xl border border-oxford/5 text-center hover:-translate-y-2 transition-transform">
+                                <h3 className="text-sandstone-dark font-bold uppercase text-xs tracking-[0.2em] mb-4 font-serif">{stat.class}</h3>
+                                <p className="text-4xl font-black text-oxford">{stat.score}</p>
+                                <p className="text-[10px] text-green-600 font-bold mt-2 uppercase tracking-widest">Pass Percentage</p>
                             </div>
                         ))}
                     </div>
@@ -281,11 +289,12 @@ export default function MarudharContent() {
             </section>
 
             {/* Top Scorers Table */}
-            <section className="py-20 px-6 bg-white">
+            <section className="py-24 px-6 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
-                        <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Meritorious Students</span>
-                        <h2 className="text-3xl md:text-4xl font-bold text-oxford mt-2 font-serif">Board Exam Toppers (2024-25)</h2>
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Meritorious Students</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight font-serif text-center">Board Exam Toppers</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
                         <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
                             Celebrating the dedication and hard work of our top performers.
                         </p>
@@ -295,28 +304,32 @@ export default function MarudharContent() {
             </section>
 
             {/* Scholarships & Merit Awards */}
-            <section className="py-20 px-6 bg-gray-50">
+            <section className="py-24 px-6 bg-gray-50 overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
-                        <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Recognition & Rewards</span>
-                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2 font-serif">Scholarships & Merit Awards</h2>
-                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Recognition & Rewards</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight font-serif text-center">Scholarships & Awards</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
+                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto font-medium">
                             By Balika Shiksha Foundation, Government of Rajasthan (Jaipur)
                         </p>
                     </div>
 
-                    {/* EWS Scheme */}
                     <div className="mb-20">
-                        <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3 font-serif">
-                            <Star className="text-sandstone fill-sandstone" />
-                            EWS Merit Promotion Scheme (State Level)
-                        </h3>
-                        <p className="text-gray-600 mb-8 max-w-3xl">
+                        <div className="text-center mb-10">
+                            <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-xs block mb-4">State Level Recognition</span>
+                            <h3 className="text-3xl font-bold text-oxford flex justify-center items-center gap-3 font-serif">
+                                <Trophy className="text-sandstone" />
+                                EWS Merit Promotion Scheme
+                            </h3>
+                            <div className="h-1 bg-sandstone w-16 mx-auto mt-6 rounded-full" />
+                        </div>
+                        <p className="text-gray-600 mb-12 max-w-3xl mx-auto text-center">
                             Under this scheme, three meritorious students who secured positions in the State Merit List were awarded ₹15,000 each.
                         </p>
 
                         <div className="grid lg:grid-cols-3 gap-8">
-                            <div className="lg:col-span-2 overflow-hidden rounded-2xl border border-oxford/10 shadow-lg bg-white">
+                            <div className="lg:col-span-2 overflow-hidden rounded-[2.5rem] border border-oxford/5 shadow-xl bg-white">
                                 <table className="w-full text-left border-collapse">
                                     <thead className="bg-oxford text-white">
                                         <tr>
@@ -365,19 +378,22 @@ export default function MarudharContent() {
                         </div>
                     </div>
 
-                    {/* Padmakshi Award Scheme */}
                     <div>
-                        <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3 font-serif">
-                            <Medal className="text-sandstone fill-sandstone" />
-                            Padmakshi (Merit) Award Scheme – District Level Toppers
-                        </h3>
-                        <p className="text-gray-600 mb-8 max-w-3xl">
+                        <div className="text-center mb-10 mt-12">
+                            <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-xs block mb-4">District Level Recognition</span>
+                            <h3 className="text-3xl font-bold text-oxford flex justify-center items-center gap-3 font-serif">
+                                <Medal className="text-sandstone" />
+                                Padmakshi (Merit) Award Scheme
+                            </h3>
+                            <div className="h-1 bg-sandstone w-16 mx-auto mt-6 rounded-full" />
+                        </div>
+                        <p className="text-gray-600 mb-12 max-w-3xl mx-auto text-center">
                             Under the Padmakshi Award Scheme, students who secured first position in Pali District in their respective classes were honored with cash prizes.
                         </p>
 
                         <div className="grid lg:grid-cols-3 gap-8">
                             {/* Visual Highlight for Padmakshi */}
-                            <div className="bg-sandstone text-oxford p-8 rounded-2xl flex flex-col justify-center items-center text-center relative overflow-hidden order-2 lg:order-1">
+                            <div className="bg-sandstone text-oxford p-10 rounded-[2.5rem] flex flex-col justify-center items-center text-center relative overflow-hidden order-2 lg:order-1 shadow-xl">
                                 <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
                                 <Star size={64} className="text-oxford mb-6" />
                                 <h4 className="text-4xl font-black mb-2">₹1,25,000</h4>
@@ -426,15 +442,17 @@ export default function MarudharContent() {
                     </div>
 
                     {/* GARGI AWARD */}
-                    <div className="mt-20 bg-oxford text-white rounded-3xl p-8 md:p-12 relative overflow-hidden">
+                    <div className="mt-20 bg-oxford text-white rounded-[3rem] p-10 md:p-16 relative overflow-hidden shadow-2xl">
                         <div className="absolute top-0 right-0 w-64 h-64 bg-sandstone/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
                         <div className="relative z-10 text-center">
-                            <h3 className="text-3xl font-bold mb-4 flex items-center justify-center gap-3 font-serif">
-                                <Trophy className="text-sandstone" size={32} />
-                                GARGI Award
+                            <span className="text-sandstone-light font-bold uppercase tracking-[0.4em] text-xs block mb-4">Academic Brilliance</span>
+                            <h3 className="text-4xl font-bold mb-6 flex items-center justify-center gap-3 font-serif">
+                                <Trophy className="text-sandstone" size={40} />
+                                GARGI Award Recipients
                             </h3>
-                            <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
-                                We are proud to announce that <span className="font-bold text-sandstone">115 students</span> will be honored under the GARGI AWARD Scheme for their academic excellence.
+                            <div className="h-1.5 w-24 bg-sandstone mx-auto mb-10 rounded-full" />
+                            <p className="text-xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
+                                We are proud to announce that <span className="font-bold text-sandstone">115 students</span> from our institution have been honored under the GARGI AWARD Scheme for their academic excellence.
                             </p>
 
                             <div className="flex flex-col md:flex-row justify-center gap-6 mb-8">

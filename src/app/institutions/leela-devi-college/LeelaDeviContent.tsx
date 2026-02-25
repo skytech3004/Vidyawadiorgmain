@@ -241,7 +241,7 @@ export default function LeelaDeviContent() {
     const displayedCourses = showAll ? filteredCourses : filteredCourses.slice(0, 6);
 
     return (
-        <div className="bg-white">
+        <div className="bg-white font-devanagari">
             {/* Hero Section */}
             <section className="relative pt-40 pb-20 px-6 bg-oxford/90 text-white overflow-hidden">
                 <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-sandstone/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
@@ -316,7 +316,9 @@ export default function LeelaDeviContent() {
                         viewport={{ once: true }}
                         className="order-1 lg:order-2"
                     >
-                        <h2 className="text-3xl md:text-4xl font-bold text-oxford mb-6 font-serif">About the College</h2>
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Our Legacy</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight font-serif">About the College</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mt-6 rounded-full mb-10" />
                         <div className="prose text-gray-600 leading-relaxed space-y-4">
                             <p>
                                 Leela Devi Parasmal Sancheti Kanya Mahavidyalaya is a women-only higher education institution managed by <b>Marudhar Mahila Shikshan Sangh,Vidyawadi</b>.
@@ -345,27 +347,12 @@ export default function LeelaDeviContent() {
             <section className="py-24 px-6 bg-white overflow-hidden scroll-mt-20" id="laboratories">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
-                        <motion.span
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            className="text-sandstone-dark font-black uppercase tracking-[0.2em] text-xs mb-3 block"
-                        >
-                            Advanced Learning Hubs
-                        </motion.span>
-                        <motion.h2
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            className="text-4xl md:text-5xl font-black text-oxford mt-2 font-serif"
-                        >
-                            Laboratories & Research
-                        </motion.h2>
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            className="text-gray-500 mt-4 max-w-2xl mx-auto font-medium"
-                        >
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Advanced Learning Hubs</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight font-serif text-center">Laboratories & Research</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
+                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto font-medium">
                             State-of-the-art facilities designed to foster scientific inquiry, creative expression, and technical proficiency.
-                        </motion.p>
+                        </p>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -417,25 +404,10 @@ export default function LeelaDeviContent() {
             <section className="py-24 px-6 bg-gray-50 relative overflow-hidden">
                 <div className="max-w-7xl mx-auto relative z-10">
                     <div className="text-center mb-16">
-                        <motion.span
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            className="text-sandstone font-bold uppercase tracking-widest text-sm"
-                        >
-                            Academic Programs
-                        </motion.span>
-                        <motion.h2
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            className="text-3xl md:text-5xl font-black text-oxford mt-2 font-serif"
-                        >
-                            Courses Offered
-                        </motion.h2>
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            className="mt-4"
-                        >
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Academic Programs</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight font-serif text-center">Courses Offered</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
+                        <div className="mt-4">
                             <a
                                 href="https://vidyawadicollege.org/courses"
                                 target="_blank"
@@ -445,7 +417,7 @@ export default function LeelaDeviContent() {
                                 <Globe size={18} />
                                 Visit Official Course Portal
                             </a>
-                        </motion.div>
+                        </div>
                     </div>
 
                     {/* Integrated Filters & Search */}
@@ -569,27 +541,12 @@ export default function LeelaDeviContent() {
             <section className="py-24 px-6 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
-                        <motion.span
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            className="text-sandstone-dark font-black uppercase tracking-[0.2em] text-xs mb-3 block"
-                        >
-                            Academic Toppers
-                        </motion.span>
-                        <motion.h2
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            className="text-4xl md:text-5xl font-black text-oxford mt-2 font-serif"
-                        >
-                            University Topper
-                        </motion.h2>
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            className="text-gray-500 mt-4 max-w-2xl mx-auto font-medium"
-                        >
-                            Celebrating the academic excellence and hard work of our students who achieved the highest honors at the university level.
-                        </motion.p>
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Academic Toppers</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight font-serif text-center">University Toppers</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
+                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto font-medium">
+                            Celebrating the academic excellence and hard work of our students who achieved the highest honors.
+                        </p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -845,42 +802,49 @@ export default function LeelaDeviContent() {
                             </motion.div>
                         ))}
                     </div>
-                    <div className="container mx-auto">
-                        <div className="mt-20 bg-white p-8 md:p-12 rounded-[2.5rem] border border-dashed border-gray-300 flex flex-col md:flex-row items-center gap-8 shadow-sm">
-                            <div className="flex-1">
-                                <h4 className="font-bold text-2xl text-oxford mb-4 flex items-center gap-3 font-serif">
-                                    <Star className="text-sandstone" size={24} fill="currentColor" />
-                                    Admission Criteria
-                                </h4>
-                                <ul className="space-y-4 text-base text-gray-600">
-                                    <li className="flex items-start gap-4">
-                                        <div className="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0 mt-0.5">
-                                            <CheckCircle2 size={14} />
-                                        </div>
-                                        <span>Admissions are generally merit-based on previous qualifying exam scores.</span>
-                                    </li>
-                                    <li className="flex items-start gap-4">
-                                        <div className="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0 mt-0.5">
-                                            <CheckCircle2 size={14} />
-                                        </div>
-                                        <span>Integrated B.Ed programs may include entrance criteria set by the university or state.</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <Link href="/contact" className="px-8 py-4 bg-sandstone text-oxford rounded-full font-black text-xs uppercase tracking-widest hover:scale-105 transition-all shadow-lg shrink-0">
-                                Apply for Admission
-                            </Link>
+                </div>
+            </section>
+
+            <section className="py-24 px-6 bg-white overflow-hidden">
+                <div className="max-w-7xl mx-auto">
+                    <div className="mt-20 bg-oxford/5 p-10 md:p-14 rounded-[2.5rem] border border-oxford/5 flex flex-col md:flex-row items-center gap-10 shadow-xl relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-sandstone/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+                        <div className="flex-1 relative z-10">
+                            <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-xs block mb-4">Admissions</span>
+                            <h4 className="font-bold text-3xl md:text-4xl text-oxford mb-6 flex items-center gap-3 font-serif">
+                                <Star className="text-sandstone" size={28} fill="currentColor" />
+                                Admission Criteria
+                            </h4>
+                            <div className="h-1 bg-sandstone w-16 mb-8 rounded-full" />
+                            <ul className="space-y-4 text-base text-gray-600">
+                                <li className="flex items-start gap-4">
+                                    <div className="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0 mt-0.5">
+                                        <CheckCircle2 size={14} />
+                                    </div>
+                                    <span className="font-medium">Admissions are generally merit-based on previous qualifying exam scores.</span>
+                                </li>
+                                <li className="flex items-start gap-4">
+                                    <div className="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0 mt-0.5">
+                                        <CheckCircle2 size={14} />
+                                    </div>
+                                    <span className="font-medium">Integrated B.Ed programs may include entrance criteria set by the university or state.</span>
+                                </li>
+                            </ul>
                         </div>
+                        <Link href="/contact" className="px-10 py-5 bg-sandstone text-oxford rounded-full font-black text-xs uppercase tracking-widest hover:scale-105 transition-all shadow-xl shrink-0 relative z-10">
+                            Apply for Admission
+                        </Link>
                     </div>
                 </div>
             </section>
 
             {/* Admission Process */}
-            <section className="py-24 px-6 bg-oxford text-white">
+            <section className="py-24 px-6 bg-oxford text-white overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-20">
-                        <span className="text-sandstone font-bold uppercase tracking-widest text-sm">WANT TO JOIN US?</span>
-                        <h2 className="text-3xl md:text-5xl font-bold mt-2 font-serif">Admission Process</h2>
+                        <span className="text-sandstone-light font-bold uppercase tracking-[0.4em] text-sm block mb-4">WANT TO JOIN US?</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight font-serif">Admission Process</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full" />
                     </div>
 
                     <div className="grid lg:grid-cols-5 gap-4 relative">
@@ -935,30 +899,15 @@ export default function LeelaDeviContent() {
             </section>
 
             {/* Faculty Section */}
-            <section className="py-24 px-6 bg-gray-50">
+            <section className="py-24 px-6 bg-gray-50 overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
-                        <motion.span
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            className="text-sandstone font-bold uppercase tracking-widest text-sm"
-                        >
-                            Our Faculty
-                        </motion.span>
-                        <motion.h2
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            className="text-3xl md:text-5xl font-bold text-oxford mt-2 font-serif"
-                        >
-                            LPS School Navigators
-                        </motion.h2>
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            className="text-gray-600 mt-4 max-w-2xl mx-auto"
-                        >
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Our Faculty</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight font-serif">College Faculty</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
+                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
                             Meet our dedicated faculty and staff members committed to excellence.
-                        </motion.p>
+                        </p>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -1038,18 +987,23 @@ export default function LeelaDeviContent() {
             {/* School Uniform & General Instructions Section */}
 
             {/* Final CTA */}
-            <section className="py-24 px-6 bg-sandstone">
-                <div className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-4xl md:text-5xl font-black text-oxford mb-8 uppercase tracking-tight leading-tight font-serif">Empowering Women Through Excellence</h2>
+            <section className="py-24 px-6 bg-sandstone overflow-hidden relative">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+                <div className="max-w-4xl mx-auto text-center relative z-10">
+                    <span className="text-oxford/60 font-bold uppercase tracking-[0.4em] text-sm block mb-4">Invest in Your Future</span>
+                    <h2 className="text-4xl md:text-6xl font-black text-oxford mb-8 leading-tight font-serif uppercase">Empowering Women</h2>
+                    <div className="h-1.5 w-24 bg-oxford mx-auto mb-10 rounded-full" />
                     <p className="text-xl text-oxford/80 font-medium mb-12">
-                        Invest in your future. Join a community of leaders, thinkers, and changemakers. Admissions are now open.
+                        Join a community of leaders, thinkers, and changemakers. Admissions are now open for the upcoming session.
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4">
-                        <a href="tel:+918764185993" className="px-10 py-5 bg-oxford text-white rounded-full font-bold uppercase tracking-wider shadow-2xl hover:bg-white hover:text-oxford transition-all">
+                        <a href="tel:+918764185993" className="px-10 py-5 bg-oxford text-white rounded-full font-bold uppercase tracking-wider shadow-2xl hover:bg-white hover:text-oxford transition-all flex items-center justify-center gap-2">
                             Call: 8764185993
+                            <Phone size={18} />
                         </a>
-                        <Link href="https://vidyawadicollege.org/admissions/apply" className="px-10 py-5 bg-white text-oxford rounded-full font-bold uppercase tracking-wider shadow-2xl hover:scale-105 transition-all">
+                        <Link href="https://vidyawadicollege.org/admissions/apply" className="px-10 py-5 bg-white text-oxford rounded-full font-bold uppercase tracking-wider shadow-2xl hover:shadow-xl transition-all flex items-center justify-center gap-2">
                             Apply for Admission
+                            <ArrowRight size={18} />
                         </Link>
                     </div>
                 </div>

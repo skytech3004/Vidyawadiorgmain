@@ -77,41 +77,30 @@ export default function BlogSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
-                            className="group cursor-pointer"
+                            className="group cursor-pointer bg-white p-10 rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-500 border border-black/5 flex flex-col justify-between"
                         >
-                            <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden mb-8 shadow-lg group-hover:shadow-2xl transition-all duration-500">
-                                <Image
-                                    src={post.image}
-                                    alt={post.title}
-                                    fill
-                                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                />
-                                <div className="absolute top-6 left-6 px-4 py-1.5 bg-white/90 backdrop-blur-md rounded-full text-[10px] font-bold text-oxford uppercase tracking-widest">
-                                    {post.category}
-                                </div>
-                            </div>
-
-                            <div className="space-y-4 px-2">
-                                <div className="flex items-center gap-6 text-[10px] font-bold uppercase tracking-widest text-oxford/50">
-                                    <div className="flex items-center gap-2">
-                                        <Calendar size={14} />
-                                        <span>{post.date}</span>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <Clock size={14} />
-                                        <span>{post.readTime}</span>
+                            <div className="space-y-4">
+                                <div className="flex items-center justify-between mb-4">
+                                    <span className="px-4 py-1.5 bg-oxford/5 text-oxford text-[10px] font-bold uppercase tracking-widest rounded-full">
+                                        {post.category}
+                                    </span>
+                                    <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-oxford/30">
+                                        <div className="flex items-center gap-1.5">
+                                            <Calendar size={12} />
+                                            <span>{post.date}</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <h3 className="text-xl md:text-2xl font-bold text-oxford group-hover:text-sandstone transition-colors leading-snug">
+                                <h3 className="text-xl font-serif text-oxford group-hover:text-sandstone transition-colors leading-snug">
                                     {post.title}
                                 </h3>
-                                <p className="text-gray-500 text-sm leading-relaxed line-clamp-2">
+                                <p className="text-gray-500 text-sm leading-relaxed line-clamp-3 font-light">
                                     {post.excerpt}
                                 </p>
-                                <div className="pt-4 flex items-center gap-2 text-oxford font-black text-[10px] uppercase tracking-[0.2em] group-hover:gap-4 transition-all">
-                                    Continue Reading
-                                    <ArrowRight size={14} className="text-sandstone" />
-                                </div>
+                            </div>
+                            <div className="pt-8 flex items-center gap-2 text-oxford font-black text-[10px] uppercase tracking-[0.2em] group-hover:gap-4 transition-all">
+                                Read Full Article
+                                <ArrowRight size={14} className="text-sandstone" />
                             </div>
                         </motion.article>
                     ))}

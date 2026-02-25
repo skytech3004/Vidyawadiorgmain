@@ -9,25 +9,37 @@ import { Calendar, Image as ImageIcon, ArrowRight } from "lucide-react";
 
 export default function GalleryPage() {
     return (
-        <main className="min-h-screen bg-white">
+        <main className="min-h-screen bg-white font-devanagari">
             <Navbar />
 
             {/* Header */}
-            <section id="home" data-theme="dark" className="pt-32 pb-16 px-6 bg-oxford text-white relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-1/2 h-full bg-sandstone/10 skew-x-12 translate-x-1/4 rounded-full blur-3xl" />
-                <div className="max-w-7xl mx-auto relative z-10">
+            <section id="home" data-theme="dark" className="pt-40 pb-20 px-6 bg-oxford text-white relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-sandstone/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+                <div className="max-w-7xl mx-auto relative z-10 text-center">
+                    <motion.span
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-sandstone-light font-bold uppercase tracking-[0.4em] text-sm block mb-4"
+                    >
+                        Our Visual Journey
+                    </motion.span>
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-5xl md:text-8xl font-serif mb-6"
+                        className="text-4xl md:text-6xl lg:text-8xl font-black mb-6 leading-tight uppercase font-serif"
                     >
                         Our <span className="text-sandstone">Gallery</span>
                     </motion.h1>
+                    <motion.div
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8"
+                    />
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="text-lg md:text-2xl text-white/70 max-w-2xl font-light"
+                        className="text-lg md:text-2xl text-white/70 max-w-2xl mx-auto font-light"
                     >
                         Witness the journey of excellence, creativity, and joy through our curated collection of moments.
                     </motion.p>

@@ -126,7 +126,7 @@ export default function LPSContent() {
     ];
 
     return (
-        <main className="min-h-screen bg-white">
+        <main className="min-h-screen bg-white font-devanagari">
             <StudentModal isOpen={isModalOpen} onClose={closeModal} student={selectedStudent} />
 
             {/* Hero Section */}
@@ -173,11 +173,13 @@ export default function LPSContent() {
                 </div>
             </section>
 
-            {/* About Section (Principal's Message & Vision) */}
-            <section className="py-20 px-6">
+            {/* About Section */}
+            <section className="py-24 px-6 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
                     <div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-oxford mb-6 font-serif">Principal’s Message</h2>
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Leadership</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight font-serif">Principal’s Message</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mt-6 rounded-full mb-10" />
                         <div className="prose text-gray-600 leading-relaxed space-y-4 mb-8">
                             <p className="">
                                 "Welcome to LPS, Vidyawadi, where we take pride in fostering a nurturing environment that empowers every learner to grow into a confident, compassionate, and globally-minded citizen."
@@ -213,11 +215,13 @@ export default function LPSContent() {
                     </div>
 
                     <div className="relative">
-                        <div className="bg-oxford/5 rounded-3xl p-8 border border-oxford/10">
-                            <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3 font-serif">
+                        <div className="bg-oxford/5 rounded-[2.5rem] p-10 border border-oxford/10 shadow-xl">
+                            <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-xs block mb-4 text-center">Our Ethos</span>
+                            <h3 className="text-3xl font-bold text-oxford mb-6 flex justify-center items-center gap-3 font-serif">
                                 <Star className="text-sandstone fill-sandstone" />
                                 Our Core Values
                             </h3>
+                            <div className="h-1 bg-sandstone w-16 mx-auto mb-8 rounded-full" />
                             <ul className="space-y-4">
                                 {[
                                     { title: "Discover Yourself", desc: "Explore unique talents and interests." },
@@ -264,12 +268,12 @@ export default function LPSContent() {
                             { title: "Middle", level: "VI to VIII", icon: School },
                             { title: "Secondary", level: "IX & XII", icon: Trophy },
                         ].map((stat, i) => (
-                            <div key={i} className="bg-white p-8 rounded-2xl shadow-lg border-b-4 border-sandstone text-center hover:-translate-y-2 transition-transform group">
-                                <div className="w-12 h-12 bg-oxford/5 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-sandstone transition-colors">
-                                    <stat.icon className="text-sandstone group-hover:text-white transition-colors" size={24} />
+                            <div key={i} className="bg-white p-10 rounded-[2rem] shadow-xl border border-oxford/5 text-center hover:-translate-y-2 transition-transform group">
+                                <div className="w-14 h-14 bg-oxford/5 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-sandstone transition-colors">
+                                    <stat.icon className="text-sandstone group-hover:text-white transition-colors" size={28} />
                                 </div>
-                                <h3 className="text-gray-500 font-bold uppercase text-xs tracking-wider mb-2 font-serif">{stat.title}</h3>
-                                <p className="text-2xl font-black text-oxford">{stat.level}</p>
+                                <h3 className="text-sandstone-dark font-bold uppercase text-xs tracking-[0.2em] mb-4 font-serif">{stat.title}</h3>
+                                <p className="text-3xl font-black text-oxford leading-tight">{stat.level}</p>
                             </div>
                         ))}
                     </div>
@@ -327,11 +331,12 @@ export default function LPSContent() {
             </section>
 
             {/* Meritorious Students Section */}
-            <section className="py-20 px-6 bg-white">
+            <section className="py-24 px-6 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
-                        <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Meritorious Students</span>
-                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2 font-serif">Result Highlights</h2>
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Meritorious Students</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight font-serif text-center">Result Highlights</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
                         <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
                             Celebrating the academic excellence and dedication of our top performers.
                         </p>
@@ -460,12 +465,13 @@ export default function LPSContent() {
             </section>
 
             {/* Beyond Academics (Facilities & Activities) */}
-            <section className="py-20 px-6 bg-oxford text-white">
+            <section className="py-24 px-6 bg-oxford text-white overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
-                        <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Co-Curricular Excellence</span>
-                        <h2 className="text-3xl md:text-5xl font-bold mt-2 font-serif">Beyond Academics</h2>
-                        <p className="text-white/80 mt-4 max-w-2xl mx-auto">
+                        <span className="text-sandstone-light font-bold uppercase tracking-[0.4em] text-sm block mb-4">Co-Curricular Excellence</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight font-serif">Beyond Academics</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
+                        <p className="text-white/80 mt-4 max-w-2xl mx-auto italic">
                             “With wings of courage and dreams, the sky is the limit.”
                         </p>
                     </div>
@@ -549,11 +555,12 @@ export default function LPSContent() {
             </section>
 
             {/* Staff Section */}
-            <section className="py-20 px-6 bg-gray-50">
+            <section className="py-24 px-6 bg-gray-50 overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
-                        <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Our Faculty</span>
-                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2 font-serif">LPS School Navigators</h2>
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Our Faculty</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight font-serif">School Navigators</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
                         <p className="text-gray-600 mt-4 max-w-2xl mx-auto">Meet our dedicated faculty and staff members committed to excellence.</p>
                     </div>
 
@@ -594,13 +601,15 @@ export default function LPSContent() {
             </section>
 
             {/* Rules & Uniform Section */}
-            <section className="py-20 px-6 bg-white">
+            <section className="py-24 px-6 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-                    <div className="bg-oxford/5 rounded-3xl p-8 md:p-12 border border-oxford/10">
-                        <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3">
+                    <div className="bg-oxford/5 rounded-[2.5rem] p-10 md:p-14 border border-oxford/5 shadow-xl">
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-xs block mb-4">Identity</span>
+                        <h3 className="text-3xl font-bold text-oxford mb-6 flex items-center gap-3 font-serif">
                             <Sparkles className="text-sandstone" />
                             School Uniform
                         </h3>
+                        <div className="h-1 bg-sandstone w-16 mb-10 rounded-full" />
                         <div className="space-y-6">
                             <div>
                                 <h4 className="font-bold text-sandstone text-sm uppercase tracking-wider mb-3">Nursery to VIII</h4>
@@ -620,8 +629,12 @@ export default function LPSContent() {
                         </div>
                     </div>
 
-                    <div className="space-y-8">
-                        <h2 className="text-3xl md:text-4xl font-bold text-oxford font-serif">General Instructions</h2>
+                    <div className="space-y-10">
+                        <div>
+                            <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Guidelines</span>
+                            <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight font-serif">General Instructions</h2>
+                            <div className="h-1.5 w-24 bg-sandstone mt-6 rounded-full mb-8" />
+                        </div>
                         <div className="grid gap-4">
                             {[
                                 { title: "Regularity", desc: "Minimum 75% attendance is mandatory." },
@@ -645,9 +658,12 @@ export default function LPSContent() {
             </section>
 
             {/* CTA Section */}
-            <section className="py-20 px-6 bg-sandstone">
-                <div className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-4xl font-black text-oxford mb-6 uppercase tracking-tight font-serif">Admissions Open</h2>
+            <section className="py-24 px-6 bg-sandstone overflow-hidden relative">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+                <div className="max-w-4xl mx-auto text-center relative z-10">
+                    <span className="text-oxford/60 font-bold uppercase tracking-[0.4em] text-sm block mb-4">Join Our Community</span>
+                    <h2 className="text-4xl md:text-6xl font-black text-oxford mb-6 leading-tight font-serif uppercase">Admissions Open</h2>
+                    <div className="h-1.5 w-24 bg-oxford mx-auto mb-10 rounded-full" />
                     <p className="text-xl text-oxford/80 font-medium mb-10">
                         Give your daughter the opportunity to grow into a confident, educated, and successful individual.
                     </p>
