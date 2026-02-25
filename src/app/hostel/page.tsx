@@ -251,13 +251,13 @@ export default function Page() {
                             { image: "/uploads/mess/Mess.jpg", title: "Pure Jain Food", desc: "Nutritious Satvik meals with 5 servings per day." },
                             { image: "/uploads/mess/RO.jpg", title: "RO Drinking Water", desc: "Pure and safe RO purified drinking water available 24/7." },
                             { image: "/uploads/mess/HOT.jpg", title: "Hot Water", desc: "Constant supply of hot water during winter months." },
-                            { image: "/images/RS-CIT IT Computer Center.png", title: "Digital Library", desc: "24/7 access to educational resources and quiet study space." },
+                            { image: "/uploads/mess/aa.jpg", title: "Digital Library", desc: "24/7 access to educational resources and quiet study space." },
                             { image: "/uploads/mess/yoga.jpeg", title: "Yoga & Meditation", desc: "Daily morning sessions for physical and mental well-being." },
                             { image: "/uploads/mess/sport.jpg", title: "Sports Facilities", desc: "International standard stadium and sports ground." },
                             { image: "/uploads/mess/Health.jpg", title: "Health Care 24x7", desc: "On-campus medical assistance and annual checkups." },
                             { image: "/uploads/mess/ac.jpg", title: "AC / Air Cooled", desc: "Well-ventilated rooms with central cooling options." },
                             { image: "/uploads/mess/laundry.jpg", title: "Laundry Services", desc: "Professional and hassle-free laundry services for all students." },
-                            { image: "/uploads/mess/Kitchen2.jpg", title: "Canteen Facility", desc: "Safe and hygienic canteen for snacks and refreshments." },
+                            { image: "/uploads/mess/canteen.jpg", title: "Canteen Facility", desc: "Safe and hygienic canteen for snacks and refreshments." },
                             { image: "/uploads/mess/tuck.jpg", title: "Tuck Shop", desc: "On-campus tuck shop for all daily essentials and stationery." }
                         ].map((item: any, i) => (
                             <motion.div
