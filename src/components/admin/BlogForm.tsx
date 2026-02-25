@@ -6,9 +6,10 @@ import { Save, X, Type, Link, Tag, User, Eye, EyeOff } from "lucide-react";
 
 interface BlogFormProps {
     initialData?: any;
+    isEditing?: boolean;
 }
 
-export default function BlogForm({ initialData }: BlogFormProps) {
+export default function BlogForm({ initialData, isEditing }: BlogFormProps) {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState(initialData || {
