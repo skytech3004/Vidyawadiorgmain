@@ -13,9 +13,10 @@ import {
 
 interface GalleryFormProps {
     initialData?: any;
+    isEditing?: boolean;
 }
 
-export default function GalleryForm({ initialData }: GalleryFormProps) {
+export default function GalleryForm({ initialData, isEditing }: GalleryFormProps) {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState(initialData || {
