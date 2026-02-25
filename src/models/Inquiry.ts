@@ -1,29 +1,23 @@
 import mongoose from "mongoose";
 
 const InquirySchema = new mongoose.Schema({
-    fullName: {
+    name: {
         type: String,
-        required: [true, "Please provide a name"],
+        required: true,
     },
     email: {
         type: String,
-        required: [true, "Please provide an email"],
+        required: true,
     },
-    phone: {
-        type: String,
-        required: [true, "Please provide a phone number"],
-    },
-    grade: {
-        type: String,
-        required: [true, "Please provide a grade"],
-    },
+    phone: String,
+    subject: String,
     message: {
         type: String,
-        required: [true, "Please provide a message"],
+        required: true,
     },
     status: {
         type: String,
-        enum: ["new", "read", "replied"],
+        enum: ["new", "read", "resolved"],
         default: "new",
     }
 }, { timestamps: true });

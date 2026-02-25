@@ -1,233 +1,219 @@
 "use client";
 
-import React, { useState } from "react";
-import {
-    Save,
-    Trophy,
-    School,
-    GraduationCap,
-    Calendar,
-    Image as ImageIcon,
-    Hash,
-    Loader2,
-    ArrowLeft,
-    BookOpen
-} from "lucide-react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import AdvancedImageUpload from "./AdvancedImageUpload";
+import React, { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Save, X, Trophy, Hash, Calendar, GraduationCap } from "lucide-react";
+import ImageUploadField from "./ImageUploadField";
 
 interface ResultFormProps {
     initialData?: any;
     isEditing?: boolean;
 }
 
-const classes = ["X", "XII"];
-const institutions = ["LPS", "Marudhar"];
-
-export default function ResultForm({ initialData, isEditing = false }: ResultFormProps) {
+export default function ResultForm({ initialData, isEditing }: ResultFormProps) {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
-    const [formData, setFormData] = useState({
-        name: initialData?.name || "",
-        percentage: initialData?.percentage || "",
-        stream: initialData?.stream || "-",
-        class: initialData?.class || "XII",
-        year: initialData?.year || "2024-25",
-        institution: initialData?.institution || "LPS",
-        image: initialData?.image || "",
-        order: initialData?.order || 0,
+    const [formData, setFormData] = useState(initialData || {
+        name: "",
+        percentage: "",
+        class: "XII",
+        year: new Date().getFullYear().toString(),
+        stream: "",
+        image: "",
+        institution: "marudhar",
+        order: 0,
+        resultType: "Board"
     });
+
+    const searchParams = useSearchParams();
+
+    useEffect(() => {
+        if (!isEditing) {
+            const institutionParam = searchParams.get("institution");
+            const typeParam = searchParams.get("resultType");
+
+            if (institutionParam || typeParam) {
+                setFormData((prev: any) => ({
+                    ...prev,
+                    institution: institutionParam || prev.institution,
+                    resultType: typeParam || prev.resultType
+                }));
+            }
+        }
+    }, [searchParams, isEditing]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
 
+        const url = isEditing ? `/api/admin/results/${initialData._id}` : "/api/admin/results";
+
         try {
-            const url = isEditing
-                ? `/api/admin/results/${initialData._id}`
-                : "/api/admin/results";
-
-            const method = isEditing ? "PUT" : "POST";
-
             const res = await fetch(url, {
-                method,
+                method: isEditing ? "PUT" : "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),
             });
 
-            const data = await res.json();
-            if (data.success) {
+            if (res.ok) {
                 router.push("/admin/results");
                 router.refresh();
-            } else {
-                alert(data.error || "Something went wrong");
             }
         } catch (error) {
-            alert("An error occurred");
+            console.error("Error saving result:", error);
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="max-w-2xl mx-auto pb-20">
-            <Link
-                href="/admin/results"
-                className="inline-flex items-center gap-2 text-gray-500 hover:text-oxford transition-colors mb-8 font-bold text-xs uppercase tracking-widest"
-            >
-                <ArrowLeft size={16} />
-                Back to Results
-            </Link>
-
-            <form onSubmit={handleSubmit} className="space-y-8">
-                <div className="bg-white rounded-[2.5rem] p-8 md:p-12 border border-gray-100 shadow-sm space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl">
+            <div className="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                    {/* Name */}
                     <div className="space-y-2">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-sandstone px-1">Student Name</label>
-                        <div className="relative">
-                            <Trophy className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" size={18} />
-                            <input
-                                type="text"
-                                value={formData.name}
-                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                placeholder="e.g. Priyanshi Jain"
-                                className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:border-sandstone transition-colors"
-                                required
-                            />
-                        </div>
+                        <label className="text-sm font-bold text-oxford uppercase tracking-wider flex items-center gap-2">
+                            <GraduationCap size={16} className="text-sandstone" />
+                            Student Name
+                        </label>
+                        <input
+                            type="text"
+                            required
+                            value={formData.name}
+                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-sandstone focus:ring-2 focus:ring-sandstone/20 outline-none transition-all bg-gray-50/50"
+                            placeholder="e.g. Priyanshi Shekhawat"
+                        />
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-8">
-                        <div className="space-y-2">
-                            <label className="text-[10px] font-black uppercase tracking-widest text-sandstone px-1">Percentage / Score</label>
-                            <div className="relative">
-                                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-bold text-lg">%</span>
-                                <input
-                                    type="text"
-                                    value={formData.percentage}
-                                    onChange={(e) => setFormData({ ...formData, percentage: e.target.value })}
-                                    placeholder="95.4"
-                                    className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:border-sandstone transition-colors"
-                                    required
-                                />
-                            </div>
-                        </div>
-
-                        <div className="space-y-2">
-                            <label className="text-[10px] font-black uppercase tracking-widest text-sandstone px-1">Stream</label>
-                            <div className="relative">
-                                <BookOpen className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" size={18} />
-                                <input
-                                    type="text"
-                                    value={formData.stream}
-                                    onChange={(e) => setFormData({ ...formData, stream: e.target.value })}
-                                    placeholder="e.g. Science"
-                                    className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:border-sandstone transition-colors"
-                                />
-                            </div>
-                        </div>
+                    {/* Percentage */}
+                    <div className="space-y-2">
+                        <label className="text-sm font-bold text-oxford uppercase tracking-wider flex items-center gap-2">
+                            <Trophy size={16} className="text-sandstone" />
+                            Percentage / CGPA
+                        </label>
+                        <input
+                            type="text"
+                            required
+                            value={formData.percentage}
+                            onChange={(e) => setFormData({ ...formData, percentage: e.target.value })}
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-sandstone focus:ring-2 focus:ring-sandstone/20 outline-none transition-all bg-gray-50/50"
+                            placeholder="e.g. 98.4%"
+                        />
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-8">
-                        <div className="space-y-2">
-                            <label className="text-[10px] font-black uppercase tracking-widest text-sandstone px-1">Class</label>
-                            <div className="relative">
-                                <GraduationCap className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" size={18} />
-                                <select
-                                    value={formData.class}
-                                    onChange={(e) => setFormData({ ...formData, class: e.target.value })}
-                                    className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:border-sandstone transition-colors appearance-none"
-                                >
-                                    {classes.map(cl => (
-                                        <option key={cl} value={cl}>Class {cl}</option>
-                                    ))}
-                                </select>
-                            </div>
-                        </div>
-
-                        <div className="space-y-2">
-                            <label className="text-[10px] font-black uppercase tracking-widest text-sandstone px-1">Academic Year</label>
-                            <div className="relative">
-                                <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" size={18} />
-                                <input
-                                    type="text"
-                                    value={formData.year}
-                                    onChange={(e) => setFormData({ ...formData, year: e.target.value })}
-                                    placeholder="2023-24"
-                                    className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:border-sandstone transition-colors"
-                                    required
-                                />
-                            </div>
-                        </div>
+                    {/* Class */}
+                    <div className="space-y-2">
+                        <label className="text-sm font-bold text-oxford uppercase tracking-wider flex items-center gap-2">
+                            <Hash size={16} className="text-sandstone" />
+                            Class
+                        </label>
+                        <select
+                            value={formData.class}
+                            onChange={(e) => setFormData({ ...formData, class: e.target.value })}
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-sandstone focus:ring-2 focus:ring-sandstone/20 outline-none transition-all bg-gray-50/50"
+                        >
+                            <option value="X">X (Secondary)</option>
+                            <option value="XII">XII (Sr. Secondary)</option>
+                            <option value="College">College</option>
+                        </select>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-8">
-                        <div className="space-y-2">
-                            <label className="text-[10px] font-black uppercase tracking-widest text-sandstone px-1">Institution</label>
-                            <div className="relative">
-                                <School className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" size={18} />
-                                <select
-                                    value={formData.institution}
-                                    onChange={(e) => setFormData({ ...formData, institution: e.target.value })}
-                                    className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:border-sandstone transition-colors appearance-none"
-                                >
-                                    {institutions.map(inst => (
-                                        <option key={inst} value={inst}>{inst}</option>
-                                    ))}
-                                </select>
-                            </div>
-                        </div>
-
-                        <div className="space-y-2">
-                            <label className="text-[10px] font-black uppercase tracking-widest text-sandstone px-1">Rank / Position</label>
-                            <div className="relative">
-                                <Hash className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" size={18} />
-                                <input
-                                    type="number"
-                                    value={formData.order}
-                                    onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })}
-                                    className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:border-sandstone transition-colors"
-                                />
-                            </div>
-                        </div>
+                    {/* Year */}
+                    <div className="space-y-2">
+                        <label className="text-sm font-bold text-oxford uppercase tracking-wider flex items-center gap-2">
+                            <Calendar size={16} className="text-sandstone" />
+                            Academic Year
+                        </label>
+                        <input
+                            type="text"
+                            required
+                            value={formData.year}
+                            onChange={(e) => setFormData({ ...formData, year: e.target.value })}
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-sandstone focus:ring-2 focus:ring-sandstone/20 outline-none transition-all bg-gray-50/50"
+                            placeholder="e.g. 2023-24"
+                        />
                     </div>
 
-                    {/* New Image Upload Component */}
-                    <div className="max-w-md">
-                        <AdvancedImageUpload
+                    {/* Stream */}
+                    <div className="space-y-2">
+                        <label className="text-sm font-bold text-oxford uppercase tracking-wider flex items-center gap-2">
+                            Stream
+                        </label>
+                        <input
+                            type="text"
+                            value={formData.stream}
+                            onChange={(e) => setFormData({ ...formData, stream: e.target.value })}
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-sandstone focus:ring-2 focus:ring-sandstone/20 outline-none transition-all bg-gray-50/50"
+                            placeholder="e.g. Science, Arts, Commerce"
+                        />
+                    </div>
+
+                    {/* Institution */}
+                    <div className="space-y-2">
+                        <label className="text-sm font-bold text-oxford uppercase tracking-wider flex items-center gap-2">
+                            Institution
+                        </label>
+                        <select
+                            value={formData.institution}
+                            onChange={(e) => setFormData({ ...formData, institution: e.target.value })}
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-sandstone focus:ring-2 focus:ring-sandstone/20 outline-none transition-all bg-gray-50/50"
+                        >
+                            <option value="marudhar">Marudhar Balika Vidyapeeth</option>
+                            <option value="lps">Leeladevi English Medium</option>
+                            <option value="college">Leela Devi College</option>
+                        </select>
+                    </div>
+
+                    {/* Result Type */}
+                    <div className="space-y-2">
+                        <label className="text-sm font-bold text-oxford uppercase tracking-wider flex items-center gap-2">
+                            Result Type
+                        </label>
+                        <select
+                            value={formData.resultType || "Board"}
+                            onChange={(e) => setFormData({ ...formData, resultType: e.target.value })}
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-sandstone focus:ring-2 focus:ring-sandstone/20 outline-none transition-all bg-gray-50/50"
+                        >
+                            <option value="Board">Board Topper (VIII, X, XII)</option>
+                            <option value="Non-Board">Non-Board Topper (I-VII, IX, XI)</option>
+                            <option value="Sports">Sports Achievement</option>
+                            <option value="Competitive">Competitive Exams (NEET, JEE, etc.)</option>
+                            <option value="Scholarship">Scholarships & Awards</option>
+                        </select>
+                    </div>
+
+                    {/* Student Photo Upload */}
+                    <div className="md:col-span-2">
+                        <ImageUploadField
                             label="Student Photo"
-                            folder="results"
                             value={formData.image}
-                            onUpload={(url: string) => setFormData({ ...formData, image: url })}
-                            onRemove={() => setFormData({ ...formData, image: "" })}
+                            onChange={(url: string) => setFormData({ ...formData, image: url })}
+                            folder="toppers"
+                            description="Clear portrait recommended. Under 2MB. JPG, PNG, WEBP."
                         />
                     </div>
                 </div>
+            </div>
 
-                <div className="flex justify-end gap-4">
-                    <button
-                        type="button"
-                        onClick={() => router.back()}
-                        className="px-8 py-4 bg-white text-gray-400 rounded-2xl font-bold uppercase tracking-wider hover:text-oxford transition-colors"
-                    >
-                        Cancel
-                    </button>
-                    <button
-                        type="submit"
-                        disabled={loading}
-                        className="px-10 py-4 bg-oxford text-white rounded-2xl font-bold uppercase tracking-wider shadow-xl hover:bg-sandstone transition-colors flex items-center gap-2 group disabled:opacity-50"
-                    >
-                        {loading ? (
-                            <Loader2 className="animate-spin" size={20} />
-                        ) : (
-                            <>
-                                <Save size={20} className="group-hover:scale-110 transition-transform" />
-                                {isEditing ? "Update Result" : "Add Record"}
-                            </>
-                        )}
-                    </button>
-                </div>
-            </form>
-        </div>
+            <div className="flex items-center gap-4 justify-end">
+                <button
+                    type="button"
+                    onClick={() => router.back()}
+                    className="px-6 py-3 rounded-xl border border-gray-200 font-bold text-gray-500 hover:bg-gray-50 transition-all flex items-center gap-2"
+                >
+                    <X size={20} />
+                    Cancel
+                </button>
+                <button
+                    type="submit"
+                    disabled={loading}
+                    className="px-8 py-3 rounded-xl bg-oxford text-white font-bold hover:bg-oxford/90 shadow-lg shadow-oxford/20 transition-all flex items-center gap-2 disabled:opacity-50"
+                >
+                    <Save size={20} />
+                    {loading ? "Saving..." : "Save Result"}
+                </button>
+            </div>
+        </form>
     );
 }

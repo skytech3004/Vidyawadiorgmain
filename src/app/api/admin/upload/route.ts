@@ -38,6 +38,11 @@ export async function POST(req: NextRequest) {
         const filename = `${Date.now()}-${file.name.replace(/\s+/g, "-")}`;
         const relativePath = `uploads/${folder}/${filename}`;
         const absolutePath = path.join(process.cwd(), "public", relativePath);
+        const dir = path.dirname(absolutePath);
+
+        // Ensure directory exists
+        const { mkdir } = await import("fs/promises");
+        await mkdir(dir, { recursive: true });
 
         await writeFile(absolutePath, buffer);
 

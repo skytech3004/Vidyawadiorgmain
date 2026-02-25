@@ -3,32 +3,28 @@ import mongoose from "mongoose";
 const PostSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: [true, "Please provide a title"],
+        required: true,
     },
     slug: {
         type: String,
-        required: [true, "Please provide a slug"],
+        required: true,
         unique: true,
     },
     content: {
         type: String,
-        required: [true, "Please provide content"],
+        required: true,
     },
     category: {
         type: String,
-        required: [true, "Please provide a category"],
+        required: true,
     },
-    coverImage: {
-        type: String,
-    },
-    isPublished: {
+    image: String,
+    tags: [String],
+    author: String,
+    published: {
         type: Boolean,
         default: false,
-    },
-    author: {
-        type: String,
-        default: "Admin",
-    },
+    }
 }, { timestamps: true });
 
 export default mongoose.models.Post || mongoose.model("Post", PostSchema);

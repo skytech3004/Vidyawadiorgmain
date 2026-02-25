@@ -12,12 +12,15 @@ import Academics from "@/components/Academics";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import HomeNewsEvents from "@/components/HomeNewsEvents";
+import AdmissionsPopup from "@/components/AdmissionsPopup";
+
 export default async function Home() {
   // Initialize DB table on first load
   // await initDB();
 
   return (
     <main className="min-h-screen">
+      <AdmissionsPopup />
       <Navbar />
       <Hero />
       <About />

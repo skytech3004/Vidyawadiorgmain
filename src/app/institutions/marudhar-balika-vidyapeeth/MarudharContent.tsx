@@ -3,6 +3,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { BookOpen, Trophy, School, Users, Star, Microscope, Medal, Phone, MapPin, Globe, CheckCircle2 } from "lucide-react";
 import StudentResultsTable from "@/components/StudentResultsTable";
 import StudentModal from "@/components/StudentModal";
@@ -31,13 +32,25 @@ export default function MarudharContent() {
             <section className="relative pt-40 pb-20 px-6 bg-oxford/90 text-white overflow-hidden">
                 <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-sandstone/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
                 <div className="max-w-7xl mx-auto relative z-10">
-                    <span className="text-sandstone font-bold uppercase tracking-widest text-sm mb-4 block">Hindi & English Meduim Senior Secondary School (RBSE)</span>
-                    <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight">
-                        Marudhar Balika Vidyapeeth
-                    </h1>
-                    <p className="text-xl md:text-2xl text-white/90 font-light mb-10 max-w-3xl">
-                        Empowering Girls Through Education, Excellence & Values
-                    </p>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="flex flex-col md:flex-row gap-8 items-center mb-10"
+                    >
+                        <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-sandstone overflow-hidden bg-white shrink-0">
+                            {/* User: Add your image path here */}
+                            <img src="/marudhar_balika.jpg" alt="Marudhar Balika Vidyapeeth Logo" className="w-full h-full object-cover" />
+                        </div>
+                        <div>
+                            <span className="text-sandstone font-bold uppercase tracking-widest text-sm mb-4 block">Hindi & English Meduim Senior Secondary School (RBSE)</span>
+                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 leading-tight">
+                                Marudhar Balika Vidyapeeth
+                            </h1>
+                            <p className="text-xl md:text-2xl text-white/90 font-light max-w-3xl">
+                                Empowering Girls Through Education, Excellence & Values
+                            </p>
+                        </div>
+                    </motion.div>
 
                     <div className="grid md:grid-cols-3 gap-6 text-sm font-medium text-white/80">
                         <div className="flex items-start gap-3">

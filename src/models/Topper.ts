@@ -3,37 +3,40 @@ import mongoose from "mongoose";
 const TopperSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, "Please provide a name"],
+        required: true,
     },
     percentage: {
-        type: String,
-        required: [true, "Please provide a percentage"],
-    },
-    stream: {
-        type: String,
-        default: "-",
+        type: Number,
+        required: true,
     },
     class: {
         type: String,
-        enum: ["X", "XII"],
-        required: [true, "Please provide a class"],
+        required: true,
     },
     year: {
         type: String,
-        required: [true, "Please provide a year"],
+        required: true,
     },
-    image: {
-        type: String,
-    },
+    stream: String,
+    image: String,
     institution: {
         type: String,
-        enum: ["LPS", "Marudhar"],
-        required: [true, "Please provide an institution"],
+        required: true,
     },
     order: {
         type: Number,
         default: 0,
+    },
+    resultType: {
+        type: String,
+        default: "Board", // e.g., 'Board', 'Non-Board', 'Sports', 'Competitive'
     }
 }, { timestamps: true });
 
-export default mongoose.models.Topper || mongoose.model("Topper", TopperSchema);
+// Force delete the model in development to ensure schema changes are applied
+if (process.env.NODE_ENV === "development") {
+    delete mongoose.models.Topper;
+}
+
+const Topper = mongoose.models.Topper || mongoose.model("Topper", TopperSchema);
+export default Topper;

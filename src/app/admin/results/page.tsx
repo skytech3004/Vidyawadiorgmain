@@ -17,7 +17,7 @@ import {
 import Link from "next/link";
 
 const classes = ["All", "X", "XII"];
-const institutions = ["All", "LPS", "Marudhar"];
+const institutions = ["All", "LPS", "Marudhar", "College"];
 
 export default function ResultManagerPage() {
     const [results, setResults] = useState<any[]>([]);
@@ -51,18 +51,23 @@ export default function ResultManagerPage() {
         try {
             const res = await fetch(`/api/admin/results/${id}`, { method: "DELETE" });
             const data = await res.json();
+
             if (data.success) {
                 setResults(results.filter(item => item._id !== id));
+            } else {
+                alert(`Error: ${data.error || "Failed to delete result record."}`);
             }
         } catch (error) {
-            alert("Failed to delete result.");
+            console.error("Delete error:", error);
+            alert("A network error occurred while trying to delete the result.");
         }
     };
 
     const filteredResults = results.filter(item => {
         const matchesSearch = item.name.toLowerCase().includes(search.toLowerCase());
         const matchesClass = selectedClass === "All" || item.class === selectedClass;
-        const matchesInst = selectedInst === "All" || item.institution === selectedInst;
+        const matchesInst = selectedInst === "All" ||
+            item.institution?.toLowerCase() === selectedInst.toLowerCase();
         return matchesSearch && matchesClass && matchesInst;
     });
 
@@ -89,8 +94,8 @@ export default function ResultManagerPage() {
                                     key={cl}
                                     onClick={() => setSelectedClass(cl)}
                                     className={`px-4 py-1.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all ${selectedClass === cl
-                                            ? "bg-white text-oxford shadow-sm"
-                                            : "text-gray-400 hover:text-oxford"
+                                        ? "bg-white text-oxford shadow-sm"
+                                        : "text-gray-400 hover:text-oxford"
                                         }`}
                                 >
                                     {cl === "All" ? "All Classes" : `Class ${cl}`}
@@ -104,8 +109,8 @@ export default function ResultManagerPage() {
                                     key={inst}
                                     onClick={() => setSelectedInst(inst)}
                                     className={`px-4 py-1.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all ${selectedInst === inst
-                                            ? "bg-white text-oxford shadow-sm"
-                                            : "text-gray-400 hover:text-oxford"
+                                        ? "bg-white text-oxford shadow-sm"
+                                        : "text-gray-400 hover:text-oxford"
                                         }`}
                                 >
                                     {inst}

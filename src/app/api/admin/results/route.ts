@@ -24,7 +24,15 @@ export async function GET(req: NextRequest) {
         }
 
         await dbConnect();
-        const results = await Topper.find({}).sort({ year: -1, class: 1, order: 1 });
+        const { searchParams } = new URL(req.url);
+        const institution = searchParams.get("institution");
+        const resultType = searchParams.get("resultType");
+
+        let query: any = {};
+        if (institution) query.institution = institution;
+        if (resultType) query.resultType = resultType;
+
+        const results = await Topper.find(query).sort({ year: -1, class: 1, order: 1 });
         return NextResponse.json({ success: true, results });
     } catch (error: any) {
         return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });

@@ -79,7 +79,7 @@ export default function Hero() {
                     poster="/hostel.jpg"
                 >
                     <source src="/ritu_vaishnav_created.webm" type="video/webm" />
-                    <source src="/ritu_vaishnav_created.mp4" type="video/mp4" />
+                    {/* <source src="/ritu_vaishnav_created.mp4" type="video/mp4" /> */}
                 </video>
 
                 {/* Cool Blue Cinematic Grade */}

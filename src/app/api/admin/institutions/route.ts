@@ -1,0 +1,59 @@
+import { NextRequest, NextResponse } from "next/server";
+import dbConnect from "@/lib/mongodb";
+import Institution from "@/models/Institution";
+import { jwtVerify } from "jose";
+
+async function verifyAuth(req: NextRequest) {
+    const token = req.cookies.get("adminToken")?.value;
+    if (!token) return null;
+
+    try {
+        const secret = new TextEncoder().encode(process.env.JWT_SECRET || "fallback_secret");
+        const { payload } = await jwtVerify(token, secret);
+        return payload;
+    } catch (error) {
+        return null;
+    }
+}
+
+export async function GET(req: NextRequest) {
+    try {
+        const auth = await verifyAuth(req);
+        if (!auth) {
+            return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
+        }
+
+        await dbConnect();
+        const institutions = await Institution.find({});
+        return NextResponse.json({ success: true, institutions });
+    } catch (error: any) {
+        return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });
+    }
+}
+
+export async function POST(req: NextRequest) {
+    try {
+        const auth = await verifyAuth(req);
+        if (!auth) {
+            return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
+        }
+
+        await dbConnect();
+        const data = await req.json();
+
+        if (!data.id) {
+            return NextResponse.json({ success: false, error: "Missing Institution ID" }, { status: 400 });
+        }
+
+        const institution = await Institution.findOneAndUpdate(
+            { id: data.id },
+            data,
+            { upsert: true, new: true }
+        );
+
+        return NextResponse.json({ success: true, institution });
+    } catch (error: any) {
+        console.error("INSTITUTION_POST_ERROR:", error);
+        return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });
+    }
+}

@@ -60,7 +60,8 @@ export default function FacultyManagerPage() {
     const filteredFaculty = faculty.filter(member => {
         const matchesSearch = member.name.toLowerCase().includes(search.toLowerCase()) ||
             member.designation.toLowerCase().includes(search.toLowerCase());
-        const matchesInstitution = selectedInstitution === "All" || member.institution === selectedInstitution;
+        const matchesInstitution = selectedInstitution === "All" ||
+            member.institution?.toLowerCase() === selectedInstitution.toLowerCase();
         return matchesSearch && matchesInstitution;
     });
 
@@ -86,8 +87,8 @@ export default function FacultyManagerPage() {
                                 key={inst}
                                 onClick={() => setSelectedInstitution(inst)}
                                 className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest whitespace-nowrap transition-all ${selectedInstitution === inst
-                                        ? "bg-sandstone text-oxford shadow-md"
-                                        : "bg-white text-gray-400 hover:text-oxford border border-gray-100"
+                                    ? "bg-sandstone text-oxford shadow-md"
+                                    : "bg-white text-gray-400 hover:text-oxford border border-gray-100"
                                     }`}
                             >
                                 {inst === "All" ? "All Faculty" : inst}

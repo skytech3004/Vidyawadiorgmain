@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
     FileText,
@@ -9,22 +9,65 @@ import {
     Trophy,
     MessageSquare,
     ArrowUpRight,
-    Plus
+    Plus,
+    RefreshCcw
 } from "lucide-react";
 
-const stats = [
-    { name: "Total Blog Posts", value: "24", icon: FileText, color: "text-blue-600", bg: "bg-blue-50" },
-    { name: "Gallery Images", value: "156", icon: ImageIcon, color: "text-purple-600", bg: "bg-purple-50" },
-    { name: "Active Staff", value: "48", icon: Users, color: "text-green-600", bg: "bg-green-50" },
-    { name: "New Inquiries", value: "12", icon: MessageSquare, color: "text-orange-600", bg: "bg-orange-50" },
-];
-
 export default function DashboardPage() {
+    const [loading, setLoading] = useState(true);
+    const [data, setData] = useState<any>({ stats: [], recentActivity: [] });
+
+    useEffect(() => {
+        fetchDashboardData();
+    }, []);
+
+    const fetchDashboardData = async () => {
+        try {
+            const res = await fetch("/api/admin/dashboard");
+            const result = await res.json();
+            if (result.success) {
+                // Map icons back to stats
+                const iconMap: any = {
+                    "Total Blog Posts": FileText,
+                    "Gallery Images": ImageIcon,
+                    "Active Staff": Users,
+                    "New Inquiries": MessageSquare,
+                };
+                const colorMap: any = {
+                    "Total Blog Posts": { color: "text-blue-600", bg: "bg-blue-50" },
+                    "Gallery Images": { color: "text-purple-600", bg: "bg-purple-50" },
+                    "Active Staff": { color: "text-green-600", bg: "bg-green-50" },
+                    "New Inquiries": { color: "text-orange-600", bg: "bg-orange-50" },
+                };
+
+                const mappedStats = result.stats.map((s: any) => ({
+                    ...s,
+                    icon: iconMap[s.name] || FileText,
+                    ...(colorMap[s.name] || { color: "text-gray-600", bg: "bg-gray-50" })
+                }));
+
+                setData({ ...result, stats: mappedStats });
+            }
+        } catch (error) {
+            console.error("Failed to fetch dashboard stats", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center h-96">
+                <RefreshCcw className="animate-spin text-sandstone" size={48} />
+            </div>
+        );
+    }
+
     return (
         <div className="space-y-8">
             {/* Stats Grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {stats.map((stat, i) => (
+                {data.stats.map((stat: any, i: number) => (
                     <motion.div
                         key={stat.name}
                         initial={{ opacity: 0, y: 20 }}
@@ -60,24 +103,30 @@ export default function DashboardPage() {
                     </div>
 
                     <div className="space-y-6">
-                        {[1, 2, 3].map((_, i) => (
+                        {data.recentActivity.length > 0 ? data.recentActivity.map((activity: any, i: number) => (
                             <div key={i} className="flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100">
                                 <div className="w-16 h-16 rounded-xl bg-gray-100 overflow-hidden flex-shrink-0">
-                                    <div className="w-full h-full bg-sandstone/10" />
+                                    <div className="w-full h-full bg-sandstone/10 flex items-center justify-center text-sandstone font-black text-xl">
+                                        {activity.title[0]}
+                                    </div>
                                 </div>
                                 <div className="flex-1">
                                     <div className="flex items-center gap-2 mb-1">
-                                        <span className="text-[10px] font-bold uppercase tracking-widest text-sandstone">School News</span>
-                                        <span className="text-[10px] text-gray-400">• 2 hours ago</span>
+                                        <span className="text-[10px] font-bold uppercase tracking-widest text-sandstone">{activity.category || "News"}</span>
+                                        <span className="text-[10px] text-gray-400">• {activity.time}</span>
                                     </div>
-                                    <h4 className="font-bold text-oxford line-clamp-1">Annual Sports Day 2024 Preparations Begin</h4>
-                                    <p className="text-xs text-gray-500 mt-1">Updated by Admin</p>
+                                    <h4 className="font-bold text-oxford line-clamp-1">{activity.title}</h4>
+                                    <p className="text-xs text-gray-500 mt-1">Updated by {activity.author || "Admin"}</p>
                                 </div>
                                 <button className="p-2 hover:bg-white rounded-lg transition-colors border border-transparent hover:border-gray-200 shadow-sm">
                                     <ArrowUpRight size={16} className="text-gray-400" />
                                 </button>
                             </div>
-                        ))}
+                        )) : (
+                            <div className="text-center py-10 text-gray-400 font-medium">
+                                No recent activity found.
+                            </div>
+                        )}
                     </div>
                 </div>
 
@@ -87,13 +136,14 @@ export default function DashboardPage() {
                     <h3 className="text-xl font-black mb-8 uppercase tracking-tight relative z-10">Quick Actions</h3>
                     <div className="grid gap-4 relative z-10">
                         {[
-                            { name: "Update Results", icon: Trophy, desc: "Add board exam toppers" },
-                            { name: "Manage Staff", icon: Users, desc: "Edit faculty profiles" },
-                            { name: "Upload Photos", icon: ImageIcon, desc: "Add to event gallery" },
+                            { name: "Update Results", icon: Trophy, desc: "Add board exam toppers", href: "/admin/results/new" },
+                            { name: "Manage Staff", icon: Users, desc: "Edit faculty profiles", href: "/admin/staff/new" },
+                            { name: "Upload Photos", icon: ImageIcon, desc: "Add to event gallery", href: "/admin/gallery/new" },
                         ].map((action, i) => (
                             <button
                                 key={i}
-                                className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-left"
+                                onClick={() => window.location.href = action.href}
+                                className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-left w-full"
                             >
                                 <div className="w-10 h-10 bg-sandstone rounded-xl flex items-center justify-center text-oxford">
                                     <action.icon size={20} />

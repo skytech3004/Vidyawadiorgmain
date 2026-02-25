@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
     BookOpen, Trophy, School, Users, Star, Microscope,
@@ -67,64 +67,55 @@ const staffList = [
     { no: 50, name: "Ms. Chanchal Suthar", designation: "Comp. Lab Asst." },
 ];
 
-const toppers12 = [
-    { name: "Ms. Ankur Kanwar", stream: "Science", percentage: "97.40%", image: "/images/english school/Ankur Kunwar.jpg" },
-    { name: "Ms. Himanshi Jain", stream: "Science", percentage: "94.80%", image: "/images/english school/Himanshi Jain.jpg" },
-    { name: "Ms. Niral", stream: "Commerce", percentage: "93.60%", image: "/images/english school/Niral.jpg" },
-    { name: "Ms. Ishita Chouhan", stream: "Humanities", percentage: "92.60%", image: "" },
-    { name: "Ms. Manjari Vaishnav", stream: "Humanities", percentage: "92.40%", image: "/images/english school/Manjari vaishnav.jpg" },
-    { name: "Ms. Alfina", stream: "Humanities", percentage: "91.00%", image: "/images/english school/alfina.jpg" },
-    { name: "Ms. Laxita Rahore", stream: "Humanities", percentage: "90.00%", image: "/images/english school/Lakshita rathore.jpg" },
-    { name: "Ms. Yuti Sharma", stream: "Humanities", percentage: "89.80%", image: "/images/english school/Yuti Sharma.jpg" },
-    { name: "Ms. Sofia Khan", stream: "Humanities", percentage: "89.20%", image: "/images/english school/Sofia khan.jpg" },
-    { name: "Ms. Taruna", stream: "Humanities", percentage: "89.00%", image: "/images/english school/taruna.jpg" },
-];
-
-const toppers10 = [
-    { name: "Ms. Rajal Rajpurohit", percentage: "93.80%", image: "" },
-    { name: "Ms. Pragati Sirvi", percentage: "93.00%", image: "/images/english school/pragati sirvi.jpg" },
-    { name: "Ms. Yajeshvi", percentage: "92.40%", image: "/images/english school/Yajeshvi.jpg" },
-    { name: "Ms. Aisha Soni", percentage: "92.00%", image: "/images/english school/AAIsha soni.jpg" },
-    { name: "Ms. Anju Kanwar", percentage: "91.20%", image: "/images/english school/anju kanwar.jpg" },
-    { name: "Ms. Janvee Soni", percentage: "90.60%", image: "/images/english school/Janvee soni.jpg" },
-    { name: "Ms. Saniya Soni", percentage: "89.00%", image: "/images/english school/saniya soni.jpg" },
-    { name: "Ms. Bhavya Sharma", percentage: "87.80%", image: "/images/english school/bhavya sharma.jpg" },
-    { name: "Ms. Renuka Bhati", percentage: "87.80%", image: "/images/english school/Renuka bhati.jpg" },
-    { name: "Ms. Gayatri Rathore", percentage: "87.00%", image: "/images/english school/Gayatri Rathore.jpg" },
-    { name: "Ms. Rudrakshi", percentage: "86.60%", image: "/images/english school/Rudrakshi.jpg" },
-    { name: "Ms. Tanishi Choudhary", percentage: "85.40%", image: "/images/english school/Tanisi choudary.jpg" },
-    { name: "Ms. Mumal Kanwar", percentage: "85.00%", image: "/images/english school/Mumal kanwar.jpg" },
-    { name: "Ms. Sakshi Deora", percentage: "85.00%", image: "/images/english school/sakshi deora.jpg" },
-];
-
-const nonBoardToppers = [
-    { name: "Ms. Shivgami Chouhan", class: "I", image: "" },
-    { name: "Ms. Priyadarshni", class: "II", image: "" },
-    { name: "Ms. Kinjal Dewasi", class: "III", image: "" },
-    { name: "Ms. Poorvi Pareek", class: "IV", image: "" },
-    { name: "Ms. Chetnya Rathore", class: "V", image: "" },
-    { name: "Ms. Abhigya", class: "VI", image: "" },
-    { name: "Ms. Dimpy Malviya", class: "VII", image: "" },
-    { name: "Ms. Tamanna", class: "VIII", image: "" },
-    { name: "Ms. Preksha", class: "IX", image: "" },
-    { name: "Ms. Tanisha Jain", class: "XI Sci", image: "/images/english school/Tanisha jain.jpg" },
-    { name: "Ms. Mehak Jain", class: "XI Com", image: "" },
-    { name: "Ms. Jaishree", class: "XI Hum", image: "" },
-];
+// Hardcoded fallback data removed in favor of dynamic fetching
 
 export default function LPSContent() {
     const [selectedStudent, setSelectedStudent] = useState<any>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-
-    // Pagination states
     const [visibleToppers, setVisibleToppers] = useState(10);
     const [visibleStaff, setVisibleStaff] = useState(12);
+    const [selectedCategory, setSelectedCategory] = useState("XII");
+    const [allResults, setAllResults] = useState<any[]>([]);
+    const [loadingResults, setLoadingResults] = useState(true);
 
-    // Combined toppers for the table
-    const allToppers = [
-        ...toppers12.map(t => ({ ...t, class: "XII", description: `Class XII ${t.stream} Topper` })),
-        ...toppers10.map(t => ({ ...t, class: "X", stream: "-", description: "Class X Board Exam Topper" }))
-    ];
+    useEffect(() => {
+        const fetchResults = async () => {
+            try {
+                const res = await fetch("/api/results?institution=lps");
+                const data = await res.json();
+                if (data.success) {
+                    setAllResults(data.results);
+                }
+            } catch (err) {
+                console.error("Failed to fetch LPS results:", err);
+            } finally {
+                setLoadingResults(false);
+            }
+        };
+        fetchResults();
+    }, []);
+
+    // Filtered results based on category
+    const getFilteredResults = () => {
+        if (selectedCategory === "XII") {
+            return allResults
+                .filter(r => r.class === "XII" && (r.resultType === "Board" || !r.resultType))
+                .map(t => ({ ...t, description: `Class XII ${t.stream || ""} Topper` }));
+        }
+        if (selectedCategory === "X") {
+            return allResults
+                .filter(r => r.class === "X" && (r.resultType === "Board" || !r.resultType))
+                .map(t => ({ ...t, stream: t.stream || "-", description: "Class X Board Exam Topper" }));
+        }
+        if (selectedCategory === "Non-Board") {
+            return allResults
+                .filter(r => r.resultType === "Non-Board")
+                .map(t => ({ ...t, stream: t.stream || "-", description: `Class ${t.class} Topper` }));
+        }
+        return [];
+    };
+
+    const displayResults = getFilteredResults();
 
     const openModal = (student: any) => {
         setSelectedStudent(student);
@@ -136,21 +127,39 @@ export default function LPSContent() {
         setTimeout(() => setSelectedStudent(null), 300);
     };
 
+    const categories = [
+        { id: "XII", name: "Class XII", icon: Trophy, count: allResults.filter(r => r.class === "XII").length, desc: "Aissce Board Result" },
+        { id: "X", name: "Class X", icon: Medal, count: allResults.filter(r => r.class === "X").length, desc: "Aisse Board Result" },
+        { id: "Non-Board", name: "Non-Board", icon: Star, count: allResults.filter(r => r.resultType === "Non-Board").length, desc: "Class Toppers" }
+    ];
+
     return (
         <main className="min-h-screen bg-white">
             <StudentModal isOpen={isModalOpen} onClose={closeModal} student={selectedStudent} />
 
             {/* Hero Section */}
+            {/* ... lines 144-185 remain same ... */}
             <section className="relative pt-40 pb-20 px-6 bg-oxford/90 text-white overflow-hidden">
                 <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-sandstone/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
                 <div className="max-w-7xl mx-auto relative z-10">
-                    <span className="text-sandstone font-bold uppercase tracking-widest text-sm mb-4 block">Affiliated to CBSE, New Delhi</span>
-                    <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight">
-                        Leeladevi Parasmal Sancheti English Medium Sr.Sec.School
-                    </h1>
-                    <p className="text-xl md:text-2xl text-white/90 font-light mb-10 max-w-3xl">
-                        A premier residential school for girls in Pali, Rajasthan
-                    </p>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="flex flex-col md:flex-row gap-8 items-center mb-10"
+                    >
+                        <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-sandstone overflow-hidden bg-white shrink-0">
+                            <img src="/lps.jpg" alt="LPS Logo" className="w-full h-full object-cover" />
+                        </div>
+                        <div>
+                            <span className="text-sandstone font-bold uppercase tracking-widest text-sm mb-4 block">Affiliated to CBSE, New Delhi</span>
+                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 leading-tight">
+                                Leeladevi Parasmal Sancheti English Medium Sr.Sec.Schoool
+                            </h1>
+                            <p className="text-xl md:text-2xl text-white/90 font-light max-w-3xl">
+                                A premier residential school for girls in Pali, Rajasthan
+                            </p>
+                        </div>
+                    </motion.div>
 
                     <div className="grid md:grid-cols-3 gap-6 text-sm font-medium text-white/80 border-t border-white/10 pt-10">
                         <div className="flex items-start gap-3">
@@ -330,30 +339,72 @@ export default function LPSContent() {
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Meritorious Students</span>
-                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2">Result Highlights 2023-24</h2>
+                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2">Result Highlights</h2>
                         <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-                            Celebrating the academic excellence and dedication of our top performers in board exams.
+                            Celebrating the academic excellence and dedication of our top performers.
                         </p>
                     </div>
 
-                    <div className="space-y-16">
-                        {/* Class XII & X Table */}
-                        <div className="overflow-x-auto rounded-3xl border border-oxford/10 shadow-xl bg-white">
+                    {/* Category Cards */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                        {categories.map((cat) => (
+                            <motion.button
+                                key={cat.id}
+                                whileHover={{ y: -5 }}
+                                whileTap={{ scale: 0.98 }}
+                                onClick={() => {
+                                    setSelectedCategory(cat.id);
+                                    setVisibleToppers(10);
+                                }}
+                                className={`relative p-8 rounded-3xl text-left transition-all overflow-hidden border ${selectedCategory === cat.id
+                                    ? "bg-oxford text-white border-oxford shadow-2xl"
+                                    : "bg-gray-50 text-oxford border-gray-100 hover:bg-white hover:shadow-xl"
+                                    }`}
+                            >
+                                {selectedCategory === cat.id && (
+                                    <motion.div
+                                        layoutId="activeGlow"
+                                        className="absolute top-0 right-0 w-32 h-32 bg-sandstone/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"
+                                    />
+                                )}
+                                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${selectedCategory === cat.id ? "bg-sandstone text-oxford" : "bg-oxford/5 text-sandstone"
+                                    }`}>
+                                    <cat.icon size={28} />
+                                </div>
+                                <h3 className="text-2xl font-black mb-1">{cat.name}</h3>
+                                <p className={`text-sm uppercase tracking-widest font-bold mb-4 ${selectedCategory === cat.id ? "text-sandstone" : "text-gray-500"
+                                    }`}>{cat.desc}</p>
+                                <div className="flex items-center gap-2 mt-auto">
+                                    <span className={`text-4xl font-black ${selectedCategory === cat.id ? "text-white" : "text-oxford"
+                                        }`}>{cat.count}</span>
+                                    <span className={`text-xs uppercase tracking-tighter font-bold ${selectedCategory === cat.id ? "text-white/60" : "text-gray-400"
+                                        }`}>Students</span>
+                                </div>
+                            </motion.button>
+                        ))}
+                    </div>
+
+                    <div className="space-y-8">
+                        {/* Results Table */}
+                        <div className="overflow-x-auto rounded-[2rem] border border-oxford/10 shadow-xl bg-white overflow-hidden">
                             <table className="w-full text-left border-collapse">
                                 <thead>
                                     <tr className="bg-oxford text-white">
-                                        <th className="p-6 font-bold uppercase tracking-wider text-xs">S.No.</th>
-                                        <th className="p-6 font-bold uppercase tracking-wider text-xs">Student Name</th>
-                                        <th className="p-6 font-bold uppercase tracking-wider text-xs">Class</th>
-                                        <th className="p-6 font-bold uppercase tracking-wider text-xs">Stream</th>
-                                        <th className="p-6 font-bold uppercase tracking-wider text-xs text-right">Percentage</th>
+                                        <th className="p-6 font-bold uppercase tracking-wider text-[10px]">S.No.</th>
+                                        <th className="p-6 font-bold uppercase tracking-wider text-[10px]">Student Name</th>
+                                        <th className="p-6 font-bold uppercase tracking-wider text-[10px]">
+                                            {selectedCategory === "Non-Board" ? "Class" : "Stream"}
+                                        </th>
+                                        <th className="p-6 font-bold uppercase tracking-wider text-[10px] text-right">
+                                            {selectedCategory === "Non-Board" ? "Category" : "Percentage"}
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-100">
-                                    {allToppers.slice(0, visibleToppers).map((student, i) => (
+                                    {displayResults.slice(0, visibleToppers).map((student, i) => (
                                         <motion.tr
-                                            initial={{ opacity: 0, y: 10 }}
-                                            animate={{ opacity: 1, y: 0 }}
+                                            initial={{ opacity: 0, x: -10 }}
+                                            animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: i * 0.05 }}
                                             key={i}
                                             className="hover:bg-oxford/5 transition-colors group cursor-pointer"
@@ -361,21 +412,37 @@ export default function LPSContent() {
                                         >
                                             <td className="p-6 text-sm text-gray-500 font-medium">{i + 1}</td>
                                             <td className="p-6">
-                                                <div className="flex items-center gap-3">
-                                                    <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden border border-oxford/10 group-hover:border-sandstone transition-colors">
+                                                <div className="flex items-center gap-4">
+                                                    <div className="w-12 h-12 rounded-full bg-gray-100 overflow-hidden border-2 border-transparent group-hover:border-sandstone transition-all shadow-sm">
                                                         {student.image ? (
                                                             <img src={student.image} alt={student.name} className="w-full h-full object-cover" />
                                                         ) : (
-                                                            <User className="w-full h-full p-2 text-oxford/20" />
+                                                            <div className="w-full h-full flex items-center justify-center bg-oxford/5 text-oxford/20">
+                                                                <User size={20} />
+                                                            </div>
                                                         )}
                                                     </div>
-                                                    <span className="font-bold text-oxford group-hover:text-sandstone transition-colors">{student.name}</span>
+                                                    <div>
+                                                        <span className="font-bold text-oxford group-hover:text-sandstone transition-colors block leading-none mb-1">{student.name}</span>
+                                                        <span className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Vidyawadi Student</span>
+                                                    </div>
                                                 </div>
                                             </td>
-                                            <td className="p-6 text-sm font-bold text-gray-600">{student.class}</td>
-                                            <td className="p-6 text-sm text-gray-500 font-medium">{student.stream}</td>
+                                            <td className="p-6">
+                                                {selectedCategory === "Non-Board" ? (
+                                                    <span className="px-3 py-1 bg-oxford/5 text-oxford text-xs font-black rounded-lg uppercase">Class {student.class}</span>
+                                                ) : (
+                                                    <span className="text-sm font-bold text-gray-600">{student.stream || "-"}</span>
+                                                )}
+                                            </td>
                                             <td className="p-6 text-right">
-                                                <span className="px-4 py-1 bg-sandstone/10 text-sandstone font-black rounded-lg">{student.percentage}</span>
+                                                {selectedCategory === "Non-Board" ? (
+                                                    <span className="text-[10px] font-black text-sandstone uppercase tracking-widest">Topper</span>
+                                                ) : (
+                                                    <span className="inline-flex items-center justify-center px-4 py-1.5 bg-sandstone/10 text-sandstone font-black rounded-xl text-sm border border-sandstone/20">
+                                                        {student.percentage}
+                                                    </span>
+                                                )}
                                             </td>
                                         </motion.tr>
                                     ))}
@@ -383,40 +450,19 @@ export default function LPSContent() {
                             </table>
                         </div>
 
-                        {visibleToppers < allToppers.length && (
+                        {visibleToppers < displayResults.length && (
                             <div className="flex justify-center mt-8">
                                 <motion.button
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                     onClick={() => setVisibleToppers(prev => prev + 10)}
-                                    className="px-8 py-3 bg-oxford text-white rounded-full font-bold uppercase tracking-wider shadow-lg hover:bg-sandstone transition-colors flex items-center gap-2"
+                                    className="px-10 py-4 bg-oxford text-white rounded-full font-bold uppercase tracking-widest shadow-xl hover:bg-sandstone transition-all flex items-center gap-3 text-sm"
                                 >
-                                    Load 10 More Results
+                                    View More Results
                                     <ArrowRight size={18} />
                                 </motion.button>
                             </div>
                         )}
-
-                        {/* Non-Board Tags */}
-                        <div className="bg-oxford rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden text-center">
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-sandstone/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
-                            <h3 className="text-2xl font-bold text-white mb-8 relative z-10 flex items-center justify-center gap-3">
-                                <Star className="text-sandstone fill-sandstone" />
-                                Class Toppers (Non-Board)
-                            </h3>
-                            <div className="flex flex-wrap justify-center gap-4 relative z-10">
-                                {nonBoardToppers.map((student, i) => (
-                                    <div
-                                        key={i}
-                                        className="px-6 py-3 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 flex items-center gap-3 text-sm hover:bg-white/20 transition-all cursor-pointer group"
-                                        onClick={() => openModal({ ...student, description: `Class ${student.class} Topper` })}
-                                    >
-                                        <span className="font-bold text-white group-hover:text-sandstone transition-colors">{student.name}</span>
-                                        <span className="px-2 py-0.5 bg-sandstone text-oxford text-[10px] font-black rounded">{student.class}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
                     </div>
                 </div>
             </section>
