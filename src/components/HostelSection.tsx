@@ -14,7 +14,7 @@ const hostelImages = [
     "/Hostels_2.png",
     "/Hostels_3.png",
     "/Hostels_4.png",
-    "/uploads/mess/yoga.jpeg",
+
 ];
 
 const features = [

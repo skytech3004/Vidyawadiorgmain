@@ -12,7 +12,7 @@ const images = [
     { src: "/Hostels_2.png", title: "Modern Facilities" },
     { src: "/Hostels_3.png", title: "Nurturing Environment" },
     { src: "/Hostels_4.png", title: "Safe & Secure" },
-    { src: "/uploads/mess/yoga.jpeg", title: "Yoga & Wellness" }
+
 ];
 
 const HostelGallery = () => {
