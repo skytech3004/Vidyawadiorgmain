@@ -84,7 +84,7 @@ export default function Institutions() {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-4xl md:text-6xl font-bold text-oxford leading-tight font-serif"
+                        className="text-4xl md:text-6xl font-bold text-oxford leading-tight"
                     >
                         Our Units
                     </motion.h2>
@@ -135,7 +135,7 @@ export default function Institutions() {
                                         <span key={tag} className="text-[10px] font-bold text-sand-dark opacity-60 uppercase tracking-widest border border-oxford rounded-[20px] p-2">{tag}</span>
                                     ))}
                                 </div>
-                                <h3 className="text-2xl md:text-3xl font-bold text-oxford mb-4 group-hover:text-sandstone transition-colors leading-tight font-serif">
+                                <h3 className="text-2xl md:text-3xl font-bold text-oxford mb-4 group-hover:text-sandstone transition-colors leading-tight">
                                     {inst.title}
                                 </h3>
                                 <p className="text-gray-600 leading-relaxed mb-8 line-clamp-2">

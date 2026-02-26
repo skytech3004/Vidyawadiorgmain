@@ -78,7 +78,7 @@ const Hero = ({ content }: any) => (
                     initial={{ y: 200 }}
                     animate={{ y: 0 }}
                     transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
-                    className="text-5xl md:text-8xl font-serif tracking-tight"
+                    className="text-5xl md:text-8xl tracking-tight"
                 >
                     <SafeText value={content.title} />
                 </motion.h1>
@@ -116,7 +116,7 @@ const TextContent = ({ content }: any) => (
                         whileInView={{ y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 1, ease: "easeOut" }}
-                        className={`text-4xl md:text-6xl font-serif ${content.variant === "orange" ? "text-white" : "text-oxford"}`}
+                        className={`text-4xl md:text-6xl ${content.variant === "orange" ? "text-white" : "text-oxford"}`}
                     >
                         <SafeText value={content.title} />
                     </motion.h2>
@@ -150,7 +150,7 @@ const TabbedFeatures = ({ content }: any) => {
                     transition={{ duration: 0.8 }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-4xl md:text-6xl font-serif text-oxford mb-4"><SafeText value={content.title} /></h2>
+                    <h2 className="text-4xl md:text-6xl text-oxford mb-4"><SafeText value={content.title} /></h2>
                     <p className="text-gray-500 max-w-2xl mx-auto font-light"><SafeText value={content.description} /></p>
                 </motion.div>
 
@@ -235,8 +235,8 @@ const CardGrid = ({ content }: any) => {
                     transition={{ duration: 0.8 }}
                     className="text-center mb-16"
                 >
-                    <h2 className={`text-4xl md:text-6xl font-serif text-oxford mb-4 ${content.subtitle ? "mb-2" : ""}`}><SafeText value={content.title} /></h2>
-                    {content.subtitle && <h3 className="text-4xl md:text-6xl font-serif text-sandstone mb-6"><SafeText value={content.subtitle} /></h3>}
+                    <h2 className={`text-4xl md:text-6xl text-oxford mb-4 ${content.subtitle ? "mb-2" : ""}`}><SafeText value={content.title} /></h2>
+                    {content.subtitle && <h3 className="text-4xl md:text-6xl text-sandstone mb-6"><SafeText value={content.subtitle} /></h3>}
                     <p className="text-gray-500 max-w-2xl mx-auto font-light"><SafeText value={content.description} /></p>
                 </motion.div>
 
@@ -312,7 +312,7 @@ const SideBySide = ({ content }: any) => {
                     transition={{ duration: 0.8 }}
                     className={`${content.reverse ? "order-2" : "order-1"}`}
                 >
-                    <h2 className="text-4xl md:text-6xl font-serif text-oxford mb-6 leading-tight">
+                    <h2 className="text-4xl md:text-6xl text-oxford mb-6 leading-tight">
                         <SafeText value={content.title} />
                     </h2>
                     <p className="text-gray-600 leading-relaxed text-lg mb-8 font-light">
@@ -391,7 +391,7 @@ const ScatteredGrid = ({ content }: any) => {
                                 whileInView={{ y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 1, ease: "easeOut" }}
-                                className="text-4xl md:text-6xl font-serif text-oxford mb-6 font-medium"
+                                className="text-4xl md:text-6xl text-oxford mb-6 font-medium"
                             >
                                 <SafeText value={content.title} />
                             </motion.h2>
@@ -464,7 +464,7 @@ const CTASection = ({ content }: any) => (
                     whileInView={{ y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 1, ease: "easeOut" }}
-                    className="text-4xl md:text-7xl font-serif text-white"
+                    className="text-4xl md:text-7xl text-white"
                 >
                     <SafeText value={content.title} />
                 </motion.h2>
@@ -513,7 +513,7 @@ const Gallery = ({ content }: any) => (
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
-                    className="text-4xl font-serif text-oxford mb-12 text-center"
+                    className="text-4xl text-oxford mb-12 text-center"
                 >
                     <SafeText value={content.title} />
                 </motion.h2>
@@ -555,7 +555,7 @@ const GridFeatures = ({ content }: any) => (
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
-                className="text-4xl md:text-6xl font-serif mb-8"
+                className="text-4xl md:text-6xl mb-8"
             >
                 <SafeText value={content.title} />
             </motion.h2>
@@ -605,7 +605,7 @@ const VideoSection = ({ content }: any) => (
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
-                className="text-4xl md:text-6xl font-serif text-oxford mb-12"
+                className="text-4xl md:text-6xl text-oxford mb-12"
             >
                 <SafeText value={content.title} />
             </motion.h2>

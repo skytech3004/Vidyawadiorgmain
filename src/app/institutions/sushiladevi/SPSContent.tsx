@@ -157,7 +157,7 @@ export default function SPSContent() {
                         </div>
                         <div>
                             <span className="text-sandstone font-bold uppercase tracking-widest text-sm mb-4 block">Affiliated to CBSE, New Delhi</span>
-                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 leading-tight uppercase font-serif">
+                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 leading-tight uppercase">
                                 Sushiladevi Prakashraj Modi Primary School
                             </h1>
                             <p className="text-xl md:text-2xl text-white/90 font-light max-w-3xl">
@@ -191,7 +191,7 @@ export default function SPSContent() {
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
                     <div>
                         <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Leadership</span>
-                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight font-serif">Principal’s Message</h2>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight">Principal’s Message</h2>
                         <div className="h-1.5 w-24 bg-sandstone mt-6 rounded-full mb-10" />
                         <div className="prose text-gray-600 leading-relaxed space-y-4 mb-8">
                             <p className="">
@@ -230,7 +230,7 @@ export default function SPSContent() {
                     <div className="relative">
                         <div className="bg-oxford/5 rounded-[2.5rem] p-10 border border-oxford/10 shadow-xl">
                             <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-xs block mb-4 text-center">Our Ethos</span>
-                            <h3 className="text-3xl font-bold text-oxford mb-6 flex justify-center items-center gap-3 font-serif">
+                            <h3 className="text-3xl font-bold text-oxford mb-6 flex justify-center items-center gap-3">
                                 <Star className="text-sandstone fill-sandstone" />
                                 Our Core Values
                             </h3>
@@ -254,7 +254,7 @@ export default function SPSContent() {
 
                         <div className="mt-8 bg-oxford rounded-3xl p-8 text-white relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-sandstone/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-                            <h3 className="text-xl font-bold mb-4 relative z-10 font-serif">Our School</h3>
+                            <h3 className="text-xl font-bold mb-4 relative z-10">Our School</h3>
                             <p className="text-white/80 text-sm leading-relaxed relative z-10">
                                 SPS Vidyawadi is known for its reputation and adherence to quality education, State of Art Infrastructure, and facilities like Sports, Bharat Scout & Guide, and National Cadet Corps (NCC). We offer maximum subject choices and engage students in traditional and innovative educational methods.
                             </p>
@@ -268,7 +268,7 @@ export default function SPSContent() {
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Academic Excellence</span>
-                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight font-serif">Curriculum & Structure</h2>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight">Curriculum & Structure</h2>
                         <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
                         <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
                             Providing a comprehensive and balanced educational framework from foundational to primary levels.
@@ -284,7 +284,7 @@ export default function SPSContent() {
                                 <div className="w-14 h-14 bg-oxford/5 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-sandstone transition-colors">
                                     <stat.icon className="text-sandstone group-hover:text-white transition-colors" size={28} />
                                 </div>
-                                <h3 className="text-sandstone-dark font-bold uppercase text-xs tracking-[0.2em] mb-4 font-serif">{stat.title}</h3>
+                                <h3 className="text-sandstone-dark font-bold uppercase text-xs tracking-[0.2em] mb-4">{stat.title}</h3>
                                 <p className="text-3xl font-black text-oxford leading-tight">{stat.level}</p>
                             </div>
                         ))}
@@ -292,7 +292,7 @@ export default function SPSContent() {
 
                     <div className="bg-white p-10 md:p-14 rounded-[2.5rem] shadow-xl border border-oxford/5">
                         <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-xs block mb-4 text-center">Comprehensive Curriculum</span>
-                        <h3 className="text-3xl md:text-4xl font-bold text-oxford mb-6 flex justify-center items-center gap-3 font-serif text-center">
+                        <h3 className="text-3xl md:text-4xl font-bold text-oxford mb-6 flex justify-center items-center gap-3 text-center">
                             <Sparkles className="text-sandstone" />
                             Senior Secondary Streams
                         </h3>
@@ -334,7 +334,7 @@ export default function SPSContent() {
                     <div className="mt-16 bg-white p-10 md:p-14 rounded-[2.5rem] shadow-xl border border-oxford/5">
                         <div className="text-center mb-12">
                             <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-xs block mb-4">Extracurricular</span>
-                            <h3 className="text-3xl md:text-4xl font-bold text-oxford flex justify-center items-center gap-3 font-serif">
+                            <h3 className="text-3xl md:text-4xl font-bold text-oxford flex justify-center items-center gap-3">
                                 <Users className="text-sandstone" />
                                 Clubs & Activities
                             </h3>
@@ -374,7 +374,7 @@ export default function SPSContent() {
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Student Life</span>
-                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight font-serif">Our Vibrant Campus</h2>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight">Our Vibrant Campus</h2>
                         <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
                         <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
                             Glimpses of daily life, activities, and the joy of learning at SPS.
@@ -444,7 +444,7 @@ export default function SPSContent() {
                             className="flex items-center justify-center gap-3 mb-4"
                         >
                             <Star className="text-sandstone fill-sandstone" size={28} />
-                            <h2 className="text-3xl md:text-5xl font-black text-white font-serif uppercase tracking-tight">
+                            <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight">
                                 Class Toppers <span className="text-sandstone">(Non-Board)</span>
                             </h2>
                         </motion.div>
@@ -479,7 +479,7 @@ export default function SPSContent() {
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Co-Curricular Excellence</span>
-                        <h2 className="text-3xl md:text-5xl font-bold mt-2 font-serif">Beyond Academics</h2>
+                        <h2 className="text-3xl md:text-5xl font-bold mt-2">Beyond Academics</h2>
                         <p className="text-white/80 mt-4 max-w-2xl mx-auto">
                             “Nurturing talents beyond textbooks.”
                         </p>
@@ -491,7 +491,7 @@ export default function SPSContent() {
                                 <div className="w-12 h-12 bg-sandstone/20 rounded-2xl flex items-center justify-center text-sandstone mb-6 group-hover:scale-110 transition-transform">
                                     <Microscope size={24} />
                                 </div>
-                                <h3 className="text-xl font-bold text-white mb-4 font-serif">Discovery Lab</h3>
+                                <h3 className="text-xl font-bold text-white mb-4">Discovery Lab</h3>
                                 <p className="text-white/60 text-xs leading-relaxed">
                                     Engaging science and discovery activities tailored for primary explorers.
                                 </p>
@@ -500,7 +500,7 @@ export default function SPSContent() {
                                 <div className="w-12 h-12 bg-sandstone/20 rounded-2xl flex items-center justify-center text-sandstone mb-6 group-hover:scale-110 transition-transform">
                                     <BookOpen size={24} />
                                 </div>
-                                <h3 className="text-xl font-bold text-white mb-4 font-serif">Junior Library</h3>
+                                <h3 className="text-xl font-bold text-white mb-4">Junior Library</h3>
                                 <p className="text-white/60 text-xs leading-relaxed">
                                     Collection of storybooks, pictorials, and educational games.
                                 </p>
@@ -509,7 +509,7 @@ export default function SPSContent() {
                                 <div className="w-12 h-12 bg-sandstone/20 rounded-2xl flex items-center justify-center text-sandstone mb-6 group-hover:scale-110 transition-transform">
                                     <ShieldCheck size={24} />
                                 </div>
-                                <h3 className="text-xl font-bold text-white mb-4 font-serif">Values Training</h3>
+                                <h3 className="text-xl font-bold text-white mb-4">Values Training</h3>
                                 <p className="text-white/60 text-xs leading-relaxed">
                                     Foundational ethics and community service projects.
                                 </p>
@@ -518,7 +518,7 @@ export default function SPSContent() {
                                 <div className="w-12 h-12 bg-sandstone/20 rounded-2xl flex items-center justify-center text-sandstone mb-6 group-hover:scale-110 transition-transform">
                                     <Medal size={24} />
                                 </div>
-                                <h3 className="text-xl font-bold text-white mb-4 font-serif">Kids Club</h3>
+                                <h3 className="text-xl font-bold text-white mb-4">Kids Club</h3>
                                 <p className="text-white/60 text-xs leading-relaxed">
                                     Fun-filled activities: oratory, drama, and eco-consciousness.
                                 </p>
@@ -527,7 +527,7 @@ export default function SPSContent() {
 
                         <div className="bg-white rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
                             <div className="bg-sandstone p-6">
-                                <h3 className="text-xl font-bold text-oxford flex items-center gap-3 font-serif">
+                                <h3 className="text-xl font-bold text-oxford flex items-center gap-3">
                                     <Trophy />
                                     Primary Sports Highlights
                                 </h3>
@@ -566,7 +566,7 @@ export default function SPSContent() {
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Our Faculty</span>
-                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2 font-serif">SPS School Mentors</h2>
+                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2">SPS School Mentors</h2>
                         <p className="text-gray-600 mt-4 max-w-2xl mx-auto">Meet our dedicated faculty members committed to foundational excellence.</p>
                     </div>
 
@@ -627,7 +627,7 @@ export default function SPSContent() {
                     </div>
 
                     <div className="space-y-8">
-                        <h2 className="text-3xl md:text-4xl font-bold text-oxford font-serif">General Guidelines</h2>
+                        <h2 className="text-3xl md:text-4xl font-bold text-oxford">General Guidelines</h2>
                         <div className="grid gap-4">
                             {[
                                 { title: "Punctuality", desc: "Consistent and timely attendance is encouraged." },
@@ -653,7 +653,7 @@ export default function SPSContent() {
             {/* CTA Section */}
             < section className="py-20 px-6 bg-sandstone" >
                 <div className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-4xl font-black text-oxford mb-6 uppercase tracking-tight font-serif">Enroll Her Potential</h2>
+                    <h2 className="text-4xl font-black text-oxford mb-6 uppercase tracking-tight">Enroll Her Potential</h2>
                     <p className="text-xl text-oxford/80 font-medium mb-10">
                         Join Sushiladevi Primary School for a remarkable foundational journey.
                     </p>

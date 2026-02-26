@@ -13,6 +13,7 @@ import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import HomeNewsEvents from "@/components/HomeNewsEvents";
 import AdmissionsPopup from "@/components/AdmissionsPopup";
+import GallerySection from "@/components/GallerySection";
 
 export default async function Home() {
   // Initialize DB table on first load
@@ -26,6 +27,7 @@ export default async function Home() {
       <About />
       <Stats />
       <Institutions />
+      <GallerySection />
       <HostelSection />
 
       <Facilities />

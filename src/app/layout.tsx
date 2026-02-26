@@ -1,18 +1,15 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display, Noto_Sans_Devanagari } from "next/font/google";
+import { Montserrat, Noto_Sans_Devanagari } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import FloatingButtons from "@/components/FloatingButtons";
 
-const inter = Inter({
-  variable: "--font-inter",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-});
+
 
 const notoDevaragari = Noto_Sans_Devanagari({
   variable: "--font-noto-devanagari",
@@ -36,7 +33,7 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
       </head>
       <body
-        className={`${inter.variable} ${playfair.variable} ${notoDevaragari.variable} font-sans antialiased bg-sandstone-light text-oxford overflow-x-hidden w-full`}
+        className={`${montserrat.variable} ${notoDevaragari.variable} font-sans antialiased bg-sandstone-light text-oxford overflow-x-hidden w-full`}
       >
         {children}
         <FloatingButtons />

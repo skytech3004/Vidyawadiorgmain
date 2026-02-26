@@ -26,7 +26,7 @@ export default function GalleryPage() {
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-4xl md:text-6xl lg:text-8xl font-black mb-6 leading-tight uppercase font-serif"
+                        className="text-4xl md:text-6xl lg:text-8xl font-black mb-6 leading-tight uppercase"
                     >
                         Our <span className="text-sandstone">Gallery</span>
                     </motion.h1>
@@ -83,7 +83,7 @@ export default function GalleryPage() {
                                         <Calendar className="w-3 h-3" />
                                         {new Date(album.date).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
                                     </div>
-                                    <h2 className="text-2xl font-serif text-oxford mb-3 group-hover:text-sandstone transition-colors">
+                                    <h2 className="text-2xl text-oxford mb-3 group-hover:text-sandstone transition-colors">
                                         {album.title}
                                     </h2>
                                     <p className="text-gray-500 font-light text-sm mb-6 line-clamp-2">

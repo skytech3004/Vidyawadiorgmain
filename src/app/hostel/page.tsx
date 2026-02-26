@@ -60,7 +60,7 @@ const SectionHeader = ({ title, subtitle, light = false }: any) => (
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className={`text-4xl md:text-6xl font-bold leading-tight font-serif ${light ? "text-white" : "text-oxford"}`}
+            className={`text-4xl md:text-6xl font-bold leading-tight ${light ? "text-white" : "text-oxford"}`}
         >
             {title}
         </motion.h2>
@@ -133,7 +133,7 @@ export default function Page() {
                         <span className="inline-block px-4 py-1.5 bg-sandstone text-oxford text-[10px] font-black uppercase tracking-[0.2em] rounded-full mb-6">
                             Education with Sanskar
                         </span>
-                        {/* <h1 className="text-5xl md:text-8xl font-serif mb-8 leading-tight">
+                        {/* <h1 className="text-5xl md:text-8xl mb-8 leading-tight">
                             Hostel <span className="text-sandstone">Life</span>
                         </h1> */}
                         <p className="text-lg md:text-2xl font-light mb-12 max-w-2xl mx-auto text-white/90">
@@ -190,7 +190,7 @@ export default function Page() {
                                 <img src="/f837631c-4bc9-4494-b8f1-fff9b07554d8.jpg" alt="Campus Gardens" className="w-full h-full object-cover" />
                             </div>
                             <div className="absolute -bottom-10 -right-10 bg-oxford p-10 rounded-[2.5rem] shadow-2xl text-white">
-                                <div className="text-5xl font-serif text-sandstone mb-2">800+</div>
+                                <div className="text-5xl text-sandstone mb-2">800+</div>
                                 <div className="text-xs font-black uppercase tracking-widest text-white/60">Student Capacity</div>
                             </div>
                         </motion.div>
@@ -200,7 +200,7 @@ export default function Page() {
                                 <span className="block text-xs font-black uppercase tracking-[0.3em] text-sandstone mb-4">
                                     About The Hostel
                                 </span>
-                                <h2 className="text-4xl md:text-6xl font-serif text-oxford leading-tight">
+                                <h2 className="text-4xl md:text-6xl text-oxford leading-tight">
                                     Your Second Home for <br />
                                     <span>Holistic Growth.</span>
                                 </h2>
@@ -229,7 +229,7 @@ export default function Page() {
                                     <ShieldCheck size={24} />
                                 </div>
                                 <div>
-                                    <h4 className="font-bold text-oxford mb-1 font-serif">Professional Caretaking</h4>
+                                    <h4 className="font-bold text-oxford mb-1">Professional Caretaking</h4>
                                     <p className="text-sm text-gray-500 leading-relaxed">
                                         Each hostel is managed by 2 dedicated wardens, 2 maids, and a dedicated sweeper to ensure constant support and hygiene.
                                     </p>
@@ -284,7 +284,7 @@ export default function Page() {
                                 </div>
 
                                 <div className="p-8 flex flex-col flex-1">
-                                    <h3 className="text-2xl font-serif text-oxford mb-3 group-hover:text-sandstone transition-colors">
+                                    <h3 className="text-2xl text-oxford mb-3 group-hover:text-sandstone transition-colors">
                                         {item.title}
                                     </h3>
                                     <p className="text-gray-500 font-light text-sm leading-relaxed">
@@ -335,7 +335,7 @@ export default function Page() {
                                 />
                             </div>
                             <div className="space-y-8">
-                                <h3 className="text-3xl md:text-5xl font-serif text-oxford">
+                                <h3 className="text-3xl md:text-5xl text-oxford">
                                     {activeRoomType === "ac" ? "Premium AC Suites" : "Standard Air-Cooled Rooms"}
                                 </h3>
                                 <div className="grid grid-cols-2 gap-x-8 gap-y-4">
@@ -386,7 +386,7 @@ export default function Page() {
                                     { class: "B.Ed 1st & 2nd Year", nonAc: "₹80,500", ac: "₹1,10,500" }
                                 ].map((row, i) => (
                                     <tr key={i} className="hover:bg-slate-50 transition-colors">
-                                        <td className="p-10 font-bold text-oxford font-serif">{row.class}</td>
+                                        <td className="p-10 font-bold text-oxford">{row.class}</td>
                                         <td className="p-10 text-gray-500 font-medium">{row.nonAc} / Year</td>
                                         <td className="p-10">
                                             {row.ac !== "-" ? (
@@ -407,7 +407,7 @@ export default function Page() {
                                 <CreditCard size={24} />
                             </div>
                             <div>
-                                <h4 className="font-bold text-oxford mb-2 font-serif">Short Duration Stay</h4>
+                                <h4 className="font-bold text-oxford mb-2">Short Duration Stay</h4>
                                 <p className="text-sm text-gray-500">Non AC: ₹10,000 / Month • AC: ₹12,000 / Month</p>
                             </div>
                         </div>
@@ -416,7 +416,7 @@ export default function Page() {
                                 <Banknote size={24} />
                             </div>
                             <div>
-                                <h4 className="font-bold text-oxford mb-2 font-serif">Cancellation Policy</h4>
+                                <h4 className="font-bold text-oxford mb-2">Cancellation Policy</h4>
                                 <p className="text-sm text-gray-500">₹10,000 deduction if cancelled after deposit. Deadline: Aug 15 (School), Oct 30 (College).</p>
                             </div>
                         </div>
@@ -440,7 +440,7 @@ export default function Page() {
                                         <div className={`p-3 rounded-xl transition-colors ${activeAccordion === rule.id ? "bg-sandstone text-white" : "bg-slate-50 text-sandstone group-hover:bg-sandstone/10"}`}>
                                             {rule.icon}
                                         </div>
-                                        <span className="text-xl font-bold text-oxford font-serif">{rule.title}</span>
+                                        <span className="text-xl font-bold text-oxford">{rule.title}</span>
                                     </div>
                                     <div className={`transition-transform duration-300 ${activeAccordion === rule.id ? "rotate-45" : ""}`}>
                                         <Plus size={24} className="text-sandstone" />
@@ -476,7 +476,7 @@ export default function Page() {
                     <div className="grid lg:grid-cols-2 gap-12">
                         {/* Scholarships */}
                         <div className="bg-white/5 backdrop-blur-md rounded-[3rem] p-12 border border-white/10">
-                            <h3 className="text-3xl font-serif text-white mb-8">Scholarships & Discounts</h3>
+                            <h3 className="text-3xl text-white mb-8">Scholarships & Discounts</h3>
                             <div className="space-y-6">
                                 {[
                                     { title: "Merit Scholarship", desc: "10% discount for students securing 95% and above." },
@@ -488,7 +488,7 @@ export default function Page() {
                                             <Trophy size={20} />
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-white mb-1 font-serif">{item.title}</h4>
+                                            <h4 className="font-bold text-white mb-1">{item.title}</h4>
                                             <p className="text-sm text-white/50 leading-relaxed">{item.desc}</p>
                                         </div>
                                     </div>
@@ -498,7 +498,7 @@ export default function Page() {
 
                         {/* Banking Details */}
                         <div className="bg-white rounded-[3rem] p-12 shadow-2xl">
-                            <h3 className="text-3xl font-serif text-oxford mb-8">Banking Details</h3>
+                            <h3 className="text-3xl text-oxford mb-8">Banking Details</h3>
                             <div className="space-y-4 mb-10 text-sm">
                                 <div className="flex justify-between py-3 border-b border-slate-100">
                                     <span className="text-gray-400 font-bold uppercase tracking-widest text-[10px]">Account Name</span>

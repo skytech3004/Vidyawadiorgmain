@@ -161,6 +161,19 @@ export default function ContactForm() {
                                     />
                                 </div>
                                 <div className="space-y-2">
+                                    <label className="text-sm font-bold text-sandstone uppercase tracking-widest pl-1">Select Board</label>
+                                    <select
+                                        name="grade"
+                                        required
+                                        className="w-full px-6 py-4 rounded-2xl bg-oxford border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-sandstone transition-all appearance-none"
+                                    >
+                                        <option value="">Select Board</option>
+                                        <option value="RBSE">RBSE</option>
+                                        <option value="CBSE">CBSE</option>
+
+                                    </select>
+                                </div>
+                                <div className="space-y-2">
                                     <label className="text-sm font-bold text-sandstone uppercase tracking-widest pl-1">Interested Grade</label>
                                     <select
                                         name="grade"

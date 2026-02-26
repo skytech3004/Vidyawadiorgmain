@@ -10,8 +10,7 @@
   --color-teal-blue: #296374;
   --color-teal-blue-light: #3A8196;
 
-  --font-playfair: "Playfair Display", serif;
-  --font-inter: "Inter", sans-serif;
+  --font-montserrat: "Montserrat", "Arial", sans-serif;
   --font-devanagari: var(--font-noto-devanagari), sans-serif;
 }
 
@@ -23,7 +22,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter);
+  font-family: var(--font-montserrat);
   overflow-x: hidden;
   width: 100%;
 }

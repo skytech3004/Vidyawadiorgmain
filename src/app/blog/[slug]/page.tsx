@@ -44,7 +44,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
                                 {post.author}
                             </div>
                         </div>
-                        <h1 className="text-4xl md:text-6xl font-serif text-oxford mb-8 leading-tight">
+                        <h1 className="text-4xl md:text-6xl text-oxford mb-8 leading-tight">
                             {post.title}
                         </h1>
                     </motion.div>

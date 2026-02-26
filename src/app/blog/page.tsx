@@ -19,7 +19,7 @@ export default function BlogPage() {
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-5xl md:text-7xl font-serif mb-6 text-oxford"
+                        className="text-5xl md:text-7xl mb-6 text-oxford"
                     >
                         Our Blog
                     </motion.h1>
@@ -75,7 +75,7 @@ export default function BlogPage() {
                                         </div>
                                     </div>
 
-                                    <h2 className="text-3xl font-serif text-oxford mb-4 group-hover:text-sandstone transition-colors leading-tight">
+                                    <h2 className="text-3xl text-oxford mb-4 group-hover:text-sandstone transition-colors leading-tight">
                                         <Link href={`/blog/${post.slug}`}>
                                             {post.title}
                                         </Link>

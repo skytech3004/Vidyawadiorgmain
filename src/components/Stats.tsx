@@ -62,7 +62,7 @@ export default function Stats() {
                     transition={{ duration: 0.8 }}
                     className="text-center mb-20"
                 >
-                    <h2 className="text-4xl md:text-5xl font-bold text-sandstone mb-6 font-serif">Our Legacy in Numbers</h2>
+                    <h2 className="text-4xl md:text-5xl font-bold text-sandstone mb-6">Our Legacy in Numbers</h2>
                     <div className="w-24 h-1 bg-sandstone mx-auto rounded-full" />
                 </motion.div>
 

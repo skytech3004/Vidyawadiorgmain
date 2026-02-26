@@ -91,7 +91,7 @@ export default function BlogSection() {
                                         </div>
                                     </div>
                                 </div>
-                                <h3 className="text-xl font-serif text-oxford group-hover:text-sandstone transition-colors leading-snug">
+                                <h3 className="text-xl text-oxford group-hover:text-sandstone transition-colors leading-snug">
                                     {post.title}
                                 </h3>
                                 <p className="text-gray-500 text-sm leading-relaxed line-clamp-3 font-light">
