@@ -28,7 +28,7 @@ export default function AdmissionsPopup() {
         } else if (selectedType === "Hostel") {
             window.location.href = "/hostel";
         } else {
-            window.location.href = "/contact";
+            window.location.href = "/apply";
         }
     };
 

@@ -46,7 +46,7 @@ export default function Footer() {
                                 <MapPin className="text-sandstone shrink-0" size={20} />
                                 <span className="text-sm">
                                     VIDYAWADI<br />
-                                    (A Unit of Marudhar Mahila Sikshan Sangh, Vidyawadi),<br />
+
                                     Post - Vidyawadi, Khimel, St. Rani,<br />
                                     Tehsil- Bali, Dist. Pali,<br />
                                     State - Rajasthan (India)<br />

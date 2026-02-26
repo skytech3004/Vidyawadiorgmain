@@ -2,8 +2,20 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ShieldCheck, Coffee, Heart, UserCheck, PhoneCall, Home } from "lucide-react";
+import { ShieldCheck, Coffee, Heart, UserCheck, PhoneCall, Home, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import { AnimatePresence } from "framer-motion";
+
+const hostelImages = [
+    "/hostel.jpg",
+    "/Cafeteria.png",
+    "/Hostels.png",
+    "/Hostels_1.png",
+    "/Hostels_2.png",
+    "/Hostels_3.png",
+    "/Hostels_4.png",
+    "/uploads/mess/yoga.jpeg",
+];
 
 const features = [
     {
@@ -29,6 +41,18 @@ const features = [
 ];
 
 export default function HostelSection() {
+    const [currentImage, setCurrentImage] = React.useState(0);
+
+    React.useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentImage((prev) => (prev + 1) % hostelImages.length);
+        }, 5000);
+        return () => clearInterval(timer);
+    }, []);
+
+    const nextImage = () => setCurrentImage((prev) => (prev + 1) % hostelImages.length);
+    const prevImage = () => setCurrentImage((prev) => (prev - 1 + hostelImages.length) % hostelImages.length);
+
     return (
         <section id="hostel" className="py-24 px-6 bg-oxford relative overflow-hidden" data-theme="dark">
             {/* Background Texture */}
@@ -44,16 +68,55 @@ export default function HostelSection() {
                             initial={{ opacity: 0, scale: 0.9 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            className="relative aspect-square rounded-[3rem] overflow-hidden border-8 border-white/5 shadow-2xl"
+                            className="relative aspect-square rounded-[3rem] overflow-hidden border-8 border-white/5 shadow-2xl group"
                         >
-                            <Image
-                                src="/hostel.jpg"
-                                alt="Vidyawadi Hostel Life"
-                                fill
-                                className="object-cover"
-                            />
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={currentImage}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.7 }}
+                                    className="absolute inset-0"
+                                >
+                                    <Image
+                                        src={hostelImages[currentImage]}
+                                        alt="Vidyawadi Hostel Life"
+                                        fill
+                                        className="object-contain p-4"
+                                    />
+                                </motion.div>
+                            </AnimatePresence>
+
+                            {/* Carousel Controls */}
+                            <div className="absolute inset-0 flex items-center justify-between px-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button
+                                    onClick={prevImage}
+                                    className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-sandstone hover:text-oxford transition-all"
+                                >
+                                    <ChevronLeft size={24} />
+                                </button>
+                                <button
+                                    onClick={nextImage}
+                                    className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-sandstone hover:text-oxford transition-all"
+                                >
+                                    <ChevronRight size={24} />
+                                </button>
+                            </div>
+
+                            {/* Carousel Indicators */}
+                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+                                {hostelImages.map((_, idx) => (
+                                    <button
+                                        key={idx}
+                                        onClick={() => setCurrentImage(idx)}
+                                        className={`w-2 h-2 rounded-full transition-all ${currentImage === idx ? "bg-sandstone w-6" : "bg-white/40"}`}
+                                    />
+                                ))}
+                            </div>
+
                             {/* Overlay Card */}
-                            <div className="absolute bottom-8 left-8 right-8 p-8 bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20">
+                            <div className="absolute bottom-8 left-8 right-8 p-8 bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 z-10">
                                 <div className="flex items-center gap-4 mb-4">
                                     <div className="w-12 h-12 bg-sandstone rounded-full flex items-center justify-center text-oxford">
                                         <Home size={24} />

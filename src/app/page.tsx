@@ -14,6 +14,7 @@ import Footer from "@/components/Footer";
 import HomeNewsEvents from "@/components/HomeNewsEvents";
 import AdmissionsPopup from "@/components/AdmissionsPopup";
 import GallerySection from "@/components/GallerySection";
+import AwardsSection from "@/components/AwardsSection";
 
 export default async function Home() {
   // Initialize DB table on first load
@@ -27,7 +28,7 @@ export default async function Home() {
       <About />
       <Stats />
       <Institutions />
-      <GallerySection />
+      <AwardsSection />
       <HostelSection />
 
       <Facilities />

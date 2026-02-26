@@ -11,6 +11,8 @@ function cn(...inputs: ClassValue[]) {
 
 import { Menu, X, Phone, Mail, Facebook, Instagram, Youtube, ChevronDown, Download } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+
 
 const navLinks = [
     { name: "Home", href: "/" },
@@ -226,14 +228,16 @@ export default function Navbar() {
 
                     {/* Action Buttons */}
                     <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
-                        <button className={cn(
-                            "hidden sm:flex items-center gap-2 px-6 py-2.5 rounded-full font-bold text-sm tracking-wider uppercase transition-all shadow-md active:scale-95",
-                            scrolled || !isDarkSection
-                                ? "bg-oxford text-white hover:bg-oxford/90"
-                                : "bg-sandstone text-oxford hover:bg-sandstone-light"
-                        )}>
-                            Enroll Now
-                        </button>
+                        <Link href="/apply">
+                            <button className={cn(
+                                "hidden sm:flex items-center gap-2 px-6 py-2.5 rounded-full font-bold text-sm tracking-wider uppercase transition-all shadow-md active:scale-95",
+                                scrolled || !isDarkSection
+                                    ? "bg-oxford text-white hover:bg-oxford/90"
+                                    : "bg-sandstone text-oxford hover:bg-sandstone-light"
+                            )}>
+                                Enroll Now
+                            </button>
+                        </Link>
 
                         <button
                             className={cn(
@@ -334,9 +338,11 @@ export default function Navbar() {
                         </div>
 
                         <div className="mt-auto pt-6 bg-oxford border-t border-white/10">
-                            <button className="w-full py-4 bg-sandstone text-oxford font-black text-lg rounded-xl shadow-[0_4px_15px_rgba(226,199,146,0.3)] transition-transform active:scale-[0.98]">
-                                ENROLL NOW
-                            </button>
+                            <Link href="/apply" className="w-full">
+                                <button className="w-full py-4 bg-sandstone text-oxford font-black text-lg rounded-xl shadow-[0_4px_15px_rgba(226,199,146,0.3)] transition-transform active:scale-[0.98]">
+                                    ENROLL NOW
+                                </button>
+                            </Link>
                         </div>
                     </motion.div>
                 )}

@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import HostelGallery from "@/components/HostelGallery3D";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     ShieldCheck,
@@ -239,6 +240,9 @@ export default function Page() {
                     </div>
                 </div>
             </section>
+
+            {/* 3. Hostel Gallery */}
+            <HostelGallery />
 
             {/* 3. Facilities Section */}
             <section className="py-24 px-6 bg-slate-50">
