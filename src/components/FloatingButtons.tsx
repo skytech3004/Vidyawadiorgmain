@@ -35,10 +35,10 @@ export default function FloatingButtons() {
                 initial={{ x: -100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 whileHover={{ x: 5 }}
-                className="fixed left-0 top-1/2 -translate-y-1/2 z-[90] bg-oxford text-white px-4 py-8 rounded-r-2xl shadow-2xl flex flex-col items-center gap-4 group transition-all hover:bg-sandstone hover:text-oxford"
+                className="fixed left-0 top-1/2 -translate-y-1/2 z-[90] bg-oxford text-white px-2 py-4 md:px-4 md:py-8 rounded-r-2xl shadow-2xl flex flex-col items-center gap-2 md:gap-4 group transition-all hover:bg-sandstone hover:text-oxford"
             >
-                <Info size={24} className="group-hover:rotate-12 transition-transform" />
-                <span className="[writing-mode:vertical-lr] rotate-180 font-black uppercase tracking-[0.2em] text-sm">
+                <Info size={20} className="md:w-6 md:h-6 group-hover:rotate-12 transition-transform" />
+                <span className="[writing-mode:vertical-lr] rotate-180 font-black uppercase tracking-[0.1em] md:tracking-[0.2em] text-[10px] md:text-sm">
                     Inquire Now
                 </span>
             </motion.button>

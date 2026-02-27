@@ -68,7 +68,7 @@ export default function HostelSection() {
                             initial={{ opacity: 0, scale: 0.9 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            className="relative aspect-square rounded-[3rem] overflow-hidden border-8 border-white/5 shadow-2xl group"
+                            className="relative aspect-square rounded-[3.5rem] md:rounded-[4rem] overflow-hidden border-4 md:border-8 border-white/5 shadow-2xl group"
                         >
                             <AnimatePresence mode="wait">
                                 <motion.div
@@ -83,7 +83,7 @@ export default function HostelSection() {
                                         src={hostelImages[currentImage]}
                                         alt="Vidyawadi Hostel Life"
                                         fill
-                                        className="object-contain p-4"
+                                        className="object-contain p-1"
                                     />
                                 </motion.div>
                             </AnimatePresence>
@@ -115,19 +115,32 @@ export default function HostelSection() {
                                 ))}
                             </div>
 
-                            {/* Overlay Card */}
-                            <div className="absolute bottom-8 left-8 right-8 p-8 bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 z-10">
+                            {/* Overlay Card - Desktop Only */}
+                            <div className="hidden md:block absolute bottom-8 left-8 right-8 p-8 bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 z-10">
                                 <div className="flex items-center gap-4 mb-4">
                                     <div className="w-12 h-12 bg-sandstone rounded-full flex items-center justify-center text-oxford">
                                         <Home size={24} />
                                     </div>
-                                    <h4 className="text-xl font-bold text-white">Home Away From Home</h4>
+                                    <h4 className="text-xl font-bold text-white uppercase tracking-wider">Home Away From Home</h4>
                                 </div>
-                                <p className="text-white/70 text-sm leading-relaxed">
-                                    Trusted by parents across India for over 6 decades for girls' residential education and safety.
+                                <p className="text-white/80 text-sm leading-relaxed">
+                                    Trusted by parents across India for over 6 decades for girls&apos; residential education and safety.
                                 </p>
                             </div>
                         </motion.div>
+
+                        {/* Home Away From Home - Mobile Only */}
+                        <div className="md:hidden mt-6 p-6 bg-white/5 backdrop-blur-md rounded-3xl border border-white/10 shadow-lg">
+                            <div className="flex items-center gap-4 mb-3">
+                                <div className="w-10 h-10 bg-sandstone rounded-full flex items-center justify-center text-oxford shrink-0">
+                                    <Home size={20} />
+                                </div>
+                                <h4 className="text-lg font-bold text-white uppercase tracking-wide">Home Away From Home</h4>
+                            </div>
+                            <p className="text-white/70 text-sm leading-relaxed">
+                                Trusted by parents across India for over 6 decades for girls&apos; residential education and safety.
+                            </p>
+                        </div>
 
                         {/* Campus Infrastructure & Facilities List */}
                         <motion.div
@@ -162,10 +175,10 @@ export default function HostelSection() {
                             initial={{ rotate: -15, opacity: 0 }}
                             whileInView={{ rotate: 10, opacity: 1 }}
                             viewport={{ once: true }}
-                            className="absolute -top-10 -right-10 w-40 h-40 bg-sandstone rounded-full flex flex-col items-center justify-center text-oxford text-center p-4 shadow-2xl border-4 border-oxford"
+                            className="absolute -top-6 -right-6 md:-top-10 md:-right-10 w-24 h-24 md:w-40 md:h-40 bg-sandstone rounded-full flex flex-col items-center justify-center text-oxford text-center p-2 md:p-4 shadow-2xl border-2 md:border-4 border-oxford z-30"
                         >
-                            <span className="text-3xl font-black leading-none">100%</span>
-                            <span className="text-[10px] font-bold uppercase tracking-widest mt-1">Girls' Safety Record</span>
+                            <span className="text-xl md:text-3xl font-black leading-none">100%</span>
+                            <span className="text-[8px] md:text-[10px] font-bold uppercase tracking-widest mt-1">Girls' Safety Record</span>
                         </motion.div>
                     </div>
 
