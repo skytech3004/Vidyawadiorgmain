@@ -42,8 +42,8 @@ export async function POST(req: NextRequest) {
         // Set cookie
         response.cookies.set("adminToken", token, {
             httpOnly: true,
-            secure: true, // Always true for production, usually fine for local dev with modern browsers
-            sameSite: "strict",
+            secure: false, // Changed to false because the server is running on HTTP (not HTTPS)
+            sameSite: "lax", // Changed from strict to lax for better compatibility over IP
             maxAge: 86400, // 24 hours
             path: "/",
         });
