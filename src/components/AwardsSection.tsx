@@ -8,7 +8,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 const awards = [
     {
         id: 1,
-        title: "Best Residential School",
+        title: "Awarded by Marwad Ratna",
         organization: "National Education Excellence Awards",
         year: "2024",
         image: "/award1.jpg",
@@ -16,7 +16,7 @@ const awards = [
     },
     {
         id: 2,
-        title: "Excellence in Girls' Education",
+        title: "Awarded by Marwad Ratna",
         organization: "State Education Board",
         year: "2023",
         image: "/award.jpg",
@@ -24,7 +24,7 @@ const awards = [
     },
     {
         id: 3,
-        title: "Top Holistic Development Hub",
+        title: "Awarded by Marwad Ratna",
         organization: "Educational Leaders Forum",
         year: "2024",
         image: "/award3.jpg",

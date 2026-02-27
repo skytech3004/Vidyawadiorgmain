@@ -7,7 +7,8 @@ import {
     Dna,
     BookOpen,
     Home,
-    Palette,
+    Palette, Medal,
+    Crown
 } from "lucide-react";
 
 interface Facility {
@@ -31,6 +32,7 @@ const facilities: Facility[] = [
         title: "NCC Training",
         description: "Building discipline and leadership through Army and Navy wings.",
         icon: "🎖️",
+        image: "/images/english school/a9fa45d8-e14b-4e5f-b4c0-64cc9c49e22f.jpg",
         theme: "bg-sandstone",
         features: ["Army Wing", "Navy Wing"]
     },
@@ -47,12 +49,16 @@ const facilities: Facility[] = [
         description: "10,000+ books and global digital resources for research.",
         icon: <BookOpen className="w-12 h-12 text-white/30" />,
         theme: "bg-oxford-dark",
+        image: "/uploads/mess/aa.jpg",
+
         features: ["Digital Access", "Offline Study"]
     },
     {
         title: "Skill Center",
         description: "Life skills training including Baking, Culinary, and Grooming.",
-        icon: "🍰",
+        icon: <Crown className="w-12 h-12 text-white/30" />,
+        image: "/skill.jpg",
+
         theme: "bg-sandstone-dark",
         features: ["Baking", "Culinary", "Grooming"]
     },
@@ -68,6 +74,8 @@ const facilities: Facility[] = [
         title: "Self Defense",
         description: "Empowering girls with Karate and advanced self-defense techniques.",
         icon: "🥋",
+        image: "/karate.png",
+
         theme: "bg-teal-blue",
         features: ["Karate", "Safety Drills"]
     },
@@ -76,6 +84,14 @@ const facilities: Facility[] = [
         description: "Safe and nurturing environment with 24/7 care and security.",
         icon: <Home className="w-12 h-12 text-white/30" />,
         image: "/hostel.jpg",
+        theme: "bg-sandstone",
+        features: ["24/7 Care", "Security"]
+    },
+    {
+        title: "NSS",
+        description: "National Service Scheme for community service and leadership development.",
+        icon: <Medal className="w-12 h-12 text-white/30" />,
+        image: "/NSS.jpg",
         theme: "bg-sandstone",
         features: ["24/7 Care", "Security"]
     }
@@ -101,71 +117,67 @@ export default function Facilities() {
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
                     {facilities.map((fac, i) => (
                         <motion.div
                             key={fac.title}
-                            initial={{ opacity: 0, scale: 0.95, y: 30 }}
-                            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1, duration: 0.5 }}
-                            whileHover={{ y: -10 }}
-                            className={cn(
-                                "group rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col",
-                                fac.theme || "bg-white"
-                            )}
+                            className="group relative h-[500px] rounded-[2.5rem] overflow-hidden shadow-2xl transition-all duration-700 hover:shadow-sandstone/20"
                         >
-                            <div className="h-48 relative">
+                            {/* Image Background */}
+                            <div className="absolute inset-0 z-0">
                                 {fac.image ? (
-                                    <img src={fac.image} alt={fac.title} className="w-full h-full object-cover" />
+                                    <img
+                                        src={fac.image}
+                                        alt={fac.title}
+                                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                                    />
                                 ) : (
-                                    <div className="w-full h-full flex items-center justify-center text-5xl bg-white/10 backdrop-blur-sm">
-                                        {fac.icon}
+                                    <div className={cn(
+                                        "w-full h-full flex items-center justify-center bg-gradient-to-br",
+                                        fac.theme === "bg-sandstone" ? "from-sandstone to-sandstone-dark" : "from-oxford to-oxford-dark"
+                                    )}>
+                                        <div className="scale-150 opacity-20">{fac.icon}</div>
                                     </div>
                                 )}
+                                <div className="absolute inset-0 bg-gradient-to-t from-oxford-dark/95 via-oxford-dark/40 to-transparent z-10" />
                             </div>
-                            <div className="p-8 flex-grow flex flex-col justify-between">
-                                <div className="space-y-3">
-                                    <h3 className={cn(
-                                        "text-2xl font-black tracking-tight",
-                                        fac.theme === "bg-sandstone" ? "text-oxford" : "text-white"
-                                    )}>
-                                        {fac.title}
-                                    </h3>
-                                    <p className={cn(
-                                        "text-sm leading-relaxed",
-                                        fac.theme === "bg-sandstone" ? "text-oxford/80" : "text-white/80"
-                                    )}>
+
+                            {/* Content Overlay */}
+                            <div className="absolute inset-0 z-20 p-10 flex flex-col justify-end transform transition-transform duration-500 group-hover:translate-y-[-10px]">
+                                <div className="mb-6 transform transition-all duration-500 delay-100 group-hover:translate-y-[-10px]">
+                                    <div className="flex items-center gap-4 mb-4">
+                                        <div className="p-3 bg-sandstone/10 backdrop-blur-md rounded-2xl text-sandstone border border-sandstone/20">
+                                            {typeof fac.icon === 'string' ? <span className="text-2xl">{fac.icon}</span> : React.cloneElement(fac.icon as any, { className: "w-6 h-6" })}
+                                        </div>
+                                        <h3 className="text-3xl font-black text-white uppercase tracking-tight leading-none">
+                                            {fac.title}
+                                        </h3>
+                                    </div>
+                                    <p className="text-white/80 text-lg leading-relaxed mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
                                         {fac.description}
                                     </p>
-                                </div>
-                                <div className="space-y-6 mt-6">
-                                    <div className="flex flex-wrap gap-2">
+
+                                    <div className="flex flex-wrap gap-2 mb-8 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-300 transform translate-y-4 group-hover:translate-y-0">
                                         {fac.features?.map(feat => (
-                                            <span key={feat} className={cn(
-                                                "px-3 py-1 rounded-full text-[10px] uppercase tracking-widest font-bold border",
-                                                fac.theme === "bg-sandstone"
-                                                    ? "bg-oxford/5 border-oxford/10 text-oxford"
-                                                    : "bg-white/10 border-white/10 text-white"
-                                            )}>
+                                            <span key={feat} className="px-4 py-1.5 rounded-full text-[10px] uppercase tracking-[0.2em] font-black bg-white/10 backdrop-blur-md border border-white/10 text-white">
                                                 {feat}
                                             </span>
                                         ))}
                                     </div>
 
-                                    <button className={cn(
-                                        "w-full py-4 rounded-xl font-black text-xs uppercase tracking-widest transition-all shadow-md active:scale-95 group/btn",
-                                        fac.theme === "bg-sandstone"
-                                            ? "bg-oxford text-white hover:bg-oxford-dark"
-                                            : "bg-white text-oxford hover:bg-sandstone hover:text-oxford"
-                                    )}>
-                                        <span className="flex items-center justify-center gap-2">
-                                            Explore More
-                                            <div className="w-4 h-px bg-current group-hover/btn:w-6 transition-all" />
-                                        </span>
+                                    <button className="flex items-center gap-4 text-sandstone font-black text-sm uppercase tracking-widest group/btn bg-white/5 hover:bg-sandstone hover:text-oxford px-6 py-4 rounded-2xl transition-all duration-300 w-fit backdrop-blur-sm border border-sandstone/30">
+                                        Explore Excellence
+                                        <div className="w-8 h-px bg-current group-hover/btn:w-12 transition-all duration-300" />
                                     </button>
                                 </div>
                             </div>
+
+                            {/* Corner Accent */}
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-sandstone/10 backdrop-blur-3xl rounded-bl-[5rem] z-10 translate-x-16 -translate-y-16 group-hover:translate-x-8 group-hover:-translate-y-8 transition-transform duration-700" />
                         </motion.div>
                     ))}
                 </div>

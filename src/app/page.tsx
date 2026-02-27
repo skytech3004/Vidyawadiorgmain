@@ -32,6 +32,7 @@ export default async function Home() {
 
       <Facilities />
       <AwardsSection />
+      <GallerySection />
 
       <Heritage />
       <HomeNewsEvents />
