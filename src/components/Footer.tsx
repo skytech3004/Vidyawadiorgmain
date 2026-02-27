@@ -11,19 +11,19 @@ export default function Footer() {
                     <div className="lg:col-span-5 space-y-6">
                         <div className="flex items-center gap-4">
                             <img src="/white-logo.png" alt="Logo" className="w-24 h-24 object-contain" />
-                            <h3 className="text-xl sm:text-2xl font-bold text-sandstone leading-tight lg:whitespace-nowrap">Marudhar Mahila Shikshan Sangh Vidyawadi</h3>
+                            <h3 className="text-xl sm:text-2xl font-bold text-sandstone leading-tight lg:whitespace-nowrap">Marudhar Mahila Shikshan Sangh<br />  Vidyawadi</h3>
                         </div>
                         <p className="text-white/60 leading-relaxed">
                             Excellence in education since 1956. Nurturing the next generation of leaders with values and vision.
                         </p>
                         <div className="flex gap-4">
-                            <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-sandstone hover:text-oxford transition-all">
+                            <a href="https://www.facebook.com/profile.php?id=61583590541462" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-sandstone hover:text-oxford transition-all">
                                 <Facebook size={18} />
                             </a>
                             <a href="https://www.instagram.com/vidyawadiofficial" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-sandstone hover:text-oxford transition-all">
                                 <Instagram size={18} />
                             </a>
-                            <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-sandstone hover:text-oxford transition-all">
+                            <a href="https://www.linkedin.com/company/111560973/admin/page-posts/published/" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-sandstone hover:text-oxford transition-all">
                                 <Linkedin size={18} />
                             </a>
                             <a href="https://www.youtube.com/@Vidyawadi-MMSS" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-sandstone hover:text-oxford transition-all">

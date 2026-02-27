@@ -54,7 +54,7 @@ export default function About() {
 
                         <div className="space-y-6 text-oxford/70 text-lg leading-relaxed">
                             <p>
-                                <span className="font-bold text-oxford">Marudhar Mahila Shikshan Sangh Vidyawadi<br /> </span>
+                                <span className="font-bold text-oxford">Marudhar Mahila Shikshan Sangh<br />  Vidyawadi<br /> </span>
                                 Located at <span className="font-bold text-oxford">Khimel Rani Station, District Pali, Rajasthan (306115), <br /> </span> It is one of the most trusted and established residential girls’ education campuses in Rajasthan.
                             </p>
                             <p>

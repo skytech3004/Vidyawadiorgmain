@@ -66,26 +66,31 @@ export default function ContactForm() {
                         <div className="space-y-8">
                             <h3 className="text-2xl font-bold text-white uppercase tracking-widest border-b border-white/10 pb-4">Our Location</h3>
                             <div className="space-y-6 text-white/80 leading-relaxed">
-                                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-start gap-6 mb-8 text-left">
-                                    <strong className="text-sandstone block text-xl sm:text-3xl font-bold leading-tight lg:whitespace-nowrap">Marudhar Mahila Shikshan Sangh Vidyawadi</strong>
-                                    <img src="/white-logo.png" alt="Logo" className="w-24 h-24 sm:w-32 sm:h-32 object-contain shrink-0" />
-                                </div>
-
-                                <p>
-                                    Post - Vidyawadi, Khimel, St. Rani,<br />
-                                    Tehsil- Bali, Dist. Pali,<br />
-                                    State - Rajasthan (India)<br />
-                                    PIN – 306115
-                                </p>
-                                <div className="space-y-2">
-                                    <p className="flex items-center gap-3">
-                                        <span className="text-sandstone font-bold">Phone:</span>
-                                        +91 6377204218
-                                    </p>
-                                    <p className="flex items-center gap-3">
-                                        <span className="text-sandstone font-bold">Email:</span>
-                                        marudharmahila@gmail.com
-                                    </p>
+                                <div className="flex flex-col sm:flex-row items-start gap-8 mb-8">
+                                    <div className="flex-shrink-0">
+                                        <img src="/white-logo.png" alt="Logo" className="w-32 h-32 sm:w-48 sm:h-48 object-contain" />
+                                    </div>
+                                    <div className="space-y-6">
+                                        <div>
+                                            <strong className="text-sandstone block text-xl sm:text-3xl font-bold leading-tight">Marudhar Mahila Shikshan Sangh Vidyawadi</strong>
+                                        </div>
+                                        <p className="text-white/80">
+                                            Post - Vidyawadi, Khimel, St. Rani,<br />
+                                            Tehsil- Bali, Dist. Pali,<br />
+                                            State - Rajasthan (India)<br />
+                                            PIN – 306115
+                                        </p>
+                                        <div className="space-y-2">
+                                            <p className="flex items-center gap-3">
+                                                <span className="text-sandstone font-bold">Phone:</span>
+                                                <span className="text-white/90">+91 6377204218</span>
+                                            </p>
+                                            <p className="flex items-center gap-3">
+                                                <span className="text-sandstone font-bold">Email:</span>
+                                                <span className="text-white/90">marudharmahila@gmail.com</span>
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <p className="text-sm text-white/60">
                                     We come under Khimel village panchayat, located in Pali district. The campus is on Rani-Falna route, 3 kms away from Rani and 11 kms from Falna station.

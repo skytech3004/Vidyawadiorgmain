@@ -101,9 +101,9 @@ export default function Navbar() {
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <a href="#" className="hover:text-sandstone transition-colors"><Facebook size={20} /></a>
+                        <a href="https://www.facebook.com/profile.php?id=61583590541462" className="hover:text-sandstone transition-colors"><Facebook size={20} /></a>
                         <a href="https://www.instagram.com/vidyawadiofficial" target="_blank" rel="noopener noreferrer" className="hover:text-sandstone transition-colors"><Instagram size={20} /></a>
-                        <a href="#" className="hover:text-sandstone transition-colors"><Linkedin size={20} /></a>
+                        <a href="https://www.linkedin.com/company/111560973/admin/page-posts/published/" className="hover:text-sandstone transition-colors"><Linkedin size={20} /></a>
                         <a href="https://www.youtube.com/@Vidyawadi-MMSS" target="_blank" rel="noopener noreferrer" className="hover:text-sandstone transition-colors"><Youtube size={20} /></a>
 
                         {/* <div className="w-px h-3 bg-white/20 mx-2" > */}
