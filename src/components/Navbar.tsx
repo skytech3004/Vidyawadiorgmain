@@ -9,7 +9,7 @@ function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
 }
 
-import { Menu, X, Phone, Mail, Facebook, Instagram, Youtube, ChevronDown, Download } from "lucide-react";
+import { Menu, X, Phone, Mail, Facebook, Instagram, Youtube, Linkedin, ChevronDown, Download } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -103,7 +103,9 @@ export default function Navbar() {
                     <div className="flex items-center gap-4">
                         <a href="#" className="hover:text-sandstone transition-colors"><Facebook size={20} /></a>
                         <a href="#" className="hover:text-sandstone transition-colors"><Instagram size={20} /></a>
+                        <a href="#" className="hover:text-sandstone transition-colors"><Linkedin size={20} /></a>
                         <a href="#" className="hover:text-sandstone transition-colors"><Youtube size={20} /></a>
+
                         {/* <div className="w-px h-3 bg-white/20 mx-2" > */}
                         {/* <span className="uppercase tracking-widest text-[10px] font-bold">Enrollment Open</span> */}
                     </div>

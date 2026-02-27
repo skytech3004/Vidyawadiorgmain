@@ -1,15 +1,18 @@
 "use client";
 
 import React from "react";
-import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
 
 export default function Footer() {
     return (
         <footer data-theme="dark" className="bg-oxford-dark text-white py-20 px-6 border-t border-white/5">
-            <div className="max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-                    <div className="space-y-6">
-                        <h3 className="text-3xl font-bold text-sandstone">Vidyawadi</h3>
+            <div className="max-w-[1600px] mx-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-12 mb-16">
+                    <div className="lg:col-span-5 space-y-6">
+                        <div className="flex items-center gap-4">
+                            <img src="/white-logo.png" alt="Logo" className="w-24 h-24 object-contain" />
+                            <h3 className="text-xl sm:text-2xl font-bold text-sandstone leading-tight whitespace-nowrap">Marudhar Mahila Shikshan Sangh Vidyawadi</h3>
+                        </div>
                         <p className="text-white/60 leading-relaxed">
                             Excellence in education since 1956. Nurturing the next generation of leaders with values and vision.
                         </p>
@@ -21,12 +24,12 @@ export default function Footer() {
                                 <Instagram size={18} />
                             </a>
                             <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-sandstone hover:text-oxford transition-all">
-                                <Twitter size={18} />
+                                <Linkedin size={18} />
                             </a>
                         </div>
                     </div>
 
-                    <div>
+                    <div className="lg:col-span-2">
                         <h4 className="text-lg font-bold mb-6 text-white uppercase tracking-widest">Quick Links</h4>
                         <ul className="space-y-4">
                             {["About Us", "Admissions", "Facilities", "Heritage", "Curriculum", "Contact"].map((link) => (
@@ -39,7 +42,7 @@ export default function Footer() {
                         </ul>
                     </div>
 
-                    <div>
+                    <div className="lg:col-span-3">
                         <h4 className="text-lg font-bold mb-6 text-white uppercase tracking-widest">Contact Info</h4>
                         <ul className="space-y-4">
                             <li className="flex gap-4 text-white/60">
@@ -64,7 +67,7 @@ export default function Footer() {
                         </ul>
                     </div>
 
-                    <div>
+                    <div className="lg:col-span-2">
                         <h4 className="text-lg font-bold mb-6 text-white uppercase tracking-widest">Newsletter</h4>
                         <p className="text-white/60 mb-6 text-sm">Stay updated with our latest news and events.</p>
                         <div className="relative">

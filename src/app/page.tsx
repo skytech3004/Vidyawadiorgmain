@@ -28,10 +28,11 @@ export default async function Home() {
       <About />
       <Stats />
       <Institutions />
-      <AwardsSection />
       <HostelSection />
 
       <Facilities />
+      <AwardsSection />
+
       <Heritage />
       <HomeNewsEvents />
       {/* <Staff /> */}
