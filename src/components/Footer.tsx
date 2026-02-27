@@ -11,7 +11,7 @@ export default function Footer() {
                     <div className="lg:col-span-5 space-y-6">
                         <div className="flex items-center gap-4">
                             <img src="/white-logo.png" alt="Logo" className="w-24 h-24 object-contain" />
-                            <h3 className="text-xl sm:text-2xl font-bold text-sandstone leading-tight whitespace-nowrap">Marudhar Mahila Shikshan Sangh Vidyawadi</h3>
+                            <h3 className="text-xl sm:text-2xl font-bold text-sandstone leading-tight lg:whitespace-nowrap">Marudhar Mahila Shikshan Sangh Vidyawadi</h3>
                         </div>
                         <p className="text-white/60 leading-relaxed">
                             Excellence in education since 1956. Nurturing the next generation of leaders with values and vision.

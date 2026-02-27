@@ -67,7 +67,7 @@ export default function ContactForm() {
                             <h3 className="text-2xl font-bold text-white uppercase tracking-widest border-b border-white/10 pb-4">Our Location</h3>
                             <div className="space-y-6 text-white/80 leading-relaxed">
                                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-start gap-6 mb-8 text-left">
-                                    <strong className="text-sandstone block text-xl sm:text-3xl font-bold leading-tight whitespace-nowrap">Marudhar Mahila Shikshan Sangh Vidyawadi</strong>
+                                    <strong className="text-sandstone block text-xl sm:text-3xl font-bold leading-tight lg:whitespace-nowrap">Marudhar Mahila Shikshan Sangh Vidyawadi</strong>
                                     <img src="/white-logo.png" alt="Logo" className="w-24 h-24 sm:w-32 sm:h-32 object-contain shrink-0" />
                                 </div>
 
