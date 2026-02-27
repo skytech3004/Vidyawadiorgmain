@@ -27,6 +27,10 @@ export async function POST(req: NextRequest) {
 
         // Create JWT
         const secret = new TextEncoder().encode(process.env.JWT_SECRET || "fallback_secret");
+        if (!process.env.JWT_SECRET) {
+            console.warn("WARN: JWT_SECRET is not defined, using fallback_secret");
+        }
+
         const token = await new SignJWT({ id: admin._id, username: admin.username, role: admin.role })
             .setProtectedHeader({ alg: "HS256" })
             .setIssuedAt()
@@ -38,15 +42,24 @@ export async function POST(req: NextRequest) {
         // Set cookie
         response.cookies.set("adminToken", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
+            secure: true, // Always true for production, usually fine for local dev with modern browsers
             sameSite: "strict",
             maxAge: 86400, // 24 hours
             path: "/",
         });
 
+        console.log(`LOGIN_SUCCESS: User ${username} logged in successfully`);
         return response;
     } catch (error: any) {
-        console.error("LOGIN_ERROR:", error);
-        return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });
+        console.error("LOGIN_ERROR_DETAILS:", {
+            message: error.message,
+            stack: error.stack,
+            name: error.name
+        });
+        return NextResponse.json({
+            success: false,
+            error: "Internal Server Error",
+            details: process.env.NODE_ENV === "development" ? error.message : "Check server logs for details"
+        }, { status: 500 });
     }
 }

@@ -35,7 +35,8 @@ async function dbConnect() {
 
     try {
         cached.conn = await cached.promise;
-    } catch (e) {
+    } catch (e: any) {
+        console.error("MONGODB_CONNECTION_ERROR:", e.message);
         cached.promise = null;
         throw e;
     }
