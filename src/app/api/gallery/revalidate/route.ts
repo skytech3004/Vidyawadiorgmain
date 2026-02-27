@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
 
     try {
         // This will purge the 'gallery' cache tag
-        revalidateTag('gallery');
+        (revalidateTag as any)('gallery');
         return NextResponse.json({
             revalidated: true,
             now: Date.now(),
