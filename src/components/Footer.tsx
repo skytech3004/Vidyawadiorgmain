@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
+import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 
 export default function Footer() {
     return (
@@ -20,11 +20,14 @@ export default function Footer() {
                             <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-sandstone hover:text-oxford transition-all">
                                 <Facebook size={18} />
                             </a>
-                            <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-sandstone hover:text-oxford transition-all">
+                            <a href="https://www.instagram.com/vidyawadiofficial" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-sandstone hover:text-oxford transition-all">
                                 <Instagram size={18} />
                             </a>
                             <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-sandstone hover:text-oxford transition-all">
                                 <Linkedin size={18} />
+                            </a>
+                            <a href="https://www.youtube.com/@Vidyawadi-MMSS" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-sandstone hover:text-oxford transition-all">
+                                <Youtube size={18} />
                             </a>
                         </div>
                     </div>
