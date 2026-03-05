@@ -87,10 +87,10 @@ export default function Navbar() {
                             <Phone size={14} className="text-sandstone group-hover:scale-110 transition-transform" />
                             <span>Have any Question?</span>
                         </a>
-                        <a href="mailto:info@vidyawadi.org" className="flex items-center gap-2 hover:text-sandstone transition-colors group">
+                        {/* <a href="mailto:info@vidyawadi.org" className="flex items-center gap-2 hover:text-sandstone transition-colors group">
                             <Mail size={14} className="text-sandstone group-hover:scale-110 transition-transform" />
                             <span>info@vidyawadi.org</span>
-                        </a>
+                        </a> */}
                     </div>
 
                     <div className="flex-1 px-1 overflow-hidden">

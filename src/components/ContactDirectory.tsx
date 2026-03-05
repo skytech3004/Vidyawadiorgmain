@@ -10,12 +10,12 @@ interface ContactEntry {
 }
 
 const contactData: ContactEntry[] = [
-    { office: "Secretary - MMSS", email: "kailashkaveria@yahoo.com" },
+    // { office: "Secretary - MMSS", email: "kailashkaveria@yahoo.com" },
     { office: "CEO", phone: "6377204201", email: "ceo@vidyawadi.org" },
     { office: "Principal College", phone: "6377204203", email: "principal.college@vidyawadi.org" },
     { office: "Principal Hindi School", phone: "6377204205", email: "priya.sangeeta@vidyawadi.org" },
     { office: "Principal English School", phone: "6377203204", email: "principal_lps@vidyawadi.org" },
-    { office: "Chief Resident Officer", phone: "6377204202", email: "alka.choudhary@vidyawadi.org" },
+    { office: "Chief Resident Officer", phone: "6377204202", email: "" },
     { office: "Hostel Assistant", phone: "6377204218" },
     { office: "Accounts Department", phone: "6377204209", email: "brajmohan.agarawal@vidyawadi.org" },
     { office: "Admin Department", phone: "6377204206", email: "administration.manager@vidyawadi.org" },
