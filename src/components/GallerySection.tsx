@@ -34,7 +34,11 @@ export default function GallerySection() {
                 const catsData = await catsRes.json();
 
                 if (galleryData.success && galleryData.data) {
-                    setAlbums(galleryData.data);
+                    const sanitized = galleryData.data.map((album: any) => ({
+                        ...album,
+                        images: album.images.map((img: string) => img.replace(/\/+/g, "/"))
+                    }));
+                    setAlbums(sanitized);
                 }
                 if (catsData.success && catsData.categories) {
                     setDynamicCategories(catsData.categories.map((c: any) => c.name));
@@ -97,7 +101,7 @@ export default function GallerySection() {
                             viewport={{ once: true }}
                             className="text-4xl md:text-6xl font-black text-oxford leading-tight uppercase"
                         >
-                            Moments of <span className="text-sandstone">Excellence</span>
+                            Life at <span className="text-sandstone">@Vidyawadi</span>
                         </motion.h2>
 
                         <div className="flex flex-wrap gap-2 mt-10">
@@ -153,7 +157,7 @@ export default function GallerySection() {
                                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                                     />
                                     {/* Rich Reddish-Pink Gradient Overlay */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-[#B02A30]/90 via-[#B02A30]/30 to-transparent opacity-100 group-hover:opacity-90 transition-opacity" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-oxford/90 via-oxford/30 to-transparent opacity-100 group-hover:opacity-90 transition-opacity" />
 
                                     <div className="absolute bottom-6 left-6 right-6">
                                         <h3 className="text-white text-xl md:text-2xl font-black uppercase tracking-tight leading-none mb-1 shadow-sm">

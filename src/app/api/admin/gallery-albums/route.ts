@@ -25,7 +25,14 @@ export async function GET(req: NextRequest) {
 
         await dbConnect();
         const albums = await GalleryAlbum.find({}).sort({ date: -1, createdAt: -1 });
-        return NextResponse.json({ success: true, albums });
+
+        // Normalize image paths for existing records
+        const sanitizedAlbums = albums.map(album => ({
+            ...album.toObject(),
+            images: album.images.map((img: string) => img.replace(/\/+/g, "/"))
+        }));
+
+        return NextResponse.json({ success: true, albums: sanitizedAlbums });
     } catch (error: any) {
         console.error("ALBUM_GET_ERROR:", error);
         return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });

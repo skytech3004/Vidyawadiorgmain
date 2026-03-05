@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
 
         const formData = await req.formData();
         const file = formData.get("file") as File;
-        const folder = formData.get("folder") as string || "uploads";
+        const folder = (formData.get("folder") as string || "uploads").replace(/^\/+|\/+$/g, "");
 
         if (!file) {
             return NextResponse.json({ success: false, error: "No file uploaded" }, { status: 400 });
@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
 
         // Sanitize filename and add timestamp to avoid collisions
         const filename = `${Date.now()}-${file.name.replace(/\s+/g, "-")}`;
-        const relativePath = `uploads/${folder}/${filename}`;
+        const relativePath = `uploads/${folder}/${filename}`.replace(/\/+/g, "/");
         const absolutePath = path.join(process.cwd(), "public", relativePath);
         const dir = path.dirname(absolutePath);
 

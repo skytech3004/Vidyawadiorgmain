@@ -207,7 +207,7 @@ function GalleryContent() {
                                                         loading={idx === 0 && i < 4 ? "eager" : "lazy"}
                                                         priority={idx === 0 && i < 4}
                                                     />
-                                                    <div className="absolute inset-0 bg-gradient-to-t from-red-900/80 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
 
                                                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 backdrop-blur-[2px]">
                                                         <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white">
