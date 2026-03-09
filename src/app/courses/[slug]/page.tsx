@@ -212,7 +212,7 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                                     Join our community of learners and start your journey towards excellence today.
                                 </p>
                                 <Link
-                                    href="/contact"
+                                    href="/apply"
                                     className="w-full bg-oxford text-white py-4 rounded-full font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-oxford/90 transition-all"
                                 >
                                     Inquire Now

@@ -3,14 +3,16 @@
 import React from "react";
 import { Info } from "lucide-react";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 export default function FloatingButtons() {
     const whatsappNumber = "+916377204218";
     const whatsappMessage = "Hello Vidyawadi, I would like to inquire about admissions.";
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+    const router = useRouter();
 
-    const scrollToContact = () => {
-        document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+    const handleInquireClick = () => {
+        router.push("/apply");
     };
 
     return (
@@ -31,7 +33,7 @@ export default function FloatingButtons() {
 
             {/* Inquire Now Sticky Button (Left Side) */}
             <motion.button
-                onClick={scrollToContact}
+                onClick={handleInquireClick}
                 initial={{ x: -100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 whileHover={{ x: 5 }}

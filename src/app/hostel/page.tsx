@@ -372,7 +372,7 @@ export default function Page() {
             {/* 5. Fee Structure Section */}
             <section className="py-24 px-6 bg-slate-50">
                 <div className="max-w-7xl mx-auto">
-                    <SectionHeader title="Hostel Fee Structure" subtitle="2025 – 26 Session" />
+                    <SectionHeader title="Hostel Fee Structure" subtitle="2026 – 27 Session" />
 
                     <div className="overflow-x-auto rounded-[3rem] shadow-2xl border border-black/5 bg-white">
                         <table className="w-full text-left border-collapse">

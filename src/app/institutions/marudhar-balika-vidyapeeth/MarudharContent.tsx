@@ -577,7 +577,7 @@ export default function MarudharContent() {
                                         </thead>
                                         <tbody className="divide-y divide-white/10 text-sm">
                                             {[
-                                                { camp: "ATC", date: "17 May 2025 – 26 May 2025", loc: "Jodhpur" },
+                                                { camp: "ATC", date: "17 May 2026 – 27 Session May 2025", loc: "Jodhpur" },
                                                 { camp: "Pre TSC – I", date: "04 July 2025 – 13 July 2025", loc: "Jodhpur" },
                                                 { camp: "Pre TSC – II", date: "21 July 2025 – 30 July 2025", loc: "Sri Ganganagar" },
                                                 { camp: "IG SC TSC", date: "02 Aug 2025 – 11 Aug 2025", loc: "Udaipur" }

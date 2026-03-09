@@ -4,8 +4,10 @@ import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ArrowDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 export default function Hero() {
+    const router = useRouter();
     const heroRef = useRef<HTMLDivElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
     const subtitleRef = useRef<HTMLParagraphElement>(null);
@@ -57,7 +59,7 @@ export default function Hero() {
     }, []);
 
     const scrollToContact = () => {
-        document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+        router.push("/apply");
     };
 
     return (
@@ -78,7 +80,7 @@ export default function Hero() {
                     className="h-full w-full object-cover opacity-80"
                     poster="/hostel.jpg"
                 >
-                    <source src="/ritu_vaishnav_created.webm" type="video/webm" />
+                    <source src="/IMG_9398-ezgif.com-video-to-webp-converter.webm" type="video/webm" />
                     {/* <source src="/ritu_vaishnav_created.mp4" type="video/mp4" /> */}
                 </video>
 

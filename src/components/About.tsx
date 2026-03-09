@@ -3,28 +3,34 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { History, Shield, Target, GraduationCap, Users } from "lucide-react";
+import Link from "next/link";
 
 const features = [
     {
         title: "Leeladevi Parasmal Sancheti Kanya Mahavidyalaya",
         icon: GraduationCap,
+        link: "/institutions/leela-devi-college"
     },
     {
         title: "Marudhar Balika Vidyapeeth (Sr. Sec.) – Vidyawadi (RBSE Hindi & English)",
         icon: GraduationCap,
+        link: "/institutions/marudhar-balika-vidyapeeth"
     },
     {
         title: "Sushiladevi Prakashraj Modi Primary School",
         icon: GraduationCap,
+        link: "/institutions/sushiladevi"
     },
     {
         title: "Leeladevi Parasmal Sancheti English Medium Sr. Sec. School",
         icon: GraduationCap,
+        link: "/institutions/leeladevi-english-medium"
     },
     {
         title: "Girls’ Hostel (A.C. & Non A.C. )",
         icon: Shield,
         highlight: true,
+        link: "/hostel"
     }
 ];
 
@@ -65,22 +71,23 @@ export default function About() {
 
                         <div className="grid grid-cols-2 gap-4 mt-12">
                             {features.map((item: any, idx) => (
-                                <motion.div
-                                    key={idx}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: idx * 0.1 }}
-                                    className={`flex items-center gap-3 p-4 rounded-xl border transition-all duration-300 ${item.highlight
-                                        ? "bg-sandstone text-oxford border-oxford/20 shadow-lg scale-105 z-10"
-                                        : "bg-sandstone-light/20 border-sandstone/10"
-                                        }`}
-                                >
-                                    <div className={`p-2 rounded-lg shadow-sm ${item.highlight ? "bg-oxford text-sandstone" : "bg-white text-sandstone"}`}>
-                                        <item.icon size={20} />
-                                    </div>
-                                    <span className={`text-sm font-bold ${item.highlight ? "text-oxford" : "text-oxford/80"}`}>{item.title}</span>
-                                </motion.div>
+                                <Link href={item.link || "#"} key={idx} className="block group">
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: idx * 0.1 }}
+                                        className={`flex items-center gap-3 p-4 rounded-xl border transition-all duration-300 h-full ${item.highlight
+                                            ? "bg-sandstone text-oxford border-oxford/20 shadow-lg group-hover:scale-105 z-10"
+                                            : "bg-sandstone-light/20 border-sandstone/10 hover:bg-sandstone-light/40 group-hover:-translate-y-1"
+                                            }`}
+                                    >
+                                        <div className={`p-2 rounded-lg shadow-sm ${item.highlight ? "bg-oxford text-sandstone" : "bg-white text-sandstone group-hover:scale-110 transition-transform"}`}>
+                                            <item.icon size={20} />
+                                        </div>
+                                        <span className={`text-sm font-bold ${item.highlight ? "text-oxford" : "text-oxford/80 group-hover:text-oxford"}`}>{item.title}</span>
+                                    </motion.div>
+                                </Link>
                             ))}
                         </div>
                     </motion.div>
