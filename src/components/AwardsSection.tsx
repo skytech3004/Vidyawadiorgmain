@@ -9,25 +9,9 @@ const awards = [
     {
         id: 1,
         title: "Awarded by Marwad Ratna",
-        organization: "National Education Excellence Awards",
-        year: "2024",
-        image: "/award1.jpg",
-        color: "bg-sandstone"
-    },
-    {
-        id: 2,
-        title: "Awarded by Marwad Ratna",
-        organization: "State Education Board",
-        year: "2023",
-        image: "/award.jpg",
-        color: "bg-oxford text-white"
-    },
-    {
-        id: 3,
-        title: "Awarded by Marwad Ratna",
-        organization: "Educational Leaders Forum",
-        year: "2024",
-        image: "/award3.jpg",
+        organization: "Excellence in Education",
+        year: "2025",
+        images: ["/award1.jpg", "/award.jpg", "/award3.jpg"],
         color: "bg-sandstone"
     }
 ];
@@ -110,23 +94,12 @@ export default function AwardsSection() {
                                 key={award.id}
                                 animate={styles}
                                 transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-                                className="absolute w-full max-w-2xl bg-white rounded-[3rem] border border-oxford/5 shadow-2xl overflow-hidden cursor-pointer active:scale-[0.98] transition-transform"
+                                className="absolute w-full max-w-5xl bg-white rounded-[3rem] border border-oxford/5 shadow-2xl overflow-hidden cursor-pointer active:scale-[0.98] transition-transform"
                                 onClick={() => setCurrentIndex(index)}
                             >
                                 <div className="flex flex-col items-center">
-                                    {/* Award Image */}
-                                    <div className="relative w-full aspect-[4/3] bg-white overflow-hidden border-b border-oxford/5">
-                                        <Image
-                                            src={award.image}
-                                            alt={award.title}
-                                            fill
-                                            className="object-contain p-8 md:p-12"
-                                            priority
-                                        />
-                                    </div>
-
                                     {/* Content Area */}
-                                    <div className="p-8 md:p-12 text-center w-full bg-white">
+                                    <div className="p-8 md:p-12 pb-4 text-center w-full bg-white border-b border-oxford/5">
                                         <span className="text-sandstone font-black text-base uppercase tracking-[0.4em] mb-3 block">
                                             {award.year}
                                         </span>
@@ -138,38 +111,57 @@ export default function AwardsSection() {
                                             {award.organization}
                                         </p>
                                     </div>
+
+                                    {/* Award Images */}
+                                    <div className="relative w-full bg-white overflow-hidden flex flex-wrap items-center justify-center p-8 gap-6 md:gap-10 min-h-[350px]">
+                                        {award.images?.map((img, i) => (
+                                            <div key={i} className="relative w-full sm:w-[30%] aspect-[4/3] max-w-[280px]">
+                                                <Image
+                                                    src={img}
+                                                    alt={`${award.title} ${i + 1}`}
+                                                    fill
+                                                    className="object-contain hover:scale-105 transition-transform duration-500"
+                                                    priority
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             </motion.div>
                         );
                     })}
 
                     {/* Navigation Overlays */}
-                    <div className="absolute inset-0 flex items-center justify-between pointer-events-none z-40 px-4 md:px-0">
-                        <button
-                            onClick={(e) => { e.stopPropagation(); prev(); }}
-                            className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-white/90 backdrop-blur shadow-2xl flex items-center justify-center text-oxford hover:bg-sandstone hover:text-white transition-all pointer-events-auto active:scale-90 border border-oxford/5"
-                        >
-                            <ChevronLeft size={40} />
-                        </button>
-                        <button
-                            onClick={(e) => { e.stopPropagation(); next(); }}
-                            className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-white/90 backdrop-blur shadow-2xl flex items-center justify-center text-oxford hover:bg-sandstone hover:text-white transition-all pointer-events-auto active:scale-90 border border-oxford/5"
-                        >
-                            <ChevronRight size={40} />
-                        </button>
-                    </div>
+                    {awards.length > 1 && (
+                        <div className="absolute inset-0 flex items-center justify-between pointer-events-none z-40 px-4 md:px-0">
+                            <button
+                                onClick={(e) => { e.stopPropagation(); prev(); }}
+                                className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-white/90 backdrop-blur shadow-2xl flex items-center justify-center text-oxford hover:bg-sandstone hover:text-white transition-all pointer-events-auto active:scale-90 border border-oxford/5"
+                            >
+                                <ChevronLeft size={40} />
+                            </button>
+                            <button
+                                onClick={(e) => { e.stopPropagation(); next(); }}
+                                className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-white/90 backdrop-blur shadow-2xl flex items-center justify-center text-oxford hover:bg-sandstone hover:text-white transition-all pointer-events-auto active:scale-90 border border-oxford/5"
+                            >
+                                <ChevronRight size={40} />
+                            </button>
+                        </div>
+                    )}
                 </div>
 
                 {/* Indicators */}
-                <div className="flex justify-center gap-3 mt-12">
-                    {awards.map((_, idx) => (
-                        <button
-                            key={idx}
-                            onClick={() => setCurrentIndex(idx)}
-                            className={`h-2 rounded-full transition-all duration-300 ${currentIndex === idx ? "w-12 bg-sandstone" : "w-2 bg-oxford/20"}`}
-                        />
-                    ))}
-                </div>
+                {awards.length > 1 && (
+                    <div className="flex justify-center gap-3 mt-12">
+                        {awards.map((_, idx) => (
+                            <button
+                                key={idx}
+                                onClick={() => setCurrentIndex(idx)}
+                                className={`h-2 rounded-full transition-all duration-300 ${currentIndex === idx ? "w-12 bg-sandstone" : "w-2 bg-oxford/20"}`}
+                            />
+                        ))}
+                    </div>
+                )}
             </div>
         </section>
     );

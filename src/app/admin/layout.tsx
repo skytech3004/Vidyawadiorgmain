@@ -13,12 +13,14 @@ import {
     LogOut,
     ChevronRight,
     School,
-    Bed
+    Bed,
+    Settings
 } from "lucide-react";
 import { motion } from "framer-motion";
 
 const sidebarItems = [
     { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
+    { name: "Admissions", href: "/admin/admissions", icon: FileText },
     { name: "Institutions", href: "/admin/institutions", icon: School },
     { name: "Hostel Life", href: "/admin/hostel", icon: Bed },
     { name: "Media Library", href: "/admin/media", icon: ImageIcon },
@@ -27,6 +29,7 @@ const sidebarItems = [
     { name: "Faculty / Staff", href: "/admin/staff", icon: Users },
     { name: "Result Highlights", href: "/admin/results", icon: Trophy },
     { name: "Inquiries", href: "/admin/inquiries", icon: MessageSquare },
+    { name: "Settings", href: "/admin/settings", icon: Settings },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

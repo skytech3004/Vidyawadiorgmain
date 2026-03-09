@@ -26,6 +26,7 @@ async function dbConnect() {
 
         const opts = {
             bufferCommands: false,
+            family: 4,
         };
 
         cached.promise = mongoose.connect(uri, opts).then((mongoose) => {

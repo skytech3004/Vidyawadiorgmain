@@ -167,9 +167,9 @@ export default function MarudharContent() {
                                 "We believe that educated girls build stronger families, communities, and the nation."
                             </p>
                         </div>
-                        <button className="mt-8 px-8 py-3 bg-oxford text-white rounded-full font-bold uppercase tracking-wider text-sm hover:bg-sandstone hover:text-oxford transition-all">
+                        <a href="/apply" className="inline-block mt-8 px-8 py-3 bg-oxford text-white rounded-full font-bold uppercase tracking-wider text-sm hover:bg-sandstone hover:text-oxford transition-all">
                             Apply for Admission
-                        </button>
+                        </a>
                     </div>
                     <div className="relative">
                         <div className="bg-white rounded-[2.5rem] p-10 border border-oxford/5 shadow-xl">

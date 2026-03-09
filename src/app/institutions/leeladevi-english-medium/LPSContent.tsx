@@ -160,7 +160,10 @@ export default function LPSContent() {
                         </div>
                         <div className="flex items-start gap-3">
                             <Phone className="text-sandstone shrink-0" size={20} />
-                            <a href="tel:8764250887" className="hover:text-sandstone transition-colors">8764250887</a>
+                            <div className="flex flex-col">
+                                <a href="tel:8764250887" className="hover:text-sandstone transition-colors">8764250887</a>
+                                <a href="tel:6377203204" className="hover:text-sandstone transition-colors">6377203204</a>
+                            </div>
                         </div>
                         <div className="flex items-start gap-3">
                             <Mail className="text-sandstone shrink-0" size={20} />

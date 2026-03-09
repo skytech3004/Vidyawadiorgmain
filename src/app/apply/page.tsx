@@ -8,11 +8,48 @@ import Footer from "@/components/Footer";
 
 export default function ApplyNowPage() {
     const [submitted, setSubmitted] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const [formData, setFormData] = useState({
+        fullName: "",
+        email: "",
+        phone: "",
+        city: "",
+        state: "",
+        pincode: "",
+        board: "",
+        grade: "",
+        message: ""
+    });
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setSubmitted(true);
-        // Add form submission logic here
+        setLoading(true);
+        setError("");
+
+        try {
+            const res = await fetch("/api/admissions", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData)
+            });
+            const data = await res.json();
+
+            if (data.success) {
+                setSubmitted(true);
+            } else {
+                setError(data.error || "Failed to submit application");
+            }
+        } catch (err: any) {
+            setError(err.message || "Something went wrong.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -69,7 +106,12 @@ export default function ApplyNowPage() {
                                     Thank you for applying. Our admissions team will contact you shortly via email or phone.
                                 </p>
                                 <button
-                                    onClick={() => setSubmitted(false)}
+                                    onClick={() => {
+                                        setSubmitted(false);
+                                        setFormData({
+                                            fullName: "", email: "", phone: "", city: "", state: "", pincode: "", board: "", grade: "", message: ""
+                                        });
+                                    }}
                                     className="px-10 py-4 bg-oxford text-white font-black uppercase tracking-widest text-xs rounded-full hover:bg-sandstone hover:text-oxford transition-all"
                                 >
                                     Submit Another Application
@@ -83,6 +125,12 @@ export default function ApplyNowPage() {
                                         Application Form
                                     </h2>
 
+                                    {error && (
+                                        <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-600 rounded-2xl text-sm font-medium">
+                                            {error}
+                                        </div>
+                                    )}
+
                                     <form onSubmit={handleSubmit} className="space-y-8">
                                         <div className="grid md:grid-cols-2 gap-8">
                                             {/* Full Name */}
@@ -90,6 +138,9 @@ export default function ApplyNowPage() {
                                                 <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">Full Name</label>
                                                 <input
                                                     required
+                                                    name="fullName"
+                                                    value={formData.fullName}
+                                                    onChange={handleChange}
                                                     type="text"
                                                     placeholder="Enter student's full name"
                                                     className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium"
@@ -101,6 +152,9 @@ export default function ApplyNowPage() {
                                                 <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">Email Address</label>
                                                 <input
                                                     required
+                                                    name="email"
+                                                    value={formData.email}
+                                                    onChange={handleChange}
                                                     type="email"
                                                     placeholder="Enter your email"
                                                     className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium"
@@ -114,6 +168,9 @@ export default function ApplyNowPage() {
                                                 <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">Phone Number</label>
                                                 <input
                                                     required
+                                                    name="phone"
+                                                    value={formData.phone}
+                                                    onChange={handleChange}
                                                     type="tel"
                                                     placeholder="Enter 10-digit mobile number"
                                                     className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium"
@@ -125,6 +182,9 @@ export default function ApplyNowPage() {
                                                 <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">City</label>
                                                 <input
                                                     required
+                                                    name="city"
+                                                    value={formData.city}
+                                                    onChange={handleChange}
                                                     type="text"
                                                     placeholder="Enter your city"
                                                     className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium"
@@ -138,6 +198,9 @@ export default function ApplyNowPage() {
                                                 <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">State</label>
                                                 <input
                                                     required
+                                                    name="state"
+                                                    value={formData.state}
+                                                    onChange={handleChange}
                                                     type="text"
                                                     placeholder="Enter your state"
                                                     className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium"
@@ -149,6 +212,9 @@ export default function ApplyNowPage() {
                                                 <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">Pincode</label>
                                                 <input
                                                     required
+                                                    name="pincode"
+                                                    value={formData.pincode}
+                                                    onChange={handleChange}
                                                     type="text"
                                                     placeholder="Enter pincode"
                                                     className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium"
@@ -162,6 +228,9 @@ export default function ApplyNowPage() {
                                                 <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">Select Board</label>
                                                 <select
                                                     required
+                                                    name="board"
+                                                    value={formData.board}
+                                                    onChange={handleChange}
                                                     className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium appearance-none h-[66px]"
                                                 >
                                                     <option value="">Choose Board</option>
@@ -176,6 +245,9 @@ export default function ApplyNowPage() {
                                                 <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">Interested Grade/Class</label>
                                                 <select
                                                     required
+                                                    name="grade"
+                                                    value={formData.grade}
+                                                    onChange={handleChange}
                                                     className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium appearance-none h-[66px]"
                                                 >
                                                     <option value="">Choose Class</option>
@@ -191,8 +263,11 @@ export default function ApplyNowPage() {
 
                                         {/* Message / Inquiry */}
                                         <div className="space-y-2">
-                                            <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">Message / Inquiry</label>
+                                            <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">Message / Inquiry (Optional)</label>
                                             <textarea
+                                                name="message"
+                                                value={formData.message}
+                                                onChange={handleChange}
                                                 rows={4}
                                                 placeholder="Ask us anything about admissions, hostels, or facilities..."
                                                 className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium resize-none"
@@ -202,10 +277,15 @@ export default function ApplyNowPage() {
                                         <div className="pt-6">
                                             <button
                                                 type="submit"
-                                                className="w-full py-6 bg-oxford text-white font-black uppercase tracking-[0.3em] text-sm rounded-2xl hover:bg-black transition-all shadow-xl shadow-oxford/20 flex items-center justify-center gap-4"
+                                                disabled={loading}
+                                                className="w-full py-6 bg-oxford text-white font-black uppercase tracking-[0.3em] text-sm rounded-2xl hover:bg-black transition-all shadow-xl shadow-oxford/20 flex items-center justify-center gap-4 disabled:opacity-70"
                                             >
-                                                Submit Application
-                                                <Send size={18} className="text-sandstone" />
+                                                {loading ? "Submitting..." : (
+                                                    <>
+                                                        Submit Application
+                                                        <Send size={18} className="text-sandstone" />
+                                                    </>
+                                                )}
                                             </button>
                                         </div>
                                     </form>
