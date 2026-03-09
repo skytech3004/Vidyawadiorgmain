@@ -149,14 +149,16 @@ export default function Page() {
                                 <Download size={20} className="group-hover:translate-y-1 transition-transform" />
                                 Download Prospectus
                             </motion.button>
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="px-10 py-5 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white font-black uppercase tracking-widest rounded-2xl border border-white/30 flex items-center gap-3 transition-all"
-                            >
-                                Apply Now
-                                <ArrowRight size={20} />
-                            </motion.button>
+                            <a href="/apply/hostel" className="contents">
+                                <motion.button
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="px-10 py-5 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white font-black uppercase tracking-widest rounded-2xl border border-white/30 flex items-center gap-3 transition-all"
+                                >
+                                    Apply Now
+                                    <ArrowRight size={20} />
+                                </motion.button>
+                            </a>
                         </div>
                     </motion.div>
                 </div>

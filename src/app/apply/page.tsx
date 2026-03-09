@@ -30,7 +30,7 @@ export default function ApplyNowPage() {
                         animate={{ opacity: 1, y: 0 }}
                         className="text-sandstone font-bold uppercase tracking-[0.4em] text-sm block mb-4"
                     >
-                        Admissions 2024-25
+                        Admissions 2026-27
                     </motion.span>
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}

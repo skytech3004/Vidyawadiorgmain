@@ -125,7 +125,7 @@ export default function ManagementPage() {
                         </motion.div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    <div className="space-y-4">
                         {[
                             { name: "Shri Kantilal Nagraj Mehta", post: "President" },
                             { name: "Shri Pradeep Ghisulal Rathod", post: "Vice President" },
@@ -141,22 +141,34 @@ export default function ManagementPage() {
                         ].map((bearer, i) => (
                             <motion.div
                                 key={i}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.05 }}
-                                className="group bg-white rounded-3xl p-8 border border-oxford/5 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
+                                className="group flex flex-col md:flex-row md:items-center justify-between p-8 bg-stone-50/50 hover:bg-white border border-oxford/5 rounded-3xl hover:shadow-xl hover:border-sandstone/20 transition-all duration-300"
                             >
-                                <div className="aspect-square w-full mb-6 relative overflow-hidden rounded-2xl bg-sandstone-light/20 flex items-center justify-center grayscale group-hover:grayscale-0 transition-all duration-500">
-                                    <div className="absolute inset-0 bg-gradient-to-t from-oxford/20 to-transparent" />
-                                    <Users size={64} className="text-oxford/20" />
+                                <div className="flex items-center gap-6">
+                                    <div className="w-14 h-14 rounded-2xl bg-oxford/5 flex items-center justify-center text-oxford/20 group-hover:bg-sandstone group-hover:text-white transition-all duration-500 shadow-inner">
+                                        <Users size={28} />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-xl md:text-2xl font-black text-oxford uppercase tracking-tight group-hover:text-sandstone transition-colors">
+                                            {bearer.name}
+                                        </h4>
+                                        <div className="md:hidden mt-2">
+                                            <span className="px-4 py-1.5 bg-oxford text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-full inline-block">
+                                                {bearer.post}
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <h4 className="text-xl font-black text-oxford mb-2 group-hover:text-sandstone transition-colors truncate" title={bearer.name}>
-                                    {bearer.name}
-                                </h4>
-                                <p className="text-sandstone font-black uppercase tracking-widest text-xs">
-                                    {bearer.post}
-                                </p>
+
+                                <div className="hidden md:flex items-center gap-4">
+                                    <div className="h-[1px] w-20 bg-oxford/10 group-hover:w-32 group-hover:bg-sandstone/30 transition-all duration-500" />
+                                    <span className="px-6 py-2.5 bg-oxford text-white text-xs font-black uppercase tracking-[0.3em] rounded-full shadow-lg shadow-oxford/20 group-hover:bg-sandstone group-hover:text-oxford group-hover:shadow-sandstone/20 transition-all duration-500">
+                                        {bearer.post}
+                                    </span>
+                                </div>
                             </motion.div>
                         ))}
                     </div>

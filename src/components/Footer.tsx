@@ -35,9 +35,12 @@ export default function Footer() {
                     <div className="lg:col-span-2">
                         <h4 className="text-lg font-bold mb-6 text-white uppercase tracking-widest">Quick Links</h4>
                         <ul className="space-y-4">
-                            {["About Us", "Admissions", "Facilities", "Heritage", "Curriculum", "Contact"].map((link) => (
+                            {["About Us", "Admissions", "Facilities", "Online Donation", "Contact"].map((link) => (
                                 <li key={link}>
-                                    <a href={`#${link.toLowerCase().replace(" ", "-")}`} className="text-white/60 hover:text-sandstone transition-colors font-medium">
+                                    <a
+                                        href={link === "Online Donation" ? "/donate" : `/#${link.toLowerCase().replace(" ", "-")}`}
+                                        className="text-white/60 hover:text-sandstone transition-colors font-medium"
+                                    >
                                         {link}
                                     </a>
                                 </li>
