@@ -16,8 +16,9 @@ async function verifyAuth(req: NextRequest) {
     }
 }
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
     try {
+        const { id } = await params;
         const payload = await verifyAuth(request);
         if (!payload) {
             return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
@@ -27,7 +28,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
         const data = await request.json();
 
         const updatedAchievement = await Achievement.findByIdAndUpdate(
-            params.id,
+            id,
             { $set: data },
             { new: true, runValidators: true }
         );
@@ -43,8 +44,9 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
     try {
+        const { id } = await params;
         const payload = await verifyAuth(request);
         if (!payload) {
             return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
@@ -52,7 +54,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
 
         await connectDB();
 
-        const deletedAchievement = await Achievement.findByIdAndDelete(params.id);
+        const deletedAchievement = await Achievement.findByIdAndDelete(id);
 
         if (!deletedAchievement) {
             return NextResponse.json({ success: false, error: "Achievement not found" }, { status: 404 });
