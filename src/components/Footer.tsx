@@ -7,16 +7,16 @@ export default function Footer() {
     return (
         <footer data-theme="dark" className="bg-oxford-dark text-white py-20 px-6 border-t border-white/5">
             <div className="max-w-[1600px] mx-auto">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-12 mb-16">
-                    <div className="lg:col-span-5 space-y-6">
-                        <div className="flex items-center gap-4">
-                            <img src="/white-logo.png" alt="Logo" className="w-24 h-24 object-contain" />
-                            <h3 className="text-xl sm:text-2xl font-bold text-sandstone leading-tight lg:whitespace-nowrap">Marudhar Mahila Shikshan Sangh<br />  Vidyawadi</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 mb-16">
+                    <div className="md:col-span-2 lg:col-span-4 space-y-6 flex flex-col md:block items-center text-center md:text-left">
+                        <div className="flex flex-col sm:flex-row items-center gap-4">
+                            <img src="/white-logo.png" alt="Logo" className="w-20 h-20 sm:w-24 sm:h-24 object-contain" />
+                            <h3 className="text-xl sm:text-2xl font-bold text-sandstone leading-tight">Marudhar Mahila Shikshan Sangh<br className="hidden sm:block" /> Vidyawadi</h3>
                         </div>
-                        <p className="text-white/60 leading-relaxed">
+                        <p className="text-white/60 leading-relaxed max-w-sm mx-auto md:mx-0">
                             Excellence in education since 1956. Nurturing the next generation of leaders with values and vision.
                         </p>
-                        <div className="flex gap-4">
+                        <div className="flex justify-center md:justify-start gap-4">
                             <a href="https://www.facebook.com/profile.php?id=61583590541462" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-sandstone hover:text-oxford transition-all">
                                 <Facebook size={18} />
                             </a>

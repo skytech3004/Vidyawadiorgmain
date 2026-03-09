@@ -72,7 +72,16 @@ export default function VisionMissionPage() {
                                 <div className="absolute inset-0 bg-oxford opacity-5" />
                                 <div className="absolute inset-12 border-4 border-white/50 rounded-[2rem] flex items-center justify-center p-12 text-center text-oxford">
                                     <div>
-                                        <Target size={80} className="mx-auto mb-6 text-oxford/20" />
+                                        <div className="relative flex items-center justify-center mb-6 h-28 w-full">
+                                            <motion.img
+                                                initial={{ scale: 0, opacity: 0, rotate: -30 }}
+                                                whileInView={{ scale: 1, opacity: 1, rotate: 0 }}
+                                                transition={{ type: "spring", bounce: 0.5, duration: 1 }}
+                                                src="https://cdn-icons-png.flaticon.com/512/752/752675.png"
+                                                alt="Target Arrow"
+                                                className="h-28 w-28 object-contain drop-shadow-2xl"
+                                            />
+                                        </div>
                                         <h3 className="text-xl font-black uppercase tracking-widest text-oxford/40">Empowerment Through Education</h3>
                                     </div>
                                 </div>

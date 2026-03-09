@@ -50,7 +50,7 @@ export default function AboutPage() {
                     </p>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         <div>
-                            <div className="text-4xl font-black text-sandstone mb-2">65+</div>
+                            <div className="text-4xl font-black text-sandstone mb-2">70+</div>
                             <div className="text-sm font-bold text-oxford/60 uppercase tracking-widest">Acres Campus</div>
                         </div>
                         <div>
