@@ -178,6 +178,8 @@ export default function ContactForm() {
                                         <option value="">Select Board</option>
                                         <option value="RBSE">RBSE</option>
                                         <option value="CBSE">CBSE</option>
+                                        <option value="JNVU">JNVU</option>
+
 
                                     </select>
                                 </div>
@@ -194,6 +196,9 @@ export default function ContactForm() {
                                         <option value="Class 6-8">Class 6-8</option>
                                         <option value="Class 9-10">Class 9-10</option>
                                         <option value="Class 11-12">Class 11-12</option>
+                                        <option value="UG">UG</option>
+                                        <option value="PG">PG</option>
+
                                     </select>
                                 </div>
                             </div>

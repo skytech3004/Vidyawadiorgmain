@@ -77,7 +77,7 @@ export default function VisionMissionPage() {
                                                 initial={{ scale: 0, opacity: 0, rotate: -30 }}
                                                 whileInView={{ scale: 1, opacity: 1, rotate: 0 }}
                                                 transition={{ type: "spring", bounce: 0.5, duration: 1 }}
-                                                src="https://cdn-icons-png.flaticon.com/512/752/752675.png"
+                                                src="/aiming-how-to-improve-v0-4x6zodxi69d11.webp"
                                                 alt="Target Arrow"
                                                 className="h-28 w-28 object-contain drop-shadow-2xl"
                                             />
