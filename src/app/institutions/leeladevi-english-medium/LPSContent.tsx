@@ -75,6 +75,25 @@ export default function LPSContent() {
     const [visibleToppers, setVisibleToppers] = useState(10);
     const [visibleStaff, setVisibleStaff] = useState(12);
     const [selectedCategory, setSelectedCategory] = useState("XII");
+    const [achievements, setAchievements] = useState<any[]>([]);
+    const [loadingAchievements, setLoadingAchievements] = useState(true);
+
+    useEffect(() => {
+        const fetchAchievements = async () => {
+            try {
+                const res = await fetch("/api/achievements?category=Sports&institution=lps");
+                const data = await res.json();
+                if (data.success) {
+                    setAchievements(data.achievements);
+                }
+            } catch (error) {
+                console.error("Error fetching achievements:", error);
+            } finally {
+                setLoadingAchievements(false);
+            }
+        };
+        fetchAchievements();
+    }, []);
 
     // --- Mock Results Data ---
     const allResults = [
@@ -535,20 +554,18 @@ export default function LPSContent() {
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-white/5">
-                                        {[
-                                            { title: "District Badminton (U-19)", desc: "2nd position. One selected for state." },
-                                            { title: "District Rifle Shooting (U-17)", desc: "2nd position. 3 selected for state." },
-                                            { title: "Rifle Shooting (U-19)", desc: "1st position. 2 selected for state." },
-                                            { title: "District Skating", desc: "3rd position & selected for state." },
-                                            { title: "Athletics (U-19)", desc: "1st (Long Jump), 2nd (Shot Put)." },
-                                            { title: "Athletics (U-17)", desc: "Top positions. 4 selected for state." },
-                                            { title: "Athletics (U-14)", desc: "Overall Championship. 4 selected for state." }
-                                        ].map((ach, i) => (
-                                            <tr key={i} className="hover:bg-white/5 transition-colors">
-                                                <td className="p-4 text-xs font-bold text-white">{ach.title}</td>
-                                                <td className="p-4 text-xs text-white/70 text-right">{ach.desc}</td>
-                                            </tr>
-                                        ))}
+                                        {loadingAchievements ? (
+                                            <tr><td colSpan={2} className="p-4 text-center text-xs text-white/70">Loading...</td></tr>
+                                        ) : achievements.length > 0 ? (
+                                            achievements.map((ach) => (
+                                                <tr key={ach._id} className="hover:bg-white/5 transition-colors">
+                                                    <td className="p-4 text-sm font-bold text-oxford">{ach.title}</td>
+                                                    <td className="p-4 text-sm text-oxford text-right">{ach.description}</td>
+                                                </tr>
+                                            ))
+                                        ) : (
+                                            <tr><td colSpan={2} className="p-4 text-center text-xs text-white/70">No achievements recorded yet.</td></tr>
+                                        )}
                                     </tbody>
                                 </table>
                             </div>

@@ -204,6 +204,7 @@ const labsData = [
         "id": 10,
         "name": "Psychology Laboratory",
         "slug": "psychology",
+        "image": "/psy.png",
         "icon": <Trophy className="w-8 h-8 text-oxford" />,
         "gradient": "from-sandstone to-sandstone-dark",
         "description": "Interactive space to understand human behavior through scientific methods and psychological assessments.",
@@ -775,18 +776,18 @@ export default function LeelaDeviContent() {
                     </div>
 
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                        {[
-                            { name: "Girls Hostel", icon: School },
-                            { name: "Medical Support", icon: HeartPulse },
-                            { name: "Library", icon: Library },
-                            { name: "Sports & Gym", icon: Dumbbell },
-                            { name: "IT Infrastructure", icon: Monitor },
-                            { name: "Science Labs", icon: Microscope },
-                            { name: "Cafeteria", icon: Utensils },
-                            { name: "Auditorium", icon: Music },
-                            { name: "Transport", icon: Bus },
-                            { name: "Extra-curricular", icon: Trophy }
-                        ].map((facility, i) => (
+                        {([
+                            { name: "Girls Hostel", img: "/images.jpg" },
+                            { name: "Medical Support", img: "/uploads/Supporting/health.png" },
+                            { name: "Library", img: "/uploads/Supporting/lib.png" },
+                            { name: "Sports & Gym", img: "/uploads/Supporting/gym.png" }, // Missing image, keeping icon as fallback
+                            { name: "IT Infrastructure", img: "/uploads/Supporting/IT.png" },
+                            { name: "Science Labs", img: "/uploads/Supporting/lab.png" },
+                            { name: "Cafeteria", img: "/uploads/Supporting/cafe.png" },
+                            { name: "Auditorium", img: "/uploads/Supporting/audio.png" },
+                            { name: "Transport", img: "/uploads/Supporting/trans.png" },
+                            { name: "Extra-curricular", img: "/uploads/Supporting/extra.png" }
+                        ] as { name: string; img?: string; icon?: any }[]).map((facility, i) => (
                             <motion.div
                                 key={i}
                                 initial={{ opacity: 0, y: 20 }}
@@ -795,8 +796,12 @@ export default function LeelaDeviContent() {
                                 transition={{ delay: i * 0.1 }}
                                 className="group p-8 rounded-3xl bg-gray-50 hover:bg-white hover:shadow-2xl transition-all border border-oxford hover:border-sandstone/20 text-center flex flex-col items-center"
                             >
-                                <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-6 group-hover:bg-sandstone group-hover:text-white transition-colors">
-                                    <facility.icon size={32} strokeWidth={1.5} />
+                                <div className="w-40 h-40 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-6 overflow-hidden group-hover:scale-110 transition-transform">
+                                    {facility.img ? (
+                                        <img src={facility.img} alt={facility.name} className="w-full h-full object-cover" />
+                                    ) : facility.icon ? (
+                                        <facility.icon size={32} strokeWidth={1.5} className="text-oxford group-hover:text-sandstone transition-colors" />
+                                    ) : null}
                                 </div>
                                 <h3 className="font-bold text-oxford leading-tight">{facility.name}</h3>
                             </motion.div>
