@@ -215,15 +215,15 @@ export default function MarudharContent() {
                             { name: "Chemistry Laboratory", icon: Microscope, img: "/images/Chemistry Laboratory.png" },
                             { name: "Biology Laboratory", icon: Microscope, img: "/images/Biology Laboratory.png" },
                             { name: "Geography Laboratory", icon: Globe, img: "/images/Geography Laboratory.png" },
-                            { name: "Art & Craft Lab", icon: Trophy, img: "/images/Art & Craft Lab.png" },
+                            { name: "Art & Craft Lab", icon: Trophy, img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWM0VDuzqiY7GKHYNiuLdOiI7NeBpeOLzD8rQ4xWGJnwBcENRmGbgaQuXdZCdb1_Jo2vfdGOarAbvU_jduXSt9pSejENdN_TZGKOTTYaLnDGUVrn-NJryFo1Y3QjC4d9zL7tMd6Aq9J40/s1600/photo+4-3.JPG" },
                             { name: "RS-CIT IT Computer Center", icon: School, img: "/images/RS-CIT IT Computer Center.png" },
-                            { name: "CCTV Camera Surveillance", icon: CheckCircle2, img: null },
-                            { name: "Fire Safety Systems", icon: CheckCircle2, img: null },
-                            { name: "Practical Equipment (All Subjects)", icon: BookOpen, img: null }
+                            { name: "CCTV Camera Surveillance", icon: CheckCircle2, img: "https://journalistsresource.org/wp-content/uploads/2014/02/surveillance-camera-860x466.jpg" },
+                            { name: "Fire Safety Systems", icon: CheckCircle2, img: "https://static.vecteezy.com/system/resources/previews/065/840/675/non_2x/a-firefighter-presenting-fire-safety-tips-with-a-fire-extinguisher-illustration-vector.jpg" },
+                            { name: "Practical Equipment (All Subjects)", icon: BookOpen, img: "https://www.labkafe.com/storage/blog/optimize/20-common-lab-equipment.jpg" }
                         ].map((facility, i) => (
                             <div key={i} className="group overflow-hidden rounded-[2rem] bg-white shadow-xl hover:shadow-2xl transition-all border border-oxford/5">
                                 {facility.img ? (
-                                    <div className="h-48 overflow-hidden relative">
+                                    <div className="h-80 overflow-hidden relative">
                                         <div className="absolute inset-0 bg-oxford/20 group-hover:bg-transparent transition-colors z-10" />
                                         <img
                                             src={facility.img}
@@ -278,6 +278,7 @@ export default function MarudharContent() {
                             <Star size={48} className="text-sandstone mb-4" />
                             <h3 className="text-3xl font-bold mb-2">34 Students</h3>
                             <p className="text-white/80">Scored above 90% in board exams</p>
+                            <h2 className="text-3xl font-bold mb-2">In 2025</h2>
                         </div>
                         <div className="bg-oxford text-white p-8 rounded-2xl flex flex-col justify-center items-center text-center">
                             <Medal size={48} className="text-sandstone mb-4" />
@@ -765,48 +766,48 @@ export default function MarudharContent() {
 
 
                             // 🏫 School Leadership
-                            { no: 1, name: "Priya Sangeeta", designation: "Principal", image: "/staff/priya-sangeeta.png" },
-                            { no: 2, name: "Alka Tak", designation: "Vice Principal", image: "/staff/alka-tak.png" },
+                            { no: 1, name: "Priya Sangeeta", designation: "Principal", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 2, name: "Alka Tak", designation: "Vice Principal", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
 
                             // 👩‍🏫 PGT Teachers
-                            { no: 3, name: "Kushal Kunwar", designation: "PGT - History", image: "/staff/kushal-kunwar.png" },
-                            { no: 4, name: "Prakash Gehlot", designation: "PGT - Mathematics", image: "/staff/prakash-gehlot.png" },
-                            { no: 5, name: "Uttam Kunwar", designation: "PGT - English Literature", image: "/staff/uttam-kunwar.png" },
-                            { no: 6, name: "Vishnu Kanwar", designation: "PGT - Drawing", image: "/staff/vishnu-kanwar.png" },
-                            { no: 7, name: "Santosh Kanwar", designation: "PGT - Economics", image: "/staff/santosh-kanwar.png" },
-                            { no: 8, name: "Dimpal Kumari Sharma", designation: "PGT - Political Science", image: "/staff/dimpal-kumari-sharma.png" },
-                            { no: 9, name: "Chandra Kunwar", designation: "PGT - Chemistry", image: "/staff/chandra-kunwar.png" },
-                            { no: 10, name: "Suman Kanwar", designation: "PGT - Geography", image: "/staff/suman-kanwar.png" },
-                            { no: 11, name: "Jitendra Singh", designation: "PGT - Accounts", image: "/staff/jitendra-singh.png" },
-                            { no: 12, name: "Vandana Sharma", designation: "PGT - Hindi Literature", image: "/staff/vandana-sharma.png" },
-                            { no: 13, name: "Dinesh Kumar", designation: "PGT - Physics", image: "/staff/dinesh-kumar.png" },
+                            { no: 3, name: "Kushal Kunwar", designation: "PGT - History", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 4, name: "Prakash Gehlot", designation: "PGT - Mathematics", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 5, name: "Uttam Kunwar", designation: "PGT - English Literature", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 6, name: "Vishnu Kanwar", designation: "PGT - Drawing", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 7, name: "Santosh Kanwar", designation: "PGT - Economics", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 8, name: "Dimpal Kumari Sharma", designation: "PGT - Political Science", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 9, name: "Chandra Kunwar", designation: "PGT - Chemistry", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 10, name: "Suman Kanwar", designation: "PGT - Geography", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 11, name: "Jitendra Singh", designation: "PGT - Accounts", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 12, name: "Vandana Sharma", designation: "PGT - Hindi Literature", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 13, name: "Dinesh Kumar", designation: "PGT - Physics", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
 
                             // 👨‍🏫 TGT Teachers
-                            { no: 14, name: "Shruti Sharma", designation: "TGT - Sanskrit", image: "/staff/shruti-sharma.png" },
-                            { no: 15, name: "Heena Chouhan", designation: "TGT - Hindi", image: "/staff/heena-chouhan.png" },
-                            { no: 16, name: "Kamlesh", designation: "TGT - Computer", image: "/staff/kamlesh.png" },
-                            { no: 17, name: "Harshita Soni", designation: "TGT - Science", image: "/staff/harshita-soni.png" },
-                            { no: 18, name: "Jitendra Kumar", designation: "TGT - Biology", image: "/staff/jitendra-kumar.png" },
-                            { no: 19, name: "Neha Ashawat", designation: "TGT - English", image: "/staff/neha-ashawat.png" },
-                            { no: 20, name: "Yogita Malviya", designation: "TGT - Mathematics", image: "/staff/yogita-malviya.png" },
-                            { no: 21, name: "Soniya Kumari", designation: "TGT - Social Science", image: "/staff/soniya-kumari.png" },
+                            { no: 14, name: "Shruti Sharma", designation: "TGT - Sanskrit", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 15, name: "Heena Chouhan", designation: "TGT - Hindi", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 16, name: "Kamlesh", designation: "TGT - Computer", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 17, name: "Harshita Soni", designation: "TGT - Science", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 18, name: "Jitendra Kumar", designation: "TGT - Biology", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 19, name: "Neha Ashawat", designation: "TGT - English", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 20, name: "Yogita Malviya", designation: "TGT - Mathematics", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 21, name: "Soniya Kumari", designation: "TGT - Social Science", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
 
                             // 🧪 Academic Support
-                            { no: 22, name: "Uday Narayan Shukla", designation: "Science Lab Assistant", image: "/staff/uday-narayan-shukla.png" },
-                            { no: 23, name: "Baby Kunwar", designation: "Librarian", image: "/staff/baby-kunwar.png" },
-                            { no: 24, name: "Monika", designation: "P.T.I.", image: "/staff/monika.png" },
+                            { no: 22, name: "Uday Narayan Shukla", designation: "Science Lab Assistant", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 23, name: "Baby Kunwar", designation: "Librarian", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 24, name: "Monika", designation: "P.T.I.", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
 
                             // 🏢 Administrative Staff
-                            { no: 25, name: "Himmat Singh Rathore", designation: "U.D.C.", image: "/staff/himmat-singh-rathore.png" },
-                            { no: 26, name: "Dilip Kumar", designation: "L.D.C.", image: "/staff/dilip-kumar.png" },
+                            { no: 25, name: "Himmat Singh Rathore", designation: "U.D.C.", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 26, name: "Dilip Kumar", designation: "L.D.C.", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
 
                             // 🛠 Support Staff
-                            { no: 27, name: "Arvind Kumar", designation: "Office Boy", image: "/staff/arvind-kumar.png" },
-                            { no: 28, name: "Rekha", designation: "Peon", image: "/staff/rekha.png" },
-                            { no: 29, name: "Bhima Ram", designation: "Gardener", image: "/staff/bhima-ram.png" },
-                            { no: 30, name: "Gordhan Singh Sisodia", designation: "Peon", image: "/staff/gordhan-singh-sisodia.png" },
-                            { no: 31, name: "Dilip", designation: "Peon", image: "/staff/dilip.png" },
-                            { no: 32, name: "Hirwanti", designation: "Sweeper", image: "/staff/hirwanti.png" }
+                            { no: 27, name: "Arvind Kumar", designation: "Office Boy", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 28, name: "Rekha", designation: "Peon", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 29, name: "Bhima Ram", designation: "Gardener", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 30, name: "Gordhan Singh Sisodia", designation: "Peon", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 31, name: "Dilip", designation: "Peon", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
+                            { no: 32, name: "Hirwanti", designation: "Sweeper", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" }
 
 
                         ].slice(0, visibleStaff).map((staff, i) => (

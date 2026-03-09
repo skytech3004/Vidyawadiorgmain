@@ -14,7 +14,8 @@ import {
     ChevronRight,
     School,
     Bed,
-    Settings
+    Settings,
+    Heart
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -28,6 +29,7 @@ const sidebarItems = [
     { name: "Gallery", href: "/admin/gallery", icon: ImageIcon },
     { name: "Faculty / Staff", href: "/admin/staff", icon: Users },
     { name: "Result Highlights", href: "/admin/results", icon: Trophy },
+    { name: "Donations", href: "/admin/donations", icon: Heart },
     { name: "Inquiries", href: "/admin/inquiries", icon: MessageSquare },
     { name: "Settings", href: "/admin/settings", icon: Settings },
 ];

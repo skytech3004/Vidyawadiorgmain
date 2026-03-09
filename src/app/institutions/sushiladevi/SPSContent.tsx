@@ -173,7 +173,7 @@ export default function SPSContent() {
                         </div>
                         <div className="flex items-start gap-3">
                             <Phone className="text-sandstone shrink-0" size={20} />
-                            <a href="tel:8764250887" className="hover:text-sandstone transition-colors">8764250887</a>
+                            <a href="tel:6377204218" className="hover:text-sandstone transition-colors">Call +91 6377204218</a>
                         </div>
                         <div className="flex items-start gap-3">
                             <Mail className="text-sandstone shrink-0" size={20} />
@@ -289,7 +289,7 @@ export default function SPSContent() {
                             </div>
                         ))}
                     </div>
-
+                    {/* 
                     <div className="bg-white p-10 md:p-14 rounded-[2.5rem] shadow-xl border border-oxford/5">
                         <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-xs block mb-4 text-center">Comprehensive Curriculum</span>
                         <h3 className="text-3xl md:text-4xl font-bold text-oxford mb-6 flex justify-center items-center gap-3 text-center">
@@ -329,7 +329,7 @@ export default function SPSContent() {
                                 </div>
                             ))}
                         </div>
-                    </div>
+                    </div> */}
 
                     <div className="mt-16 bg-white p-10 md:p-14 rounded-[2.5rem] shadow-xl border border-oxford/5">
                         <div className="text-center mb-12">

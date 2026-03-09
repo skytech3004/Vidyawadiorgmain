@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart, Globe, CreditCard, ShieldCheck, CheckCircle2, DollarSign, Wallet, ArrowRight, User, Mail, Phone, FileText, MapPin } from "lucide-react";
+import Script from "next/script";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -12,20 +13,139 @@ export default function DonatePage() {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
+    // Donor Details State
+    const [donorName, setDonorName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+
     const presets = ["1100", "2100", "5100", "11000"];
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (!donorName || !email || !phone || !amount) {
+            alert("Please fill all required fields");
+            return;
+        }
+
         setIsSubmitting(true);
-        // Mock submission
-        setTimeout(() => {
+
+        try {
+            // 1. Create order or subscription on the backend
+            const endpoint = frequency === "once" ? "/api/donate/order" : "/api/donate/subscription";
+
+            const res = await fetch(endpoint, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ amount, donorName, email, phone })
+            });
+
+            const data = await res.json();
+
+            // Handle Mock Mode (If no actual live/test keys are present)
+            if (!data.success || data.error?.includes("Failed to create")) {
+                // If backend throws error because of missing keys, fall back to mock
+                const isMock = confirm("Razorpay keys not found. Do you want to proceed in Mock Mode using a QR Code?");
+                if (isMock) {
+                    setIsSubmitting(false);
+                    // Open a simple mock modal
+                    const confirmPayment = confirm(`Please scan your Razorpay QR code to pay ₹${amount}.\nClick OK once you have completed the payment via UPI/QR.`);
+                    if (confirmPayment) {
+                        setIsSubmitting(true);
+                        // Record mock successful transaction directly to DB
+                        await fetch("/api/donate/verify", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                                razorpay_order_id: `mock_order_${Date.now()}`,
+                                razorpay_payment_id: `mock_pay_${Date.now()}`,
+                                razorpay_signature: "mock_signature_skip_verify", // Instruct backend to skip verify in mock mode
+                                type: frequency,
+                                mock_data: { amount, donorName, email, phone } // Pass details to save new record directly
+                            })
+                        });
+                        setIsSubmitted(true);
+                    }
+                }
+                setIsSubmitting(false);
+                return;
+            }
+
+            // 2. Setup Razorpay Checkout Options
+            const options: any = {
+                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "",
+                name: "Vidyawadi School",
+                description: frequency === "once" ? `One-Time Donation` : `Monthly Donation`,
+                image: "/images/favicon.png",
+                prefill: {
+                    name: donorName,
+                    email: email,
+                    contact: phone,
+                },
+                notes: {
+                    type: frequency
+                },
+                theme: {
+                    color: "#182035", // Oxford text
+                },
+                handler: async function (response: any) {
+                    setIsSubmitting(true);
+                    try {
+                        // 3. Verify signature securely on our backend
+                        const verifyRes = await fetch("/api/donate/verify", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                                razorpay_order_id: response.razorpay_order_id,
+                                razorpay_subscription_id: response.razorpay_subscription_id,
+                                razorpay_payment_id: response.razorpay_payment_id,
+                                razorpay_signature: response.razorpay_signature,
+                                type: frequency
+                            })
+                        });
+
+                        const verifyData = await verifyRes.json();
+
+                        if (verifyData.success) {
+                            setIsSubmitted(true);
+                        } else {
+                            alert("Payment verification failed! Please contact support.");
+                        }
+                    } catch (error) {
+                        alert("An error occurred while verifying the payment.");
+                    } finally {
+                        setIsSubmitting(false);
+                    }
+                }
+            };
+
+            // Switch between Order ID (One-time) vs Subscription ID (Monthly)
+            if (frequency === "once") {
+                options.order_id = data.orderId;
+            } else {
+                options.subscription_id = data.subscriptionId;
+            }
+
+            // 4. Open Razorpay Checkout Form
+            const rzp = new (window as any).Razorpay(options);
+
+            rzp.on("payment.failed", function (response: any) {
+                alert("Payment failed: " + response.error.description);
+                setIsSubmitting(false);
+            });
+
+            rzp.open();
+
+        } catch (error) {
+            console.error("DONATION_ERROR:", error);
+            alert("Connection error. Please try again.");
             setIsSubmitting(false);
-            setIsSubmitted(true);
-        }, 1500);
+        }
     };
 
     return (
         <main className="min-h-screen bg-stone-50 font-devanagari">
+            <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
             <Navbar />
 
             {/* Hero Section */}
@@ -176,18 +296,18 @@ export default function DonatePage() {
                                             <div className="grid md:grid-cols-2 gap-6">
                                                 <div className="space-y-2">
                                                     <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4 flex items-center gap-2"><User size={12} /> Full Name</label>
-                                                    <input required type="text" placeholder="Your name" className="w-full px-8 py-5 bg-stone-50 border border-black/5 rounded-2xl focus:bg-white focus:border-sandstone transition-all outline-none text-oxford font-medium" />
+                                                    <input required value={donorName} onChange={e => setDonorName(e.target.value)} type="text" placeholder="Your name" className="w-full px-8 py-5 bg-stone-50 border border-black/5 rounded-2xl focus:bg-white focus:border-sandstone transition-all outline-none text-oxford font-medium" />
                                                 </div>
                                                 <div className="space-y-2">
                                                     <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4 flex items-center gap-2"><Mail size={12} /> Email Address</label>
-                                                    <input required type="email" placeholder="Your email" className="w-full px-8 py-5 bg-stone-50 border border-black/5 rounded-2xl focus:bg-white focus:border-sandstone transition-all outline-none text-oxford font-medium" />
+                                                    <input required value={email} onChange={e => setEmail(e.target.value)} type="email" placeholder="Your email" className="w-full px-8 py-5 bg-stone-50 border border-black/5 rounded-2xl focus:bg-white focus:border-sandstone transition-all outline-none text-oxford font-medium" />
                                                 </div>
                                             </div>
 
                                             <div className="grid md:grid-cols-2 gap-6">
                                                 <div className="space-y-2">
                                                     <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4 flex items-center gap-2"><Phone size={12} /> Mobile Number</label>
-                                                    <input required type="tel" placeholder="10-digit number" className="w-full px-8 py-5 bg-stone-50 border border-black/5 rounded-2xl focus:bg-white focus:border-sandstone transition-all outline-none text-oxford font-medium" />
+                                                    <input required value={phone} onChange={e => setPhone(e.target.value)} type="tel" placeholder="10-digit number" className="w-full px-8 py-5 bg-stone-50 border border-black/5 rounded-2xl focus:bg-white focus:border-sandstone transition-all outline-none text-oxford font-medium" />
                                                 </div>
                                                 <div className="space-y-2">
                                                     <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4 flex items-center gap-2"><Globe size={12} /> Citizenship</label>
