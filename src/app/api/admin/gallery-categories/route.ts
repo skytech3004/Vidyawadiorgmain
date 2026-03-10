@@ -24,7 +24,8 @@ export async function GET() {
         const categories = await GalleryCategory.find({}).sort({ order: 1, name: 1 });
         return NextResponse.json({ success: true, categories });
     } catch (error: any) {
-        return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });
+        console.error("Gallery Categories API Error:", error);
+        return NextResponse.json({ success: false, error: `Internal Server Error: ${error.message}` }, { status: 500 });
     }
 }
 

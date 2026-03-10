@@ -27,7 +27,7 @@ export async function GET() {
     } catch (error: any) {
         console.error("Local Gallery API Error:", error);
         return NextResponse.json(
-            { success: false, error: "Failed to fetch gallery data" },
+            { success: false, error: `Failed to fetch gallery data: ${error?.message || "Unknown error"}` },
             { status: 500 }
         );
     }

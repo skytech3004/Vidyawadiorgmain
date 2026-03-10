@@ -8,7 +8,7 @@ const timelineEvents = [
     {
         year: "1956",
         title: "The Foundation",
-        description: "Vidyawadi School established with 50 students and 5 teachers in a small building.",
+        description: "Vidyawadi School was established with 5 students, and Sudra Ma was the only teacher in the beginning, in a small building.",
         side: "left"
     },
     {

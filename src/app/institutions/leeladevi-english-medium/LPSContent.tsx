@@ -1,16 +1,16 @@
 "use client";
 
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import {
-    BookOpen, Trophy, School, Users, Star, Microscope,
-    Medal, Phone, MapPin, Mail, CheckCircle2,
-    Music, Calendar, User, FileText, Sparkles, ShieldCheck,
-    Globe, ArrowRight
+import { 
+    BookOpen, Trophy, School, Users, Star, Microscope, 
+    Medal, Phone, MapPin, Globe, CheckCircle2, User,
+    ShieldCheck, Sparkles 
 } from "lucide-react";
-import Image from "next/image";
-import StudentModal from "@/components/StudentModal";
 import StudentResultsTable from "@/components/StudentResultsTable";
+import StudentModal from "@/components/StudentModal";
 
 // --- Data ---
 
@@ -67,86 +67,10 @@ const staffList = [
     { no: 50, name: "Ms. Chanchal Suthar", designation: "Comp. Lab Asst." },
 ];
 
-// Hardcoded fallback data removed in favor of dynamic fetching
-
 export default function LPSContent() {
     const [selectedStudent, setSelectedStudent] = useState<any>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [visibleToppers, setVisibleToppers] = useState(10);
     const [visibleStaff, setVisibleStaff] = useState(12);
-    const [selectedCategory, setSelectedCategory] = useState("XII");
-    const [achievements, setAchievements] = useState<any[]>([]);
-    const [loadingAchievements, setLoadingAchievements] = useState(true);
-
-    useEffect(() => {
-        const fetchAchievements = async () => {
-            try {
-                const res = await fetch("/api/achievements?category=Sports&institution=lps");
-                const data = await res.json();
-                if (data.success) {
-                    setAchievements(data.achievements);
-                }
-            } catch (error) {
-                console.error("Error fetching achievements:", error);
-            } finally {
-                setLoadingAchievements(false);
-            }
-        };
-        fetchAchievements();
-    }, []);
-
-    // --- Mock Results Data ---
-    const allResults = [
-        // Class XII
-        { name: "Ankur Kanwar", class: "XII", percentage: "97.40%", stream: "Science", image: "/images/ankur_kanwar.jpg", resultType: "Board" },
-        { name: "Himanshi Jain", class: "XII", percentage: "94.80%", stream: "Science", image: "/images/himanshi_jain.jpg", resultType: "Board" },
-        { name: "Niral", class: "XII", percentage: "93.60%", stream: "Commerce", image: "/images/niral.jpg", resultType: "Board" },
-        { name: "Ishita Chouhan", class: "XII", percentage: "92.60%", stream: "Humanities", image: "/images/ishita_chouhan.jpg", resultType: "Board" },
-        { name: "Manjari Vaishnav", class: "XII", percentage: "92.40%", stream: "Humanities", image: "/images/manjari_vaishnav.jpg", resultType: "Board" },
-        { name: "Alfina", class: "XII", percentage: "91.00%", stream: "Humanities", image: "/images/alfina.jpg", resultType: "Board" },
-        { name: "Lakshita Rathore", class: "XII", percentage: "90.00%", stream: "Humanities", image: "/images/lakshita_rathore.jpg", resultType: "Board" },
-        { name: "Yuti Sharma", class: "XII", percentage: "89.80%", stream: "Humanities", image: "/images/yuti_sharma.jpg", resultType: "Board" },
-        { name: "Sofia Khan", class: "XII", percentage: "89.20%", stream: "Humanities", image: "/images/sofia_khan.jpg", resultType: "Board" },
-        { name: "Taruna", class: "XII", percentage: "89.00%", stream: "Humanities", image: "/images/taruna.jpg", resultType: "Board" },
-        
-        // Class X
-        { name: "Raj Rajpurohit", class: "X", percentage: "93.80%", image: "/images/student_1.png", resultType: "Board" },
-        { name: "Pragati Sirvi", class: "X", percentage: "93.00%", image: "/images/student_2.png", resultType: "Board" },
-        { name: "Yageshvi", class: "X", percentage: "92.40%", image: "/images/student_3.png", resultType: "Board" },
-        { name: "Asha Soni", class: "X", percentage: "92.00%", image: "/images/student_4.png", resultType: "Board" },
-        { name: "Anju Kanwar", class: "X", percentage: "91.20%", image: "/images/student_5.png", resultType: "Board" },
-        { name: "Janvee Soni", class: "X", percentage: "90.60%", image: "/images/student_6.png", resultType: "Board" },
-        { name: "Saniya Soni", class: "X", percentage: "89.00%", image: "/images/student_7.png", resultType: "Board" },
-        { name: "Bhavya Sharma", class: "X", percentage: "87.80%", image: "/images/student_8.png", resultType: "Board" },
-        { name: "Renuka Bhati", class: "X", percentage: "87.80%", image: "/images/student_9.png", resultType: "Board" },
-        { name: "Gayatri Rathore", class: "X", percentage: "87.00%", image: "/images/student_10.png", resultType: "Board" },
-        { name: "Rudrakshi", class: "X", percentage: "86.60%", image: "/images/student_11.png", resultType: "Board" },
-        { name: "Tanishi Choudhary", class: "X", percentage: "85.40%", image: "/images/student_12.png", resultType: "Board" },
-        { name: "Mumal Kanwar", class: "X", percentage: "85.00%", image: "/images/student_13.png", resultType: "Board" },
-        { name: "Sakshi Deora", class: "X", percentage: "85.00%", image: "/images/student_14.png", resultType: "Board" }
-    ];
-
-    // Filtered results based on category
-    const getFilteredResults = () => {
-        if (selectedCategory === "XII") {
-            return allResults
-                .filter(r => r.class === "XII" && (r.resultType === "Board" || !r.resultType))
-                .map(t => ({ ...t, description: `Class XII ${t.stream || ""} Topper` }));
-        }
-        if (selectedCategory === "X") {
-            return allResults
-                .filter(r => r.class === "X" && (r.resultType === "Board" || !r.resultType))
-                .map(t => ({ ...t, stream: t.stream || "-", description: "Class X Board Exam Topper" }));
-        }
-        if (selectedCategory === "Non-Board") {
-            return allResults
-                .filter(r => r.resultType === "Non-Board")
-                .map(t => ({ ...t, stream: t.stream || "-", description: `Class ${t.class} Topper` }));
-        }
-        return [];
-    };
-
-    const displayResults = getFilteredResults();
 
     const openModal = (student: any) => {
         setSelectedStudent(student);
@@ -158,18 +82,12 @@ export default function LPSContent() {
         setTimeout(() => setSelectedStudent(null), 300);
     };
 
-    const categories = [
-        { id: "XII", name: "Class XII", icon: Trophy, count: allResults.filter(r => r.class === "XII").length, desc: "Aissce Board Result" },
-        { id: "X", name: "Class X", icon: Medal, count: allResults.filter(r => r.class === "X").length, desc: "Aisse Board Result" },
-        { id: "Non-Board", name: "Non-Board", icon: Star, count: allResults.filter(r => r.resultType === "Non-Board").length, desc: "Class Toppers" }
-    ];
-
     return (
         <main className="min-h-screen bg-white font-devanagari">
             <StudentModal isOpen={isModalOpen} onClose={closeModal} student={selectedStudent} />
+            <Navbar />
 
             {/* Hero Section */}
-            {/* ... lines 144-185 remain same ... */}
             <section className="relative pt-40 pb-20 px-6 bg-oxford/90 text-white overflow-hidden">
                 <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-sandstone/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
                 <div className="max-w-7xl mx-auto relative z-10">
@@ -179,43 +97,39 @@ export default function LPSContent() {
                         className="flex flex-col md:flex-row gap-8 items-center mb-10"
                     >
                         <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-sandstone overflow-hidden bg-white shrink-0">
-                            <img src="/lps.jpg" alt="LPS Logo" className="w-full h-full object-cover" />
+                            <img src="/lps.jpg" alt="Leeladevi School Logo" className="w-full h-full object-cover" />
                         </div>
                         <div>
                             <span className="text-sandstone font-bold uppercase tracking-widest text-sm mb-4 block">Affiliated to CBSE, New Delhi</span>
                             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 leading-tight">
-                                Leeladevi Parasmal Sancheti English Medium Sr.Sec.Schoool
+                                Leeladevi Parasmal Sancheti English Medium School
                             </h1>
                             <p className="text-xl md:text-2xl text-white/90 font-light max-w-3xl">
-                                A premier residential school for girls in Pali, Rajasthan
+                                Nurturing Minds, Shaping Futures through Academic Excellence & Values
                             </p>
                         </div>
                     </motion.div>
 
-                    <div className="grid md:grid-cols-3 gap-6 text-sm font-medium text-white/80 border-t border-white/10 pt-10">
+                    <div className="grid md:grid-cols-3 gap-6 text-sm font-medium text-white/80">
                         <div className="flex items-start gap-3">
                             <MapPin className="text-sandstone shrink-0" size={20} />
-                            <span>Vidyawadi, Khimel, Station-Rani,<br />Distt.-Pali (Raj.) 306115</span>
+                            <span>Vidyawadi, Khimel, Station Rani – 306115,<br />District Pali (Rajasthan)</span>
                         </div>
                         <div className="flex items-start gap-3">
                             <Phone className="text-sandstone shrink-0" size={20} />
                             <div className="flex flex-col">
-                                <a href="tel:6377203204" className="hover:text-sandstone transition-colors">6377203204</a>
-                                <a href="tel:6377203204" className="hover:text-sandstone transition-colors">6377203204</a>
+                                <a href="tel:6377203204" className="hover:text-sandstone transition-colors font-bold">6377203204</a>
                             </div>
                         </div>
                         <div className="flex items-start gap-3">
-                            <Mail className="text-sandstone shrink-0" size={20} />
-                            <div className="flex flex-col">
-                                <a href="mailto:lpsvidhyawadi@gmail.com" className="hover:text-sandstone transition-colors">lpsvidhyawadi@gmail.com</a>
-                                <a href="http://www.lpsvidhyawadi.com" target="_blank" rel="noopener noreferrer" className="hover:text-sandstone transition-colors">www.lpsvidhyawadi.com</a>
-                            </div>
+                            <Globe className="text-sandstone shrink-0" size={20} />
+                            <a href="https://www.vidyawadi.org" target="_blank" rel="noopener noreferrer" className="hover:text-sandstone transition-colors font-bold">www.vidyawadi.org</a>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* About Section */}
+            {/* About & Leadership Section */}
             <section className="py-24 px-6 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
                     <div>
@@ -223,34 +137,27 @@ export default function LPSContent() {
                         <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight">Principal’s Message</h2>
                         <div className="h-1.5 w-24 bg-sandstone mt-6 rounded-full mb-10" />
                         <div className="prose text-gray-600 leading-relaxed space-y-4 mb-8">
-                            <p className="">
-                                "Welcome to LPS, Vidyawadi, where we take pride in fostering a nurturing environment that empowers every learner to grow into a confident, compassionate, and globally-minded citizen."
-                            </p>
-                            <p>
-                                Dear Students, Parents, and Community Members,
+                            <p className="text-lg text-oxford/80 font-medium italic">
+                                “Welcome to LPS, Vidyawadi, where we take pride in fostering a nurturing environment that empowers every learner to grow into a confident, compassionate, and globally-minded citizen.”
                             </p>
                             <p>
                                 Founded in 2004, situated in the rural belt of Pali District in Rajasthan, this Vidyalaya is a residential school providing quality education from Nursery to XII primarily for girls, with a noble thought of promoting girls’ education. Presently, the School accommodates more than 1000 girls.
                             </p>
                             <p>
-                                At our core, we embrace a vision to nurture global citizens who are equipped to thrive in an ever-changing world. Our mission is to provide a healthy learning environment where every student feels safe, valued, and inspired to pursue excellence.
-                            </p>
-                            <p>
                                 Together, let us work to create a future where every child shines brightly, empowered to shape their destiny and contribute meaningfully to the global community.
                             </p>
                         </div>
+
                         <div className="flex items-center gap-4">
                             <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-sandstone shadow-lg">
-                                <Image
+                                <img
                                     src="/images/english school/principle.jpg"
-                                    alt="Principal"
-                                    width={100}
-                                    height={100}
+                                    alt="Principal Jyoti Nath"
                                     className="w-full h-full object-cover"
                                 />
                             </div>
                             <div className="font-bold text-oxford">
-                                <p className="text-lg">Ms. Jyoti Nath</p>
+                                <p className="text-xl">Ms. Jyoti Nath</p>
                                 <p className="text-xs text-sandstone uppercase tracking-widest">Principal</p>
                             </div>
                         </div>
@@ -263,17 +170,19 @@ export default function LPSContent() {
                                 <Star className="text-sandstone fill-sandstone" />
                                 Our Core Values
                             </h3>
-                            <div className="h-1 bg-sandstone w-16 mx-auto mb-8 rounded-full" />
-                            <ul className="space-y-4">
+                            <div className="h-1 bg-sandstone w-16 mx-auto mb-10 rounded-full" />
+                            <ul className="space-y-6">
                                 {[
                                     { title: "Discover Yourself", desc: "Explore unique talents and interests." },
                                     { title: "Be Your Own Light", desc: "Lead with integrity and wisdom." },
                                     { title: "Make Your Own Path", desc: "Inspire independent thinking and courage." }
                                 ].map((item, i) => (
-                                    <li key={i} className="flex items-start gap-3 text-gray-700">
-                                        <CheckCircle2 size={18} className="text-green-600 shrink-0 mt-1" />
+                                    <li key={i} className="flex items-start gap-4 text-gray-700">
+                                        <div className="bg-green-100 p-1 rounded-full shadow-sm">
+                                            <CheckCircle2 size={18} className="text-green-600 shrink-0" />
+                                        </div>
                                         <div>
-                                            <span className="font-bold text-oxford block">{item.title}</span>
+                                            <span className="font-bold text-oxford block text-lg">{item.title}</span>
                                             <span className="text-sm">{item.desc}</span>
                                         </div>
                                     </li>
@@ -281,406 +190,480 @@ export default function LPSContent() {
                             </ul>
                         </div>
 
-                        <div className="mt-8 bg-oxford rounded-3xl p-8 text-white relative overflow-hidden">
+                        <div className="mt-8 bg-oxford rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-sandstone/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-                            <h3 className="text-xl font-bold mb-4 relative z-10">Our School</h3>
-                            <p className="text-white/80 text-sm leading-relaxed relative z-10">
-                                LPS Vidyawadi is known for its reputation and adherence to quality education, State of Art Infrastructure, and facilities like Sports, Bharat Scout & Guide, and National Cadet Corps (NCC). We offer maximum subject choices and engage students in traditional and innovative educational methods.
+                            <h4 className="text-xl font-bold mb-4 flex items-center gap-2">
+                                <School className="text-sandstone" />
+                                Premium Residential Campus
+                            </h4>
+                            <p className="text-white/80 text-sm leading-relaxed">
+                                LPS Vidyawadi is known for its reputation and adherence to quality education, State of Art Infrastructure, and facilities like Sports, Bharat Scout & Guide, and National Cadet Corps (NCC). We empower girls for future success.
                             </p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Academics Section */}
-            <section className="py-20 px-6 bg-gray-50">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Academic Excellence</span>
-                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2">Curriculum & Structure</h2>
-                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-                            Providing a comprehensive and balanced educational framework from foundational to secondary levels.
-                        </p>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-                        {[
-                            { title: "Foundational", level: "Nursery – II", icon: Star },
-                            { title: "Preparatory", level: "III to V", icon: BookOpen },
-                            { title: "Middle", level: "VI to VIII", icon: School },
-                            { title: "Secondary", level: "IX & XII", icon: Trophy },
-                        ].map((stat, i) => (
-                            <div key={i} className="bg-white p-10 rounded-[2rem] shadow-xl border border-oxford/5 text-center hover:-translate-y-2 transition-transform group">
-                                <div className="w-14 h-14 bg-oxford/5 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-sandstone transition-colors">
-                                    <stat.icon className="text-sandstone group-hover:text-white transition-colors" size={28} />
-                                </div>
-                                <h3 className="text-sandstone-dark font-bold uppercase text-xs tracking-[0.2em] mb-4">{stat.title}</h3>
-                                <p className="text-3xl font-black text-oxford leading-tight">{stat.level}</p>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-oxford/10">
-                        <h3 className="text-3xl font-bold text-oxford mb-8 flex items-center gap-3">
-                            <Sparkles className="text-sandstone" />
-                            Senior Secondary Streams (XI & XII)
-                        </h3>
-                        <div className="grid md:grid-cols-3 gap-12">
-                            {[
-                                {
-                                    title: "Science",
-                                    color: "bg-blue-500",
-                                    subjects: ["English Core", "Physics", "Chemistry", "Maths / Biology", "Economics", "Optional: CS, Painting, Dance, PE"]
-                                },
-                                {
-                                    title: "Commerce",
-                                    color: "bg-green-500",
-                                    subjects: ["English Core", "Accountancy", "Business Studies", "Economics", "Maths", "Optional: CS, Painting, Dance, PE"]
-                                },
-                                {
-                                    title: "Humanities",
-                                    color: "bg-orange-500",
-                                    subjects: ["English Elective / Core", "Political Science", "History", "Geography / Music / Economics", "Hindi Core", "Optional: CS, Painting, Dance (Kathak)"]
-                                }
-                            ].map((stream, i) => (
-                                <div key={i} className="relative">
-                                    <div className={`h-2 w-12 ${stream.color} rounded-full mb-6`} />
-                                    <h4 className="text-2xl font-black text-oxford mb-4">{stream.title}</h4>
-                                    <ul className="space-y-3">
-                                        {stream.subjects.map((sub, j) => (
-                                            <li key={j} className="flex items-center gap-2 text-gray-600 text-sm">
-                                                <div className={`w-1.5 h-1.5 rounded-full ${stream.color} shrink-0`} />
-                                                {sub}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            ))}
-                        </div>
-
-                        <div className="mt-16 pt-10 border-t border-gray-100">
-                            <h4 className="font-bold text-oxford mb-6 uppercase tracking-wider text-sm">Skill & Vocational Courses</h4>
-                            <div className="flex flex-wrap gap-3">
-                                {["Information Technology", "Food Nutrition & Dietetics", "AI", "Block Printing", "Rockets", "Design Thinking", "Satellites", "Financial Literacy", "Handicraft", "Marketing", "Tourism", "Digital Citizenship", "Beauty & Wellness"].map((skill, i) => (
-                                    <span key={i} className="px-4 py-2 bg-oxford/5 text-oxford text-xs rounded-full font-bold hover:bg-sandstone hover:text-white transition-colors cursor-default">
-                                        {skill}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Meritorious Students Section */}
+            {/* Toppers Section */}
             <section className="py-24 px-6 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Meritorious Students</span>
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-oxford leading-tight text-center">Academic Achievements <br/><span className="text-3xl font-medium text-gray-500">Session 2023-24</span></h2>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight text-center">Board Exam Toppers</h2>
                         <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
-                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-                            Celebrating the academic excellence and dedication of our top performers.
+                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto font-medium">
+                            Celebrating the academic excellence of our students in CBSE Board Examinations.
                         </p>
                     </div>
-
-                    {/* Category Cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                        {categories.map((cat) => (
-                            <motion.button
-                                key={cat.id}
-                                whileHover={{ y: -5 }}
-                                whileTap={{ scale: 0.98 }}
-                                onClick={() => {
-                                    setSelectedCategory(cat.id);
-                                    setVisibleToppers(10);
-                                }}
-                                className={`relative p-8 rounded-3xl text-left transition-all overflow-hidden border ${selectedCategory === cat.id
-                                    ? "bg-oxford text-white border-oxford shadow-2xl"
-                                    : "bg-gray-50 text-oxford border-gray-100 hover:bg-white hover:shadow-xl"
-                                    }`}
-                            >
-                                {selectedCategory === cat.id && (
-                                    <motion.div
-                                        layoutId="activeGlow"
-                                        className="absolute top-0 right-0 w-32 h-32 bg-sandstone/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"
-                                    />
-                                )}
-                                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${selectedCategory === cat.id ? "bg-sandstone text-oxford" : "bg-oxford/5 text-sandstone"
-                                    }`}>
-                                    <cat.icon size={28} />
-                                </div>
-                                <h3 className="text-2xl font-black mb-1">{cat.name}</h3>
-                                <p className={`text-sm uppercase tracking-widest font-bold mb-4 ${selectedCategory === cat.id ? "text-sandstone" : "text-gray-500"
-                                    }`}>{cat.desc}</p>
-                                <div className="flex items-center gap-2 mt-auto">
-                                    <span className={`text-4xl font-black ${selectedCategory === cat.id ? "text-white" : "text-oxford"
-                                        }`}>{cat.count}</span>
-                                    <span className={`text-xs uppercase tracking-tighter font-bold ${selectedCategory === cat.id ? "text-white/60" : "text-gray-400"
-                                        }`}>Students</span>
-                                </div>
-                            </motion.button>
-                        ))}
-                    </div>
-
-                    <div className="space-y-8">
-                        {/* Results Table */}
-                        <div className="overflow-x-auto rounded-[2rem] border border-oxford/10 shadow-xl bg-white overflow-hidden">
-                            <table className="w-full text-left border-collapse">
-                                <thead>
-                                    <tr className="bg-oxford text-white">
-                                        <th className="p-6 font-bold uppercase tracking-wider text-[10px]">S.No.</th>
-                                        <th className="p-6 font-bold uppercase tracking-wider text-[10px]">Student Name</th>
-                                        <th className="p-6 font-bold uppercase tracking-wider text-[10px]">
-                                            {selectedCategory === "Non-Board" ? "Class" : "Stream"}
-                                        </th>
-                                        <th className="p-6 font-bold uppercase tracking-wider text-[10px] text-right">
-                                            {selectedCategory === "Non-Board" ? "Category" : "Percentage"}
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody className="divide-y divide-gray-100">
-                                    {displayResults.slice(0, visibleToppers).map((student, i) => (
-                                        <motion.tr
-                                            initial={{ opacity: 0, x: -10 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: i * 0.05 }}
-                                            key={i}
-                                            className="hover:bg-oxford/5 transition-colors group cursor-pointer"
-                                            onClick={() => openModal(student)}
-                                        >
-                                            <td className="p-6 text-sm text-gray-500 font-medium">{i + 1}</td>
-                                            <td className="p-6">
-                                                <div className="flex items-center gap-4">
-                                                    <div className="w-12 h-12 rounded-full bg-gray-100 overflow-hidden border-2 border-transparent group-hover:border-sandstone transition-all shadow-sm">
-                                                        {student.image ? (
-                                                            <img src={student.image} alt={student.name} className="w-full h-full object-cover" />
-                                                        ) : (
-                                                            <div className="w-full h-full flex items-center justify-center bg-oxford/5 text-oxford/20">
-                                                                <User size={20} />
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                    <div>
-                                                        <span className="font-bold text-oxford group-hover:text-sandstone transition-colors block leading-none mb-1">{student.name}</span>
-                                                        <span className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Vidyawadi Student</span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className="p-6">
-                                                {selectedCategory === "Non-Board" ? (
-                                                    <span className="px-3 py-1 bg-oxford/5 text-oxford text-xs font-black rounded-lg uppercase">Class {student.class}</span>
-                                                ) : (
-                                                    <span className="text-sm font-bold text-gray-600">{student.stream || "-"}</span>
-                                                )}
-                                            </td>
-                                            <td className="p-6 text-right">
-                                                {selectedCategory === "Non-Board" ? (
-                                                    <span className="text-[10px] font-black text-sandstone uppercase tracking-widest">Topper</span>
-                                                ) : (
-                                                    <span className="inline-flex items-center justify-center px-4 py-1.5 bg-sandstone/10 text-sandstone font-black rounded-xl text-sm border border-sandstone/20">
-                                                        {student.percentage}
-                                                    </span>
-                                                )}
-                                            </td>
-                                        </motion.tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-
-                        {visibleToppers < displayResults.length && (
-                            <div className="flex justify-center mt-8">
-                                <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    onClick={() => setVisibleToppers(prev => prev + 10)}
-                                    className="px-10 py-4 bg-oxford text-white rounded-full font-bold uppercase tracking-widest shadow-xl hover:bg-sandstone transition-all flex items-center gap-3 text-sm"
-                                >
-                                    View More Results
-                                    <ArrowRight size={18} />
-                                </motion.button>
-                            </div>
-                        )}
-                    </div>
+                    <StudentResultsTable />
                 </div>
             </section>
 
-            {/* Beyond Academics (Facilities & Activities) */}
-            <section className="py-24 px-6 bg-oxford text-white overflow-hidden">
+            {/* Scholarships & Merit Awards */}
+            <section className="py-24 px-6 bg-gray-50 overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
-                        <span className="text-sandstone-light font-bold uppercase tracking-[0.4em] text-sm block mb-4">Co-Curricular Excellence</span>
-                        <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight">Beyond Academics</h2>
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Recognition & Rewards</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight text-center">Scholarships & Awards</h2>
                         <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
-                        <p className="text-white/80 mt-4 max-w-2xl mx-auto italic">
-                            “With wings of courage and dreams, the sky is the limit.”
-                        </p>
                     </div>
 
-                    <div className="grid lg:grid-cols-2 gap-12 items-start">
-                        <div className="grid sm:grid-cols-2 gap-6">
-                            <div className="bg-white/5 p-8 rounded-3xl border border-white/10 hover:bg-white/10 transition-colors group">
-                                <div className="w-12 h-12 bg-sandstone/20 rounded-2xl flex items-center justify-center text-sandstone mb-6 group-hover:scale-110 transition-transform">
-                                    <Microscope size={24} />
-                                </div>
-                                <h3 className="text-xl font-bold text-white mb-4">Laboratories</h3>
-                                <p className="text-white/60 text-xs leading-relaxed">
-                                    Maths, Biology, Physics, Chemistry, Painting, Music, Computer labs integral to curriculum.
-                                </p>
-                            </div>
-                            <div className="bg-white/5 p-8 rounded-3xl border border-white/10 hover:bg-white/10 transition-colors group">
-                                <div className="w-12 h-12 bg-sandstone/20 rounded-2xl flex items-center justify-center text-sandstone mb-6 group-hover:scale-110 transition-transform">
-                                    <BookOpen size={24} />
-                                </div>
-                                <h3 className="text-xl font-bold text-white mb-4">Library</h3>
-                                <p className="text-white/60 text-xs leading-relaxed">
-                                    Well-equipped with newspapers, magazines, and encyclopedias to foster reading habits.
-                                </p>
-                            </div>
-                            <div className="bg-white/5 p-8 rounded-3xl border border-white/10 hover:bg-white/10 transition-colors group">
-                                <div className="w-12 h-12 bg-sandstone/20 rounded-2xl flex items-center justify-center text-sandstone mb-6 group-hover:scale-110 transition-transform">
-                                    <ShieldCheck size={24} />
-                                </div>
-                                <h3 className="text-xl font-bold text-white mb-4">NCC & Scouts</h3>
-                                <p className="text-white/60 text-xs leading-relaxed">
-                                    50 NCC cadets and 51 Bharat Scouts & Guides training for duty and excellence.
-                                </p>
-                            </div>
-                            <div className="bg-white/5 p-8 rounded-3xl border border-white/10 hover:bg-white/10 transition-colors group">
-                                <div className="w-12 h-12 bg-sandstone/20 rounded-2xl flex items-center justify-center text-sandstone mb-6 group-hover:scale-110 transition-transform">
-                                    <Medal size={24} />
-                                </div>
-                                <h3 className="text-xl font-bold text-white mb-4">Clubs</h3>
-                                <p className="text-white/60 text-xs leading-relaxed">
-                                    Kids, Literary, Drama, Oratory, Eco, and IT clubs for all-round development.
-                                </p>
-                            </div>
+                    <div className="mb-20">
+                        <div className="text-center mb-10">
+                            <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-xs block mb-4 text-center">District Level Recognition</span>
+                            <h3 className="text-3xl font-bold text-oxford flex justify-center items-center gap-3">
+                                <Medal className="text-sandstone" />
+                                Padmakshi (Merit) Award Scheme
+                            </h3>
+                            <div className="h-1 bg-sandstone w-16 mx-auto mt-6 rounded-full" />
                         </div>
+                        <p className="text-gray-600 mb-12 max-w-3xl mx-auto text-center">
+                            Honoring students who secured top positions in Pali District.
+                        </p>
 
-                        <div className="bg-white rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-                            <div className="bg-sandstone p-6">
-                                <h3 className="text-xl font-bold text-oxford flex items-center gap-3">
-                                    <Trophy />
-                                    Sports Achievements 2024-25
-                                </h3>
+                        <div className="grid lg:grid-cols-3 gap-8">
+                            <div className="bg-sandstone text-oxford p-10 rounded-[2.5rem] flex flex-col justify-center items-center text-center relative overflow-hidden order-2 lg:order-1 shadow-xl">
+                                <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+                                <Star size={64} className="text-oxford mb-6" />
+                                <h4 className="text-4xl font-black mb-2">₹1,25,000</h4>
+                                <p className="text-oxford/80 font-medium">Total Cash Prizes Awarded</p>
                             </div>
-                            <div className="overflow-x-auto">
+
+                            <div className="lg:col-span-2 overflow-hidden rounded-2xl border border-oxford/10 shadow-lg bg-white order-1 lg:order-2">
                                 <table className="w-full text-left border-collapse">
-                                    <thead>
-                                        <tr className="bg-oxford/50 text-white border-b border-white/10">
-                                            <th className="p-4 text-[10px] font-bold uppercase tracking-widest">Competition</th>
-                                            <th className="p-4 text-[10px] font-bold uppercase tracking-widest text-right">Result</th>
+                                    <thead className="bg-oxford text-white">
+                                        <tr>
+                                            <th className="p-4 md:p-6 font-bold uppercase tracking-wider text-xs">Student Name</th>
+                                            <th className="p-4 md:p-6 font-bold uppercase tracking-wider text-xs">Class & Stream</th>
+                                            <th className="p-4 md:p-6 font-bold uppercase tracking-wider text-xs">Percentage</th>
+                                            <th className="p-4 md:p-6 font-bold uppercase tracking-wider text-xs text-right">Award Amount</th>
                                         </tr>
                                     </thead>
-                                    <tbody className="divide-y divide-white/5">
-                                        {loadingAchievements ? (
-                                            <tr><td colSpan={2} className="p-4 text-center text-xs text-white/70">Loading...</td></tr>
-                                        ) : achievements.length > 0 ? (
-                                            achievements.map((ach) => (
-                                                <tr key={ach._id} className="hover:bg-white/5 transition-colors">
-                                                    <td className="p-4 text-sm font-bold text-oxford">{ach.title}</td>
-                                                    <td className="p-4 text-sm text-oxford text-right">{ach.description}</td>
-                                                </tr>
-                                            ))
-                                        ) : (
-                                            <tr><td colSpan={2} className="p-4 text-center text-xs text-white/70">No achievements recorded yet.</td></tr>
-                                        )}
+                                    <tbody className="divide-y divide-oxford/10 text-gray-700">
+                                        {[
+                                            { name: "Mahima Surana", class: "XII Arts", percent: "96.00%", amount: "₹75,000" },
+                                            { name: "Kirtika Kanwar", class: "XII Science", percent: "95.80%", amount: "₹75,000" },
+                                            { name: "Mamata Kumari", class: "XII Commerce", percent: "82.40%", amount: "₹75,000" }
+                                        ].map((student, i) => (
+                                            <tr key={i} className="hover:bg-oxford/5 transition-colors">
+                                                <td className="p-4 md:p-6 font-bold text-oxford">{student.name}</td>
+                                                <td className="p-4 md:p-6">{student.class}</td>
+                                                <td className="p-4 md:p-6 font-bold">{student.percent}</td>
+                                                <td className="p-4 md:p-6 text-right font-black text-green-600">{student.amount}</td>
+                                            </tr>
+                                        ))}
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
+
+                    {/* GARGI AWARD */}
+                    <div className="mt-20 bg-oxford text-white rounded-[3rem] p-10 md:p-16 relative overflow-hidden shadow-2xl">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-sandstone/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
+                        <div className="relative z-10 text-center">
+                            <h3 className="text-3xl md:text-5xl font-bold mb-6 flex items-center justify-center gap-4">
+                                <Trophy className="text-sandstone" size={48} />
+                                GARGI Award Recipients
+                            </h3>
+                            <div className="h-1.5 w-24 bg-sandstone mx-auto mb-10 rounded-full" />
+                            <p className="text-xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
+                                We celebrate our brilliant girls honored under the <span className="font-bold text-sandstone">GARGI AWARD</span> Scheme for securing 75% or more in Board Exams.
+                            </p>
+                            <div className="flex flex-col md:flex-row justify-center gap-6">
+                                <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+                                    <p className="text-3xl font-black">₹6,000</p>
+                                    <p className="text-xs uppercase tracking-widest mt-1">Class X Award</p>
+                                </div>
+                                <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+                                    <p className="text-3xl font-black">₹5,000</p>
+                                    <p className="text-xs uppercase tracking-widest mt-1">Class XII Award</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Perfect Score Achievers */}
+                    <div className="mt-24">
+                        <div className="text-center mb-10">
+                            <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Subject Brilliance</span>
+                            <h3 className="text-4xl font-bold text-oxford mt-2">Perfect Score Achievers</h3>
+                            <p className="text-gray-600 mt-2">100/100 Marks in CBSE Board Exams</p>
+                        </div>
+                        <div className="overflow-x-auto rounded-3xl border border-oxford/10 shadow-lg bg-white">
+                            <table className="w-full text-left border-collapse min-w-[600px]">
+                                <thead className="bg-oxford text-white">
+                                    <tr>
+                                        <th className="p-6 font-bold uppercase tracking-wider text-sm">Student Name</th>
+                                        <th className="p-6 font-bold uppercase tracking-wider text-sm">Class & Stream</th>
+                                        <th className="p-6 font-bold uppercase tracking-wider text-sm">Subject</th>
+                                        <th className="p-6 font-bold uppercase tracking-wider text-sm text-right">Marks</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-oxford/10 text-gray-700 font-medium">
+                                    {[
+                                        { name: "Mahima Surana", class: "XII Arts", subject: "Hindi Literature", marks: "100/100" },
+                                        { name: "Vartika", class: "XII Arts", subject: "Hindi Literature", marks: "100/100" },
+                                        { name: "Manisha", class: "XII Science", subject: "Chemistry", marks: "100/100" },
+                                        { name: "Ritika Sherawat", class: "XII Science", subject: "Biology", marks: "100/100" }
+                                    ].map((student, i) => (
+                                        <tr key={i} className="hover:bg-oxford/5 transition-colors">
+                                            <td className="p-6 font-bold text-oxford">{student.name}</td>
+                                            <td className="p-6">{student.class}</td>
+                                            <td className="p-6">{student.subject}</td>
+                                            <td className="p-6 text-right font-black text-green-600">{student.marks}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            {/* Staff Section */}
+            {/* Beyond Academics Section */}
+            <section className="py-24 px-6 bg-oxford text-white">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <span className="text-sandstone font-bold uppercase tracking-widest text-sm block mb-4">Holistic Development</span>
+                        <h2 className="text-4xl md:text-5xl font-bold">Beyond Academics</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full" />
+                    </div>
+
+                    {/* National Achievement Highlight */}
+                    <div className="mb-20 bg-white/5 rounded-3xl p-8 border border-white/10 shadow-2xl">
+                        <div className="flex flex-col md:flex-row gap-10 items-center">
+                            <div className="md:w-1/3 text-center">
+                                <div className="w-48 h-48 mx-auto rounded-full bg-sandstone/20 overflow-hidden mb-6 border-4 border-sandstone/30 flex items-center justify-center">
+                                    <User size={80} className="text-sandstone/50" />
+                                </div>
+                                <h3 className="text-2xl font-bold text-white mb-1">Lakshya Singh</h3>
+                                <p className="text-sandstone font-bold mb-2">Class X</p>
+                                <div className="inline-block px-4 py-2 bg-white/10 rounded-lg text-xs font-bold uppercase tracking-widest text-white border border-white/10">
+                                    Selected for SGFI
+                                </div>
+                            </div>
+                            <div className="md:w-2/3">
+                                <h3 className="text-3xl font-bold mb-6 flex items-center gap-3">
+                                    <Medal className="text-sandstone" />
+                                    National KVS Yoga Excellence
+                                </h3>
+                                <p className="text-white/80 text-lg leading-relaxed font-light">
+                                    Proudly representing our school at the national level, Lakshya Singh secured the <span className="text-sandstone font-bold">1st Position</span> in Yoga and has been selected for the prestigious SGFI national meet.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="grid lg:grid-cols-2 gap-12">
+                        {/* Sports Achievements Tables */}
+                        <div>
+                            <h3 className="text-2xl font-bold mb-8 flex items-center gap-3">
+                                <Trophy className="text-sandstone" />
+                                District & State Level Talents
+                            </h3>
+
+                            <div className="space-y-10">
+                                {/* State Level */}
+                                <div>
+                                    <h4 className="text-sandstone font-bold uppercase tracking-wider text-xs mb-4 flex items-center gap-2">
+                                        <Globe size={16} /> State Level Selections
+                                    </h4>
+                                    <div className="overflow-hidden rounded-xl border border-white/10 bg-white/5">
+                                        <table className="w-full text-left text-sm text-white/90">
+                                            <thead className="bg-white/10 font-bold">
+                                                <tr>
+                                                    <th className="p-4">Student Name</th>
+                                                    <th className="p-4">Sport</th>
+                                                    <th className="p-4 text-right">Result</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="divide-y divide-white/5">
+                                                {[
+                                                    { name: "Dhruvi (VI)", sport: "Skating", result: "State Selected" },
+                                                    { name: "Poonam (X)", sport: "Hammer Throw", result: "State Selected" },
+                                                    { name: "Bhawna (XI)", sport: "Shotput", result: "State Selected" },
+                                                    { name: "Leela (IX)", sport: "Shotput", result: "State Selected" }
+                                                ].map((row, i) => (
+                                                    <tr key={i} className="hover:bg-white/5 transition-colors">
+                                                        <td className="p-4 font-bold">{row.name}</td>
+                                                        <td className="p-4">{row.sport}</td>
+                                                        <td className="p-4 text-right text-sandstone font-bold italic">{row.result}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                {/* District Level */}
+                                <div>
+                                    <h4 className="text-sandstone font-bold uppercase tracking-wider text-xs mb-4 flex items-center gap-2">
+                                        <MapPin size={16} /> District Level Achievements
+                                    </h4>
+                                    <div className="overflow-hidden rounded-xl border border-white/10 bg-white/5">
+                                        <table className="w-full text-left text-sm text-white/90">
+                                            <thead className="bg-white/10 font-bold">
+                                                <tr>
+                                                    <th className="p-4">Team / Name</th>
+                                                    <th className="p-4">Sport</th>
+                                                    <th className="p-4 text-right">Position</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="divide-y divide-white/5">
+                                                {[
+                                                    { name: "U-19 Girls Team", sport: "Badminton", pos: "Second (State Selected: 1)" },
+                                                    { name: "U-17 Team (Pratibha, Kritika, KirtiRaj)", sport: "Rifle Shooting", pos: "Winners (State Selected)" },
+                                                    { name: "U-19 Team (Hrishija, Himakshi)", sport: "Rifle Shooting", pos: "Winners (State Selected)" },
+                                                    { name: "U-14 Girls Team", sport: "Athletics", pos: "Overall Champs (Leela, Rushkarshi, Hetal, Kanishka selected)" },
+                                                    { name: "Dhruvi (VI)", sport: "Skating", pos: "3rd Position (State Selected)" },
+                                                    { name: "Manisha & Chetna", sport: "Athletics", pos: "1st & 2nd Position" }
+                                                ].map((row, i) => (
+                                                    <tr key={i} className="hover:bg-white/5 transition-colors">
+                                                        <td className="p-4 font-bold">{row.name}</td>
+                                                        <td className="p-4">{row.sport}</td>
+                                                        <td className="p-4 text-right text-sandstone font-bold italic">{row.pos}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Additional Stats Section */}
+                        <div className="flex flex-col gap-8">
+                            <h3 className="text-2xl font-bold mb-2 flex items-center gap-3">
+                                <Sparkles className="text-sandstone" />
+                                Special Recognitions
+                            </h3>
+                            <div className="bg-white/5 p-10 rounded-[2.5rem] border border-white/10 shadow-xl relative overflow-hidden">
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-sandstone/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                                <h4 className="text-4xl font-black mb-4">23 Girls</h4>
+                                <p className="text-white/80 text-lg mb-8">Selected for various State Level Tournaments in 2024-25.</p>
+                                <ul className="space-y-4 text-sm font-medium">
+                                    <li className="flex items-center gap-3">
+                                        <div className="w-2 h-2 rounded-full bg-sandstone" />
+                                        <span>Softball State Selection (Shrutika, IX)</span>
+                                    </li>
+                                    <li className="flex items-center gap-3">
+                                        <div className="w-2 h-2 rounded-full bg-sandstone" />
+                                        <span>8 Girls selected for State Wrestling</span>
+                                    </li>
+                                    <li className="flex items-center gap-3">
+                                        <div className="w-2 h-2 rounded-full bg-sandstone" />
+                                        <span>State Athletics Champions in 100m hurdles & Discus</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="bg-sandstone text-oxford p-6 rounded-2xl text-center shadow-lg">
+                                    <School size={24} className="mx-auto mb-2 opacity-60" />
+                                    <p className="text-xs font-bold uppercase tracking-widest mb-1">Affiliation</p>
+                                    <p className="text-lg font-black">CBSE</p>
+                                </div>
+                                <div className="bg-white/10 p-6 rounded-2xl text-center border border-white/10">
+                                    <ShieldCheck size={24} className="mx-auto mb-2 text-sandstone" />
+                                    <p className="text-xs font-bold uppercase tracking-widest mb-1">Campus</p>
+                                    <p className="text-lg font-black">Co-Ed</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Infrastructure Section */}
+            <section className="py-24 px-6 bg-white overflow-hidden">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Facilities</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight text-center">Modern Infrastructure</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
+                        <p className="text-gray-600 max-w-2xl mx-auto text-lg italic">
+                            “Equipped with state-of-the-art laboratories and technological resources”
+                        </p>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {[
+                            { name: "Physics Laboratory", img: "/images/Physics Laboratory.png" },
+                            { name: "Chemistry Laboratory", img: "/images/Chemistry Laboratory.png" },
+                            { name: "Biology Laboratory", img: "/images/Biology Laboratory.png" },
+                            { name: "Mathematics Lab", img: "https://t3.ftcdn.net/jpg/04/71/94/28/360_F_471942858_Tj2wZJqXmX3mPzZEnY4ZlYwY8zY8zY8z.jpg" },
+                            { name: "Music & Painting Studio", img: "https://t4.ftcdn.net/jpg/02/76/81/81/360_F_276818165_cW5kXzZEnY4ZlYwY8zY8zY8z.jpg" },
+                            { name: "Geography Laboratory", img: "/images/Geography Laboratory.png" },
+                            { name: "NCC & Guide", img: "/llll-AAA.jpeg" },
+                            { name: "Library", img: "/llll-BBB.jpeg" },
+                            { name: "Computer Center", img: "/images/RS-CIT IT Computer Center.png" },
+                            { name: "Multimedia Room", img: "https://www.shutterstock.com/image-photo/empty-modern-classroom-comfortable-chairs-600nw-2111003666.jpg" },
+                            { name: "Safe & Secure Campus", img: "https://journalistsresource.org/wp-content/uploads/2014/02/surveillance-camera-860x466.jpg" }
+                        ].map((facility, i) => (
+                            <div key={i} className="group overflow-hidden rounded-[2.5rem] bg-white shadow-xl hover:shadow-2xl transition-all border border-oxford/5">
+                                <div className="h-64 overflow-hidden relative">
+                                    <div className="absolute inset-0 bg-oxford/20 group-hover:bg-transparent transition-colors z-10" />
+                                    <img
+                                        src={facility.img}
+                                        alt={facility.name}
+                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                    />
+                                    <div className="absolute bottom-0 inset-x-0 p-6 z-20 bg-gradient-to-t from-oxford/90 to-transparent">
+                                        <h3 className="font-bold text-white text-lg">{facility.name}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* What We Do Section */}
             <section className="py-24 px-6 bg-gray-50 overflow-hidden">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Activities</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight text-center">What We Do</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {[
+                            "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773142123/WhatsApp_Video_2026-03-10_at_12.21.30_r1zahz.mp4",
+                            "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773126080/WhatsApp_Video_2026-03-10_at_12.13.55_1_nmxdbj.mp4",
+                            "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773126079/WhatsApp_Video_2026-03-10_at_12.13.55_hbh5uh.mp4",
+                            "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773126078/WhatsApp_Video_2026-03-10_at_12.13.54_zzosza.mp4",
+                            "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773126078/WhatsApp_Video_2026-03-10_at_12.13.46_tlxxqk.mp4",
+                            "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773126078/WhatsApp_Video_2026-03-10_at_12.13.55_2_zjupvk.mp4"
+                        ].map((url, i) => (
+                            <div key={i} className="overflow-hidden rounded-[2rem] bg-black aspect-video shadow-2xl">
+                                <video
+                                    autoPlay
+                                    muted
+                                    loop
+                                    playsInline
+                                    className="h-full w-full object-cover opacity-80"
+                                >
+                                    <source src={url} type="video/mp4" />
+                                </video>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Faculty Section */}
+            <section className="py-24 px-6 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Our Faculty</span>
                         <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight">School Navigators</h2>
                         <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
-                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto">Meet our dedicated faculty and staff members committed to excellence.</p>
+                        <p className="text-gray-600 max-w-2xl mx-auto">Our highly qualified faculty members are dedicated to building a brighter future for our students.</p>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         {staffList.slice(0, visibleStaff).map((staff, i) => (
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: (i % 12) * 0.05 }}
+                            <div
                                 key={staff.no}
-                                className="bg-white p-4 rounded-xl shadow-sm border border-oxford/10 flex items-center gap-3 hover:border-sandstone transition-colors group"
+                                className="bg-white p-5 rounded-2xl shadow-sm border border-oxford/10 flex items-center gap-4 hover:border-sandstone transition-all group"
                             >
-                                <div className="w-10 h-10 rounded-full bg-oxford/5 flex items-center justify-center text-oxford font-bold text-xs shrink-0 group-hover:bg-sandstone group-hover:text-white transition-colors">
-                                    {staff.no}
+                                <div className="w-14 h-14 rounded-full bg-oxford/5 flex items-center justify-center overflow-hidden border-2 border-oxford/5 group-hover:border-sandstone transition-colors shrink-0 shadow-inner">
+                                    {staff.image ? (
+                                        <img src={staff.image} alt={staff.name} className="w-full h-full object-cover" />
+                                    ) : (
+                                        <User className="text-oxford/20" size={24} />
+                                    )}
                                 </div>
-                                <div>
-                                    <h4 className="font-bold text-oxford text-xs">{staff.name}</h4>
-                                    <p className="text-[10px] text-gray-500 uppercase tracking-wider">{staff.designation}</p>
+                                <div className="overflow-hidden">
+                                    <h4 className="font-bold text-oxford text-sm mb-0.5 truncate">{staff.name}</h4>
+                                    <p className="text-[10px] text-gray-500 uppercase tracking-widest font-black truncate">{staff.designation}</p>
                                 </div>
-                            </motion.div>
+                            </div>
                         ))}
                     </div>
 
                     {visibleStaff < staffList.length && (
-                        <div className="flex justify-center mt-12">
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
+                        <div className="mt-16 text-center">
+                            <button
                                 onClick={() => setVisibleStaff(prev => prev + 12)}
-                                className="px-8 py-3 bg-white text-oxford border-2 border-oxford rounded-full font-bold uppercase tracking-wider shadow-lg hover:bg-oxford hover:text-white transition-all flex items-center gap-2"
+                                className="px-10 py-4 bg-oxford text-white rounded-full font-bold uppercase tracking-widest text-xs hover:bg-sandstone hover:text-oxford transition-all shadow-xl"
                             >
-                                Load 12 More Navigators
-                                <ArrowRight size={18} />
-                            </motion.button>
+                                Meet All Faculty Members
+                            </button>
                         </div>
                     )}
                 </div>
             </section>
 
-            {/* Rules & Uniform Section */}
-            <section className="py-24 px-6 bg-white overflow-hidden">
-                <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-                    <div className="bg-oxford/5 rounded-[2.5rem] p-10 md:p-14 border border-oxford/5 shadow-xl">
-                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-xs block mb-4">Identity</span>
-                        <h3 className="text-3xl font-bold text-oxford mb-6 flex items-center gap-3">
-                            <Sparkles className="text-sandstone" />
-                            School Uniform
+            {/* School Uniform & General Instructions Section */}
+            <section className="py-20 px-6 bg-white">
+                <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
+                    <div className="bg-oxford/5 rounded-3xl p-8 md:p-12 border border-oxford/10">
+                        <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3">
+                            <Star className="text-sandstone fill-sandstone" />
+                            SCHOOL UNIFORM
                         </h3>
-                        <div className="h-1 bg-sandstone w-16 mb-10 rounded-full" />
-                        <div className="space-y-6">
+                        <div className="space-y-8 text-gray-700">
                             <div>
-                                <h4 className="font-bold text-sandstone text-sm uppercase tracking-wider mb-3">Nursery to VIII</h4>
-                                <ul className="space-y-2 text-gray-700 text-sm">
-                                    <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-green-600" /> Black & white check tunic, off-white shirt & belt</li>
-                                    <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-green-600" /> Black ankle length socks with off white strips</li>
-                                    <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-green-600" /> Black shoes, white band/hair pins</li>
+                                <h4 className="font-bold text-oxford text-lg mb-4 border-b border-oxford/10 pb-2">Nursery to VIII</h4>
+                                <ul className="space-y-3 text-sm">
+                                    <li className="flex gap-3 items-start">
+                                        <CheckCircle2 size={18} className="text-green-600 mt-0.5 shrink-0" />
+                                        <span>Black & white check tunic with off-white shirt & belt.</span>
+                                    </li>
+                                    <li className="flex gap-3 items-start">
+                                        <CheckCircle2 size={18} className="text-green-600 mt-0.5 shrink-0" />
+                                        <span>Black ankle length socks with off white strips & Black shoes.</span>
+                                    </li>
+                                    <li className="flex gap-3 items-start">
+                                        <CheckCircle2 size={18} className="text-green-600 mt-0.5 shrink-0" />
+                                        <span>White band/hair pins.</span>
+                                    </li>
                                 </ul>
                             </div>
+
                             <div>
-                                <h4 className="font-bold text-sandstone text-sm uppercase tracking-wider mb-3">Class IX & XII</h4>
-                                <ul className="space-y-2 text-gray-700 text-sm">
-                                    <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-green-600" /> Black & white check kurta, off-white salwar</li>
-                                    <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-green-600" /> Off-white dupatta</li>
+                                <h4 className="font-bold text-oxford text-lg mb-4 border-b border-oxford/10 pb-2">Class IX & XII</h4>
+                                <ul className="space-y-3 text-sm">
+                                    <li className="flex gap-3 items-start">
+                                        <CheckCircle2 size={18} className="text-green-600 mt-0.5 shrink-0" />
+                                        <span>Black & white check kurta, off-white salwar and off-white dupatta.</span>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
 
-                    <div className="space-y-10">
-                        <div>
-                            <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Guidelines</span>
-                            <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight">General Instructions</h2>
-                            <div className="h-1.5 w-24 bg-sandstone mt-6 rounded-full mb-8" />
-                        </div>
+                    <div className="space-y-8">
+                        <h2 className="text-3xl md:text-4xl font-bold text-oxford">General Instructions</h2>
                         <div className="grid gap-4">
                             {[
                                 { title: "Regularity", desc: "Minimum 75% attendance is mandatory." },
-                                { title: "Mobile Phones", desc: "Strictly prohibited on campus." },
-                                { title: "Bullying", desc: "Zero tolerance policy for any form of harassment." },
-                                { title: "Hygiene", desc: "Nails trimmed, clean uniform, no makeup/jewelry." }
+                                { title: "Mobile Phones", desc: "Strictly prohibited. Confiscated gadgets will not be returned." },
+                                { title: "Bullying", desc: "Zero tolerance policy. Immediate disciplinary action for offenders." },
+                                { title: "Hygiene", desc: "Nails trimmed, clean uniform. Makeup/jewelry not permitted." }
                             ].map((rule, i) => (
                                 <div key={i} className="flex gap-4 items-start">
                                     <div className="w-8 h-8 rounded-full bg-sandstone/10 flex items-center justify-center shrink-0 mt-1">
@@ -698,27 +681,25 @@ export default function LPSContent() {
             </section>
 
             {/* CTA Section */}
-            <section className="py-24 px-6 bg-sandstone overflow-hidden relative">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+            <section className="py-20 px-6 bg-sandstone relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
                 <div className="max-w-4xl mx-auto text-center relative z-10">
-                    <span className="text-oxford/60 font-bold uppercase tracking-[0.4em] text-sm block mb-4">Join Our Community</span>
-                    <h2 className="text-4xl md:text-6xl font-black text-oxford mb-6 leading-tight uppercase">Admissions Open</h2>
-                    <div className="h-1.5 w-24 bg-oxford mx-auto mb-10 rounded-full" />
-                    <p className="text-xl text-oxford/80 font-medium mb-10">
-                        Give your daughter the opportunity to grow into a confident, educated, and successful individual.
+                    <h2 className="text-4xl md:text-5xl font-black text-oxford mb-8 uppercase tracking-tighter">Admissions Open 2024-25</h2>
+                    <p className="text-xl text-oxford/70 font-medium mb-12 max-w-2xl mx-auto">
+                        Empower your daughter with quality education and a nurturing environment. Join the LPS family today.
                     </p>
-                    <div className="flex flex-col sm:flex-row justify-center gap-4">
-                        <a href="tel:6377203204" className="px-8 py-4 bg-oxford text-white rounded-full font-bold uppercase tracking-wider shadow-lg hover:bg-white hover:text-oxford transition-all flex items-center justify-center gap-2">
-                            Call: 6377203204
-                            <Phone size={18} />
+                    <div className="flex flex-col sm:flex-row justify-center gap-6">
+                        <a href="tel:6377203204" className="px-10 py-5 bg-oxford text-white rounded-full font-bold uppercase tracking-widest text-xs shadow-2xl hover:bg-white hover:text-oxford transition-all flex items-center justify-center gap-3">
+                            <Phone size={18} /> Call Us: 6377203204
                         </a>
-                        <a href="#contact" className="px-8 py-4 bg-white text-oxford rounded-full font-bold uppercase tracking-wider shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">
-                            Visit Campus
-                            <ArrowRight size={18} />
+                        <a href="#contact" className="px-10 py-5 bg-white text-oxford rounded-full font-bold uppercase tracking-widest text-xs shadow-2xl hover:shadow-inner transition-all flex items-center justify-center gap-3">
+                            Visit Our Campus
                         </a>
                     </div>
                 </div>
             </section>
+
+            <Footer />
         </main>
     );
 }

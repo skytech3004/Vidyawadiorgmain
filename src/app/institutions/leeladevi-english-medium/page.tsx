@@ -9,11 +9,5 @@ export const metadata = {
 };
 
 export default function Page() {
-    return (
-        <main className="min-h-screen">
-            <Navbar />
-            <LPSContent />
-            <Footer />
-        </main>
-    );
+    return <LPSContent />;
 }

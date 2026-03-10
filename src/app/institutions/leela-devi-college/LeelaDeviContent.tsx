@@ -781,11 +781,11 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                         {([
                             { name: "Girls Hostel", img: "/images.jpg" },
                             { name: "Medical Support", img: "/uploads/Supporting/health.png" },
-                            { name: "Library", img: "/uploads/Supporting/lib.png" },
+                            { name: "Library", img: "/images/english school/63680e76-2f23-4f80-a9ee-96a18fdd6348.jpg" },
                             { name: "Sports & Gym", img: "/uploads/Supporting/gym.png" }, // Missing image, keeping icon as fallback
                             { name: "IT Infrastructure", img: "/uploads/Supporting/IT.png" },
                             { name: "Science Labs", img: "/uploads/Supporting/lab.png" },
-                            { name: "Cafeteria", img: "/uploads/Supporting/cafe.png" },
+                            { name: "Cafeteria", img: "/uploads/mess/canteen.jpg" },
                             { name: "Auditorium", img: "/uploads/Supporting/audio.png" },
                             { name: "Transport", img: "/uploads/Supporting/trans.png" },
                             { name: "Extra-curricular", img: "/uploads/Supporting/extra.png" }
@@ -838,15 +838,17 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                                     collegeFaculty.slice(0, visibleFacultyCount).map((staff, i) => (
                                         <tr key={staff._id || i} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors group">
                                             <td className="py-5 px-8 text-gray-400 font-bold">{i + 1}</td>
+                                            <td className="py-5 px-8 text-gray-600 font-medium">
+                                                {(staff.department && staff.department !== "General") ? `${staff.designation} (${staff.department})` : staff.designation}
+                                            </td>
                                             <td className="py-5 px-8">
                                                 <div className="flex items-center gap-5">
                                                     <div className="w-12 h-12 rounded-full overflow-hidden bg-white shrink-0 border border-gray-200 group-hover:border-sandstone transition-colors shadow-sm">
                                                         <img src="https://cdn-icons-png.flaticon.com/512/4288/4288270.png" alt={staff.name || "Faculty"} className="w-full h-full object-cover p-1.5 opacity-80" />
-                                                        <td className="py-5 px-8 text-gray-600 font-medium">{(staff.department && staff.department !== "General") ? `${staff.designation} (${staff.department})` : staff.designation}</td>
                                                     </div>
+                                                    <span className="font-bold text-oxford text-lg group-hover:text-sandstone transition-colors">{staff.name}</span>
                                                 </div>
                                             </td>
-                                            <span className="font-bold text-oxford text-lg group-hover:text-sandstone transition-colors">{staff.name}</span>
                                         </tr>
                                     ))
                                 ) : (
