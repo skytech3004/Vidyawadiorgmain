@@ -3,6 +3,8 @@ import dbConnect from "@/lib/mongodb";
 import GalleryCategory from "@/models/GalleryCategory";
 import { jwtVerify } from "jose";
 
+export const dynamic = 'force-dynamic';
+
 async function verifyAuth(req: NextRequest) {
     const token = req.cookies.get("adminToken")?.value;
     if (!token) return null;

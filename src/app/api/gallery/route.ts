@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import dbConnect from "@/lib/mongodb";
 import GalleryAlbum from "@/models/GalleryAlbum";
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
     try {
         await dbConnect();
