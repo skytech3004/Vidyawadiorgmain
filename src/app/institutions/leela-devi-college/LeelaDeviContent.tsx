@@ -828,8 +828,9 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                             <thead>
                                 <tr className="bg-oxford/5 border-b border-gray-100">
                                     <th className="py-5 px-8 font-black text-oxford text-sm uppercase tracking-wider w-24">S.No.</th>
-                                    <th className="py-5 px-8 font-black text-oxford text-sm uppercase tracking-wider">Faculty Member</th>
                                     <th className="py-5 px-8 font-black text-oxford text-sm uppercase tracking-wider">Designation</th>
+
+                                    <th className="py-5 px-8 font-black text-oxford text-sm uppercase tracking-wider">Faculty Member</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -841,11 +842,11 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                                                 <div className="flex items-center gap-5">
                                                     <div className="w-12 h-12 rounded-full overflow-hidden bg-white shrink-0 border border-gray-200 group-hover:border-sandstone transition-colors shadow-sm">
                                                         <img src="https://cdn-icons-png.flaticon.com/512/4288/4288270.png" alt={staff.name || "Faculty"} className="w-full h-full object-cover p-1.5 opacity-80" />
+                                                        <td className="py-5 px-8 text-gray-600 font-medium">{(staff.department && staff.department !== "General") ? `${staff.designation} (${staff.department})` : staff.designation}</td>
                                                     </div>
-                                                    <span className="font-bold text-oxford text-lg group-hover:text-sandstone transition-colors">{staff.name}</span>
                                                 </div>
                                             </td>
-                                            <td className="py-5 px-8 text-gray-600 font-medium">{(staff.department && staff.department !== "General") ? `${staff.designation} (${staff.department})` : staff.designation}</td>
+                                            <span className="font-bold text-oxford text-lg group-hover:text-sandstone transition-colors">{staff.name}</span>
                                         </tr>
                                     ))
                                 ) : (
