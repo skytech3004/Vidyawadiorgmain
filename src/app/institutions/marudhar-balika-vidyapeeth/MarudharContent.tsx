@@ -215,6 +215,8 @@ export default function MarudharContent() {
                             { name: "Chemistry Laboratory", icon: Microscope, img: "/images/Chemistry Laboratory.png" },
                             { name: "Biology Laboratory", icon: Microscope, img: "/images/Biology Laboratory.png" },
                             { name: "Geography Laboratory", icon: Globe, img: "/images/Geography Laboratory.png" },
+                            { name: "NCC & Guide", icon: Trophy, img: "/llll-AAA.jpeg" },
+                            { name: "Library", icon: Globe, img: "/llll-BBB.jpeg" },
                             { name: "Art & Craft Lab", icon: Trophy, img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWM0VDuzqiY7GKHYNiuLdOiI7NeBpeOLzD8rQ4xWGJnwBcENRmGbgaQuXdZCdb1_Jo2vfdGOarAbvU_jduXSt9pSejENdN_TZGKOTTYaLnDGUVrn-NJryFo1Y3QjC4d9zL7tMd6Aq9J40/s1600/photo+4-3.JPG" },
                             { name: "RS-CIT IT Computer Center", icon: School, img: "/images/RS-CIT IT Computer Center.png" },
                             { name: "CCTV Camera Surveillance", icon: CheckCircle2, img: "https://journalistsresource.org/wp-content/uploads/2014/02/surveillance-camera-860x466.jpg" },
@@ -748,6 +750,48 @@ export default function MarudharContent() {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </section>
+            {/* What We Do Section */}
+            <section className="py-24 px-6 bg-white overflow-hidden">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Our Activities</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight text-center">What We Do</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
+                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+                            Glimpses of our vibrant school life and academic activities.
+                        </p>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+                        {[
+                            { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773126078/WhatsApp_Video_2026-03-10_at_12.13.54_zzosza.mp4", title: "Campus Activity" },
+                            { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773126080/WhatsApp_Video_2026-03-10_at_12.13.55_1_nmxdbj.mp4", title: "Student Life" },
+                            { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773126079/WhatsApp_Video_2026-03-10_at_12.13.55_hbh5uh.mp4", title: "Learning & Growth" },
+                            { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773126078/WhatsApp_Video_2026-03-10_at_12.13.54_zzosza.mp4", title: "Extracurriculars" },
+                            { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773126078/WhatsApp_Video_2026-03-10_at_12.13.46_tlxxqk.mp4", title: "Special Events" },
+                            { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773126078/WhatsApp_Video_2026-03-10_at_12.13.55_2_zjupvk.mp4", title: "Sports & Fitness" }
+                        ].map((video, i) => (
+                            <div key={i} className="group overflow-hidden rounded-[2rem] bg-white shadow-xl hover:shadow-2xl transition-all border border-oxford/5">
+                                <div className="h-64 sm:h-80 xl:h-64 overflow-hidden relative">
+                                    <video
+                                        autoPlay
+                                        muted
+                                        loop
+                                        playsInline
+                                        className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 bg-gray-100"
+                                    >
+                                        <source src={video.url} type="video/mp4" />
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                {/* <div className="p-4 relative text-center bg-oxford text-white">
+                                    <h3 className="font-bold text-sm md:text-base">{video.title}</h3>
+                                </div> */}
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>
