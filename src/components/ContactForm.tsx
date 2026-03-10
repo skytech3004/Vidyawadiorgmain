@@ -72,7 +72,7 @@ export default function ContactForm() {
                                     </div>
                                     <div className="space-y-6">
                                         <div>
-                                            <strong className="text-sandstone block text-xl sm:text-3xl font-bold leading-tight">Marudhar Mahila Shikshan Sangh Vidyawadi</strong>
+                                            <strong className="text-sandstone block text-lg sm:text-2xl lg:text-3xl font-bold leading-tight break-words">Marudhar Mahila Shikshan Sangh Vidyawadi</strong>
                                         </div>
                                         <p className="text-white/80">
                                             Post - Vidyawadi, Khimel, St. Rani,<br />
@@ -136,16 +136,29 @@ export default function ContactForm() {
                     <div className="bg-white/5 p-8 rounded-3xl border border-white/10">
                         <h3 className="text-2xl font-bold text-white uppercase tracking-widest mb-8">Send us an Inquiry</h3>
                         <form className="space-y-6">
-                            <div className="space-y-2">
-                                <label className="text-sm font-bold text-sandstone uppercase tracking-widest pl-1">Full Name</label>
-                                <input
-                                    name="fullName"
-                                    type="text"
-                                    required
-                                    placeholder="Enter parent or guardian name"
-                                    className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-sandstone transition-all"
-                                />
+                            <div className="grid sm:grid-cols-2 gap-6">
+                                <div className="space-y-2">
+                                    <label className="text-sm font-bold text-sandstone uppercase tracking-widest pl-1">Full Name</label>
+                                    <input
+                                        name="fullName"
+                                        type="text"
+                                        required
+                                        placeholder="Enter parent or guardian name"
+                                        className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-sandstone transition-all"
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-bold text-sandstone uppercase tracking-widest pl-1">Phone Number</label>
+                                    <input
+                                        name="phone"
+                                        type="tel"
+                                        required
+                                        placeholder="+91 00000 00000"
+                                        className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-sandstone transition-all"
+                                    />
+                                </div>
                             </div>
+                            
                             <div className="space-y-2">
                                 <label className="text-sm font-bold text-sandstone uppercase tracking-widest pl-1">Email Address</label>
                                 <input
@@ -157,21 +170,11 @@ export default function ContactForm() {
                                 />
                             </div>
 
-                            <div className="grid md:grid-cols-2 gap-6">
-                                <div className="space-y-2">
-                                    <label className="text-sm font-bold text-sandstone uppercase tracking-widest pl-1">Phone Number</label>
-                                    <input
-                                        name="phone"
-                                        type="tel"
-                                        required
-                                        placeholder="+91 00000 00000"
-                                        className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-sandstone transition-all"
-                                    />
-                                </div>
+                            <div className="grid sm:grid-cols-2 gap-6">
                                 <div className="space-y-2">
                                     <label className="text-sm font-bold text-sandstone uppercase tracking-widest pl-1">Select Board</label>
                                     <select
-                                        name="grade"
+                                        name="board"
                                         required
                                         className="w-full px-6 py-4 rounded-2xl bg-oxford border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-sandstone transition-all appearance-none"
                                     >
@@ -179,8 +182,6 @@ export default function ContactForm() {
                                         <option value="RBSE">RBSE</option>
                                         <option value="CBSE">CBSE</option>
                                         <option value="JNVU">JNVU</option>
-
-
                                     </select>
                                 </div>
                                 <div className="space-y-2">
@@ -198,7 +199,6 @@ export default function ContactForm() {
                                         <option value="Class 11-12">Class 11-12</option>
                                         <option value="UG">UG</option>
                                         <option value="PG">PG</option>
-
                                     </select>
                                 </div>
                             </div>

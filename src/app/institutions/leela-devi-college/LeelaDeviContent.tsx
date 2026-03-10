@@ -286,8 +286,8 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                         <div className="flex items-start gap-3">
                             <Phone className="text-sandstone shrink-0" size={20} />
                             <div className="flex flex-col">
-                                <a href="tel:+918764185993" className="hover:text-sandstone transition-colors">+91-8764185993</a>
-                                <a href="tel:+916377204208" className="hover:text-sandstone transition-colors">+91-63772-04208</a>
+                                <a href="tel:+916377204208" className="hover:text-sandstone transition-colors">+91-6377204208</a>
+                                <a href="tel:+916377204203" className="hover:text-sandstone transition-colors">+91-6377204203</a>
                             </div>
                         </div>
                         <div className="flex items-start gap-3">
@@ -988,8 +988,8 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                         Join a community of leaders, thinkers, and changemakers. Admissions are now open for the upcoming session.
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4">
-                        <a href="tel:+918764185993" className="px-10 py-5 bg-oxford text-white rounded-full font-bold uppercase tracking-wider shadow-2xl hover:bg-white hover:text-oxford transition-all flex items-center justify-center gap-2">
-                            Call: 8764185993
+                        <a href="tel:+916377204208" className="px-10 py-5 bg-oxford text-white rounded-full font-bold uppercase tracking-wider shadow-2xl hover:bg-white hover:text-oxford transition-all flex items-center justify-center gap-2">
+                            Call: 6377204208
                             <Phone size={18} />
                         </a>
                         <Link href="https://vidyawadicollege.org/admissions/apply" className="px-10 py-5 bg-white text-oxford rounded-full font-bold uppercase tracking-wider shadow-2xl hover:shadow-xl transition-all flex items-center justify-center gap-2">

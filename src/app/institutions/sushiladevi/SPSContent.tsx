@@ -173,7 +173,7 @@ export default function SPSContent() {
                         </div>
                         <div className="flex items-start gap-3">
                             <Phone className="text-sandstone shrink-0" size={20} />
-                            <a href="tel:6377204218" className="hover:text-sandstone transition-colors">Call +91 6377204218</a>
+                            <a href="tel:6377203204" className="hover:text-sandstone transition-colors">Call +91 6377203204</a>
                         </div>
                         <div className="flex items-start gap-3">
                             <Mail className="text-sandstone shrink-0" size={20} />
@@ -432,7 +432,7 @@ export default function SPSContent() {
             </section >
 
             {/* Class Toppers (Non-Board) Section */}
-            < section className="py-24 px-6 bg-oxford relative overflow-hidden" >
+            < section className="py-24 px-6 bg-oxford relative overflow-hidden hidden" >
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-sandstone/10 via-transparent to-transparent opacity-50" />
 
                 <div className="max-w-7xl mx-auto relative z-10">
@@ -658,8 +658,8 @@ export default function SPSContent() {
                         Join Sushiladevi Primary School for a remarkable foundational journey.
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4">
-                        <a href="tel:8764250887" className="px-8 py-4 bg-oxford text-white rounded-full font-bold uppercase tracking-wider shadow-lg hover:bg-white hover:text-oxford transition-all flex items-center justify-center gap-2">
-                            Enquire: 8764250887
+                        <a href="tel:6377203204" className="px-8 py-4 bg-oxford text-white rounded-full font-bold uppercase tracking-wider shadow-lg hover:bg-white hover:text-oxford transition-all flex items-center justify-center gap-2">
+                            Enquire: 6377203204
                             <Phone size={18} />
                         </a>
                         <a href="/contact" className="px-8 py-4 bg-white text-oxford rounded-full font-bold uppercase tracking-wider shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">

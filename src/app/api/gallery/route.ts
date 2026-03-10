@@ -10,10 +10,12 @@ export async function GET() {
         const albums = await GalleryAlbum.find({ isActive: true })
             .sort({ date: -1, createdAt: -1 });
 
-        // Normalize image paths to fix existing double-slash bugs
-        const sanitizedAlbums = albums.map(album => ({
+        // Normalize image paths to fix existing double-slash bugs defensively
+        const sanitizedAlbums = albums.map((album: any) => ({
             ...album.toObject(),
-            images: album.images.map((img: string) => img.replace(/\/+/g, "/"))
+            images: Array.isArray(album.images) 
+                ? album.images.map((img: string) => typeof img === 'string' ? img.replace(/\/+/g, "/") : img) 
+                : []
         }));
 
         return NextResponse.json({

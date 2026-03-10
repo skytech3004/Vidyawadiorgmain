@@ -180,7 +180,7 @@ export default function LPSContent() {
                         <div className="flex items-start gap-3">
                             <Phone className="text-sandstone shrink-0" size={20} />
                             <div className="flex flex-col">
-                                <a href="tel:8764250887" className="hover:text-sandstone transition-colors">8764250887</a>
+                                <a href="tel:6377203204" className="hover:text-sandstone transition-colors">6377203204</a>
                                 <a href="tel:6377203204" className="hover:text-sandstone transition-colors">6377203204</a>
                             </div>
                         </div>
@@ -688,8 +688,8 @@ export default function LPSContent() {
                         Give your daughter the opportunity to grow into a confident, educated, and successful individual.
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4">
-                        <a href="tel:8764250887" className="px-8 py-4 bg-oxford text-white rounded-full font-bold uppercase tracking-wider shadow-lg hover:bg-white hover:text-oxford transition-all flex items-center justify-center gap-2">
-                            Call: 8764250887
+                        <a href="tel:6377203204" className="px-8 py-4 bg-oxford text-white rounded-full font-bold uppercase tracking-wider shadow-lg hover:bg-white hover:text-oxford transition-all flex items-center justify-center gap-2">
+                            Call: 6377203204
                             <Phone size={18} />
                         </a>
                         <a href="#contact" className="px-8 py-4 bg-white text-oxford rounded-full font-bold uppercase tracking-wider shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">
