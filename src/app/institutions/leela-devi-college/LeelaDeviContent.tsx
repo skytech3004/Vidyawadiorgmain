@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     BookOpen, Trophy, School, Users, Star, Microscope,
@@ -222,11 +222,13 @@ const labsData = [
     }
 ];
 
-export default function LeelaDeviContent() {
+export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initialCollegeFaculty?: any[] }) {
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("all");
     const [showAll, setShowAll] = useState(false);
     const [selectedLab, setSelectedLab] = useState<any>(null);
+    const [collegeFaculty, setCollegeFaculty] = useState<any[]>(initialCollegeFaculty);
+    const [visibleFacultyCount, setVisibleFacultyCount] = useState(10);
 
     const filteredCourses = useMemo(() => {
         return coursesData.courses.filter((course: any) => {
@@ -809,6 +811,74 @@ export default function LeelaDeviContent() {
                     </div>
                 </div>
             </section>
+            {/* Faculty Section */}
+            <section className="py-24 px-6 bg-gray-50 overflow-hidden">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Our Faculty</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight">College Faculty</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
+                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+                            Meet our dedicated faculty and staff members committed to excellence.
+                        </p>
+                    </div>
+
+                    <div className="overflow-x-auto bg-white rounded-[2rem] shadow-xl border border-oxford-100">
+                        <table className="w-full text-left border-collapse min-w-[600px]">
+                            <thead>
+                                <tr className="bg-oxford/5 border-b border-gray-100">
+                                    <th className="py-5 px-8 font-black text-oxford text-sm uppercase tracking-wider w-24">S.No.</th>
+                                    <th className="py-5 px-8 font-black text-oxford text-sm uppercase tracking-wider">Faculty Member</th>
+                                    <th className="py-5 px-8 font-black text-oxford text-sm uppercase tracking-wider">Designation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {collegeFaculty.length > 0 ? (
+                                    collegeFaculty.slice(0, visibleFacultyCount).map((staff, i) => (
+                                        <tr key={staff._id || i} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors group">
+                                            <td className="py-5 px-8 text-gray-400 font-bold">{i + 1}</td>
+                                            <td className="py-5 px-8">
+                                                <div className="flex items-center gap-5">
+                                                    <div className="w-12 h-12 rounded-full overflow-hidden bg-white shrink-0 border border-gray-200 group-hover:border-sandstone transition-colors shadow-sm">
+                                                        <img src="https://cdn-icons-png.flaticon.com/512/4288/4288270.png" alt={staff.name || "Faculty"} className="w-full h-full object-cover p-1.5 opacity-80" />
+                                                    </div>
+                                                    <span className="font-bold text-oxford text-lg group-hover:text-sandstone transition-colors">{staff.name}</span>
+                                                </div>
+                                            </td>
+                                            <td className="py-5 px-8 text-gray-600 font-medium">{(staff.department && staff.department !== "General") ? `${staff.designation} (${staff.department})` : staff.designation}</td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan={3} className="py-12 text-center text-gray-500">
+                                            <div className="animate-pulse flex flex-col items-center">
+                                                <div className="w-12 h-12 bg-gray-200 rounded-full mb-4"></div>
+                                                <div className="h-4 bg-gray-200 rounded w-48 mb-2"></div>
+                                                <div className="h-3 bg-gray-100 rounded w-32"></div>
+                                            </div>
+                                            <p className="mt-4">Loading faculty members...</p>
+                                        </td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {visibleFacultyCount < collegeFaculty.length && (
+                        <div className="mt-12 text-center">
+                            <button
+                                onClick={() => setVisibleFacultyCount(prev => prev + 10)}
+                                className="inline-flex items-center gap-3 px-10 py-4 bg-white text-oxford border border-gray-200 rounded-full font-black text-xs uppercase tracking-widest shadow-lg hover:border-sandstone hover:text-sandstone transition-all group"
+                            >
+                                Load More Faculty
+                                <div className="w-6 h-6 rounded-full bg-oxford/5 flex items-center justify-center group-hover:bg-sandstone/10 transition-colors">
+                                    <ChevronRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+                                </div>
+                            </button>
+                        </div>
+                    )}
+                </div>
+            </section>
 
             <section className="py-24 px-6 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto">
@@ -903,91 +973,7 @@ export default function LeelaDeviContent() {
                 </div>
             </section>
 
-            {/* Faculty Section */}
-            <section className="py-24 px-6 bg-gray-50 overflow-hidden">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Our Faculty</span>
-                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight">College Faculty</h2>
-                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
-                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-                            Meet our dedicated faculty and staff members committed to excellence.
-                        </p>
-                    </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                        {[
-                            { no: 1, name: "Ms. Jyoti Nath", designation: "Principal" },
-                            { no: 2, name: "Ms. Kusum Vaishnav", designation: "PGT (History)" },
-                            { no: 3, name: "Dr. Nidhi Upadhyay", designation: "PGT (Painting)" },
-                            { no: 4, name: "Ms. Bhagwanti", designation: "PGT (Maths)" },
-                            { no: 5, name: "Mr. Ghanshyam Singh", designation: "PGT (English)" },
-                            { no: 6, name: "Ms. Mamta Rajpurohit", designation: "PGT (B.St.)" },
-                            { no: 7, name: "Mr. Mahendra Kumar", designation: "PGT (Physics)" },
-                            { no: 8, name: "Ms. Deepshikha Khangarot", designation: "PGT (Biology)" },
-                            { no: 9, name: "Ms. Priya Sharma", designation: "PGT (Hindi)" },
-                            { no: 10, name: "Mr. Ronak Singh", designation: "PGT (Accountancy)" },
-                            { no: 11, name: "Ms. Priyanka Lakhawat", designation: "PGT (Pol. Sci.)" },
-                            { no: 12, name: "Ms. Dimpal", designation: "PGT (Chemistry)" },
-                            { no: 13, name: "Dr. Purnima Bhati", designation: "PGT (English)" },
-                            { no: 14, name: "Mr. Rahul Joshi", designation: "PGT (Geography)" },
-                            { no: 15, name: "Ms. Neha Srivastva", designation: "PGT (English)" },
-                            { no: 16, name: "Ms. Roshni Bano", designation: "PGT (Music)" },
-                            { no: 17, name: "Mr. Pradeep Singh", designation: "PGT (Comp. Sci.)" },
-                            { no: 18, name: "Ms. Deepa Tolani", designation: "TGT (S.St.)" },
-                            { no: 19, name: "Ms. Rajkumari Choudhary", designation: "TGT (Science)" },
-                            { no: 20, name: "Ms. Varsha Palrecha", designation: "TGT (Hindi)" },
-                            { no: 21, name: "Ms. Krishana Kanta Pareek", designation: "TGT (Sanskrit)" },
-                            { no: 22, name: "Mr. Kantilal Prajapat", designation: "TGT (Maths)" },
-                            { no: 23, name: "Ms. Veena Kumari", designation: "TGT (English)" },
-                            { no: 24, name: "Ms. Divya Soni", designation: "TGT (Maths)" },
-                            { no: 25, name: "Ms. Manglem Singh", designation: "TGT (Science)" },
-                            { no: 26, name: "Ms. Priyanka Saxena", designation: "TGT (Sanskrit)" },
-                            { no: 27, name: "Ms. Bhawna", designation: "TGT (Hindi)" },
-                            { no: 28, name: "Ms. Mamta Kanwar", designation: "TGT (Maths)" },
-                            { no: 29, name: "Ms. Kalal Nilam", designation: "TGT (Comp. Sci.)" },
-                            { no: 30, name: "Ms. Neelam Parihar", designation: "TGT (English)" },
-                            { no: 31, name: "Ms. Kalpna Vaishnav", designation: "TGT" },
-                            { no: 32, name: "Ms. Meena Sirvi", designation: "TGT (S.St.)" },
-                            { no: 33, name: "Ms. Rashmi Tripathi", designation: "PET" },
-                            { no: 34, name: "Ms. Suman", designation: "PET" },
-                            { no: 35, name: "Ms. Megha Arora", designation: "PRT Co-ordinator" },
-                            { no: 36, name: "Ms. Sunder Dewasi", designation: "PRT (Hindi)" },
-                            { no: 37, name: "Ms. Rathod Gopal Kunwar", designation: "PRT (M.T.)" },
-                            { no: 38, name: "Ms. Anjali Rathore", designation: "PRT (EVS)" },
-                            { no: 39, name: "Ms. Yumnum Reena Devi", designation: "PRT (English)" },
-                            { no: 40, name: "Ms. Monika", designation: "PRT" },
-                            { no: 41, name: "Ms. Jyoti Choudhary", designation: "PRT" },
-                            { no: 42, name: "Ms. Hemlata Suthar", designation: "PRT" },
-                            { no: 43, name: "Ms. Gracy Soni", designation: "PRT" },
-                            { no: 44, name: "Ms. Chitrakshi Kalet", designation: "PRT" },
-                            { no: 45, name: "Ms. Bharti Mali", designation: "PRT" },
-                            { no: 46, name: "Mr. Md Asfak", designation: "Office Superintendent" },
-                            { no: 47, name: "Mr. Niranjan Gehlot", designation: "Accountant" },
-                            { no: 48, name: "Ms. Jaya Gehlot", designation: "Librarian" },
-                            { no: 49, name: "Ms. Soniya Arya", designation: "Sci. Lab Asst." },
-                            { no: 50, name: "Ms. Chanchal Suthar", designation: "Comp. Lab Asst." },
-                        ].map((staff, i) => (
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: (i % 12) * 0.05 }}
-                                key={staff.no}
-                                className="bg-white p-4 rounded-xl shadow-sm border border-oxford/10 flex items-center gap-3 hover:border-sandstone transition-colors group"
-                            >
-                                <div className="w-10 h-10 rounded-full bg-oxford/5 flex items-center justify-center text-oxford font-bold text-xs shrink-0 group-hover:bg-sandstone group-hover:text-white transition-colors">
-                                    {staff.no}
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-oxford text-xs">{staff.name}</h4>
-                                    <p className="text-[10px] text-gray-500 uppercase tracking-wider">{staff.designation}</p>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
             {/* School Uniform & General Instructions Section */}
 

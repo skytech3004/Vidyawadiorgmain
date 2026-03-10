@@ -8,11 +8,28 @@ export const metadata = {
     description: "A Premier Women’s College in Western Rajasthan. Affiliated to JNVU and NAAC B++ Accredited."
 };
 
-export default function LeelaDeviCollege() {
+export const revalidate = 3600; // Cache the fetched data for 1 hour
+
+export default async function LeelaDeviCollege() {
+    let collegeFaculty = [];
+    try {
+        const res = await fetch("https://www.vidyawadicollege.org/api/faculties?isActive=true", {
+            next: { revalidate: 3600 }
+        });
+        if (res.ok) {
+            const data = await res.json();
+            collegeFaculty = Array.isArray(data) ? data : (data.faculties || data.data || []);
+        } else {
+            console.error("Failed to fetch college faculty, status:", res.status);
+        }
+    } catch (err) {
+        console.error("Error fetching college faculty:", err);
+    }
+
     return (
         <main className="min-h-screen">
             <Navbar />
-            <LeelaDeviContent />
+            <LeelaDeviContent initialCollegeFaculty={collegeFaculty} />
             <Footer />
         </main>
     );
