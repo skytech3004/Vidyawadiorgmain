@@ -25,6 +25,8 @@ const facilities: Facility[] = [
         title: "Equestrian Center",
         description: "Professional horse riding training for personality development and confidence.",
         icon: "🐴",
+        image: "/images/uploads/vidywadi_main/horse.png",
+
         theme: "bg-oxford",
         features: ["Horse Riding", "Stable Management"]
     },
