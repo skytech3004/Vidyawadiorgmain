@@ -4,10 +4,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { 
-    BookOpen, Trophy, School, Users, Star, Microscope, 
+import {
+    BookOpen, Trophy, School, Users, Star, Microscope,
     Medal, Phone, MapPin, Globe, CheckCircle2, User,
-    ShieldCheck, Sparkles 
+    ShieldCheck, Sparkles
 } from "lucide-react";
 import StudentResultsTable from "@/components/StudentResultsTable";
 import StudentModal from "@/components/StudentModal";
@@ -509,16 +509,16 @@ export default function LPSContent() {
 
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         {[
-                            { name: "Physics Laboratory", img: "/images/Physics Laboratory.png" },
-                            { name: "Chemistry Laboratory", img: "/images/Chemistry Laboratory.png" },
-                            { name: "Biology Laboratory", img: "/images/Biology Laboratory.png" },
-                            { name: "Mathematics Lab", img: "https://t3.ftcdn.net/jpg/04/71/94/28/360_F_471942858_Tj2wZJqXmX3mPzZEnY4ZlYwY8zY8zY8z.jpg" },
-                            { name: "Music & Painting Studio", img: "https://t4.ftcdn.net/jpg/02/76/81/81/360_F_276818165_cW5kXzZEnY4ZlYwY8zY8zY8z.jpg" },
-                            { name: "Geography Laboratory", img: "/images/Geography Laboratory.png" },
+                            { name: "Physics Laboratory", img: "/psy.png" },
+                            { name: "Chemistry Laboratory", img: "/chemistry.jpg" },
+                            { name: "Biology Laboratory", img: "/bio.jpg" },
+                            { name: "Mathematics Lab", img: "/math.png" },
+                            { name: "Music & Painting Studio", img: "/images/english school/93b4f897-0aca-4189-a717-16c13f8372d5.jpg" },
+                            { name: "Geography Laboratory", img: "/images/uploads/vidywadi_main/_29012022131850936.jpg" },
                             { name: "NCC & Guide", img: "/llll-AAA.jpeg" },
-                            { name: "Library", img: "/llll-BBB.jpeg" },
-                            { name: "Computer Center", img: "/images/RS-CIT IT Computer Center.png" },
-                            { name: "Multimedia Room", img: "https://www.shutterstock.com/image-photo/empty-modern-classroom-comfortable-chairs-600nw-2111003666.jpg" },
+                            { name: "Library", img: "/images/english school/706b5bd7-1cbd-40f0-a48f-2ec78225ac48.jpg" },
+                            { name: "Computer Center", img: "/images/english school/344537e3-f907-4894-b74e-6c120656cc03.jpg" },
+                            { name: "Multimedia Room", img: "/images/uploads/vidywadi_main/_29012022131942147.jpg" },
                             { name: "Safe & Secure Campus", img: "https://journalistsresource.org/wp-content/uploads/2014/02/surveillance-camera-860x466.jpg" }
                         ].map((facility, i) => (
                             <div key={i} className="group overflow-hidden rounded-[2.5rem] bg-white shadow-xl hover:shadow-2xl transition-all border border-oxford/5">
