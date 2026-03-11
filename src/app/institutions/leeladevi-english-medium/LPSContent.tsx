@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
     BookOpen, Trophy, School, Users, Star, Microscope,
@@ -12,56 +12,68 @@ import Image from "next/image";
 // --- Data ---
 
 const staffList = [
-    { no: 1, name: "Ms. Jyoti Nath", designation: "Principal", image: "/images/english school/principle.jpg" },
-    { no: 2, name: "Ms. Kusum Vaishnav", designation: "PGT (History)" },
-    { no: 3, name: "Dr. Nidhi Upadhyay", designation: "PGT (Painting)" },
-    { no: 4, name: "Ms. Bhagwanti", designation: "PGT (Maths)" },
-    { no: 5, name: "Mr. Ghanshyam Singh", designation: "PGT (English)" },
-    { no: 6, name: "Ms. Mamta Rajpurohit", designation: "PGT (B.St.)" },
-    { no: 7, name: "Mr. Mahendra Kumar", designation: "PGT (Physics)" },
-    { no: 8, name: "Ms. Deepshikha Khangarot", designation: "PGT (Biology)" },
-    { no: 9, name: "Ms. Priya Sharma", designation: "PGT (Hindi)" },
-    { no: 10, name: "Mr. Ronak Singh", designation: "PGT (Accountancy)" },
-    { no: 11, name: "Ms. Priyanka Lakhawat", designation: "PGT (Pol. Sci.)" },
-    { no: 12, name: "Ms. Dimpal", designation: "PGT (Chemistry)" },
-    { no: 13, name: "Dr. Purnima Bhati", designation: "PGT (English)" },
-    { no: 14, name: "Mr. Rahul Joshi", designation: "PGT (Geography)" },
-    { no: 15, name: "Ms. Neha Srivastva", designation: "PGT (English)" },
-    { no: 16, name: "Ms. Roshni Bano", designation: "PGT (Music)" },
-    { no: 17, name: "Mr. Pradeep Singh", designation: "PGT (Comp. Sci.)" },
-    { no: 18, name: "Ms. Deepa Tolani", designation: "TGT (S.St.)" },
-    { no: 19, name: "Ms. Rajkumari Choudhary", designation: "TGT (Science)" },
-    { no: 20, name: "Ms. Varsha Palrecha", designation: "TGT (Hindi)" },
-    { no: 21, name: "Ms. Krishana Kanta Pareek", designation: "TGT (Sanskrit)" },
-    { no: 22, name: "Mr. Kantilal Prajapat", designation: "TGT (Maths)" },
-    { no: 23, name: "Ms. Veena Kumari", designation: "TGT (English)" },
-    { no: 24, name: "Ms. Divya Soni", designation: "TGT (Maths)" },
-    { no: 25, name: "Ms. Manglem Singh", designation: "TGT (Science)" },
-    { no: 26, name: "Ms. Priyanka Saxena", designation: "TGT (Sanskrit)" },
-    { no: 27, name: "Ms. Bhawna", designation: "TGT (Hindi)" },
-    { no: 28, name: "Ms. Mamta Kanwar", designation: "TGT (Maths)" },
-    { no: 29, name: "Ms. Kalal Nilam", designation: "TGT (Comp. Sci.)" },
-    { no: 30, name: "Ms. Neelam Parihar", designation: "TGT (English)" },
-    { no: 31, name: "Ms. Kalpna Vaishnav", designation: "TGT" },
-    { no: 32, name: "Ms. Meena Sirvi", designation: "TGT (S.St.)" },
-    { no: 33, name: "Ms. Rashmi Tripathi", designation: "PET" },
-    { no: 34, name: "Ms. Suman", designation: "PET" },
-    { no: 35, name: "Ms. Megha Arora", designation: "PRT Co-ordinator" },
-    { no: 36, name: "Ms. Sunder Dewasi", designation: "PRT (Hindi)" },
-    { no: 37, name: "Ms. Rathod Gopal Kunwar", designation: "PRT (M.T.)" },
-    { no: 38, name: "Ms. Anjali Rathore", designation: "PRT (EVS)" },
-    { no: 39, name: "Ms. Yumnum Reena Devi", designation: "PRT (English)" },
-    { no: 40, name: "Ms. Monika", designation: "PRT" },
-    { no: 41, name: "Ms. Jyoti Choudhary", designation: "PRT" },
-    { no: 42, name: "Ms. Hemlata Suthar", designation: "PRT" },
-    { no: 43, name: "Ms. Gracy Soni", designation: "PRT" },
-    { no: 44, name: "Ms. Chitrakshi Kalet", designation: "PRT" },
-    { no: 45, name: "Ms. Bharti Mali", designation: "PRT" },
-    { no: 46, name: "Mr. Md Asfak", designation: "Office Superintendent" },
-    { no: 47, name: "Mr. Niranjan Gehlot", designation: "Accountant" },
-    { no: 48, name: "Ms. Jaya Gehlot", designation: "Librarian" },
-    { no: 49, name: "Ms. Soniya Arya", designation: "Sci. Lab Asst." },
-    { no: 50, name: "Ms. Chanchal Suthar", designation: "Comp. Lab Asst." },
+    { "no": 1, "name": "Ms. Jyoti Nath", "designation": "Principal" },
+    { "no": 2, "name": "Ms. Deepshikha Khangarot", "designation": "PGT (Biology) & V.P." },
+    { "no": 3, "name": "Dr. Nidhi Upadhyay", "designation": "PGT (Drawing & Painting)" },
+    { "no": 4, "name": "Mrs. Bhagwanti", "designation": "PGT (Maths)" },
+    { "no": 5, "name": "Mr. Ghanshyam Singh", "designation": "PGT (English)" },
+    { "no": 6, "name": "Ms. Mamta Rajpurohit", "designation": "PGT (B.St.)" },
+    { "no": 7, "name": "Mr. Mahendra Kumar", "designation": "PGT (Physics)" },
+    { "no": 8, "name": "Mrs. Priya Sharma", "designation": "PGT (Hindi)" },
+    { "no": 9, "name": "Mr. Ronak Singh", "designation": "PGT (Accountancy)" },
+    { "no": 10, "name": "Ms. Roshni Bano", "designation": "PGT (Music)" },
+    { "no": 11, "name": "Mr. Pradeep Singh Sevarsa", "designation": "PGT (Comp. Sci.)" },
+    { "no": 12, "name": "Mr. Andrew Daimari", "designation": "PGT(English)" },
+    { "no": 13, "name": "Ms. Sonal", "designation": "PGT(Chemistry)" },
+    { "no": 14, "name": "Ms. Princi Saxena", "designation": "PGT (English)" },
+    { "no": 15, "name": "Mr. Pushpendra Singh", "designation": "PGT (Geography)" },
+    { "no": 16, "name": "Mr. Rahul Joshi", "designation": "PGT (Polt. Scie.)" },
+    { "no": 17, "name": "Mrs. Deepa Tolani", "designation": "TGT (S.St.)" },
+    { "no": 18, "name": "Mrs. Rajkumari Choudhary", "designation": "TGT (Science)" },
+    { "no": 19, "name": "Ms. Varsha Palrecha", "designation": "TGT (Hindi)" },
+    { "no": 20, "name": "Ms. Aruna Mali", "designation": "TGT (Sanskrit)" },
+    { "no": 21, "name": "Mr. Kantilal Prajapat", "designation": "TGT (Maths)" },
+    { "no": 22, "name": "Ms. Divya Soni", "designation": "TGT (Maths)" },
+    { "no": 23, "name": "Ms. Priyanka Saxena", "designation": "TGT (Sanskrit)" },
+    { "no": 24, "name": "Ms. Kalal Nilam", "designation": "TGT (Comp. Sci.)" },
+    { "no": 25, "name": "Ms. Mamta Kanwar", "designation": "TGT (Maths)" },
+    { "no": 26, "name": "Ms. Neelam Parihar", "designation": "TGT (English)" },
+    { "no": 27, "name": "Ms. Meena Sirvi", "designation": "TGT (S.St.)" },
+    { "no": 28, "name": "Ms. Yumnum Manglem Singh", "designation": "TGT(Science)" },
+    { "no": 29, "name": "Ms. Sunder Dewasi", "designation": "TGT (Hindi), Guide-Incharge" },
+    { "no": 30, "name": "Ms. Sudiksha Soni", "designation": "TGT (IT)" },
+    { "no": 31, "name": "Ms. Kareena Shaikh", "designation": "TGT(S.ST. & English)" },
+    { "no": 32, "name": "Ms. Chhaya Rajpurohit", "designation": "TGT(English) & PGT (B.ST)" },
+    { "no": 33, "name": "Ms. Honey Agrawat", "designation": "PRT (Eng.) Primary Coordinator" },
+    { "no": 34, "name": "Ms. Jyoti Choudhary", "designation": "PRT" },
+    { "no": 35, "name": "Ms. Yumnum Reena Devi", "designation": "PRT" },
+    { "no": 36, "name": "Ms. Monika", "designation": "PRT" },
+    { "no": 37, "name": "Ms. Hemlata Suthar", "designation": "PRT" },
+    { "no": 38, "name": "Ms. Suman Gurjar", "designation": "PET" },
+    { "no": 39, "name": "Ms. Gracy Soni", "designation": "PRT" },
+    { "no": 40, "name": "Ms. Bharti Mali", "designation": "PRT" },
+    { "no": 41, "name": "Ms. Pista Kumari", "designation": "PRT" },
+    { "no": 42, "name": "Ms. Mary Grace", "designation": "PRT" },
+    { "no": 43, "name": "Ms. Monika Kumari", "designation": "PRT" },
+    { "no": 44, "name": "Ms. Leena Sharma", "designation": "PRT" },
+    { "no": 45, "name": "Ms. Leela Choudhary", "designation": "PET" },
+    { "no": 46, "name": "Ms. Gopal Kanwar", "designation": "PRT" },
+    { "no": 47, "name": "Ms. Chtrakshi Kalet", "designation": "PRT" },
+    { "no": 48, "name": "Mr. Md. Asfak", "designation": "Office Supdt." },
+    { "no": 49, "name": "Ms. Jaya Gehlot", "designation": "Librarian" },
+    { "no": 50, "name": "Ms. Bhawana Solanki", "designation": "PRT+Lab Asst." },
+    { "no": 51, "name": "Ms. Gayatri Mali", "designation": "Front Desk Executive" },
+    { "no": 52, "name": "Mr. Ramesh Choudhary", "designation": "Peon" },
+    { "no": 53, "name": "Mr. Suresh Puri", "designation": "Peon" },
+    { "no": 54, "name": "Mr. Heeral Lal Prajapat", "designation": "Peon" },
+    { "no": 55, "name": "Mrs. Rukmini", "designation": "Peon" },
+    { "no": 56, "name": "Mrs. Champa", "designation": "Peon" },
+    { "no": 57, "name": "Ms. Anju Kanwar", "designation": "Peon" },
+    { "no": 58, "name": "Ms. Nenu Vaishnav", "designation": "Peon" },
+    { "no": 59, "name": "Mr. Ramesh Prajapat", "designation": "Peon" },
+    { "no": 60, "name": "Mrs. Basanti Devi", "designation": "Sweeper" },
+    { "no": 61, "name": "Mrs. Krishna", "designation": "Sweeper" },
+    { "no": 62, "name": "Ms. Mamta Goswami", "designation": "Peon" }
 ];
 
 const toppers12 = [
@@ -109,7 +121,51 @@ const nonBoardToppers = [
     { name: "Ms. Jaishree", class: "XI Hum", image: "" },
 ];
 
+const houseList = [
+    "Rani Lakshmi Bai",
+    "Sarojani Naidu",
+    "Padmawati",
+    "Vijaya Lakshmi"
+];
+
+const clubList = [
+    { id: 1, name: "LEGAL AWARENESS" },
+    { id: 2, name: "N.C.C." },
+    { id: 3, name: "GUIDE + BULBUL" },
+    { id: 4, name: "ROAD SAFETY" },
+    { id: 5, name: "LITERARY" },
+    { id: 6, name: "MATHS" },
+    { id: 7, name: "LIFE SKILL" },
+    { id: 8, name: "RED CROSS" },
+    { id: 9, name: "ECO" },
+    { id: 10, name: "I.T." },
+    { id: 11, name: "ORATORY" },
+    { id: 12, name: "HERITAGE" },
+    { id: 13, name: "ART & CRAFT" },
+    { id: 14, name: "EK BHARAT SHRESTH BHARAT" },
+    { id: 15, name: "CULTURAL" },
+    { id: 16, name: "MUSIC" },
+    { id: 17, name: "SCIENCE" },
+    { id: 18, name: "READERS" },
+    { id: 19, name: "DANCE" },
+    { id: 20, name: "THEATER & DRAMA" },
+    { id: 21, name: "SWACHHA VIDYALAYA" },
+    { id: 22, name: "SUPW" },
+    { id: 23, name: "CYBER CLUB" },
+    { id: 24, name: "SANSKRIT" },
+    { id: 25, name: "KIDS" },
+    { id: 26, name: "SPORTS" },
+    { id: 27, name: "YUVA TOURISM" },
+    { id: 28, name: "ELECTORAL LITERACY CLUB" }
+];
+
 export default function LPSContent() {
+    const [visibleClubs, setVisibleClubs] = useState(10);
+    const [visibleStaff, setVisibleStaff] = useState(10);
+
+    const loadMoreClubs = () => setVisibleClubs(prev => prev + 10);
+    const loadMoreStaff = () => setVisibleStaff(prev => prev + 10);
+
     return (
         <div className="bg-white">
             {/* Hero Section */}
@@ -121,9 +177,14 @@ export default function LPSContent() {
                         animate={{ opacity: 1, y: 0 }}
                         className="flex flex-col md:flex-row gap-8 items-center mb-10"
                     >
-                        <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-sandstone overflow-hidden bg-white shrink-0 shadow-xl">
-                            {/* Placeholder for School Logo if specific one exists, else using existing or generic */}
-                            <School size={80} className="text-oxford m-auto h-full" />
+                        <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-sandstone overflow-hidden bg-white shrink-0 shadow-xl flex items-center justify-center">
+                            <Image
+                                src="/lps.jpg"
+                                alt="LPS Logo"
+                                width={160}
+                                height={160}
+                                className="w-full h-full object-cover rounded-full"
+                            />
                         </div>
                         <div>
                             <span className="text-sandstone font-bold uppercase tracking-widest text-sm mb-4 block">Affiliated to CBSE, New Delhi</span>
@@ -153,7 +214,7 @@ export default function LPSContent() {
                         </div>
                         <div className="flex items-start gap-3">
                             <Phone className="text-sandstone shrink-0" size={20} />
-                            <a href="tel:8764250887" className="hover:text-sandstone transition-colors">8764250887</a>
+                            <a href="tel:6377203204" className="hover:text-sandstone transition-colors">6377203204</a>
                         </div>
                         <div className="flex items-start gap-3">
                             <Mail className="text-sandstone shrink-0" size={20} />
@@ -237,6 +298,59 @@ export default function LPSContent() {
                             </div>
                         </div>
                     </motion.div>
+                </div>
+            </section>
+
+            {/* Houses & Clubs Section */}
+            <section className="py-24 px-6 bg-oxford/5 border-y border-oxford/10">
+                <div className="max-w-7xl mx-auto">
+                    <div className="grid lg:grid-cols-3 gap-16">
+                        <div className="lg:col-span-1">
+                            <span className="text-sandstone font-bold uppercase tracking-widest text-sm block mb-2">Internal Organization</span>
+                            <h2 className="text-3xl md:text-4xl font-black text-oxford mb-6">Houses & Councils</h2>
+                            <p className="text-gray-600 leading-relaxed mb-8 text-sm">
+                                To foster competition, teamwork, and leadership, we follow a vibrant House system. Every student is part of a legacy that encourages them to excel in academics and co-curricular activities.
+                            </p>
+                            <div className="grid grid-cols-2 gap-3">
+                                {houseList.map((house, i) => (
+                                    <div key={i} className="p-4 bg-white border border-sandstone/10 rounded-2xl text-center text-sm font-black text-oxford shadow-sm hover:border-sandstone transition-colors group">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-sandstone mx-auto mb-2 opacity-30 group-hover:opacity-100 transition-opacity" />
+                                        {house}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="lg:col-span-2">
+                            <h3 className="text-2xl font-bold text-oxford mb-8 flex items-center gap-3">
+                                <Trophy className="text-sandstone" />
+                                Student Clubs
+                            </h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                                {clubList.slice(0, visibleClubs).map((club) => (
+                                    <div key={club.id} className="p-3 bg-white border border-gray-100 rounded-xl flex items-center gap-3 hover:border-sandstone transition-all hover:shadow-md group">
+                                        <span className="w-8 h-8 flex-shrink-0 bg-gray-50 rounded-lg flex items-center justify-center text-[11px] font-black text-gray-400 group-hover:bg-sandstone/10 group-hover:text-sandstone transition-colors">
+                                            {club.id}
+                                        </span>
+                                        <span className="text-[11px] font-bold text-oxford/80 leading-tight uppercase tracking-tight group-hover:text-oxford transition-colors">
+                                            {club.name}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {visibleClubs < clubList.length && (
+                                <div className="mt-8 flex justify-center">
+                                    <button
+                                        onClick={loadMoreClubs}
+                                        className="px-6 py-2.5 bg-oxford text-white text-xs font-black uppercase tracking-widest rounded-full hover:bg-sandstone transition-colors shadow-lg"
+                                    >
+                                        View More Clubs
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -420,15 +534,6 @@ export default function LPSContent() {
                             </div>
                             <div>
                                 <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                                    <Medal className="text-sandstone" />
-                                    Co-Scholastic & Clubs
-                                </h3>
-                                <p className="text-white/70 leading-relaxed">
-                                    Maximum subject choices and activities like Kids, Literary, Drama, Oratory, Eco, IT, and more. House system (Rani Lakshmi Bai, Padmavati, Sarojini Naidu, Vijaya Lakshmi) fosters teamwork and competition.
-                                </p>
-                            </div>
-                            <div>
-                                <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
                                     <ShieldStar className="text-sandstone" />
                                     NCC & Scouts
                                 </h3>
@@ -437,11 +542,34 @@ export default function LPSContent() {
                                     <strong>Bharat Scout & Guide:</strong> Active since 2016-17, currently training 51 students.
                                 </p>
                             </div>
+                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
+                                {[
+                                    { src: "/images/english school/7e7ad0cf-7675-40dc-b2d9-a7a4dc3053a4.jpg", alt: "Yoga" },
+                                    { src: "/images/english school/6d8b41a6-cf4a-4f8f-9530-ea59b75c9377.jpg", alt: "Hula Hoop" },
+                                    { src: "/images/english school/a200f34b-f2de-4939-9049-944380c69594.jpg", alt: "Athletics - Manisha" },
+                                    { src: "/images/english school/da326549-dcf6-4c5d-baa6-425a657140c6.jpg", alt: "Rifle Shooting - Kritika" },
+                                    { src: "/images/english school/9bd3aa78-5651-4fab-b2c0-c30cde54fb2b.jpg", alt: "Sports Achievement" },
+                                    { src: "/uploads/mess/skate.jpg", alt: "Sports Achievement" },
+                                ].map((img, i) => (
+                                    <div key={i} className="aspect-[4/5] rounded-xl overflow-hidden border border-white/10 group relative">
+                                        <Image
+                                            src={img.src}
+                                            alt={img.alt}
+                                            fill
+                                            className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                                            <p className="text-[10px] font-bold text-white uppercase tracking-tight">{img.alt}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
 
                         <div className="bg-white/5 rounded-[2.5rem] p-8 border border-white/10">
                             <h3 className="text-2xl font-bold text-white mb-6">Sports Achievements 2024-25</h3>
-                            <div className="space-y-6 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+
+                            <div className="space-y-6 max-h-[800px] overflow-y-auto pr-2 custom-scrollbar">
                                 <AchievementItem title="District Badminton (U-19)" desc="Girls secured 2nd position. One selected for state-level." />
                                 <AchievementItem title="District Rifle Shooting (U-17)" desc="Team secured 2nd position. Pratibha (1st), Kritika (2nd), KirtiRaj (3rd). All selected for state." />
                                 <AchievementItem title="Rifle Shooting (U-19)" desc="Team secured 1st position. Hrishija & Himakshi Khechi selected for state." />
@@ -451,6 +579,7 @@ export default function LPSContent() {
                                 <AchievementItem title="Athletics (U-14)" desc="Overall Championship. Multiple students (Leela, Rushkarshi, Hetal, Kanishka) selected for state." />
                             </div>
                         </div>
+
                     </div>
                 </div>
             </section>
@@ -464,7 +593,7 @@ export default function LPSContent() {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        {staffList.map((staff) => (
+                        {staffList.slice(0, visibleStaff).map((staff) => (
                             <div key={staff.no} className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center gap-3 hover:border-sandstone transition-colors">
                                 <div className="w-10 h-10 rounded-full bg-oxford/5 flex items-center justify-center text-oxford font-bold text-sm shrink-0">
                                     {staff.no}
@@ -476,6 +605,17 @@ export default function LPSContent() {
                             </div>
                         ))}
                     </div>
+
+                    {visibleStaff < staffList.length && (
+                        <div className="mt-12 flex justify-center">
+                            <button
+                                onClick={loadMoreStaff}
+                                className="px-8 py-3 bg-white border-2 border-oxford text-oxford text-sm font-black uppercase tracking-widest rounded-full hover:bg-oxford hover:text-white transition-all shadow-md"
+                            >
+                                View More Navigators
+                            </button>
+                        </div>
+                    )}
                 </div>
             </section>
 
@@ -514,7 +654,25 @@ export default function LPSContent() {
                     </div>
                 </div>
             </section>
+            <section className="py-20 px-6 bg-sandstone relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+                <div className="max-w-4xl mx-auto text-center relative z-10">
+                    <h2 className="text-4xl md:text-5xl font-black text-oxford mb-8 uppercase tracking-tighter">Admissions Open 2025-26</h2>
+                    <p className="text-xl text-oxford/70 font-medium mb-12 max-w-2xl mx-auto">
+                        Empower your daughter with quality education and a nurturing environment. Join the LPS family today.
+                    </p>
+                    <div className="flex flex-col sm:flex-row justify-center gap-6">
+                        <a href="tel:6377203204" className="px-10 py-5 bg-oxford text-white rounded-full font-bold uppercase tracking-widest text-xs shadow-2xl hover:bg-white hover:text-oxford transition-all flex items-center justify-center gap-3">
+                            <Phone size={18} /> Call Us: 6377203204
+                        </a>
+                        <a href="#contact" className="px-10 py-5 bg-white text-oxford rounded-full font-bold uppercase tracking-widest text-xs shadow-2xl hover:shadow-inner transition-all flex items-center justify-center gap-3">
+                            Visit Our Campus
+                        </a>
+                    </div>
+                </div>
+            </section>
         </div>
+
     );
 }
 

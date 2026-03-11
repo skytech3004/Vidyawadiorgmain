@@ -9,5 +9,11 @@ export const metadata = {
 };
 
 export default function Page() {
-    return <LPSContent />;
+    return (
+        <>
+            <Navbar />
+            <LPSContent />
+            <Footer />
+        </>
+    );
 }
