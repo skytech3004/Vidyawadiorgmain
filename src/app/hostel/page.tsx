@@ -80,6 +80,7 @@ export default function Page() {
 
     React.useEffect(() => {
         window.scrollTo(0, 0);
+        document.documentElement.scrollTo(0, 0);
     }, []);
 
     const rules = [

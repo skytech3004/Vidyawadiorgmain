@@ -217,9 +217,9 @@ export default function HostelSection() {
                         </div>
 
                         <div className="flex flex-col sm:flex-row items-center gap-6 pt-6">
-                            <Link href="/hostel" className="w-full sm:w-auto px-10 py-5 bg-sandstone text-oxford font-black text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white transition-all shadow-xl text-center">
+                            <a href="/hostel" className="w-full sm:w-auto px-10 py-5 bg-sandstone text-oxford font-black text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white transition-all shadow-xl text-center">
                                 Explore Hostel Features
-                            </Link>
+                            </a>
                             <button className="w-full sm:w-auto flex items-center justify-center gap-3 text-white font-bold hover:text-sandstone transition-colors group">
                                 <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-sandstone group-hover:text-oxford">
                                     <PhoneCall size={18} />
