@@ -1,104 +1,117 @@
 "use client";
 
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import {
     BookOpen, Trophy, School, Users, Star, Microscope,
-    Medal, Phone, MapPin, Globe, CheckCircle2, User,
-    ShieldCheck, Sparkles, ChevronRight
+    Medal, Phone, MapPin, Mail, CheckCircle2,
+    Music, Calendar, User, FileText, Sparkles
 } from "lucide-react";
-import StudentResultsTable from "@/components/StudentResultsTable";
-import StudentModal from "@/components/StudentModal";
+import Image from "next/image";
 
 // --- Data ---
 
 const staffList = [
-    { "no": 1, "name": "Ms. Jyoti Nath", "designation": "Principal" },
-    { "no": 2, "name": "Ms. Deepshikha Khangarot", "designation": "PGT (Biology) & V.P." },
-    { "no": 3, "name": "Dr. Nidhi Upadhyay", "designation": "PGT (Drawing & Painting)" },
-    { "no": 4, "name": "Mrs. Bhagwanti", "designation": "PGT (Maths)" },
-    { "no": 5, "name": "Mr. Ghanshyam Singh", "designation": "PGT (English)" },
-    { "no": 6, "name": "Ms. Mamta Rajpurohit", "designation": "PGT (B.St.)" },
-    { "no": 7, "name": "Mr. Mahendra Kumar", "designation": "PGT (Physics)" },
-    { "no": 8, "name": "Mrs. Priya Sharma", "designation": "PGT (Hindi)" },
-    { "no": 9, "name": "Mr. Ronak Singh", "designation": "PGT (Accountancy)" },
-    { "no": 10, "name": "Ms. Roshni Bano", "designation": "PGT (Music)" },
-    { "no": 11, "name": "Mr. Pradeep Singh Sevarsa", "designation": "PGT (Comp. Sci.)" },
-    { "no": 12, "name": "Mr. Andrew Daimari", "designation": "PGT(English)" },
-    { "no": 13, "name": "Ms. Sonal", "designation": "PGT(Chemistry)" },
-    { "no": 14, "name": "Ms. Princi Saxena", "designation": "PGT (English)" },
-    { "no": 15, "name": "Mr. Pushpendra Singh", "designation": "PGT (Geography)" },
-    { "no": 16, "name": "Mr. Rahul Joshi", "designation": "PGT (Polt. Scie.)" },
-    { "no": 17, "name": "Mrs. Deepa Tolani", "designation": "TGT (S.St.)" },
-    { "no": 18, "name": "Mrs. Rajkumari Choudhary", "designation": "TGT (Science)" },
-    { "no": 19, "name": "Ms. Varsha Palrecha", "designation": "TGT (Hindi)" },
-    { "no": 20, "name": "Ms. Aruna Mali", "designation": "TGT (Sanskrit)" },
-    { "no": 21, "name": "Mr. Kantilal Prajapat", "designation": "TGT (Maths)" },
-    { "no": 22, "name": "Ms. Divya Soni", "designation": "TGT (Maths)" },
-    { "no": 23, "name": "Ms. Priyanka Saxena", "designation": "TGT (Sanskrit)" },
-    { "no": 24, "name": "Ms. Kalal Nilam", "designation": "TGT (Comp. Sci.)" },
-    { "no": 25, "name": "Ms. Mamta Kanwar", "designation": "TGT (Maths)" },
-    { "no": 26, "name": "Ms. Neelam Parihar", "designation": "TGT (English)" },
-    { "no": 27, "name": "Ms. Meena Sirvi", "designation": "TGT (S.St.)" },
-    { "no": 28, "name": "Ms. Yumnum Manglem Singh", "designation": "TGT(Science)" },
-    { "no": 29, "name": "Ms. Sunder Dewasi", "designation": "TGT (Hindi), Guide-Incharge" },
-    { "no": 30, "name": "Ms. Sudiksha Soni", "designation": "TGT (IT)" },
-    { "no": 31, "name": "Ms. Kareena Shaikh", "designation": "TGT(S.ST. & English)" },
-    { "no": 32, "name": "Ms. Chhaya Rajpurohit", "designation": "TGT(English) & PGT (B.ST)" },
-    { "no": 33, "name": "Ms. Honey Agrawat", "designation": "PRT (Eng.) Primary Coordinator" },
-    { "no": 34, "name": "Ms. Jyoti Choudhary", "designation": "PRT" },
-    { "no": 35, "name": "Ms. Yumnum Reena Devi", "designation": "PRT" },
-    { "no": 36, "name": "Ms. Monika", "designation": "PRT" },
-    { "no": 37, "name": "Ms. Hemlata Suthar", "designation": "PRT" },
-    { "no": 38, "name": "Ms. Suman Gurjar", "designation": "PET" },
-    { "no": 39, "name": "Ms. Gracy Soni", "designation": "PRT" },
-    { "no": 40, "name": "Ms. Bharti Mali", "designation": "PRT" },
-    { "no": 41, "name": "Ms. Pista Kumari", "designation": "PRT" },
-    { "no": 42, "name": "Ms. Mary Grace", "designation": "PRT" },
-    { "no": 43, "name": "Ms. Monika Kumari", "designation": "PRT" },
-    { "no": 44, "name": "Ms. Leena Sharma", "designation": "PRT" },
-    { "no": 45, "name": "Ms. Leela Choudhary", "designation": "PET" },
-    { "no": 46, "name": "Ms. Gopal Kanwar", "designation": "PRT" },
-    { "no": 47, "name": "Ms. Chtrakshi Kalet", "designation": "PRT" },
-    { "no": 48, "name": "Mr. Md. Asfak", "designation": "Office Supdt." },
-    { "no": 49, "name": "Ms. Jaya Gehlot", "designation": "Librarian" },
-    { "no": 50, "name": "Ms. Bhawana Solanki", "designation": "PRT+Lab Asst." },
-    { "no": 51, "name": "Ms. Gayatri Mali", "designation": "Front Desk Executive" },
-    { "no": 52, "name": "Mr. Ramesh Choudhary", "designation": "Peon" },
-    { "no": 53, "name": "Mr. Suresh Puri", "designation": "Peon" },
-    { "no": 54, "name": "Mr. Heeral Lal Prajapat", "designation": "Peon" },
-    { "no": 55, "name": "Mrs. Rukmini", "designation": "Peon" },
-    { "no": 56, "name": "Mrs. Champa", "designation": "Peon" },
-    { "no": 57, "name": "Ms. Anju Kanwar", "designation": "Peon" },
-    { "no": 58, "name": "Ms. Nenu Vaishnav", "designation": "Peon" },
-    { "no": 59, "name": "Mr. Ramesh Prajapat", "designation": "Peon" },
-    { "no": 60, "name": "Mrs. Basanti Devi", "designation": "Sweeper" },
-    { "no": 61, "name": "Mrs. Krishna", "designation": "Sweeper" },
-    { "no": 62, "name": "Ms. Mamta Goswami", "designation": "Peon" }
+    { no: 1, name: "Ms. Jyoti Nath", designation: "Principal", image: "/images/english school/principle.jpg" },
+    { no: 2, name: "Ms. Kusum Vaishnav", designation: "PGT (History)" },
+    { no: 3, name: "Dr. Nidhi Upadhyay", designation: "PGT (Painting)" },
+    { no: 4, name: "Ms. Bhagwanti", designation: "PGT (Maths)" },
+    { no: 5, name: "Mr. Ghanshyam Singh", designation: "PGT (English)" },
+    { no: 6, name: "Ms. Mamta Rajpurohit", designation: "PGT (B.St.)" },
+    { no: 7, name: "Mr. Mahendra Kumar", designation: "PGT (Physics)" },
+    { no: 8, name: "Ms. Deepshikha Khangarot", designation: "PGT (Biology)" },
+    { no: 9, name: "Ms. Priya Sharma", designation: "PGT (Hindi)" },
+    { no: 10, name: "Mr. Ronak Singh", designation: "PGT (Accountancy)" },
+    { no: 11, name: "Ms. Priyanka Lakhawat", designation: "PGT (Pol. Sci.)" },
+    { no: 12, name: "Ms. Dimpal", designation: "PGT (Chemistry)" },
+    { no: 13, name: "Dr. Purnima Bhati", designation: "PGT (English)" },
+    { no: 14, name: "Mr. Rahul Joshi", designation: "PGT (Geography)" },
+    { no: 15, name: "Ms. Neha Srivastva", designation: "PGT (English)" },
+    { no: 16, name: "Ms. Roshni Bano", designation: "PGT (Music)" },
+    { no: 17, name: "Mr. Pradeep Singh", designation: "PGT (Comp. Sci.)" },
+    { no: 18, name: "Ms. Deepa Tolani", designation: "TGT (S.St.)" },
+    { no: 19, name: "Ms. Rajkumari Choudhary", designation: "TGT (Science)" },
+    { no: 20, name: "Ms. Varsha Palrecha", designation: "TGT (Hindi)" },
+    { no: 21, name: "Ms. Krishana Kanta Pareek", designation: "TGT (Sanskrit)" },
+    { no: 22, name: "Mr. Kantilal Prajapat", designation: "TGT (Maths)" },
+    { no: 23, name: "Ms. Veena Kumari", designation: "TGT (English)" },
+    { no: 24, name: "Ms. Divya Soni", designation: "TGT (Maths)" },
+    { no: 25, name: "Ms. Manglem Singh", designation: "TGT (Science)" },
+    { no: 26, name: "Ms. Priyanka Saxena", designation: "TGT (Sanskrit)" },
+    { no: 27, name: "Ms. Bhawna", designation: "TGT (Hindi)" },
+    { no: 28, name: "Ms. Mamta Kanwar", designation: "TGT (Maths)" },
+    { no: 29, name: "Ms. Kalal Nilam", designation: "TGT (Comp. Sci.)" },
+    { no: 30, name: "Ms. Neelam Parihar", designation: "TGT (English)" },
+    { no: 31, name: "Ms. Kalpna Vaishnav", designation: "TGT" },
+    { no: 32, name: "Ms. Meena Sirvi", designation: "TGT (S.St.)" },
+    { no: 33, name: "Ms. Rashmi Tripathi", designation: "PET" },
+    { no: 34, name: "Ms. Suman", designation: "PET" },
+    { no: 35, name: "Ms. Megha Arora", designation: "PRT Co-ordinator" },
+    { no: 36, name: "Ms. Sunder Dewasi", designation: "PRT (Hindi)" },
+    { no: 37, name: "Ms. Rathod Gopal Kunwar", designation: "PRT (M.T.)" },
+    { no: 38, name: "Ms. Anjali Rathore", designation: "PRT (EVS)" },
+    { no: 39, name: "Ms. Yumnum Reena Devi", designation: "PRT (English)" },
+    { no: 40, name: "Ms. Monika", designation: "PRT" },
+    { no: 41, name: "Ms. Jyoti Choudhary", designation: "PRT" },
+    { no: 42, name: "Ms. Hemlata Suthar", designation: "PRT" },
+    { no: 43, name: "Ms. Gracy Soni", designation: "PRT" },
+    { no: 44, name: "Ms. Chitrakshi Kalet", designation: "PRT" },
+    { no: 45, name: "Ms. Bharti Mali", designation: "PRT" },
+    { no: 46, name: "Mr. Md Asfak", designation: "Office Superintendent" },
+    { no: 47, name: "Mr. Niranjan Gehlot", designation: "Accountant" },
+    { no: 48, name: "Ms. Jaya Gehlot", designation: "Librarian" },
+    { no: 49, name: "Ms. Soniya Arya", designation: "Sci. Lab Asst." },
+    { no: 50, name: "Ms. Chanchal Suthar", designation: "Comp. Lab Asst." },
+];
+
+const toppers12 = [
+    { name: "Ms. Ankur Kanwar", stream: "Science", percentage: "97.40%", image: "/images/english school/Ankur Kunwar.jpg" },
+    { name: "Ms. Himanshi Jain", stream: "Science", percentage: "94.80%", image: "/images/english school/Himanshi Jain.jpg" },
+    { name: "Ms. Niral", stream: "Commerce", percentage: "93.60%", image: "/images/english school/Niral.jpg" },
+    { name: "Ms. Ishita Chouhan", stream: "Humanities", percentage: "92.60%", image: "" },
+    { name: "Ms. Manjari Vaishnav", stream: "Humanities", percentage: "92.40%", image: "/images/english school/Manjari vaishnav.jpg" },
+    { name: "Ms. Alfina", stream: "Humanities", percentage: "91.00%", image: "/images/english school/alfina.jpg" },
+    { name: "Ms. Laxita Rahore", stream: "Humanities", percentage: "90.00%", image: "/images/english school/Lakshita rathore.jpg" },
+    { name: "Ms. Yuti Sharma", stream: "Humanities", percentage: "89.80%", image: "/images/english school/Yuti Sharma.jpg" },
+    { name: "Ms. Sofia Khan", stream: "Humanities", percentage: "89.20%", image: "/images/english school/Sofia khan.jpg" },
+    { name: "Ms. Taruna", stream: "Humanities", percentage: "89.00%", image: "/images/english school/taruna.jpg" },
+];
+
+const toppers10 = [
+    { name: "Ms. Rajal Rajpurohit", percentage: "93.80%", image: "" },
+    { name: "Ms. Pragati Sirvi", percentage: "93.00%", image: "/images/english school/pragati sirvi.jpg" },
+    { name: "Ms. Yajeshvi", percentage: "92.40%", image: "/images/english school/Yajeshvi.jpg" },
+    { name: "Ms. Aisha Soni", percentage: "92.00%", image: "/images/english school/AAIsha soni.jpg" },
+    { name: "Ms. Anju Kanwar", percentage: "91.20%", image: "/images/english school/anju kanwar.jpg" },
+    { name: "Ms. Janvee Soni", percentage: "90.60%", image: "/images/english school/Janvee soni.jpg" },
+    { name: "Ms. Saniya Soni", percentage: "89.00%", image: "/images/english school/saniya soni.jpg" },
+    { name: "Ms. Bhavya Sharma", percentage: "87.80%", image: "/images/english school/bhavya sharma.jpg" },
+    { name: "Ms. Renuka Bhati", percentage: "87.80%", image: "/images/english school/Renuka bhati.jpg" },
+    { name: "Ms. Gayatri Rathore", percentage: "87.00%", image: "/images/english school/Gayatri Rathore.jpg" },
+    { name: "Ms. Rudrakshi", percentage: "86.60%", image: "/images/english school/Rudrakshi.jpg" },
+    { name: "Ms. Tanishi Choudhary", percentage: "85.40%", image: "/images/english school/Tanisi choudary.jpg" },
+    { name: "Ms. Mumal Kanwar", percentage: "85.00%", image: "/images/english school/Mumal kanwar.jpg" },
+    { name: "Ms. Sakshi Deora", percentage: "85.00%", image: "/images/english school/sakshi deora.jpg" },
+];
+
+const nonBoardToppers = [
+    { name: "Ms. Shivgami Chouhan", class: "I", image: "" },
+    { name: "Ms. Priyadarshni", class: "II", image: "" },
+    { name: "Ms. Kinjal Dewasi", class: "III", image: "" },
+    { name: "Ms. Poorvi Pareek", class: "IV", image: "" },
+    { name: "Ms. Chetnya Rathore", class: "V", image: "" },
+    { name: "Ms. Abhigya", class: "VI", image: "" },
+    { name: "Ms. Dimpy Malviya", class: "VII", image: "" },
+    { name: "Ms. Tamanna", class: "VIII", image: "" },
+    { name: "Ms. Preksha", class: "IX", image: "" },
+    { name: "Ms. Tanisha Jain", class: "XI Sci", image: "/images/english school/Tanisha jain.jpg" },
+    { name: "Ms. Mehak Jain", class: "XI Com", image: "" },
+    { name: "Ms. Jaishree", class: "XI Hum", image: "" },
 ];
 
 export default function LPSContent() {
-    const [selectedStudent, setSelectedStudent] = useState<any>(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [visibleStaff, setVisibleStaff] = useState(12);
-
-    const openModal = (student: any) => {
-        setSelectedStudent(student);
-        setIsModalOpen(true);
-    };
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-        setTimeout(() => setSelectedStudent(null), 300);
-    };
-
     return (
-        <main className="min-h-screen bg-white font-devanagari">
-            <StudentModal isOpen={isModalOpen} onClose={closeModal} student={selectedStudent} />
-            <Navbar />
-
+        <div className="bg-white">
             {/* Hero Section */}
             <section className="relative pt-40 pb-20 px-6 bg-oxford/90 text-white overflow-hidden">
                 <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-sandstone/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
@@ -108,442 +121,357 @@ export default function LPSContent() {
                         animate={{ opacity: 1, y: 0 }}
                         className="flex flex-col md:flex-row gap-8 items-center mb-10"
                     >
-                        <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-sandstone overflow-hidden bg-white shrink-0">
-                            <img src="/lps.jpg" alt="Leeladevi School Logo" className="w-full h-full object-cover" />
+                        <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-sandstone overflow-hidden bg-white shrink-0 shadow-xl">
+                            {/* Placeholder for School Logo if specific one exists, else using existing or generic */}
+                            <School size={80} className="text-oxford m-auto h-full" />
                         </div>
                         <div>
                             <span className="text-sandstone font-bold uppercase tracking-widest text-sm mb-4 block">Affiliated to CBSE, New Delhi</span>
-                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 leading-tight">
-                                Leeladevi Parasmal Sancheti English Medium School
+                            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 leading-tight">
+                                Leeladevi Parasmal Sancheti English Medium Sr.Sec.School
                             </h1>
-                            <p className="text-xl md:text-2xl text-white/90 font-light max-w-3xl">
-                                Nurturing Minds, Shaping Futures through Academic Excellence & Values
-                            </p>
+                            <div className="flex flex-wrap gap-4 items-center text-white/80">
+                                <div className="px-4 py-1.5 bg-sandstone/20 rounded-full border border-sandstone/30 text-sandstone font-bold text-sm uppercase">
+                                    Vidyawadi, Pali
+                                </div>
+                                <div className="px-4 py-1.5 bg-white/10 rounded-full border border-white/20 text-white font-bold text-sm uppercase">
+                                    Residential School for Girls
+                                </div>
+                            </div>
                         </div>
                     </motion.div>
 
-                    <div className="grid md:grid-cols-3 gap-6 text-sm font-medium text-white/80">
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                        className="grid md:grid-cols-3 gap-8 text-sm font-medium text-white/80 border-t border-white/10 pt-10"
+                    >
                         <div className="flex items-start gap-3">
                             <MapPin className="text-sandstone shrink-0" size={20} />
-                            <span>Vidyawadi, Khimel, Station Rani – 306115,<br />District Pali (Rajasthan)</span>
+                            <span>Vidyawadi, Khimel, Station-Rani,<br />Distt.-Pali (Raj.) 306115</span>
                         </div>
                         <div className="flex items-start gap-3">
                             <Phone className="text-sandstone shrink-0" size={20} />
-                            <div className="flex flex-col">
-                                <a href="tel:6377203204" className="hover:text-sandstone transition-colors font-bold">6377203204</a>
-                            </div>
+                            <a href="tel:8764250887" className="hover:text-sandstone transition-colors">8764250887</a>
                         </div>
                         <div className="flex items-start gap-3">
-                            <Globe className="text-sandstone shrink-0" size={20} />
-                            <a href="https://www.vidyawadi.org" target="_blank" rel="noopener noreferrer" className="hover:text-sandstone transition-colors font-bold">www.vidyawadi.org</a>
+                            <Mail className="text-sandstone shrink-0" size={20} />
+                            <div className="flex flex-col">
+                                <a href="mailto:lpsvidhyawadi@gmail.com" className="hover:text-sandstone transition-colors">lpsvidhyawadi@gmail.com</a>
+                                <a href="http://www.lpsvidhyawadi.com" target="_blank" rel="noopener noreferrer" className="hover:text-sandstone transition-colors">www.lpsvidhyawadi.com</a>
+                            </div>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </section>
 
-            {/* About & Leadership Section */}
-            <section className="py-24 px-6 bg-white overflow-hidden">
+            {/* Principal's Message & Vision */}
+            <section className="py-24 px-6">
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
-                    <div>
-                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Leadership</span>
-                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight">Principal’s Message</h2>
-                        <div className="h-1.5 w-24 bg-sandstone mt-6 rounded-full mb-10" />
-                        <div className="prose text-gray-600 leading-relaxed space-y-4 mb-8">
-                            <p className="text-lg text-oxford/80 font-medium italic">
-                                “Welcome to LPS, Vidyawadi, where we take pride in fostering a nurturing environment that empowers every learner to grow into a confident, compassionate, and globally-minded citizen.”
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <h2 className="text-3xl md:text-4xl font-bold text-oxford mb-6">Principal’s Message</h2>
+                        <div className="bg-gray-50 p-8 rounded-3xl border border-gray-100 italic text-gray-700 leading-relaxed relative">
+                            <span className="absolute top-4 left-4 text-6xl text-sandstone/20 font-serif">"</span>
+                            <p className="mb-4">
+                                Dear Students, Parents, and Community Members,
                             </p>
-                            <p>
+                            <p className="mb-4">
+                                Welcome to LPS, Vidyawadi, where we take pride in fostering a nurturing environment that empowers every learner to grow into a confident, compassionate, and globally-minded citizen.
+                            </p>
+                            <p className="mb-4">
                                 Founded in 2004, situated in the rural belt of Pali District in Rajasthan, this Vidyalaya is a residential school providing quality education from Nursery to XII primarily for girls, with a noble thought of promoting girls’ education. Presently, the School accommodates more than 1000 girls.
+                            </p>
+                            <p className="mb-4">
+                                At our core, we embrace a vision to nurture global citizens who are equipped to thrive in an ever-changing world. Our mission is to provide a healthy learning environment where every student feels safe, valued, and inspired to pursue excellence.
                             </p>
                             <p>
                                 Together, let us work to create a future where every child shines brightly, empowered to shape their destiny and contribute meaningfully to the global community.
                             </p>
+                            <div className="mt-8 flex flex-col items-center sm:items-start gap-4">
+                                <div className="w-48 h-48 rounded-2xl overflow-hidden border-4 border-sandstone shadow-xl">
+                                    <Image
+                                        src="/images/english school/principle.jpg"
+                                        alt="Principal"
+                                        width={300}
+                                        height={300}
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
+                                <div className="font-bold text-oxford">
+                                    <p className="text-xl">Ms. Jyoti Nath</p>
+                                    <p className="text-sm text-sandstone-dark uppercase tracking-widest">Principal</p>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, x: 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        className="space-y-8"
+                    >
+                        <div>
+                            <h2 className="text-3xl md:text-4xl font-bold text-oxford mb-6">Our School</h2>
+                            <p className="text-gray-600 leading-relaxed mb-6">
+                                LPS Vidyawadi is known for its reputation and adherence to quality education, State of Art Infrastructure, and facilities like Sports, Bharat Scout & Guide, and National Cadet Corps (NCC). We offer maximum subject choices and engage students in traditional and innovative educational methods.
+                            </p>
                         </div>
 
-                        <div className="flex items-center gap-4">
-                            <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-sandstone shadow-lg">
-                                <img
-                                    src="/images/english school/principle.jpg"
-                                    alt="Principal Jyoti Nath"
-                                    className="w-full h-full object-cover"
-                                />
-                            </div>
-                            <div className="font-bold text-oxford">
-                                <p className="text-xl">Ms. Jyoti Nath</p>
-                                <p className="text-xs text-sandstone uppercase tracking-widest">Principal</p>
+                        <div className="grid gap-6">
+                            <div className="p-6 bg-white rounded-2xl shadow-lg border border-gray-100">
+                                <h3 className="text-xl font-bold text-oxford mb-2 flex items-center gap-2">
+                                    <Sparkles className="text-sandstone" />
+                                    Values
+                                </h3>
+                                <ul className="space-y-3 text-gray-600 text-sm">
+                                    <li className="flex gap-2"><div className="w-1.5 h-1.5 mt-2 rounded-full bg-sandstone shrink-0" /><span><strong>Discover Yourself:</strong> Explore unique talents and interests.</span></li>
+                                    <li className="flex gap-2"><div className="w-1.5 h-1.5 mt-2 rounded-full bg-sandstone shrink-0" /><span><strong>Be Your Own Light:</strong> Lead with integrity and wisdom.</span></li>
+                                    <li className="flex gap-2"><div className="w-1.5 h-1.5 mt-2 rounded-full bg-sandstone shrink-0" /><span><strong>Make Your Own Path:</strong> Inspire independent thinking and courage.</span></li>
+                                </ul>
                             </div>
                         </div>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* Academics */}
+            <section className="py-24 px-6 bg-gray-50">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <span className="text-sandstone font-bold uppercase tracking-widest text-sm block mb-2">Academic Excellence</span>
+                        <h2 className="text-3xl md:text-5xl font-black text-oxford">Curriculum & Structure</h2>
                     </div>
 
-                    <div className="relative">
-                        <div className="bg-oxford/5 rounded-[2.5rem] p-10 border border-oxford/10 shadow-xl">
-                            <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-xs block mb-4 text-center">Our Ethos</span>
-                            <h3 className="text-3xl font-bold text-oxford mb-6 flex justify-center items-center gap-3">
-                                <Star className="text-sandstone fill-sandstone" />
-                                Our Core Values
-                            </h3>
-                            <div className="h-1 bg-sandstone w-16 mx-auto mb-10 rounded-full" />
-                            <ul className="space-y-6">
-                                {[
-                                    { title: "Discover Yourself", desc: "Explore unique talents and interests." },
-                                    { title: "Be Your Own Light", desc: "Lead with integrity and wisdom." },
-                                    { title: "Make Your Own Path", desc: "Inspire independent thinking and courage." }
-                                ].map((item, i) => (
-                                    <li key={i} className="flex items-start gap-4 text-gray-700">
-                                        <div className="bg-green-100 p-1 rounded-full shadow-sm">
-                                            <CheckCircle2 size={18} className="text-green-600 shrink-0" />
-                                        </div>
-                                        <div>
-                                            <span className="font-bold text-oxford block text-lg">{item.title}</span>
-                                            <span className="text-sm">{item.desc}</span>
-                                        </div>
-                                    </li>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                        {["Foundational (Nursery – II)", "Preparatory (III to V)", "Middle (VI to VIII)", "Secondary (IX & XII)"].map((stage, i) => (
+                            <div key={i} className="bg-white p-6 rounded-2xl shadow-sm text-center font-bold text-oxford border border-gray-100 hover:border-sandstone transition-colors">
+                                {stage}
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-gray-100">
+                        <h3 className="text-2xl font-bold text-oxford mb-6">Senior Secondary Streams (XI & XII)</h3>
+                        <div className="grid md:grid-cols-3 gap-8">
+                            <div className="space-y-4">
+                                <div className="h-2 w-12 bg-blue-500 rounded-full" />
+                                <h4 className="text-xl font-black text-oxford">Science</h4>
+                                <ul className="space-y-2 text-gray-600 text-sm">
+                                    <li>English Core</li>
+                                    <li>Physics</li>
+                                    <li>Chemistry</li>
+                                    <li>Maths / Biology</li>
+                                    <li>Economics</li>
+                                    <li>Computer Science / Multimedia / Painting / Dance / PE</li>
+                                </ul>
+                            </div>
+                            <div className="space-y-4">
+                                <div className="h-2 w-12 bg-green-500 rounded-full" />
+                                <h4 className="text-xl font-black text-oxford">Commerce</h4>
+                                <ul className="space-y-2 text-gray-600 text-sm">
+                                    <li>English Core</li>
+                                    <li>Accountancy</li>
+                                    <li>Business Studies</li>
+                                    <li>Economics</li>
+                                    <li>Maths</li>
+                                    <li>Computer Science / Multimedia / Painting / Dance / PE</li>
+                                </ul>
+                            </div>
+                            <div className="space-y-4">
+                                <div className="h-2 w-12 bg-orange-500 rounded-full" />
+                                <h4 className="text-xl font-black text-oxford">Humanities</h4>
+                                <ul className="space-y-2 text-gray-600 text-sm">
+                                    <li>English Elective / Core</li>
+                                    <li>Political Science</li>
+                                    <li>History</li>
+                                    <li>Geography / Music / Economics</li>
+                                    <li>Hindi Core / Computer Science / Multimedia</li>
+                                    <li>Painting / Dance (Kathak)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div className="mt-12 pt-8 border-t border-gray-100">
+                            <h4 className="font-bold text-oxford mb-4">Skill & Vocational Courses</h4>
+                            <div className="flex flex-wrap gap-2">
+                                {["Information Technology", "Food Nutrition & Dietetics", "AI", "Block Printing", "Rockets", "Design Thinking", "Satellites", "Financial Literacy", "Handicraft", "Marketing", "Tourism", "Digital Citizenship", "Beauty & Wellness"].map((skill, i) => (
+                                    <span key={i} className="px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full font-medium">
+                                        {skill}
+                                    </span>
                                 ))}
-                            </ul>
-                        </div>
-
-                        <div className="mt-8 bg-oxford rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl">
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-sandstone/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-                            <h4 className="text-xl font-bold mb-4 flex items-center gap-2">
-                                <School className="text-sandstone" />
-                                Premium Residential Campus
-                            </h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                                LPS Vidyawadi is known for its reputation and adherence to quality education, State of Art Infrastructure, and facilities like Sports, Bharat Scout & Guide, and National Cadet Corps (NCC). We empower girls for future success.
-                            </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Toppers Section */}
-            <section className="py-24 px-6 bg-white overflow-hidden">
+            {/* Toppers */}
+            <section className="py-24 px-6 bg-white">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
-                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Meritorious Students</span>
-                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight text-center">Board Exam Toppers</h2>
-                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
-                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto font-medium">
-                            Celebrating the academic excellence of our students in CBSE Board Examinations.
-                        </p>
-                    </div>
-                    <StudentResultsTable />
-                </div>
-            </section>
-
-            {/* Scholarships & Merit Awards */}
-            <section className="py-24 px-6 bg-gray-50 overflow-hidden">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Recognition & Rewards</span>
-                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight text-center">Scholarships & Awards</h2>
-                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
+                        <span className="text-sandstone font-bold uppercase tracking-widest text-sm block mb-2">Hall of Fame</span>
+                        <h2 className="text-3xl md:text-5xl font-black text-oxford">Result Highlights 2023-24</h2>
                     </div>
 
-                    <div className="mb-20">
-                        <div className="text-center mb-10">
-                            <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-xs block mb-4 text-center">District Level Recognition</span>
-                            <h3 className="text-3xl font-bold text-oxford flex justify-center items-center gap-3">
-                                <Medal className="text-sandstone" />
-                                Padmakshi (Merit) Award Scheme
+                    <div className="space-y-16">
+                        {/* Class XII */}
+                        <div>
+                            <h3 className="text-2xl font-bold text-oxford mb-8 text-center flex items-center justify-center gap-3">
+                                <Trophy className="text-sandstone" />
+                                Class XII Toppers
                             </h3>
-                            <div className="h-1 bg-sandstone w-16 mx-auto mt-6 rounded-full" />
-                        </div>
-                        <p className="text-gray-600 mb-12 max-w-3xl mx-auto text-center">
-                            Honoring students who secured top positions in Pali District.
-                        </p>
-
-                        <div className="grid lg:grid-cols-3 gap-8">
-                            <div className="bg-sandstone text-oxford p-10 rounded-[2.5rem] flex flex-col justify-center items-center text-center relative overflow-hidden order-2 lg:order-1 shadow-xl">
-                                <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
-                                <Star size={64} className="text-oxford mb-6" />
-                                <h4 className="text-4xl font-black mb-2">₹1,25,000</h4>
-                                <p className="text-oxford/80 font-medium">Total Cash Prizes Awarded</p>
-                            </div>
-
-                            <div className="lg:col-span-2 overflow-hidden rounded-2xl border border-oxford/10 shadow-lg bg-white order-1 lg:order-2">
-                                <table className="w-full text-left border-collapse">
-                                    <thead className="bg-oxford text-white">
-                                        <tr>
-                                            <th className="p-4 md:p-6 font-bold uppercase tracking-wider text-xs">Student Name</th>
-                                            <th className="p-4 md:p-6 font-bold uppercase tracking-wider text-xs">Class & Stream</th>
-                                            <th className="p-4 md:p-6 font-bold uppercase tracking-wider text-xs">Percentage</th>
-                                            <th className="p-4 md:p-6 font-bold uppercase tracking-wider text-xs text-right">Award Amount</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="divide-y divide-oxford/10 text-gray-700">
-                                        {[
-                                            { name: "Mahima Surana", class: "XII Arts", percent: "96.00%", amount: "₹75,000" },
-                                            { name: "Kirtika Kanwar", class: "XII Science", percent: "95.80%", amount: "₹75,000" },
-                                            { name: "Mamata Kumari", class: "XII Commerce", percent: "82.40%", amount: "₹75,000" }
-                                        ].map((student, i) => (
-                                            <tr key={i} className="hover:bg-oxford/5 transition-colors">
-                                                <td className="p-4 md:p-6 font-bold text-oxford">{student.name}</td>
-                                                <td className="p-4 md:p-6">{student.class}</td>
-                                                <td className="p-4 md:p-6 font-bold">{student.percent}</td>
-                                                <td className="p-4 md:p-6 text-right font-black text-green-600">{student.amount}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                                {toppers12.map((student, i) => (
+                                    <div key={i} className="bg-gray-50 p-6 rounded-2xl text-center border border-transparent hover:border-sandstone/30 hover:shadow-lg transition-all group">
+                                        <div className="w-16 h-16 rounded-full bg-sandstone/10 mx-auto mb-4 flex items-center justify-center text-sandstone font-black text-xl group-hover:bg-sandstone group-hover:text-white transition-colors overflow-hidden">
+                                            {student.image ? (
+                                                <Image
+                                                    src={student.image}
+                                                    alt={student.name}
+                                                    width={100}
+                                                    height={100}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            ) : (
+                                                student.percentage.split('.')[0]
+                                            )}
+                                        </div>
+                                        <h4 className="font-bold text-oxford mb-1">{student.name}</h4>
+                                        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">{student.stream}</p>
+                                        <p className="text-lg font-black text-sandstone mt-2">{student.percentage}</p>
+                                    </div>
+                                ))}
                             </div>
                         </div>
-                    </div>
 
-                    {/* GARGI AWARD */}
-                    <div className="mt-20 bg-oxford text-white rounded-[3rem] p-10 md:p-16 relative overflow-hidden shadow-2xl">
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-sandstone/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
-                        <div className="relative z-10 text-center">
-                            <h3 className="text-3xl md:text-5xl font-bold mb-6 flex items-center justify-center gap-4">
-                                <Trophy className="text-sandstone" size={48} />
-                                GARGI Award Recipients
+                        {/* Class X */}
+                        <div>
+                            <h3 className="text-2xl font-bold text-oxford mb-8 text-center flex items-center justify-center gap-3">
+                                <Star className="text-sandstone" />
+                                Class X Toppers
                             </h3>
-                            <div className="h-1.5 w-24 bg-sandstone mx-auto mb-10 rounded-full" />
-                            <p className="text-xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
-                                We celebrate our brilliant girls honored under the <span className="font-bold text-sandstone">GARGI AWARD</span> Scheme for securing 75% or more in Board Exams.
-                            </p>
-                            <div className="flex flex-col md:flex-row justify-center gap-6">
-                                <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
-                                    <p className="text-3xl font-black">₹6,000</p>
-                                    <p className="text-xs uppercase tracking-widest mt-1">Class X Award</p>
-                                </div>
-                                <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
-                                    <p className="text-3xl font-black">₹5,000</p>
-                                    <p className="text-xs uppercase tracking-widest mt-1">Class XII Award</p>
-                                </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                                {toppers10.map((student, i) => (
+                                    <div key={i} className="bg-gray-50 p-6 rounded-2xl text-center border border-transparent hover:border-sandstone/30 hover:shadow-lg transition-all">
+                                        {student.image && (
+                                            <div className="w-20 h-20 rounded-full bg-sandstone/10 mx-auto mb-4 overflow-hidden border-2 border-transparent hover:border-sandstone transition-all">
+                                                <Image
+                                                    src={student.image}
+                                                    alt={student.name}
+                                                    width={100}
+                                                    height={100}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </div>
+                                        )}
+                                        <h4 className="font-bold text-oxford mb-1">{student.name}</h4>
+                                        <p className="text-lg font-black text-sandstone mt-2">{student.percentage}</p>
+                                    </div>
+                                ))}
                             </div>
                         </div>
-                    </div>
 
-                    {/* Perfect Score Achievers */}
-                    <div className="mt-24">
-                        <div className="text-center mb-10">
-                            <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Subject Brilliance</span>
-                            <h3 className="text-4xl font-bold text-oxford mt-2">Perfect Score Achievers</h3>
-                            <p className="text-gray-600 mt-2">100/100 Marks in CBSE Board Exams</p>
-                        </div>
-                        <div className="overflow-x-auto rounded-3xl border border-oxford/10 shadow-lg bg-white">
-                            <table className="w-full text-left border-collapse min-w-[600px]">
-                                <thead className="bg-oxford text-white">
-                                    <tr>
-                                        <th className="p-6 font-bold uppercase tracking-wider text-sm">Student Name</th>
-                                        <th className="p-6 font-bold uppercase tracking-wider text-sm">Class & Stream</th>
-                                        <th className="p-6 font-bold uppercase tracking-wider text-sm">Subject</th>
-                                        <th className="p-6 font-bold uppercase tracking-wider text-sm text-right">Marks</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="divide-y divide-oxford/10 text-gray-700 font-medium">
-                                    {[
-                                        { name: "Mahima Surana", class: "XII Arts", subject: "Hindi Literature", marks: "100/100" },
-                                        { name: "Vartika", class: "XII Arts", subject: "Hindi Literature", marks: "100/100" },
-                                        { name: "Manisha", class: "XII Science", subject: "Chemistry", marks: "100/100" },
-                                        { name: "Ritika Sherawat", class: "XII Science", subject: "Biology", marks: "100/100" }
-                                    ].map((student, i) => (
-                                        <tr key={i} className="hover:bg-oxford/5 transition-colors">
-                                            <td className="p-6 font-bold text-oxford">{student.name}</td>
-                                            <td className="p-6">{student.class}</td>
-                                            <td className="p-6">{student.subject}</td>
-                                            <td className="p-6 text-right font-black text-green-600">{student.marks}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                        {/* Non-Board */}
+                        <div>
+                            <h3 className="text-xl font-bold text-oxford mb-8 text-center">Class Toppers (Non-Board)</h3>
+                            <div className="flex flex-wrap justify-center gap-4">
+                                {nonBoardToppers.map((student, i) => (
+                                    <div key={i} className="px-6 py-3 bg-gray-50 rounded-full border border-gray-100 flex items-center gap-3 text-sm pr-2">
+                                        {student.image && (
+                                            <div className="w-8 h-8 rounded-full overflow-hidden border border-sandstone/20">
+                                                <Image
+                                                    src={student.image}
+                                                    alt={student.name}
+                                                    width={50}
+                                                    height={50}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </div>
+                                        )}
+                                        <span className="font-bold text-oxford">{student.name}</span>
+                                        <span className="px-2 py-0.5 bg-sandstone/20 text-sandstone text-xs font-black rounded mr-2">{student.class}</span>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Beyond Academics Section */}
+            {/* Facilities & Activities */}
             <section className="py-24 px-6 bg-oxford text-white">
                 <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <span className="text-sandstone font-bold uppercase tracking-widest text-sm block mb-4">Holistic Development</span>
-                        <h2 className="text-4xl md:text-5xl font-bold">Beyond Academics</h2>
-                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full" />
-                    </div>
-
-                    {/* National Achievement Highlight */}
-                    <div className="mb-20 bg-white/5 rounded-3xl p-8 border border-white/10 shadow-2xl">
-                        <div className="flex flex-col md:flex-row gap-10 items-center">
-                            <div className="md:w-1/3 text-center">
-                                <div className="w-48 h-48 mx-auto rounded-full bg-sandstone/20 overflow-hidden mb-6 border-4 border-sandstone/30 flex items-center justify-center">
-                                    <User size={80} className="text-sandstone/50" />
-                                </div>
-                                <h3 className="text-2xl font-bold text-white mb-1">Lakshya Singh</h3>
-                                <p className="text-sandstone font-bold mb-2">Class X</p>
-                                <div className="inline-block px-4 py-2 bg-white/10 rounded-lg text-xs font-bold uppercase tracking-widest text-white border border-white/10">
-                                    Selected for SGFI
-                                </div>
-                            </div>
-                            <div className="md:w-2/3">
-                                <h3 className="text-3xl font-bold mb-6 flex items-center gap-3">
-                                    <Medal className="text-sandstone" />
-                                    National KVS Yoga Excellence
+                    <div className="grid md:grid-cols-2 gap-12">
+                        <div className="space-y-8">
+                            <div>
+                                <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                                    <Microscope className="text-sandstone" />
+                                    Laboratories & Library
                                 </h3>
-                                <p className="text-white/80 text-lg leading-relaxed font-light">
-                                    Proudly representing our school at the national level, Lakshya Singh secured the <span className="text-sandstone font-bold">1st Position</span> in Yoga and has been selected for the prestigious SGFI national meet.
+                                <p className="text-white/70 leading-relaxed">
+                                    Our laboratories (Maths, Biology, Physics, Chemistry, Painting, Music, Computer) are integral to our curriculum, enabling deep conceptual understanding. Our library is well-equipped with newspapers, magazines, and encyclopedias to foster reading habits.
+                                </p>
+                            </div>
+                            <div>
+                                <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                                    <Medal className="text-sandstone" />
+                                    Co-Scholastic & Clubs
+                                </h3>
+                                <p className="text-white/70 leading-relaxed">
+                                    Maximum subject choices and activities like Kids, Literary, Drama, Oratory, Eco, IT, and more. House system (Rani Lakshmi Bai, Padmavati, Sarojini Naidu, Vijaya Lakshmi) fosters teamwork and competition.
+                                </p>
+                            </div>
+                            <div>
+                                <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                                    <ShieldStar className="text-sandstone" />
+                                    NCC & Scouts
+                                </h3>
+                                <p className="text-white/70 leading-relaxed">
+                                    <strong>NCC:</strong> Introduced in 2014, now with 50 cadets preparing for the Indian Armed Forces.<br />
+                                    <strong>Bharat Scout & Guide:</strong> Active since 2016-17, currently training 51 students.
                                 </p>
                             </div>
                         </div>
-                    </div>
 
-                    <div className="grid lg:grid-cols-2 gap-12">
-                        {/* Sports Achievements Tables */}
-                        <div>
-                            <h3 className="text-2xl font-bold mb-8 flex items-center gap-3">
-                                <Trophy className="text-sandstone" />
-                                District & State Level Talents
-                            </h3>
-
-                            <div className="space-y-10">
-                                {/* State Level */}
-                                <div>
-                                    <h4 className="text-sandstone font-bold uppercase tracking-wider text-xs mb-4 flex items-center gap-2">
-                                        <Globe size={16} /> State Level Selections
-                                    </h4>
-                                    <div className="overflow-hidden rounded-xl border border-white/10 bg-white/5">
-                                        <table className="w-full text-left text-sm text-white/90">
-                                            <thead className="bg-white/10 font-bold">
-                                                <tr>
-                                                    <th className="p-4">Student Name</th>
-                                                    <th className="p-4">Sport</th>
-                                                    <th className="p-4 text-right">Result</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody className="divide-y divide-white/5">
-                                                {[
-                                                    { name: "Dhruvi (VI)", sport: "Skating", result: "State Selected" },
-                                                    { name: "Poonam (X)", sport: "Hammer Throw", result: "State Selected" },
-                                                    { name: "Bhawna (XI)", sport: "Shotput", result: "State Selected" },
-                                                    { name: "Leela (IX)", sport: "Shotput", result: "State Selected" }
-                                                ].map((row, i) => (
-                                                    <tr key={i} className="hover:bg-white/5 transition-colors">
-                                                        <td className="p-4 font-bold">{row.name}</td>
-                                                        <td className="p-4">{row.sport}</td>
-                                                        <td className="p-4 text-right text-sandstone font-bold italic">{row.result}</td>
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-
-                                {/* District Level */}
-                                <div>
-                                    <h4 className="text-sandstone font-bold uppercase tracking-wider text-xs mb-4 flex items-center gap-2">
-                                        <MapPin size={16} /> District Level Achievements
-                                    </h4>
-                                    <div className="overflow-hidden rounded-xl border border-white/10 bg-white/5">
-                                        <table className="w-full text-left text-sm text-white/90">
-                                            <thead className="bg-white/10 font-bold">
-                                                <tr>
-                                                    <th className="p-4">Team / Name</th>
-                                                    <th className="p-4">Sport</th>
-                                                    <th className="p-4 text-right">Position</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody className="divide-y divide-white/5">
-                                                {[
-                                                    { name: "U-19 Girls Team", sport: "Badminton", pos: "Second (State Selected: 1)" },
-                                                    { name: "U-17 Team (Pratibha, Kritika, KirtiRaj)", sport: "Rifle Shooting", pos: "Winners (State Selected)" },
-                                                    { name: "U-19 Team (Hrishija, Himakshi)", sport: "Rifle Shooting", pos: "Winners (State Selected)" },
-                                                    { name: "U-14 Girls Team", sport: "Athletics", pos: "Overall Champs (Leela, Rushkarshi, Hetal, Kanishka selected)" },
-                                                    { name: "Dhruvi (VI)", sport: "Skating", pos: "3rd Position (State Selected)" },
-                                                    { name: "Manisha & Chetna", sport: "Athletics", pos: "1st & 2nd Position" }
-                                                ].map((row, i) => (
-                                                    <tr key={i} className="hover:bg-white/5 transition-colors">
-                                                        <td className="p-4 font-bold">{row.name}</td>
-                                                        <td className="p-4">{row.sport}</td>
-                                                        <td className="p-4 text-right text-sandstone font-bold italic">{row.pos}</td>
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Additional Stats Section */}
-                        <div className="flex flex-col gap-8">
-                            <h3 className="text-2xl font-bold mb-2 flex items-center gap-3">
-                                <Sparkles className="text-sandstone" />
-                                Special Recognitions
-                            </h3>
-                            <div className="bg-white/5 p-10 rounded-[2.5rem] border border-white/10 shadow-xl relative overflow-hidden">
-                                <div className="absolute top-0 right-0 w-32 h-32 bg-sandstone/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-                                <h4 className="text-4xl font-black mb-4">23 Girls</h4>
-                                <p className="text-white/80 text-lg mb-8">Selected for various State Level Tournaments in 2024-25.</p>
-                                <ul className="space-y-4 text-sm font-medium">
-                                    <li className="flex items-center gap-3">
-                                        <div className="w-2 h-2 rounded-full bg-sandstone" />
-                                        <span>Softball State Selection (Shrutika, IX)</span>
-                                    </li>
-                                    <li className="flex items-center gap-3">
-                                        <div className="w-2 h-2 rounded-full bg-sandstone" />
-                                        <span>8 Girls selected for State Wrestling</span>
-                                    </li>
-                                    <li className="flex items-center gap-3">
-                                        <div className="w-2 h-2 rounded-full bg-sandstone" />
-                                        <span>State Athletics Champions in 100m hurdles & Discus</span>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="bg-sandstone text-oxford p-6 rounded-2xl text-center shadow-lg">
-                                    <School size={24} className="mx-auto mb-2 opacity-60" />
-                                    <p className="text-xs font-bold uppercase tracking-widest mb-1">Affiliation</p>
-                                    <p className="text-lg font-black">CBSE</p>
-                                </div>
-                                <div className="bg-white/10 p-6 rounded-2xl text-center border border-white/10">
-                                    <ShieldCheck size={24} className="mx-auto mb-2 text-sandstone" />
-                                    <p className="text-xs font-bold uppercase tracking-widest mb-1">Campus</p>
-                                    <p className="text-lg font-black">Co-Ed</p>
-                                </div>
+                        <div className="bg-white/5 rounded-[2.5rem] p-8 border border-white/10">
+                            <h3 className="text-2xl font-bold text-white mb-6">Sports Achievements 2024-25</h3>
+                            <div className="space-y-6 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+                                <AchievementItem title="District Badminton (U-19)" desc="Girls secured 2nd position. One selected for state-level." />
+                                <AchievementItem title="District Rifle Shooting (U-17)" desc="Team secured 2nd position. Pratibha (1st), Kritika (2nd), KirtiRaj (3rd). All selected for state." />
+                                <AchievementItem title="Rifle Shooting (U-19)" desc="Team secured 1st position. Hrishija & Himakshi Khechi selected for state." />
+                                <AchievementItem title="District Skating" desc="Dhruvi (Class 6th) secured 3rd position & selected for state." />
+                                <AchievementItem title="Athletics (U-19)" desc="Manisha (1st in Long Jump), Chetna (2nd in Shot Put)." />
+                                <AchievementItem title="Athletics (U-17)" desc="Poonam, Bhawna, Mamta, Bhavya secured top positions and selected for state." />
+                                <AchievementItem title="Athletics (U-14)" desc="Overall Championship. Multiple students (Leela, Rushkarshi, Hetal, Kanishka) selected for state." />
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Infrastructure Section */}
-            <section className="py-24 px-6 bg-white overflow-hidden">
+            {/* Staff List */}
+            <section className="py-24 px-6 bg-gray-50">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
-                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Facilities</span>
-                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight text-center">Modern Infrastructure</h2>
-                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
-                        <p className="text-gray-600 max-w-2xl mx-auto text-lg italic">
-                            “Equipped with state-of-the-art laboratories and technological resources”
-                        </p>
+                        <h2 className="text-3xl md:text-5xl font-black text-oxford">LPS School Navigators</h2>
+                        <p className="text-gray-500 mt-2">Meet our dedicated faculty and staff</p>
                     </div>
 
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {[
-                            { name: "Physics Laboratory", img: "/psy.png" },
-                            { name: "Chemistry Laboratory", img: "/chemistry.jpg" },
-                            { name: "Biology Laboratory", img: "/bio.jpg" },
-                            { name: "Mathematics Lab", img: "/math.png" },
-                            { name: "Music & Painting Studio", img: "/images/english school/93b4f897-0aca-4189-a717-16c13f8372d5.jpg" },
-                            { name: "Geography Laboratory", img: "/images/uploads/vidywadi_main/_29012022131850936.jpg" },
-                            { name: "NCC & Guide", img: "/llll-AAA.jpeg" },
-                            { name: "Library", img: "/images/english school/706b5bd7-1cbd-40f0-a48f-2ec78225ac48.jpg" },
-                            { name: "Computer Center", img: "/images/english school/344537e3-f907-4894-b74e-6c120656cc03.jpg" },
-                            { name: "Multimedia Room", img: "/images/uploads/vidywadi_main/_29012022131942147.jpg" },
-                            { name: "Safe & Secure Campus", img: "https://journalistsresource.org/wp-content/uploads/2014/02/surveillance-camera-860x466.jpg" }
-                        ].map((facility, i) => (
-                            <div key={i} className="group overflow-hidden rounded-[2.5rem] bg-white shadow-xl hover:shadow-2xl transition-all border border-oxford/5">
-                                <div className="h-64 overflow-hidden relative">
-                                    <div className="absolute inset-0 bg-oxford/20 group-hover:bg-transparent transition-colors z-10" />
-                                    <img
-                                        src={facility.img}
-                                        alt={facility.name}
-                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                                    />
-                                    <div className="absolute bottom-0 inset-x-0 p-6 z-20 bg-gradient-to-t from-oxford/90 to-transparent">
-                                        <h3 className="font-bold text-white text-lg">{facility.name}</h3>
-                                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        {staffList.map((staff) => (
+                            <div key={staff.no} className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center gap-3 hover:border-sandstone transition-colors">
+                                <div className="w-10 h-10 rounded-full bg-oxford/5 flex items-center justify-center text-oxford font-bold text-sm shrink-0">
+                                    {staff.no}
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-oxford text-sm">{staff.name}</h4>
+                                    <p className="text-xs text-gray-500">{staff.designation}</p>
                                 </div>
                             </div>
                         ))}
@@ -551,179 +479,75 @@ export default function LPSContent() {
                 </div>
             </section>
 
-            {/* What We Do Section */}
-            <section className="py-24 px-6 bg-gray-50 overflow-hidden">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Activities</span>
-                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight text-center">What We Do</h2>
-                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
-                    </div>
-
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {[
-                            "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773142123/WhatsApp_Video_2026-03-10_at_12.21.30_r1zahz.mp4",
-                            "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773126080/WhatsApp_Video_2026-03-10_at_12.13.55_1_nmxdbj.mp4",
-                            "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773126079/WhatsApp_Video_2026-03-10_at_12.13.55_hbh5uh.mp4",
-                            "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773126078/WhatsApp_Video_2026-03-10_at_12.13.54_zzosza.mp4",
-                            "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773126078/WhatsApp_Video_2026-03-10_at_12.13.46_tlxxqk.mp4",
-                            "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773126078/WhatsApp_Video_2026-03-10_at_12.13.55_2_zjupvk.mp4"
-                        ].map((url, i) => (
-                            <div key={i} className="overflow-hidden rounded-[2rem] bg-black aspect-video shadow-2xl">
-                                <video
-                                    autoPlay
-                                    muted
-                                    loop
-                                    playsInline
-                                    className="h-full w-full object-cover opacity-80"
-                                >
-                                    <source src={url} type="video/mp4" />
-                                </video>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Faculty Section */}
-            <section className="py-24 px-6 bg-gray-50 overflow-hidden">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Our Faculty</span>
-                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight">School Navigators</h2>
-                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
-                        <p className="text-gray-600 max-w-2xl mx-auto">Our highly qualified faculty members are dedicated to building a brighter future for our students.</p>
-                    </div>
-
-                    <div className="overflow-x-auto bg-white rounded-[2rem] shadow-xl border border-oxford-100">
-                        <table className="w-full text-left border-collapse min-w-[600px]">
-                            <thead>
-                                <tr className="bg-oxford/5 border-b border-gray-100">
-                                    <th className="py-5 px-8 font-black text-oxford text-sm uppercase tracking-wider w-24">S.No.</th>
-                                    <th className="py-5 px-8 font-black text-oxford text-sm uppercase tracking-wider">Designation</th>
-                                    <th className="py-5 px-8 font-black text-oxford text-sm uppercase tracking-wider">Faculty Member</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {staffList.slice(0, visibleStaff).map((staff, i) => (
-                                    <tr key={staff.no} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors group">
-                                        <td className="py-5 px-8 text-gray-400 font-bold">{i + 1}</td>
-                                        <td className="py-5 px-8 text-gray-600 font-medium">
-                                            {staff.designation}
-                                        </td>
-                                        <td className="py-5 px-8">
-                                            <div className="flex items-center gap-5">
-                                                <div className="w-12 h-12 rounded-full overflow-hidden bg-white shrink-0 border border-gray-200 group-hover:border-sandstone transition-colors shadow-sm flex items-center justify-center">
-                                                    <User className="text-oxford/20" size={24} />
-                                                </div>
-                                                <span className="font-bold text-oxford text-lg group-hover:text-sandstone transition-colors">{staff.name}</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-
-                    {visibleStaff < staffList.length && (
-                        <div className="mt-12 text-center">
-                            <button
-                                onClick={() => setVisibleStaff(prev => prev + 12)}
-                                className="inline-flex items-center gap-3 px-10 py-4 bg-white text-oxford border border-gray-200 rounded-full font-black text-xs uppercase tracking-widest shadow-lg hover:border-sandstone hover:text-sandstone transition-all group"
-                            >
-                                Meet All Faculty Members
-                                <div className="w-6 h-6 rounded-full bg-oxford/5 flex items-center justify-center group-hover:bg-sandstone/10 transition-colors">
-                                    <ChevronRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
-                                </div>
-                            </button>
-                        </div>
-                    )}
-                </div>
-            </section>
-
-            {/* School Uniform & General Instructions Section */}
-            <section className="py-20 px-6 bg-white">
-                <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
-                    <div className="bg-oxford/5 rounded-3xl p-8 md:p-12 border border-oxford/10">
-                        <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3">
-                            <Star className="text-sandstone fill-sandstone" />
-                            SCHOOL UNIFORM
-                        </h3>
-                        <div className="space-y-8 text-gray-700">
-                            <div>
-                                <h4 className="font-bold text-oxford text-lg mb-4 border-b border-oxford/10 pb-2">Nursery to VIII</h4>
-                                <ul className="space-y-3 text-sm">
-                                    <li className="flex gap-3 items-start">
-                                        <CheckCircle2 size={18} className="text-green-600 mt-0.5 shrink-0" />
-                                        <span>Black & white check tunic with off-white shirt & belt.</span>
-                                    </li>
-                                    <li className="flex gap-3 items-start">
-                                        <CheckCircle2 size={18} className="text-green-600 mt-0.5 shrink-0" />
-                                        <span>Black ankle length socks with off white strips & Black shoes.</span>
-                                    </li>
-                                    <li className="flex gap-3 items-start">
-                                        <CheckCircle2 size={18} className="text-green-600 mt-0.5 shrink-0" />
-                                        <span>White band/hair pins.</span>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div>
-                                <h4 className="font-bold text-oxford text-lg mb-4 border-b border-oxford/10 pb-2">Class IX & XII</h4>
-                                <ul className="space-y-3 text-sm">
-                                    <li className="flex gap-3 items-start">
-                                        <CheckCircle2 size={18} className="text-green-600 mt-0.5 shrink-0" />
-                                        <span>Black & white check kurta, off-white salwar and off-white dupatta.</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+            {/* Rules & Regulations */}
+            <section className="py-24 px-6 bg-white">
+                <div className="max-w-4xl mx-auto">
+                    <h2 className="text-3xl font-bold text-oxford mb-8 text-center">General Instructions & Uniform</h2>
 
                     <div className="space-y-8">
-                        <h2 className="text-3xl md:text-4xl font-bold text-oxford">General Instructions</h2>
-                        <div className="grid gap-4">
-                            {[
-                                { title: "Regularity", desc: "Minimum 75% attendance is mandatory." },
-                                { title: "Mobile Phones", desc: "Strictly prohibited. Confiscated gadgets will not be returned." },
-                                { title: "Bullying", desc: "Zero tolerance policy. Immediate disciplinary action for offenders." },
-                                { title: "Hygiene", desc: "Nails trimmed, clean uniform. Makeup/jewelry not permitted." }
-                            ].map((rule, i) => (
-                                <div key={i} className="flex gap-4 items-start">
-                                    <div className="w-8 h-8 rounded-full bg-sandstone/10 flex items-center justify-center shrink-0 mt-1">
-                                        <span className="text-oxford font-bold text-xs">{i + 1}</span>
-                                    </div>
-                                    <div>
-                                        <h4 className="font-bold text-oxford">{rule.title}</h4>
-                                        <p className="text-sm text-gray-600">{rule.desc}</p>
-                                    </div>
+                        <div className="bg-gray-50 p-8 rounded-3xl">
+                            <h3 className="font-bold text-oxford mb-4">School Uniform</h3>
+                            <div className="grid md:grid-cols-2 gap-6 text-sm text-gray-700">
+                                <div>
+                                    <strong className="block text-sandstone mb-2">Nursery to VIII</strong>
+                                    <ul className="list-disc pl-4 space-y-1">
+                                        <li>Black & white check tunic with off-white shirt & belt.</li>
+                                        <li>Black ankle length socks with off white strips & Black shoes.</li>
+                                        <li>White band/hair pins.</li>
+                                    </ul>
                                 </div>
-                            ))}
+                                <div>
+                                    <strong className="block text-sandstone mb-2">Class IX & XII</strong>
+                                    <ul className="list-disc pl-4 space-y-1">
+                                        <li>Black & white check kurta, off-white salwar and off-white dupatta.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="space-y-4 text-sm text-gray-600">
+                            <p><strong>Regularity:</strong> Minimum 75% attendance is mandatory.</p>
+                            <p><strong>Mobile Phones:</strong> Strictly prohibited. Confiscated gadgets will not be returned.</p>
+                            <p><strong>Bullying:</strong> Zero tolerance policy. Immediate disciplinary action for offenders.</p>
+                            <p><strong>Hygiene:</strong> Nails trimmed, clean uniform. Makeup/jewelry not permitted.</p>
                         </div>
                     </div>
                 </div>
             </section>
-
-            {/* CTA Section */}
-            <section className="py-20 px-6 bg-sandstone relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
-                <div className="max-w-4xl mx-auto text-center relative z-10">
-                    <h2 className="text-4xl md:text-5xl font-black text-oxford mb-8 uppercase tracking-tighter">Admissions Open 2024-25</h2>
-                    <p className="text-xl text-oxford/70 font-medium mb-12 max-w-2xl mx-auto">
-                        Empower your daughter with quality education and a nurturing environment. Join the LPS family today.
-                    </p>
-                    <div className="flex flex-col sm:flex-row justify-center gap-6">
-                        <a href="tel:6377203204" className="px-10 py-5 bg-oxford text-white rounded-full font-bold uppercase tracking-widest text-xs shadow-2xl hover:bg-white hover:text-oxford transition-all flex items-center justify-center gap-3">
-                            <Phone size={18} /> Call Us: 6377203204
-                        </a>
-                        <a href="#contact" className="px-10 py-5 bg-white text-oxford rounded-full font-bold uppercase tracking-widest text-xs shadow-2xl hover:shadow-inner transition-all flex items-center justify-center gap-3">
-                            Visit Our Campus
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-            <Footer />
-        </main>
+        </div>
     );
+}
+
+function AchievementItem({ title, desc }: { title: string, desc: string }) {
+    return (
+        <div className="flex gap-4 p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-colors">
+            <div className="w-10 h-10 rounded-full bg-sandstone/20 flex items-center justify-center text-sandstone shrink-0">
+                <Trophy size={18} />
+            </div>
+            <div>
+                <h4 className="font-bold text-white text-sm">{title}</h4>
+                <p className="text-xs text-white/70 mt-1">{desc}</p>
+            </div>
+        </div>
+    );
+}
+
+function ShieldStar({ className }: { className?: string }) {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={className}
+        >
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            <path d="m12 8 2 2 2-2-2 4 2 2H8l2-2-2-4 2 2 2-2z" />
+        </svg>
+    )
 }
