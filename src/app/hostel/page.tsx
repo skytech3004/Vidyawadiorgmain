@@ -78,6 +78,10 @@ export default function Page() {
     const [activeRoomType, setActiveRoomType] = useState("non-ac");
     const [activeAccordion, setActiveAccordion] = useState<string | null>("entry");
 
+    React.useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const rules = [
         {
             id: "entry",
@@ -203,7 +207,7 @@ export default function Page() {
                                 <span className="block text-xs font-black uppercase tracking-[0.3em] text-sandstone mb-4">
                                     About The Hostel
                                 </span>
-                                <h2 className="text-4xl md:text-6xl text-oxford leading-tight">
+                                <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight">
                                     Your Second Home for <br />
                                     <span>Holistic Growth.</span>
                                 </h2>
@@ -290,7 +294,7 @@ export default function Page() {
                                 </div>
 
                                 <div className="p-8 flex flex-col flex-1">
-                                    <h3 className="text-2xl text-oxford mb-3 group-hover:text-sandstone transition-colors">
+                                    <h3 className="text-2xl text-oxford font-bold mb-3 group-hover:text-sandstone transition-colors">
                                         {item.title}
                                     </h3>
                                     <p className="text-gray-500 font-light text-sm leading-relaxed">
@@ -341,7 +345,7 @@ export default function Page() {
                                 />
                             </div>
                             <div className="space-y-8">
-                                <h3 className="text-3xl md:text-5xl text-oxford">
+                                <h3 className="text-3xl md:text-5xl font-bold text-oxford">
                                     {activeRoomType === "ac" ? "Premium AC Suites" : "Standard Air-Cooled Rooms"}
                                 </h3>
                                 <div className="grid grid-cols-2 gap-x-8 gap-y-4">
@@ -351,7 +355,7 @@ export default function Page() {
                                         { icon: <ShieldCheck size={16} />, label: "Personal Cupboard" },
                                         { icon: <ArrowRight size={16} />, label: "Mattress & Pillow" }
                                     ].map((item, i) => (
-                                        <div key={i} className="flex items-center gap-3 text-sm text-gray-500">
+                                        <div key={i} className="flex items-center font-medium  gap-3 text-sm text-gray-500">
                                             <div className="text-sandstone">{item.icon}</div>
                                             {item.label}
                                         </div>

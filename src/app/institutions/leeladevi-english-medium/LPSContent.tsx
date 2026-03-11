@@ -670,36 +670,63 @@ export default function LPSContent() {
             </section>
 
             {/* Rules & Regulations */}
-            <section className="py-24 px-6 bg-white">
-                <div className="max-w-4xl mx-auto">
-                    <h2 className="text-3xl font-bold text-oxford mb-8 text-center">General Instructions & Uniform</h2>
+            <section className="py-20 px-6 bg-white">
+                <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
+                    <div className="bg-oxford/5 rounded-3xl p-8 md:p-12 border border-oxford/10">
+                        <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3">
+                            <Star className="text-sandstone fill-sandstone" />
+                            SCHOOL UNIFORM
+                        </h3>
+                        <div className="space-y-8 text-gray-700">
+                            <div>
+                                <h4 className="font-bold text-oxford text-lg mb-4 border-b border-oxford/10 pb-2">Nursery to VIII</h4>
+                                <ul className="space-y-3 text-sm">
+                                    <li className="flex gap-3 items-start">
+                                        <CheckCircle2 size={18} className="text-green-600 mt-0.5 shrink-0" />
+                                        <span>Black & white check tunic with off-white shirt & belt.</span>
+                                    </li>
+                                    <li className="flex gap-3 items-start">
+                                        <CheckCircle2 size={18} className="text-green-600 mt-0.5 shrink-0" />
+                                        <span>Black ankle length socks with off white strips & Black shoes.</span>
+                                    </li>
+                                    <li className="flex gap-3 items-start">
+                                        <CheckCircle2 size={18} className="text-green-600 mt-0.5 shrink-0" />
+                                        <span>White band/hair pins.</span>
+                                    </li>
+                                </ul>
+                            </div>
 
-                    <div className="space-y-8">
-                        <div className="bg-gray-50 p-8 rounded-3xl">
-                            <h3 className="font-bold text-oxford mb-4">School Uniform</h3>
-                            <div className="grid md:grid-cols-2 gap-6 text-sm text-gray-700">
-                                <div>
-                                    <strong className="block text-sandstone mb-2">Nursery to VIII</strong>
-                                    <ul className="list-disc pl-4 space-y-1">
-                                        <li>Black & white check tunic with off-white shirt & belt.</li>
-                                        <li>Black ankle length socks with off white strips & Black shoes.</li>
-                                        <li>White band/hair pins.</li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <strong className="block text-sandstone mb-2">Class IX & XII</strong>
-                                    <ul className="list-disc pl-4 space-y-1">
-                                        <li>Black & white check kurta, off-white salwar and off-white dupatta.</li>
-                                    </ul>
-                                </div>
+                            <div>
+                                <h4 className="font-bold text-oxford text-lg mb-4 border-b border-oxford/10 pb-2">Class IX & XII</h4>
+                                <ul className="space-y-3 text-sm">
+                                    <li className="flex gap-3 items-start">
+                                        <CheckCircle2 size={18} className="text-green-600 mt-0.5 shrink-0" />
+                                        <span>Black & white check kurta, off-white salwar and off-white dupatta.</span>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
+                    </div>
 
-                        <div className="space-y-4 text-sm text-gray-600">
-                            <p><strong>Regularity:</strong> Minimum 75% attendance is mandatory.</p>
-                            <p><strong>Mobile Phones:</strong> Strictly prohibited. Confiscated gadgets will not be returned.</p>
-                            <p><strong>Bullying:</strong> Zero tolerance policy. Immediate disciplinary action for offenders.</p>
-                            <p><strong>Hygiene:</strong> Nails trimmed, clean uniform. Makeup/jewelry not permitted.</p>
+                    <div className="space-y-8">
+                        <h2 className="text-3xl md:text-4xl font-bold text-oxford">General Instructions</h2>
+                        <div className="grid gap-4">
+                            {[
+                                { title: "Regularity", desc: "Minimum 75% attendance is mandatory." },
+                                { title: "Mobile Phones", desc: "Strictly prohibited. Confiscated gadgets will not be returned." },
+                                { title: "Bullying", desc: "Zero tolerance policy. Immediate disciplinary action for offenders." },
+                                { title: "Hygiene", desc: "Nails trimmed, clean uniform. Makeup/jewelry not permitted." }
+                            ].map((rule, i) => (
+                                <div key={i} className="flex gap-4 items-start">
+                                    <div className="w-8 h-8 rounded-full bg-sandstone/10 flex items-center justify-center shrink-0 mt-1">
+                                        <span className="text-oxford font-bold text-xs">{i + 1}</span>
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-oxford">{rule.title}</h4>
+                                        <p className="text-sm text-gray-600">{rule.desc}</p>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>

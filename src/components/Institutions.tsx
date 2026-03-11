@@ -48,6 +48,7 @@ const institutions: Institution[] = [
         icon: <GraduationCap className="w-6 h-6" />,
         stats: "English Medium Only",
         image: "/lps.jpg",
+        href: "/institutions/leeladevi-english-medium",
         tags: ["CBSE Standards", "Boarding Available"],
         isBrochure: false
     },
@@ -58,6 +59,7 @@ const institutions: Institution[] = [
         icon: <GraduationCap className="w-6 h-6" />,
         stats: "English Medium Only",
         image: "/shushiladevi.jpg",
+        href: "/institutions/sushiladevi",
         tags: ["CBSE Standards", "Boarding Available"],
         isBrochure: false
     },
@@ -177,9 +179,7 @@ export default function Institutions() {
                     <p className="text-oxford font-medium mb-8">
                         "Empowering daughters with modern knowledge and traditional values since 1956."
                     </p>
-                    <button className="px-10 py-4 bg-oxford text-white rounded-full font-black text-sm uppercase tracking-[0.2em] shadow-xl hover:bg-sandstone hover:text-oxford transition-all">
-                        View All Programmes
-                    </button>
+
                 </div>
             </div>
         </section>

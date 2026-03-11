@@ -54,9 +54,10 @@ export default function Footer() {
                             <li className="flex gap-4 text-white/60">
                                 <MapPin className="text-sandstone shrink-0" size={20} />
                                 <span className="text-sm">
-                                    VIDYAWADI<br />
+                                    Marudhar Mahila Shikshan Sangh
+                                    Vidyawadi<br />
 
-                                    Post - Vidyawadi, Khimel, St. Rani,<br />
+                                    Post -Khimel, St. Rani,<br />
                                     Tehsil- Bali, Dist. Pali,<br />
                                     State - Rajasthan (India)<br />
                                     PIN – 306115

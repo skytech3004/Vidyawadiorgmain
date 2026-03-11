@@ -75,7 +75,7 @@ export default function ContactForm() {
                                             <strong className="text-sandstone block text-lg sm:text-2xl lg:text-3xl font-bold leading-tight break-words">Marudhar Mahila Shikshan Sangh Vidyawadi</strong>
                                         </div>
                                         <p className="text-white/80">
-                                            Post - Vidyawadi, Khimel, St. Rani,<br />
+                                            Post - Khimel, St. Rani,<br />
                                             Tehsil- Bali, Dist. Pali,<br />
                                             State - Rajasthan (India)<br />
                                             PIN – 306115
@@ -158,7 +158,7 @@ export default function ContactForm() {
                                     />
                                 </div>
                             </div>
-                            
+
                             <div className="space-y-2">
                                 <label className="text-sm font-bold text-sandstone uppercase tracking-widest pl-1">Email Address</label>
                                 <input
