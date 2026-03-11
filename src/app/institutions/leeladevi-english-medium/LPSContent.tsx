@@ -584,6 +584,56 @@ export default function LPSContent() {
                 </div>
             </section>
 
+            {/* Modern Infrastructure Section */}
+            <section className="py-24 px-6 bg-white overflow-hidden">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Facilities</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight text-center">Modern Infrastructure</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
+                        <p className="text-gray-600 max-w-2xl mx-auto text-lg italic">
+                            “Equipped with state-of-the-art laboratories and technological resources”
+                        </p>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {[
+                            { name: "Physics Laboratory" },
+                            { name: "Chemistry Laboratory", img: "/chemistry.jpg" },
+                            { name: "Biology Laboratory", img: "/bio.jpg" },
+                            { name: "Mathematics Lab" },
+                            { name: "Music & Painting Studio", img: "/images/english school/93b4f897-0aca-4189-a717-16c13f8372d5.jpg" },
+                            { name: "Geography Laboratory" },
+                            { name: "NCC & Guide", img: "/llll-AAA.jpeg" },
+                            { name: "Library", img: "/images/english school/706b5bd7-1cbd-40f0-a48f-2ec78225ac48.jpg" },
+                            { name: "Computer Center", img: "/images/english school/344537e3-f907-4894-b74e-6c120656cc03.jpg" },
+                            { name: "Multimedia Room", img: "/images/english school/a40160d0-ce25-4bad-818d-e2e729dc47f4.jpg" },
+                            { name: "Safe & Secure Campus", img: "https://journalistsresource.org/wp-content/uploads/2014/02/surveillance-camera-860x466.jpg" }
+                        ].map((facility, i) => (
+                            <div key={i} className="group overflow-hidden rounded-[2.5rem] bg-white shadow-xl hover:shadow-2xl transition-all border border-oxford/5">
+                                <div className="h-64 overflow-hidden relative">
+                                    <div className="absolute inset-0 bg-oxford/20 group-hover:bg-transparent transition-colors z-10" />
+                                    {facility.img ? (
+                                        <img
+                                            src={facility.img}
+                                            alt={facility.name}
+                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                        />
+                                    ) : (
+                                        <div className="w-full h-full bg-white flex items-center justify-center">
+                                            <Microscope className="text-gray-100 w-20 h-20" />
+                                        </div>
+                                    )}
+                                    <div className="absolute bottom-0 inset-x-0 p-6 z-20 bg-gradient-to-t from-oxford/90 to-transparent">
+                                        <h3 className="font-bold text-white text-lg">{facility.name}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             {/* Staff List */}
             <section className="py-24 px-6 bg-gray-50">
                 <div className="max-w-7xl mx-auto">
