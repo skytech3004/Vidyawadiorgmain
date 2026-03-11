@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import {
     BookOpen, Trophy, School, Users, Star, Microscope,
     Medal, Phone, MapPin, Globe, CheckCircle2, User,
-    ShieldCheck, Sparkles
+    ShieldCheck, Sparkles, ChevronRight
 } from "lucide-react";
 import StudentResultsTable from "@/components/StudentResultsTable";
 import StudentModal from "@/components/StudentModal";
@@ -15,56 +15,68 @@ import StudentModal from "@/components/StudentModal";
 // --- Data ---
 
 const staffList = [
-    { no: 1, name: "Ms. Jyoti Nath", designation: "Principal", image: "/images/english school/principle.jpg" },
-    { no: 2, name: "Ms. Kusum Vaishnav", designation: "PGT (History)" },
-    { no: 3, name: "Dr. Nidhi Upadhyay", designation: "PGT (Painting)" },
-    { no: 4, name: "Ms. Bhagwanti", designation: "PGT (Maths)" },
-    { no: 5, name: "Mr. Ghanshyam Singh", designation: "PGT (English)" },
-    { no: 6, name: "Ms. Mamta Rajpurohit", designation: "PGT (B.St.)" },
-    { no: 7, name: "Mr. Mahendra Kumar", designation: "PGT (Physics)" },
-    { no: 8, name: "Ms. Deepshikha Khangarot", designation: "PGT (Biology)" },
-    { no: 9, name: "Ms. Priya Sharma", designation: "PGT (Hindi)" },
-    { no: 10, name: "Mr. Ronak Singh", designation: "PGT (Accountancy)" },
-    { no: 11, name: "Ms. Priyanka Lakhawat", designation: "PGT (Pol. Sci.)" },
-    { no: 12, name: "Ms. Dimpal", designation: "PGT (Chemistry)" },
-    { no: 13, name: "Dr. Purnima Bhati", designation: "PGT (English)" },
-    { no: 14, name: "Mr. Rahul Joshi", designation: "PGT (Geography)" },
-    { no: 15, name: "Ms. Neha Srivastva", designation: "PGT (English)" },
-    { no: 16, name: "Ms. Roshni Bano", designation: "PGT (Music)" },
-    { no: 17, name: "Mr. Pradeep Singh", designation: "PGT (Comp. Sci.)" },
-    { no: 18, name: "Ms. Deepa Tolani", designation: "TGT (S.St.)" },
-    { no: 19, name: "Ms. Rajkumari Choudhary", designation: "TGT (Science)" },
-    { no: 20, name: "Ms. Varsha Palrecha", designation: "TGT (Hindi)" },
-    { no: 21, name: "Ms. Krishana Kanta Pareek", designation: "TGT (Sanskrit)" },
-    { no: 22, name: "Mr. Kantilal Prajapat", designation: "TGT (Maths)" },
-    { no: 23, name: "Ms. Veena Kumari", designation: "TGT (English)" },
-    { no: 24, name: "Ms. Divya Soni", designation: "TGT (Maths)" },
-    { no: 25, name: "Ms. Manglem Singh", designation: "TGT (Science)" },
-    { no: 26, name: "Ms. Priyanka Saxena", designation: "TGT (Sanskrit)" },
-    { no: 27, name: "Ms. Bhawna", designation: "TGT (Hindi)" },
-    { no: 28, name: "Ms. Mamta Kanwar", designation: "TGT (Maths)" },
-    { no: 29, name: "Ms. Kalal Nilam", designation: "TGT (Comp. Sci.)" },
-    { no: 30, name: "Ms. Neelam Parihar", designation: "TGT (English)" },
-    { no: 31, name: "Ms. Kalpna Vaishnav", designation: "TGT" },
-    { no: 32, name: "Ms. Meena Sirvi", designation: "TGT (S.St.)" },
-    { no: 33, name: "Ms. Rashmi Tripathi", designation: "PET" },
-    { no: 34, name: "Ms. Suman", designation: "PET" },
-    { no: 35, name: "Ms. Megha Arora", designation: "PRT Co-ordinator" },
-    { no: 36, name: "Ms. Sunder Dewasi", designation: "PRT (Hindi)" },
-    { no: 37, name: "Ms. Rathod Gopal Kunwar", designation: "PRT (M.T.)" },
-    { no: 38, name: "Ms. Anjali Rathore", designation: "PRT (EVS)" },
-    { no: 39, name: "Ms. Yumnum Reena Devi", designation: "PRT (English)" },
-    { no: 40, name: "Ms. Monika", designation: "PRT" },
-    { no: 41, name: "Ms. Jyoti Choudhary", designation: "PRT" },
-    { no: 42, name: "Ms. Hemlata Suthar", designation: "PRT" },
-    { no: 43, name: "Ms. Gracy Soni", designation: "PRT" },
-    { no: 44, name: "Ms. Chitrakshi Kalet", designation: "PRT" },
-    { no: 45, name: "Ms. Bharti Mali", designation: "PRT" },
-    { no: 46, name: "Mr. Md Asfak", designation: "Office Superintendent" },
-    { no: 47, name: "Mr. Niranjan Gehlot", designation: "Accountant" },
-    { no: 48, name: "Ms. Jaya Gehlot", designation: "Librarian" },
-    { no: 49, name: "Ms. Soniya Arya", designation: "Sci. Lab Asst." },
-    { no: 50, name: "Ms. Chanchal Suthar", designation: "Comp. Lab Asst." },
+    { "no": 1, "name": "Ms. Jyoti Nath", "designation": "Principal" },
+    { "no": 2, "name": "Ms. Deepshikha Khangarot", "designation": "PGT (Biology) & V.P." },
+    { "no": 3, "name": "Dr. Nidhi Upadhyay", "designation": "PGT (Drawing & Painting)" },
+    { "no": 4, "name": "Mrs. Bhagwanti", "designation": "PGT (Maths)" },
+    { "no": 5, "name": "Mr. Ghanshyam Singh", "designation": "PGT (English)" },
+    { "no": 6, "name": "Ms. Mamta Rajpurohit", "designation": "PGT (B.St.)" },
+    { "no": 7, "name": "Mr. Mahendra Kumar", "designation": "PGT (Physics)" },
+    { "no": 8, "name": "Mrs. Priya Sharma", "designation": "PGT (Hindi)" },
+    { "no": 9, "name": "Mr. Ronak Singh", "designation": "PGT (Accountancy)" },
+    { "no": 10, "name": "Ms. Roshni Bano", "designation": "PGT (Music)" },
+    { "no": 11, "name": "Mr. Pradeep Singh Sevarsa", "designation": "PGT (Comp. Sci.)" },
+    { "no": 12, "name": "Mr. Andrew Daimari", "designation": "PGT(English)" },
+    { "no": 13, "name": "Ms. Sonal", "designation": "PGT(Chemistry)" },
+    { "no": 14, "name": "Ms. Princi Saxena", "designation": "PGT (English)" },
+    { "no": 15, "name": "Mr. Pushpendra Singh", "designation": "PGT (Geography)" },
+    { "no": 16, "name": "Mr. Rahul Joshi", "designation": "PGT (Polt. Scie.)" },
+    { "no": 17, "name": "Mrs. Deepa Tolani", "designation": "TGT (S.St.)" },
+    { "no": 18, "name": "Mrs. Rajkumari Choudhary", "designation": "TGT (Science)" },
+    { "no": 19, "name": "Ms. Varsha Palrecha", "designation": "TGT (Hindi)" },
+    { "no": 20, "name": "Ms. Aruna Mali", "designation": "TGT (Sanskrit)" },
+    { "no": 21, "name": "Mr. Kantilal Prajapat", "designation": "TGT (Maths)" },
+    { "no": 22, "name": "Ms. Divya Soni", "designation": "TGT (Maths)" },
+    { "no": 23, "name": "Ms. Priyanka Saxena", "designation": "TGT (Sanskrit)" },
+    { "no": 24, "name": "Ms. Kalal Nilam", "designation": "TGT (Comp. Sci.)" },
+    { "no": 25, "name": "Ms. Mamta Kanwar", "designation": "TGT (Maths)" },
+    { "no": 26, "name": "Ms. Neelam Parihar", "designation": "TGT (English)" },
+    { "no": 27, "name": "Ms. Meena Sirvi", "designation": "TGT (S.St.)" },
+    { "no": 28, "name": "Ms. Yumnum Manglem Singh", "designation": "TGT(Science)" },
+    { "no": 29, "name": "Ms. Sunder Dewasi", "designation": "TGT (Hindi), Guide-Incharge" },
+    { "no": 30, "name": "Ms. Sudiksha Soni", "designation": "TGT (IT)" },
+    { "no": 31, "name": "Ms. Kareena Shaikh", "designation": "TGT(S.ST. & English)" },
+    { "no": 32, "name": "Ms. Chhaya Rajpurohit", "designation": "TGT(English) & PGT (B.ST)" },
+    { "no": 33, "name": "Ms. Honey Agrawat", "designation": "PRT (Eng.) Primary Coordinator" },
+    { "no": 34, "name": "Ms. Jyoti Choudhary", "designation": "PRT" },
+    { "no": 35, "name": "Ms. Yumnum Reena Devi", "designation": "PRT" },
+    { "no": 36, "name": "Ms. Monika", "designation": "PRT" },
+    { "no": 37, "name": "Ms. Hemlata Suthar", "designation": "PRT" },
+    { "no": 38, "name": "Ms. Suman Gurjar", "designation": "PET" },
+    { "no": 39, "name": "Ms. Gracy Soni", "designation": "PRT" },
+    { "no": 40, "name": "Ms. Bharti Mali", "designation": "PRT" },
+    { "no": 41, "name": "Ms. Pista Kumari", "designation": "PRT" },
+    { "no": 42, "name": "Ms. Mary Grace", "designation": "PRT" },
+    { "no": 43, "name": "Ms. Monika Kumari", "designation": "PRT" },
+    { "no": 44, "name": "Ms. Leena Sharma", "designation": "PRT" },
+    { "no": 45, "name": "Ms. Leela Choudhary", "designation": "PET" },
+    { "no": 46, "name": "Ms. Gopal Kanwar", "designation": "PRT" },
+    { "no": 47, "name": "Ms. Chtrakshi Kalet", "designation": "PRT" },
+    { "no": 48, "name": "Mr. Md. Asfak", "designation": "Office Supdt." },
+    { "no": 49, "name": "Ms. Jaya Gehlot", "designation": "Librarian" },
+    { "no": 50, "name": "Ms. Bhawana Solanki", "designation": "PRT+Lab Asst." },
+    { "no": 51, "name": "Ms. Gayatri Mali", "designation": "Front Desk Executive" },
+    { "no": 52, "name": "Mr. Ramesh Choudhary", "designation": "Peon" },
+    { "no": 53, "name": "Mr. Suresh Puri", "designation": "Peon" },
+    { "no": 54, "name": "Mr. Heeral Lal Prajapat", "designation": "Peon" },
+    { "no": 55, "name": "Mrs. Rukmini", "designation": "Peon" },
+    { "no": 56, "name": "Mrs. Champa", "designation": "Peon" },
+    { "no": 57, "name": "Ms. Anju Kanwar", "designation": "Peon" },
+    { "no": 58, "name": "Ms. Nenu Vaishnav", "designation": "Peon" },
+    { "no": 59, "name": "Mr. Ramesh Prajapat", "designation": "Peon" },
+    { "no": 60, "name": "Mrs. Basanti Devi", "designation": "Sweeper" },
+    { "no": 61, "name": "Mrs. Krishna", "designation": "Sweeper" },
+    { "no": 62, "name": "Ms. Mamta Goswami", "designation": "Peon" }
 ];
 
 export default function LPSContent() {
@@ -574,7 +586,7 @@ export default function LPSContent() {
             </section>
 
             {/* Faculty Section */}
-            <section className="py-24 px-6 bg-white overflow-hidden">
+            <section className="py-24 px-6 bg-gray-50 overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Our Faculty</span>
@@ -583,34 +595,46 @@ export default function LPSContent() {
                         <p className="text-gray-600 max-w-2xl mx-auto">Our highly qualified faculty members are dedicated to building a brighter future for our students.</p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                        {staffList.slice(0, visibleStaff).map((staff, i) => (
-                            <div
-                                key={staff.no}
-                                className="bg-white p-5 rounded-2xl shadow-sm border border-oxford/10 flex items-center gap-4 hover:border-sandstone transition-all group"
-                            >
-                                <div className="w-14 h-14 rounded-full bg-oxford/5 flex items-center justify-center overflow-hidden border-2 border-oxford/5 group-hover:border-sandstone transition-colors shrink-0 shadow-inner">
-                                    {staff.image ? (
-                                        <img src={staff.image} alt={staff.name} className="w-full h-full object-cover" />
-                                    ) : (
-                                        <User className="text-oxford/20" size={24} />
-                                    )}
-                                </div>
-                                <div className="overflow-hidden">
-                                    <h4 className="font-bold text-oxford text-sm mb-0.5 truncate">{staff.name}</h4>
-                                    <p className="text-[10px] text-gray-500 uppercase tracking-widest font-black truncate">{staff.designation}</p>
-                                </div>
-                            </div>
-                        ))}
+                    <div className="overflow-x-auto bg-white rounded-[2rem] shadow-xl border border-oxford-100">
+                        <table className="w-full text-left border-collapse min-w-[600px]">
+                            <thead>
+                                <tr className="bg-oxford/5 border-b border-gray-100">
+                                    <th className="py-5 px-8 font-black text-oxford text-sm uppercase tracking-wider w-24">S.No.</th>
+                                    <th className="py-5 px-8 font-black text-oxford text-sm uppercase tracking-wider">Designation</th>
+                                    <th className="py-5 px-8 font-black text-oxford text-sm uppercase tracking-wider">Faculty Member</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {staffList.slice(0, visibleStaff).map((staff, i) => (
+                                    <tr key={staff.no} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors group">
+                                        <td className="py-5 px-8 text-gray-400 font-bold">{i + 1}</td>
+                                        <td className="py-5 px-8 text-gray-600 font-medium">
+                                            {staff.designation}
+                                        </td>
+                                        <td className="py-5 px-8">
+                                            <div className="flex items-center gap-5">
+                                                <div className="w-12 h-12 rounded-full overflow-hidden bg-white shrink-0 border border-gray-200 group-hover:border-sandstone transition-colors shadow-sm flex items-center justify-center">
+                                                    <User className="text-oxford/20" size={24} />
+                                                </div>
+                                                <span className="font-bold text-oxford text-lg group-hover:text-sandstone transition-colors">{staff.name}</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
 
                     {visibleStaff < staffList.length && (
-                        <div className="mt-16 text-center">
+                        <div className="mt-12 text-center">
                             <button
                                 onClick={() => setVisibleStaff(prev => prev + 12)}
-                                className="px-10 py-4 bg-oxford text-white rounded-full font-bold uppercase tracking-widest text-xs hover:bg-sandstone hover:text-oxford transition-all shadow-xl"
+                                className="inline-flex items-center gap-3 px-10 py-4 bg-white text-oxford border border-gray-200 rounded-full font-black text-xs uppercase tracking-widest shadow-lg hover:border-sandstone hover:text-sandstone transition-all group"
                             >
                                 Meet All Faculty Members
+                                <div className="w-6 h-6 rounded-full bg-oxford/5 flex items-center justify-center group-hover:bg-sandstone/10 transition-colors">
+                                    <ChevronRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+                                </div>
                             </button>
                         </div>
                     )}
