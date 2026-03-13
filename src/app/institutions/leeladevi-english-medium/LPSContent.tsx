@@ -1,11 +1,10 @@
-"use client";
-
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import {
     BookOpen, Trophy, School, Users, Star, Microscope,
     Medal, Phone, MapPin, Mail, CheckCircle2,
-    Music, Calendar, User, FileText, Sparkles
+    Music, Calendar, User, FileText, Sparkles,
+    Play, X, Volume2, VolumeX, Maximize2
 } from "lucide-react";
 import Image from "next/image";
 
@@ -159,7 +158,141 @@ const clubList = [
     { id: 28, name: "ELECTORAL LITERACY CLUB" }
 ];
 
+const videoData = [
+    { url: "/IMG_9212.webm", title: "Campus Life" },
+    { url: "/IMG_9218.webm", title: "Student Activities" },
+    { url: "/IMG_9227.webm", title: "Learning Moments" },
+    { url: "/IMG_9230.webm", title: "Daily Routine" },
+    { url: "/IMG_9236.webm", title: "Skills & Growth" },
+    { url: "/IMG_9340.webm", title: "Classroom Interaction" },
+    { url: "/IMG_9354.webm", title: "Outdoor Education" },
+    { url: "/IMG_9363.webm", title: "Creative Expression" },
+    { url: "/IMG_9373.webm", title: "School Spirit" },
+    { url: "/IMG_9400.webm", title: "Future Leaders" },
+];
+
+function OptimizedVideoCard({ video, index, onClick }: { video: any, index: number, onClick: () => void }) {
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const containerRef = useRef(null);
+    const [isHovered, setIsHovered] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    // Poster image logic - using the converting webp as a placeholder if available
+    const posterUrl = "/IMG_9398-ezgif.com-video-to-webp-converter.webp";
+
+    return (
+        <motion.div
+            ref={containerRef}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ delay: index * 0.05, duration: 0.5 }}
+            viewport={{ once: true }}
+            onClick={onClick}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            className="group cursor-pointer overflow-hidden rounded-[2.5rem] bg-oxford/5 shadow-xl hover:shadow-2xl transition-all border border-oxford/5 relative aspect-square sm:aspect-video xl:aspect-square"
+            style={{ willChange: "transform" }}
+        >
+            {/* Poster / Placeholder */}
+            {!isLoaded && (
+                <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
+                    <Image
+                        src={posterUrl}
+                        alt="Loading..."
+                        fill
+                        className="object-cover opacity-30 grayscale"
+                    />
+                </div>
+            )}
+
+            {/* Lazy Mounted Video */}
+            {(isHovered || isLoaded) && (
+                <video
+                    ref={videoRef}
+                    muted
+                    loop
+                    playsInline
+                    onCanPlay={() => setIsLoaded(true)}
+                    autoPlay
+                    className={`h-full w-full object-cover transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+                >
+                    <source src={video.url} type="video/webm" />
+                </video>
+            )}
+
+            {/* Overlay UI */}
+            <div className={`absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300 flex flex-col items-center justify-center`}>
+                <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white transform group-hover:scale-110 transition-transform duration-500">
+                    <Play fill="white" size={28} className="translate-x-0.5" />
+                </div>
+                <div className="mt-4 px-4 py-1.5 bg-oxford/60 backdrop-blur-md rounded-full border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
+                    <p className="text-[10px] font-black text-white uppercase tracking-[0.2em]">{video.title}</p>
+                </div>
+            </div>
+
+            {/* Hardware Acceleration Hint */}
+            <div className="absolute inset-0 pointer-events-none ring-1 ring-inset ring-white/10 group-hover:ring-sandstone/30 transition-all rounded-[2.5rem]" />
+        </motion.div>
+    );
+}
+
+function VideoLightbox({ isOpen, onClose, video }: { isOpen: boolean, onClose: () => void, video: any }) {
+    const [isMuted, setIsMuted] = useState(false);
+
+    return (
+        <AnimatePresence>
+            {isOpen && (
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-oxford/95 backdrop-blur-xl"
+                    onClick={onClose}
+                >
+                    <motion.div
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        exit={{ scale: 0.9, opacity: 0 }}
+                        className="relative max-w-5xl w-full aspect-video bg-black rounded-3xl overflow-hidden shadow-2xl"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <button
+                            onClick={onClose}
+                            className="absolute top-6 right-6 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+                        >
+                            <X size={24} />
+                        </button>
+
+                        <video
+                            autoPlay
+                            loop
+                            playsInline
+                            key={video?.url}
+                            muted={isMuted}
+                            className="w-full h-full object-contain"
+                        >
+                            <source src={video?.url} type="video/webm" />
+                        </video>
+
+                        <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between">
+                            <h3 className="text-white font-bold text-xl">{video?.title}</h3>
+                            <button
+                                onClick={() => setIsMuted(!isMuted)}
+                                className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+                            >
+                                {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+                            </button>
+                        </div>
+                    </motion.div>
+                </motion.div>
+            )}
+        </AnimatePresence>
+    );
+}
+
 export default function LPSContent() {
+    const [selectedVideo, setSelectedVideo] = useState<any>(null);
     const [visibleClubs, setVisibleClubs] = useState(10);
     const [visibleStaff, setVisibleStaff] = useState(10);
 
@@ -632,6 +765,37 @@ export default function LPSContent() {
                         ))}
                     </div>
                 </div>
+            </section>
+
+            {/* What We Do Section */}
+            <section className="py-24 px-6 bg-white overflow-hidden">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Our Activities</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight text-center">What We Do</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
+                        <p className="text-gray-600 max-w-2xl mx-auto text-lg italic">
+                            “Glimpses of our vibrant school life and academic activities.”
+                        </p>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {videoData.map((video, i) => (
+                            <OptimizedVideoCard
+                                key={i}
+                                video={video}
+                                index={i}
+                                onClick={() => setSelectedVideo(video)}
+                            />
+                        ))}
+                    </div>
+                </div>
+
+                <VideoLightbox
+                    isOpen={!!selectedVideo}
+                    onClose={() => setSelectedVideo(null)}
+                    video={selectedVideo}
+                />
             </section>
 
             {/* Staff List */}
