@@ -180,9 +180,6 @@ function OptimizedVideoCard({ video, index, onClick }: { video: any, index: numb
     const [isHovered, setIsHovered] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
 
-    // Poster image logic
-    const posterUrl = "/IMG_9398-ezgif.com-video-to-webp-converter.webp";
-
     // Play/Pause based on hover, assuming it's already preloading
     useEffect(() => {
         if (!videoRef.current) return;
@@ -207,17 +204,9 @@ function OptimizedVideoCard({ video, index, onClick }: { video: any, index: numb
             className="group cursor-pointer overflow-hidden rounded-[2.5rem] bg-oxford/5 shadow-xl hover:shadow-2xl transition-all border border-oxford/5 relative aspect-square sm:aspect-video xl:aspect-square"
             style={{ willChange: "transform" }}
         >
-            {/* Poster / Placeholder */}
+            {/* Loading Placeholder */}
             {!isLoaded && (
-                <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
-                    <Image
-                        src={posterUrl}
-                        alt="Loading..."
-                        fill
-                        unoptimized
-                        className="object-cover opacity-30 grayscale"
-                    />
-                </div>
+                <div className="absolute inset-0 bg-oxford/10 animate-pulse flex items-center justify-center" />
             )}
 
             {/* Aggressive Preloading Video element */}
