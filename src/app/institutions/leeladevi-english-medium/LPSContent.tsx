@@ -161,29 +161,37 @@ const clubList = [
 ];
 
 const videoData = [
-    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773391464/syg9dltnhceammqbqlle.webm", title: "Campus Life" },
-    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773391482/cq2kkio4r4ejpjefud0t.webm", title: "Student Activities" },
-    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773391496/nn7voo5exwrjoouzpgum.webm", title: "Learning Moments" },
-    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773391521/unokyuqhzklwgikuysyx.webm", title: "Daily Routine" },
-    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773391549/hnejadb4s2iwnr4zldrp.webm", title: "Skills & Growth" },
-    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773391557/rpopi31ubmrjcwcfn1mp.webm", title: "Classroom Interaction" },
-    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773391569/smocfmbl3azc80921ptb.webm", title: "Outdoor Education" },
-    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773391579/dgs8vykkqgnqrvgjaz6d.webm", title: "Creative Expression" },
-    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773391585/bdleqv8zbjklrhdgyihg.webm", title: "School Spirit" },
-    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773391593/ojsarehv4j31bpzttcku.webm", title: "Future Leaders" },
+    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/f_auto,q_auto/v1773391464/syg9dltnhceammqbqlle.webm", title: "Campus Life" },
+    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/f_auto,q_auto/v1773391482/cq2kkio4r4ejpjefud0t.webm", title: "Student Activities" },
+    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/f_auto,q_auto/v1773391496/nn7voo5exwrjoouzpgum.webm", title: "Learning Moments" },
+    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/f_auto,q_auto/v1773391521/unokyuqhzklwgikuysyx.webm", title: "Daily Routine" },
+    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/f_auto,q_auto/v1773391549/hnejadb4s2iwnr4zldrp.webm", title: "Skills & Growth" },
+    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/f_auto,q_auto/v1773391557/rpopi31ubmrjcwcfn1mp.webm", title: "Classroom Interaction" },
+    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/f_auto,q_auto/v1773391569/smocfmbl3azc80921ptb.webm", title: "Outdoor Education" },
+    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/f_auto,q_auto/v1773391579/dgs8vykkqgnqrvgjaz6d.webm", title: "Creative Expression" },
+    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/f_auto,q_auto/v1773391585/bdleqv8zbjklrhdgyihg.webm", title: "School Spirit" },
+    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/f_auto,q_auto/v1773391593/ojsarehv4j31bpzttcku.webm", title: "Future Leaders" },
 ];
 
 function OptimizedVideoCard({ video, index, onClick }: { video: any, index: number, onClick: () => void }) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const containerRef = useRef(null);
+    const isInView = useInView(containerRef, { amount: 0.2, margin: "200px" });
     const [isHovered, setIsHovered] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
 
     // Poster image logic
     const posterUrl = "/IMG_9398-ezgif.com-video-to-webp-converter.webp";
 
-    // "Server-Side" Optimization: Start warming up the video if it's in the first 3 (above fold)
-    const isPriority = index < 3;
+    // Play/Pause based on hover, assuming it's already preloading
+    useEffect(() => {
+        if (!videoRef.current) return;
+        if (isHovered) {
+            videoRef.current.play().catch(() => { });
+        } else {
+            videoRef.current.pause();
+        }
+    }, [isHovered]);
 
     return (
         <motion.div
@@ -201,28 +209,28 @@ function OptimizedVideoCard({ video, index, onClick }: { video: any, index: numb
         >
             {/* Poster / Placeholder */}
             {!isLoaded && (
-                <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
+                <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
                     <Image
                         src={posterUrl}
                         alt="Loading..."
                         fill
+                        unoptimized
                         className="object-cover opacity-30 grayscale"
                     />
                 </div>
             )}
 
-            {/* Lazy Mounted Video */}
-            {(isHovered || isLoaded || isPriority) && (
+            {/* Aggressive Preloading Video element */}
+            {isInView && (
                 <video
                     ref={videoRef}
                     muted
                     loop
                     playsInline
+                    preload="auto"
                     onCanPlay={() => setIsLoaded(true)}
-                    autoPlay={isHovered}
-                    preload={isPriority ? "auto" : "metadata"}
-                    // @ts-ignore - fetchpriority is a new experimental prop
-                    fetchpriority={isPriority ? "high" : "low"}
+                    // @ts-ignore
+                    fetchpriority={index < 3 ? "high" : "low"}
                     className={`h-full w-full object-cover transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
                 >
                     <source src={video.url} type="video/webm" />
@@ -239,7 +247,6 @@ function OptimizedVideoCard({ video, index, onClick }: { video: any, index: numb
                 </div>
             </div>
 
-            {/* Hardware Acceleration Hint */}
             <div className="absolute inset-0 pointer-events-none ring-1 ring-inset ring-white/10 group-hover:ring-sandstone/30 transition-all rounded-[2.5rem]" />
         </motion.div>
     );
