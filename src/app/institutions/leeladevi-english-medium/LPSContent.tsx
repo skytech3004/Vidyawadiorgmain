@@ -179,8 +179,11 @@ function OptimizedVideoCard({ video, index, onClick }: { video: any, index: numb
     const [isHovered, setIsHovered] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
 
-    // Poster image logic - using the converting webp as a placeholder if available
+    // Poster image logic
     const posterUrl = "/IMG_9398-ezgif.com-video-to-webp-converter.webp";
+
+    // "Server-Side" Optimization: Start warming up the video if it's in the first 3 (above fold)
+    const isPriority = index < 3;
 
     return (
         <motion.div
@@ -209,14 +212,17 @@ function OptimizedVideoCard({ video, index, onClick }: { video: any, index: numb
             )}
 
             {/* Lazy Mounted Video */}
-            {(isHovered || isLoaded) && (
+            {(isHovered || isLoaded || isPriority) && (
                 <video
                     ref={videoRef}
                     muted
                     loop
                     playsInline
                     onCanPlay={() => setIsLoaded(true)}
-                    autoPlay
+                    autoPlay={isHovered}
+                    preload={isPriority ? "auto" : "metadata"}
+                    // @ts-ignore - fetchpriority is a new experimental prop
+                    fetchpriority={isPriority ? "high" : "low"}
                     className={`h-full w-full object-cover transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
                 >
                     <source src={video.url} type="video/webm" />
