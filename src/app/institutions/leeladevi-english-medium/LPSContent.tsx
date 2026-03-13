@@ -161,16 +161,16 @@ const clubList = [
 ];
 
 const videoData = [
-    { url: "/IMG_9212.webm", title: "Campus Life" },
-    { url: "/IMG_9218.webm", title: "Student Activities" },
-    { url: "/IMG_9227.webm", title: "Learning Moments" },
-    { url: "/IMG_9230.webm", title: "Daily Routine" },
-    { url: "/IMG_9236.webm", title: "Skills & Growth" },
-    { url: "/IMG_9340.webm", title: "Classroom Interaction" },
-    { url: "/IMG_9354.webm", title: "Outdoor Education" },
-    { url: "/IMG_9363.webm", title: "Creative Expression" },
-    { url: "/IMG_9373.webm", title: "School Spirit" },
-    { url: "/IMG_9400.webm", title: "Future Leaders" },
+    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773391464/syg9dltnhceammqbqlle.webm", title: "Campus Life" },
+    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773391482/cq2kkio4r4ejpjefud0t.webm", title: "Student Activities" },
+    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773391496/nn7voo5exwrjoouzpgum.webm", title: "Learning Moments" },
+    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773391521/unokyuqhzklwgikuysyx.webm", title: "Daily Routine" },
+    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773391549/hnejadb4s2iwnr4zldrp.webm", title: "Skills & Growth" },
+    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773391557/rpopi31ubmrjcwcfn1mp.webm", title: "Classroom Interaction" },
+    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773391569/smocfmbl3azc80921ptb.webm", title: "Outdoor Education" },
+    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773391579/dgs8vykkqgnqrvgjaz6d.webm", title: "Creative Expression" },
+    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773391585/bdleqv8zbjklrhdgyihg.webm", title: "School Spirit" },
+    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773391593/ojsarehv4j31bpzttcku.webm", title: "Future Leaders" },
 ];
 
 function OptimizedVideoCard({ video, index, onClick }: { video: any, index: number, onClick: () => void }) {
