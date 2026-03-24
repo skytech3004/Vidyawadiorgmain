@@ -719,8 +719,7 @@ export default function MarudharContent() {
                                         </thead>
                                         <tbody className="divide-y divide-white/10">
                                             {[
-                                                { name: "Equestrian Center", cls: "Campus", ach: "Horse Riding Training", img: "/images/uploads/vidywadi_main/horse.png" },
-                                            { name: "Prithvi Charan", cls: "VIII A", ach: "Quiz Competition", img: "/images/puthvi_charn.png" },
+                                                { name: "Prithvi Charan", cls: "VIII A", ach: "Quiz Competition", img: "/images/puthvi_charn.png" },
                                                 { name: "Vedika Sharma", cls: "XII A", ach: "Smart Fire Safety Device", img: "/images/devika_sharma.png" },
                                                 { name: "Garima Kanwar", cls: "VIII A", ach: "Smart Fire Safety Device Model", img: "/images/garima_kawar.png" },
                                                 { name: "Heena Kanwar", cls: "VII B", ach: "Geometrical Park Model", img: "/images/hina_kawar.png" }
@@ -963,7 +962,7 @@ export default function MarudharContent() {
             {/* CTA */}
             <section className="py-20 px-6 bg-sandstone">
                 <div className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-4xl font-black text-oxford mb-6 uppercase tracking-tight">Admissions Open 2026-27</h2>
+                    <h2 className="text-4xl font-black text-oxford mb-6 uppercase tracking-tight">Admissions Open</h2>
                     <p className="text-xl text-oxford/80 font-medium mb-10">
                         Give your daughter the opportunity to grow into a confident, educated, and successful individual.
                     </p>

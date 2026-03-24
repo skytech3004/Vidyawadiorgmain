@@ -6,8 +6,7 @@ import {
     BookOpen, Trophy, School, Users, Star, Microscope,
     Medal, Phone, MapPin, Mail, CheckCircle2,
     Music, Calendar, User, FileText, Sparkles,
-    Play, X, Volume2, VolumeX, Maximize2,
-    Award
+    Play, X, Volume2, VolumeX, Maximize2
 } from "lucide-react";
 import Image from "next/image";
 
@@ -673,20 +672,12 @@ export default function LPSContent() {
                             <div>
                                 <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
                                     <ShieldStar className="text-sandstone" />
-                                    NCC, Scouts & Horse Riding
+                                    NCC & Scouts
                                 </h3>
-                                <div className="space-y-4 text-white/70 leading-relaxed">
-                                    <p>
-                                        <strong>NCC:</strong> Introduced in 2014, now with 50 cadets preparing for the Indian Armed Forces.
-                                    </p>
-                                    <p>
-                                        <strong>Bharat Scout & Guide:</strong> Active since 2016-17, currently training 51 students.
-                                    </p>
-                                    <p className="p-4 bg-sandstone/10 rounded-2xl border border-sandstone/20 text-white">
-                                        <Award className="text-sandstone mb-2" size={24} />
-                                        <strong>Equestrian Center (Horse Riding):</strong> Our specialized Horse Riding club trains students in equestrian arts, fostering courage, coordination, and a unique bond with nature.
-                                    </p>
-                                </div>
+                                <p className="text-white/70 leading-relaxed">
+                                    <strong>NCC:</strong> Introduced in 2014, now with 50 cadets preparing for the Indian Armed Forces.<br />
+                                    <strong>Bharat Scout & Guide:</strong> Active since 2016-17, currently training 51 students.
+                                </p>
                             </div>
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
                                 {[
@@ -695,7 +686,7 @@ export default function LPSContent() {
                                     { src: "/images/english school/a200f34b-f2de-4939-9049-944380c69594.jpg", alt: "Athletics - Manisha" },
                                     { src: "/images/english school/da326549-dcf6-4c5d-baa6-425a657140c6.jpg", alt: "Rifle Shooting - Kritika" },
                                     { src: "/images/english school/9bd3aa78-5651-4fab-b2c0-c30cde54fb2b.jpg", alt: "Sports Achievement" },
-                                    { src: "/uploads/mess/skate.jpg", alt: "Sports Achievement" },
+                                    { src: "/images/uploads/vidywadi_main/horse.png", alt: "Horse Riding" },
                                 ].map((img, i) => (
                                     <div key={i} className="aspect-[4/5] rounded-xl overflow-hidden border border-white/10 group relative">
                                         <Image
@@ -716,6 +707,7 @@ export default function LPSContent() {
                             <h3 className="text-2xl font-bold text-white mb-6">Sports Achievements 2024-25</h3>
 
                             <div className="space-y-6 max-h-[800px] overflow-y-auto pr-2 custom-scrollbar">
+                                <AchievementItem title="Horse Riding Training" desc="Structured horse riding program focused on confidence, balance, and discipline." />
                                 <AchievementItem title="District Badminton (U-19)" desc="Girls secured 2nd position. One selected for state-level." />
                                 <AchievementItem title="District Rifle Shooting (U-17)" desc="Team secured 2nd position. Pratibha (1st), Kritika (2nd), KirtiRaj (3rd). All selected for state." />
                                 <AchievementItem title="Rifle Shooting (U-19)" desc="Team secured 1st position. Hrishija & Himakshi Khechi selected for state." />
@@ -751,7 +743,6 @@ export default function LPSContent() {
                             { name: "Music & Painting Studio", img: "/images/english school/93b4f897-0aca-4189-a717-16c13f8372d5.jpg" },
                             { name: "Geography Laboratory" },
                             { name: "NCC & Guide", img: "/llll-AAA.jpeg" },
-                            { name: "Equestrian Center (Horse Riding)", img: "/uploads/mess/sport.jpg" }, // Using sport.jpg as placeholder
                             { name: "Library", img: "/images/english school/706b5bd7-1cbd-40f0-a48f-2ec78225ac48.jpg" },
                             { name: "Computer Center", img: "/images/english school/344537e3-f907-4894-b74e-6c120656cc03.jpg" },
                             { name: "Multimedia Room", img: "/images/english school/a40160d0-ce25-4bad-818d-e2e729dc47f4.jpg" },

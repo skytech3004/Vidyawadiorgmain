@@ -232,25 +232,9 @@ export default function DonatePage() {
                                     </div>
 
                                     <div className="mt-12 p-6 bg-white/5 rounded-2xl border border-white/10">
-                                        <p className="text-xs text-white/40 leading-relaxed italic mb-6">
+                                        <p className="text-xs text-white/40 leading-relaxed italic">
                                             "Education is the most powerful weapon which you can use to change the world." — Vidyawadi Vision
                                         </p>
-                                        <div className="pt-6 border-t border-white/10">
-                                            <h4 className="text-sandstone font-bold uppercase tracking-widest text-[10px] mb-4">Direct Bank Transfer</h4>
-                                            <div className="space-y-2 text-[11px] font-medium text-white/70">
-                                                <p><span className="text-white/40">A/c Name:</span> Marudhar Mahila Shikshan Sangh</p>
-                                                <p><span className="text-white/40">Bank:</span> ICICI Bank - Rani Branch</p>
-                                                <p><span className="text-white/40">A/c No:</span> 684605601184</p>
-                                                <p><span className="text-white/40">IFSC:</span> ICIC0006846</p>
-                                            </div>
-                                            <div className="mt-6 aspect-square bg-white p-2 rounded-xl w-32 mx-auto overflow-hidden">
-                                                <img 
-                                                    src="/donation_qr.png" 
-                                                    alt="Scan to Donate" 
-                                                    className="w-full h-full object-contain"
-                                                />
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
 
@@ -365,6 +349,81 @@ export default function DonatePage() {
                             </div>
                         )}
                     </motion.div>
+                </div>
+            </section>
+
+            {/* Direct Bank Transfer & QR Section */}
+            <section className="pb-32 px-6">
+                <div className="max-w-5xl mx-auto">
+                    <div className="grid md:grid-cols-2 gap-8">
+                        {/* Bank Details Card */}
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            className="bg-white rounded-[3rem] p-12 shadow-xl border border-oxford/5"
+                        >
+                            <h3 className="text-2xl font-black text-oxford mb-8 uppercase tracking-tight flex items-center gap-3">
+                                <div className="w-1.5 h-6 bg-sandstone rounded-full" />
+                                Direct Bank Transfer
+                            </h3>
+                            <div className="space-y-4 text-sm">
+                                {[
+                                    { label: "Account Name", value: "Marudhar Mahila Shikshan Sangh" },
+                                    { label: "Bank & Branch", value: "ICICI Bank – Rani Branch" },
+                                    { label: "A/c Number", value: "684605601184", highlight: true },
+                                    { label: "IFSC Code", value: "ICIC0006846", highlight: true }
+                                ].map((item, i) => (
+                                    <div key={i} className="flex justify-between py-4 border-b border-slate-50 last:border-0">
+                                        <span className="text-gray-400 font-bold uppercase tracking-widest text-[10px]">{item.label}</span>
+                                        <span className={cn("text-oxford font-black", item.highlight && "text-sandstone-dark tracking-widest")}>{item.value}</span>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="mt-8 p-4 bg-sandstone/5 rounded-2xl border border-sandstone/10">
+                                <p className="text-[10px] text-oxford/60 leading-relaxed text-center font-medium italic">
+                                    After transfer, please share the transaction screenshot to <br />
+                                    <span className="text-oxford font-bold">marudharmahila@gmail.com</span> for the receipt.
+                                </p>
+                            </div>
+                        </motion.div>
+
+                        {/* QR Code Card */}
+                        <motion.div
+                            initial={{ opacity: 0, x: 20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            className="bg-oxford rounded-[3rem] p-12 shadow-xl text-center flex flex-col items-center justify-center relative overflow-hidden group"
+                        >
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-bl-full -mr-16 -mt-16 transition-transform group-hover:scale-110" />
+                            
+                            <h3 className="text-2xl font-black text-white mb-2 uppercase tracking-tight">Scan to Pay</h3>
+                            <p className="text-white/40 text-[10px] font-bold uppercase tracking-widest mb-8">UPI / QR Payment</p>
+                            
+                            <div className="relative p-4 bg-white rounded-3xl mb-8 shadow-2xl">
+                                <div className="w-48 h-48 bg-stone-100 flex items-center justify-center overflow-hidden rounded-2xl border-4 border-white">
+                                    {/* Placeholder QR - User needs to provide actual payload for real QR */}
+                                    <img 
+                                        src="/images/qr-placeholder.png" 
+                                        alt="Payment QR Code" 
+                                        className="w-full h-full object-contain opacity-50 grayscale"
+                                    />
+                                    <div className="absolute inset-0 flex items-center justify-center flex-col gap-2 bg-white/80 backdrop-blur-[2px] opacity-100 group-hover:opacity-0 transition-opacity">
+                                        <div className="w-12 h-12 bg-oxford/10 rounded-full flex items-center justify-center animate-pulse">
+                                            <ShieldCheck size={24} className="text-oxford" />
+                                        </div>
+                                        <span className="text-[10px] font-black text-oxford uppercase tracking-widest">Secure QR</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div className="flex gap-4 opacity-50">
+                                <Image src="/images/upi-logo.png" width={40} height={20} alt="UPI" className="brightness-0 invert object-contain" />
+                                <Image src="/images/gpay-logo.png" width={40} height={20} alt="GPay" className="brightness-0 invert object-contain" />
+                                <Image src="/images/phonepe-logo.png" width={40} height={20} alt="PhonePe" className="brightness-0 invert object-contain" />
+                            </div>
+                        </motion.div>
+                    </div>
                 </div>
             </section>
 

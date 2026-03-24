@@ -653,7 +653,7 @@ export default function SPSContent() {
             {/* CTA Section */}
             < section className="py-20 px-6 bg-sandstone" >
                 <div className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-4xl font-black text-oxford mb-6 uppercase tracking-tight">Enroll Her Potential 2026-27</h2>
+                    <h2 className="text-4xl font-black text-oxford mb-6 uppercase tracking-tight">Enroll Her Potential</h2>
                     <p className="text-xl text-oxford/80 font-medium mb-10">
                         Join Sushiladevi Primary School for a remarkable foundational journey.
                     </p>

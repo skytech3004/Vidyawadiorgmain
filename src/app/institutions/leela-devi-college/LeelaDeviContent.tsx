@@ -14,9 +14,9 @@ import coursesData from "@/data/courses.json";
 
 const categories = [
     { name: "All Courses", slug: "all" },
-    { name: "Undergraduate (UG)", slug: "ug" },
-    { name: "Postgraduate (PG)", slug: "pg" },
-    { name: "Skill Courses", slug: "skill" },
+    { name: "Undergraduate Programs", slug: "ug" },
+    { name: "Postgraduate Programs", slug: "pg" },
+    { name: "Skill Development Courses", slug: "skill" },
 ];
 
 const labsData = [
@@ -785,6 +785,7 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                             { name: "Sports & Gym", img: "/uploads/Supporting/gym.png" }, // Missing image, keeping icon as fallback
                             { name: "IT Infrastructure", img: "/uploads/Supporting/IT.png" },
                             { name: "Science Labs", img: "/uploads/Supporting/lab.png" },
+                            { name: "Cafeteria", img: "/images/english school/63680e76-2f23-4f80-a9ee-96a18fdd6348.jpg" },
                             { name: "Auditorium", img: "/uploads/Supporting/audio.png" },
                             { name: "Transport", img: "/uploads/Supporting/trans.png" },
                             { name: "Extra-curricular", img: "/uploads/Supporting/extra.png" }
@@ -987,7 +988,7 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                     <h2 className="text-4xl md:text-6xl font-black text-oxford mb-8 leading-tight uppercase">Empowering Women</h2>
                     <div className="h-1.5 w-24 bg-oxford mx-auto mb-10 rounded-full" />
                     <p className="text-xl text-oxford/80 font-medium mb-12">
-                        Join a community of leaders, thinkers, and changemakers. Admissions are now open for the 2026-27 session.
+                        Join a community of leaders, thinkers, and changemakers. Admissions are now open for the upcoming session.
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4">
                         <a href="tel:+916377204208" className="px-10 py-5 bg-oxford text-white rounded-full font-bold uppercase tracking-wider shadow-2xl hover:bg-white hover:text-oxford transition-all flex items-center justify-center gap-2">
