@@ -4,8 +4,10 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart, Globe, CreditCard, ShieldCheck, CheckCircle2, DollarSign, Wallet, ArrowRight, User, Mail, Phone, FileText, MapPin } from "lucide-react";
 import Script from "next/script";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { cn } from "@/lib/utils";
 
 export default function DonatePage() {
     const [amount, setAmount] = useState<string>("2100");
