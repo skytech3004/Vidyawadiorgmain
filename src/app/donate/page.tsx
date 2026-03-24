@@ -210,10 +210,9 @@ export default function DonatePage() {
                             </div>
                         ) : (
                             <div className="grid lg:grid-cols-5">
-                                 {/* Left Side: Info & Impact */}
-                                <div className="lg:col-span-2 bg-oxford p-10 md:p-16 text-white flex flex-col justify-between relative overflow-hidden">
-                                    <div className="absolute top-0 right-0 w-32 h-32 bg-sandstone/10 rounded-full blur-3xl -mr-16 -mt-16" />
-                                    <div className="relative z-10">
+                                {/* Left Side: Info & Impact */}
+                                <div className="lg:col-span-2 bg-oxford p-10 md:p-16 text-white flex flex-col justify-between">
+                                    <div>
                                         <h2 className="text-3xl font-black mb-8 uppercase tracking-tight">Your Impact</h2>
                                         <div className="space-y-8">
                                             {[
@@ -232,46 +231,26 @@ export default function DonatePage() {
                                         </div>
                                     </div>
 
-                                    <div className="mt-12 relative z-10">
-                                        <div className="p-8 bg-white/5 rounded-[2rem] border border-white/10 backdrop-blur-sm">
-                                            <div className="flex items-center gap-3 mb-6">
-                                                <Wallet className="text-sandstone" size={24} />
-                                                <h4 className="text-sandstone font-black uppercase tracking-widest text-xs">Direct Bank Transfer</h4>
+                                    <div className="mt-12 p-6 bg-white/5 rounded-2xl border border-white/10">
+                                        <p className="text-xs text-white/40 leading-relaxed italic mb-6">
+                                            "Education is the most powerful weapon which you can use to change the world." — Vidyawadi Vision
+                                        </p>
+                                        <div className="pt-6 border-t border-white/10">
+                                            <h4 className="text-sandstone font-bold uppercase tracking-widest text-[10px] mb-4">Direct Bank Transfer</h4>
+                                            <div className="space-y-2 text-[11px] font-medium text-white/70">
+                                                <p><span className="text-white/40">A/c Name:</span> Marudhar Mahila Shikshan Sangh</p>
+                                                <p><span className="text-white/40">Bank:</span> ICICI Bank - Rani Branch</p>
+                                                <p><span className="text-white/40">A/c No:</span> 684605601184</p>
+                                                <p><span className="text-white/40">IFSC:</span> ICIC0006846</p>
                                             </div>
-                                            
-                                            <div className="space-y-4 mb-8">
-                                                <div className="space-y-1">
-                                                    <p className="text-[10px] text-white/40 uppercase font-black tracking-widest">Account Name</p>
-                                                    <p className="text-sm font-bold">Marudhar Mahila Shikshan Sangh</p>
-                                                </div>
-                                                <div className="grid grid-cols-2 gap-4">
-                                                    <div className="space-y-1">
-                                                        <p className="text-[10px] text-white/40 uppercase font-black tracking-widest">Bank</p>
-                                                        <p className="text-xs font-medium text-white/80">ICICI Bank - Rani</p>
-                                                    </div>
-                                                    <div className="space-y-1 text-right">
-                                                        <p className="text-[10px] text-white/40 uppercase font-black tracking-widest">IFSC</p>
-                                                        <p className="text-xs font-bold text-sandstone tracking-widest">ICIC0006846</p>
-                                                    </div>
-                                                </div>
-                                                <div className="pt-4 border-t border-white/10">
-                                                    <p className="text-[10px] text-white/40 uppercase font-black tracking-widest mb-1">Account Number</p>
-                                                    <p className="text-xl font-black tracking-widest text-white">684605601184</p>
-                                                </div>
-                                            </div>
-
-                                            <div className="bg-white p-3 rounded-2xl w-full aspect-square flex flex-col items-center justify-center gap-2 group cursor-pointer hover:bg-stone-50 transition-colors">
+                                            <div className="mt-6 aspect-square bg-white p-2 rounded-xl w-32 mx-auto overflow-hidden">
                                                 <img 
                                                     src="/donation_qr.png" 
                                                     alt="Scan to Donate" 
                                                     className="w-full h-full object-contain"
                                                 />
-                                                <span className="text-[9px] text-oxford font-black uppercase tracking-tighter opacity-40 group-hover:opacity-100 transition-opacity">Scan to Pay via UPI</span>
                                             </div>
                                         </div>
-                                        <p className="text-[10px] text-white/40 mt-4 text-center leading-relaxed">
-                                            *Donations are eligible for tax exemption under section 80G.
-                                        </p>
                                     </div>
                                 </div>
 

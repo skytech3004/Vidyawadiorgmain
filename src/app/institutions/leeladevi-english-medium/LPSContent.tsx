@@ -7,10 +7,9 @@ import {
     Medal, Phone, MapPin, Mail, CheckCircle2,
     Music, Calendar, User, FileText, Sparkles,
     Play, X, Volume2, VolumeX, Maximize2,
-    Award, ArrowRight
+    Award
 } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 
 // --- Data ---
 
@@ -918,11 +917,9 @@ export default function LPSContent() {
                         Empower your daughter with quality education and a nurturing environment. Join the LPS family today.
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-6">
-                        <Link href="/apply" className="px-10 py-5 bg-white text-oxford rounded-full font-extrabold uppercase tracking-widest hover:shadow-2xl transition-all flex items-center justify-center gap-3 group relative overflow-hidden">
-                            <div className="absolute inset-0 bg-oxford/5 -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
-                            <span className="relative z-10">Apply for Admission</span>
-                            <ArrowRight size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
-                        </Link>
+                        <a href="tel:6377203204" className="px-10 py-5 bg-oxford text-white rounded-full font-bold uppercase tracking-widest text-xs shadow-2xl hover:bg-white hover:text-oxford transition-all flex items-center justify-center gap-3">
+                            <Phone size={18} /> Call Us: 6377203204
+                        </a>
                         <a href="#contact" className="px-10 py-5 bg-white text-oxford rounded-full font-bold uppercase tracking-widest text-xs shadow-2xl hover:shadow-inner transition-all flex items-center justify-center gap-3">
                             Visit Our Campus
                         </a>

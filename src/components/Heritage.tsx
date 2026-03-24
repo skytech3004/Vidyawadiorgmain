@@ -8,7 +8,7 @@ const timelineEvents = [
     {
         year: "1956",
         title: "The Foundation",
-        description: "Vidyawadi School was established with 3 students, and Subhadra ma'am was the only teacher in the beginning, in a small building.",
+        description: "Vidyawadi School was established with 5 students, and Subhadra ma'am was the only teacher in the beginning, in a small building.",
         side: "left"
     },
     {

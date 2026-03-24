@@ -3,15 +3,13 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
-    BookOpen, Trophy, School, Users, Star, Microscope,
+    BookOpen, Trophy, Star, Microscope,
     Medal, Phone, MapPin, Mail, CheckCircle2,
-    Music, Calendar, User, FileText, Sparkles,
-    Play, X, Volume2, VolumeX, Maximize2,
-    Award, ArrowRight, Leaf, GraduationCap, FlaskConical,
-    Palette, HeartHandshake, Globe, ShieldCheck
+    User, Sparkles, ShieldCheck, ArrowRight,
+    Users, Leaf, FlaskConical, HeartHandshake,
+    Globe, Music, Palette, GraduationCap
 } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import StudentModal from "@/components/StudentModal";
 import StudentResultsTable from "@/components/StudentResultsTable";
 
@@ -664,10 +662,10 @@ export default function SPSContent() {
                             Enquire: 6377203204
                             <Phone size={18} />
                         </a>
-                        <Link href="/apply" className="px-8 py-4 bg-white text-oxford rounded-full font-bold uppercase tracking-wider shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">
-                            Apply Now
+                        <a href="/contact" className="px-8 py-4 bg-white text-oxford rounded-full font-bold uppercase tracking-wider shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">
+                            Campus Visit
                             <ArrowRight size={18} />
-                        </Link>
+                        </a>
                     </div>
                 </div>
             </section >
