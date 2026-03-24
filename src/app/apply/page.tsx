@@ -2,9 +2,15 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Phone, Mail, MapPin, CheckCircle2 } from "lucide-react";
+import { Send, Phone, MapPin, CheckCircle2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+function cn(...inputs: ClassValue[]) {
+    return twMerge(clsx(inputs));
+}
 
 export default function ApplyNowPage() {
     const [submitted, setSubmitted] = useState(false);
@@ -12,6 +18,7 @@ export default function ApplyNowPage() {
     const [error, setError] = useState("");
 
     const [formData, setFormData] = useState({
+        type: "school", // 'school' or 'college'
         fullName: "",
         email: "",
         phone: "",
@@ -20,6 +27,8 @@ export default function ApplyNowPage() {
         pincode: "",
         board: "",
         grade: "",
+        stream: "",
+        qualification: "",
         message: ""
     });
 
@@ -109,7 +118,7 @@ export default function ApplyNowPage() {
                                     onClick={() => {
                                         setSubmitted(false);
                                         setFormData({
-                                            fullName: "", email: "", phone: "", city: "", state: "", pincode: "", board: "", grade: "", message: ""
+                                            type: "school", fullName: "", email: "", phone: "", city: "", state: "", pincode: "", board: "", grade: "", stream: "", qualification: "", message: ""
                                         });
                                     }}
                                     className="px-10 py-4 bg-oxford text-white font-black uppercase tracking-widest text-xs rounded-full hover:bg-sandstone hover:text-oxford transition-all"
@@ -118,110 +127,137 @@ export default function ApplyNowPage() {
                                 </button>
                             </div>
                         ) : (
-                            <div className="grid md:grid-cols-1">
-                                <div className="p-10 md:p-16">
-                                    <h2 className="text-3xl font-black text-oxford mb-10 uppercase tracking-tight flex items-center gap-4">
-                                        <div className="w-2 h-10 bg-sandstone rounded-full" />
-                                        Application Form
-                                    </h2>
+                            <div className="p-10 md:p-16">
+                                <h2 className="text-3xl font-black text-oxford mb-10 uppercase tracking-tight flex items-center gap-4">
+                                    <div className="w-2 h-10 bg-sandstone rounded-full" />
+                                    Application Form
+                                </h2>
 
-                                    {error && (
-                                        <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-600 rounded-2xl text-sm font-medium">
-                                            {error}
+                                {error && (
+                                    <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-600 rounded-2xl text-sm font-medium">
+                                        {error}
+                                    </div>
+                                )}
+
+                                <form onSubmit={handleSubmit} className="space-y-8">
+                                    {/* Application Type Selection */}
+                                    <div className="p-8 bg-oxford/5 rounded-3xl border border-oxford/10 mb-10">
+                                        <label className="text-[10px] font-black uppercase tracking-widest text-oxford block mb-4 text-center">Applying For</label>
+                                        <div className="flex gap-4">
+                                            <button
+                                                type="button"
+                                                onClick={() => setFormData({ ...formData, type: 'school' })}
+                                                className={cn(
+                                                    "flex-1 py-4 rounded-2xl font-black uppercase tracking-widest text-xs transition-all border-2",
+                                                    formData.type === 'school' ? "bg-oxford text-white border-oxford shadow-lg" : "bg-white text-oxford border-oxford/10 hover:border-sandstone"
+                                                )}
+                                            >
+                                                School (Prep - 12th)
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={() => setFormData({ ...formData, type: 'college' })}
+                                                className={cn(
+                                                    "flex-1 py-4 rounded-2xl font-black uppercase tracking-widest text-xs transition-all border-2",
+                                                    formData.type === 'college' ? "bg-oxford text-white border-oxford shadow-lg" : "bg-white text-oxford border-oxford/10 hover:border-sandstone"
+                                                )}
+                                            >
+                                                College (Higher Ed)
+                                            </button>
                                         </div>
-                                    )}
+                                    </div>
 
-                                    <form onSubmit={handleSubmit} className="space-y-8">
-                                        <div className="grid md:grid-cols-2 gap-8">
-                                            {/* Full Name */}
-                                            <div className="space-y-2">
-                                                <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">Full Name</label>
-                                                <input
-                                                    required
-                                                    name="fullName"
-                                                    value={formData.fullName}
-                                                    onChange={handleChange}
-                                                    type="text"
-                                                    placeholder="Enter student's full name"
-                                                    className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium"
-                                                />
-                                            </div>
-
-                                            {/* Email Address */}
-                                            <div className="space-y-2">
-                                                <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">Email Address</label>
-                                                <input
-                                                    required
-                                                    name="email"
-                                                    value={formData.email}
-                                                    onChange={handleChange}
-                                                    type="email"
-                                                    placeholder="Enter your email"
-                                                    className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium"
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div className="grid md:grid-cols-2 gap-8">
-                                            {/* Phone Number */}
-                                            <div className="space-y-2">
-                                                <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">Phone Number</label>
-                                                <input
-                                                    required
-                                                    name="phone"
-                                                    value={formData.phone}
-                                                    onChange={handleChange}
-                                                    type="tel"
-                                                    placeholder="Enter 10-digit mobile number"
-                                                    className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium"
-                                                />
-                                            </div>
-
-                                            {/* City */}
-                                            <div className="space-y-2">
-                                                <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">City</label>
-                                                <input
-                                                    required
-                                                    name="city"
-                                                    value={formData.city}
-                                                    onChange={handleChange}
-                                                    type="text"
-                                                    placeholder="Enter your city"
-                                                    className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium"
-                                                />
-                                            </div>
+                                    <div className="grid md:grid-cols-2 gap-8">
+                                        {/* Full Name */}
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">Full Name</label>
+                                            <input
+                                                required
+                                                name="fullName"
+                                                value={formData.fullName}
+                                                onChange={handleChange}
+                                                type="text"
+                                                placeholder="Enter student's full name"
+                                                className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium"
+                                            />
                                         </div>
 
-                                        <div className="grid md:grid-cols-2 gap-8">
-                                            {/* State */}
-                                            <div className="space-y-2">
-                                                <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">State</label>
-                                                <input
-                                                    required
-                                                    name="state"
-                                                    value={formData.state}
-                                                    onChange={handleChange}
-                                                    type="text"
-                                                    placeholder="Enter your state"
-                                                    className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium"
-                                                />
-                                            </div>
+                                        {/* Email Address */}
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">Email Address</label>
+                                            <input
+                                                required
+                                                name="email"
+                                                value={formData.email}
+                                                onChange={handleChange}
+                                                type="email"
+                                                placeholder="Enter email address"
+                                                className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium"
+                                            />
+                                        </div>
+                                    </div>
 
-                                            {/* Pincode */}
-                                            <div className="space-y-2">
-                                                <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">Pincode</label>
-                                                <input
-                                                    required
-                                                    name="pincode"
-                                                    value={formData.pincode}
-                                                    onChange={handleChange}
-                                                    type="text"
-                                                    placeholder="Enter pincode"
-                                                    className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium"
-                                                />
-                                            </div>
+                                    <div className="grid md:grid-cols-2 gap-8">
+                                        {/* Phone Number */}
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">Phone Number</label>
+                                            <input
+                                                required
+                                                name="phone"
+                                                value={formData.phone}
+                                                onChange={handleChange}
+                                                type="tel"
+                                                placeholder="Enter 10-digit mobile number"
+                                                className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium"
+                                            />
                                         </div>
 
+                                        {/* City */}
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">City</label>
+                                            <input
+                                                required
+                                                name="city"
+                                                value={formData.city}
+                                                onChange={handleChange}
+                                                type="text"
+                                                placeholder="Enter your city"
+                                                className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="grid md:grid-cols-2 gap-8">
+                                        {/* State */}
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">State</label>
+                                            <input
+                                                required
+                                                name="state"
+                                                value={formData.state}
+                                                onChange={handleChange}
+                                                type="text"
+                                                placeholder="Enter your state"
+                                                className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium"
+                                            />
+                                        </div>
+
+                                        {/* Pincode */}
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">Pincode</label>
+                                            <input
+                                                required
+                                                name="pincode"
+                                                value={formData.pincode}
+                                                onChange={handleChange}
+                                                type="text"
+                                                placeholder="Enter pincode"
+                                                className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {formData.type === 'school' ? (
                                         <div className="grid md:grid-cols-2 gap-8">
                                             {/* Select Board */}
                                             <div className="space-y-2">
@@ -256,40 +292,74 @@ export default function ApplyNowPage() {
                                                     <option value="Middle (6-8)">Middle (6-8)</option>
                                                     <option value="Secondary (9-10)">Secondary (9-10)</option>
                                                     <option value="Sr. Secondary (11-12)">Sr. Secondary (11-12)</option>
-                                                    <option value="College">College (Higher Education)</option>
                                                 </select>
                                             </div>
                                         </div>
+                                    ) : (
+                                        <div className="grid md:grid-cols-2 gap-8">
+                                            {/* College Stream */}
+                                            <div className="space-y-2">
+                                                <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">Interested Stream</label>
+                                                <select
+                                                    required
+                                                    name="stream"
+                                                    value={formData.stream}
+                                                    onChange={handleChange}
+                                                    className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium appearance-none h-[66px]"
+                                                >
+                                                    <option value="">Choose Stream</option>
+                                                    <option value="Arts">B.A. (Arts)</option>
+                                                    <option value="Science">B.Sc. (Science)</option>
+                                                    <option value="Commerce">B.Com. (Commerce)</option>
+                                                    <option value="BEd">B.Ed. (Teacher Training)</option>
+                                                    <option value="Other">Post Graduation / Other</option>
+                                                </select>
+                                            </div>
 
-                                        {/* Message / Inquiry */}
-                                        <div className="space-y-2">
-                                            <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">Message / Inquiry (Optional)</label>
-                                            <textarea
-                                                name="message"
-                                                value={formData.message}
-                                                onChange={handleChange}
-                                                rows={4}
-                                                placeholder="Ask us anything about admissions, hostels, or facilities..."
-                                                className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium resize-none"
-                                            ></textarea>
+                                            {/* Last Qualification */}
+                                            <div className="space-y-2">
+                                                <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">Last Qualification</label>
+                                                <input
+                                                    required
+                                                    name="qualification"
+                                                    value={formData.qualification}
+                                                    onChange={handleChange}
+                                                    type="text"
+                                                    placeholder="e.g. 12th Pass, Graduate"
+                                                    className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium"
+                                                />
+                                            </div>
                                         </div>
+                                    )}
 
-                                        <div className="pt-6">
-                                            <button
-                                                type="submit"
-                                                disabled={loading}
-                                                className="w-full py-6 bg-oxford text-white font-black uppercase tracking-[0.3em] text-sm rounded-2xl hover:bg-black transition-all shadow-xl shadow-oxford/20 flex items-center justify-center gap-4 disabled:opacity-70"
-                                            >
-                                                {loading ? "Submitting..." : (
-                                                    <>
-                                                        Submit Application
-                                                        <Send size={18} className="text-sandstone" />
-                                                    </>
-                                                )}
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
+                                    {/* Message / Inquiry */}
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-4">Message / Inquiry (Optional)</label>
+                                        <textarea
+                                            name="message"
+                                            value={formData.message}
+                                            onChange={handleChange}
+                                            rows={4}
+                                            placeholder="Ask us anything about admissions, hostels, or facilities..."
+                                            className="w-full px-8 py-5 bg-stone-50 border border-oxford rounded-2xl focus:bg-white focus:border-sandstone focus:ring-0 transition-all outline-none text-oxford font-medium resize-none"
+                                        ></textarea>
+                                    </div>
+
+                                    <div className="pt-6">
+                                        <button
+                                            type="submit"
+                                            disabled={loading}
+                                            className="w-full py-6 bg-oxford text-white font-black uppercase tracking-[0.3em] text-sm rounded-2xl hover:bg-black transition-all shadow-xl shadow-oxford/20 flex items-center justify-center gap-4 disabled:opacity-70"
+                                        >
+                                            {loading ? "Submitting..." : (
+                                                <>
+                                                    Submit Application
+                                                    <Send size={18} className="text-sandstone" />
+                                                </>
+                                            )}
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         )}
                     </motion.div>

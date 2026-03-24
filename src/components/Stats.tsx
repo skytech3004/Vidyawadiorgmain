@@ -44,11 +44,11 @@ const StatItem = ({ target, label, suffix = "" }: StatItemProps) => {
 
 export default function Stats() {
     const stats = [
-        { target: 2500, label: "Students", suffix: "+" },
+        { target: 5000, label: "Students", suffix: "+" },
         { target: 65, label: "Acres Campus", suffix: "+" },
         { target: 70, label: "Years Legacy", suffix: "+" },
-        { target: 5000, label: "Alumni", suffix: "+" },
-        { target: 8, label: "Hostel", suffix: "+" },
+        { target: 50000, label: "Alumni", suffix: "+" },
+        { target: 8, label: "Hostels", suffix: "" },
         { target: 16, label: "Buses", suffix: "+" },
     ];
 

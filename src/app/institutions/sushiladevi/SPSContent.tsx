@@ -3,13 +3,15 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
-    BookOpen, Trophy, Star, Microscope,
+    BookOpen, Trophy, School, Users, Star, Microscope,
     Medal, Phone, MapPin, Mail, CheckCircle2,
-    User, Sparkles, ShieldCheck, ArrowRight,
-    Users, Leaf, FlaskConical, HeartHandshake,
-    Globe, Music, Palette, GraduationCap
+    Music, Calendar, User, FileText, Sparkles,
+    Play, X, Volume2, VolumeX, Maximize2,
+    Award, ArrowRight, Leaf, GraduationCap, FlaskConical,
+    Palette, HeartHandshake, Globe, ShieldCheck
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import StudentModal from "@/components/StudentModal";
 import StudentResultsTable from "@/components/StudentResultsTable";
 
@@ -653,7 +655,7 @@ export default function SPSContent() {
             {/* CTA Section */}
             < section className="py-20 px-6 bg-sandstone" >
                 <div className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-4xl font-black text-oxford mb-6 uppercase tracking-tight">Enroll Her Potential</h2>
+                    <h2 className="text-4xl font-black text-oxford mb-6 uppercase tracking-tight">Enroll Her Potential 2026-27</h2>
                     <p className="text-xl text-oxford/80 font-medium mb-10">
                         Join Sushiladevi Primary School for a remarkable foundational journey.
                     </p>
@@ -662,10 +664,10 @@ export default function SPSContent() {
                             Enquire: 6377203204
                             <Phone size={18} />
                         </a>
-                        <a href="/contact" className="px-8 py-4 bg-white text-oxford rounded-full font-bold uppercase tracking-wider shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">
-                            Campus Visit
+                        <Link href="/apply" className="px-8 py-4 bg-white text-oxford rounded-full font-bold uppercase tracking-wider shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">
+                            Apply Now
                             <ArrowRight size={18} />
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </section >

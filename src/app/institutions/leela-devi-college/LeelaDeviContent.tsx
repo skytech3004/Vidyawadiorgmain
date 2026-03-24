@@ -254,12 +254,14 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                         animate={{ opacity: 1, y: 0 }}
                         className="flex flex-col md:flex-row gap-8 items-center mb-10"
                     >
-                        <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-sandstone overflow-hidden bg-white shrink-0">
-                            <img src="/leeladevi.jpg" alt="Leela Devi College Logo" className="w-full h-full object-cover" />
+                        <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-sandstone overflow-hidden bg-white shrink-0 shadow-xl flex items-center justify-center">
+                            <GraduationCap className="w-20 h-20 text-oxford" />
                         </div>
                         <div>
-                            <span className="text-sandstone font-bold uppercase tracking-widest text-sm mb-4 block">A Premier Women’s College in Western Rajasthan</span>
-                            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 leading-tight">
+                            <span className="text-sandstone font-black uppercase tracking-widest text-sm mb-4 block">
+                                70 Years of Excellence
+                            </span>
+                            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 leading-tight uppercase">
                                 Leela Devi Parasmal Sancheti Kanya Mahavidyalaya
                             </h1>
                             <div className="flex flex-wrap gap-4 items-center text-white/80">
@@ -267,7 +269,7 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                                     NAAC B++ Grade
                                 </div>
                                 <div className="px-4 py-1.5 bg-white/10 rounded-full border border-white/20 text-white font-bold text-sm uppercase">
-                                    Affiliated to JNVU
+                                    Girls College
                                 </div>
                             </div>
                         </div>
@@ -785,7 +787,6 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                             { name: "Sports & Gym", img: "/uploads/Supporting/gym.png" }, // Missing image, keeping icon as fallback
                             { name: "IT Infrastructure", img: "/uploads/Supporting/IT.png" },
                             { name: "Science Labs", img: "/uploads/Supporting/lab.png" },
-                            { name: "Cafeteria", img: "/uploads/mess/canteen.jpg" },
                             { name: "Auditorium", img: "/uploads/Supporting/audio.png" },
                             { name: "Transport", img: "/uploads/Supporting/trans.png" },
                             { name: "Extra-curricular", img: "/uploads/Supporting/extra.png" }
@@ -909,7 +910,7 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                                 </li>
                             </ul>
                         </div>
-                        <Link href="/contact" className="px-10 py-5 bg-sandstone text-oxford rounded-full font-black text-xs uppercase tracking-widest hover:scale-105 transition-all shadow-xl shrink-0 relative z-10">
+                        <Link href="/apply" className="px-10 py-5 bg-sandstone text-oxford rounded-full font-black text-xs uppercase tracking-widest hover:scale-105 transition-all shadow-xl shrink-0 relative z-10">
                             Apply for Admission
                         </Link>
                     </div>
@@ -988,14 +989,14 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                     <h2 className="text-4xl md:text-6xl font-black text-oxford mb-8 leading-tight uppercase">Empowering Women</h2>
                     <div className="h-1.5 w-24 bg-oxford mx-auto mb-10 rounded-full" />
                     <p className="text-xl text-oxford/80 font-medium mb-12">
-                        Join a community of leaders, thinkers, and changemakers. Admissions are now open for the upcoming session.
+                        Join a community of leaders, thinkers, and changemakers. Admissions are now open for the 2026-27 session.
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4">
                         <a href="tel:+916377204208" className="px-10 py-5 bg-oxford text-white rounded-full font-bold uppercase tracking-wider shadow-2xl hover:bg-white hover:text-oxford transition-all flex items-center justify-center gap-2">
                             Call: 6377204208
                             <Phone size={18} />
                         </a>
-                        <Link href="https://vidyawadicollege.org/admissions/apply" className="px-10 py-5 bg-white text-oxford rounded-full font-bold uppercase tracking-wider shadow-2xl hover:shadow-xl transition-all flex items-center justify-center gap-2">
+                        <Link href="/apply" className="px-10 py-5 bg-white text-oxford rounded-full font-bold uppercase tracking-wider shadow-2xl hover:shadow-xl transition-all flex items-center justify-center gap-2">
                             Apply for Admission
                             <ArrowRight size={18} />
                         </Link>

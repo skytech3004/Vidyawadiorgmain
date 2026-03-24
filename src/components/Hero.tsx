@@ -13,7 +13,12 @@ export default function Hero() {
     const subtitleRef = useRef<HTMLParagraphElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
     const [textIndex, setTextIndex] = useState(0);
-    const texts = ["शिक्षा भी, संस्कार भी", "Nurturing Minds, Shaping Futures"];
+    const texts = [
+        "70 Years of Excellence",
+        "Admissions Open 2026-27",
+        "शिक्षा भी, संस्कार भी",
+        "Nurturing Minds, Shaping Futures"
+    ];
 
     useEffect(() => {
         const timer = setInterval(() => {

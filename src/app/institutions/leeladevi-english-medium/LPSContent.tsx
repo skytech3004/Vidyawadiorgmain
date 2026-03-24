@@ -6,9 +6,11 @@ import {
     BookOpen, Trophy, School, Users, Star, Microscope,
     Medal, Phone, MapPin, Mail, CheckCircle2,
     Music, Calendar, User, FileText, Sparkles,
-    Play, X, Volume2, VolumeX, Maximize2
+    Play, X, Volume2, VolumeX, Maximize2,
+    Award, ArrowRight
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 // --- Data ---
 
@@ -672,12 +674,20 @@ export default function LPSContent() {
                             <div>
                                 <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
                                     <ShieldStar className="text-sandstone" />
-                                    NCC & Scouts
+                                    NCC, Scouts & Horse Riding
                                 </h3>
-                                <p className="text-white/70 leading-relaxed">
-                                    <strong>NCC:</strong> Introduced in 2014, now with 50 cadets preparing for the Indian Armed Forces.<br />
-                                    <strong>Bharat Scout & Guide:</strong> Active since 2016-17, currently training 51 students.
-                                </p>
+                                <div className="space-y-4 text-white/70 leading-relaxed">
+                                    <p>
+                                        <strong>NCC:</strong> Introduced in 2014, now with 50 cadets preparing for the Indian Armed Forces.
+                                    </p>
+                                    <p>
+                                        <strong>Bharat Scout & Guide:</strong> Active since 2016-17, currently training 51 students.
+                                    </p>
+                                    <p className="p-4 bg-sandstone/10 rounded-2xl border border-sandstone/20 text-white">
+                                        <Award className="text-sandstone mb-2" size={24} />
+                                        <strong>Equestrian Center (Horse Riding):</strong> Our specialized Horse Riding club trains students in equestrian arts, fostering courage, coordination, and a unique bond with nature.
+                                    </p>
+                                </div>
                             </div>
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
                                 {[
@@ -742,6 +752,7 @@ export default function LPSContent() {
                             { name: "Music & Painting Studio", img: "/images/english school/93b4f897-0aca-4189-a717-16c13f8372d5.jpg" },
                             { name: "Geography Laboratory" },
                             { name: "NCC & Guide", img: "/llll-AAA.jpeg" },
+                            { name: "Equestrian Center (Horse Riding)", img: "/uploads/mess/sport.jpg" }, // Using sport.jpg as placeholder
                             { name: "Library", img: "/images/english school/706b5bd7-1cbd-40f0-a48f-2ec78225ac48.jpg" },
                             { name: "Computer Center", img: "/images/english school/344537e3-f907-4894-b74e-6c120656cc03.jpg" },
                             { name: "Multimedia Room", img: "/images/english school/a40160d0-ce25-4bad-818d-e2e729dc47f4.jpg" },
@@ -902,14 +913,16 @@ export default function LPSContent() {
             <section className="py-20 px-6 bg-sandstone relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
                 <div className="max-w-4xl mx-auto text-center relative z-10">
-                    <h2 className="text-4xl md:text-5xl font-black text-oxford mb-8 uppercase tracking-tighter">Admissions Open 2025-26</h2>
+                    <h2 className="text-4xl md:text-5xl font-black text-oxford mb-8 uppercase tracking-tighter">Admissions Open 2026-27</h2>
                     <p className="text-xl text-oxford/70 font-medium mb-12 max-w-2xl mx-auto">
                         Empower your daughter with quality education and a nurturing environment. Join the LPS family today.
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-6">
-                        <a href="tel:6377203204" className="px-10 py-5 bg-oxford text-white rounded-full font-bold uppercase tracking-widest text-xs shadow-2xl hover:bg-white hover:text-oxford transition-all flex items-center justify-center gap-3">
-                            <Phone size={18} /> Call Us: 6377203204
-                        </a>
+                        <Link href="/apply" className="px-10 py-5 bg-white text-oxford rounded-full font-extrabold uppercase tracking-widest hover:shadow-2xl transition-all flex items-center justify-center gap-3 group relative overflow-hidden">
+                            <div className="absolute inset-0 bg-oxford/5 -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
+                            <span className="relative z-10">Apply for Admission</span>
+                            <ArrowRight size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+                        </Link>
                         <a href="#contact" className="px-10 py-5 bg-white text-oxford rounded-full font-bold uppercase tracking-widest text-xs shadow-2xl hover:shadow-inner transition-all flex items-center justify-center gap-3">
                             Visit Our Campus
                         </a>

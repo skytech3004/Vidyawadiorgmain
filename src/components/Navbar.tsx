@@ -29,16 +29,17 @@ const navLinks = [
     },
     {
         name: "Admissions",
-        href: "#Admissions",
+        href: "/apply",
         subLinks: [
-            { name: "Download Brochure (PDF)", href: "/brochures/prospectus.pdf", isBrochure: true },
-            { name: "Leeladevi Parasmal Sancheti Kanya Mahavidyalaya", href: "/institutions/leela-devi-college" },
-            { name: "Marudhar Balika Vidyapeeth (Sr. Sec.) Vidyawadi Hindi/English Medium (RBSE)", href: "/institutions/marudhar-balika-vidyapeeth" },
-            { name: "Leeladevi Parasmal Sancheti English Medium Sr.Sec.School", href: "/institutions/leeladevi-english-medium" },
-            { name: "Sushiladevi Prakashraj Modi Primary School", href: "/institutions/sushiladevi" }
+            { name: "Apply Online (Admission 2026-27)", href: "/apply" },
+            { name: "Download Prospectus (PDF)", href: "/brochures/prospectus.pdf", isBrochure: true },
+            { name: "Leela Devi College (Higher Education)", href: "/institutions/leela-devi-college" },
+            { name: "RBSE Schools (Hindi & English Medium)", href: "/institutions/marudhar-balika-vidyapeeth" },
+            { name: "CBSE School (LPS English Medium)", href: "/institutions/leeladevi-english-medium" },
+            { name: "Primary School (Sushiladevi)", href: "/institutions/sushiladevi" }
         ]
     },
-    { name: "Amenities", href: "#home" },
+    { name: "Amenities", href: "#facilities" },
     { name: "Hostel", href: "/hostel" },
     { name: "Gallery", href: "/gallery" },
     { name: "Blog", href: "/blog" },
