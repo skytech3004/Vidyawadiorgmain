@@ -38,7 +38,7 @@ const navLinks = [
             { name: "Sushiladevi Prakashraj Modi Primary School", href: "/institutions/sushiladevi" }
         ]
     },
-    { name: "Amenities", href: "#facilities" },
+    { name: "Amenities", href: "/amenities" },
     { name: "Hostel", href: "/hostel" },
     { name: "Gallery", href: "/gallery" },
     { name: "Blog", href: "/blog" },

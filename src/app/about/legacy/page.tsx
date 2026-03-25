@@ -91,7 +91,7 @@ export default function LegacyPage() {
                             className="p-10 bg-white/5 rounded-3xl border border-white/10"
                         >
                             <Star size={48} className="text-sandstone mx-auto mb-6" />
-                            <div className="text-5xl font-black mb-2 text-white">5000+</div>
+                            <div className="text-5xl font-black mb-2 text-white">50000+</div>
                             <div className="text-sandstone font-bold uppercase tracking-widest text-sm">Global Alumni</div>
                         </motion.div>
                     </div>

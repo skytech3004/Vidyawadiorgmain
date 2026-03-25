@@ -233,10 +233,13 @@ export default function DonatePage() {
                                         </div>
                                     </div>
 
-                                    <div className="mt-12 p-6 bg-white/5 rounded-2xl border border-white/10">
-                                        <p className="text-xs text-white/40 leading-relaxed italic">
-                                            "Education is the most powerful weapon which you can use to change the world." — Vidyawadi Vision
-                                        </p>
+                                    <div className="space-y-8">
+                                        <div className="p-6 bg-white/5 rounded-2xl border border-white/10">
+                                            <p className="text-xs text-white/40 leading-relaxed italic">
+                                                "Education is the most powerful weapon which you can use to change the world." — Vidyawadi Vision
+                                            </p>
+                                        </div>
+
                                     </div>
                                 </div>
 
@@ -259,6 +262,25 @@ export default function DonatePage() {
                                             >
                                                 Donate Monthly
                                             </button>
+                                        </div>
+
+                                        {/* Quick Pay QR Code */}
+                                        <div className="p-8 bg-stone-50 rounded-[2rem] text-center border border-oxford/5">
+                                            <p className="text-oxford text-[10px] font-black uppercase tracking-widest mb-4">Quick Pay via QR</p>
+                                            <div className="relative w-48 h-48 mx-auto mb-4 bg-white rounded-xl overflow-hidden border-2 border-stone-100 p-2">
+                                                <Image 
+                                                    src="/donation_qr.png" 
+                                                    alt="Donation QR Code" 
+                                                    width={192} 
+                                                    height={192}
+                                                    className="w-full h-full object-contain"
+                                                />
+                                            </div>
+                                            <div className="flex justify-center gap-3 opacity-60">
+                                                <Image src="/images/upi-logo.png" width={30} height={15} alt="UPI" className="object-contain" />
+                                                <Image src="/images/gpay-logo.png" width={30} height={15} alt="GPay" className="object-contain" />
+                                                <Image src="/images/phonepe-logo.png" width={30} height={15} alt="PhonePe" className="object-contain" />
+                                            </div>
                                         </div>
 
                                         {/* Amount Selection */}
@@ -403,19 +425,14 @@ export default function DonatePage() {
                             <p className="text-white/40 text-[10px] font-bold uppercase tracking-widest mb-8">UPI / QR Payment</p>
                             
                             <div className="relative p-4 bg-white rounded-3xl mb-8 shadow-2xl">
-                                <div className="w-48 h-48 bg-stone-100 flex items-center justify-center overflow-hidden rounded-2xl border-4 border-white">
-                                    {/* Placeholder QR - User needs to provide actual payload for real QR */}
-                                    <img 
-                                        src="/images/qr-placeholder.png" 
+                                <div className="w-48 h-48 bg-white flex items-center justify-center overflow-hidden rounded-2xl border-4 border-white">
+                                    <Image 
+                                        src="/donation_qr.png" 
                                         alt="Payment QR Code" 
-                                        className="w-full h-full object-contain opacity-50 grayscale"
+                                        width={192} 
+                                        height={192}
+                                        className="w-full h-full object-contain"
                                     />
-                                    <div className="absolute inset-0 flex items-center justify-center flex-col gap-2 bg-white/80 backdrop-blur-[2px] opacity-100 group-hover:opacity-0 transition-opacity">
-                                        <div className="w-12 h-12 bg-oxford/10 rounded-full flex items-center justify-center animate-pulse">
-                                            <ShieldCheck size={24} className="text-oxford" />
-                                        </div>
-                                        <span className="text-[10px] font-black text-oxford uppercase tracking-widest">Secure QR</span>
-                                    </div>
                                 </div>
                             </div>
                             
