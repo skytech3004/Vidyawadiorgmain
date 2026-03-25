@@ -6,7 +6,7 @@ import {
     BookOpen, Trophy, School, Users, Star, Microscope,
     Medal, Phone, MapPin, Mail, CheckCircle2,
     Music, Calendar, User, FileText, Sparkles,
-    Play, X, Volume2, VolumeX, Maximize2
+    Play, X, Volume2, VolumeX, Maximize2, Globe
 } from "lucide-react";
 import Image from "next/image";
 
@@ -556,6 +556,103 @@ export default function LPSContent() {
                                         {skill}
                                     </span>
                                 ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Fee Structure Section */}
+            <section className="py-24 px-6 bg-white overflow-hidden">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Investment in Excellence</span>
+                        <h2 className="text-4xl md:text-6xl font-extrabold text-oxford leading-tight text-center">Fee Structure 2026–27</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
+                    </div>
+
+                    <div className="grid lg:grid-cols-2 gap-12">
+                        {/* Primary & Middle */}
+                        <div className="bg-white p-8 rounded-[2.5rem] border-2 border-gray-100 hover:border-sandstone/30 hover:shadow-2xl transition-all duration-500 group/card shadow-sm">
+                            <h3 className="text-2xl font-black text-oxford mb-8 flex items-center gap-3 group-hover/card:text-sandstone transition-colors">
+                                <BookOpen className="text-sandstone" />
+                                Nursery to Class X
+                            </h3>
+                            <div className="overflow-x-auto">
+                                <table className="w-full text-left">
+                                    <thead>
+                                        <tr className="border-b border-gray-200">
+                                            <th className="py-4 font-black uppercase text-[10px] tracking-widest text-gray-400">Class</th>
+                                            <th className="py-4 font-black uppercase text-[10px] tracking-widest text-gray-400">Installments</th>
+                                            <th className="py-4 font-black uppercase text-[10px] tracking-widest text-gray-400 text-right">Total Fee</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-gray-100">
+                                        {[
+                                            { class: "Nursery", inst: "₹4,425 × 4", total: "₹17,700" },
+                                            { class: "KG – Prep", inst: "₹4,600 × 4", total: "₹18,400" },
+                                            { class: "Class I – II", inst: "₹5,325 × 4", total: "₹21,300" },
+                                            { class: "Class III – IV", inst: "₹5,850 × 4", total: "₹23,400" },
+                                            { class: "Class V", inst: "₹8,050 × 4", total: "₹32,200" },
+                                            { class: "Class VI", inst: "₹8,475 × 4", total: "₹33,900" },
+                                            { class: "Class VII – VIII", inst: "₹9,600 × 4", total: "₹38,400" },
+                                            { class: "Class IX – X", inst: "₹9,900 × 4", total: "₹39,600" },
+                                        ].map((row, i) => (
+                                            <tr key={i} className="hover:bg-sandstone/5 group/row transition-colors cursor-pointer capitalize">
+                                                <td className="py-4 px-4 font-bold text-oxford group-hover/row:text-sandstone transition-colors">{row.class}</td>
+                                                <td className="py-4 px-4 text-gray-500 text-sm group-hover/row:text-sandstone transition-colors">{row.inst}</td>
+                                                <td className="py-4 px-4 text-right font-black text-oxford group-hover/row:text-sandstone transition-colors">{row.total}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div className="mt-8 p-6 bg-white rounded-2xl border border-gray-100 flex flex-col sm:flex-row justify-between items-center sm:items-start gap-4">
+                                <div>
+                                    <h4 className="font-bold text-oxford text-sm mb-1 uppercase tracking-wider">Admission Fee</h4>
+                                    <p className="text-xs text-gray-500">Nursery to V: ₹2,500 | VI to X: ₹5,000</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Senior Secondary */}
+                        <div className="bg-white p-8 rounded-[2.5rem] border-2 border-gray-100 hover:border-sandstone/30 hover:shadow-2xl transition-all duration-500 group/card shadow-sm">
+                            <h3 className="text-2xl font-black text-oxford mb-8 flex items-center gap-3 group-hover/card:text-sandstone transition-colors">
+                                <Globe className="text-sandstone" />
+                                Senior Secondary (XI–XII)
+                            </h3>
+                            <div className="overflow-x-auto">
+                                <table className="w-full text-left">
+                                    <thead>
+                                        <tr className="border-b border-gray-200">
+                                            <th className="py-4 font-black uppercase text-[10px] tracking-widest text-gray-400">Stream</th>
+                                            <th className="py-4 font-black uppercase text-[10px] tracking-widest text-gray-400">Installments</th>
+                                            <th className="py-4 font-black uppercase text-[10px] tracking-widest text-gray-400 text-right">Total Fee</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-gray-100">
+                                        {[
+                                            { stream: "Science (PCM)", inst: "₹13,650 × 4", total: "₹54,600" },
+                                            { stream: "Science (PCB)", inst: "₹14,350 × 4", total: "₹57,400" },
+                                            { stream: "Commerce (General)", inst: "₹11,325 × 4", total: "₹45,300" },
+                                            { stream: "Commerce (Comp Sci)", inst: "₹11,650 × 4", total: "₹46,600" },
+                                            { stream: "Arts (General)", inst: "₹11,400 × 4", total: "₹45,600" },
+                                            { stream: "Arts (Music/Geo/Comp)", inst: "₹12,000 × 4", total: "₹48,000" },
+                                        ].map((row, i) => (
+                                            <tr key={i} className="hover:bg-sandstone/5 group/row transition-colors cursor-pointer capitalize">
+                                                <td className="py-4 px-4 font-bold text-oxford group-hover/row:text-sandstone transition-colors">{row.stream}</td>
+                                                <td className="py-4 px-4 text-gray-500 text-sm group-hover/row:text-sandstone transition-colors">{row.inst}</td>
+                                                <td className="py-4 px-4 text-right font-black text-oxford group-hover/row:text-sandstone transition-colors">{row.total}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div className="mt-8 p-6 bg-white rounded-2xl border border-gray-100 flex flex-col sm:flex-row justify-between items-center sm:items-start gap-4">
+                                <div>
+                                    <h4 className="font-bold text-oxford text-sm mb-1 uppercase tracking-wider">Admission Fee</h4>
+                                    <p className="text-xs text-gray-500">Class XI & XII: ₹5,000</p>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -378,7 +378,7 @@ export default function Page() {
                 <div className="max-w-7xl mx-auto">
                     <SectionHeader title="Hostel Fee Structure" subtitle="2026 – 27 Session" />
 
-                    <div className="overflow-x-auto rounded-[3rem] shadow-2xl border border-black/5 bg-white">
+                    <div className="overflow-x-auto rounded-[3rem] shadow-2xl border-2 border-gray-100 bg-white hover:border-sandstone/30 hover:shadow-2xl transition-all duration-500 group/card">
                         <table className="w-full text-left border-collapse">
                             <thead>
                                 <tr className="bg-oxford text-white">
@@ -387,16 +387,18 @@ export default function Page() {
                                     <th className="p-10 text-xs font-black uppercase tracking-widest">Premium (AC)</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-slate-100">
-                                {[
-                                    { class: "Nursery to V", nonAc: "₹75,500", ac: "-" },
-                                    { class: "VI to IX", nonAc: "₹75,500", ac: "₹1,10,500" },
-                                    { class: "X to College (UG/PG)", nonAc: "₹80,500", ac: "₹1,10,500" },
-                                    { class: "Integrated Courses", nonAc: "₹80,500", ac: "₹1,10,500" },
-                                    { class: "B.Ed 1st & 2nd Year", nonAc: "₹80,500", ac: "₹1,10,500" }
+                            <tbody className="divide-y divide-slate-100">                                 {[
+                                    { class: "Nursery to Class 5", nonAc: "₹87,500", ac: "₹1,20,500" },
+                                    { class: "Class 6", nonAc: "₹87,500", ac: "₹1,22,500" },
+                                    { class: "Class 7 to 9", nonAc: "₹90,500", ac: "₹1,22,500" },
+                                    { class: "Class 10 to XII", nonAc: "₹95,500", ac: "₹1,22,500" },
+                                    { class: "College (UG/PG)", nonAc: "₹95,500", ac: "₹1,22,500" },
+                                    { class: "B.Ed (1st & 2nd Year)", nonAc: "₹95,500", ac: "-" },
+                                    { class: "B.Ed 3rd Year", nonAc: "₹61,500", ac: "-" },
+                                    { class: "B.Ed 4th Year", nonAc: "₹56,500", ac: "-" }
                                 ].map((row, i) => (
-                                    <tr key={i} className="hover:bg-slate-50 transition-colors">
-                                        <td className="p-10 font-bold text-oxford">{row.class}</td>
+                                    <tr key={i} className="hover:bg-sandstone/5 group transition-colors cursor-pointer">
+                                        <td className="p-10 font-bold text-oxford group-hover:text-sandstone transition-colors">{row.class}</td>
                                         <td className="p-10 text-gray-500 font-medium">{row.nonAc} / Year</td>
                                         <td className="p-10">
                                             {row.ac !== "-" ? (
@@ -418,7 +420,7 @@ export default function Page() {
                             </div>
                             <div>
                                 <h4 className="font-bold text-oxford mb-2">Short Duration Stay</h4>
-                                <p className="text-sm text-gray-500">Non AC: ₹10,000 / Month • AC: ₹12,000 / Month</p>
+                                <p className="text-sm text-gray-500">Non AC: ₹10,000 / Month • AC: ₹12,000 / Month (Min. 3 Months)</p>
                             </div>
                         </div>
                         <div className="bg-white p-8 rounded-3xl shadow-sm border border-black/5 flex items-start gap-4">

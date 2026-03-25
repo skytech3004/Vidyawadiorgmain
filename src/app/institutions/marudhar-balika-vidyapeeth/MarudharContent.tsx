@@ -306,7 +306,96 @@ export default function MarudharContent() {
                 </div>
             </section>
 
+
+            {/* Fee Structure Section */}
+            <section className="py-24 px-6 bg-white overflow-hidden text-devanagari">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Investment in Education</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight text-center">Fee Structure 2026–27</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
+                    </div>
+
+                    <div className="grid lg:grid-cols-2 gap-12">
+                        {/* Hindi Medium */}
+                        <div className="bg-white p-8 rounded-[2.5rem] border-2 border-gray-100 hover:border-sandstone/30 hover:shadow-2xl transition-all duration-500 group/card">
+                            <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3 group-hover/card:text-sandstone transition-colors">
+                                <BookOpen className="text-sandstone" />
+                                RBSE Hindi Medium
+                            </h3>
+                            <div className="overflow-x-auto">
+                                <table className="w-full text-left">
+                                    <thead>
+                                        <tr className="border-b border-gray-200">
+                                            <th className="py-4 font-black uppercase text-[10px] tracking-widest text-gray-400">Class</th>
+                                            <th className="py-4 font-black uppercase text-[10px] tracking-widest text-gray-400">Installments</th>
+                                            <th className="py-4 font-black uppercase text-[10px] tracking-widest text-gray-400 text-right">Total Fee</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-gray-100">
+                                        {[
+                                            { class: "VI – VIII", inst: "₹4,750 × 4", total: "₹19,000" },
+                                            { class: "IX – X", inst: "₹6,300 × 4", total: "₹25,200" },
+                                            { class: "XI – XII Arts", inst: "₹6,700 × 4", total: "₹26,800" },
+                                            { class: "XI – XII Commerce", inst: "₹6,700 × 4", total: "₹26,800" },
+                                            { class: "XI – XII Science", inst: "₹8,250 × 4", total: "₹33,000" },
+                                        ].map((row, i) => (
+                                            <tr key={i} className="hover:bg-sandstone/5 transition-colors group cursor-pointer">
+                                                <td className="py-4 px-4 font-bold text-oxford group-hover:text-sandstone transition-colors">{row.class}</td>
+                                                <td className="py-4 px-4 text-gray-500 text-sm">{row.inst}</td>
+                                                <td className="py-4 px-4 text-right font-black text-sandstone-dark">{row.total}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div className="mt-6 p-4 bg-white rounded-xl border border-gray-100 text-xs text-gray-500">
+                                <p><strong>Admission Fee:</strong> VI–VIII: ₹2,000 | IX–XII: ₹4,000</p>
+                            </div>
+                        </div>
+
+                        {/* English Medium */}
+                        <div className="bg-white p-8 rounded-[2.5rem] border-2 border-gray-100 hover:border-sandstone/30 hover:shadow-2xl transition-all duration-500 group/card">
+                            <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3 group-hover/card:text-sandstone transition-colors">
+                                <Globe className="text-sandstone" />
+                                RBSE English Medium
+                            </h3>
+                            <div className="overflow-x-auto">
+                                <table className="w-full text-left">
+                                    <thead>
+                                        <tr className="border-b border-gray-200">
+                                            <th className="py-4 font-black uppercase text-[10px] tracking-widest text-gray-400">Class</th>
+                                            <th className="py-4 font-black uppercase text-[10px] tracking-widest text-gray-400">Installments</th>
+                                            <th className="py-4 font-black uppercase text-[10px] tracking-widest text-gray-400 text-right">Total Fee</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-gray-100">
+                                        {[
+                                            { class: "VI – VIII", inst: "₹5,100 × 4", total: "₹20,400" },
+                                            { class: "IX – X", inst: "₹6,750 × 4", total: "₹27,000" },
+                                            { class: "XI – XII Arts", inst: "₹7,200 × 4", total: "₹28,800" },
+                                            { class: "XI – XII Commerce", inst: "₹7,200 × 4", total: "₹28,800" },
+                                            { class: "XI – XII Science", inst: "₹8,850 × 4", total: "₹35,400" },
+                                        ].map((row, i) => (
+                                            <tr key={i} className="hover:bg-sandstone/5 transition-colors group cursor-pointer">
+                                                <td className="py-4 px-4 font-bold text-oxford group-hover:text-sandstone transition-colors">{row.class}</td>
+                                                <td className="py-4 px-4 text-gray-500 text-sm">{row.inst}</td>
+                                                <td className="py-4 px-4 text-right font-black text-sandstone-dark">{row.total}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div className="mt-6 p-4 bg-white rounded-xl border border-gray-100 text-xs text-gray-500">
+                                <p><strong>Admission Fee:</strong> VI–VIII: ₹2,000 | IX–XII: ₹4,000</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* Scholarships & Merit Awards */}
+
             <section className="py-24 px-6 bg-gray-50 overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
