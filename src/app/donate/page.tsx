@@ -281,7 +281,7 @@ export default function DonatePage() {
                                             <p className="text-oxford text-[10px] font-black uppercase tracking-widest mb-4">Quick Pay via QR</p>
                                             <div className="relative w-48 h-48 mx-auto mb-4 bg-white rounded-xl overflow-hidden border-2 border-stone-100 p-2">
                                                 <Image 
-                                                    src="/donation_qr.png" 
+                                                    src="/scane.png" 
                                                     alt="Donation QR Code" 
                                                     width={192} 
                                                     height={192}

@@ -258,17 +258,16 @@ export default function Page() {
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {[
-                            { image: "/uploads/mess/security.jpg", title: "Safety & CCTV", desc: "Round-the-clock security with full CCTV coverage." },
-                            { image: "/images/english school/7e7ad0cf-7675-40dc-b2d9-a7a4dc3053a4.jpg", title: "Pure Jain Food", desc: "Nutritious Satvik meals with 5 servings per day." },
-                            { image: "/uploads/mess/RO.jpg", title: "RO Drinking Water", desc: "Pure and safe RO purified drinking water available 24/7." },
-                            { image: "/uploads/mess/HOT.jpg", title: "Hot Water", desc: "Constant supply of hot water during winter months." },
-                            { image: "/uploads/mess/aa.jpg", title: "Digital Library", desc: "24/7 access to educational resources and quiet study space." },
-                            { image: "/uploads/mess/yoga.jpeg", title: "Yoga & Meditation", desc: "Daily morning sessions for physical and mental well-being." },
-                            { image: "/uploads/mess/sport.jpg", title: "Sports Facilities", desc: "International standard stadium and sports ground." },
-                            { image: "/uploads/mess/Health.jpg", title: "Health Care 24x7", desc: "On-campus medical assistance and annual checkups." },
-                            { image: "/uploads/mess/ac.jpg", title: "AC / Air Cooled", desc: "Well-ventilated rooms with central cooling options." },
-                            { image: "/uploads/mess/laundry.jpg", title: "Laundry Services", desc: "Professional and hassle-free laundry services for all students." },
-                            { image: "/uploads/mess/tuck.jpg", title: "Tuck Shop", desc: "On-campus tuck shop for all daily essentials and stationery." }
+                            { icon: <ShieldCheck />, title: "Safety & CCTV", desc: "Round-the-clock security with video surveillance coverage." },
+                            { icon: <Droplets />, title: "RO Drinking Water", desc: "Pure and safe RO purified drinking water available 24/7." },
+                            { icon: <Thermometer />, title: "Hot Water", desc: "Constant supply of hot water during winter months." },
+                            { icon: <GraduationCap />, title: "Digital Library", desc: "24/7 access to study resources and quiet learning spaces." },
+                            { icon: <Heart />, title: "Yoga & Meditation", desc: "Daily sessions for physical balance and mental well-being." },
+                            { icon: <Dumbbell />, title: "Sports Facilities", desc: "Stadium and sports ground for fitness and skill building." },
+                            { icon: <Stethoscope />, title: "Health Care 24x7", desc: "On-campus medical assistance and periodic checkups." },
+                            { icon: <Wind />, title: "AC / Air Cooled", desc: "Well-ventilated rooms with central cooling options." },
+                            { icon: <Shirt />, title: "Laundry Services", desc: "Professional and hassle-free laundry services for students." },
+                            { icon: <ShoppingBag />, title: "Tuck Shop", desc: "On-campus tuck shop for daily essentials and stationery." }
                         ].map((item: any, i) => (
                             <motion.div
                                 key={i}
@@ -310,7 +309,7 @@ export default function Page() {
             {/* 4. Room Section (Tabs) */}
             <section className="py-24 px-6 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto">
-                    <SectionHeader title="Our Accommodations" subtitle="Spacious & Comfortable" />
+                    <SectionHeader title="Our Accommodations" subtitle="Total 8 Hostels: 4 AC + 4 Non-AC" />
 
                     <div className="flex justify-center mb-16">
                         <div className="bg-slate-100 p-2 rounded-2xl flex gap-2">
@@ -318,13 +317,13 @@ export default function Page() {
                                 onClick={() => setActiveRoomType("non-ac")}
                                 className={`px-8 py-3 rounded-xl font-black uppercase tracking-widest text-xs transition-all ${activeRoomType === "non-ac" ? "bg-white text-oxford shadow-lg" : "text-gray-400 hover:text-oxford"}`}
                             >
-                                Standard Non-AC
+                                Non-AC Hostels (4)
                             </button>
                             <button
                                 onClick={() => setActiveRoomType("ac")}
                                 className={`px-8 py-3 rounded-xl font-black uppercase tracking-widest text-xs transition-all ${activeRoomType === "ac" ? "bg-white text-oxford shadow-lg" : "text-gray-400 hover:text-oxford"}`}
                             >
-                                Premium AC
+                                AC Hostels (4)
                             </button>
                         </div>
                     </div>
@@ -338,15 +337,16 @@ export default function Page() {
                             transition={{ duration: 0.5 }}
                             className="grid lg:grid-cols-2 gap-12 items-center"
                         >
-                            <div className="aspect-video rounded-[3rem] overflow-hidden shadow-2xl">
+                            <div className="relative h-[340px] sm:h-[420px] md:h-[480px] rounded-[3rem] overflow-hidden shadow-2xl">
                                 <img
                                     src={activeRoomType === "ac" ? "/f837631c-4bc9-4494-b8f1-fff9b07554d8.jpg" : "/hostel.jpg"}
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full object-cover object-center"
+                                    loading="eager"
                                 />
                             </div>
                             <div className="space-y-8">
                                 <h3 className="text-3xl md:text-5xl font-bold text-oxford">
-                                    {activeRoomType === "ac" ? "Premium AC Suites" : "Standard Air-Cooled Rooms"}
+                                    {activeRoomType === "ac" ? "AC Hostel Suites" : "Non-AC Hostel Rooms"}
                                 </h3>
                                 <div className="grid grid-cols-2 gap-x-8 gap-y-4">
                                     {[
