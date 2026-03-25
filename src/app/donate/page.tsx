@@ -151,10 +151,22 @@ export default function DonatePage() {
             <Navbar />
 
             {/* Hero Section */}
-            <section className="relative pt-32 pb-20 px-6 bg-oxford overflow-hidden">
-                <div className="absolute inset-0 opacity-10">
-                    <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:40px_40px]" />
+            <section className="relative pt-28 md:pt-32 pb-16 md:pb-20 px-6 bg-oxford overflow-hidden">
+                {/* Big responsive hero image background */}
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src="/IMG_9398-ezgif.com-video-to-webp-converter.webp"
+                        alt="Vidyawadi campus"
+                        fill
+                        priority
+                        className="object-cover opacity-25"
+                    />
+                    <div className="absolute inset-0 bg-oxford/70" />
+                    <div className="absolute inset-0 opacity-10">
+                        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:40px_40px]" />
+                    </div>
                 </div>
+
                 <div className="max-w-7xl mx-auto relative z-10 text-center">
                     <motion.span
                         initial={{ opacity: 0, y: 10 }}
