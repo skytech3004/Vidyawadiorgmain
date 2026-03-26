@@ -402,7 +402,226 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                     </div>
                 </div>
             </section>
+            {/* Facilities Section */}
+            <section className="py-24 px-6 overflow-hidden">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Facilities & Campus Life</span>
+                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2">Supporting Your Growth</h2>
+                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+                            The college provides a learner-friendly environment designed for academics, sports, and overall well-being.
+                        </p>
+                    </div>
 
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                        {([
+                            { name: "Girls Hostel", img: "/images.jpg" },
+                            { name: "Medical Support", img: "/uploads/Supporting/health.png" },
+                            { name: "Library", img: "/images/english school/63680e76-2f23-4f80-a9ee-96a18fdd6348.jpg" },
+                            { name: "Sports & Gym", img: "/uploads/Supporting/gym.png" }, // Missing image, keeping icon as fallback
+                            { name: "IT Infrastructure", img: "/uploads/Supporting/IT.png" },
+                            { name: "Science Labs", img: "/uploads/Supporting/lab.png" },
+                            { name: "Cafeteria", img: "/images/english school/63680e76-2f23-4f80-a9ee-96a18fdd6348.jpg" },
+                            { name: "Auditorium", img: "/uploads/Supporting/audio.png" },
+                            { name: "Transport", img: "/uploads/Supporting/trans.png" },
+                            { name: "Extra-curricular", img: "/uploads/Supporting/extra.png" }
+                        ] as { name: string; img?: string; icon?: any }[]).map((facility, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                                className="group p-8 rounded-3xl bg-gray-50 hover:bg-white hover:shadow-2xl transition-all border border-oxford hover:border-sandstone/20 text-center flex flex-col items-center"
+                            >
+                                <div className="w-40 h-40 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-6 overflow-hidden group-hover:scale-110 transition-transform">
+                                    {facility.img ? (
+                                        <img src={facility.img} alt={facility.name} className="w-full h-full object-cover" />
+                                    ) : facility.icon ? (
+                                        <facility.icon size={32} strokeWidth={1.5} className="text-oxford group-hover:text-sandstone transition-colors" />
+                                    ) : null}
+                                </div>
+                                <h3 className="font-bold text-oxford leading-tight">{facility.name}</h3>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+            <AnimatePresence>
+                {selectedLab && (
+                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setSelectedLab(null)}
+                            className="absolute inset-0 bg-oxford/80 backdrop-blur-md"
+                        />
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                            className="relative w-full max-w-4xl max-h-[90vh] bg-white rounded-[3rem] shadow-2xl overflow-hidden flex flex-col"
+                        >
+                            {/* Modal Header */}
+                            <div className={`p-8 md:p-12 bg-gradient-to-br ${selectedLab.gradient} text-white relative`}>
+                                <button
+                                    onClick={() => setSelectedLab(null)}
+                                    className="absolute top-8 right-8 w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center hover:bg-white/30 transition-colors z-10"
+                                >
+                                    <X size={24} />
+                                </button>
+                                <div className="flex flex-col md:flex-row gap-8 items-start md:items-center">
+                                    <div className="w-24 h-24 rounded-[2rem] bg-white/20 backdrop-blur-md flex items-center justify-center text-5xl shadow-xl">
+                                        {selectedLab.icon}
+                                    </div>
+                                    <div className="flex-1">
+                                        <h2 className="text-3xl md:text-5xl font-black mb-4 leading-tight">{selectedLab.name}</h2>
+                                        <p className="text-white/90 text-lg font-medium max-w-2xl leading-relaxed">
+                                            {selectedLab.description}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Modal Content */}
+                            <div className="flex-1 overflow-y-auto p-8 md:p-12">
+                                <div className="grid lg:grid-cols-3 gap-12">
+                                    <div className="lg:col-span-2 space-y-12">
+                                        <section>
+                                            <h4 className="text-xs font-black uppercase tracking-[0.2em] text-sandstone mb-6 flex items-center gap-2">
+                                                <div className="w-2 h-2 rounded-full bg-sandstone" />
+                                                Overview
+                                            </h4>
+                                            <p className="text-gray-600 text-lg leading-relaxed whitespace-pre-line">
+                                                {selectedLab.fullDescription}
+                                            </p>
+                                        </section>
+
+                                        <div className="grid sm:grid-cols-2 gap-8">
+                                            <section className="bg-gray-50 p-8 rounded-[2rem]">
+                                                <h4 className="text-xs font-black uppercase tracking-[0.2em] text-sandstone mb-6">Key Activities</h4>
+                                                <p className="text-gray-700 font-medium leading-relaxed">
+                                                    {selectedLab.activities}
+                                                </p>
+                                            </section>
+                                            <section className="bg-oxford text-white p-8 rounded-[2rem]">
+                                                <h4 className="text-xs font-black uppercase tracking-[0.2em] text-sandstone mb-6">Learning Impact</h4>
+                                                <p className="text-white/80 font-medium leading-relaxed">
+                                                    {selectedLab.impact}
+                                                </p>
+                                            </section>
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-8">
+                                        <section className="sticky top-0">
+                                            <h4 className="text-xs font-black uppercase tracking-[0.2em] text-sandstone mb-6 flex items-center gap-2">
+                                                <div className="w-2 h-2 rounded-full bg-sandstone" />
+                                                Key Features
+                                            </h4>
+                                            <div className="space-y-4">
+                                                {selectedLab.keyFeatures.map((feature: string, i: number) => (
+                                                    <div key={i} className="flex items-start gap-4 p-4 bg-gray-50 rounded-2xl border border-gray-100 hover:border-sandstone/30 transition-colors">
+                                                        <div className="w-6 h-6 rounded-lg bg-sandstone/10 text-sandstone flex items-center justify-center shrink-0 mt-0.5">
+                                                            <CheckCircle2 size={14} />
+                                                        </div>
+                                                        <span className="text-sm font-bold text-oxford/70 leading-snug">{feature}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Modal Footer */}
+                            <div className="p-8 md:p-12 border-t border-gray-100 bg-gray-50 flex justify-between items-center shrink-0">
+                                <div className="hidden md:block">
+                                    <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Leela Devi Parasmal Sancheti Kanya Mahavidyalaya</p>
+                                </div>
+                                <button
+                                    onClick={() => setSelectedLab(null)}
+                                    className="px-10 py-4 bg-oxford text-white rounded-full font-black text-[10px] uppercase tracking-widest shadow-xl hover:bg-sandstone hover:text-oxford transition-all"
+                                >
+                                    Close Facility Info
+                                </button>
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
+
+            <section className="py-24 px-6 bg-gray-50 overflow-hidden">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Our Faculty</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight">College Faculty</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
+                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+                            Meet our dedicated faculty and staff members committed to excellence.
+                        </p>
+                    </div>
+
+                    <div className="overflow-x-auto bg-white rounded-[2rem] shadow-xl border border-oxford-100">
+                        <table className="w-full text-left border-collapse min-w-[600px]">
+                            <thead>
+                                <tr className="bg-oxford/5 border-b border-gray-100">
+                                    <th className="py-5 px-8 font-black text-oxford text-sm uppercase tracking-wider w-24">S.No.</th>
+                                    <th className="py-5 px-8 font-black text-oxford text-sm uppercase tracking-wider">Designation</th>
+
+                                    <th className="py-5 px-8 font-black text-oxford text-sm uppercase tracking-wider">Faculty Member</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {collegeFaculty.length > 0 ? (
+                                    collegeFaculty.slice(0, visibleFacultyCount).map((staff, i) => (
+                                        <tr key={staff._id || i} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors group">
+                                            <td className="py-5 px-8 text-gray-400 font-bold">{i + 1}</td>
+                                            <td className="py-5 px-8 text-gray-600 font-medium">
+                                                {(staff.department && staff.department !== "General") ? `${staff.designation} (${staff.department})` : staff.designation}
+                                            </td>
+                                            <td className="py-5 px-8">
+                                                <div className="flex items-center gap-5">
+                                                    <div className="w-12 h-12 rounded-full overflow-hidden bg-white shrink-0 border border-gray-200 group-hover:border-sandstone transition-colors shadow-sm">
+                                                        <img src="https://cdn-icons-png.flaticon.com/512/4288/4288270.png" alt={staff.name || "Faculty"} className="w-full h-full object-cover p-1.5 opacity-80" />
+                                                    </div>
+                                                    <span className="font-bold text-oxford text-lg group-hover:text-sandstone transition-colors">{staff.name}</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan={3} className="py-12 text-center text-gray-500">
+                                            <div className="animate-pulse flex flex-col items-center">
+                                                <div className="w-12 h-12 bg-gray-200 rounded-full mb-4"></div>
+                                                <div className="h-4 bg-gray-200 rounded w-48 mb-2"></div>
+                                                <div className="h-3 bg-gray-100 rounded w-32"></div>
+                                            </div>
+                                            <p className="mt-4">Loading faculty members...</p>
+                                        </td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {visibleFacultyCount < collegeFaculty.length && (
+                        <div className="mt-12 text-center">
+                            <button
+                                onClick={() => setVisibleFacultyCount(prev => prev + 10)}
+                                className="inline-flex items-center gap-3 px-10 py-4 bg-white text-oxford border border-gray-200 rounded-full font-black text-xs uppercase tracking-widest shadow-lg hover:border-sandstone hover:text-sandstone transition-all group"
+                            >
+                                Load More Faculty
+                                <div className="w-6 h-6 rounded-full bg-oxford/5 flex items-center justify-center group-hover:bg-sandstone/10 transition-colors">
+                                    <ChevronRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+                                </div>
+                            </button>
+                        </div>
+                    )}
+                </div>
+            </section>
             {/* Academic Programs - DYNAMIC SECTION */}
             <section className="py-24 px-6 bg-gray-50 relative overflow-hidden">
                 <div className="max-w-7xl mx-auto relative z-10">
@@ -661,227 +880,10 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
             </section>
 
             {/* Lab Detailed Modal */}
-            <AnimatePresence>
-                {selectedLab && (
-                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            onClick={() => setSelectedLab(null)}
-                            className="absolute inset-0 bg-oxford/80 backdrop-blur-md"
-                        />
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                            className="relative w-full max-w-4xl max-h-[90vh] bg-white rounded-[3rem] shadow-2xl overflow-hidden flex flex-col"
-                        >
-                            {/* Modal Header */}
-                            <div className={`p-8 md:p-12 bg-gradient-to-br ${selectedLab.gradient} text-white relative`}>
-                                <button
-                                    onClick={() => setSelectedLab(null)}
-                                    className="absolute top-8 right-8 w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center hover:bg-white/30 transition-colors z-10"
-                                >
-                                    <X size={24} />
-                                </button>
-                                <div className="flex flex-col md:flex-row gap-8 items-start md:items-center">
-                                    <div className="w-24 h-24 rounded-[2rem] bg-white/20 backdrop-blur-md flex items-center justify-center text-5xl shadow-xl">
-                                        {selectedLab.icon}
-                                    </div>
-                                    <div className="flex-1">
-                                        <h2 className="text-3xl md:text-5xl font-black mb-4 leading-tight">{selectedLab.name}</h2>
-                                        <p className="text-white/90 text-lg font-medium max-w-2xl leading-relaxed">
-                                            {selectedLab.description}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
 
-                            {/* Modal Content */}
-                            <div className="flex-1 overflow-y-auto p-8 md:p-12">
-                                <div className="grid lg:grid-cols-3 gap-12">
-                                    <div className="lg:col-span-2 space-y-12">
-                                        <section>
-                                            <h4 className="text-xs font-black uppercase tracking-[0.2em] text-sandstone mb-6 flex items-center gap-2">
-                                                <div className="w-2 h-2 rounded-full bg-sandstone" />
-                                                Overview
-                                            </h4>
-                                            <p className="text-gray-600 text-lg leading-relaxed whitespace-pre-line">
-                                                {selectedLab.fullDescription}
-                                            </p>
-                                        </section>
 
-                                        <div className="grid sm:grid-cols-2 gap-8">
-                                            <section className="bg-gray-50 p-8 rounded-[2rem]">
-                                                <h4 className="text-xs font-black uppercase tracking-[0.2em] text-sandstone mb-6">Key Activities</h4>
-                                                <p className="text-gray-700 font-medium leading-relaxed">
-                                                    {selectedLab.activities}
-                                                </p>
-                                            </section>
-                                            <section className="bg-oxford text-white p-8 rounded-[2rem]">
-                                                <h4 className="text-xs font-black uppercase tracking-[0.2em] text-sandstone mb-6">Learning Impact</h4>
-                                                <p className="text-white/80 font-medium leading-relaxed">
-                                                    {selectedLab.impact}
-                                                </p>
-                                            </section>
-                                        </div>
-                                    </div>
-
-                                    <div className="space-y-8">
-                                        <section className="sticky top-0">
-                                            <h4 className="text-xs font-black uppercase tracking-[0.2em] text-sandstone mb-6 flex items-center gap-2">
-                                                <div className="w-2 h-2 rounded-full bg-sandstone" />
-                                                Key Features
-                                            </h4>
-                                            <div className="space-y-4">
-                                                {selectedLab.keyFeatures.map((feature: string, i: number) => (
-                                                    <div key={i} className="flex items-start gap-4 p-4 bg-gray-50 rounded-2xl border border-gray-100 hover:border-sandstone/30 transition-colors">
-                                                        <div className="w-6 h-6 rounded-lg bg-sandstone/10 text-sandstone flex items-center justify-center shrink-0 mt-0.5">
-                                                            <CheckCircle2 size={14} />
-                                                        </div>
-                                                        <span className="text-sm font-bold text-oxford/70 leading-snug">{feature}</span>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </section>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Modal Footer */}
-                            <div className="p-8 md:p-12 border-t border-gray-100 bg-gray-50 flex justify-between items-center shrink-0">
-                                <div className="hidden md:block">
-                                    <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Leela Devi Parasmal Sancheti Kanya Mahavidyalaya</p>
-                                </div>
-                                <button
-                                    onClick={() => setSelectedLab(null)}
-                                    className="px-10 py-4 bg-oxford text-white rounded-full font-black text-[10px] uppercase tracking-widest shadow-xl hover:bg-sandstone hover:text-oxford transition-all"
-                                >
-                                    Close Facility Info
-                                </button>
-                            </div>
-                        </motion.div>
-                    </div>
-                )}
-            </AnimatePresence>
-
-            {/* Facilities Section */}
-            <section className="py-24 px-6 overflow-hidden">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Facilities & Campus Life</span>
-                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2">Supporting Your Growth</h2>
-                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-                            The college provides a learner-friendly environment designed for academics, sports, and overall well-being.
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                        {([
-                            { name: "Girls Hostel", img: "/images.jpg" },
-                            { name: "Medical Support", img: "/uploads/Supporting/health.png" },
-                            { name: "Library", img: "/images/english school/63680e76-2f23-4f80-a9ee-96a18fdd6348.jpg" },
-                            { name: "Sports & Gym", img: "/uploads/Supporting/gym.png" }, // Missing image, keeping icon as fallback
-                            { name: "IT Infrastructure", img: "/uploads/Supporting/IT.png" },
-                            { name: "Science Labs", img: "/uploads/Supporting/lab.png" },
-                            { name: "Cafeteria", img: "/images/english school/63680e76-2f23-4f80-a9ee-96a18fdd6348.jpg" },
-                            { name: "Auditorium", img: "/uploads/Supporting/audio.png" },
-                            { name: "Transport", img: "/uploads/Supporting/trans.png" },
-                            { name: "Extra-curricular", img: "/uploads/Supporting/extra.png" }
-                        ] as { name: string; img?: string; icon?: any }[]).map((facility, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                                className="group p-8 rounded-3xl bg-gray-50 hover:bg-white hover:shadow-2xl transition-all border border-oxford hover:border-sandstone/20 text-center flex flex-col items-center"
-                            >
-                                <div className="w-40 h-40 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-6 overflow-hidden group-hover:scale-110 transition-transform">
-                                    {facility.img ? (
-                                        <img src={facility.img} alt={facility.name} className="w-full h-full object-cover" />
-                                    ) : facility.icon ? (
-                                        <facility.icon size={32} strokeWidth={1.5} className="text-oxford group-hover:text-sandstone transition-colors" />
-                                    ) : null}
-                                </div>
-                                <h3 className="font-bold text-oxford leading-tight">{facility.name}</h3>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
             {/* Faculty Section */}
-            <section className="py-24 px-6 bg-gray-50 overflow-hidden">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Our Faculty</span>
-                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight">College Faculty</h2>
-                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
-                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-                            Meet our dedicated faculty and staff members committed to excellence.
-                        </p>
-                    </div>
 
-                    <div className="overflow-x-auto bg-white rounded-[2rem] shadow-xl border border-oxford-100">
-                        <table className="w-full text-left border-collapse min-w-[600px]">
-                            <thead>
-                                <tr className="bg-oxford/5 border-b border-gray-100">
-                                    <th className="py-5 px-8 font-black text-oxford text-sm uppercase tracking-wider w-24">S.No.</th>
-                                    <th className="py-5 px-8 font-black text-oxford text-sm uppercase tracking-wider">Designation</th>
-
-                                    <th className="py-5 px-8 font-black text-oxford text-sm uppercase tracking-wider">Faculty Member</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {collegeFaculty.length > 0 ? (
-                                    collegeFaculty.slice(0, visibleFacultyCount).map((staff, i) => (
-                                        <tr key={staff._id || i} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors group">
-                                            <td className="py-5 px-8 text-gray-400 font-bold">{i + 1}</td>
-                                            <td className="py-5 px-8 text-gray-600 font-medium">
-                                                {(staff.department && staff.department !== "General") ? `${staff.designation} (${staff.department})` : staff.designation}
-                                            </td>
-                                            <td className="py-5 px-8">
-                                                <div className="flex items-center gap-5">
-                                                    <div className="w-12 h-12 rounded-full overflow-hidden bg-white shrink-0 border border-gray-200 group-hover:border-sandstone transition-colors shadow-sm">
-                                                        <img src="https://cdn-icons-png.flaticon.com/512/4288/4288270.png" alt={staff.name || "Faculty"} className="w-full h-full object-cover p-1.5 opacity-80" />
-                                                    </div>
-                                                    <span className="font-bold text-oxford text-lg group-hover:text-sandstone transition-colors">{staff.name}</span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    ))
-                                ) : (
-                                    <tr>
-                                        <td colSpan={3} className="py-12 text-center text-gray-500">
-                                            <div className="animate-pulse flex flex-col items-center">
-                                                <div className="w-12 h-12 bg-gray-200 rounded-full mb-4"></div>
-                                                <div className="h-4 bg-gray-200 rounded w-48 mb-2"></div>
-                                                <div className="h-3 bg-gray-100 rounded w-32"></div>
-                                            </div>
-                                            <p className="mt-4">Loading faculty members...</p>
-                                        </td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
-                    </div>
-
-                    {visibleFacultyCount < collegeFaculty.length && (
-                        <div className="mt-12 text-center">
-                            <button
-                                onClick={() => setVisibleFacultyCount(prev => prev + 10)}
-                                className="inline-flex items-center gap-3 px-10 py-4 bg-white text-oxford border border-gray-200 rounded-full font-black text-xs uppercase tracking-widest shadow-lg hover:border-sandstone hover:text-sandstone transition-all group"
-                            >
-                                Load More Faculty
-                                <div className="w-6 h-6 rounded-full bg-oxford/5 flex items-center justify-center group-hover:bg-sandstone/10 transition-colors">
-                                    <ChevronRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
-                                </div>
-                            </button>
-                        </div>
-                    )}
-                </div>
-            </section>
 
             <section className="py-24 px-6 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto">

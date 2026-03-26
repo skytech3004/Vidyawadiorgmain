@@ -1,13 +1,14 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import {
     BookOpen, Trophy, Star, Microscope,
     Medal, Phone, MapPin, Mail, CheckCircle2,
     User, Sparkles, ShieldCheck, ArrowRight,
     Users, Leaf, FlaskConical, HeartHandshake,
-    Globe, Music, Palette, GraduationCap
+    Globe, Music, Palette, GraduationCap,
+    Play, Volume2, VolumeX, X
 } from "lucide-react";
 import Image from "next/image";
 import StudentModal from "@/components/StudentModal";
@@ -68,7 +69,117 @@ const staffList = [
     { no: 50, name: "Ms. Chanchal Suthar", designation: "Comp. Lab Asst." },
 ];
 
+const videoData = [
+    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/f_auto,q_auto/v1773391579/dgs8vykkqgnqrvgjaz6d.webm", title: "Creative Expression" },
+    { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/f_auto,q_auto/v1773391585/bdleqv8zbjklrhdgyihg.webm", title: "School Spirit" },
+];
+
+function OptimizedVideoCard({ video, index, onClick }: { video: any, index: number, onClick: () => void }) {
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const containerRef = useRef(null);
+    const isInView = useInView(containerRef, { amount: 0.2, margin: "200px" });
+    const [isHovered, setIsHovered] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        if (!videoRef.current) return;
+        if (isHovered) {
+            videoRef.current.play().catch(() => { });
+        } else {
+            videoRef.current.pause();
+        }
+    }, [isHovered]);
+
+    return (
+        <motion.div
+            ref={containerRef}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ delay: index * 0.05, duration: 0.5 }}
+            viewport={{ once: true }}
+            onClick={onClick}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            className="group cursor-pointer overflow-hidden rounded-[2.5rem] bg-oxford/5 shadow-xl hover:shadow-2xl transition-all border border-oxford/5 relative aspect-square sm:aspect-video xl:aspect-square"
+            style={{ willChange: "transform" }}
+        >
+            {!isLoaded && <div className="absolute inset-0 bg-oxford/10 animate-pulse flex items-center justify-center" />}
+            {isInView && (
+                <video
+                    ref={videoRef}
+                    muted
+                    loop
+                    playsInline
+                    preload="auto"
+                    onCanPlay={() => setIsLoaded(true)}
+                    // @ts-ignore
+                    fetchpriority={index < 3 ? "high" : "low"}
+                    className={`h-full w-full object-cover transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+                >
+                    <source src={video.url} type="video/webm" />
+                </video>
+            )}
+            <div className={`absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300 flex flex-col items-center justify-center`}>
+                <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white transform group-hover:scale-110 transition-transform duration-500">
+                    <Play fill="white" size={28} className="translate-x-0.5" />
+                </div>
+                <div className="mt-4 px-4 py-1.5 bg-oxford/60 backdrop-blur-md rounded-full border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
+                    <p className="text-[10px] font-black text-white uppercase tracking-[0.2em]">{video.title}</p>
+                </div>
+            </div>
+            <div className="absolute inset-0 pointer-events-none ring-1 ring-inset ring-white/10 group-hover:ring-sandstone/30 transition-all rounded-[2.5rem]" />
+        </motion.div>
+    );
+}
+
+function VideoLightbox({ isOpen, onClose, video }: { isOpen: boolean, onClose: () => void, video: any }) {
+    const [isMuted, setIsMuted] = useState(false);
+
+    return (
+        <AnimatePresence>
+            {isOpen && (
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-oxford/95 backdrop-blur-xl"
+                    onClick={onClose}
+                >
+                    <motion.div
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        exit={{ scale: 0.9, opacity: 0 }}
+                        className="relative max-w-5xl w-full aspect-video bg-black rounded-3xl overflow-hidden shadow-2xl"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <button
+                            onClick={onClose}
+                            className="absolute top-6 right-6 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+                        >
+                            <X size={24} />
+                        </button>
+                        <video autoPlay loop playsInline key={video?.url} muted={isMuted} className="w-full h-full object-contain">
+                            <source src={video?.url} type="video/webm" />
+                        </video>
+                        <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between">
+                            <h3 className="text-white font-bold text-xl">{video?.title}</h3>
+                            <button
+                                onClick={() => setIsMuted(!isMuted)}
+                                className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+                            >
+                                {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+                            </button>
+                        </div>
+                    </motion.div>
+                </motion.div>
+            )}
+        </AnimatePresence>
+    );
+}
+
 export default function SPSContent() {
+    const [selectedVideo, setSelectedVideo] = useState<any>(null);
     const [selectedStudent, setSelectedStudent] = useState<any>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [visibleToppers, setVisibleToppers] = useState(10);
@@ -275,10 +386,12 @@ export default function SPSContent() {
                         </p>
                     </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-12 mb-16">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
                         {[
                             { title: "Foundational", level: "Nursery – II", icon: Star },
                             { title: "Preparatory", level: "III to V", icon: BookOpen },
+                            { title: "Middle", level: "VI to VIII", icon: Users },
+                            { title: "Secondary", level: "IX to X", icon: Medal },
                         ].map((stat, i) => (
                             <div key={i} className="bg-white p-10 rounded-[2rem] shadow-xl border border-oxford/5 text-center hover:-translate-y-2 transition-transform group">
                                 <div className="w-14 h-14 bg-oxford/5 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-sandstone transition-colors">
@@ -369,6 +482,93 @@ export default function SPSContent() {
                 </div>
             </section>
 
+            {/* Fee Structure Section */}
+            <section className="py-24 px-6 bg-white overflow-hidden">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Investment in Excellence</span>
+                        <h2 className="text-4xl md:text-6xl font-extrabold text-oxford leading-tight text-center">Fee Structure 2026–27</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
+                    </div>
+
+                    <div className="grid lg:grid-cols-1 max-w-4xl mx-auto gap-12">
+                        {/* Primary & Middle & Secondary */}
+                        <div className="bg-white p-8 rounded-[2.5rem] border-2 border-gray-100 hover:border-sandstone/30 hover:shadow-2xl transition-all duration-500 group/card shadow-sm">
+                            <h3 className="text-2xl font-black text-oxford mb-8 flex items-center gap-3 group-hover/card:text-sandstone transition-colors">
+                                <BookOpen className="text-sandstone" />
+                                Nursery to Class X
+                            </h3>
+                            <div className="overflow-x-auto">
+                                <table className="w-full text-left">
+                                    <thead>
+                                        <tr className="border-b border-gray-200">
+                                            <th className="py-4 font-black uppercase text-[10px] tracking-widest text-gray-400">Class</th>
+                                            <th className="py-4 font-black uppercase text-[10px] tracking-widest text-gray-400">Installments</th>
+                                            <th className="py-4 font-black uppercase text-[10px] tracking-widest text-gray-400 text-right">Total Fee</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-gray-100">
+                                        {[
+                                            { class: "Nursery", inst: "₹4,425 × 4", total: "₹17,700" },
+                                            { class: "KG – Prep", inst: "₹4,600 × 4", total: "₹18,400" },
+                                            { class: "Class I – II", inst: "₹5,325 × 4", total: "₹21,300" },
+                                            { class: "Class III – IV", inst: "₹5,850 × 4", total: "₹23,400" },
+                                            { class: "Class V", inst: "₹8,050 × 4", total: "₹32,200" },
+                                            { class: "Class VI", inst: "₹8,475 × 4", total: "₹33,900" },
+                                            { class: "Class VII – VIII", inst: "₹9,600 × 4", total: "₹38,400" },
+                                            { class: "Class IX – X", inst: "₹9,900 × 4", total: "₹39,600" },
+                                        ].map((row, i) => (
+                                            <tr key={i} className="hover:bg-sandstone/5 group/row transition-colors cursor-pointer capitalize">
+                                                <td className="py-4 px-4 font-bold text-oxford group-hover/row:text-sandstone transition-colors">{row.class}</td>
+                                                <td className="py-4 px-4 text-gray-500 text-sm group-hover/row:text-sandstone transition-colors">{row.inst}</td>
+                                                <td className="py-4 px-4 text-right font-black text-oxford group-hover/row:text-sandstone transition-colors">{row.total}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div className="mt-8 p-6 bg-white rounded-2xl border border-gray-100 flex flex-col sm:flex-row justify-between items-center sm:items-start gap-4">
+                                <div>
+                                    <h4 className="font-bold text-oxford text-sm mb-1 uppercase tracking-wider">Admission Fee</h4>
+                                    <p className="text-xs text-gray-500">Nursery to V: ₹2,500 | VI to X: ₹5,000</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* What We Do Section */}
+            <section className="py-24 px-6 bg-gray-50 overflow-hidden">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Our Activities</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight text-center">What We Do</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
+                        <p className="text-gray-600 max-w-2xl mx-auto text-lg italic">
+                            “Glimpses of our vibrant school life and academic activities.”
+                        </p>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                        {videoData.map((video, i) => (
+                            <OptimizedVideoCard
+                                key={i}
+                                video={video}
+                                index={i}
+                                onClick={() => setSelectedVideo(video)}
+                            />
+                        ))}
+                    </div>
+                </div>
+
+                <VideoLightbox
+                    isOpen={!!selectedVideo}
+                    onClose={() => setSelectedVideo(null)}
+                    video={selectedVideo}
+                />
+            </section>
+
             {/* Student Life Gallery Section */}
             <section className="py-24 px-6 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto">
@@ -391,26 +591,26 @@ export default function SPSContent() {
                             "/images/childern/1290780e-b8e3-4a73-86c2-035a68ef944c.jpg",
                             "/images/childern/1c926537-394f-4233-be78-ed6a3c980eb7.jpg",
                             "/images/childern/3c98151a-177a-411c-a689-96fb2a6bc7fb.jpg",
-                            "/images/childern/85c9f954-079d-4803-b3b4-7acf4b451544.jpg",
+                            // "/images/childern/85c9f954-079d-4803-b3b4-7acf4b451544.jpg",
                             "/images/childern/c5f0ebd8-5b00-4a0f-8a1c-f53e1ff65aee.jpg",
                             "/images/childern/f865022a-1f6c-409f-9866-8b073b608d3f.jpg",
                             "/images/childern/01c2c50c-98b7-46bd-b44f-af8f897e0c7e.jpg",
-                            "/images/childern/1c96c2da-8eb7-4af9-a61e-09b1cec14802.jpg",
-                            "/images/childern/2da6f752-6901-4999-9fab-b80e216618c1.jpg",
-                            "/images/childern/488b49a5-f698-41f2-a478-9a3666798d84.jpg",
-                            "/images/childern/4f25b7f8-9ac3-4c38-b04a-9acbd28f7d29.jpg",
-                            "/images/childern/550b7d5a-c8d4-4500-aa1f-fd2ab566ee25.jpg",
-                            "/images/childern/93947ad7-766e-4633-acc4-2f9ec377f41d.jpg",
+                            // "/images/childern/1c96c2da-8eb7-4af9-a61e-09b1cec14802.jpg",
+                            // "/images/childern/2da6f752-6901-4999-9fab-b80e216618c1.jpg",
+                            // "/images/childern/488b49a5-f698-41f2-a478-9a3666798d84.jpg",
+                            // "/images/childern/4f25b7f8-9ac3-4c38-b04a-9acbd28f7d29.jpg",
+                            // "/images/childern/550b7d5a-c8d4-4500-aa1f-fd2ab566ee25.jpg",
+                            // "/images/childern/93947ad7-766e-4633-acc4-2f9ec377f41d.jpg",
                             "/images/childern/940bf23d-9913-4b47-b0be-1793145cc0b1.jpg",
                             "/images/childern/WhatsApp Image 2026-02-25 at 18.27.53.jpeg",
                             "/images/childern/WhatsApp Image 2026-02-25 at 18.34.15 (1).jpeg",
                             "/images/childern/WhatsApp Image 2026-02-25 at 18.34.15.jpeg",
-                            "/images/childern/WhatsApp Image 2026-02-25 at 18.34.16 (1).jpeg",
+                            // "/images/childern/WhatsApp Image 2026-02-25 at 18.34.16 (1).jpeg",
                             "/images/childern/WhatsApp Image 2026-02-25 at 18.34.16 (2).jpeg",
                             "/images/childern/WhatsApp Image 2026-02-25 at 18.34.16 (3).jpeg",
                             "/images/childern/WhatsApp Image 2026-02-25 at 18.34.16.jpeg",
-                            "/images/childern/a723594c-f4ac-4b1b-a847-d7a461e8a1cc.jpg",
-                            "/images/childern/b53ef50d-d9a5-4dd8-bb30-1c894b06611a.jpg"
+                            // "/images/childern/a723594c-f4ac-4b1b-a847-d7a461e8a1cc.jpg",
+                            // "/images/childern/b53ef50d-d9a5-4dd8-bb30-1c894b06611a.jpg"
                         ].map((src, i) => (
                             <motion.div
                                 key={i}
