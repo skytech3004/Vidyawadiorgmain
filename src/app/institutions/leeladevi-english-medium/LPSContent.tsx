@@ -489,7 +489,210 @@ export default function LPSContent() {
                     </div>
                 </div>
             </section>
+            <section className="py-24 px-6 bg-white overflow-hidden">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Facilities</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight text-center">Modern Infrastructure</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
+                        <p className="text-gray-600 max-w-2xl mx-auto text-lg italic">
+                            “Equipped with state-of-the-art laboratories and technological resources”
+                        </p>
+                    </div>
 
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {[
+                            { name: "Physics Laboratory" },
+                            { name: "Chemistry Laboratory", img: "/chemistry.jpg" },
+                            { name: "Biology Laboratory", img: "/bio.jpg" },
+                            { name: "Mathematics Lab" },
+                            { name: "Music & Painting Studio", img: "/images/english school/93b4f897-0aca-4189-a717-16c13f8372d5.jpg" },
+                            { name: "Geography Laboratory" },
+                            { name: "NCC & Guide", img: "/llll-AAA.jpeg" },
+                            { name: "Library", img: "/images/english school/706b5bd7-1cbd-40f0-a48f-2ec78225ac48.jpg" },
+                            { name: "Computer Center", img: "/images/english school/344537e3-f907-4894-b74e-6c120656cc03.jpg" },
+                            { name: "Multimedia Room", img: "/images/english school/a40160d0-ce25-4bad-818d-e2e729dc47f4.jpg" },
+                            { name: "Safe & Secure Campus", img: "https://journalistsresource.org/wp-content/uploads/2014/02/surveillance-camera-860x466.jpg" }
+                        ].map((facility, i) => (
+                            <div key={i} className="group overflow-hidden rounded-[2.5rem] bg-white shadow-xl hover:shadow-2xl transition-all border border-oxford/5">
+                                <div className="h-64 overflow-hidden relative">
+                                    <div className="absolute inset-0 bg-oxford/20 group-hover:bg-transparent transition-colors z-10" />
+                                    {facility.img ? (
+                                        <img
+                                            src={facility.img}
+                                            alt={facility.name}
+                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                        />
+                                    ) : (
+                                        <div className="w-full h-full bg-white flex items-center justify-center">
+                                            <Microscope className="text-gray-100 w-20 h-20" />
+                                        </div>
+                                    )}
+                                    <div className="absolute bottom-0 inset-x-0 p-6 z-20 bg-gradient-to-t from-oxford/90 to-transparent">
+                                        <h3 className="font-bold text-white text-lg">{facility.name}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+            <section className="py-24 px-6 bg-oxford text-white">
+                <div className="max-w-7xl mx-auto">
+                    <div className="grid md:grid-cols-2 gap-12">
+                        <div className="space-y-8">
+                            <div>
+                                <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                                    <Microscope className="text-sandstone" />
+                                    Laboratories & Library
+                                </h3>
+                                <p className="text-white/70 leading-relaxed">
+                                    Our laboratories (Maths, Biology, Physics, Chemistry, Painting, Music, Computer) are integral to our curriculum, enabling deep conceptual understanding. Our library is well-equipped with newspapers, magazines, and encyclopedias to foster reading habits.
+                                </p>
+                            </div>
+                            <div>
+                                <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                                    <ShieldStar className="text-sandstone" />
+                                    NCC & Scouts
+                                </h3>
+                                <p className="text-white/70 leading-relaxed">
+                                    <strong>NCC:</strong> Introduced in 2014, now with 50 cadets preparing for the Indian Armed Forces.<br />
+                                    <strong>Bharat Scout & Guide:</strong> Active since 2016-17, currently training 51 students.
+                                </p>
+                            </div>
+                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
+                                {[
+                                    { src: "/images/english school/7e7ad0cf-7675-40dc-b2d9-a7a4dc3053a4.jpg", alt: "Yoga" },
+                                    { src: "/images/english school/6d8b41a6-cf4a-4f8f-9530-ea59b75c9377.jpg", alt: "Hula Hoop" },
+                                    { src: "/images/english school/a200f34b-f2de-4939-9049-944380c69594.jpg", alt: "Athletics - Manisha" },
+                                    { src: "/images/english school/da326549-dcf6-4c5d-baa6-425a657140c6.jpg", alt: "Rifle Shooting - Kritika" },
+                                    { src: "/images/english school/9bd3aa78-5651-4fab-b2c0-c30cde54fb2b.jpg", alt: "Sports Achievement" },
+                                    { src: "/images/uploads/vidywadi_main/horse.png", alt: "Horse Riding" },
+                                ].map((img, i) => (
+                                    <div key={i} className="aspect-[4/5] rounded-xl overflow-hidden border border-white/10 group relative">
+                                        <Image
+                                            src={img.src}
+                                            alt={img.alt}
+                                            fill
+                                            className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                                            <p className="text-[10px] font-bold text-white uppercase tracking-tight">{img.alt}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="bg-white/5 rounded-[2.5rem] p-8 border border-white/10">
+                            <h3 className="text-2xl font-bold text-white mb-6">Sports Achievements 2024-25</h3>
+
+                            <div className="space-y-6 max-h-[800px] overflow-y-auto pr-2 custom-scrollbar">
+                                <AchievementItem title="Horse Riding Training" desc="Structured horse riding program focused on confidence, balance, and discipline." />
+                                <AchievementItem title="District Badminton (U-19)" desc="Girls secured 2nd position. One selected for state-level." />
+                                <AchievementItem title="District Rifle Shooting (U-17)" desc="Team secured 2nd position. Pratibha (1st), Kritika (2nd), KirtiRaj (3rd). All selected for state." />
+                                <AchievementItem title="Rifle Shooting (U-19)" desc="Team secured 1st position. Hrishija & Himakshi Khechi selected for state." />
+                                <AchievementItem title="District Skating" desc="Dhruvi (Class 6th) secured 3rd position & selected for state." />
+                                <AchievementItem title="Athletics (U-19)" desc="Manisha (1st in Long Jump), Chetna (2nd in Shot Put)." />
+                                <AchievementItem title="Athletics (U-17)" desc="Poonam, Bhawna, Mamta, Bhavya secured top positions and selected for state." />
+                                <AchievementItem title="Athletics (U-14)" desc="Overall Championship. Multiple students (Leela, Rushkarshi, Hetal, Kanishka) selected for state." />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            <section className="py-24 px-6 bg-white">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <span className="text-sandstone font-bold uppercase tracking-widest text-sm block mb-2">Hall of Fame</span>
+                        <h2 className="text-3xl md:text-5xl font-black text-oxford">Result Highlights 2023-24</h2>
+                    </div>
+
+                    <div className="space-y-16">
+                        {/* Class XII */}
+                        <div>
+                            <h3 className="text-2xl font-bold text-oxford mb-8 text-center flex items-center justify-center gap-3">
+                                <Trophy className="text-sandstone" />
+                                Class XII Toppers
+                            </h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                                {toppers12.map((student, i) => (
+                                    <div key={i} className="bg-gray-50 p-6 rounded-2xl text-center border border-transparent hover:border-sandstone/30 hover:shadow-lg transition-all group">
+                                        <div className="w-16 h-16 rounded-full bg-sandstone/10 mx-auto mb-4 flex items-center justify-center text-sandstone font-black text-xl group-hover:bg-sandstone group-hover:text-white transition-colors overflow-hidden">
+                                            {student.image ? (
+                                                <Image
+                                                    src={student.image}
+                                                    alt={student.name}
+                                                    width={100}
+                                                    height={100}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            ) : (
+                                                student.percentage.split('.')[0]
+                                            )}
+                                        </div>
+                                        <h4 className="font-bold text-oxford mb-1">{student.name}</h4>
+                                        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">{student.stream}</p>
+                                        <p className="text-lg font-black text-sandstone mt-2">{student.percentage}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Class X */}
+                        <div>
+                            <h3 className="text-2xl font-bold text-oxford mb-8 text-center flex items-center justify-center gap-3">
+                                <Star className="text-sandstone" />
+                                Class X Toppers
+                            </h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                                {toppers10.map((student, i) => (
+                                    <div key={i} className="bg-gray-50 p-6 rounded-2xl text-center border border-transparent hover:border-sandstone/30 hover:shadow-lg transition-all">
+                                        {student.image && (
+                                            <div className="w-20 h-20 rounded-full bg-sandstone/10 mx-auto mb-4 overflow-hidden border-2 border-transparent hover:border-sandstone transition-all">
+                                                <Image
+                                                    src={student.image}
+                                                    alt={student.name}
+                                                    width={100}
+                                                    height={100}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </div>
+                                        )}
+                                        <h4 className="font-bold text-oxford mb-1">{student.name}</h4>
+                                        <p className="text-lg font-black text-sandstone mt-2">{student.percentage}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Non-Board */}
+                        <div>
+                            <h3 className="text-xl font-bold text-oxford mb-8 text-center">Class Toppers (Non-Board)</h3>
+                            <div className="flex flex-wrap justify-center gap-4">
+                                {nonBoardToppers.map((student, i) => (
+                                    <div key={i} className="px-6 py-3 bg-gray-50 rounded-full border border-gray-100 flex items-center gap-3 text-sm pr-2">
+                                        {student.image && (
+                                            <div className="w-8 h-8 rounded-full overflow-hidden border border-sandstone/20">
+                                                <Image
+                                                    src={student.image}
+                                                    alt={student.name}
+                                                    width={50}
+                                                    height={50}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </div>
+                                        )}
+                                        <span className="font-bold text-oxford">{student.name}</span>
+                                        <span className="px-2 py-0.5 bg-sandstone/20 text-sandstone text-xs font-black rounded mr-2">{student.class}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
             {/* Academics */}
             <section className="py-24 px-6 bg-gray-50">
                 <div className="max-w-7xl mx-auto">
@@ -616,214 +819,12 @@ export default function LPSContent() {
             </section>
 
             {/* Toppers */}
-            <section className="py-24 px-6 bg-white">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <span className="text-sandstone font-bold uppercase tracking-widest text-sm block mb-2">Hall of Fame</span>
-                        <h2 className="text-3xl md:text-5xl font-black text-oxford">Result Highlights 2023-24</h2>
-                    </div>
 
-                    <div className="space-y-16">
-                        {/* Class XII */}
-                        <div>
-                            <h3 className="text-2xl font-bold text-oxford mb-8 text-center flex items-center justify-center gap-3">
-                                <Trophy className="text-sandstone" />
-                                Class XII Toppers
-                            </h3>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                                {toppers12.map((student, i) => (
-                                    <div key={i} className="bg-gray-50 p-6 rounded-2xl text-center border border-transparent hover:border-sandstone/30 hover:shadow-lg transition-all group">
-                                        <div className="w-16 h-16 rounded-full bg-sandstone/10 mx-auto mb-4 flex items-center justify-center text-sandstone font-black text-xl group-hover:bg-sandstone group-hover:text-white transition-colors overflow-hidden">
-                                            {student.image ? (
-                                                <Image
-                                                    src={student.image}
-                                                    alt={student.name}
-                                                    width={100}
-                                                    height={100}
-                                                    className="w-full h-full object-cover"
-                                                />
-                                            ) : (
-                                                student.percentage.split('.')[0]
-                                            )}
-                                        </div>
-                                        <h4 className="font-bold text-oxford mb-1">{student.name}</h4>
-                                        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">{student.stream}</p>
-                                        <p className="text-lg font-black text-sandstone mt-2">{student.percentage}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Class X */}
-                        <div>
-                            <h3 className="text-2xl font-bold text-oxford mb-8 text-center flex items-center justify-center gap-3">
-                                <Star className="text-sandstone" />
-                                Class X Toppers
-                            </h3>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                                {toppers10.map((student, i) => (
-                                    <div key={i} className="bg-gray-50 p-6 rounded-2xl text-center border border-transparent hover:border-sandstone/30 hover:shadow-lg transition-all">
-                                        {student.image && (
-                                            <div className="w-20 h-20 rounded-full bg-sandstone/10 mx-auto mb-4 overflow-hidden border-2 border-transparent hover:border-sandstone transition-all">
-                                                <Image
-                                                    src={student.image}
-                                                    alt={student.name}
-                                                    width={100}
-                                                    height={100}
-                                                    className="w-full h-full object-cover"
-                                                />
-                                            </div>
-                                        )}
-                                        <h4 className="font-bold text-oxford mb-1">{student.name}</h4>
-                                        <p className="text-lg font-black text-sandstone mt-2">{student.percentage}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Non-Board */}
-                        <div>
-                            <h3 className="text-xl font-bold text-oxford mb-8 text-center">Class Toppers (Non-Board)</h3>
-                            <div className="flex flex-wrap justify-center gap-4">
-                                {nonBoardToppers.map((student, i) => (
-                                    <div key={i} className="px-6 py-3 bg-gray-50 rounded-full border border-gray-100 flex items-center gap-3 text-sm pr-2">
-                                        {student.image && (
-                                            <div className="w-8 h-8 rounded-full overflow-hidden border border-sandstone/20">
-                                                <Image
-                                                    src={student.image}
-                                                    alt={student.name}
-                                                    width={50}
-                                                    height={50}
-                                                    className="w-full h-full object-cover"
-                                                />
-                                            </div>
-                                        )}
-                                        <span className="font-bold text-oxford">{student.name}</span>
-                                        <span className="px-2 py-0.5 bg-sandstone/20 text-sandstone text-xs font-black rounded mr-2">{student.class}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
             {/* Facilities & Activities */}
-            <section className="py-24 px-6 bg-oxford text-white">
-                <div className="max-w-7xl mx-auto">
-                    <div className="grid md:grid-cols-2 gap-12">
-                        <div className="space-y-8">
-                            <div>
-                                <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                                    <Microscope className="text-sandstone" />
-                                    Laboratories & Library
-                                </h3>
-                                <p className="text-white/70 leading-relaxed">
-                                    Our laboratories (Maths, Biology, Physics, Chemistry, Painting, Music, Computer) are integral to our curriculum, enabling deep conceptual understanding. Our library is well-equipped with newspapers, magazines, and encyclopedias to foster reading habits.
-                                </p>
-                            </div>
-                            <div>
-                                <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                                    <ShieldStar className="text-sandstone" />
-                                    NCC & Scouts
-                                </h3>
-                                <p className="text-white/70 leading-relaxed">
-                                    <strong>NCC:</strong> Introduced in 2014, now with 50 cadets preparing for the Indian Armed Forces.<br />
-                                    <strong>Bharat Scout & Guide:</strong> Active since 2016-17, currently training 51 students.
-                                </p>
-                            </div>
-                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
-                                {[
-                                    { src: "/images/english school/7e7ad0cf-7675-40dc-b2d9-a7a4dc3053a4.jpg", alt: "Yoga" },
-                                    { src: "/images/english school/6d8b41a6-cf4a-4f8f-9530-ea59b75c9377.jpg", alt: "Hula Hoop" },
-                                    { src: "/images/english school/a200f34b-f2de-4939-9049-944380c69594.jpg", alt: "Athletics - Manisha" },
-                                    { src: "/images/english school/da326549-dcf6-4c5d-baa6-425a657140c6.jpg", alt: "Rifle Shooting - Kritika" },
-                                    { src: "/images/english school/9bd3aa78-5651-4fab-b2c0-c30cde54fb2b.jpg", alt: "Sports Achievement" },
-                                    { src: "/images/uploads/vidywadi_main/horse.png", alt: "Horse Riding" },
-                                ].map((img, i) => (
-                                    <div key={i} className="aspect-[4/5] rounded-xl overflow-hidden border border-white/10 group relative">
-                                        <Image
-                                            src={img.src}
-                                            alt={img.alt}
-                                            fill
-                                            className="object-cover group-hover:scale-110 transition-transform duration-500"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
-                                            <p className="text-[10px] font-bold text-white uppercase tracking-tight">{img.alt}</p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
 
-                        <div className="bg-white/5 rounded-[2.5rem] p-8 border border-white/10">
-                            <h3 className="text-2xl font-bold text-white mb-6">Sports Achievements 2024-25</h3>
-
-                            <div className="space-y-6 max-h-[800px] overflow-y-auto pr-2 custom-scrollbar">
-                                <AchievementItem title="Horse Riding Training" desc="Structured horse riding program focused on confidence, balance, and discipline." />
-                                <AchievementItem title="District Badminton (U-19)" desc="Girls secured 2nd position. One selected for state-level." />
-                                <AchievementItem title="District Rifle Shooting (U-17)" desc="Team secured 2nd position. Pratibha (1st), Kritika (2nd), KirtiRaj (3rd). All selected for state." />
-                                <AchievementItem title="Rifle Shooting (U-19)" desc="Team secured 1st position. Hrishija & Himakshi Khechi selected for state." />
-                                <AchievementItem title="District Skating" desc="Dhruvi (Class 6th) secured 3rd position & selected for state." />
-                                <AchievementItem title="Athletics (U-19)" desc="Manisha (1st in Long Jump), Chetna (2nd in Shot Put)." />
-                                <AchievementItem title="Athletics (U-17)" desc="Poonam, Bhawna, Mamta, Bhavya secured top positions and selected for state." />
-                                <AchievementItem title="Athletics (U-14)" desc="Overall Championship. Multiple students (Leela, Rushkarshi, Hetal, Kanishka) selected for state." />
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
 
             {/* Modern Infrastructure Section */}
-            <section className="py-24 px-6 bg-white overflow-hidden">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Facilities</span>
-                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight text-center">Modern Infrastructure</h2>
-                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
-                        <p className="text-gray-600 max-w-2xl mx-auto text-lg italic">
-                            “Equipped with state-of-the-art laboratories and technological resources”
-                        </p>
-                    </div>
-
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {[
-                            { name: "Physics Laboratory" },
-                            { name: "Chemistry Laboratory", img: "/chemistry.jpg" },
-                            { name: "Biology Laboratory", img: "/bio.jpg" },
-                            { name: "Mathematics Lab" },
-                            { name: "Music & Painting Studio", img: "/images/english school/93b4f897-0aca-4189-a717-16c13f8372d5.jpg" },
-                            { name: "Geography Laboratory" },
-                            { name: "NCC & Guide", img: "/llll-AAA.jpeg" },
-                            { name: "Library", img: "/images/english school/706b5bd7-1cbd-40f0-a48f-2ec78225ac48.jpg" },
-                            { name: "Computer Center", img: "/images/english school/344537e3-f907-4894-b74e-6c120656cc03.jpg" },
-                            { name: "Multimedia Room", img: "/images/english school/a40160d0-ce25-4bad-818d-e2e729dc47f4.jpg" },
-                            { name: "Safe & Secure Campus", img: "https://journalistsresource.org/wp-content/uploads/2014/02/surveillance-camera-860x466.jpg" }
-                        ].map((facility, i) => (
-                            <div key={i} className="group overflow-hidden rounded-[2.5rem] bg-white shadow-xl hover:shadow-2xl transition-all border border-oxford/5">
-                                <div className="h-64 overflow-hidden relative">
-                                    <div className="absolute inset-0 bg-oxford/20 group-hover:bg-transparent transition-colors z-10" />
-                                    {facility.img ? (
-                                        <img
-                                            src={facility.img}
-                                            alt={facility.name}
-                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                                        />
-                                    ) : (
-                                        <div className="w-full h-full bg-white flex items-center justify-center">
-                                            <Microscope className="text-gray-100 w-20 h-20" />
-                                        </div>
-                                    )}
-                                    <div className="absolute bottom-0 inset-x-0 p-6 z-20 bg-gradient-to-t from-oxford/90 to-transparent">
-                                        <h3 className="font-bold text-white text-lg">{facility.name}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
             {/* What We Do Section */}
             <section className="py-24 px-6 bg-white overflow-hidden">
