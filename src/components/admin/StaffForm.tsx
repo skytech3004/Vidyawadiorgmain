@@ -28,8 +28,11 @@ export default function StaffForm({ initialData, isEditing }: StaffFormProps) {
         setLoading(true);
 
         try {
-            const res = await fetch("/api/admin/staff", {
-                method: initialData ? "PUT" : "POST",
+            const url = isEditing && initialData?._id
+                ? `/api/admin/staff/${initialData._id}`
+                : "/api/admin/staff";
+            const res = await fetch(url, {
+                method: isEditing ? "PUT" : "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),
             });

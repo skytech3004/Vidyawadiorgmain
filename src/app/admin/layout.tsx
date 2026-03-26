@@ -22,9 +22,9 @@ import { motion } from "framer-motion";
 const sidebarItems = [
     { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
     { name: "Admissions", href: "/admin/admissions", icon: FileText },
-    { name: "Institutions", href: "/admin/institutions", icon: School },
-    { name: "Hostel Life", href: "/admin/hostel", icon: Bed },
-    { name: "Media Library", href: "/admin/media", icon: ImageIcon },
+    // { name: "Institutions", href: "/admin/institutions", icon: School },
+    // { name: "Hostel Life", href: "/admin/hostel", icon: Bed },
+    // { name: "Media Library", href: "/admin/media", icon: ImageIcon },
     { name: "Blog Manager", href: "/admin/blog", icon: FileText },
     { name: "Gallery", href: "/admin/gallery", icon: ImageIcon },
     { name: "Faculty / Staff", href: "/admin/staff", icon: Users },
