@@ -3,27 +3,41 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, CheckCircle2, AlertCircle } from "lucide-react";
-// import { submitInquiry } from "@/app/actions";
 
 export default function ContactForm() {
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
     const [errorMessage, setErrorMessage] = useState("");
 
-    // async function handleSubmit(formData: FormData) {
-    //     setStatus("loading");
-    //     try {
-    //         const result = await submitInquiry(formData);
-    //         if (result.success) {
-    //             setStatus("success");
-    //         } else {
-    //             setStatus("error");
-    //             setErrorMessage(result.error || "Failed to submit inquiry");
-    //         }
-    //     } catch (err) {
-    //         setStatus("error");
-    //         setErrorMessage("Something went wrong. Please try again.");
-    //     }
-    // }
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        setStatus("loading");
+        const formData = new FormData(e.currentTarget);
+        const data = {
+            fullName: formData.get("fullName"),
+            phone: formData.get("phone"),
+            email: formData.get("email"),
+            board: formData.get("board"),
+            grade: formData.get("grade"),
+            message: formData.get("message"),
+        };
+        try {
+            const res = await fetch("/api/inquiries", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            });
+            const result = await res.json();
+            if (result.success) {
+                setStatus("success");
+            } else {
+                setStatus("error");
+                setErrorMessage(result.error || "Failed to submit inquiry");
+            }
+        } catch (err) {
+            setStatus("error");
+            setErrorMessage("Something went wrong. Please try again.");
+        }
+    }
 
     if (status === "success") {
         return (
@@ -135,7 +149,7 @@ export default function ContactForm() {
                     {/* Form */}
                     <div className="bg-white/5 p-8 rounded-3xl border border-white/10">
                         <h3 className="text-2xl font-bold text-white uppercase tracking-widest mb-8">Send us an Inquiry</h3>
-                        <form className="space-y-6">
+                        <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="grid sm:grid-cols-2 gap-6">
                                 <div className="space-y-2">
                                     <label className="text-sm font-bold text-sandstone uppercase tracking-widest pl-1">Full Name</label>

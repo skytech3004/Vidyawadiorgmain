@@ -74,9 +74,9 @@ export default function InquiryManagerPage() {
     };
 
     const filteredInquiries = inquiries.filter(iq =>
-        iq.fullName.toLowerCase().includes(search.toLowerCase()) ||
-        iq.email.toLowerCase().includes(search.toLowerCase()) ||
-        iq.phone.includes(search)
+        iq.name?.toLowerCase().includes(search.toLowerCase()) ||
+        iq.email?.toLowerCase().includes(search.toLowerCase()) ||
+        iq.phone?.includes(search)
     );
 
     return (
@@ -116,13 +116,13 @@ export default function InquiryManagerPage() {
                                 <div className="flex justify-between items-start mb-2">
                                     <span className={`text-[10px] font-black uppercase tracking-widest ${selectedInquiry?._id === iq._id ? "text-sandstone" : "text-gray-400"
                                         }`}>
-                                        {iq.grade}
+                                        {iq.subject}
                                     </span>
                                     {iq.status === "new" && (
                                         <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
                                     )}
                                 </div>
-                                <h4 className="font-bold text-sm line-clamp-1">{iq.fullName}</h4>
+                                <h4 className="font-bold text-sm line-clamp-1">{iq.name}</h4>
                                 <p className={`text-[10px] mt-1 ${selectedInquiry?._id === iq._id ? "text-white/60" : "text-gray-400"}`}>
                                     {new Date(iq.createdAt).toLocaleDateString()} at {new Date(iq.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                 </p>
@@ -138,7 +138,7 @@ export default function InquiryManagerPage() {
                     <div className="flex flex-col h-full">
                         <div className="p-8 border-b border-gray-50 flex justify-between items-start">
                             <div>
-                                <h3 className="text-2xl font-black text-oxford uppercase tracking-tight">{selectedInquiry.fullName}</h3>
+                                <h3 className="text-2xl font-black text-oxford uppercase tracking-tight">{selectedInquiry.name}</h3>
                                 <div className="flex flex-wrap items-center gap-4 mt-2">
                                     <div className="flex items-center gap-1.5 text-xs text-gray-500">
                                         <Mail size={14} className="text-sandstone" />
@@ -146,11 +146,11 @@ export default function InquiryManagerPage() {
                                     </div>
                                     <div className="flex items-center gap-1.5 text-xs text-gray-500">
                                         <Phone size={14} className="text-sandstone" />
-                                        {selectedInquiry.phone}
+                                        {selectedInquiry.phone || "—"}
                                     </div>
                                     <div className="flex items-center gap-1.5 text-xs text-gray-500">
                                         <GraduationCap size={14} className="text-sandstone" />
-                                        Grade {selectedInquiry.grade}
+                                        {selectedInquiry.subject}
                                     </div>
                                 </div>
                             </div>
