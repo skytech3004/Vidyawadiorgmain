@@ -22,13 +22,13 @@ interface Facility {
 
 const facilities: Facility[] = [
     {
-        title: "Equestrian Center",
-        description: "Professional horse riding training for personality development and confidence.",
-        icon: "🐴",
-        image: "/images/uploads/vidywadi_main/horse.png",
+        title: "NCC Training Camp",
+        description: "Discipline-based military training including rifle shooting, teamwork, and leadership development under expert supervision.",
+        icon: "🎯",
+        image: "/images/uploads/vidywadi_main/shooting.jpeg",
 
         theme: "bg-oxford",
-        features: ["Horse Riding", "Stable Management"]
+        features: ["Rifle Shooting", "Discipline & Leadership", "Field Training"]
     },
     {
         title: "NCC Training",

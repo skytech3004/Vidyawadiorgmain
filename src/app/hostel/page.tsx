@@ -258,16 +258,18 @@ export default function Page() {
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {[
-                            { icon: <ShieldCheck />, title: "Safety & CCTV", desc: "Round-the-clock security with video surveillance coverage." },
-                            { icon: <Droplets />, title: "RO Drinking Water", desc: "Pure and safe RO purified drinking water available 24/7." },
-                            { icon: <Thermometer />, title: "Hot Water", desc: "Constant supply of hot water during winter months." },
-                            { icon: <GraduationCap />, title: "Digital Library", desc: "24/7 access to study resources and quiet learning spaces." },
-                            { icon: <Heart />, title: "Yoga & Meditation", desc: "Daily sessions for physical balance and mental well-being." },
-                            { icon: <Dumbbell />, title: "Sports Facilities", desc: "Stadium and sports ground for fitness and skill building." },
-                            { icon: <Stethoscope />, title: "Health Care 24x7", desc: "On-campus medical assistance and periodic checkups." },
-                            { icon: <Wind />, title: "AC / Air Cooled", desc: "Well-ventilated rooms with central cooling options." },
-                            { icon: <Shirt />, title: "Laundry Services", desc: "Professional and hassle-free laundry services for students." },
-                            { icon: <ShoppingBag />, title: "Tuck Shop", desc: "On-campus tuck shop for daily essentials and stationery." }
+                            { image: "/uploads/mess/security.jpg", title: "Safety & CCTV", desc: "Round-the-clock security with full CCTV coverage." },
+                            { image: "/images/english school/7e7ad0cf-7675-40dc-b2d9-a7a4dc3053a4.jpg", title: "Pure Jain Food", desc: "Nutritious Satvik meals with 5 servings per day." },
+                            { image: "/uploads/mess/RO.jpg", title: "RO Drinking Water", desc: "Pure and safe RO purified drinking water available 24/7." },
+                            { image: "/uploads/mess/HOT.jpg", title: "Hot Water", desc: "Constant supply of hot water during winter months." },
+                            { image: "/uploads/mess/aa.jpg", title: "Digital Library", desc: "24/7 access to educational resources and quiet study space." },
+                            { image: "/uploads/mess/yoga.jpeg", title: "Yoga & Meditation", desc: "Daily morning sessions for physical and mental well-being." },
+                            { image: "/uploads/mess/sport.jpg", title: "Sports Facilities", desc: "International standard stadium and sports ground." },
+                            { image: "/uploads/mess/Health.jpg", title: "Health Care 24x7", desc: "On-campus medical assistance and annual checkups." },
+                            { image: "/uploads/mess/ac.jpg", title: "AC / Air Cooled", desc: "Well-ventilated rooms with central cooling options." },
+                            { image: "/uploads/mess/laundry.jpg", title: "Laundry Services", desc: "Professional and hassle-free laundry services for all students." },
+                            { image: "/uploads/mess/tuck.jpg", title: "Tuck Shop", desc: "On-campus tuck shop for all daily essentials and stationery." }
+
                         ].map((item: any, i) => (
                             <motion.div
                                 key={i}
@@ -307,7 +309,7 @@ export default function Page() {
             </section>
 
             {/* 4. Room Section (Tabs) */}
-            <section className="py-24 px-6 bg-white overflow-hidden">
+            {/* <section className="py-24 px-6 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <SectionHeader title="Our Accommodations" subtitle="Total 8 Hostels: 4 AC + 4 Non-AC" />
 
@@ -371,7 +373,7 @@ export default function Page() {
                         </motion.div>
                     </AnimatePresence>
                 </div>
-            </section>
+            </section> */}
 
             {/* 5. Fee Structure Section */}
             <section className="py-24 px-6 bg-slate-50">
@@ -388,48 +390,76 @@ export default function Page() {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-slate-100">                                 {[
-                                    { class: "Nursery to Class 5", nonAc: "₹87,500", ac: "₹1,20,500" },
-                                    { class: "Class 6", nonAc: "₹87,500", ac: "₹1,22,500" },
-                                    { class: "Class 7 to 9", nonAc: "₹90,500", ac: "₹1,22,500" },
-                                    { class: "Class 10 to XII", nonAc: "₹95,500", ac: "₹1,22,500" },
-                                    { class: "College (UG/PG)", nonAc: "₹95,500", ac: "₹1,22,500" },
-                                    { class: "B.Ed (1st & 2nd Year)", nonAc: "₹95,500", ac: "-" },
-                                    { class: "B.Ed 3rd Year", nonAc: "₹61,500", ac: "-" },
-                                    { class: "B.Ed 4th Year", nonAc: "₹56,500", ac: "-" }
-                                ].map((row, i) => (
-                                    <tr key={i} className="hover:bg-sandstone/5 group transition-colors cursor-pointer">
-                                        <td className="p-10 font-bold text-oxford group-hover:text-sandstone transition-colors">{row.class}</td>
-                                        <td className="p-10 text-gray-500 font-medium">{row.nonAc} / Year</td>
-                                        <td className="p-10">
-                                            {row.ac !== "-" ? (
-                                                <span className="text-sandstone-dark font-black">{row.ac} / Year</span>
-                                            ) : (
-                                                <span className="text-gray-300">N/A</span>
-                                            )}
-                                        </td>
-                                    </tr>
-                                ))}
+                                { class: "Nursery to Class 5", nonAc: "₹87,500", ac: "₹1,20,500" },
+                                { class: "Class 6", nonAc: "₹87,500", ac: "₹1,22,500" },
+                                { class: "Class 7 to 9", nonAc: "₹90,500", ac: "₹1,22,500" },
+                                { class: "Class 10 to XII", nonAc: "₹95,500", ac: "₹1,22,500" },
+                                { class: "College (UG/PG)", nonAc: "₹95,500", ac: "₹1,22,500" },
+                                { class: "B.Ed (1st & 2nd Year)", nonAc: "₹95,500", ac: "-" },
+                                { class: "B.Ed 3rd Year", nonAc: "₹61,500", ac: "-" },
+                                { class: "B.Ed 4th Year", nonAc: "₹56,500", ac: "-" }
+                            ].map((row, i) => (
+                                <tr key={i} className="hover:bg-sandstone/5 group transition-colors cursor-pointer">
+                                    <td className="p-10 font-bold text-oxford group-hover:text-sandstone transition-colors">{row.class}</td>
+                                    <td className="p-10 text-gray-500 font-medium">{row.nonAc} / Year</td>
+                                    <td className="p-10">
+                                        {row.ac !== "-" ? (
+                                            <span className="text-sandstone-dark font-black">{row.ac} / Year</span>
+                                        ) : (
+                                            <span className="text-gray-300">N/A</span>
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
                             </tbody>
                         </table>
                     </div>
 
-                    <div className="mt-12 grid md:grid-cols-2 gap-8">
-                        <div className="bg-white p-8 rounded-3xl shadow-sm border border-black/5 flex items-start gap-4">
-                            <div className="bg-sandstone/10 p-4 rounded-xl text-sandstone">
-                                <CreditCard size={24} />
+                    <div className="mt-12 grid lg:grid-cols-2 gap-8">
+                        <div className="bg-white p-8 rounded-3xl shadow-sm border border-black/5 flex items-start gap-5 hover:shadow-lg transition-shadow">
+                            <div className="bg-sandstone/10 p-4 rounded-2xl text-sandstone shrink-0">
+                                <CreditCard size={28} />
                             </div>
-                            <div>
-                                <h4 className="font-bold text-oxford mb-2">Short Duration Stay</h4>
-                                <p className="text-sm text-gray-500">Non AC: ₹10,000 / Month • AC: ₹12,000 / Month (Min. 3 Months)</p>
+                            <div className="w-full">
+                                <h4 className="font-bold text-oxford mb-4 text-xl border-b border-gray-50 pb-3">Short Duration Stay</h4>
+                                <p className="text-sm text-gray-500 mb-5 leading-relaxed">
+                                    The institution offers short-term accommodation facilities as per the following tariff:
+                                </p>
+                                <div className="space-y-3 text-sm text-gray-600 font-medium bg-slate-50 p-5 rounded-2xl border border-gray-100">
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-gray-500">Non-AC</span>
+                                        <span className="font-black text-oxford text-base">₹10,000 <span className="text-xs text-gray-400 font-normal">/ month</span></span>
+                                    </div>
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-gray-500">AC</span>
+                                        <span className="font-black text-oxford text-base">₹12,000 <span className="text-xs text-gray-400 font-normal">/ month</span></span>
+                                    </div>
+                                    <div className="pt-3 mt-1 border-t border-gray-200/60 text-xs text-gray-400 font-semibold tracking-wide text-center uppercase">
+                                        Minimum duration of stay: 3 months
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div className="bg-white p-8 rounded-3xl shadow-sm border border-black/5 flex items-start gap-4">
-                            <div className="bg-sandstone/10 p-4 rounded-xl text-sandstone">
-                                <Banknote size={24} />
+                        <div className="bg-white p-8 rounded-3xl shadow-sm border border-black/5 flex items-start gap-5 hover:shadow-lg transition-shadow">
+                            <div className="bg-sandstone/10 p-4 rounded-2xl text-sandstone shrink-0">
+                                <Banknote size={28} />
                             </div>
-                            <div>
-                                <h4 className="font-bold text-oxford mb-2">Cancellation Policy</h4>
-                                <p className="text-sm text-gray-500">₹10,000 deduction if cancelled after deposit. Deadline: Aug 15 (School), Oct 30 (College).</p>
+                            <div className="w-full">
+                                <h4 className="font-bold text-oxford mb-4 text-xl border-b border-gray-50 pb-3">Cancellation Policy</h4>
+                                <p className="text-sm text-gray-500 mb-5 leading-relaxed">
+                                    In the event of cancellation after the payment of the deposit, a deduction of <span className="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded-full whitespace-nowrap">₹10,000</span> shall be applicable.
+                                </p>
+                                <p className="text-sm text-gray-500 mb-4 font-semibold">The last dates for cancellation are as follows:</p>
+                                <div className="space-y-3 text-sm text-gray-600 font-medium bg-slate-50 p-5 rounded-2xl border border-gray-100">
+                                    <div className="flex justify-between items-center bg-white p-3 rounded-xl border border-gray-50 shadow-sm">
+                                        <span className="flex items-center gap-2"><School size={16} className="text-sandstone" /> School</span>
+                                        <span className="font-black text-oxford">August 15</span>
+                                    </div>
+                                    <div className="flex justify-between items-center bg-white p-3 rounded-xl border border-gray-50 shadow-sm">
+                                        <span className="flex items-center gap-2"><GraduationCap size={16} className="text-sandstone" /> College</span>
+                                        <span className="font-black text-oxford">October 30</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
