@@ -759,6 +759,158 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                 </div>
             </section>
 
+            {/* College Details and Fee Structure */}
+            <section className="py-24 px-6 bg-slate-50 overflow-hidden">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Admissions & Fees</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight text-center">College Details & Fee Structure</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
+                    </div>
+
+                    {/* College Details Card */}
+                    <div className="bg-white rounded-[2rem] p-8 md:p-12 shadow-xl border border-gray-100 mb-16 max-w-4xl mx-auto">
+                        <div className="flex items-start gap-6">
+                            <div className="w-16 h-16 rounded-2xl bg-sandstone/10 text-sandstone flex items-center justify-center shrink-0">
+                                <School size={32} />
+                            </div>
+                            <div className="flex-1">
+                                <h3 className="text-2xl font-bold text-oxford mb-6">College Overview</h3>
+                                <div className="space-y-4 text-gray-600 font-medium">
+                                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 border-b border-gray-50 pb-4">
+                                        <span className="text-gray-400 font-bold sm:w-32 uppercase text-xs tracking-widest mt-1">Name</span>
+                                        <span className="text-oxford text-lg font-bold">Leela Devi Parasmal Sancheti Kanya Mahavidyalaya, Vidyawadi</span>
+                                    </div>
+                                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 border-b border-gray-50 pb-4">
+                                        <span className="text-gray-400 font-bold sm:w-32 uppercase text-xs tracking-widest mt-1">Session</span>
+                                        <span className="text-oxford text-lg">2026–27</span>
+                                    </div>
+                                    <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                                        <span className="text-gray-400 font-bold sm:w-32 uppercase text-xs tracking-widest mt-1">Website</span>
+                                        <a href="https://vidyawadicollege.org" target="_blank" rel="noopener noreferrer" className="text-sandstone text-lg hover:text-sandstone-dark hover:underline transition-colors">vidyawadicollege.org</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="space-y-16">
+                        {/* UG Courses */}
+                        <div>
+                            <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3">
+                                <GraduationCap className="text-sandstone" />
+                                UG Courses Fee Structure (2026–27)
+                            </h3>
+                            <div className="overflow-x-auto rounded-[2rem] shadow-xl border border-gray-100 bg-white">
+                                <table className="w-full text-left border-collapse min-w-[800px]">
+                                    <thead>
+                                        <tr className="bg-oxford text-white">
+                                            <th className="p-6 text-xs font-black uppercase tracking-widest">Course</th>
+                                            <th className="p-6 text-xs font-black uppercase tracking-widest text-white/50">Previous Fee<br/>(2025-26)</th>
+                                            <th className="p-6 text-xs font-black uppercase tracking-widest text-white/50">Hike %</th>
+                                            <th className="p-6 text-xs font-black uppercase tracking-widest text-white/50">Hike Amount</th>
+                                            <th className="p-6 text-xs font-black uppercase tracking-widest text-sandstone">Total Fee</th>
+                                            <th className="p-6 text-xs font-black uppercase tracking-widest">Admission Fee</th>
+                                            <th className="p-6 text-xs font-black uppercase tracking-widest text-sandstone">Per Semester</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-gray-50">
+                                        {[
+                                            { name: "B.A.", prev: "22800", hikeP: "8%", hikeA: "1824", total: "24600", admin: "3500", sem: "12300" },
+                                            { name: "B.Com.", prev: "22000", hikeP: "8%", hikeA: "1760", total: "23800", admin: "3500", sem: "11900" },
+                                            { name: "B.Sc. (Biology)", prev: "32500", hikeP: "5%", hikeA: "1625", total: "34100", admin: "3500", sem: "17050" },
+                                            { name: "B.Sc. (Maths)", prev: "31500", hikeP: "5%", hikeA: "1575", total: "33100", admin: "3500", sem: "16550" }
+                                        ].map((row, i) => (
+                                            <tr key={i} className="hover:bg-sandstone/5 transition-colors group">
+                                                <td className="p-6 font-bold text-oxford group-hover:text-sandstone transition-colors">{row.name}</td>
+                                                <td className="p-6 font-medium text-gray-400">₹{row.prev}</td>
+                                                <td className="p-6 font-medium text-gray-400">{row.hikeP}</td>
+                                                <td className="p-6 font-medium text-gray-400">₹{row.hikeA}</td>
+                                                <td className="p-6 font-black text-oxford text-lg">₹{row.total}</td>
+                                                <td className="p-6 font-medium text-gray-500">₹{row.admin}</td>
+                                                <td className="p-6 font-black text-sandstone text-xl">₹{row.sem}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div className="grid lg:grid-cols-2 gap-16">
+                            {/* PG Courses */}
+                            <div>
+                                <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3">
+                                    <BookOpen className="text-sandstone" />
+                                    PG Courses Fee Structure
+                                </h3>
+                                <div className="overflow-x-auto rounded-[2rem] shadow-xl border border-gray-100 bg-white">
+                                    <table className="w-full text-left border-collapse">
+                                        <thead>
+                                            <tr className="bg-oxford text-white">
+                                                <th className="p-6 text-xs font-black uppercase tracking-widest">Course</th>
+                                                <th className="p-6 text-xs font-black uppercase tracking-widest">Total Fee</th>
+                                                <th className="p-6 text-xs font-black uppercase tracking-widest text-sandstone">Per Semester</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-gray-50">
+                                            {[
+                                                { name: "M.Sc. Chemistry", total: "31200", sem: "15600" },
+                                                { name: "M.Sc. Mathematics", total: "25000", sem: "12500" },
+                                                { name: "M.A. Hindi", total: "15000", sem: "7500" },
+                                                { name: "M.A. English", total: "15000", sem: "7500" },
+                                                { name: "M.A. History", total: "15000", sem: "7500" },
+                                                { name: "M.A. Political Science", total: "15000", sem: "7500" },
+                                                { name: "M.A. Geography", total: "17000", sem: "8500" },
+                                                { name: "M.Com. (Business Admin.)", total: "15000", sem: "7500" }
+                                            ].map((row, i) => (
+                                                <tr key={i} className="hover:bg-sandstone/5 transition-colors group">
+                                                    <td className="p-6 font-bold text-oxford group-hover:text-sandstone transition-colors">{row.name}</td>
+                                                    <td className="p-6 font-medium text-gray-500 text-lg">₹{row.total}</td>
+                                                    <td className="p-6 font-black text-sandstone text-lg">₹{row.sem}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            {/* Integrated Courses */}
+                            <div>
+                                <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3">
+                                    <Star className="text-sandstone" />
+                                    Integrated Course (via NTA)
+                                </h3>
+                                <div className="bg-white rounded-[2rem] shadow-xl border border-gray-100 p-8">
+                                    <p className="text-gray-500 font-medium mb-6">Approximate semester fee values listed below:</p>
+                                    <div className="grid grid-cols-2 gap-4">
+                                        {[
+                                            { sem: "Semester 1", fee: "27730" },
+                                            { sem: "Semester 2", fee: "27514" },
+                                            { sem: "Semester 3", fee: "27514" },
+                                            { sem: "Semester 4", fee: "27514" },
+                                            { sem: "Semester 5", fee: "27730" },
+                                            { sem: "Semester 6", fee: "27514" },
+                                            { sem: "Semester 7", fee: "27514" },
+                                            { sem: "Semester 8", fee: "27514" }
+                                        ].map((row, i) => (
+                                            <div key={i} className="flex justify-between items-center p-4 bg-gray-50 rounded-xl border border-gray-100 shadow-sm hover:border-sandstone/30 transition-colors">
+                                                <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">{row.sem}</span>
+                                                <span className="font-black text-oxford text-lg">₹{row.fee}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className="mt-8 p-4 bg-sandstone/10 rounded-xl border border-sandstone/20 flex items-start gap-3">
+                                        <div className="text-sandstone shrink-0 mt-0.5"><CheckCircle2 size={16} /></div>
+                                        <p className="text-sm font-bold text-oxford/70">As per NCTE / Govt. norms</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
             {/* University Toppers Section */}
             <section className="py-24 px-6 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto">
