@@ -81,8 +81,8 @@ export default function Navbar() {
         <header className="fixed top-0 w-full z-[100] font-inter">
             {/* Top Bar */}
             <div className="bg-oxford text-white py-2 px-10 hidden md:block">
-                <div className="max-w-7xl mx-auto flex justify-between items-center text-[13px] font-medium px-4">
-                    <div className="flex items-center gap-6">
+                <div className="max-w-[1600px] mx-auto flex justify-between items-center text-[13px] font-medium px-4">
+                    <div className="flex items-center gap-6 pl-32">
                         <a href="tel:+916377204218" className="flex items-center gap-2 hover:text-sandstone transition-colors group">
                             <Phone size={14} className="text-sandstone group-hover:scale-110 transition-transform" />
                             <span>Have any Question?</span>
@@ -121,15 +121,18 @@ export default function Navbar() {
                         : (isDarkSection ? "bg-transparent py-4 border-white/10" : "bg-white py-4 border-oxford/10")
                 )}
             >
-                <div className="max-w-7xl mx-auto px-4 flex justify-between items-center relative">
+                <div className="max-w-[1600px] mx-auto px-3 md:px-5 flex justify-between items-center">
+
+                    {/* LOGO + BRAND (BADGE STYLE) */}
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className="relative flex items-center cursor-pointer min-h-[60px]"
+                        className="relative flex items-center cursor-pointer"
+
                         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                     >
                         {/* BADGE LOGO */}
-                        <div className="absolute -top-10 -left-2 md:-top-12 md:-left-4 z-50 mt-[23px]">
+                        <div className="absolute -top-10 -left-4 md:-top-12 md:-left-5 z-50">
                             <div className={cn(
                                 "relative transition-all duration-300",
                                 scrolled
@@ -146,8 +149,8 @@ export default function Navbar() {
                             </div>
                         </div>
 
-                        {/* BRAND TEXT */}
-                        <div className="pl-20 sm:pl-24 md:pl-36 leading-tight flex-1 min-w-0">
+                        {/* BRAND TEXT & MENU STACK */}
+                        <div className="pl-16 sm:pl-20 md:pl-32 leading-tight flex-1 min-w-0 flex flex-col">
                             <p className={cn(
                                 "text-[8px] sm:text-[11px] font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] mt-1 truncate",
                                 scrolled || !isDarkSection ? "text-oxford/90" : "text-white/90"
@@ -162,67 +165,65 @@ export default function Navbar() {
                             )}>
                                 VIDYAWADI
                             </h1>
+
+                            {/* Desktop Links - Moved under name */}
+                            <div className="hidden lg:flex items-center gap-4 mt-4 -ml-4">
+                                {navLinks.map((link) => (
+                                    <div
+                                        key={link.name}
+                                        className="relative group"
+                                        onMouseEnter={() => setActiveDropdown(link.name)}
+                                        onMouseLeave={() => setActiveDropdown(null)}
+                                    >
+                                        <a
+                                            href={link.href}
+                                            className={cn(
+                                                "px-4 py-1 text-[12px] font-bold tracking-wide uppercase transition-all flex items-center gap-1 border-b-2 border-transparent hover:text-sandstone hover:border-sandstone",
+                                                scrolled || !isDarkSection ? "text-oxford/70" : "text-white/70"
+                                            )}
+                                        >
+                                            {link.name}
+                                            {link.subLinks && <ChevronDown size={12} className={cn("transition-transform", activeDropdown === link.name && "rotate-180")} />}
+                                        </a>
+
+                                        {/* Dropdown Menu */}
+                                        {link.subLinks && (
+                                            <AnimatePresence>
+                                                {activeDropdown === link.name && (
+                                                    <motion.div
+                                                        initial={{ opacity: 0, y: 10 }}
+                                                        animate={{ opacity: 1, y: 0 }}
+                                                        exit={{ opacity: 0, y: 10 }}
+                                                        className="absolute top-full left-0 pt-2 z-[120]"
+                                                    >
+                                                        <div className="bg-white rounded-xl shadow-2xl border border-oxford/5 overflow-hidden p-2 min-w-max">
+                                                            {link.subLinks.map((sub: any) => (
+                                                                <div key={sub.name} className="flex items-center gap-2">
+                                                                    <a
+                                                                        href={sub.href}
+                                                                        download={sub.isBrochure}
+                                                                        className={cn(
+                                                                            "rounded-lg transition-all whitespace-nowrap flex items-center justify-between gap-4 w-full",
+                                                                            sub.isBrochure
+                                                                                ? "px-4 py-2 bg-oxford text-white rounded-md font-bold text-[12px] shadow-md mb-2 mt-1 mx-2"
+                                                                                : "flex-1 px-4 py-2.5 text-[13px] font-semibold text-oxford hover:bg-oxford hover:text-white"
+                                                                        )}
+                                                                    >
+                                                                        <span>{sub.name}</span>
+                                                                        {sub.isBrochure && <Download size={14} />}
+                                                                    </a>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </motion.div>
-
-                    {/* REST OF NAV (unchanged) */}
-
-                    {/* Desktop Links */}
-                    <div className="hidden 3xl:flex items-center gap-1 xl:gap-2">
-                        {navLinks.map((link) => (
-                            <div
-                                key={link.name}
-                                className="relative group"
-                                onMouseEnter={() => setActiveDropdown(link.name)}
-                                onMouseLeave={() => setActiveDropdown(null)}
-                            >
-                                <a
-                                    href={link.href}
-                                    className={cn(
-                                        "px-4 py-2 text-[14px] font-bold tracking-wide uppercase transition-all flex items-center gap-1 border-b-2 border-transparent hover:text-sandstone hover:border-sandstone",
-                                        scrolled || !isDarkSection ? "text-oxford/80" : "text-white/80"
-                                    )}
-                                >
-                                    {link.name}
-                                    {link.subLinks && <ChevronDown size={14} className={cn("transition-transform", activeDropdown === link.name && "rotate-180")} />}
-                                </a>
-
-                                {/* Dropdown Menu */}
-                                {link.subLinks && (
-                                    <AnimatePresence>
-                                        {activeDropdown === link.name && (
-                                            <motion.div
-                                                initial={{ opacity: 0, y: 10 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                exit={{ opacity: 0, y: 10 }}
-                                                className="absolute top-full left-0 pt-4"
-                                            >
-                                                <div className="bg-white rounded-xl shadow-2xl border border-oxford/5 overflow-hidden p-2 min-w-max">
-                                                    {link.subLinks.map((sub: any) => (
-                                                        <div key={sub.name} className="flex items-center gap-2">
-                                                            <a
-                                                                href={sub.href}
-                                                                download={sub.isBrochure}
-                                                                className={cn(
-                                                                    "rounded-lg transition-all whitespace-nowrap flex items-center justify-between gap-4",
-                                                                    sub.isBrochure
-                                                                        ? "px-4 py-2 bg-oxford text-white rounded-md font-bold text-[12px] shadow-md mb-2 w-fit ml-auto mr-2 mt-1"
-                                                                        : "flex-1 px-4 py-3 text-sm font-semibold text-oxford hover:bg-oxford hover:text-white"
-                                                                )}
-                                                            >
-                                                                <span>{sub.name}</span>
-                                                                {sub.isBrochure && <Download size={14} />}
-                                                            </a>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
-                                )}
-                            </div>
-                        ))}
-                    </div>
 
                     {/* Action Buttons */}
                     <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
@@ -239,7 +240,7 @@ export default function Navbar() {
 
                         <button
                             className={cn(
-                                "3xl:hidden p-2 rounded-lg transition-colors",
+                                "lg:hidden p-2 rounded-lg transition-colors",
                                 scrolled || !isDarkSection ? "text-oxford hover:bg-oxford/5" : "text-white hover:bg-white/10"
                             )}
                             onClick={() => setIsOpen(!isOpen)}
@@ -258,30 +259,18 @@ export default function Navbar() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: "100%" }}
                         transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                        className="3xl:hidden fixed inset-0 bg-oxford z-[110] p-6 flex flex-col h-screen overflow-hidden"
+                        className="lg:hidden fixed inset-0 bg-oxford z-[110] p-6 flex flex-col h-screen overflow-hidden"
                     >
-                        <div className="flex justify-between items-center mb-10 relative">
-                            <div className="flex items-center">
-                                {/* Mobile Badge Logo */}
-                                <div className="relative h-24 w-16 shrink-0 z-10 -ml-2 mt-[9px]">
-                                    <Image
-                                        src="/111rrrdd.png"
-                                        alt="Vidyawadi Logo"
-                                        fill
-                                        className="object-contain"
-                                        priority
-                                    />
-                                </div>
-                                <div className="flex flex-col pl-2">
-                                    <h2 className="text-xl font-black text-white tracking-widest uppercase leading-none">Vidyawadi</h2>
-                                    <p className="text-[7px] text-sandstone font-bold uppercase tracking-widest mt-2 truncate max-w-[180px]">
-                                        <span className="bg-sandstone text-oxford px-1.5 py-0.5 rounded shadow-sm">
-                                            Marudhar Mahila Shikshan Sangh
-                                        </span>
-                                    </p>
-                                </div>
+                        <div className="flex justify-between items-center mb-10">
+                            <div className="flex flex-col">
+                                <h2 className="text-2xl font-black text-white tracking-widest uppercase">Vidyawadi</h2>
+                                <p className="text-[9px] text-sandstone font-bold uppercase tracking-widest mt-1">
+                                    <span className="bg-sandstone text-oxford px-1.5 py-0.5 rounded shadow-sm">
+                                        Marudhar Mahila Shikshan Sangh
+                                    </span>
+                                </p>
                             </div>
-                            <button onClick={() => setIsOpen(false)} className="text-white p-2 hover:bg-white/10 rounded-full transition-colors shrink-0">
+                            <button onClick={() => setIsOpen(false)} className="text-white p-2 hover:bg-white/10 rounded-full transition-colors">
                                 <X size={28} />
                             </button>
                         </div>
