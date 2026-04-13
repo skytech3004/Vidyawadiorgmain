@@ -125,30 +125,39 @@ export default function Navbar() {
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className="flex items-center gap-3 sm:gap-4 cursor-pointer py-1"
+                        className="relative flex items-center cursor-pointer min-h-[60px]"
                         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                     >
-                        <div className="relative h-12 w-12 sm:h-16 sm:w-16 md:h-20 md:w-20 shrink-0">
-                            <Image
-                                src="/111rrrdd.png"
-                                alt="Vidyawadi Logo"
-                                fill
-                                className="object-contain drop-shadow-md"
-                                priority
-                            />
+                        {/* BADGE LOGO */}
+                        <div className="absolute -top-10 -left-2 md:-top-12 md:-left-4 z-50 mt-[23px]">
+                            <div className={cn(
+                                "relative transition-all duration-300",
+                                scrolled
+                                    ? "h-32 w-16 md:h-48 md:w-32"
+                                    : "h-40 w-20 md:h-48 md:w-32"
+                            )}>
+                                <Image
+                                    src="/111rrrdd.png"
+                                    alt="Vidyawadi Logo"
+                                    fill
+                                    className="object-contain drop-shadow-lg"
+                                    priority
+                                />
+                            </div>
                         </div>
 
-                        <div className="flex flex-col justify-center min-w-0">
-                            <div className={cn(
-                                " transition-all duration-300",
+                        {/* BRAND TEXT */}
+                        <div className="pl-20 sm:pl-24 md:pl-36 leading-tight flex-1 min-w-0">
+                            <p className={cn(
+                                "text-[8px] sm:text-[11px] font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] mt-1 truncate",
                                 scrolled || !isDarkSection ? "text-oxford/90" : "text-white/90"
                             )}>
-                                <span className="bg-sandstone text-oxford px-1.5 py-0.5 rounded text-[7px] sm:text-[9px] font-bold uppercase tracking-wider inline-block">
+                                <span className="bg-sandstone text-oxford px-1.5 py-0.5 rounded shadow-sm inline-block">
                                     Marudhar Mahila Shikshan Sangh
                                 </span>
-                            </div>
+                            </p>
                             <h1 className={cn(
-                                "text-lg sm:text-xl md:text-2xl font-black tracking-widest leading-none mt-1 transition-all truncate",
+                                "text-lg sm:text-2xl md:text-3xl font-black tracking-[0.1em] leading-none transition-all truncate pr-2",
                                 scrolled || !isDarkSection ? "text-oxford" : "text-white"
                             )}>
                                 VIDYAWADI
@@ -251,16 +260,28 @@ export default function Navbar() {
                         transition={{ type: "spring", damping: 25, stiffness: 200 }}
                         className="3xl:hidden fixed inset-0 bg-oxford z-[110] p-6 flex flex-col h-screen overflow-hidden"
                     >
-                        <div className="flex justify-between items-center mb-10">
-                            <div className="flex flex-col">
-                                <h2 className="text-2xl font-black text-white tracking-widest uppercase">Vidyawadi</h2>
-                                <p className="text-[9px] text-sandstone font-bold uppercase tracking-widest mt-1">
-                                    <span className="bg-sandstone text-oxford px-1.5 py-0.5 rounded shadow-sm">
-                                        Marudhar Mahila Shikshan Sangh
-                                    </span>
-                                </p>
+                        <div className="flex justify-between items-center mb-10 relative">
+                            <div className="flex items-center">
+                                {/* Mobile Badge Logo */}
+                                <div className="relative h-24 w-16 shrink-0 z-10 -ml-2 mt-[9px]">
+                                    <Image
+                                        src="/111rrrdd.png"
+                                        alt="Vidyawadi Logo"
+                                        fill
+                                        className="object-contain"
+                                        priority
+                                    />
+                                </div>
+                                <div className="flex flex-col pl-2">
+                                    <h2 className="text-xl font-black text-white tracking-widest uppercase leading-none">Vidyawadi</h2>
+                                    <p className="text-[7px] text-sandstone font-bold uppercase tracking-widest mt-2 truncate max-w-[180px]">
+                                        <span className="bg-sandstone text-oxford px-1.5 py-0.5 rounded shadow-sm">
+                                            Marudhar Mahila Shikshan Sangh
+                                        </span>
+                                    </p>
+                                </div>
                             </div>
-                            <button onClick={() => setIsOpen(false)} className="text-white p-2 hover:bg-white/10 rounded-full transition-colors">
+                            <button onClick={() => setIsOpen(false)} className="text-white p-2 hover:bg-white/10 rounded-full transition-colors shrink-0">
                                 <X size={28} />
                             </button>
                         </div>
