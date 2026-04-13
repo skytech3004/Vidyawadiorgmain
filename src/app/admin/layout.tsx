@@ -27,12 +27,12 @@ const sidebarItems = [
     // { name: "Media Library", href: "/admin/media", icon: ImageIcon },
     { name: "Blog Manager", href: "/admin/blog", icon: FileText },
     { name: "Gallery", href: "/admin/gallery", icon: ImageIcon },
-    { name: "Faculty / Staff", href: "/admin/staff", icon: Users },
-    { name: "Result Highlights", href: "/admin/results", icon: Trophy },
-    { name: "Achievements", href: "/admin/achievements", icon: Trophy },
-    { name: "Donations", href: "/admin/donations", icon: Heart },
+    // { name: "Faculty / Staff", href: "/admin/staff", icon: Users },
+    // { name: "Result Highlights", href: "/admin/results", icon: Trophy },
+    // { name: "Achievements", href: "/admin/achievements", icon: Trophy },
+    // { name: "Donations", href: "/admin/donations", icon: Heart },
     { name: "Inquiries", href: "/admin/inquiries", icon: MessageSquare },
-    { name: "Settings", href: "/admin/settings", icon: Settings },
+    // { name: "Settings", href: "/admin/settings", icon: Settings },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
