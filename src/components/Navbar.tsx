@@ -81,8 +81,8 @@ export default function Navbar() {
         <header className="fixed top-0 w-full z-[100] font-inter">
             {/* Top Bar */}
             <div className="bg-oxford text-white py-2 px-10 hidden md:block">
-                <div className="max-w-[1600px] mx-auto flex justify-between items-center text-[13px] font-medium px-4">
-                    <div className="flex items-center gap-6 pl-32">
+                <div className="max-w-7xl mx-auto flex justify-between items-center text-[13px] font-medium px-4">
+                    <div className="flex items-center gap-6">
                         <a href="tel:+916377204218" className="flex items-center gap-2 hover:text-sandstone transition-colors group">
                             <Phone size={14} className="text-sandstone group-hover:scale-110 transition-transform" />
                             <span>Have any Question?</span>
@@ -121,58 +121,45 @@ export default function Navbar() {
                         : (isDarkSection ? "bg-transparent py-4 border-white/10" : "bg-white py-4 border-oxford/10")
                 )}
             >
-                <div className="max-w-[1600px] mx-auto px-3 md:px-5 flex justify-between items-center">
-
-                    {/* LOGO + BRAND (BADGE STYLE) */}
+                <div className="max-w-7xl mx-auto px-4 flex justify-between items-center relative">
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className="relative flex items-center cursor-pointer"
-
+                        className="flex items-center gap-3 sm:gap-4 cursor-pointer py-1"
                         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                     >
-                        {/* BADGE LOGO */}
-                        <div className="absolute -top-10 -left-4 md:-top-12 md:-left-5 z-50">
-                            <div className={cn(
-                                "relative transition-all duration-300",
-                                scrolled
-                                    ? "h-32 w-16 md:h-48 md:w-32"
-                                    : "h-40 w-20 md:h-48 md:w-32"
-                            )}>
-                                <Image
-                                    src="/111rrrdd.png"
-                                    alt="Vidyawadi Logo"
-                                    fill
-                                    className="object-contain drop-shadow-lg"
-                                    priority
-                                />
-                            </div>
+                        <div className="relative h-12 w-12 sm:h-16 sm:w-16 md:h-20 md:w-20 shrink-0">
+                            <Image
+                                src="/111rrrdd.png"
+                                alt="Vidyawadi Logo"
+                                fill
+                                className="object-contain drop-shadow-md"
+                                priority
+                            />
                         </div>
 
-                        {/* BRAND TEXT */}
-                        <div className="pl-16 sm:pl-20 md:pl-32 leading-tight flex-1 min-w-0">
-                            <p className={cn(
-                                "text-[8px] sm:text-[11px] font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] mt-1 truncate",
+                        <div className="flex flex-col justify-center min-w-0">
+                            <div className={cn(
+                                " transition-all duration-300",
                                 scrolled || !isDarkSection ? "text-oxford/90" : "text-white/90"
                             )}>
-                                <span className="bg-sandstone text-oxford px-1.5 py-0.5 rounded shadow-sm inline-block">
+                                <span className="bg-sandstone text-oxford px-1.5 py-0.5 rounded text-[7px] sm:text-[9px] font-bold uppercase tracking-wider inline-block">
                                     Marudhar Mahila Shikshan Sangh
                                 </span>
-                            </p>
+                            </div>
                             <h1 className={cn(
-                                "text-lg sm:text-2xl md:text-3xl font-black tracking-[0.1em] leading-none transition-all truncate pr-2",
+                                "text-lg sm:text-xl md:text-2xl font-black tracking-widest leading-none mt-1 transition-all truncate",
                                 scrolled || !isDarkSection ? "text-oxford" : "text-white"
                             )}>
                                 VIDYAWADI
                             </h1>
-
                         </div>
                     </motion.div>
 
                     {/* REST OF NAV (unchanged) */}
 
                     {/* Desktop Links */}
-                    <div className="hidden lg:flex items-center gap-4">
+                    <div className="hidden 3xl:flex items-center gap-1 xl:gap-2">
                         {navLinks.map((link) => (
                             <div
                                 key={link.name}
@@ -243,7 +230,7 @@ export default function Navbar() {
 
                         <button
                             className={cn(
-                                "lg:hidden p-2 rounded-lg transition-colors",
+                                "3xl:hidden p-2 rounded-lg transition-colors",
                                 scrolled || !isDarkSection ? "text-oxford hover:bg-oxford/5" : "text-white hover:bg-white/10"
                             )}
                             onClick={() => setIsOpen(!isOpen)}
@@ -262,7 +249,7 @@ export default function Navbar() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: "100%" }}
                         transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                        className="lg:hidden fixed inset-0 bg-oxford z-[110] p-6 flex flex-col h-screen overflow-hidden"
+                        className="3xl:hidden fixed inset-0 bg-oxford z-[110] p-6 flex flex-col h-screen overflow-hidden"
                     >
                         <div className="flex justify-between items-center mb-10">
                             <div className="flex flex-col">
