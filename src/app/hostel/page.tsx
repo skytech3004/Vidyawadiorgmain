@@ -100,7 +100,7 @@ export default function Page() {
             id: "discipline",
             title: "Discipline Rules",
             icon: <Scale size={20} />,
-            content: "We maintain a focused environment: Mobiles are not allowed for school students. Dress code prohibits shorts, sleeveless, or tight clothing. Cosmetics, jewelry, cameras, and large sums of currency are restricted. Morning Yoga and Sports are mandatory for all residents."
+            content: "We maintain a focused environment: Mobiles are not allowed for school students. Dress code prohibits shorts, sleeveless, or tight clothing. Cosmetics, jewellery, cameras, and large sums of currency are restricted. Morning Yoga and Sports are mandatory for all residents."
         },
         {
             id: "holidays",
@@ -259,7 +259,7 @@ export default function Page() {
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {[
                             { image: "/uploads/mess/security.jpg", title: "Safety & CCTV", desc: "Round-the-clock security with full CCTV coverage." },
-                            { image: "/images/english school/7e7ad0cf-7675-40dc-b2d9-a7a4dc3053a4.jpg", title: "Pure Jain Food", desc: "Nutritious Satvik meals with 5 servings per day." },
+                            { image: "/images/jain_meals.png", title: "Pure Jain Food", desc: "Nutritious Satvik meals with 5 servings per day." },
                             { image: "/uploads/mess/RO.jpg", title: "RO Drinking Water", desc: "Pure and safe RO purified drinking water available 24/7." },
                             { image: "/uploads/mess/HOT.jpg", title: "Hot Water", desc: "Constant supply of hot water during winter months." },
                             { image: "/uploads/mess/aa.jpg", title: "Digital Library", desc: "24/7 access to educational resources and quiet study space." },

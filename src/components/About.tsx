@@ -49,6 +49,7 @@ export default function About() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
+                        className="lg:col-span-2"
                     >
                         <span className="text-sandstone font-black uppercase tracking-[0.3em] text-sm mb-4 block">
                             Our Journey
@@ -92,49 +93,6 @@ export default function About() {
                         </div>
                     </motion.div>
 
-                    {/* Right Content - Vision & Mission */}
-                    <div className="grid gap-8">
-                        {/* Vision Card */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
-                            className="bg-oxford p-10 rounded-[2rem] text-white relative overflow-hidden group shadow-2xl"
-                        >
-                            <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-110 transition-transform duration-500">
-                                <Target size={120} />
-                            </div>
-                            <div className="relative z-10">
-                                <span className="inline-flex items-center justify-center w-12 h-12 bg-sandstone rounded-full mb-6">
-                                    <Target className="text-oxford" size={24} />
-                                </span>
-                                <h3 className="text-3xl font-black mb-6 tracking-wide">VISION</h3>
-                                <p className="text-white/80 leading-relaxed text-lg">
-                                    "To provide affordable, high-quality education that empowers students with knowledge, skills, and strong values. We aim to nurture hidden talents, encourage innovation, and create future leaders, entrepreneurs, and responsible citizens."
-                                </p>
-                            </div>
-                        </motion.div>
-
-                        {/* Mission Card */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
-                            className="bg-sandstone-light p-10 rounded-[2rem] text-oxford relative overflow-hidden shadow-xl"
-                        >
-                            <div className="relative z-10">
-                                <span className="inline-flex items-center justify-center w-12 h-12 bg-oxford rounded-full mb-6">
-                                    <Shield className="text-white" size={24} />
-                                </span>
-                                <h3 className="text-3xl font-black mb-6 tracking-wide">MISSION</h3>
-                                <p className="text-oxford/80 leading-relaxed text-lg">
-                                    "Our mission is to deliver excellence in education through value-based and holistic learning. We focus on developing creativity, critical thinking, and entrepreneurial skills while promoting gender equality, social responsibility, and environmental awareness."
-                                </p>
-                            </div>
-                        </motion.div>
-                    </div>
                 </div>
             </div>
         </section >

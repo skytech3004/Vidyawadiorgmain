@@ -36,9 +36,9 @@ const timelineEvents = [
         side: "left"
     },
     {
-        year: "2025",
-        title: "65 Years of Excellence",
-        description: "Celebrating our diamond jubilee with over 5,000 alumni worldwide.",
+        year: "2026",
+        title: "70 Years of Excellence",
+        description: "Celebrating our platinum jubilee with over 5,000 alumni worldwide.",
         side: "right"
     }
 ];

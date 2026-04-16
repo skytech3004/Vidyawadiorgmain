@@ -10,7 +10,7 @@ interface ContactEntry {
 }
 
 const contactData: ContactEntry[] = [
-    // { office: "Secretary - MMSS", email: "kailashkaveria@yahoo.com" },
+    { office: "Secretary - Marudhar Mahila Shikshan Sangh", email: "kailashkaveria@yahoo.com" },
     { office: "CEO", phone: "6377204201", email: "ceo@vidyawadi.org" },
     { office: "Principal College", phone: "6377204203", email: "principal.college@vidyawadi.org" },
     { office: "Principal Hindi School", phone: "6377204205", email: "priya.sangeeta@vidyawadi.org" },

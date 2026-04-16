@@ -22,7 +22,7 @@ const features = [
     {
         icon: <ShieldCheck className="w-8 h-8" />,
         title: "Uncompromising Security",
-        desc: "24/7 warden supervision, CCTV surveillance, and specialized female security personnel ensure a safe heaven for your daughters."
+        desc: "24/7 warden supervision, CCTV surveillance, and specialized female security personnel ensure a secure and nurturing environment for your daughters."
     },
     {
         icon: <Coffee className="w-8 h-8" />,
@@ -32,7 +32,7 @@ const features = [
     {
         icon: <Heart className="w-8 h-8" />,
         title: "Care & Support",
-        desc: "An emotional support system where chaque student is treated with care, fostering a family-like atmosphere."
+        desc: "An emotional support system where each student is treated with care, fostering a family-like atmosphere."
     },
     {
         icon: <UserCheck className="w-8 h-8" />,
@@ -161,7 +161,7 @@ export default function HostelSection() {
                                     "Spacious Sports Ground",
                                     "Kids Activity Park",
                                     "Modern Science & Computer Labs",
-                                    "16 Buses serving 83+ villages"
+                                    "21 Buses serving 83+ villages"
                                 ].map((item, idx) => (
                                     <li key={idx} className="flex items-start gap-3 text-white/70 font-medium group">
                                         <div className="w-2 h-2 rounded-full bg-sandstone shrink-0 mt-2 group-hover:scale-125 transition-transform" />

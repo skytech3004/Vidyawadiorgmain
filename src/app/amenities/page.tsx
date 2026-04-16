@@ -114,7 +114,7 @@ export default function AmenitiesPage() {
                                 "Stadium to accommodate 300 people.",
                                 "National standard athletics track and national level courts (basketball, volleyball).",
                                 "Indoor gymnasium hall with gymnastic, badminton, table-tennis & Yoga education.",
-                                "Football & hockey ground.",
+                                "Football & Hockey Grounds.",
                             ]}
                         />
 

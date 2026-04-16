@@ -42,7 +42,7 @@ export default function MarudharContent() {
                             <img src="/marudhar_balika.jpg" alt="Marudhar Balika Vidyapeeth Logo" className="w-full h-full object-cover" />
                         </div>
                         <div>
-                            <span className="text-sandstone font-bold uppercase tracking-widest text-sm mb-4 block">Hindi & English Meduim Senior Secondary School (RBSE)</span>
+                            <span className="text-sandstone font-bold uppercase tracking-widest text-sm mb-4 block">Hindi & English Medium Senior Secondary School (RBSE)</span>
                             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 leading-tight">
                                 Marudhar Balika Vidyapeeth
                             </h1>
@@ -161,7 +161,7 @@ export default function MarudharContent() {
                         <div className="h-1.5 w-24 bg-sandstone mt-6 rounded-full mb-10" />
                         <div className="prose text-gray-600 leading-relaxed space-y-4">
                             <p>
-                                Marudhar Balika Vidyapeeth is a premier girls’ senior secondary school dedicated to academic excellence, character building, and all-round development. Managed by Marudhar Mahila Shikshan Sangh,Vidyawadi, our institution provides quality education in Hindi & English Medium under RBSE.
+                                Marudhar Balika Vidyapeeth is a premier girls’ senior secondary school dedicated to academic excellence, character building, and all-round development. Managed by Marudhar Mahila Shikshan Sangh, Vidyawadi, our institution provides quality education in Hindi & English Medium under RBSE.
                             </p>
                             <p className="text-lg font-medium text-oxford">
                                 "We believe that educated girls build stronger families, communities, and the nation."
@@ -216,10 +216,10 @@ export default function MarudharContent() {
                             { name: "Biology Laboratory", icon: Microscope, img: "/images/Biology Laboratory.png" },
                             { name: "Geography Laboratory", icon: Globe, img: "/images/Geography Laboratory.png" },
                             { name: "NCC & Guide", icon: Trophy, img: "/llll-AAA.jpeg" },
-                            { name: "Library", icon: Globe, img: "/llll-BBB.jpeg" },
+                            { name: "Library", icon: Globe, img: "/images/english school/63680e76-2f23-4f80-a9ee-96a18fdd6348.jpg" },
                             { name: "Art & Craft Lab", icon: Trophy, img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWM0VDuzqiY7GKHYNiuLdOiI7NeBpeOLzD8rQ4xWGJnwBcENRmGbgaQuXdZCdb1_Jo2vfdGOarAbvU_jduXSt9pSejENdN_TZGKOTTYaLnDGUVrn-NJryFo1Y3QjC4d9zL7tMd6Aq9J40/s1600/photo+4-3.JPG" },
                             { name: "RS-CIT IT Computer Center", icon: School, img: "/images/RS-CIT IT Computer Center.png" },
-                            { name: "CCTV Camera Surveillance", icon: CheckCircle2, img: "https://journalistsresource.org/wp-content/uploads/2014/02/surveillance-camera-860x466.jpg" },
+                            { name: "CCTV Surveillance", icon: CheckCircle2, img: "https://journalistsresource.org/wp-content/uploads/2014/02/surveillance-camera-860x466.jpg" },
                             { name: "Fire Safety Systems", icon: CheckCircle2, img: "https://static.vecteezy.com/system/resources/previews/065/840/675/non_2x/a-firefighter-presenting-fire-safety-tips-with-a-fire-extinguisher-illustration-vector.jpg" },
                             { name: "Practical Equipment (All Subjects)", icon: BookOpen, img: "https://www.labkafe.com/storage/blog/optimize/20-common-lab-equipment.jpg" }
                         ].map((facility, i) => (

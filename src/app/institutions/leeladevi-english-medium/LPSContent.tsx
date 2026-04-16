@@ -502,15 +502,15 @@ export default function LPSContent() {
 
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         {[
-                            { name: "Physics Laboratory" },
-                            { name: "Chemistry Laboratory", img: "/chemistry.jpg" },
-                            { name: "Biology Laboratory", img: "/bio.jpg" },
+                            { name: "Physics Laboratory", img: "/images/Physics Laboratory.png" },
+                            { name: "Chemistry Laboratory", img: "/images/Chemistry Laboratory.png" },
+                            { name: "Biology Laboratory", img: "/images/Biology Laboratory.png" },
                             { name: "Mathematics Lab" },
                             { name: "Music & Painting Studio", img: "/images/english school/93b4f897-0aca-4189-a717-16c13f8372d5.jpg" },
-                            { name: "Geography Laboratory" },
+                            { name: "Geography Laboratory", img: "/images/Geography Laboratory.png" },
                             { name: "NCC & Guide", img: "/llll-AAA.jpeg" },
                             { name: "Library", img: "/images/english school/706b5bd7-1cbd-40f0-a48f-2ec78225ac48.jpg" },
-                            { name: "Computer Center", img: "/images/english school/344537e3-f907-4894-b74e-6c120656cc03.jpg" },
+                            { name: "Computer Center", img: "/images/RS-CIT IT Computer Center.png" },
                             { name: "Multimedia Room", img: "/images/english school/a40160d0-ce25-4bad-818d-e2e729dc47f4.jpg" },
                             { name: "Safe & Secure Campus", img: "https://journalistsresource.org/wp-content/uploads/2014/02/surveillance-camera-860x466.jpg" }
                         ].map((facility, i) => (

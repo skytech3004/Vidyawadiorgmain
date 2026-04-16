@@ -93,7 +93,7 @@ export default function GallerySection() {
                             viewport={{ once: true }}
                             className="text-sandstone font-bold uppercase tracking-[0.4em] text-sm block mb-4"
                         >
-                            Our Visual Journey
+                            LIFE AT VIDYAWADI
                         </motion.span>
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
