@@ -592,7 +592,7 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                 )}
             </AnimatePresence>
 
-            <section className="py-24 px-6 bg-gray-50 overflow-hidden">
+            {/* <section className="py-24 px-6 bg-gray-50 overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Our Faculty</span>
@@ -661,7 +661,7 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                         </div>
                     )}
                 </div>
-            </section>
+            </section> */}
             {/* Academic Programs - DYNAMIC SECTION */}
             <section className="py-24 px-6 bg-gray-50 relative overflow-hidden">
                 <div className="max-w-7xl mx-auto relative z-10">
@@ -846,7 +846,7 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                                     <thead>
                                         <tr className="bg-oxford text-white">
                                             <th className="p-6 text-xs font-black uppercase tracking-widest">Course</th>
-                                            <th className="p-6 text-xs font-black uppercase tracking-widest text-white/50">Previous Fee<br/>(2025-26)</th>
+                                            <th className="p-6 text-xs font-black uppercase tracking-widest text-white/50">Previous Fee<br />(2025-26)</th>
                                             <th className="p-6 text-xs font-black uppercase tracking-widest text-white/50">Hike %</th>
                                             <th className="p-6 text-xs font-black uppercase tracking-widest text-white/50">Hike Amount</th>
                                             <th className="p-6 text-xs font-black uppercase tracking-widest text-sandstone">Total Fee</th>
