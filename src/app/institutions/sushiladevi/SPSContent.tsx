@@ -184,6 +184,16 @@ export default function SPSContent() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [visibleToppers, setVisibleToppers] = useState(10);
     const [visibleStaff, setVisibleStaff] = useState(12);
+
+    const openModal = (student: any) => {
+        setSelectedStudent(student);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setTimeout(() => setSelectedStudent(null), 300);
+    };
     return (
         <main className="min-h-screen bg-white font-devanagari">
             <StudentModal isOpen={isModalOpen} onClose={closeModal} student={selectedStudent} />
