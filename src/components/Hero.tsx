@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ArrowDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
+import HeroCarousel from "./HeroCarousel";
 
 export default function Hero() {
     const router = useRouter();
@@ -13,14 +14,36 @@ export default function Hero() {
     const subtitleRef = useRef<HTMLParagraphElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
     const [textIndex, setTextIndex] = useState(0);
-    const texts = ["Celebrating 70 Years of Excellence", "शिक्षा भी, संस्कार भी", "Nurturing Minds, Shaping Futures"];
+    const [texts, setTexts] = useState(["Celebrating 70 Years of Excellence", "शिक्षा भी, संस्कार भी", "Nurturing Minds, Shaping Futures"]);
+    const [settings, setSettings] = useState<any>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchSettings = async () => {
+            try {
+                const res = await fetch("/api/admin/settings");
+                const data = await res.json();
+                if (data.success && data.settings) {
+                    if (data.settings.hero_texts?.length > 0) {
+                        setTexts(data.settings.hero_texts);
+                    }
+                    setSettings(data.settings);
+                }
+            } catch (error) {
+                console.error("Failed to fetch hero settings:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchSettings();
+    }, []);
 
     useEffect(() => {
         const timer = setInterval(() => {
             setTextIndex((prev) => (prev + 1) % texts.length);
         }, 4000);
         return () => clearInterval(timer);
-    }, []);
+    }, [texts]);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -69,30 +92,42 @@ export default function Hero() {
             data-theme="dark"
             className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-oxford"
         >
-            {/* Cinematic Video Background */}
-            <div className="absolute inset-0 z-0">
-                <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="auto"
-                    className="h-full w-full object-cover opacity-80"
-                    poster="/IMG_9398-ezgif.com-video-to-webp-converter.webp"
-                >
-                    {/* <source src="/IMG_9398-ezgif.com-video-to-webp-converter.webm" type="video/webm" /> */}
-                    {/* <source src="/ritu_vaishnav_created.mp4" type="video/mp4" /> */}
-                </video>
+            {/* Cinematic Background (Video or Carousel) */}
+            {settings?.hero_type === "carousel" ? (
+                <HeroCarousel images={settings.hero_carousel_images} />
+            ) : (
+                <div className="absolute inset-0 z-0">
+                    <video
+                        key={settings?.hero_video_url} // Re-mount when URL changes
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="auto"
+                        className="h-full w-full object-cover opacity-80"
+                        poster="/IMG_9398-ezgif.com-video-to-webp-converter.webp"
+                    >
+                        {settings?.hero_video_url ? (
+                            <source src={settings.hero_video_url} type="video/mp4" />
+                        ) : (
+                            <>
+                                {/* Fallback/Initial Hardcoded Videos */}
+                                {/* <source src="/IMG_9398-ezgif.com-video-to-webp-converter.webm" type="video/webm" /> */}
+                                <source src="/ritu_vaishnav_created.mp4" type="video/mp4" />
+                            </>
+                        )}
+                    </video>
 
-                {/* Cool Blue Cinematic Grade */}
-                <div className="absolute inset-0 bg-teal-blue/20 mix-blend-multiply pointer-events-none" />
+                    {/* Cool Blue Cinematic Grade */}
+                    <div className="absolute inset-0 bg-teal-blue/20 mix-blend-multiply pointer-events-none" />
 
-                {/* Dark Contrast Overlay */}
-                <div className="absolute inset-0 bg-oxford/40 backdrop-blur-[1px] pointer-events-none" />
+                    {/* Dark Contrast Overlay */}
+                    <div className="absolute inset-0 bg-oxford/40 backdrop-blur-[1px] pointer-events-none" />
 
-                {/* Navy Blue Primary Bottom Gradient Overlay */}
-                <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-oxford via-oxford/60 to-transparent z-[1] pointer-events-none" />
-            </div>
+                    {/* Navy Blue Primary Bottom Gradient Overlay */}
+                    <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-oxford via-oxford/60 to-transparent z-[1] pointer-events-none" />
+                </div>
+            )}
 
             <div className="relative z-20 text-center text-white px-6 w-full max-w-6xl">
                 <motion.div
