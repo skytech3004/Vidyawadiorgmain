@@ -1,56 +1,100 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import StaffForm from "@/components/admin/StaffForm";
-import { Loader2 } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { useParams, useRouter } from "next/navigation";
+import FacultyForm from "@/components/admin/FacultyForm";
+import { ArrowLeft, RefreshCcw, Trash2 } from "lucide-react";
+import Link from "next/link";
 
-export default function EditStaffPage({ params }: { params: Promise<{ id: string }> }) {
+export default function EditFacultyPage() {
+    const { id } = useParams();
+    const router = useRouter();
     const [member, setMember] = useState<any>(null);
     const [loading, setLoading] = useState(true);
+    const [deleting, setDeleting] = useState(false);
 
     useEffect(() => {
-        const fetchMember = async () => {
-            try {
-                const { id } = await params;
-                const res = await fetch(`/api/admin/staff/${id}`);
-                const data = await res.json();
-                if (data.success) {
-                    setMember(data.member);
-                }
-            } catch (error) {
-                console.error("Fetch error:", error);
-            } finally {
-                setLoading(false);
+        if (id) {
+            fetchMember();
+        }
+    }, [id]);
+
+    const fetchMember = async () => {
+        try {
+            const res = await fetch(`/api/admin/staff/${id}`);
+            const data = await res.json();
+            if (data.success) {
+                setMember(data.member);
             }
-        };
-        fetchMember();
-    }, [params]);
+        } catch (error) {
+            console.error("Failed to fetch member", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleDelete = async () => {
+        if (!confirm("Are you sure you want to delete this faculty member?")) return;
+        
+        setDeleting(true);
+        try {
+            const res = await fetch(`/api/admin/staff/${id}`, {
+                method: "DELETE",
+            });
+            if (res.ok) {
+                router.back();
+            }
+        } catch (error) {
+            console.error("Delete failed", error);
+        } finally {
+            setDeleting(false);
+        }
+    };
 
     if (loading) {
         return (
-            <div className="flex flex-col items-center justify-center p-20">
-                <Loader2 className="animate-spin text-sandstone" size={32} />
-                <p className="text-sm text-gray-500 mt-4">Loading navigator details...</p>
+            <div className="flex items-center justify-center h-96">
+                <RefreshCcw className="animate-spin text-sandstone" size={48} />
             </div>
         );
     }
 
     if (!member) {
         return (
-            <div className="text-center p-20">
-                <h3 className="text-xl font-bold text-oxford">Member not found</h3>
-                <p className="text-gray-500">The faculty member you are trying to edit does not exist.</p>
+            <div className="text-center py-20">
+                <h2 className="text-2xl font-bold text-oxford">Member not found</h2>
+                <Link href="/admin/institutions" className="text-sandstone font-bold hover:underline mt-4 block">Return to Institutions</Link>
             </div>
         );
     }
 
     return (
-        <div className="space-y-8">
-            <div>
-                <h2 className="text-3xl font-black text-oxford uppercase tracking-tight">Edit Navigator</h2>
-                <p className="text-sm text-gray-500">Update the details of "{member.name}".</p>
+        <div className="space-y-8 pb-20">
+            <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                    <button
+                        onClick={() => router.back()}
+                        className="w-10 h-10 rounded-full bg-white border border-gray-100 flex items-center justify-center text-oxford hover:bg-gray-50 transition-colors shadow-sm"
+                    >
+                        <ArrowLeft size={20} />
+                    </button>
+                    <div>
+                        <h1 className="text-3xl font-black text-oxford uppercase tracking-tight">Edit Faculty</h1>
+                        <p className="text-sm text-gray-500 font-medium">Update record for {member.name}</p>
+                    </div>
+                </div>
+
+                <button
+                    onClick={handleDelete}
+                    disabled={deleting}
+                    className="flex items-center gap-2 bg-red-50 text-red-600 px-6 py-2.5 rounded-xl font-bold hover:bg-red-100 transition-all"
+                >
+                    <Trash2 size={18} />
+                    {deleting ? "Deleting..." : "Delete Member"}
+                </button>
             </div>
-            <StaffForm initialData={member} isEditing />
+
+            <FacultyForm initialData={member} isEditing={true} />
         </div>
     );
 }

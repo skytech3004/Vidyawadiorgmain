@@ -60,8 +60,13 @@ export default function FacultyManagerPage() {
     const filteredFaculty = faculty.filter(member => {
         const matchesSearch = member.name.toLowerCase().includes(search.toLowerCase()) ||
             member.designation.toLowerCase().includes(search.toLowerCase());
+        
+        let mappedInst = selectedInstitution.toLowerCase();
+        if (mappedInst === "lps") mappedInst = "english";
+        if (mappedInst === "sps") mappedInst = "primary";
+
         const matchesInstitution = selectedInstitution === "All" ||
-            member.institution?.toLowerCase() === selectedInstitution.toLowerCase();
+            member.institution?.toLowerCase() === mappedInst;
         return matchesSearch && matchesInstitution;
     });
 
@@ -82,18 +87,28 @@ export default function FacultyManagerPage() {
                     </div>
 
                     <div className="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 w-full no-scrollbar">
-                        {institutions.map(inst => (
-                            <button
-                                key={inst}
-                                onClick={() => setSelectedInstitution(inst)}
-                                className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest whitespace-nowrap transition-all ${selectedInstitution === inst
-                                    ? "bg-sandstone text-oxford shadow-md"
-                                    : "bg-white text-gray-400 hover:text-oxford border border-gray-100"
-                                    }`}
-                            >
-                                {inst === "All" ? "All Faculty" : inst}
-                            </button>
-                        ))}
+                        {institutions.map(inst => {
+                            const count = faculty.filter(member => {
+                                if (inst === "All") return true;
+                                let mappedInst = inst.toLowerCase();
+                                if (mappedInst === "lps") mappedInst = "english";
+                                if (mappedInst === "sps") mappedInst = "primary";
+                                return member.institution?.toLowerCase() === mappedInst;
+                            }).length;
+
+                            return (
+                                <button
+                                    key={inst}
+                                    onClick={() => setSelectedInstitution(inst)}
+                                    className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest whitespace-nowrap transition-all ${selectedInstitution === inst
+                                        ? "bg-sandstone text-oxford shadow-md"
+                                        : "bg-white text-gray-400 hover:text-oxford border border-gray-100"
+                                        }`}
+                                >
+                                    {inst === "All" ? `All (${count})` : `${inst} (${count})`}
+                                </button>
+                            );
+                        })}
                     </div>
                 </div>
 
@@ -107,29 +122,29 @@ export default function FacultyManagerPage() {
             </div>
 
             {/* Staff Table / List */}
-            <div className="bg-white rounded-[2.5rem] overflow-hidden border border-gray-100 shadow-sm">
+            <div className="bg-white rounded-3xl lg:rounded-[2.5rem] overflow-hidden border border-gray-100 shadow-sm">
                 <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
+                    <table className="w-full text-left border-collapse min-w-[600px]">
                         <thead>
                             <tr className="bg-gray-50/50 border-b border-gray-100">
-                                <th className="p-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Member</th>
-                                <th className="p-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Designation</th>
-                                <th className="p-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Institution</th>
-                                <th className="p-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Order</th>
-                                <th className="p-6 text-[10px] font-black uppercase tracking-widest text-gray-400 text-right">Actions</th>
+                                <th className="p-4 lg:p-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Member</th>
+                                <th className="p-4 lg:p-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Designation</th>
+                                <th className="p-4 lg:p-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Institution</th>
+                                <th className="p-4 lg:p-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Order</th>
+                                <th className="p-4 lg:p-6 text-[10px] font-black uppercase tracking-widest text-gray-400 text-right">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-50">
                             {loading ? (
                                 <tr>
-                                    <td colSpan={5} className="p-20 text-center">
+                                    <td colSpan={5} className="p-10 lg:p-20 text-center">
                                         <Loader2 className="animate-spin mx-auto text-sandstone" size={32} />
                                         <p className="text-sm text-gray-500 mt-4">Loading school navigators...</p>
                                     </td>
                                 </tr>
                             ) : filteredFaculty.length === 0 ? (
                                 <tr>
-                                    <td colSpan={5} className="p-20 text-center">
+                                    <td colSpan={5} className="p-10 lg:p-20 text-center">
                                         <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
                                             <Users className="text-gray-300" size={32} />
                                         </div>
@@ -145,33 +160,33 @@ export default function FacultyManagerPage() {
                                         transition={{ delay: i * 0.03 }}
                                         className="hover:bg-gray-50/50 transition-colors group"
                                     >
-                                        <td className="p-6">
-                                            <div className="flex items-center gap-4">
-                                                <div className="w-10 h-10 rounded-full bg-oxford/5 flex items-center justify-center overflow-hidden flex-shrink-0 border border-gray-100">
+                                        <td className="p-4 lg:p-6">
+                                            <div className="flex items-center gap-3 lg:gap-4">
+                                                <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-oxford/5 flex items-center justify-center overflow-hidden flex-shrink-0 border border-gray-100">
                                                     {member.image ? (
                                                         <img src={member.image} alt="" className="w-full h-full object-cover" />
                                                     ) : (
-                                                        <UserIcon className="text-oxford/20" size={18} />
+                                                        <UserIcon className="text-oxford/20" size={16} />
                                                     )}
                                                 </div>
-                                                <span className="font-bold text-oxford">{member.name}</span>
+                                                <span className="font-bold text-sm lg:text-base text-oxford shrink-0">{member.name}</span>
                                             </div>
                                         </td>
-                                        <td className="p-6">
-                                            <span className="text-xs text-gray-600 font-medium">{member.designation}</span>
+                                        <td className="p-4 lg:p-6">
+                                            <span className="text-[10px] lg:text-xs text-gray-600 font-medium">{member.designation}</span>
                                         </td>
-                                        <td className="p-6">
-                                            <div className="flex items-center gap-2">
-                                                <School size={14} className="text-sandstone" />
-                                                <span className="px-2 py-0.5 bg-gray-100 text-[10px] font-black text-gray-400 rounded uppercase tracking-wider">
+                                        <td className="p-4 lg:p-6">
+                                            <div className="flex items-center gap-1.5 lg:gap-2">
+                                                <School size={14} className="text-sandstone shrink-0" />
+                                                <span className="px-1.5 lg:px-2 py-0.5 bg-gray-100 text-[9px] lg:text-[10px] font-black text-gray-400 rounded uppercase tracking-wider shrink-0">
                                                     {member.institution}
                                                 </span>
                                             </div>
                                         </td>
-                                        <td className="p-6">
+                                        <td className="p-4 lg:p-6">
                                             <span className="text-xs font-bold text-gray-400">{member.order}</span>
                                         </td>
-                                        <td className="p-6 text-right">
+                                        <td className="p-4 lg:p-6 text-right">
                                             <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                                 <Link
                                                     href={`/admin/staff/${member._id}`}

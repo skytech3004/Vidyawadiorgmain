@@ -7,11 +7,12 @@ import {
     Medal, Phone, MapPin, Globe, CheckCircle2, GraduationCap,
     Mail, HeartPulse, Library, Dumbbell, Monitor, Utensils,
     Music, Bus, Search, Filter, Clock, Award, ChevronRight,
-    ArrowRight, X
+    ArrowRight, X, Activity
 } from "lucide-react";
 import Link from "next/link";
 import coursesData from "@/data/courses.json";
 import StudentResultsTable from "@/components/StudentResultsTable";
+import FacultyGrid from "@/components/FacultyGrid";
 
 const categories = [
     { name: "All Courses", slug: "all" },
@@ -223,6 +224,23 @@ const labsData = [
     }
 ];
 
+// Icon renderer for college labs
+function LabIcon({ name, className, size = 32 }: { name: string; className?: string; size?: number }) {
+    const props = { className, size };
+    switch (name) {
+        case "Microscope": return <Microscope {...props} />;
+        case "Activity": return <Activity {...props} />;
+        case "Beaker": return <Microscope {...props} />;
+        case "Monitor": return <Monitor {...props} />;
+        case "Globe": return <Globe {...props} />;
+        case "Utensils": return <Utensils {...props} />;
+        case "Music": return <Music {...props} />;
+        case "Star": return <Star {...props} />;
+        case "BookOpen": return <BookOpen {...props} />;
+        default: return <Microscope {...props} />;
+    }
+}
+
 export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initialCollegeFaculty?: any[] }) {
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("all");
@@ -230,6 +248,23 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
     const [selectedLab, setSelectedLab] = useState<any>(null);
     const [collegeFaculty, setCollegeFaculty] = useState<any[]>(initialCollegeFaculty);
     const [visibleFacultyCount, setVisibleFacultyCount] = useState(10);
+    const [labs, setLabs] = useState<any[]>([]);
+    const [loadingLabs, setLoadingLabs] = useState(true);
+
+    useEffect(() => {
+        const fetchLabs = async () => {
+            try {
+                const res = await fetch("/api/infrastructure?institution=college");
+                const data = await res.json();
+                if (data.success) setLabs(data.results);
+            } catch (e) {
+                console.error("Failed to fetch college labs", e);
+            } finally {
+                setLoadingLabs(false);
+            }
+        };
+        fetchLabs();
+    }, []);
 
     const filteredCourses = useMemo(() => {
         return coursesData.courses.filter((course: any) => {
@@ -360,15 +395,20 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {labsData.map((lab, i) => (
+                        {loadingLabs ? (
+                            <div className="col-span-full py-20 text-center">
+                                <div className="w-12 h-12 border-4 border-sandstone border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                                <p className="text-gray-400 font-bold uppercase tracking-widest text-xs">Loading Laboratories...</p>
+                            </div>
+                        ) : labs.map((lab, i) => (
                             <motion.div
-                                key={lab.id}
+                                key={lab._id || i}
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.05 }}
                                 onClick={() => setSelectedLab(lab)}
-                                className="group cursor-pointer bg-gray-50 rounded-[2.5rem] overflow-hidden hover:bg-white hover:shadow-2xl transition-all duration-500 border border-oxford hover:border-sandstone/10  0 relative"
+                                className="group cursor-pointer bg-gray-50 rounded-[2.5rem] overflow-hidden hover:bg-white hover:shadow-2xl transition-all duration-500 border border-oxford hover:border-sandstone/10 relative"
                             >
                                 {/* Lab Image */}
                                 {lab.image && (
@@ -381,8 +421,8 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                                     </div>
                                 )}
                                 <div className="p-8">
-                                    <div className={`aspect-square w-14 rounded-2xl bg-gradient-to-br ${lab.gradient} flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-500`}>
-                                        {lab.icon}
+                                    <div className={`aspect-square w-14 rounded-2xl bg-gradient-to-br ${lab.gradient || "from-sandstone to-sandstone-dark"} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500`}>
+                                        <LabIcon name={lab.icon || "Microscope"} className="w-8 h-8 text-oxford" />
                                     </div>
                                     <h3 className="text-2xl font-black text-oxford mb-4 group-hover:text-sandstone transition-colors leading-tight">
                                         {lab.name}
@@ -395,9 +435,8 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                                         <ArrowRight size={14} className="text-sandstone" />
                                     </div>
                                 </div>
-
                                 {/* Abstract background circle */}
-                                <div className={`absolute -bottom-10 -right-10 w-32 h-32 bg-gradient-to-br ${lab.gradient} opacity-[0.03] group-hover:opacity-[0.08] rounded-full blur-2xl transition-opacity`} />
+                                <div className={`absolute -bottom-10 -right-10 w-32 h-32 bg-gradient-to-br ${lab.gradient || "from-sandstone to-sandstone-dark"} opacity-[0.03] group-hover:opacity-[0.08] rounded-full blur-2xl transition-opacity`} />
                             </motion.div>
                         ))}
                     </div>
@@ -929,6 +968,7 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
 
 
             {/* Faculty Section */}
+            <FacultyGrid institution="college" title="College Faculty Mentors" />
 
 
             <section className="py-24 px-6 bg-white overflow-hidden">

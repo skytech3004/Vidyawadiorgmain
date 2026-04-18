@@ -11,62 +11,16 @@ import {
     Play, Volume2, VolumeX, X
 } from "lucide-react";
 import Image from "next/image";
-import StudentModal from "@/components/StudentModal";
 import StudentResultsTable from "@/components/StudentResultsTable";
+import FacultyGrid from "@/components/FacultyGrid";
 
 // --- Data ---
 
-const staffList = [
-    { no: 1, name: "Ms. Jyoti Nath", designation: "Principal", image: "/images/english school/principle.jpg" },
-    { no: 2, name: "Ms. Kusum Vaishnav", designation: "PGT (History)" },
-    { no: 3, name: "Dr. Nidhi Upadhyay", designation: "PGT (Painting)" },
-    { no: 4, name: "Ms. Bhagwanti", designation: "PGT (Maths)" },
-    { no: 5, name: "Mr. Ghanshyam Singh", designation: "PGT (English)" },
-    { no: 6, name: "Ms. Mamta Rajpurohit", designation: "PGT (B.St.)" },
-    { no: 7, name: "Mr. Mahendra Kumar", designation: "PGT (Physics)" },
-    { no: 8, name: "Ms. Deepshikha Khangarot", designation: "PGT (Biology)" },
-    { no: 9, name: "Ms. Priya Sharma", designation: "PGT (Hindi)" },
-    { no: 10, name: "Mr. Ronak Singh", designation: "PGT (Accountancy)" },
-    { no: 11, name: "Ms. Priyanka Lakhawat", designation: "PGT (Pol. Sci.)" },
-    { no: 12, name: "Ms. Dimpal", designation: "PGT (Chemistry)" },
-    { no: 13, name: "Dr. Purnima Bhati", designation: "PGT (English)" },
-    { no: 14, name: "Mr. Rahul Joshi", designation: "PGT (Geography)" },
-    { no: 15, name: "Ms. Neha Srivastva", designation: "PGT (English)" },
-    { no: 16, name: "Ms. Roshni Bano", designation: "PGT (Music)" },
-    { no: 17, name: "Mr. Pradeep Singh", designation: "PGT (Comp. Sci.)" },
-    { no: 18, name: "Ms. Deepa Tolani", designation: "TGT (S.St.)" },
-    { no: 19, name: "Ms. Rajkumari Choudhary", designation: "TGT (Science)" },
-    { no: 20, name: "Ms. Varsha Palrecha", designation: "TGT (Hindi)" },
-    { no: 21, name: "Ms. Krishana Kanta Pareek", designation: "TGT (Sanskrit)" },
-    { no: 22, name: "Mr. Kantilal Prajapat", designation: "TGT (Maths)" },
-    { no: 23, name: "Ms. Veena Kumari", designation: "TGT (English)" },
-    { no: 24, name: "Ms. Divya Soni", designation: "TGT (Maths)" },
-    { no: 25, name: "Ms. Manglem Singh", designation: "TGT (Science)" },
-    { no: 26, name: "Ms. Priyanka Saxena", designation: "TGT (Sanskrit)" },
-    { no: 27, name: "Ms. Bhawna", designation: "TGT (Hindi)" },
-    { no: 28, name: "Ms. Mamta Kanwar", designation: "TGT (Maths)" },
-    { no: 29, name: "Ms. Kalal Nilam", designation: "TGT (Comp. Sci.)" },
-    { no: 30, name: "Ms. Neelam Parihar", designation: "TGT (English)" },
-    { no: 31, name: "Ms. Kalpna Vaishnav", designation: "TGT" },
-    { no: 32, name: "Ms. Meena Sirvi", designation: "TGT (S.St.)" },
-    { no: 33, name: "Ms. Rashmi Tripathi", designation: "PET" },
-    { no: 34, name: "Ms. Suman", designation: "PET" },
-    { no: 35, name: "Ms. Megha Arora", designation: "PRT Co-ordinator" },
-    { no: 36, name: "Ms. Sunder Dewasi", designation: "PRT (Hindi)" },
-    { no: 37, name: "Ms. Rathod Gopal Kunwar", designation: "PRT (M.T.)" },
-    { no: 38, name: "Ms. Anjali Rathore", designation: "PRT (EVS)" },
-    { no: 39, name: "Ms. Yumnum Reena Devi", designation: "PRT (English)" },
-    { no: 40, name: "Ms. Monika", designation: "PRT" },
-    { no: 41, name: "Ms. Jyoti Choudhary", designation: "PRT" },
-    { no: 42, name: "Ms. Hemlata Suthar", designation: "PRT" },
-    { no: 43, name: "Ms. Gracy Soni", designation: "PRT" },
-    { no: 44, name: "Ms. Chitrakshi Kalet", designation: "PRT" },
-    { no: 45, name: "Ms. Bharti Mali", designation: "PRT" },
-    { no: 46, name: "Mr. Md Asfak", designation: "Office Superintendent" },
-    { no: 47, name: "Mr. Niranjan Gehlot", designation: "Accountant" },
-    { no: 48, name: "Ms. Jaya Gehlot", designation: "Librarian" },
-    { no: 49, name: "Ms. Soniya Arya", designation: "Sci. Lab Asst." },
-    { no: 50, name: "Ms. Chanchal Suthar", designation: "Comp. Lab Asst." },
+const categories = [
+    { name: "All Levels", slug: "all" },
+    { name: "Primary", slug: "primary" },
+    { name: "Secondary", slug: "secondary" },
+    { name: "Senior Secondary", slug: "sr-secondary" }
 ];
 
 const videoData = [
@@ -182,8 +136,6 @@ export default function SPSContent() {
     const [selectedVideo, setSelectedVideo] = useState<any>(null);
     const [selectedStudent, setSelectedStudent] = useState<any>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [visibleToppers, setVisibleToppers] = useState(10);
-    const [visibleStaff, setVisibleStaff] = useState(12);
 
     const openModal = (student: any) => {
         setSelectedStudent(student);
@@ -196,8 +148,6 @@ export default function SPSContent() {
     };
     return (
         <main className="min-h-screen bg-white font-devanagari">
-            <StudentModal isOpen={isModalOpen} onClose={closeModal} student={selectedStudent} />
-
             {/* Hero Section */}
             <section className="relative pt-40 pb-20 px-6 bg-oxford/90 text-white overflow-hidden">
                 <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-sandstone/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
@@ -346,47 +296,6 @@ export default function SPSContent() {
                             </div>
                         ))}
                     </div>
-                    {/* 
-                    <div className="bg-white p-10 md:p-14 rounded-[2.5rem] shadow-xl border border-oxford/5">
-                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-xs block mb-4 text-center">Comprehensive Curriculum</span>
-                        <h3 className="text-3xl md:text-4xl font-bold text-oxford mb-6 flex justify-center items-center gap-3 text-center">
-                            <Sparkles className="text-sandstone" />
-                            Senior Secondary Streams
-                        </h3>
-                        <div className="h-1 bg-sandstone w-16 mx-auto mb-10 rounded-full" />
-                        <div className="grid md:grid-cols-3 gap-8">
-                            {[
-                                {
-                                    title: "Science",
-                                    color: "bg-blue-500",
-                                    subjects: ["English", "Hindi", "Physics", "Chemistry", "Biology / Maths"]
-                                },
-                                {
-                                    title: "Arts",
-                                    color: "bg-purple-500",
-                                    subjects: ["English", "Hindi", "Drawing / History", "Political Science / Geography", "Hindi Literature / English Literature"]
-                                },
-                                {
-                                    title: "Commerce",
-                                    color: "bg-emerald-500",
-                                    subjects: ["English", "Hindi", "Accountancy", "Business Studies", "Economics"]
-                                }
-                            ].map((stream, i) => (
-                                <div key={i} className="relative p-6 rounded-2xl bg-gray-50 hover:shadow-md transition-shadow border-1 border-oxford">
-                                    <div className={`h-1.5 w-12 ${stream.color} rounded-full mb-4`} />
-                                    <h4 className="text-xl font-black text-oxford mb-4 uppercase tracking-tight">{stream.title}</h4>
-                                    <ul className="space-y-3">
-                                        {stream.subjects.map((sub, j) => (
-                                            <li key={j} className="flex items-start gap-2 text-gray-600 text-sm">
-                                                <div className={`w-1.5 h-1.5 rounded-full ${stream.color} shrink-0 mt-1.5`} />
-                                                <span>{sub}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            ))}
-                        </div>
-                    </div> */}
 
                     <div className="mt-16 bg-white p-10 md:p-14 rounded-[2.5rem] shadow-xl border border-oxford/5">
                         <div className="text-center mb-12">
@@ -542,26 +451,16 @@ export default function SPSContent() {
                             "/images/childern/1290780e-b8e3-4a73-86c2-035a68ef944c.jpg",
                             "/images/childern/1c926537-394f-4233-be78-ed6a3c980eb7.jpg",
                             "/images/childern/3c98151a-177a-411c-a689-96fb2a6bc7fb.jpg",
-                            // "/images/childern/85c9f954-079d-4803-b3b4-7acf4b451544.jpg",
                             "/images/childern/c5f0ebd8-5b00-4a0f-8a1c-f53e1ff65aee.jpg",
                             "/images/childern/f865022a-1f6c-409f-9866-8b073b608d3f.jpg",
                             "/images/childern/01c2c50c-98b7-46bd-b44f-af8f897e0c7e.jpg",
-                            // "/images/childern/1c96c2da-8eb7-4af9-a61e-09b1cec14802.jpg",
-                            // "/images/childern/2da6f752-6901-4999-9fab-b80e216618c1.jpg",
-                            // "/images/childern/488b49a5-f698-41f2-a478-9a3666798d84.jpg",
-                            // "/images/childern/4f25b7f8-9ac3-4c38-b04a-9acbd28f7d29.jpg",
-                            // "/images/childern/550b7d5a-c8d4-4500-aa1f-fd2ab566ee25.jpg",
-                            // "/images/childern/93947ad7-766e-4633-acc4-2f9ec377f41d.jpg",
                             "/images/childern/940bf23d-9913-4b47-b0be-1793145cc0b1.jpg",
                             "/images/childern/WhatsApp Image 2026-02-25 at 18.27.53.jpeg",
                             "/images/childern/WhatsApp Image 2026-02-25 at 18.34.15 (1).jpeg",
                             "/images/childern/WhatsApp Image 2026-02-25 at 18.34.15.jpeg",
-                            // "/images/childern/WhatsApp Image 2026-02-25 at 18.34.16 (1).jpeg",
                             "/images/childern/WhatsApp Image 2026-02-25 at 18.34.16 (2).jpeg",
                             "/images/childern/WhatsApp Image 2026-02-25 at 18.34.16 (3).jpeg",
                             "/images/childern/WhatsApp Image 2026-02-25 at 18.34.16.jpeg",
-                            // "/images/childern/a723594c-f4ac-4b1b-a847-d7a461e8a1cc.jpg",
-                            // "/images/childern/b53ef50d-d9a5-4dd8-bb30-1c894b06611a.jpg"
                         ].map((src, i) => (
                             <motion.div
                                 key={i}
@@ -670,50 +569,8 @@ export default function SPSContent() {
                 </div>
             </section >
 
-            {/* Staff Section */}
-            < section className="py-20 px-6 bg-gray-50" >
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Our Faculty</span>
-                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2">SPS School Mentors</h2>
-                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto">Meet our dedicated faculty members committed to foundational excellence.</p>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                        {staffList.slice(0, visibleStaff).map((staff, i) => (
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: (i % 12) * 0.05 }}
-                                key={staff.no}
-                                className="bg-white p-4 rounded-xl shadow-sm border border-oxford/10 flex items-center gap-3 hover:border-sandstone transition-colors group"
-                            >
-                                <div className="w-10 h-10 rounded-full bg-oxford/5 flex items-center justify-center text-oxford font-bold text-xs shrink-0 group-hover:bg-sandstone group-hover:text-white transition-colors">
-                                    {staff.no}
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-oxford text-xs">{staff.name}</h4>
-                                    <p className="text-[10px] text-gray-500 uppercase tracking-wider">{staff.designation}</p>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-
-                    {visibleStaff < staffList.length && (
-                        <div className="flex justify-center mt-12">
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => setVisibleStaff(prev => prev + 12)}
-                                className="px-8 py-3 bg-white text-oxford border-2 border-oxford rounded-full font-bold uppercase tracking-wider shadow-lg hover:bg-oxford hover:text-white transition-all flex items-center gap-2"
-                            >
-                                Load More Mentors
-                                <ArrowRight size={18} />
-                            </motion.button>
-                        </div>
-                    )}
-                </div>
-            </section >
+            {/* Faculty Section */}
+            <FacultyGrid institution="primary" title="SPS School Navigators" />
 
             {/* Rules & Uniform Section */}
             < section className="py-20 px-6 bg-white" >

@@ -10,72 +10,14 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import StudentResultsTable from "@/components/StudentResultsTable";
+import FacultyGrid from "@/components/FacultyGrid";
 
 // --- Data ---
-
-const staffList = [
-    { "no": 1, "name": "Ms. Jyoti Nath", "designation": "Principal" },
-    { "no": 2, "name": "Ms. Deepshikha Khangarot", "designation": "PGT (Biology) & V.P." },
-    { "no": 3, "name": "Dr. Nidhi Upadhyay", "designation": "PGT (Drawing & Painting)" },
-    { "no": 4, "name": "Mrs. Bhagwanti", "designation": "PGT (Maths)" },
-    { "no": 5, "name": "Mr. Ghanshyam Singh", "designation": "PGT (English)" },
-    { "no": 6, "name": "Ms. Mamta Rajpurohit", "designation": "PGT (B.St.)" },
-    { "no": 7, "name": "Mr. Mahendra Kumar", "designation": "PGT (Physics)" },
-    { "no": 8, "name": "Mrs. Priya Sharma", "designation": "PGT (Hindi)" },
-    { "no": 9, "name": "Mr. Ronak Singh", "designation": "PGT (Accountancy)" },
-    { "no": 10, "name": "Ms. Roshni Bano", "designation": "PGT (Music)" },
-    { "no": 11, "name": "Mr. Pradeep Singh Sevarsa", "designation": "PGT (Comp. Sci.)" },
-    { "no": 12, "name": "Mr. Andrew Daimari", "designation": "PGT(English)" },
-    { "no": 13, "name": "Ms. Sonal", "designation": "PGT(Chemistry)" },
-    { "no": 14, "name": "Ms. Princi Saxena", "designation": "PGT (English)" },
-    { "no": 15, "name": "Mr. Pushpendra Singh", "designation": "PGT (Geography)" },
-    { "no": 16, "name": "Mr. Rahul Joshi", "designation": "PGT (Polt. Scie.)" },
-    { "no": 17, "name": "Mrs. Deepa Tolani", "designation": "TGT (S.St.)" },
-    { "no": 18, "name": "Mrs. Rajkumari Choudhary", "designation": "TGT (Science)" },
-    { "no": 19, "name": "Ms. Varsha Palrecha", "designation": "TGT (Hindi)" },
-    { "no": 20, "name": "Ms. Aruna Mali", "designation": "TGT (Sanskrit)" },
-    { "no": 21, "name": "Mr. Kantilal Prajapat", "designation": "TGT (Maths)" },
-    { "no": 22, "name": "Ms. Divya Soni", "designation": "TGT (Maths)" },
-    { "no": 23, "name": "Ms. Priyanka Saxena", "designation": "TGT (Sanskrit)" },
-    { "no": 24, "name": "Ms. Kalal Nilam", "designation": "TGT (Comp. Sci.)" },
-    { "no": 25, "name": "Ms. Mamta Kanwar", "designation": "TGT (Maths)" },
-    { "no": 26, "name": "Ms. Neelam Parihar", "designation": "TGT (English)" },
-    { "no": 27, "name": "Ms. Meena Sirvi", "designation": "TGT (S.St.)" },
-    { "no": 28, "name": "Ms. Yumnum Manglem Singh", "designation": "TGT(Science)" },
-    { "no": 29, "name": "Ms. Sunder Dewasi", "designation": "TGT (Hindi), Guide-Incharge" },
-    { "no": 30, "name": "Ms. Sudiksha Soni", "designation": "TGT (IT)" },
-    { "no": 31, "name": "Ms. Kareena Shaikh", "designation": "TGT(S.ST. & English)" },
-    { "no": 32, "name": "Ms. Chhaya Rajpurohit", "designation": "TGT(English) & PGT (B.ST)" },
-    { "no": 33, "name": "Ms. Honey Agrawat", "designation": "PRT (Eng.) Primary Coordinator" },
-    { "no": 34, "name": "Ms. Jyoti Choudhary", "designation": "PRT" },
-    { "no": 35, "name": "Ms. Yumnum Reena Devi", "designation": "PRT" },
-    { "no": 36, "name": "Ms. Monika", "designation": "PRT" },
-    { "no": 37, "name": "Ms. Hemlata Suthar", "designation": "PRT" },
-    { "no": 38, "name": "Ms. Suman Gurjar", "designation": "PET" },
-    { "no": 39, "name": "Ms. Gracy Soni", "designation": "PRT" },
-    { "no": 40, "name": "Ms. Bharti Mali", "designation": "PRT" },
-    { "no": 41, "name": "Ms. Pista Kumari", "designation": "PRT" },
-    { "no": 42, "name": "Ms. Mary Grace", "designation": "PRT" },
-    { "no": 43, "name": "Ms. Monika Kumari", "designation": "PRT" },
-    { "no": 44, "name": "Ms. Leena Sharma", "designation": "PRT" },
-    { "no": 45, "name": "Ms. Leela Choudhary", "designation": "PET" },
-    { "no": 46, "name": "Ms. Gopal Kanwar", "designation": "PRT" },
-    { "no": 47, "name": "Ms. Chtrakshi Kalet", "designation": "PRT" },
-    { "no": 48, "name": "Mr. Md. Asfak", "designation": "Office Supdt." },
-    { "no": 49, "name": "Ms. Jaya Gehlot", "designation": "Librarian" },
-    { "no": 50, "name": "Ms. Bhawana Solanki", "designation": "PRT+Lab Asst." },
-    { "no": 51, "name": "Ms. Gayatri Mali", "designation": "Front Desk Executive" },
-    { "no": 52, "name": "Mr. Ramesh Choudhary", "designation": "Peon" },
-    { "no": 53, "name": "Mr. Suresh Puri", "designation": "Peon" },
-    { "no": 54, "name": "Mr. Heeral Lal Prajapat", "designation": "Peon" },
-    { "no": 55, "name": "Mrs. Rukmini", "designation": "Peon" },
-    { "no": 56, "name": "Mrs. Champa", "designation": "Peon" },
-    { "no": 57, "name": "Ms. Anju Kanwar", "designation": "Peon" },
-    { "no": 58, "name": "Ms. Nenu Vaishnav", "designation": "Peon" },
-    { "no": 59, "name": "Mr. Ramesh Prajapat", "designation": "Peon" },
-    { "no": 60, "name": "Mrs. Basanti Devi", "designation": "Sweeper" },
-    { "no": 61, "name": "Mrs. Krishna", "designation": "Sweeper" },
-    { "no": 62, "name": "Ms. Mamta Goswami", "designation": "Peon" }
+const categories = [
+    { name: "All Levels", slug: "all" },
+    { name: "Primary", slug: "primary" },
+    { name: "Secondary", slug: "secondary" },
+    { name: "Senior Secondary", slug: "sr-secondary" }
 ];
 
 const toppers12 = [
@@ -219,7 +161,7 @@ function OptimizedVideoCard({ video, index, onClick }: { video: any, index: numb
                     preload="auto"
                     onCanPlay={() => setIsLoaded(true)}
                     // @ts-ignore
-                    fetchpriority={index < 3 ? "high" : "low"}
+                    fetchPriority={index < 3 ? "high" : "low"}
                     className={`h-full w-full object-cover transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
                 >
                     <source src={video.url} type="video/webm" />
@@ -298,10 +240,29 @@ function VideoLightbox({ isOpen, onClose, video }: { isOpen: boolean, onClose: (
 export default function LPSContent() {
     const [selectedVideo, setSelectedVideo] = useState<any>(null);
     const [visibleClubs, setVisibleClubs] = useState(10);
-    const [visibleStaff, setVisibleStaff] = useState(10);
+    const [activeTab, setActiveTab] = useState("all");
+
+    const [infrastructure, setInfrastructure] = useState<any[]>([]);
+    const [loadingInfrastructure, setLoadingInfrastructure] = useState(true);
+
+    useEffect(() => {
+        const fetchInfrastructure = async () => {
+            try {
+                const res = await fetch("/api/infrastructure?institution=english");
+                const data = await res.json();
+                if (data.success) {
+                    setInfrastructure(data.results);
+                }
+            } catch (error) {
+                console.error("Failed to fetch english infrastructure", error);
+            } finally {
+                setLoadingInfrastructure(false);
+            }
+        };
+        fetchInfrastructure();
+    }, []);
 
     const loadMoreClubs = () => setVisibleClubs(prev => prev + 10);
-    const loadMoreStaff = () => setVisibleStaff(prev => prev + 10);
 
     return (
         <div className="bg-white">
@@ -502,20 +463,13 @@ export default function LPSContent() {
                     </div>
 
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {[
-                            { name: "Physics Laboratory", img: "/images/Physics Laboratory.png" },
-                            { name: "Chemistry Laboratory", img: "/images/Chemistry Laboratory.png" },
-                            { name: "Biology Laboratory", img: "/images/Biology Laboratory.png" },
-                            { name: "Mathematics Lab" },
-                            { name: "Music & Painting Studio", img: "/images/english school/93b4f897-0aca-4189-a717-16c13f8372d5.jpg" },
-                            { name: "Geography Laboratory", img: "/images/Geography Laboratory.png" },
-                            { name: "NCC & Guide", img: "/llll-AAA.jpeg" },
-                            { name: "Library", img: "/images/english school/706b5bd7-1cbd-40f0-a48f-2ec78225ac48.jpg" },
-                            { name: "Computer Center", img: "/images/RS-CIT IT Computer Center.png" },
-                            { name: "Multimedia Room", img: "/images/english school/a40160d0-ce25-4bad-818d-e2e729dc47f4.jpg" },
-                            { name: "Safe & Secure Campus", img: "https://journalistsresource.org/wp-content/uploads/2014/02/surveillance-camera-860x466.jpg" }
-                        ].map((facility, i) => (
-                            <div key={i} className="group overflow-hidden rounded-[2.5rem] bg-white shadow-xl hover:shadow-2xl transition-all border border-oxford/5">
+                        {loadingInfrastructure ? (
+                            <div className="col-span-full py-12 text-center text-gray-500">
+                                <div className="w-12 h-12 border-4 border-sandstone border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                                <p className="font-bold">Loading Infrastructure...</p>
+                            </div>
+                        ) : infrastructure.map((facility, i) => (
+                            <div key={facility._id || i} className="group overflow-hidden rounded-[2.5rem] bg-white shadow-xl hover:shadow-2xl transition-all border border-oxford/5">
                                 <div className="h-64 overflow-hidden relative">
                                     <div className="absolute inset-0 bg-oxford/20 group-hover:bg-transparent transition-colors z-10" />
                                     {facility.img ? (
@@ -778,39 +732,7 @@ export default function LPSContent() {
             </section>
 
             {/* Staff List */}
-            <section className="py-24 px-6 bg-gray-50">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-5xl font-black text-oxford">LPS School Navigators</h2>
-                        <p className="text-gray-500 mt-2">Meet our dedicated faculty and staff</p>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        {staffList.slice(0, visibleStaff).map((staff) => (
-                            <div key={staff.no} className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center gap-3 hover:border-sandstone transition-colors">
-                                <div className="w-10 h-10 rounded-full bg-oxford/5 flex items-center justify-center text-oxford font-bold text-sm shrink-0">
-                                    {staff.no}
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-oxford text-sm">{staff.name}</h4>
-                                    <p className="text-xs text-gray-500">{staff.designation}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    {visibleStaff < staffList.length && (
-                        <div className="mt-12 flex justify-center">
-                            <button
-                                onClick={loadMoreStaff}
-                                className="px-8 py-3 bg-white border-2 border-oxford text-oxford text-sm font-black uppercase tracking-widest rounded-full hover:bg-oxford hover:text-white transition-all shadow-md"
-                            >
-                                View More Navigators
-                            </button>
-                        </div>
-                    )}
-                </div>
-            </section>
+            <FacultyGrid institution="english" title="LPS School Navigators" />
 
             {/* Rules & Regulations */}
             <section className="py-20 px-6 bg-white">

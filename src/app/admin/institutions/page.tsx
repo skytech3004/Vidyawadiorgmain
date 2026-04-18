@@ -41,6 +41,26 @@ const INSTITUTIONS = [
 ];
 
 export default function InstitutionsSelectionPage() {
+    const [stats, setStats] = React.useState<any>(null);
+    const [loading, setLoading] = React.useState(true);
+
+    React.useEffect(() => {
+        const fetchStats = async () => {
+            try {
+                const res = await fetch("/api/admin/institutions/stats");
+                const data = await res.json();
+                if (data.success) {
+                    setStats(data.stats);
+                }
+            } catch (error) {
+                console.error("Failed to fetch stats", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchStats();
+    }, []);
+
     return (
         <div className="space-y-10">
             <div className="max-w-2xl">
@@ -58,7 +78,7 @@ export default function InstitutionsSelectionPage() {
                     >
                         <Link 
                             href={`/admin/institutions/${inst.id}`}
-                            className="group block bg-white p-8 rounded-[3rem] border border-gray-100 shadow-sm hover:shadow-2xl hover:border-sandstone/20 transition-all relative overflow-hidden h-full"
+                            className="group block bg-white p-6 lg:p-8 rounded-[2rem] lg:rounded-[3rem] border border-gray-100 shadow-sm hover:shadow-2xl hover:border-sandstone/20 transition-all relative overflow-hidden h-full"
                         >
                             {/* Abstract Background Icon */}
                             <inst.icon className="absolute -right-8 -bottom-8 w-40 h-40 text-gray-50 opacity-0 group-hover:opacity-100 group-hover:rotate-12 transition-all duration-500" />
@@ -68,19 +88,30 @@ export default function InstitutionsSelectionPage() {
                                     <inst.icon size={28} />
                                 </div>
                                 
-                                <h3 className="text-2xl font-black text-oxford mb-2 group-hover:text-sandstone transition-colors leading-tight">
+                                <h3 className="text-xl lg:text-2xl font-black text-oxford mb-2 group-hover:text-sandstone transition-colors leading-tight">
                                     {inst.name}
                                 </h3>
                                 
-                                <p className="text-gray-500 text-sm font-medium mb-8 flex-grow">
+                                <p className="text-gray-500 text-xs lg:text-sm font-medium mb-8 flex-grow">
                                     {inst.description}
                                 </p>
                                 
                                 <div className="flex items-center justify-between pt-6 border-t border-gray-50">
-                                    <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">
-                                        {inst.stats}
-                                    </span>
-                                    <div className="flex items-center gap-2 text-oxford font-bold text-sm group-hover:gap-4 transition-all">
+                                    <div className="flex gap-4">
+                                        <div className="flex flex-col">
+                                            <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Staff</span>
+                                            <span className="text-sm font-black text-oxford">
+                                                {loading ? "..." : stats?.[inst.id]?.faculty || 0}
+                                            </span>
+                                        </div>
+                                        <div className="flex flex-col">
+                                            <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Toppers</span>
+                                            <span className="text-sm font-black text-oxford">
+                                                {loading ? "..." : stats?.[inst.id]?.toppers || 0}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-2 text-oxford font-bold text-sm group-hover:gap-4 transition-all uppercase tracking-tighter">
                                         Manage
                                         <ChevronRight size={16} className="text-sandstone" />
                                     </div>
@@ -92,14 +123,14 @@ export default function InstitutionsSelectionPage() {
             </div>
 
             {/* Quick Stats Helper */}
-            <div className="bg-oxford p-10 rounded-[3rem] text-white flex flex-col md:flex-row items-center gap-8 shadow-2xl">
-                <div className="w-16 h-16 rounded-2xl bg-sandstone flex items-center justify-center text-oxford shrink-0">
+            <div className="bg-oxford p-6 lg:p-10 rounded-[2rem] lg:rounded-[3rem] text-white flex flex-col md:flex-row items-center gap-6 lg:gap-8 shadow-2xl">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-sandstone to-sandstone-dark flex items-center justify-center text-white shrink-0 shadow-lg">
                     <Building2 size={32} />
                 </div>
                 <div>
-                    <h4 className="text-xl font-black mb-2 uppercase tracking-tight">Consolidated View</h4>
-                    <p className="text-white/60 text-sm leading-relaxed max-w-xl font-medium">
-                        Each institution operates as a distinct entity in the Vidyawadi ecosystem. We've separated them to ensure better clarity and faster updates for merit lists and toppers.
+                    <h4 className="text-lg lg:text-xl font-black mb-2 uppercase tracking-tight text-white drop-shadow-sm">Consolidated View</h4>
+                    <p className="text-white/70 text-xs lg:text-sm leading-relaxed max-w-xl font-medium">
+                        You are managing <strong className="text-sandstone font-black">187 total staff members</strong> across the ecosystem. Each school's merit list and faculty records are now fully dynamic and independent.
                     </p>
                 </div>
             </div>

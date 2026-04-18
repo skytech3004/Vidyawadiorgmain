@@ -66,8 +66,13 @@ export default function ResultManagerPage() {
     const filteredResults = results.filter(item => {
         const matchesSearch = item.name.toLowerCase().includes(search.toLowerCase());
         const matchesClass = selectedClass === "All" || item.class === selectedClass;
+        
+        let mappedInst = selectedInst.toLowerCase();
+        if (mappedInst === "lps") mappedInst = "english";
+        if (mappedInst === "sps") mappedInst = "primary";
+
         const matchesInst = selectedInst === "All" ||
-            item.institution?.toLowerCase() === selectedInst.toLowerCase();
+            item.institution?.toLowerCase() === mappedInst;
         return matchesSearch && matchesClass && matchesInst;
     });
 
@@ -104,18 +109,28 @@ export default function ResultManagerPage() {
                         </div>
 
                         <div className="flex bg-gray-100 p-1 rounded-xl">
-                            {institutions.map(inst => (
-                                <button
-                                    key={inst}
-                                    onClick={() => setSelectedInst(inst)}
-                                    className={`px-4 py-1.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all ${selectedInst === inst
-                                        ? "bg-white text-oxford shadow-sm"
-                                        : "text-gray-400 hover:text-oxford"
-                                        }`}
-                                >
-                                    {inst}
-                                </button>
-                            ))}
+                            {institutions.map(inst => {
+                                const count = results.filter(item => {
+                                    if (inst === "All") return true;
+                                    let mappedInst = inst.toLowerCase();
+                                    if (mappedInst === "lps") mappedInst = "english";
+                                    if (mappedInst === "sps") mappedInst = "primary";
+                                    return item.institution?.toLowerCase() === mappedInst;
+                                }).length;
+
+                                return (
+                                    <button
+                                        key={inst}
+                                        onClick={() => setSelectedInst(inst)}
+                                        className={`px-4 py-1.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all ${selectedInst === inst
+                                            ? "bg-white text-oxford shadow-sm"
+                                            : "text-gray-400 hover:text-oxford"
+                                            }`}
+                                    >
+                                        {inst === "All" ? `All (${count})` : `${inst} (${count})`}
+                                    </button>
+                                );
+                            })}
                         </div>
                     </div>
                 </div>
@@ -130,29 +145,29 @@ export default function ResultManagerPage() {
             </div>
 
             {/* Results Table */}
-            <div className="bg-white rounded-[2.5rem] overflow-hidden border border-gray-100 shadow-sm">
+            <div className="bg-white rounded-3xl lg:rounded-[2.5rem] overflow-hidden border border-gray-100 shadow-sm">
                 <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
+                    <table className="w-full text-left border-collapse min-w-[600px]">
                         <thead>
                             <tr className="bg-gray-50/50 border-b border-gray-100">
-                                <th className="p-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Student</th>
-                                <th className="p-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Class & Year</th>
-                                <th className="p-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Percentage</th>
-                                <th className="p-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Institution</th>
-                                <th className="p-6 text-[10px] font-black uppercase tracking-widest text-gray-400 text-right">Actions</th>
+                                <th className="p-4 lg:p-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Student</th>
+                                <th className="p-4 lg:p-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Class & Year</th>
+                                <th className="p-4 lg:p-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Percentage</th>
+                                <th className="p-4 lg:p-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Institution</th>
+                                <th className="p-4 lg:p-6 text-[10px] font-black uppercase tracking-widest text-gray-400 text-right">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-50">
                             {loading ? (
                                 <tr>
-                                    <td colSpan={5} className="p-20 text-center">
+                                    <td colSpan={5} className="p-10 lg:p-20 text-center">
                                         <Loader2 className="animate-spin mx-auto text-sandstone" size={32} />
                                         <p className="text-sm text-gray-500 mt-4">Loading board toppers...</p>
                                     </td>
                                 </tr>
                             ) : filteredResults.length === 0 ? (
                                 <tr>
-                                    <td colSpan={5} className="p-20 text-center">
+                                    <td colSpan={5} className="p-10 lg:p-20 text-center">
                                         <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
                                             <Trophy className="text-gray-300" size={32} />
                                         </div>
@@ -168,45 +183,45 @@ export default function ResultManagerPage() {
                                         transition={{ delay: i * 0.03 }}
                                         className="hover:bg-gray-50/50 transition-colors group"
                                     >
-                                        <td className="p-6">
-                                            <div className="flex items-center gap-4">
-                                                <div className="w-10 h-10 rounded-full bg-sandstone/10 flex items-center justify-center overflow-hidden flex-shrink-0 border border-sandstone/20">
+                                        <td className="p-4 lg:p-6">
+                                            <div className="flex items-center gap-3 lg:gap-4">
+                                                <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-sandstone/10 flex items-center justify-center overflow-hidden flex-shrink-0 border border-sandstone/20">
                                                     {item.image ? (
                                                         <img src={item.image} alt="" className="w-full h-full object-cover" />
                                                     ) : (
-                                                        <UserIcon className="text-sandstone" size={18} />
+                                                        <UserIcon className="text-sandstone" size={16} />
                                                     )}
                                                 </div>
                                                 <div>
-                                                    <span className="font-bold text-oxford block">{item.name}</span>
-                                                    <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">{item.stream || "-"}</span>
+                                                    <span className="font-bold text-sm lg:text-base text-oxford block whitespace-nowrap">{item.name}</span>
+                                                    <span className="text-[9px] lg:text-[10px] font-black uppercase tracking-widest text-gray-400">{item.stream || "-"}</span>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="p-6">
+                                        <td className="p-4 lg:p-6">
                                             <div className="flex flex-col gap-1">
-                                                <div className="flex items-center gap-2 text-xs font-bold text-oxford">
-                                                    <GraduationCap size={14} className="text-gray-400" />
+                                                <div className="flex items-center gap-1.5 lg:gap-2 text-xs font-bold text-oxford shrink-0">
+                                                    <GraduationCap size={14} className="text-gray-400 shrink-0" />
                                                     Class {item.class}
                                                 </div>
-                                                <div className="flex items-center gap-2 text-[10px] font-medium text-gray-400">
-                                                    <Calendar size={12} />
+                                                <div className="flex items-center gap-1.5 lg:gap-2 text-[9px] lg:text-[10px] font-medium text-gray-400 shrink-0">
+                                                    <Calendar size={12} className="shrink-0" />
                                                     Session {item.year}
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="p-6">
-                                            <span className="px-3 py-1 bg-sandstone text-oxford text-xs font-black rounded-lg shadow-sm">
+                                        <td className="p-4 lg:p-6">
+                                            <span className="px-2 lg:px-3 py-1 bg-sandstone text-oxford text-xs font-black rounded-lg shadow-sm">
                                                 {item.percentage}%
                                             </span>
                                         </td>
-                                        <td className="p-6">
-                                            <div className="flex items-center gap-2">
-                                                <School size={14} className="text-gray-400" />
-                                                <span className="text-[10px] font-black text-gray-400 uppercase tracking-wider">{item.institution}</span>
+                                        <td className="p-4 lg:p-6">
+                                            <div className="flex items-center gap-1.5 lg:gap-2">
+                                                <School size={14} className="text-gray-400 shrink-0" />
+                                                <span className="text-[9px] lg:text-[10px] font-black text-gray-400 uppercase tracking-wider shrink-0">{item.institution}</span>
                                             </div>
                                         </td>
-                                        <td className="p-6 text-right">
+                                        <td className="p-4 lg:p-6 text-right">
                                             <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                                 <Link
                                                     href={`/admin/results/${item._id}`}

@@ -13,12 +13,14 @@ export const revalidate = 3600; // Cache the fetched data for 1 hour
 export default async function LeelaDeviCollege() {
     let collegeFaculty = [];
     try {
-        const res = await fetch("https://www.vidyawadicollege.org/api/faculties?isActive=true", {
+        // Fetch from internal institutional database
+        const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+        const res = await fetch(`${baseUrl}/api/staff?institution=college`, {
             next: { revalidate: 3600 }
         });
         if (res.ok) {
             const data = await res.json();
-            collegeFaculty = Array.isArray(data) ? data : (data.faculties || data.data || []);
+            collegeFaculty = data.faculty || [];
         } else {
             console.error("Failed to fetch college faculty, status:", res.status);
         }

@@ -7,11 +7,31 @@ import { motion } from "framer-motion";
 import { BookOpen, Trophy, School, Users, Star, Microscope, Medal, Phone, MapPin, Globe, CheckCircle2 } from "lucide-react";
 import StudentResultsTable from "@/components/StudentResultsTable";
 import StudentModal from "@/components/StudentModal";
+import FacultyGrid from "@/components/FacultyGrid";
 
 export default function MarudharContent() {
     const [selectedStudent, setSelectedStudent] = useState<any>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [visibleStaff, setVisibleStaff] = useState(10);
+
+    const [facilities, setFacilities] = useState<any[]>([]);
+    const [loadingFacilities, setLoadingFacilities] = useState(true);
+
+    useEffect(() => {
+        const fetchFacilities = async () => {
+            try {
+                const res = await fetch("/api/infrastructure?institution=marudhar");
+                const data = await res.json();
+                if (data.success) {
+                    setFacilities(data.results);
+                }
+            } catch (error) {
+                console.error("Failed to fetch marudhar facilities", error);
+            } finally {
+                setLoadingFacilities(false);
+            }
+        };
+        fetchFacilities();
+    }, []);
 
     const openModal = (student: any) => {
         setSelectedStudent(student);
@@ -210,42 +230,62 @@ export default function MarudharContent() {
                     </div>
 
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {[
-                            { name: "Physics Laboratory", icon: Microscope, img: "/images/Physics Laboratory.png" },
-                            { name: "Chemistry Laboratory", icon: Microscope, img: "/images/Chemistry Laboratory.png" },
-                            { name: "Biology Laboratory", icon: Microscope, img: "/images/Biology Laboratory.png" },
-                            { name: "Geography Laboratory", icon: Globe, img: "/images/Geography Laboratory.png" },
-                            { name: "NCC & Guide", icon: Trophy, img: "/llll-AAA.jpeg" },
-                            { name: "Library", icon: Globe, img: "/images/english school/63680e76-2f23-4f80-a9ee-96a18fdd6348.jpg" },
-                            { name: "Art & Craft Lab", icon: Trophy, img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWM0VDuzqiY7GKHYNiuLdOiI7NeBpeOLzD8rQ4xWGJnwBcENRmGbgaQuXdZCdb1_Jo2vfdGOarAbvU_jduXSt9pSejENdN_TZGKOTTYaLnDGUVrn-NJryFo1Y3QjC4d9zL7tMd6Aq9J40/s1600/photo+4-3.JPG" },
-                            { name: "RS-CIT IT Computer Center", icon: School, img: "/images/RS-CIT IT Computer Center.png" },
-                            { name: "CCTV Surveillance", icon: CheckCircle2, img: "https://journalistsresource.org/wp-content/uploads/2014/02/surveillance-camera-860x466.jpg" },
-                            { name: "Fire Safety Systems", icon: CheckCircle2, img: "https://static.vecteezy.com/system/resources/previews/065/840/675/non_2x/a-firefighter-presenting-fire-safety-tips-with-a-fire-extinguisher-illustration-vector.jpg" },
-                            { name: "Practical Equipment (All Subjects)", icon: BookOpen, img: "https://www.labkafe.com/storage/blog/optimize/20-common-lab-equipment.jpg" }
-                        ].map((facility, i) => (
-                            <div key={i} className="group overflow-hidden rounded-[2rem] bg-white shadow-xl hover:shadow-2xl transition-all border border-oxford/5">
-                                {facility.img ? (
-                                    <div className="h-80 overflow-hidden relative">
-                                        <div className="absolute inset-0 bg-oxford/20 group-hover:bg-transparent transition-colors z-10" />
-                                        <img
-                                            src={facility.img}
-                                            alt={facility.name}
-                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                        />
-                                    </div>
-                                ) : (
-                                    <div className="h-48 bg-gray-50 flex items-center justify-center">
-                                        <facility.icon className="text-gray-300 group-hover:text-sandstone transition-colors" size={64} />
-                                    </div>
-                                )}
-                                <div className="p-6 relative">
-                                    <div className="flex items-start gap-4">
-                                        {!facility.img && <facility.icon className="text-sandstone shrink-0 mt-1" size={24} />}
-                                        <h3 className="font-bold text-oxford text-lg">{facility.name}</h3>
+                        {loadingFacilities ? (
+                            <div className="col-span-full py-12 text-center text-gray-500">
+                                <div className="w-12 h-12 border-4 border-sandstone border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                                <p className="font-bold">Loading Facilities...</p>
+                            </div>
+                        ) : facilities.map((facility, i) => {
+                            // Dynamically resolve icon from lucide-react if needed
+                            const renderIcon = (iconName: string) => {
+                                switch (iconName) {
+                                    case "Microscope": return <Microscope className="text-gray-300 group-hover:text-sandstone transition-colors" size={64} />;
+                                    case "Globe": return <Globe className="text-gray-300 group-hover:text-sandstone transition-colors" size={64} />;
+                                    case "Trophy": return <Trophy className="text-gray-300 group-hover:text-sandstone transition-colors" size={64} />;
+                                    case "School": return <School className="text-gray-300 group-hover:text-sandstone transition-colors" size={64} />;
+                                    case "BookOpen": return <BookOpen className="text-gray-300 group-hover:text-sandstone transition-colors" size={64} />;
+                                    case "CheckCircle2": return <CheckCircle2 className="text-gray-300 group-hover:text-sandstone transition-colors" size={64} />;
+                                    default: return <Star className="text-gray-300 group-hover:text-sandstone transition-colors" size={64} />;
+                                }
+                            };
+
+                            const renderSmallIcon = (iconName: string) => {
+                                switch (iconName) {
+                                    case "Microscope": return <Microscope className="text-sandstone shrink-0 mt-1" size={24} />;
+                                    case "Globe": return <Globe className="text-sandstone shrink-0 mt-1" size={24} />;
+                                    case "Trophy": return <Trophy className="text-sandstone shrink-0 mt-1" size={24} />;
+                                    case "School": return <School className="text-sandstone shrink-0 mt-1" size={24} />;
+                                    case "BookOpen": return <BookOpen className="text-sandstone shrink-0 mt-1" size={24} />;
+                                    case "CheckCircle2": return <CheckCircle2 className="text-sandstone shrink-0 mt-1" size={24} />;
+                                    default: return <Star className="text-sandstone shrink-0 mt-1" size={24} />;
+                                }
+                            };
+
+                            return (
+                                <div key={facility._id || i} className="group overflow-hidden rounded-[2rem] bg-white shadow-xl hover:shadow-2xl transition-all border border-oxford/5">
+                                    {facility.img ? (
+                                        <div className="h-80 overflow-hidden relative">
+                                            <div className="absolute inset-0 bg-oxford/20 group-hover:bg-transparent transition-colors z-10" />
+                                            <img
+                                                src={facility.img}
+                                                alt={facility.name}
+                                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                            />
+                                        </div>
+                                    ) : (
+                                        <div className="h-48 bg-gray-50 flex items-center justify-center">
+                                            {renderIcon(facility.icon)}
+                                        </div>
+                                    )}
+                                    <div className="p-6 relative">
+                                        <div className="flex items-start gap-4">
+                                            {!facility.img && renderSmallIcon(facility.icon)}
+                                            <h3 className="font-bold text-oxford text-lg">{facility.name}</h3>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
             </section>
@@ -886,95 +926,7 @@ export default function MarudharContent() {
             </section>
 
             {/* Faculty Section */}
-            <section className="py-20 px-6 bg-gray-50">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <span className="text-sandstone font-bold uppercase tracking-widest text-sm">Our Faculty</span>
-                        <h2 className="text-3xl md:text-5xl font-bold text-oxford mt-2">Marudhar Balika Vidyapeeth Navigators</h2>
-                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto">Meet our dedicated faculty and staff members committed to excellence.</p>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                        {[
-
-
-                            // 🏫 School Leadership
-                            { no: 1, name: "Priya Sangeeta", designation: "Principal", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 2, name: "Alka Tak", designation: "Vice Principal", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-
-                            // 👩‍🏫 PGT Teachers
-                            { no: 3, name: "Kushal Kunwar", designation: "PGT - History", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 4, name: "Prakash Gehlot", designation: "PGT - Mathematics", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 5, name: "Uttam Kunwar", designation: "PGT - English Literature", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 6, name: "Vishnu Kanwar", designation: "PGT - Drawing", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 7, name: "Santosh Kanwar", designation: "PGT - Economics", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 8, name: "Dimpal Kumari Sharma", designation: "PGT - Political Science", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 9, name: "Chandra Kunwar", designation: "PGT - Chemistry", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 10, name: "Suman Kanwar", designation: "PGT - Geography", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 11, name: "Jitendra Singh", designation: "PGT - Accounts", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 12, name: "Vandana Sharma", designation: "PGT - Hindi Literature", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 13, name: "Dinesh Kumar", designation: "PGT - Physics", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-
-                            // 👨‍🏫 TGT Teachers
-                            { no: 14, name: "Shruti Sharma", designation: "TGT - Sanskrit", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 15, name: "Heena Chouhan", designation: "TGT - Hindi", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 16, name: "Kamlesh", designation: "TGT - Computer", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 17, name: "Harshita Soni", designation: "TGT - Science", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 18, name: "Jitendra Kumar", designation: "TGT - Biology", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 19, name: "Neha Ashawat", designation: "TGT - English", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 20, name: "Yogita Malviya", designation: "TGT - Mathematics", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 21, name: "Soniya Kumari", designation: "TGT - Social Science", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-
-                            // 🧪 Academic Support
-                            { no: 22, name: "Uday Narayan Shukla", designation: "Science Lab Assistant", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 23, name: "Baby Kunwar", designation: "Librarian", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 24, name: "Monika", designation: "P.T.I.", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-
-                            // 🏢 Administrative Staff
-                            { no: 25, name: "Himmat Singh Rathore", designation: "U.D.C.", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 26, name: "Dilip Kumar", designation: "L.D.C.", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-
-                            // 🛠 Support Staff
-                            { no: 27, name: "Arvind Kumar", designation: "Office Boy", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 28, name: "Rekha", designation: "Peon", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 29, name: "Bhima Ram", designation: "Gardener", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 30, name: "Gordhan Singh Sisodia", designation: "Peon", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 31, name: "Dilip", designation: "Peon", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" },
-                            { no: 32, name: "Hirwanti", designation: "Sweeper", image: "https://cdn-icons-png.flaticon.com/512/4288/4288270.png" }
-
-
-                        ].slice(0, visibleStaff).map((staff, i) => (
-                            <div
-                                key={staff.no}
-                                className="bg-white p-4 rounded-xl shadow-sm border border-oxford/10 flex items-center gap-3 hover:border-sandstone transition-colors group"
-                            >
-                                <div className="w-12 h-12 rounded-full bg-oxford/5 flex items-center justify-center overflow-hidden border border-oxford/10 group-hover:border-sandstone transition-colors shrink-0">
-                                    {staff.image ? (
-                                        <img src={staff.image} alt={staff.name} className="w-full h-full object-cover" />
-                                    ) : (
-                                        <span className="text-oxford font-bold text-xs">{staff.no}</span>
-                                    )}
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-oxford text-xs">{staff.name}</h4>
-                                    <p className="text-[10px] text-gray-500 uppercase tracking-wider">{staff.designation}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    {visibleStaff < 32 && (
-                        <div className="mt-12 text-center">
-                            <button
-                                onClick={() => setVisibleStaff(prev => prev + 12)}
-                                className="px-8 py-3 bg-oxford text-white rounded-full font-bold uppercase tracking-wider text-sm hover:bg-sandstone hover:text-oxford transition-all shadow-lg"
-                            >
-                                Show More Faculty
-                            </button>
-                        </div>
-                    )}
-                </div>
-            </section>
+            <FacultyGrid institution="marudhar" title="Marudhar Balika Vidyapeeth Navigators" />
 
             {/* School Uniform & General Instructions Section */}
             <section className="py-20 px-6 bg-white">

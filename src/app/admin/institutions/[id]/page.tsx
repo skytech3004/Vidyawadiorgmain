@@ -23,7 +23,9 @@ import {
     Trophy,
     Plus,
     Edit3,
-    ArrowLeft
+    ArrowLeft,
+    Users,
+    Microscope
 } from "lucide-react";
 import Link from "next/link";
 import ImageUploadField from "@/components/admin/ImageUploadField";
@@ -46,13 +48,56 @@ export default function InstitutionManager() {
     const [formData, setFormData] = useState<any>({});
     const [results, setResults] = useState<any[]>([]);
     const [resultsLoading, setResultsLoading] = useState(false);
+    const [faculty, setFaculty] = useState<any[]>([]);
+    const [facultyLoading, setFacultyLoading] = useState(false);
+    const [labs, setLabs] = useState<any[]>([]);
+    const [labsLoading, setLabsLoading] = useState(false);
+
+    // Only show labs card for institutions that have it
+    const HAS_LABS = ["college", "marudhar", "english"];
+    const labsLabel: Record<string, string> = {
+        college: "Laboratories & Research",
+        marudhar: "Modern Labs & Facilities",
+        english: "Modern Infrastructure",
+    };
 
     useEffect(() => {
         if (instId) {
-            fetchData();
             fetchResults();
+            fetchFaculty();
+            if (HAS_LABS.includes(instId)) fetchLabs();
         }
     }, [instId]);
+
+    const fetchLabs = async () => {
+        setLabsLoading(true);
+        try {
+            const res = await fetch(`/api/admin/labs/${instId}`);
+            const data = await res.json();
+            if (data.success) setLabs(data.results);
+        } catch (e) {
+            console.error("Failed to fetch labs", e);
+        } finally {
+            setLabsLoading(false);
+        }
+    };
+
+    const fetchFaculty = async () => {
+        setFacultyLoading(true);
+        try {
+            const res = await fetch(`/api/admin/staff?institution=${instId}`);
+            const data = await res.json();
+            if (data.success) {
+                // Filter faculty by institution if API doesn't do it perfectly
+                const filtered = data.faculty.filter((f: any) => f.institution === instId);
+                setFaculty(filtered);
+            }
+        } catch (error) {
+            console.error("Failed to fetch faculty", error);
+        } finally {
+            setFacultyLoading(false);
+        }
+    };
 
     const fetchResults = async () => {
         setResultsLoading(true);
@@ -127,7 +172,7 @@ export default function InstitutionManager() {
         }
     };
 
-    if (loading) {
+    if (loading && !instId) {
         return (
             <div className="flex items-center justify-center h-96">
                 <RefreshCcw className="animate-spin text-sandstone" size={48} />
@@ -155,237 +200,115 @@ export default function InstitutionManager() {
                 </div>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-8">
-                {/* Main Content Area */}
-                <div className="lg:col-span-2 space-y-8">
+            <div className="grid md:grid-cols-2 gap-8">
+                {/* Toppers Card */}
+                <Link 
+                    href={`/admin/results?institution=${instId}`}
+                    className="group block bg-white p-8 rounded-[3rem] border border-gray-100 shadow-sm hover:shadow-2xl hover:border-sandstone/20 transition-all relative overflow-hidden h-full"
+                >
+                    <Trophy className="absolute -right-8 -bottom-8 w-40 h-40 text-gray-50 opacity-0 group-hover:opacity-100 group-hover:rotate-12 transition-all duration-500" />
                     
-                    {/* Toppers / Results Management - PRIMARY SECTION */}
-                    <section className="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm space-y-6">
-                        <div className="flex items-center justify-between">
-                            <div>
-                                <h3 className="text-2xl font-black text-oxford flex items-center gap-3">
-                                    <Trophy className="text-sandstone" size={24} />
-                                    Toppers & Merit Lists
-                                </h3>
-                                <p className="text-sm text-gray-500 font-medium mt-1">Manage board toppers and historical result highlights.</p>
-                            </div>
-                            <Link
-                                href={`/admin/results/new?institution=${instId}`}
-                                className="flex items-center gap-2 bg-oxford text-white px-6 py-2.5 rounded-xl font-bold hover:bg-oxford/90 transition-all shadow-lg"
-                            >
-                                <Plus size={18} />
-                                Add Topper
-                            </Link>
+                    <div className="relative z-10 flex flex-col h-full">
+                        <div className="w-16 h-16 rounded-2xl bg-sandstone flex items-center justify-center text-white mb-8 shadow-lg group-hover:scale-110 transition-transform">
+                            <Trophy size={32} />
                         </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {resultsLoading ? (
-                                <div className="col-span-full py-12 flex flex-col items-center justify-center text-gray-400 gap-3 text-center">
-                                    <RefreshCcw className="animate-spin" size={32} />
-                                    <p className="font-bold">Loading results...</p>
-                                </div>
-                            ) : results.length > 0 ? (
-                                results.map((result: any) => (
-                                    <div key={result._id} className="p-4 rounded-2xl bg-gray-50/50 border border-gray-100 flex items-start gap-4 group hover:bg-white hover:shadow-md transition-all">
-                                        <div className="w-12 h-12 rounded-full overflow-hidden shrink-0 border-2 border-white shadow-sm bg-gray-100">
-                                            <img
-                                                src={result.image || "/images/placeholder-student.jpg"}
-                                                alt={result.name}
-                                                className="w-full h-full object-cover"
-                                                onError={(e) => (e.currentTarget.src = "https://placehold.co/100x100?text=Student")}
-                                            />
-                                        </div>
-                                        <div className="flex-1 min-w-0">
-                                            <h4 className="font-bold text-oxford truncate">{result.name}</h4>
-                                            <div className="flex items-center gap-2 mt-0.5">
-                                                <span className="text-xs font-black text-sandstone">{result.percentage}%</span>
-                                                <span className="text-[10px] text-gray-400 font-bold px-2 py-0.5 bg-gray-100 rounded-full">{result.class} - {result.year}</span>
-                                            </div>
-                                        </div>
-                                        <Link
-                                            href={`/admin/results/${result._id}`}
-                                            className="p-2 text-gray-300 hover:text-oxford transition-colors group-hover:text-oxford"
-                                        >
-                                            <Edit3 size={16} />
-                                        </Link>
-                                    </div>
-                                ))
-                            ) : (
-                                <div className="col-span-full py-12 flex flex-col items-center justify-center text-gray-400 border-2 border-dashed border-gray-100 rounded-3xl gap-4">
-                                    <Trophy size={48} className="opacity-20" />
-                                    <div className="text-center">
-                                        <p className="font-bold">No results found</p>
-                                        <p className="text-xs mt-1">Start by adding your first merit list or topper.</p>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-
-                        {results.length > 0 && (
-                            <div className="pt-4 flex justify-center">
-                                <Link
-                                    href={`/admin/results?institution=${instId}`}
-                                    className="text-sm font-bold text-sandstone hover:underline flex items-center gap-2"
-                                >
-                                    View Detailed List
-                                    <Globe size={14} />
-                                </Link>
+                        
+                        <h3 className="text-3xl font-black text-oxford mb-4 group-hover:text-sandstone transition-colors leading-tight">
+                            Toppers & Merit Lists
+                        </h3>
+                        
+                        <p className="text-gray-500 font-medium mb-12 flex-grow">
+                            Manage board results, academic achievers, and historical merit lists for {institutionInfo?.name}.
+                        </p>
+                        
+                        <div className="flex items-center justify-between pt-8 border-t border-gray-50">
+                            <div className="flex flex-col">
+                                <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Records Found</span>
+                                <span className="text-2xl font-black text-oxford">{results.length}</span>
                             </div>
-                        )}
-                    </section>
-
-                    {/* Identity & Basic Details */}
-                    <section className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100">
-                        <div className="flex items-center gap-3 mb-6">
-                            <ImageIcon className="text-sandstone" size={24} />
-                            <h3 className="text-xl font-black text-oxford uppercase tracking-tight">Identity & Hero</h3>
-                        </div>
-                        <div className="grid md:grid-cols-2 gap-6">
-                            <div>
-                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Display Name</label>
-                                <input
-                                    type="text"
-                                    value={formData.name || ""}
-                                    onChange={(e) => handleSimpleChange("name", e.target.value)}
-                                    className="w-full bg-gray-50 border border-gray-100 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-sandstone/20"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Tagline</label>
-                                <input
-                                    type="text"
-                                    value={formData.tagline || ""}
-                                    onChange={(e) => handleSimpleChange("tagline", e.target.value)}
-                                    className="w-full bg-gray-50 border border-gray-100 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-sandstone/20"
-                                />
-                            </div>
-                            <div className="md:col-span-2">
-                                <ImageUploadField
-                                    label="Institution Logo"
-                                    value={formData.logo || ""}
-                                    onChange={(url) => handleSimpleChange("logo", url)}
-                                    folder="identities"
-                                    description="Official circular logo for the institution."
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Affiliation</label>
-                                <input
-                                    type="text"
-                                    value={formData.affiliation || ""}
-                                    onChange={(e) => handleSimpleChange("affiliation", e.target.value)}
-                                    className="w-full bg-gray-50 border border-gray-100 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-sandstone/20"
-                                />
+                            <div className="flex items-center gap-2 text-oxford font-bold text-sm group-hover:gap-4 transition-all">
+                                Manage Entries
+                                <Plus size={16} className="text-sandstone" />
                             </div>
                         </div>
-                    </section>
-
-                    {/* Principal's Message */}
-                    <section className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100">
-                        <div className="flex items-center gap-3 mb-6">
-                            <MessageSquare className="text-sandstone" size={24} />
-                            <h3 className="text-xl font-black text-oxford uppercase tracking-tight">Principal's Message</h3>
-                        </div>
-                        <div className="space-y-6">
-                            <div className="grid md:grid-cols-2 gap-6">
-                                <div>
-                                    <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Principal Name</label>
-                                    <input
-                                        type="text"
-                                        value={formData.principalMessage?.principalName || ""}
-                                        onChange={(e) => handleInputChange("principalMessage", "principalName", e.target.value)}
-                                        className="w-full bg-gray-50 border border-gray-100 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-sandstone/20"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Quote</label>
-                                    <input
-                                        type="text"
-                                        value={formData.principalMessage?.quote || ""}
-                                        onChange={(e) => handleInputChange("principalMessage", "quote", e.target.value)}
-                                        className="w-full bg-gray-50 border border-gray-100 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-sandstone/20"
-                                    />
-                                </div>
-                            </div>
-                            <div>
-                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Message Body</label>
-                                <textarea
-                                    rows={6}
-                                    value={formData.principalMessage?.message || ""}
-                                    onChange={(e) => handleInputChange("principalMessage", "message", e.target.value)}
-                                    className="w-full bg-gray-50 border border-gray-100 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-sandstone/20 resize-none"
-                                />
-                            </div>
-                            <ImageUploadField
-                                label="Principal's Photo"
-                                value={formData.principalMessage?.principalPhoto || ""}
-                                onChange={(url) => handleInputChange("principalMessage", "principalPhoto", url)}
-                                folder="principals"
-                                description="Portrait photo."
-                            />
-                        </div>
-                    </section>
-                </div>
-
-                {/* Sidebar Area */}
-                <div className="space-y-8">
-                    <section className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100">
-                        <div className="flex items-center gap-3 mb-6">
-                            <Phone className="text-sandstone" size={24} />
-                            <h3 className="text-xl font-black text-oxford uppercase tracking-tight">Contact Details</h3>
-                        </div>
-                        <div className="space-y-4">
-                            <input
-                                type="text"
-                                placeholder="Address"
-                                value={formData.contact?.address || ""}
-                                onChange={(e) => handleInputChange("contact", "address", e.target.value)}
-                                className="w-full bg-gray-50 border border-gray-100 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-sandstone/20"
-                            />
-                            <input
-                                type="text"
-                                placeholder="Phone"
-                                value={formData.contact?.phone || ""}
-                                onChange={(e) => handleInputChange("contact", "phone", e.target.value)}
-                                className="w-full bg-gray-50 border border-gray-100 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-sandstone/20"
-                            />
-                            <input
-                                type="text"
-                                placeholder="Email"
-                                value={formData.contact?.email || ""}
-                                onChange={(e) => handleInputChange("contact", "email", e.target.value)}
-                                className="w-full bg-gray-50 border border-gray-100 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-sandstone/20"
-                            />
-                        </div>
-                    </section>
-
-                    <div className="bg-sandstone/5 p-8 rounded-[2.5rem] border border-sandstone/10 sticky top-8">
-                        <h4 className="font-bold text-oxford mb-2">Institutional Sync</h4>
-                        <p className="text-xs text-gray-500 font-medium mb-6">Updates here reflect instantly on the public institutional page.</p>
-
-                        <button
-                            onClick={handleSave}
-                            disabled={saving}
-                            className="w-full bg-sandstone text-oxford py-4 rounded-2xl font-black uppercase tracking-widest shadow-xl hover:scale-[1.02] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
-                        >
-                            {saving ? <RefreshCcw className="animate-spin" size={20} /> : <Save size={20} />}
-                            Save All Changes
-                        </button>
-
-                        <AnimatePresence>
-                            {message.text && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0 }}
-                                    className={`mt-4 p-4 rounded-xl text-center text-sm font-bold flex items-center justify-center gap-2 ${message.type === "success" ? "bg-green-50 text-green-600" : "bg-red-50 text-red-600"}`}
-                                >
-                                    {message.type === "success" ? <CheckCircle2 size={16} /> : <AlertCircle size={16} />}
-                                    {message.text}
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
                     </div>
+                </Link>
+
+                {/* Faculty Card */}
+                <Link 
+                    href={`/admin/staff?institution=${instId}`}
+                    className="group block bg-white p-8 rounded-[3rem] border border-gray-100 shadow-sm hover:shadow-2xl hover:border-sandstone/20 transition-all relative overflow-hidden h-full"
+                >
+                    <Users className="absolute -right-8 -bottom-8 w-40 h-40 text-gray-50 opacity-0 group-hover:opacity-100 group-hover:rotate-12 transition-all duration-500" />
+                    
+                    <div className="relative z-10 flex flex-col h-full">
+                        <div className="w-16 h-16 rounded-2xl bg-oxford flex items-center justify-center text-white mb-8 shadow-lg group-hover:scale-110 transition-transform">
+                            <Users size={32} />
+                        </div>
+                        
+                        <h3 className="text-3xl font-black text-oxford mb-4 group-hover:text-sandstone transition-colors leading-tight">
+                            Faculties & Staff
+                        </h3>
+                        
+                        <p className="text-gray-500 font-medium mb-12 flex-grow">
+                            Maintain the record of teaching staff, administrators, and support personnel for this institution.
+                        </p>
+                        
+                        <div className="flex items-center justify-between pt-8 border-t border-gray-50">
+                            <div className="flex flex-col">
+                                <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Staff Members</span>
+                                <span className="text-2xl font-black text-oxford">{faculty.length}</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-oxford font-bold text-sm group-hover:gap-4 transition-all">
+                                Manage Staff
+                                <Plus size={16} className="text-sandstone" />
+                            </div>
+                        </div>
+                    </div>
+                </Link>
+            </div>
+
+            {/* Labs & Infrastructure Card - only for 3 institutions */}
+            {HAS_LABS.includes(instId) && (
+                <Link
+                    href={`/admin/labs/${instId}`}
+                    className="group block bg-white p-8 rounded-[3rem] border border-gray-100 shadow-sm hover:shadow-2xl hover:border-sandstone/20 transition-all relative overflow-hidden"
+                >
+                    <Microscope className="absolute -right-8 -bottom-8 w-40 h-40 text-gray-50 opacity-0 group-hover:opacity-100 group-hover:rotate-12 transition-all duration-500" />
+                    <div className="relative z-10 flex flex-col h-full">
+                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-oxford to-sandstone flex items-center justify-center text-white mb-8 shadow-lg group-hover:scale-110 transition-transform">
+                            <Microscope size={32} />
+                        </div>
+                        <h3 className="text-3xl font-black text-oxford mb-4 group-hover:text-sandstone transition-colors leading-tight">
+                            {labsLabel[instId]}
+                        </h3>
+                        <p className="text-gray-500 font-medium mb-12 flex-grow">
+                            Manage labs, facilities, and infrastructure entries displayed on the public website for {institutionInfo?.name}.
+                        </p>
+                        <div className="flex items-center justify-between pt-8 border-t border-gray-50">
+                            <div className="flex flex-col">
+                                <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Total Entries</span>
+                                <span className="text-2xl font-black text-oxford">{labsLoading ? "..." : labs.length}</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-oxford font-bold text-sm group-hover:gap-4 transition-all">
+                                Manage Labs
+                                <Plus size={16} className="text-sandstone" />
+                            </div>
+                        </div>
+                    </div>
+                </Link>
+            )}
+
+            {/* Quick Actions Helper */}
+            <div className="bg-sandstone/10 p-8 rounded-[3rem] border border-sandstone/20 flex flex-col md:flex-row items-center gap-8">
+                <div className="w-16 h-16 rounded-2xl bg-white border border-sandstone/20 flex items-center justify-center text-sandstone shrink-0 shadow-sm">
+                    <Info size={32} />
+                </div>
+                <div>
+                    <h4 className="text-xl font-black text-oxford mb-2 uppercase tracking-tight">Institutional Dashboard</h4>
+                    <p className="text-gray-600 text-sm leading-relaxed max-w-2xl font-medium">
+                        You are currently managing <strong>{institutionInfo?.name}</strong>. Any changes made to toppers or faculty records will be immediately visible on the public institutional website.
+                    </p>
                 </div>
             </div>
         </div>
