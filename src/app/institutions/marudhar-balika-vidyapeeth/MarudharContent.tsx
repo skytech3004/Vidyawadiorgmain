@@ -2,18 +2,26 @@
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { BookOpen, Trophy, School, Users, Star, Microscope, Medal, Phone, MapPin, Globe, CheckCircle2 } from "lucide-react";
+import { BookOpen, Trophy, School, Star, Microscope, Medal, Phone, MapPin, Globe, CheckCircle2 } from "lucide-react";
 import StudentResultsTable from "@/components/StudentResultsTable";
-import StudentModal from "@/components/StudentModal";
+import StudentModal, { StudentProps } from "@/components/StudentModal";
 import FacultyGrid from "@/components/FacultyGrid";
 
+interface Facility {
+    _id?: string;
+    name: string;
+    icon: string;
+    img: string;
+    order?: number;
+}
+
 export default function MarudharContent() {
-    const [selectedStudent, setSelectedStudent] = useState<any>(null);
+    const [selectedStudent, setSelectedStudent] = useState<StudentProps | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const [facilities, setFacilities] = useState<any[]>([]);
+    const [facilities, setFacilities] = useState<Facility[]>([]);
     const [loadingFacilities, setLoadingFacilities] = useState(true);
 
     useEffect(() => {
@@ -22,7 +30,7 @@ export default function MarudharContent() {
                 const res = await fetch("/api/infrastructure?institution=marudhar");
                 const data = await res.json();
                 if (data.success) {
-                    setFacilities(data.results);
+                    setFacilities(data.results as Facility[]);
                 }
             } catch (error) {
                 console.error("Failed to fetch marudhar facilities", error);
@@ -33,7 +41,7 @@ export default function MarudharContent() {
         fetchFacilities();
     }, []);
 
-    const openModal = (student: any) => {
+    const openModal = (student: StudentProps) => {
         setSelectedStudent(student);
         setIsModalOpen(true);
     };
@@ -184,7 +192,7 @@ export default function MarudharContent() {
                                 Marudhar Balika Vidyapeeth is a premier girls’ senior secondary school dedicated to academic excellence, character building, and all-round development. Managed by Marudhar Mahila Shikshan Sangh, Vidyawadi, our institution provides quality education in Hindi & English Medium under RBSE.
                             </p>
                             <p className="text-lg font-medium text-oxford">
-                                "We believe that educated girls build stronger families, communities, and the nation."
+                                &ldquo;We believe that educated girls build stronger families, communities, and the nation.&rdquo;
                             </p>
                         </div>
                         <a href="/apply" className="inline-block mt-8 px-8 py-3 bg-oxford text-white rounded-full font-bold uppercase tracking-wider text-sm hover:bg-sandstone hover:text-oxford transition-all">
@@ -651,7 +659,7 @@ export default function MarudharContent() {
                             </table>
                         </div>
                         <p className="text-center text-gray-500 mt-6 max-w-2xl mx-auto text-sm">
-                            "These students achieved full marks in their respective subjects, bringing pride to the school through their outstanding academic excellence."
+                            &ldquo;These students achieved full marks in their respective subjects, bringing pride to the school through their outstanding academic excellence.&rdquo;
                         </p>
                     </div>
                 </div>

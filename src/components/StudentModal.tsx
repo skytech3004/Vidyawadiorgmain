@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { X, Award, User, BookOpen, Trophy } from "lucide-react";
 
-interface StudentProps {
+export interface StudentProps {
     name: string;
     class?: string;
     img?: string;

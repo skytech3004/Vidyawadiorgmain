@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 import FacultyForm from "@/components/admin/FacultyForm";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
@@ -21,7 +21,9 @@ export default function NewFacultyPage() {
                 </div>
             </div>
 
-            <FacultyForm />
+            <Suspense fallback={<div className="p-8 text-center text-gray-500">Loading form...</div>}>
+                <FacultyForm />
+            </Suspense>
         </div>
     );
 }
