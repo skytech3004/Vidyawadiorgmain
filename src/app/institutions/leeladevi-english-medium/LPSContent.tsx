@@ -9,6 +9,7 @@ import {
     Play, X, Volume2, VolumeX, Maximize2, Globe
 } from "lucide-react";
 import Image from "next/image";
+import StudentResultsTable from "@/components/StudentResultsTable";
 
 // --- Data ---
 
@@ -609,88 +610,7 @@ export default function LPSContent() {
                         <h2 className="text-3xl md:text-5xl font-black text-oxford">Result Highlights 2023-24</h2>
                     </div>
 
-                    <div className="space-y-16">
-                        {/* Class XII */}
-                        <div>
-                            <h3 className="text-2xl font-bold text-oxford mb-8 text-center flex items-center justify-center gap-3">
-                                <Trophy className="text-sandstone" />
-                                Class XII Toppers
-                            </h3>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                                {toppers12.map((student, i) => (
-                                    <div key={i} className="bg-gray-50 p-6 rounded-2xl text-center border border-transparent hover:border-sandstone/30 hover:shadow-lg transition-all group">
-                                        <div className="w-16 h-16 rounded-full bg-sandstone/10 mx-auto mb-4 flex items-center justify-center text-sandstone font-black text-xl group-hover:bg-sandstone group-hover:text-white transition-colors overflow-hidden">
-                                            {student.image ? (
-                                                <Image
-                                                    src={student.image}
-                                                    alt={student.name}
-                                                    width={100}
-                                                    height={100}
-                                                    className="w-full h-full object-cover"
-                                                />
-                                            ) : (
-                                                student.percentage.split('.')[0]
-                                            )}
-                                        </div>
-                                        <h4 className="font-bold text-oxford mb-1">{student.name}</h4>
-                                        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">{student.stream}</p>
-                                        <p className="text-lg font-black text-sandstone mt-2">{student.percentage}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Class X */}
-                        <div>
-                            <h3 className="text-2xl font-bold text-oxford mb-8 text-center flex items-center justify-center gap-3">
-                                <Star className="text-sandstone" />
-                                Class X Toppers
-                            </h3>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                                {toppers10.map((student, i) => (
-                                    <div key={i} className="bg-gray-50 p-6 rounded-2xl text-center border border-transparent hover:border-sandstone/30 hover:shadow-lg transition-all">
-                                        {student.image && (
-                                            <div className="w-20 h-20 rounded-full bg-sandstone/10 mx-auto mb-4 overflow-hidden border-2 border-transparent hover:border-sandstone transition-all">
-                                                <Image
-                                                    src={student.image}
-                                                    alt={student.name}
-                                                    width={100}
-                                                    height={100}
-                                                    className="w-full h-full object-cover"
-                                                />
-                                            </div>
-                                        )}
-                                        <h4 className="font-bold text-oxford mb-1">{student.name}</h4>
-                                        <p className="text-lg font-black text-sandstone mt-2">{student.percentage}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Non-Board */}
-                        <div>
-                            <h3 className="text-xl font-bold text-oxford mb-8 text-center">Class Toppers (Non-Board)</h3>
-                            <div className="flex flex-wrap justify-center gap-4">
-                                {nonBoardToppers.map((student, i) => (
-                                    <div key={i} className="px-6 py-3 bg-gray-50 rounded-full border border-gray-100 flex items-center gap-3 text-sm pr-2">
-                                        {student.image && (
-                                            <div className="w-8 h-8 rounded-full overflow-hidden border border-sandstone/20">
-                                                <Image
-                                                    src={student.image}
-                                                    alt={student.name}
-                                                    width={50}
-                                                    height={50}
-                                                    className="w-full h-full object-cover"
-                                                />
-                                            </div>
-                                        )}
-                                        <span className="font-bold text-oxford">{student.name}</span>
-                                        <span className="px-2 py-0.5 bg-sandstone/20 text-sandstone text-xs font-black rounded mr-2">{student.class}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
+                    <StudentResultsTable institution="english" />
                 </div>
             </section>
             {/* Academics */}

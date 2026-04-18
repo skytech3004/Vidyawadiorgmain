@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import coursesData from "@/data/courses.json";
+import StudentResultsTable from "@/components/StudentResultsTable";
 
 const categories = [
     { name: "All Courses", slug: "all" },
@@ -916,118 +917,11 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Academic Toppers</span>
-                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight text-center">University Toppers</h2>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight text-center">University Highlights</h2>
                         <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
-                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto font-medium">
-                            Celebrating the academic excellence and hard work of our students who achieved the highest honors.
-                        </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {[
-                            {
-                                name: "Ratan Rathore",
-                                father: "Shri Mahaveer Singh Rathore (Jalap, Barmer)",
-                                course: "Bachelor of Arts, 2013",
-                                result: "First (Gold Medalist)"
-                            },
-                            {
-                                name: "Anjali Rathore",
-                                father: "Shri Dheerendra Singh Rathore (Malari, Bali)",
-                                course: "Bachelor of Arts, 2014",
-                                result: "First (Gold Medalist)"
-                            },
-                            {
-                                name: "Ankita Kumari Jain",
-                                father: "Shri Sohanraj Ji (Ana)",
-                                course: "Bachelor of Science, 2018",
-                                result: "First (Gold Medalist)"
-                            },
-                            {
-                                name: "Ankita Rajpurohit",
-                                father: "Shri Mangilal Ji Rajpurohit (Mada)",
-                                course: "Bachelor of Commerce, 2018",
-                                result: "First (Gold Medalist)"
-                            },
-                            {
-                                name: "Sanju Kanwar",
-                                father: "Amar Singh (Shri Sela)",
-                                course: "B.Sc., B.Ed., 2022",
-                                result: "First (Gold Medalist)"
-                            },
-                            {
-                                name: "Gracy Soni",
-                                father: "Naresh Kumar Soni (Dhola Sasan)",
-                                course: "Bachelor of Commerce, 2024",
-                                result: "First (Gold Medalist)"
-                            }
-                        ].map((topper, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                                className="group relative bg-gray-50 rounded-[2.5rem] p-8 hover:bg-white hover:shadow-2xl transition-all duration-500 border border-oxford hover:border-sandstone/20"
-                            >
-                                <div className="flex items-center gap-6 mb-8">
-                                    <div className="w-20 h-20 rounded-full bg-sandstone/10 flex items-center justify-center shrink-0 group-hover:bg-sandstone group-hover:text-oxford transition-all duration-300">
-                                        <div className="w-16 h-16 rounded-full overflow-hidden flex items-center justify-center bg-gray-200">
-                                            {/* SVG Placeholder for Topper Image */}
-                                            <svg className="w-full h-full text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="flex items-center gap-2 mb-1">
-                                            <Trophy size={14} className="text-sandstone" fill="currentColor" />
-                                            <span className="text-[10px] font-black uppercase tracking-widest text-sandstone">Gold Medalist</span>
-                                        </div>
-                                        <h3 className="text-xl font-black text-oxford leading-tight group-hover:text-sandstone transition-colors">
-                                            {topper.name}
-                                        </h3>
-                                    </div>
-                                </div>
-
-                                <div className="space-y-4 relative z-10">
-                                    <div className="flex items-start gap-3">
-                                        <div className="w-5 h-5 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
-                                            <Users size={12} className="text-oxford/70" />
-                                        </div>
-                                        <div>
-                                            <p className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Daughter of</p>
-                                            <p className="text-sm font-semibold text-oxford/70 truncate">{topper.father}</p>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-start gap-3">
-                                        <div className="w-5 h-5 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
-                                            <School size={12} className="text-oxford/70" />
-                                        </div>
-                                        <div>
-                                            <p className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Program & Batch</p>
-                                            <p className="text-sm font-semibold text-oxford/70">{topper.course}</p>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-start gap-3">
-                                        <div className="w-5 h-5 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
-                                            <Medal size={12} className="text-sandstone" />
-                                        </div>
-                                        <div>
-                                            <p className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Achievement</p>
-                                            <p className="text-sm font-black text-sandstone uppercase tracking-tight">{topper.result}</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="absolute top-6 right-8 text-oxford/5 font-black text-7xl select-none group-hover:text-sandstone/10 transition-colors">
-                                    {i + 1}
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
+                    <StudentResultsTable institution="college" title="University Toppers" />
                 </div>
             </section>
 

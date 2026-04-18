@@ -302,7 +302,7 @@ export default function MarudharContent() {
                             Celebrating the dedication and hard work of our top performers.
                         </p>
                     </div>
-                    <StudentResultsTable />
+                    <StudentResultsTable institution="marudhar" title="Board Exam Toppers" />
                 </div>
             </section>
 

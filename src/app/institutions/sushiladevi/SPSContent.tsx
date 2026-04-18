@@ -184,72 +184,6 @@ export default function SPSContent() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [visibleToppers, setVisibleToppers] = useState(10);
     const [visibleStaff, setVisibleStaff] = useState(12);
-    const [selectedCategory, setSelectedCategory] = useState("XII");
-
-    // --- Mock Results Data ---
-    const allResults = [
-        { name: "Anjali Prajapat", class: "X", percentage: "93.33", image: null, resultType: "Board" },
-        { name: "Poonam Kanwar", class: "X", percentage: "92.17", image: null, resultType: "Board" },
-        { name: "Kirtika Kanwar", class: "XII", percentage: "95.80", stream: "Science", image: null, resultType: "Board" },
-        { name: "Sanjana", class: "XII", percentage: "95.00", stream: "Science", image: null, resultType: "Board" },
-        { name: "Mahima Surana", class: "XII", percentage: "96.00", stream: "Arts", image: null, resultType: "Board" },
-        { name: "Himanshi Kanwar", class: "XII", percentage: "95.40", stream: "Arts", image: null, resultType: "Board" },
-        { name: "Gudiya Kumari", class: "XII", percentage: "90.60", stream: "Commerce", image: null, resultType: "Board" }
-    ];
-
-    // Filtered results based on category
-    const getFilteredResults = () => {
-        if (selectedCategory === "XII") {
-            return allResults
-                .filter(r => r.class === "XII" && (r.resultType === "Board" || !r.resultType))
-                .map(t => ({ ...t, description: `Class XII ${t.stream || ""} Topper` }));
-        }
-        if (selectedCategory === "X") {
-            return allResults
-                .filter(r => r.class === "X" && (r.resultType === "Board" || !r.resultType))
-                .map(t => ({ ...t, stream: t.stream || "-", description: "Class X Board Exam Topper" }));
-        }
-        if (selectedCategory === "Non-Board") {
-            return allResults
-                .filter(r => r.resultType === "Non-Board")
-                .map(t => ({ ...t, stream: t.stream || "-", description: `Class ${t.class} Topper` }));
-        }
-        return [];
-    };
-
-    const displayResults = getFilteredResults();
-
-    const openModal = (student: any) => {
-        setSelectedStudent(student);
-        setIsModalOpen(true);
-    };
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-        setTimeout(() => setSelectedStudent(null), 300);
-    };
-
-    const classToppers = [
-        { name: "Ms. Shivgami Chouhan", rank: "I" },
-        { name: "Ms. Priyadarshni", rank: "II" },
-        { name: "Ms. Kinjal Dewasi", rank: "III" },
-        { name: "Ms. Poorvi Pareek", rank: "IV" },
-        { name: "Ms. Chetnya Rathore", rank: "V" },
-        { name: "Ms. Abhigya", rank: "VI" },
-        { name: "Ms. Dimpy Malviya", rank: "VII" },
-        { name: "Ms. Tamanna", rank: "VIII" },
-        { name: "Ms. Preksha", rank: "IX" },
-        { name: "Ms. Tanisha Jain", rank: "XI Sci" },
-        { name: "Ms. Mehak Jain", rank: "XI Com" },
-        { name: "Ms. Jaishree", rank: "XI Hum" },
-    ];
-
-    const categories = [
-        { id: "XII", name: "Class XII", icon: Trophy, count: allResults.filter(r => r.class === "XII").length, desc: "Aissce Board Result" },
-        { id: "X", name: "Class X", icon: Medal, count: allResults.filter(r => r.class === "X").length, desc: "Aisse Board Result" },
-        { id: "Non-Board", name: "Non-Board", icon: Star, count: allResults.filter(r => r.resultType === "Non-Board").length, desc: "Class Toppers" }
-    ];
-
     return (
         <main className="min-h-screen bg-white font-devanagari">
             <StudentModal isOpen={isModalOpen} onClose={closeModal} student={selectedStudent} />
@@ -480,6 +414,13 @@ export default function SPSContent() {
                     </div>
 
                 </div>
+                <div className="max-w-7xl mx-auto mt-24 px-6 border-t border-gray-100 pt-24">
+                    <div className="text-center mb-16">
+                        <span className="text-sandstone font-bold uppercase tracking-widest text-sm block mb-2">Academic Achievements</span>
+                        <h2 className="text-3xl md:text-5xl font-black text-oxford">Result Highlights</h2>
+                    </div>
+                    <StudentResultsTable institution="primary" title="Board Exam Toppers" />
+                </div>
             </section>
 
             {/* Fee Structure Section */}
@@ -631,48 +572,6 @@ export default function SPSContent() {
                 </div>
             </section >
 
-            {/* Class Toppers (Non-Board) Section */}
-            < section className="py-24 px-6 bg-oxford relative overflow-hidden hidden" >
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-sandstone/10 via-transparent to-transparent opacity-50" />
-
-                <div className="max-w-7xl mx-auto relative z-10">
-                    <div className="text-center mb-16">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            className="flex items-center justify-center gap-3 mb-4"
-                        >
-                            <Star className="text-sandstone fill-sandstone" size={28} />
-                            <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight">
-                                Class Toppers <span className="text-sandstone">(Non-Board)</span>
-                            </h2>
-                        </motion.div>
-                        <div className="w-24 h-1 bg-sandstone mx-auto rounded-full" />
-                    </div>
-
-                    <div className="flex flex-wrap justify-center gap-6 max-w-6xl mx-auto">
-                        {classToppers.map((topper, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.05 }}
-                                whileHover={{ scale: 1.05 }}
-                                className="flex items-center gap-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-6 py-3 hover:bg-white/10 transition-all cursor-default shadow-lg"
-                            >
-                                <span className="text-white font-bold whitespace-nowrap">{topper.name}</span>
-                                <div className="bg-sandstone px-2 py-0.5 rounded-md min-w-[32px] text-center">
-                                    <span className="text-oxford font-black text-[15px] gap-2 uppercase tracking-tighter">
-                                        {topper.rank}
-                                    </span>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section >
 
             {/* Beyond Academics (Facilities & Activities) */}
             < section className="py-20 px-6 bg-oxford text-white" >

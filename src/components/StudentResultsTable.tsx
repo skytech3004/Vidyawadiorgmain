@@ -1,118 +1,239 @@
 "use client";
 
-import React, { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import React, { useState, useEffect, useMemo } from "react";
+import { ChevronDown, ChevronRight, Trophy, GraduationCap, Medal, Star } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
-interface StudentResult {
-    sn: number;
-    class: string;
-    stream: string | null;
-    student_name: string;
-    father_name: string;
+interface Topper {
+    _id: string;
+    name: string;
     percentage: number;
+    class: string;
+    year: string;
+    stream: string;
+    image?: string;
+    institution: string;
+    resultType: string;
 }
 
-const studentResults: StudentResult[] = [
-    { "sn": 1, "class": "X", "stream": null, "student_name": "Antra Prajapat", "father_name": "Poonaram Prajapat", "percentage": 93.33 },
-    { "sn": 2, "class": "X", "stream": null, "student_name": "Poonam Kanwar", "father_name": "Madan Singh Panwar", "percentage": 92.17 },
-    { "sn": 3, "class": "X", "stream": null, "student_name": "Kiran", "father_name": "Kehra Ram", "percentage": 92.00 },
-    { "sn": 4, "class": "X", "stream": null, "student_name": "Pragya Dewal", "father_name": "Ompal Singh", "percentage": 90.17 },
+interface Props {
+    institution: "marudhar" | "english" | "primary" | "college";
+    title?: string;
+}
 
-    { "sn": 5, "class": "XII", "stream": "Science", "student_name": "Kirtika Kanwar", "father_name": "Dilip Singh", "percentage": 95.80 },
-    { "sn": 6, "class": "XII", "stream": "Science", "student_name": "Sanjana", "father_name": "Ashok Kumar", "percentage": 95.00 },
-    { "sn": 7, "class": "XII", "stream": "Science", "student_name": "Pooja Bishnoi", "father_name": "Hanumana Ram", "percentage": 94.40 },
-    { "sn": 8, "class": "XII", "stream": "Science", "student_name": "Manisha", "father_name": "Ganpat Ram", "percentage": 94.00 },
-    { "sn": 9, "class": "XII", "stream": "Science", "student_name": "Dhara Gehlot", "father_name": "Govind Kumar", "percentage": 93.60 },
-    { "sn": 10, "class": "XII", "stream": "Science", "student_name": "Vaishali", "father_name": "Pema Ram", "percentage": 92.20 },
-    { "sn": 11, "class": "XII", "stream": "Science", "student_name": "Aarti Vishnoi", "father_name": "Chautha Ram", "percentage": 91.60 },
-    { "sn": 12, "class": "XII", "stream": "Science", "student_name": "Ritika Sherawat", "father_name": "Panna Ram", "percentage": 91.20 },
-    { "sn": 13, "class": "XII", "stream": "Science", "student_name": "Dimpal Kumari", "father_name": "Dhala Ram", "percentage": 91.00 },
-    { "sn": 14, "class": "XII", "stream": "Science", "student_name": "Sonu Borana", "father_name": "Maga Ram", "percentage": 91.00 },
+export default function StudentResultsTable({ institution, title }: Props) {
+    const [results, setResults] = useState<Topper[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [expandedYears, setExpandedYears] = useState<string[]>([]);
 
-    { "sn": 15, "class": "XII", "stream": "Arts", "student_name": "Mahima Surana", "father_name": "Ashok Surana", "percentage": 96.00 },
-    { "sn": 16, "class": "XII", "stream": "Arts", "student_name": "Himanshi Kanwar", "father_name": "Bheru Singh", "percentage": 95.40 },
-    { "sn": 17, "class": "XII", "stream": "Arts", "student_name": "Harsha Kanwar Chundawat", "father_name": "Mohan Singh", "percentage": 94.80 },
-    { "sn": 18, "class": "XII", "stream": "Arts", "student_name": "Mamta", "father_name": "Dhala Ram", "percentage": 94.40 },
-    { "sn": 19, "class": "XII", "stream": "Arts", "student_name": "Radhika Rajpurohit", "father_name": "Ashok Kumar", "percentage": 94.40 },
-    { "sn": 20, "class": "XII", "stream": "Arts", "student_name": "Vartika", "father_name": "Dilip Kumar", "percentage": 94.40 },
-    { "sn": 21, "class": "XII", "stream": "Arts", "student_name": "Pinky Kunwar", "father_name": "Ram Singh", "percentage": 93.80 },
-    { "sn": 22, "class": "XII", "stream": "Arts", "student_name": "Dikshita Rathore", "father_name": "Ganpat Singh", "percentage": 92.20 },
-    { "sn": 23, "class": "XII", "stream": "Arts", "student_name": "Bhanu Priya", "father_name": "Shivaji Ram", "percentage": 92.00 },
-    { "sn": 24, "class": "XII", "stream": "Arts", "student_name": "Khushi Kanwar", "father_name": "Dhan Singh", "percentage": 92.00 },
-    { "sn": 25, "class": "XII", "stream": "Arts", "student_name": "Digyasa Singh Rathore", "father_name": "Dindayal Singh", "percentage": 91.20 },
-    { "sn": 26, "class": "XII", "stream": "Arts", "student_name": "Jaswant Kunwar", "father_name": "Tej Singh", "percentage": 91.20 },
-    { "sn": 27, "class": "XII", "stream": "Arts", "student_name": "Muni Shreya Goswami", "father_name": "Ashok Puri Goswami", "percentage": 91.00 },
-    { "sn": 28, "class": "XII", "stream": "Arts", "student_name": "Seema Dewasi", "father_name": "Gaja Ram", "percentage": 91.00 },
+    useEffect(() => {
+        const fetchResults = async () => {
+            setLoading(true);
+            try {
+                const res = await fetch(`/api/results?institution=${institution}`);
+                const data = await res.json();
+                if (data.success) {
+                    setResults(data.results);
+                    
+                    // Default to expand the latest year
+                    if (data.results.length > 0) {
+                        const years = [...new Set(data.results.map((r: Topper) => r.year))] as string[];
+                        const latestYear = years.sort().reverse()[0];
+                        setExpandedYears([latestYear]);
+                    }
+                }
+            } catch (error) {
+                console.error("Failed to fetch results", error);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    { "sn": 29, "class": "XII", "stream": "Arts", "student_name": "Jinal Ranawat", "father_name": "Puran Singh", "percentage": 90.40 },
-    { "sn": 30, "class": "XII", "stream": "Arts", "student_name": "Seema Dewasi", "father_name": "Pukhraj Dewasi", "percentage": 90.40 },
-    { "sn": 31, "class": "XII", "stream": "Arts", "student_name": "Anjali Bhati", "father_name": "Narendra Singh Bhati", "percentage": 90.20 },
-    { "sn": 32, "class": "XII", "stream": "Arts", "student_name": "Rajshree Karnot", "father_name": "Ishwar Karan Rathore", "percentage": 90.20 },
-    { "sn": 33, "class": "XII", "stream": "Arts", "student_name": "Vidhu Kanwar Rathore", "father_name": "Abhay Singh", "percentage": 90.00 },
+        fetchResults();
+    }, [institution]);
 
-    { "sn": 34, "class": "XII", "stream": "Commerce", "student_name": "Gudiya Kumari", "father_name": "Jeevraj", "percentage": 90.60 }
-];
+    // Group results by year
+    const groupedResults = useMemo(() => {
+        const groups: Record<string, Topper[]> = {};
+        results.forEach(res => {
+            if (!groups[res.year]) groups[res.year] = [];
+            groups[res.year].push(res);
+        });
+        
+        // Sort years descending
+        return Object.keys(groups)
+            .sort((a, b) => b.localeCompare(a))
+            .map(year => ({
+                year,
+                data: groups[year].sort((a, b) => {
+                    // Sort by class (XII, then X, then others) and then percentage
+                    if (a.class === "XII" && b.class !== "XII") return -1;
+                    if (a.class !== "XII" && b.class === "XII") return 1;
+                    if (a.class === "X" && b.class !== "X") return -1;
+                    if (a.class !== "X" && b.class === "X") return 1;
+                    return b.percentage - a.percentage;
+                })
+            }));
+    }, [results]);
 
-export default function StudentResultsTable() {
-    const [visibleCount, setVisibleCount] = useState(10);
-
-    const showMore = () => {
-        setVisibleCount((prev) => Math.min(prev + 10, studentResults.length));
+    const toggleYear = (year: string) => {
+        setExpandedYears(prev => 
+            prev.includes(year) 
+            ? prev.filter(y => y !== year) 
+            : [...prev, year]
+        );
     };
 
-    const visibleResults = studentResults.slice(0, visibleCount);
-    const hasMore = visibleCount < studentResults.length;
+    if (loading) {
+        return (
+            <div className="flex flex-col items-center py-20 gap-4">
+                <div className="w-12 h-12 border-4 border-sandstone border-t-transparent rounded-full animate-spin" />
+                <p className="text-gray-400 font-bold uppercase tracking-widest text-xs">Loading Merit Lists...</p>
+            </div>
+        );
+    }
+
+    if (results.length === 0) {
+        return (
+            <div className="text-center py-20 bg-gray-50 rounded-[3rem] border border-dashed border-gray-200">
+                <Trophy size={48} className="mx-auto text-gray-200 mb-4" />
+                <p className="text-gray-500 font-medium">No toppers records found for this institution yet.</p>
+            </div>
+        );
+    }
 
     return (
-        <div className="flex flex-col items-center">
-            <div className="overflow-x-auto rounded-3xl border border-oxford/10 shadow-2xl bg-white w-full">
-                <table className="w-full text-left border-collapse min-w-[800px]">
-                    <thead className="bg-oxford text-white">
-                        <tr>
-                            <th className="p-6 font-bold uppercase tracking-wider text-sm">S.No.</th>
-                            <th className="p-6 font-bold uppercase tracking-wider text-sm">Student Name</th>
-                            <th className="p-6 font-bold uppercase tracking-wider text-sm">Father's Name</th>
-                            <th className="p-6 font-bold uppercase tracking-wider text-sm">Class</th>
-                            <th className="p-6 font-bold uppercase tracking-wider text-sm">Stream</th>
-                            <th className="p-6 font-bold uppercase tracking-wider text-sm text-right">Percentage</th>
-                        </tr>
-                    </thead>
-                    <tbody className="divide-y divide-oxford/10 text-gray-700 font-medium text-sm">
-                        {visibleResults.map((student) => (
-                            <tr key={student.sn} className="hover:bg-oxford/5 transition-colors group">
-                                <td className="p-6 font-bold text-oxford/50 group-hover:text-oxford">{student.sn}</td>
-                                <td className="p-6 font-bold text-oxford">{student.student_name}</td>
-                                <td className="p-6 text-gray-600">{student.father_name}</td>
-                                <td className="p-6">
-                                    <span className="bg-sandstone/10 text-oxford font-bold px-3 py-1 rounded-full text-xs uppercase tracking-wider">
-                                        Class {student.class}
-                                    </span>
-                                </td>
-                                <td className="p-6">
-                                    {(student.stream && student.stream !== "-") && (
-                                        <span className="bg-oxford/5 text-oxford font-medium px-3 py-1 rounded-full text-xs">
-                                            {student.stream}
-                                        </span>
-                                    )}
-                                </td>
-                                <td className="p-6 text-right font-black text-oxford text-lg">
-                                    {student.percentage.toFixed(2)}%
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-
-            {hasMore && (
-                <button
-                    onClick={showMore}
-                    className="mt-8 px-8 py-3 bg-oxford text-white rounded-full font-bold uppercase tracking-wider text-sm hover:bg-sandstone hover:text-oxford transition-all flex items-center gap-2 shadow-lg"
-                >
-                    View More
-                    <ChevronDown size={16} />
-                </button>
+        <div className="space-y-6 w-full max-w-7xl mx-auto">
+            {title && (
+                <div className="flex items-center gap-3 mb-10">
+                    <div className="w-12 h-12 rounded-2xl bg-sandstone/10 flex items-center justify-center text-sandstone">
+                        <Trophy size={28} />
+                    </div>
+                    <h2 className="text-3xl font-black text-oxford uppercase tracking-tight">{title}</h2>
+                </div>
             )}
+
+            <div className="space-y-4">
+                {groupedResults.map((group, groupIdx) => {
+                    const isExpanded = expandedYears.includes(group.year);
+                    const isLatestYear = groupIdx === 0;
+
+                    return (
+                        <div 
+                            key={group.year} 
+                            className={`rounded-[2.5rem] border transition-all duration-500 overflow-hidden ${
+                                isExpanded ? "bg-white border-oxford shadow-2xl" : "bg-gray-50 border-gray-100 hover:border-sandstone/30"
+                            }`}
+                        >
+                            {/* Accordion Header */}
+                            <button
+                                onClick={() => toggleYear(group.year)}
+                                className="w-full px-8 py-6 flex items-center justify-between text-left group"
+                            >
+                                <div className="flex items-center gap-4">
+                                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors ${
+                                        isExpanded ? "bg-oxford text-white" : "bg-white text-oxford shadow-sm group-hover:bg-sandstone group-hover:text-oxford"
+                                    }`}>
+                                        <Trophy size={20} />
+                                    </div>
+                                    <div>
+                                        <h3 className={`text-xl font-black uppercase tracking-tight transition-colors ${isExpanded ? "text-oxford" : "text-gray-400 group-hover:text-oxford"}`}>
+                                            Academic Session {group.year}
+                                        </h3>
+                                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                                            {group.data.length} Total Toppers Listed
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
+                                    isExpanded ? "bg-oxford text-white rotate-180" : "bg-white text-gray-300 group-hover:text-sandstone"
+                                }`}>
+                                    <ChevronDown size={20} />
+                                </div>
+                            </button>
+
+                            {/* Accordion Content */}
+                            <AnimatePresence>
+                                {isExpanded && (
+                                    <motion.div
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{ height: "auto", opacity: 1 }}
+                                        exit={{ height: 0, opacity: 0 }}
+                                        transition={{ duration: 0.4, ease: "easeInOut" }}
+                                    >
+                                        <div className="px-8 pb-10">
+                                            {/* Top Highlights (only if latest or has many results) */}
+                                            {isLatestYear && group.data.filter(r => r.class === "XII" || r.class === "X").length > 0 && (
+                                                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-10">
+                                                    {group.data.filter(r => (r.class === "XII" || r.class === "X") && r.percentage >= 90).slice(0, 5).map((topper, i) => (
+                                                        <div key={topper._id} className="bg-gray-50 p-6 rounded-3xl border border-transparent hover:border-sandstone/30 hover:shadow-xl transition-all text-center group/card">
+                                                            <div className="w-20 h-20 rounded-full bg-white mx-auto mb-4 overflow-hidden border-2 border-sandstone shadow-md relative">
+                                                                <img 
+                                                                    src={topper.image || "https://cdn-icons-png.flaticon.com/512/4288/4288270.png"} 
+                                                                    alt={topper.name}
+                                                                    className="w-full h-full object-cover"
+                                                                />
+                                                                <div className="absolute inset-0 bg-oxford/10 group-hover/card:bg-transparent transition-colors" />
+                                                            </div>
+                                                            <h4 className="font-black text-oxford text-sm mb-1 truncate">{topper.name}</h4>
+                                                            <p className="text-[10px] font-bold text-sandstone uppercase mb-2">Class {topper.class} {topper.stream !== "-" ? `(${topper.stream})` : ""}</p>
+                                                            <div className="text-xl font-black text-oxford">{topper.percentage}%</div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
+
+                                            {/* Table View */}
+                                            <div className="overflow-x-auto rounded-[2rem] border border-gray-100 bg-white">
+                                                <table className="w-full text-left border-collapse min-w-[700px]">
+                                                    <thead className="bg-gray-50 border-b border-gray-100">
+                                                        <tr>
+                                                            <th className="py-4 px-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Student Name</th>
+                                                            <th className="py-4 px-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Class & Stream</th>
+                                                            <th className="py-4 px-6 text-[10px] font-black uppercase tracking-widest text-gray-400 text-right">Percentage</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody className="divide-y divide-gray-50">
+                                                        {group.data.map((topper) => (
+                                                            <tr key={topper._id} className="hover:bg-gray-50/50 transition-colors group/row">
+                                                                <td className="py-4 px-6">
+                                                                    <div className="flex items-center gap-4">
+                                                                        <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-oxford group-hover/row:bg-sandstone group-hover/row:text-white transition-colors">
+                                                                            <Star size={14} />
+                                                                        </div>
+                                                                        <span className="font-bold text-oxford group-hover/row:text-sandstone transition-colors">{topper.name}</span>
+                                                                    </div>
+                                                                </td>
+                                                                <td className="py-4 px-6">
+                                                                    <div className="flex items-center gap-2">
+                                                                        <span className="px-3 py-1 bg-oxford/5 text-oxford text-[10px] font-bold rounded-full uppercase tracking-tighter">
+                                                                            Class {topper.class}
+                                                                        </span>
+                                                                        {topper.stream !== "-" && (
+                                                                            <span className="px-3 py-1 bg-sandstone/10 text-sandstone text-[10px] font-bold rounded-full uppercase tracking-tighter">
+                                                                                {topper.stream}
+                                                                            </span>
+                                                                        )}
+                                                                    </div>
+                                                                </td>
+                                                                <td className="py-4 px-6 text-right">
+                                                                    <span className="text-lg font-black text-oxford group-hover/row:text-sandstone transition-colors">
+                                                                        {topper.percentage}%
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                        ))}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 }
