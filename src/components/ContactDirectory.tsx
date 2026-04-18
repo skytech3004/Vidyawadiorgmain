@@ -17,11 +17,11 @@ const contactData: ContactEntry[] = [
     { office: "Principal English School", phone: "6377203204", email: "principal_lps@vidyawadi.org" },
     { office: "Chief Resident Officer", phone: "6377204202", email: "" },
     { office: "Hostel Assistant", phone: "6377204218" },
-    { office: "Accounts Department", phone: "6377204209", email: "brajmohan.agarawal@vidyawadi.org" },
+    { office: "Accounts Department", phone: "6377204212", email: "niranjan.gehlot@vidyawadi.org" },
     { office: "Admin Department", phone: "6377204206", email: "administration.manager@vidyawadi.org" },
     { office: "College Office", phone: "6377204208", email: "deepak.sisodiya@vidyawadi.org" },
     { office: "Hindi School Office", phone: "6377204207", email: "himmatsingh.rathore@vidyawadi.org" },
-    { office: "English School Office", phone: "6377204212", email: "niranjan.gehlot@vidyawadi.org" },
+    { office: "English School Office", phone: "6377204209", email: "brajmohan.agarawal@vidyawadi.org" },
 ];
 
 export default function ContactDirectory() {

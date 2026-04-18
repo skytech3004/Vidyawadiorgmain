@@ -938,7 +938,7 @@ export default function LPSContent() {
                                 { title: "Regularity", desc: "Minimum 75% attendance is mandatory." },
                                 { title: "Mobile Phones", desc: "Strictly prohibited. Confiscated gadgets will not be returned." },
                                 { title: "Bullying", desc: "Zero tolerance policy. Immediate disciplinary action for offenders." },
-                                { title: "Hygiene", desc: "Nails trimmed, clean uniform. Makeup/jewelry not permitted." }
+                                { title: "Hygiene", desc: "Nails trimmed, clean uniform. Makeup/jewellery not permitted." }
                             ].map((rule, i) => (
                                 <div key={i} className="flex gap-4 items-start">
                                     <div className="w-8 h-8 rounded-full bg-sandstone/10 flex items-center justify-center shrink-0 mt-1">

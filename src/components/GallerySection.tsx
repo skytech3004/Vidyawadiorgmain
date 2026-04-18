@@ -87,21 +87,14 @@ export default function GallerySection() {
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 gap-12">
                     <div className="max-w-2xl">
-                        <motion.span
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="text-sandstone font-bold uppercase tracking-[0.4em] text-sm block mb-4"
-                        >
-                            LIFE AT VIDYAWADI
-                        </motion.span>
+
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             className="text-4xl md:text-6xl font-black text-oxford leading-tight uppercase"
                         >
-                            Life at <span className="text-sandstone">@Vidyawadi</span>
+                            Life <span className="text-sandstone">@Vidyawadi</span>
                         </motion.h2>
 
                         <div className="flex flex-wrap gap-2 mt-10">
