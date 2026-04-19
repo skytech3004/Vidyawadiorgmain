@@ -336,17 +336,47 @@ export default function SettingsManagerPage() {
                                             onChange={async (e) => {
                                                 const file = e.target.files?.[0];
                                                 if (!file) return;
+
+                                                // 100MB limit for videos
+                                                if (file.size > 100 * 1024 * 1024) {
+                                                    setMessage({ type: "error", text: "Video file is too large. Maximum size allowed is 100MB." });
+                                                    return;
+                                                }
+
                                                 const formData = new FormData();
                                                 formData.append("file", file);
                                                 formData.append("folder", "hero");
+                                                
                                                 try {
+                                                    setMessage({ type: "success", text: "Uploading video..." });
                                                     const res = await fetch("/api/admin/upload", { method: "POST", body: formData });
+                                                    
+                                                    if (res.status === 413) {
+                                                        setMessage({ type: "error", text: "Upload failed: File too large (413). Please check your server's Nginx configuration." });
+                                                        return;
+                                                    }
+
+                                                    if (!res.ok) {
+                                                        const text = await res.text();
+                                                        console.error("Upload failed server response:", text);
+                                                        throw new Error(`Server returned error ${res.status}`);
+                                                    }
+
+                                                    const contentType = res.headers.get("content-type");
+                                                    if (!contentType || !contentType.includes("application/json")) {
+                                                        throw new Error("Server returned an invalid response. This often happens when the file is too large for the network.");
+                                                    }
+
                                                     const data = await res.json();
                                                     if (data.success) {
                                                         setHeroSettings({ ...heroSettings, hero_video_url: data.url });
+                                                        setMessage({ type: "success", text: "Video uploaded successfully! Don't forget to save settings." });
+                                                    } else {
+                                                        setMessage({ type: "error", text: data.error || "Failed to upload video." });
                                                     }
-                                                } catch (err) {
+                                                } catch (err: any) {
                                                     console.error("Upload error:", err);
+                                                    setMessage({ type: "error", text: `Upload error: ${err.message}` });
                                                 }
                                             }}
                                         />
@@ -398,23 +428,68 @@ export default function SettingsManagerPage() {
                                             const files = Array.from(e.target.files || []);
                                             if (files.length === 0) return;
 
-                                            const uploadPromises = files.map(async (file) => {
+                                            // Filter out files larger than 100MB
+                                            const validFiles = files.filter(file => {
+                                                if (file.size > 100 * 1024 * 1024) {
+                                                    console.warn(`File ${file.name} skipped: Too large (>100MB)`);
+                                                    return false;
+                                                }
+                                                return true;
+                                            });
+
+                                            if (validFiles.length === 0) {
+                                                setMessage({ type: "error", text: "All selected files are too large (Max 100MB)." });
+                                                return;
+                                            }
+
+                                            if (validFiles.length < files.length) {
+                                                setMessage({ type: "error", text: `Some files was skipped because they exceed 100MB.` });
+                                            }
+
+                                            setMessage({ type: "success", text: `Uploading ${validFiles.length} images...` });
+
+                                            const uploadPromises = validFiles.map(async (file) => {
                                                 const formData = new FormData();
                                                 formData.append("file", file);
                                                 formData.append("folder", "hero/carousel");
-                                                const res = await fetch("/api/admin/upload", { method: "POST", body: formData });
-                                                return res.json();
+                                                try {
+                                                    const res = await fetch("/api/admin/upload", { method: "POST", body: formData });
+                                                    
+                                                    if (!res.ok) {
+                                                        const text = await res.text();
+                                                        console.error(`Upload error for ${file.name}:`, text);
+                                                        return { success: false, fileName: file.name };
+                                                    }
+
+                                                    const contentType = res.headers.get("content-type");
+                                                    if (!contentType || !contentType.includes("application/json")) {
+                                                        return { success: false, fileName: file.name, error: "Invalid server response" };
+                                                    }
+
+                                                    return res.json();
+                                                } catch (err) {
+                                                    return { success: false, fileName: file.name };
+                                                }
                                             });
 
                                             try {
                                                 const results = await Promise.all(uploadPromises);
                                                 const successfulUrls = results.filter(r => r.success).map(r => r.url);
+                                                const failedCount = results.filter(r => !r.success).length;
+
                                                 setHeroSettings({
                                                     ...heroSettings,
                                                     hero_carousel_images: [...heroSettings.hero_carousel_images, ...successfulUrls]
                                                 });
+
+                                                if (failedCount > 0) {
+                                                    setMessage({ type: "error", text: `Uploaded ${successfulUrls.length} images, but ${failedCount} failed.` });
+                                                } else {
+                                                    setMessage({ type: "success", text: "All images uploaded successfully!" });
+                                                }
                                             } catch (err) {
                                                 console.error("Bulk upload error:", err);
+                                                setMessage({ type: "error", text: "An error occurred during bulk upload." });
                                             }
                                         }}
                                     />

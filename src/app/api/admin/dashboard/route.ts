@@ -4,6 +4,9 @@ import Post from "@/models/Post";
 import GalleryAlbum from "@/models/GalleryAlbum";
 import Faculty from "@/models/Faculty";
 import Inquiry from "@/models/Inquiry";
+import Admission from "@/models/Admission";
+import Topper from "@/models/Topper";
+import ActivityLog from "@/models/ActivityLog";
 import { jwtVerify } from "jose";
 
 async function verifyAuth(req: NextRequest) {
@@ -28,12 +31,26 @@ export async function GET(req: NextRequest) {
 
         await dbConnect();
 
-        const [blogCount, albums, staffCount, inquiryCount, recentPosts] = await Promise.all([
+        const [
+            blogCount, 
+            albums, 
+            staffCount, 
+            newInquiries, 
+            totalInquiries,
+            newAdmissions,
+            totalAdmissions,
+            topperCount,
+            recentLogs
+        ] = await Promise.all([
             Post.countDocuments(),
             GalleryAlbum.find({ isActive: true }).select('images'),
             Faculty.countDocuments(),
-            Inquiry.countDocuments({ status: "New" }).catch(() => Inquiry.countDocuments()), // Handle missing status field
-            Post.find().sort({ createdAt: -1 }).limit(5)
+            Inquiry.countDocuments({ status: "New" }).catch(() => 0),
+            Inquiry.countDocuments(),
+            Admission.countDocuments({ status: "new" }),
+            Admission.countDocuments(),
+            Topper.countDocuments(),
+            ActivityLog.find().sort({ createdAt: -1 }).limit(10)
         ]);
 
         const galleryImageCount = albums.reduce((acc: number, album: any) => acc + (album.images?.length || 0), 0);
@@ -41,17 +58,20 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({
             success: true,
             stats: [
-                { name: "Total Blog Posts", value: blogCount.toString() },
+                { name: "New Admissions", value: newAdmissions.toString(), total: totalAdmissions },
+                { name: "New Inquiries", value: newInquiries.toString(), total: totalInquiries },
+                { name: "Blog Posts", value: blogCount.toString() },
                 { name: "Gallery Images", value: galleryImageCount.toString() },
-                { name: "Active Staff", value: staffCount.toString() },
-                { name: "New Inquiries", value: inquiryCount.toString() },
+                { name: "Staff Members", value: staffCount.toString() },
+                { name: "Board Toppers", value: topperCount.toString() },
             ],
-            recentActivity: recentPosts.map(post => ({
-                id: post._id,
-                title: post.title,
-                category: post.category,
-                time: "Recently Added", // Simple for now
-                author: post.author
+            recentActivity: recentLogs.map(log => ({
+                id: log._id,
+                username: log.username,
+                action: log.action,
+                details: log.details,
+                time: log.createdAt,
+                ip: log.ip
             }))
         });
     } catch (error: any) {

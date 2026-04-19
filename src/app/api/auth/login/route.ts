@@ -49,6 +49,11 @@ export async function POST(req: NextRequest) {
         });
 
         console.log(`LOGIN_SUCCESS: User ${username} logged in successfully`);
+
+        // Record activity
+        const { recordActivity } = await import("@/lib/logger");
+        await recordActivity(req, { id: admin._id, username: admin.username }, "LOGIN", "Logged into the administration portal");
+
         return response;
     } catch (error: any) {
         console.error("LOGIN_ERROR_DETAILS:", {

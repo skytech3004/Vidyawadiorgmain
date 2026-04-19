@@ -17,7 +17,8 @@ import {
     Settings,
     Heart,
     Menu,
-    X
+    X,
+    Activity
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -29,10 +30,12 @@ const sidebarItems = [
     { name: "Gallery", href: "/admin/gallery", icon: ImageIcon },
     { name: "Inquiries", href: "/admin/inquiries", icon: MessageSquare },
     { name: "Settings", href: "/admin/settings", icon: Settings },
+    { name: "Activity Logs", href: "/admin/logs", icon: Activity },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
+    const router = useRouter();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     // Close menu on route change
@@ -122,7 +125,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 </div>
 
                 <div className="p-6 border-t border-white/5 bg-oxford-dark/50 backdrop-blur-md">
-                    <button className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/40 hover:bg-red-500/10 hover:text-red-400 w-full transition-all group">
+                    <button 
+                        onClick={async () => {
+                            try {
+                                await fetch("/api/auth/logout", { method: "POST" });
+                                router.push("/admin/login");
+                            } catch (err) {
+                                router.push("/admin/login");
+                            }
+                        }}
+                        className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/40 hover:bg-red-500/10 hover:text-red-400 w-full transition-all group"
+                    >
                         <LogOut size={20} className="group-hover:-translate-x-1 transition-transform" />
                         <span className="text-sm font-bold tracking-wide">Logout</span>
                     </button>
