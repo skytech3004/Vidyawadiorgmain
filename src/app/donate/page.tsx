@@ -280,18 +280,20 @@ export default function DonatePage() {
                                         <div className="p-8 bg-stone-50 rounded-[2rem] text-center border border-oxford/5">
                                             <p className="text-oxford text-[10px] font-black uppercase tracking-widest mb-4">Quick Pay via QR</p>
                                             <div className="relative w-48 h-48 mx-auto mb-4 bg-white rounded-xl overflow-hidden border-2 border-stone-100 p-2">
-                                                <Image 
-                                                    src="/scane.png" 
-                                                    alt="Donation QR Code" 
-                                                    width={192} 
+                                                <Image
+                                                    src="/scane.png"
+                                                    alt="Donation QR Code"
+                                                    width={192}
                                                     height={192}
                                                     className="w-full h-full object-contain"
                                                 />
                                             </div>
-                                            <div className="flex justify-center gap-3 opacity-60 mb-6">
-                                                <Image src="/images/upi-logo.png" width={30} height={15} alt="UPI" className="object-contain" />
-                                                <Image src="/images/gpay-logo.png" width={30} height={15} alt="GPay" className="object-contain" />
-                                                <Image src="/images/phonepe-logo.png" width={30} height={15} alt="PhonePe" className="object-contain" />
+                                            <div className="flex justify-center gap-3  mb-6">
+                                                <Image src="/1280px-UPI-Logo-vector.svg.webp" width={70} height={30} alt="UPI" className="object-contain" />
+                                                <Image src="/Phonepe.svg" width={80} height={30} alt="GPay" className="object-contain" />
+                                                <Image src="/Google_Pay_Logo.svg" width={70} height={30} alt="GPay" className="object-contain" />
+
+                                                <Image src="/Paytm_Logo_(standalone).svg" width={70} height={30} alt="PhonePe" className="object-contain" />
                                             </div>
 
                                             <div className="pt-6 border-t border-black/5 text-left">
