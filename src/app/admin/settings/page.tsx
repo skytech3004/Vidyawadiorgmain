@@ -20,8 +20,11 @@ import {
     X,
     GripVertical,
     ChevronDown,
-    ChevronUp
+    ChevronUp,
+    Music,
+    Volume2 as VolumeIcon
 } from "lucide-react";
+
 import BulkImageUpload from "@/components/admin/BulkImageUpload";
 import { cn } from "@/lib/utils";
 
@@ -40,8 +43,13 @@ export default function SettingsManagerPage() {
         hero_carousel_images: [] as string[],
         hero_texts: ["Celebrating 70 Years of Excellence", "शिक्षा भी, संस्कार भी", "Nurturing Minds, Shaping Futures"]
     });
+    const [musicSettings, setMusicSettings] = useState({
+        bg_music_url: "",
+        bg_music_volume: 40
+    });
 
     const [loading, setLoading] = useState(true);
+
     const [saving, setSaving] = useState(false);
     const [message, setMessage] = useState<{ type: "success" | "error", text: string } | null>(null);
 
@@ -65,7 +73,12 @@ export default function SettingsManagerPage() {
                     hero_carousel_images: data.settings.hero_carousel_images || [],
                     hero_texts: data.settings.hero_texts || ["Celebrating 70 Years of Excellence", "शिक्षा भी, संस्कार भी", "Nurturing Minds, Shaping Futures"]
                 });
+                setMusicSettings({
+                    bg_music_url: data.settings.bg_music_url || "/theboysbeats-lofi-boy-serene-strings-lofi-instrumental-278238.mp3",
+                    bg_music_volume: data.settings.bg_music_volume !== undefined ? parseInt(data.settings.bg_music_volume) : 40
+                });
             }
+
         } catch (error) {
             console.error("Fetch error:", error);
         } finally {
@@ -90,8 +103,9 @@ export default function SettingsManagerPage() {
             const res = await fetch("/api/admin/settings", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ ...settings, ...heroSettings })
+                body: JSON.stringify({ ...settings, ...heroSettings, ...musicSettings })
             });
+
             const data = await res.json();
 
             if (data.success) {
@@ -590,6 +604,142 @@ export default function SettingsManagerPage() {
                     </div>
                 </div>
             </div>
+
+            {/* Background Music Settings */}
+            <div className="bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden mt-10">
+                <div className="p-8 border-b border-gray-50 bg-gray-50/30">
+                    <h2 className="text-xl font-black text-oxford uppercase tracking-tight flex items-center gap-3">
+                        <Music className="text-sandstone" />
+                        Background Music Settings
+                    </h2>
+                    <p className="text-sm text-gray-500 mt-1">Configure global background music and default volume.</p>
+                </div>
+
+                <div className="p-8 space-y-10">
+                    <div className="grid md:grid-cols-2 gap-8 items-start">
+                        {/* Audio Preview */}
+                        <div className="space-y-4">
+                            <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-2 block">Audio Preview</label>
+                            {musicSettings.bg_music_url ? (
+                                <div className="p-6 bg-gray-50 rounded-3xl border border-gray-100 space-y-4">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm text-sandstone">
+                                            <Music size={24} />
+                                        </div>
+                                        <div className="flex-1 overflow-hidden">
+                                            <p className="text-xs font-black text-oxford truncate uppercase tracking-tight">
+                                                {musicSettings.bg_music_url.split('/').pop()}
+                                            </p>
+                                            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-0.5">Current Background Track</p>
+                                        </div>
+                                    </div>
+                                    <audio 
+                                        src={musicSettings.bg_music_url} 
+                                        controls 
+                                        className="w-full h-10 accent-sandstone"
+                                        style={{ filter: "grayscale(1) invert(1)" }}
+                                    />
+                                    <p className="text-[10px] text-gray-400 italic">This audio is muted by default on other admin pages but can be tested here.</p>
+                                </div>
+                            ) : (
+                                <div className="h-40 rounded-3xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center gap-4 bg-gray-50">
+                                    <Music className="text-gray-200" size={48} />
+                                    <p className="text-xs font-bold text-gray-400">No audio file set</p>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Controls */}
+                        <div className="space-y-8">
+                            {/* Upload */}
+                            <div className="space-y-4">
+                                <label className="text-[10px] font-black uppercase tracking-widest text-oxford ml-2 block">Change Music File</label>
+                                <div
+                                    onClick={() => document.getElementById('music-upload')?.click()}
+                                    className="w-full px-6 py-4 bg-white border border-gray-200 rounded-2xl flex items-center gap-3 cursor-pointer hover:border-sandstone transition-colors group"
+                                >
+                                    <div className="p-2 bg-gray-50 rounded-xl group-hover:bg-sandstone/10 transition-colors">
+                                        <Upload className="text-sandstone" size={18} />
+                                    </div>
+                                    <span className="text-sm font-bold text-oxford">Upload MP3 File</span>
+                                    <input
+                                        id="music-upload"
+                                        type="file"
+                                        accept="audio/mpeg,audio/mp3"
+                                        className="hidden"
+                                        onChange={async (e) => {
+                                            const file = e.target.files?.[0];
+                                            if (!file) return;
+
+                                            const formData = new FormData();
+                                            formData.append("file", file);
+                                            formData.append("folder", "music");
+                                            
+                                            try {
+                                                setMessage({ type: "success", text: "Uploading music..." });
+                                                const res = await fetch("/api/admin/upload", { method: "POST", body: formData });
+                                                const data = await res.json();
+                                                
+                                                if (data.success) {
+                                                    setMusicSettings({ ...musicSettings, bg_music_url: data.url });
+                                                    setMessage({ type: "success", text: "Music uploaded successfully! Save settings to apply." });
+                                                } else {
+                                                    setMessage({ type: "error", text: data.error || "Failed to upload music." });
+                                                }
+                                            } catch (err: any) {
+                                                setMessage({ type: "error", text: `Upload error: ${err.message}` });
+                                            }
+                                        }}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Volume Slider */}
+                            <div className="space-y-4">
+                                <div className="flex items-center justify-between ml-2">
+                                    <label className="text-[10px] font-black uppercase tracking-widest text-oxford flex items-center gap-2">
+                                        <VolumeIcon size={14} className="text-sandstone" /> Default Volume
+                                    </label>
+                                    <span className="text-xs font-black text-sandstone bg-sandstone/10 px-2 py-0.5 rounded-lg">{musicSettings.bg_music_volume}%</span>
+                                </div>
+                                <input
+                                    type="range"
+                                    min="0"
+                                    max="100"
+                                    value={musicSettings.bg_music_volume}
+                                    onChange={(e) => setMusicSettings({ ...musicSettings, bg_music_volume: parseInt(e.target.value) })}
+                                    className="w-full h-2 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-sandstone"
+                                />
+                                <div className="flex justify-between px-1">
+                                    <span className="text-[8px] font-bold text-gray-300 uppercase tracking-widest">Mute</span>
+                                    <span className="text-[8px] font-bold text-gray-300 uppercase tracking-widest">Max</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="pt-10 border-t border-gray-100 flex justify-end">
+                        <button
+                            onClick={handleSave}
+                            disabled={saving}
+                            className="px-8 py-4 bg-oxford text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-black transition-all shadow-xl shadow-oxford/20 flex items-center justify-center gap-3 disabled:opacity-70"
+                        >
+                            {saving ? (
+                                <>
+                                    <Loader2 size={18} className="animate-spin text-sandstone" />
+                                    Saving...
+                                </>
+                            ) : (
+                                <>
+                                    <Save size={18} className="text-sandstone" />
+                                    Save Music Settings
+                                </>
+                            )}
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
+
     );
 }

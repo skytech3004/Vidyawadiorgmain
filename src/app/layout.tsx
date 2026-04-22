@@ -3,6 +3,8 @@ import { Montserrat, Noto_Sans_Devanagari } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import FloatingButtons from "@/components/FloatingButtons";
+import MusicPlayer from "@/components/MusicPlayer";
+
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -37,6 +39,8 @@ export default function RootLayout({
       >
         {children}
         <FloatingButtons />
+        <MusicPlayer />
+
         <Script src="https://cdn.botpress.cloud/webchat/v2.2/shareable.js" strategy="lazyOnload" />
         <Script src="https://files.bpcontent.cloud/2025/01/15/06/20250115061642-XN0Z8Q9Z.js" strategy="lazyOnload" />
       </body>
