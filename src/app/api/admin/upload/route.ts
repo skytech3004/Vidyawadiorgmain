@@ -57,6 +57,9 @@ export async function POST(req: NextRequest) {
         const absolutePath = path.join(process.cwd(), "public", relativePath);
         const dir = path.dirname(absolutePath);
 
+        console.log(`==> [UPLOAD] process.cwd(): ${process.cwd()}`);
+        console.log(`==> [UPLOAD] target absolutePath: ${absolutePath}`);
+
         // Ensure directory exists
         const { mkdir } = await import("fs/promises");
         await mkdir(dir, { recursive: true });
