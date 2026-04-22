@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
             console.warn("WARN: JWT_SECRET is not defined, using fallback_secret");
         }
 
-        const token = await new SignJWT({ id: admin._id, username: admin.username, role: admin.role })
+        const token = await new SignJWT({ id: admin._id.toString(), username: admin.username, role: admin.role })
             .setProtectedHeader({ alg: "HS256" })
             .setIssuedAt()
             .setExpirationTime("24h")
@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
 
         // Record activity
         const { recordActivity } = await import("@/lib/logger");
-        await recordActivity(req, { id: admin._id, username: admin.username }, "LOGIN", "Logged into the administration portal");
+        await recordActivity(req, { id: admin._id.toString(), username: admin.username }, "LOGIN", "Logged into the administration portal");
 
         return response;
     } catch (error: any) {
