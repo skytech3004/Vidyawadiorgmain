@@ -70,27 +70,30 @@ export async function POST(req: NextRequest) {
 
         // Ensure directories exist
         const { mkdir } = await import("fs/promises");
+        console.log(`==> [UPLOAD] Creating directory: ${path.dirname(absolutePath)}`);
         await mkdir(path.dirname(absolutePath), { recursive: true });
         
-        try {
-            if (absolutePath.includes(".next/standalone")) {
-                // If we are already in standalone, also try root
-                const rootPublic = absolutePath.replace(".next/standalone/", "");
-                await mkdir(path.dirname(rootPublic), { recursive: true });
-                await writeFile(rootPublic, buffer);
-            } else {
-                // Also try to write to standalone if it exists
-                const standaloneDir = path.join(process.cwd(), ".next/standalone/public", `uploads/${folder}`);
-                await mkdir(standaloneDir, { recursive: true }).catch(() => {});
-                await writeFile(path.join(standaloneDir, filename), buffer).catch(() => {});
-            }
-        } catch (e) {
-            console.warn("Secondary write failed, but primary will proceed:", e);
-        }
-
         console.log(`==> [UPLOAD] Writing file to: ${absolutePath}`);
         await writeFile(absolutePath, buffer);
-        console.log(`==> [UPLOAD] Successfully uploaded: ${filename}`);
+        
+        // Verify file exists after write
+        const fs = await import("fs");
+        if (fs.existsSync(absolutePath)) {
+            console.log(`==> [UPLOAD] VERIFIED: File exists at ${absolutePath}`);
+        } else {
+            console.error(`==> [UPLOAD] ERROR: File NOT found at ${absolutePath} after write!`);
+        }
+
+        try {
+            const standaloneDir = path.join(process.cwd(), ".next/standalone/public", `uploads/${folder}`);
+            console.log(`==> [UPLOAD] Attempting standalone write to: ${standaloneDir}`);
+            await mkdir(standaloneDir, { recursive: true }).catch(() => {});
+            await writeFile(path.join(standaloneDir, filename), buffer).catch(() => {});
+        } catch (e) {
+            console.warn("Secondary write failed:", e);
+        }
+
+        console.log(`==> [UPLOAD] Successfully completed upload process for: ${filename}`);
 
         // Record activity
         const { recordActivity } = await import("@/lib/logger");
