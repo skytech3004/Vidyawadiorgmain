@@ -51,18 +51,42 @@ export async function POST(req: NextRequest) {
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
 
-        // Sanitize filename and add timestamp to avoid collisions
-        const filename = `${Date.now()}-${file.name.replace(/\s+/g, "-")}`;
+        // Sanitize filename: remove non-ASCII characters and add timestamp
+        const sanitizedBase = file.name
+            .replace(/[^\x00-\x7F]/g, "") // Remove non-ASCII (Gujarati etc)
+            .replace(/\s+/g, "-")
+            .replace(/[^a-zA-Z0-9.\-_]/g, "");
+        
+        const filename = `${Date.now()}-${sanitizedBase}`;
         const relativePath = `uploads/${folder}/${filename}`.replace(/\/+/g, "/");
+        
+        // Root public path (for persistence)
         const absolutePath = path.join(process.cwd(), "public", relativePath);
-        const dir = path.dirname(absolutePath);
+        
+        // Standalone public path (for immediate serving in some environments)
+        const standalonePath = path.join(process.cwd(), ".next/standalone/public", relativePath);
 
-        console.log(`==> [UPLOAD] process.cwd(): ${process.cwd()}`);
         console.log(`==> [UPLOAD] target absolutePath: ${absolutePath}`);
 
-        // Ensure directory exists
+        // Ensure directories exist
         const { mkdir } = await import("fs/promises");
-        await mkdir(dir, { recursive: true });
+        await mkdir(path.dirname(absolutePath), { recursive: true });
+        
+        try {
+            if (absolutePath.includes(".next/standalone")) {
+                // If we are already in standalone, also try root
+                const rootPublic = absolutePath.replace(".next/standalone/", "");
+                await mkdir(path.dirname(rootPublic), { recursive: true });
+                await writeFile(rootPublic, buffer);
+            } else {
+                // Also try to write to standalone if it exists
+                const standaloneDir = path.join(process.cwd(), ".next/standalone/public", `uploads/${folder}`);
+                await mkdir(standaloneDir, { recursive: true }).catch(() => {});
+                await writeFile(path.join(standaloneDir, filename), buffer).catch(() => {});
+            }
+        } catch (e) {
+            console.warn("Secondary write failed, but primary will proceed:", e);
+        }
 
         console.log(`==> [UPLOAD] Writing file to: ${absolutePath}`);
         await writeFile(absolutePath, buffer);
