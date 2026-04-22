@@ -634,7 +634,7 @@ export default function SettingsManagerPage() {
                                         </div>
                                     </div>
                                     <audio 
-                                        src={musicSettings.bg_music_url} 
+                                        src={musicSettings.bg_music_url.startsWith('/uploads/') ? `/api${musicSettings.bg_music_url}` : musicSettings.bg_music_url} 
                                         controls 
                                         className="w-full h-10 accent-sandstone"
                                         style={{ filter: "grayscale(1) invert(1)" }}

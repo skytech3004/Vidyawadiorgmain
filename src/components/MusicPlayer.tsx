@@ -21,8 +21,15 @@ const MusicPlayer = () => {
                 const res = await fetch("/api/admin/settings");
                 const data = await res.json();
                 if (data.success && data.settings) {
+                    let musicUrl = data.settings.bg_music_url || "/theboysbeats-lofi-boy-serene-strings-lofi-instrumental-278238.mp3";
+                    
+                    // Fallback to proxy if it's an uploaded file to avoid 404s
+                    if (musicUrl.startsWith("/uploads/")) {
+                        musicUrl = "/api" + musicUrl;
+                    }
+
                     setConfig({
-                        url: data.settings.bg_music_url || "/theboysbeats-lofi-boy-serene-strings-lofi-instrumental-278238.mp3",
+                        url: musicUrl,
                         volume: data.settings.bg_music_volume !== undefined ? parseInt(data.settings.bg_music_volume) / 100 : 0.4
                     });
                 }

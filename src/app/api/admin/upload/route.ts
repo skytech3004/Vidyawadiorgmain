@@ -98,7 +98,7 @@ export async function POST(req: NextRequest) {
 
         return NextResponse.json({
             success: true,
-            url: `/${relativePath}`
+            url: `/api/uploads/${folder}/${filename}`
         });
     } catch (error: any) {
         console.error("==> [UPLOAD] CRITICAL ERROR:", error);
