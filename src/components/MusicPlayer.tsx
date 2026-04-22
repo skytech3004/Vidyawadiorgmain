@@ -57,22 +57,40 @@ const MusicPlayer = () => {
     }, [isAdmin]);
 
     useEffect(() => {
-        // Try to resume audio if it was playing before
+        // Try to resume audio if it was playing before or if it's the first visit
         const storedState = localStorage.getItem("bg-music-playing");
-        if (storedState === "true" && !isAdmin) {
+        
+        // If it's the first visit (null) or explicitly set to true
+        if ((storedState === "true" || storedState === null) && !isAdmin) {
             const handleFirstInteraction = () => {
                 if (audioRef.current && !isPlaying) {
-                    audioRef.current.play().catch(err => console.log("Autoplay blocked:", err));
-                    setIsPlaying(true);
+                    audioRef.current.play()
+                        .then(() => {
+                            setIsPlaying(true);
+                            localStorage.setItem("bg-music-playing", "true");
+                        })
+                        .catch(err => console.log("Autoplay still blocked:", err));
                 }
-                window.removeEventListener('click', handleFirstInteraction);
-                window.removeEventListener('scroll', handleFirstInteraction);
+                // Use capture phase and multiple events for better reliability
+                window.removeEventListener('mousedown', handleFirstInteraction, true);
+                window.removeEventListener('touchstart', handleFirstInteraction, true);
+                window.removeEventListener('scroll', handleFirstInteraction, true);
+                window.removeEventListener('keydown', handleFirstInteraction, true);
             };
 
-            window.addEventListener('click', handleFirstInteraction);
-            window.addEventListener('scroll', handleFirstInteraction);
+            window.addEventListener('mousedown', handleFirstInteraction, true);
+            window.addEventListener('touchstart', handleFirstInteraction, true);
+            window.addEventListener('scroll', handleFirstInteraction, true);
+            window.addEventListener('keydown', handleFirstInteraction, true);
+
+            return () => {
+                window.removeEventListener('mousedown', handleFirstInteraction, true);
+                window.removeEventListener('touchstart', handleFirstInteraction, true);
+                window.removeEventListener('scroll', handleFirstInteraction, true);
+                window.removeEventListener('keydown', handleFirstInteraction, true);
+            };
         }
-    }, [isAdmin]);
+    }, [isAdmin, config.url]); // Re-run if URL changes
 
     const togglePlay = () => {
         if (!audioRef.current || isAdmin) return;
