@@ -382,11 +382,11 @@ export default function MarudharContent() {
                                     </thead>
                                     <tbody className="divide-y divide-gray-100">
                                         {[
-                                            { class: "VI – VIII", inst: "₹4,750 × 4", total: "₹19,000" },
-                                            { class: "IX – X", inst: "₹6,300 × 4", total: "₹25,200" },
-                                            { class: "XI – XII Arts", inst: "₹6,700 × 4", total: "₹26,800" },
-                                            { class: "XI – XII Commerce", inst: "₹6,700 × 4", total: "₹26,800" },
-                                            { class: "XI – XII Science", inst: "₹8,250 × 4", total: "₹33,000" },
+                                            { class: "VI – VIII", inst: "₹4,750 × 2", total: "₹19,000" },
+                                            { class: "IX – X", inst: "₹6,300 × 2", total: "₹25,200" },
+                                            { class: "XI – XII Arts", inst: "₹6,700 × 2", total: "₹26,800" },
+                                            { class: "XI – XII Commerce", inst: "₹6,700 × 2", total: "₹26,800" },
+                                            { class: "XI – XII Science", inst: "₹8,250 × 2", total: "₹33,000" },
                                         ].map((row, i) => (
                                             <tr key={i} className="hover:bg-sandstone/5 transition-colors group cursor-pointer">
                                                 <td className="py-4 px-4 font-bold text-oxford group-hover:text-sandstone transition-colors">{row.class}</td>
@@ -419,11 +419,11 @@ export default function MarudharContent() {
                                     </thead>
                                     <tbody className="divide-y divide-gray-100">
                                         {[
-                                            { class: "VI – VIII", inst: "₹5,100 × 4", total: "₹20,400" },
-                                            { class: "IX – X", inst: "₹6,750 × 4", total: "₹27,000" },
-                                            { class: "XI – XII Arts", inst: "₹7,200 × 4", total: "₹28,800" },
-                                            { class: "XI – XII Commerce", inst: "₹7,200 × 4", total: "₹28,800" },
-                                            { class: "XI – XII Science", inst: "₹8,850 × 4", total: "₹35,400" },
+                                            { class: "VI – VIII", inst: "₹5,100 × 2", total: "₹20,400" },
+                                            { class: "IX – X", inst: "₹6,750 × 2", total: "₹27,000" },
+                                            { class: "XI – XII Arts", inst: "₹7,200 × 2", total: "₹28,800" },
+                                            { class: "XI – XII Commerce", inst: "₹7,200 × 2", total: "₹28,800" },
+                                            { class: "XI – XII Science", inst: "₹8,850 × 2", total: "₹35,400" },
                                         ].map((row, i) => (
                                             <tr key={i} className="hover:bg-sandstone/5 transition-colors group cursor-pointer">
                                                 <td className="py-4 px-4 font-bold text-oxford group-hover:text-sandstone transition-colors">{row.class}</td>

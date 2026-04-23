@@ -18,7 +18,8 @@ import {
     Heart,
     Menu,
     X,
-    Activity
+    Activity,
+    Briefcase
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -29,6 +30,7 @@ const sidebarItems = [
     { name: "Blog Manager", href: "/admin/blog", icon: FileText },
     { name: "Gallery", href: "/admin/gallery", icon: ImageIcon },
     { name: "Inquiries", href: "/admin/inquiries", icon: MessageSquare },
+    { name: "Careers", href: "/admin/careers", icon: Briefcase },
     { name: "Settings", href: "/admin/settings", icon: Settings },
     { name: "Activity Logs", href: "/admin/logs", icon: Activity },
 ];
