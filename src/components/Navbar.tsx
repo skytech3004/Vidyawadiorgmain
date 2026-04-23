@@ -43,6 +43,8 @@ const navLinks = [
     { name: "Gallery", href: "/gallery" },
     { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
+    { name: "Careers", href: "/careers" },
+
 ];
 
 export default function Navbar() {

@@ -106,7 +106,7 @@ export default function CareersPage() {
                                         </div>
                                         {category}
                                     </h3>
-                                    
+
                                     <div className="space-y-8">
                                         {jobs.map((job: any) => (
                                             <div key={job._id} className="group">
@@ -138,7 +138,7 @@ export default function CareersPage() {
                         className="bg-oxford text-white rounded-[2rem] p-8 md:p-12 relative overflow-hidden"
                     >
                         <div className="absolute top-0 right-0 w-64 h-64 bg-sandstone rounded-full blur-3xl opacity-20 -translate-y-1/2 translate-x-1/2" />
-                        
+
                         <h3 className="text-2xl md:text-3xl font-black mb-8 relative z-10">Applicants Should:</h3>
                         <ul className="space-y-4 mb-12 relative z-10">
                             {[
@@ -158,11 +158,11 @@ export default function CareersPage() {
                             <p className="text-sandstone font-black tracking-widest text-sm uppercase mb-4">Salary no constraint for deserving candidates</p>
                             <h4 className="text-2xl font-bold mb-6">Interested candidates may send their resume to</h4>
                             <a
-                                href="mailto:vidyawadi@yahoo.com"
+                                href="mailto:marudharmahila@gmail.com"
                                 className="inline-flex items-center gap-3 bg-sandstone hover:bg-sandstone-dark text-white px-8 py-4 rounded-full font-bold transition-all hover:scale-105"
                             >
                                 <Mail size={20} />
-                                vidyawadi@yahoo.com
+                                marudharmahila@gmail.com
                             </a>
                         </div>
                     </motion.div>
