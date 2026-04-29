@@ -334,6 +334,87 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                 </div>
             </section>
 
+            {/* Principal's Message Section */}
+            <section className="py-24 px-6 bg-white overflow-hidden">
+                <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Leadership</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight">Principal’s Message</h2>
+                        <div className="h-1.5 w-24 bg-sandstone mt-6 rounded-full mb-10" />
+                        <div className="prose text-gray-600 leading-relaxed space-y-4 mb-8 text-sm">
+                            <p>
+                                Welcome to Leela Devi Parasmal Sancheti Kanya Mahavidyalaya, Vidyawadi! It is with great pride and pleasure that I extend my warm greetings to all students, parents, faculty, and well-wishers of our esteemed institution.
+                            </p>
+                            <p>
+                                As the Principal, I am honored to lead an institution that has been at the forefront of women's education in Rajasthan for over six decades. Our college is not just a place of learning; it is a nurturing ground where young women discover their potential, develop their talents, and prepare for successful futures.
+                            </p>
+                            <p>
+                                We are committed to providing a holistic education that combines academic excellence with character building, leadership development, and social responsibility. Our dedicated faculty members work tirelessly to ensure that every student receives personalized attention and guidance.
+                            </p>
+                            <p>
+                                At Vidyawadi, we believe in creating an inclusive and supportive environment where every student feels valued and empowered. We encourage our students to participate in various co-curricular and extra-curricular activities, as we believe that true education extends beyond the classroom.
+                            </p>
+                            <p>
+                                I invite you to explore our website and learn more about what makes Vidyawadi a special place. Whether you are a prospective student, a parent, or a member of our alumni, I hope you will find inspiration in our journey of excellence.
+                            </p>
+                        </div>
+
+                        <div className="flex items-center gap-6 mt-12">
+                            <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-sandstone shadow-lg shrink-0">
+                                <img
+                                    src="/1766390644137-pihe1irzqwsjeapph8eh.avif"
+                                    alt="Prof.(Dr.) Punita Soni"
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+                            <div className="font-bold text-oxford">
+                                <p className="text-xl">Prof.(Dr.) Punita Soni</p>
+                                <p className="text-xs text-sandstone uppercase tracking-widest mt-1">Principal</p>
+                                <p className="text-[10px] text-gray-400 mt-1 uppercase">Leela Devi Parasmal Sancheti Kanya Mahavidyalaya</p>
+                            </div>
+                        </div>
+                    </motion.div>
+
+                    <div className="relative">
+                        <div className="bg-oxford/5 rounded-[2.5rem] p-10 border border-oxford/10 shadow-xl">
+                            <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-xs block mb-4 text-center">Our Ethos</span>
+                            <h3 className="text-3xl font-bold text-oxford mb-6 flex justify-center items-center gap-3">
+                                <Star className="text-sandstone fill-sandstone" />
+                                Our Core Values
+                            </h3>
+                            <div className="h-1 bg-sandstone w-16 mx-auto mb-8 rounded-full" />
+                            <ul className="space-y-4">
+                                {[
+                                    { title: "Empowerment", desc: "Equipping women with knowledge and confidence." },
+                                    { title: "Excellence", desc: "Striving for the highest standards in academics and beyond." },
+                                    { title: "Integrity", desc: "Fostering strong character and ethical values." }
+                                ].map((item, i) => (
+                                    <li key={i} className="flex items-start gap-3 text-gray-700">
+                                        <CheckCircle2 size={18} className="text-green-600 shrink-0 mt-1" />
+                                        <div>
+                                            <span className="font-bold text-oxford block">{item.title}</span>
+                                            <span className="text-sm">{item.desc}</span>
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        <div className="mt-8 bg-oxford rounded-3xl p-8 text-white relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-sandstone/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                            <h3 className="text-xl font-bold mb-4 relative z-10">Our Mission</h3>
+                            <p className="text-white/80 text-sm leading-relaxed relative z-10">
+                                To provide quality education that empowers young women to become independent, responsible, and successful individuals who contribute positively to society.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* About Section */}
             <section className="py-24 px-6">
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
@@ -846,9 +927,6 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                                     <thead>
                                         <tr className="bg-oxford text-white">
                                             <th className="p-6 text-xs font-black uppercase tracking-widest">Course</th>
-                                            <th className="p-6 text-xs font-black uppercase tracking-widest text-white/50">Previous Fee<br />(2025-26)</th>
-                                            <th className="p-6 text-xs font-black uppercase tracking-widest text-white/50">Hike %</th>
-                                            <th className="p-6 text-xs font-black uppercase tracking-widest text-white/50">Hike Amount</th>
                                             <th className="p-6 text-xs font-black uppercase tracking-widest text-sandstone">Total Fee</th>
                                             <th className="p-6 text-xs font-black uppercase tracking-widest">Admission Fee</th>
                                             <th className="p-6 text-xs font-black uppercase tracking-widest text-sandstone">Per Semester</th>
@@ -863,9 +941,6 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                                         ].map((row, i) => (
                                             <tr key={i} className="hover:bg-sandstone/5 transition-colors group">
                                                 <td className="p-6 font-bold text-oxford group-hover:text-sandstone transition-colors">{row.name}</td>
-                                                <td className="p-6 font-medium text-gray-400">₹{row.prev}</td>
-                                                <td className="p-6 font-medium text-gray-400">{row.hikeP}</td>
-                                                <td className="p-6 font-medium text-gray-400">₹{row.hikeA}</td>
                                                 <td className="p-6 font-black text-oxford text-lg">₹{row.total}</td>
                                                 <td className="p-6 font-medium text-gray-500">₹{row.admin}</td>
                                                 <td className="p-6 font-black text-sandstone text-xl">₹{row.sem}</td>
