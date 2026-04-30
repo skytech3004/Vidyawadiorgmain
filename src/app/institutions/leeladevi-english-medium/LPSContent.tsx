@@ -6,9 +6,10 @@ import {
     BookOpen, Trophy, School, Users, Star, Microscope,
     Medal, Phone, MapPin, Mail, CheckCircle2,
     Music, Calendar, User, FileText, Sparkles,
-    Play, X, Volume2, VolumeX, Maximize2, Globe
+    Play, X, Volume2, VolumeX, Maximize2, Globe, ArrowRight
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import StudentResultsTable from "@/components/StudentResultsTable";
 import FacultyGrid from "@/components/FacultyGrid";
 
@@ -322,6 +323,38 @@ export default function LPSContent() {
                             </div>
                         </div>
                     </motion.div>
+                </div>
+            </section>
+            {/* JAL PAKHWADA 2026 Highlight */}
+            <section className="py-16 px-6 bg-sandstone/5">
+                <div className="max-w-7xl mx-auto">
+                    <div className="grid md:grid-cols-2 gap-12 items-center bg-white rounded-[2.5rem] overflow-hidden shadow-2xl border border-sandstone/10">
+                        <div className="relative aspect-[4/3] md:aspect-auto md:h-full min-h-[300px]">
+                            <Image
+                                src="/WhatsApp Image 2026-04-30 at 10.34.08.jpeg"
+                                alt="JAL PAKHWADA 2026"
+                                fill
+                                className="object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent" />
+                        </div>
+                        <div className="p-8 md:p-12 lg:p-16">
+                            <span className="text-sandstone-dark font-bold uppercase tracking-[0.3em] text-sm block mb-4">Event Highlight</span>
+                            <h2 className="text-4xl md:text-5xl font-black text-oxford mb-6 leading-tight">
+                                JAL PAKHWADA 2026
+                            </h2>
+                            <p className="text-gray-600 text-lg mb-8 leading-relaxed">
+                                Join us in celebrating water conservation and awareness. Explore the vibrant activities and initiatives undertaken by our students during this meaningful event.
+                            </p>
+                            <Link 
+                                href="/institutions/leeladevi-english-medium/jal-pakhwada-2026"
+                                className="inline-flex items-center gap-3 px-8 py-4 bg-oxford text-white rounded-full font-bold hover:bg-sandstone transition-all transform hover:scale-105 shadow-lg group"
+                            >
+                                View Event Highlights
+                                <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </section>
 
