@@ -8,7 +8,7 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const mediaItems = [
+const images = [
     { type: "image", src: "/WhatsApp Image 2026-04-30 at 10.34.08.jpeg", alt: "Jal Pakhwada 2026 Featured" },
     { type: "image", src: "/images copy/001pi.jpg", alt: "Jal Pakhwada 2026 Event" },
     { type: "image", src: "/images copy/001pi22.jpg", alt: "Student Activities" },
@@ -22,8 +22,11 @@ const mediaItems = [
     { type: "image", src: "/images copy/WhatsApp Image 2026-04-29 at 18.35.47.jpeg", alt: "Workshop Session" },
     { type: "image", src: "/images copy/WhatsApp Image 2026-04-29 at 18.37.00.jpeg", alt: "Presentation" },
     { type: "image", src: "/images copy/WhatsApp Image 2026-04-29 at 18.40.52.jpeg", alt: "Concluding Ceremony" },
-    { type: "video", src: "/images copy/WhatsApp Video 2026-04-27 at 15.59.23.mp4", alt: "Event Video 1" },
-    { type: "video", src: "/images copy/WhatsApp Video 2026-04-27 at 21.00.10.mp4", alt: "Event Video 2" },
+];
+
+const videos = [
+    { type: "video", src: "/images copy/jal_pakhwada_video_1.mp4", alt: "Water Conservation Highlights" },
+    { type: "video", src: "/images copy/jal_pakhwada_video_2.mp4", alt: "Student Presentations" },
 ];
 
 export default function JalPakhwadaPage() {
@@ -53,60 +56,91 @@ export default function JalPakhwadaPage() {
                             </h1>
                             <div className="h-1.5 w-32 bg-sandstone mx-auto rounded-full mb-10" />
                             <p className="text-gray-600 max-w-3xl mx-auto text-xl text-center leading-relaxed italic">
-                                “A fortnight dedicated to the conservation of our most precious resource. Glimpses of the passion and creativity shown by our students in spreading awareness about water preservation.”
+                                “A fortnight dedicated to the conservation of our most precious resource.”
                             </p>
                         </motion.div>
                     </div>
                 </section>
 
-                {/* Gallery Grid */}
+                {/* Videos Section - 2 Columns */}
+                {videos.length > 0 && (
+                    <section className="px-6 mb-20">
+                        <div className="max-w-7xl mx-auto">
+                            <div className="flex items-center gap-3 mb-10">
+                                <div className="w-10 h-10 rounded-xl bg-oxford text-white flex items-center justify-center">
+                                    <Film size={20} />
+                                </div>
+                                <h2 className="text-3xl font-black text-oxford uppercase tracking-tight">Event Videos</h2>
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                {videos.map((video, index) => (
+                                    <motion.div
+                                        key={index}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        onClick={() => setSelectedItem(video)}
+                                        className="group relative aspect-video overflow-hidden rounded-[2.5rem] cursor-pointer shadow-xl bg-white border border-sandstone/10"
+                                    >
+                                        <div className="w-full h-full relative bg-oxford/10">
+                                            <video 
+                                                className="w-full h-full object-cover"
+                                                muted
+                                                playsInline
+                                                preload="metadata"
+                                            >
+                                                <source src={video.src} type="video/mp4" />
+                                            </video>
+                                            <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
+                                                <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white transform group-hover:scale-110 transition-transform">
+                                                    <Play fill="white" size={32} className="translate-x-1" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="absolute bottom-0 inset-x-0 p-8 bg-gradient-to-t from-black/80 to-transparent">
+                                            <h3 className="text-white font-bold text-xl">{video.alt}</h3>
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+                )}
+
+                {/* Photo Gallery Grid - 3 Columns */}
                 <section className="px-6">
-                    <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {mediaItems.map((item, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: index * 0.05 }}
-                                viewport={{ once: true }}
-                                onClick={() => setSelectedItem(item)}
-                                className="group relative aspect-[4/5] overflow-hidden rounded-[2.5rem] cursor-pointer shadow-xl hover:shadow-2xl transition-all bg-white border border-sandstone/10"
-                            >
-                                {item.type === "image" ? (
+                    <div className="max-w-7xl mx-auto">
+                        <div className="flex items-center gap-3 mb-10">
+                            <div className="w-10 h-10 rounded-xl bg-sandstone text-oxford flex items-center justify-center">
+                                <ImageIcon size={20} />
+                            </div>
+                            <h2 className="text-3xl font-black text-oxford uppercase tracking-tight">Photo Gallery</h2>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {images.map((item, index) => (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    whileInView={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: index * 0.05 }}
+                                    viewport={{ once: true }}
+                                    onClick={() => setSelectedItem(item)}
+                                    className="group relative aspect-[4/5] overflow-hidden rounded-[2.5rem] cursor-pointer shadow-lg hover:shadow-2xl transition-all bg-white border border-sandstone/10"
+                                >
                                     <Image
                                         src={item.src}
                                         alt={item.alt}
                                         fill
                                         className="object-cover group-hover:scale-110 transition-transform duration-700"
                                     />
-                                ) : (
-                                    <div className="w-full h-full relative bg-oxford/10">
-                                        <video 
-                                            className="w-full h-full object-cover"
-                                            muted
-                                            playsInline
-                                            preload="metadata"
-                                        >
-                                            <source src={item.src} type="video/mp4" />
-                                        </video>
-                                        <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
-                                            <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white transform group-hover:scale-110 transition-transform">
-                                                <Play fill="white" size={28} className="translate-x-0.5" />
-                                            </div>
-                                        </div>
+                                    
+                                    {/* Overlay UI */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-oxford/90 via-oxford/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-8">
+                                        <h3 className="text-white font-bold text-lg leading-tight">{item.alt}</h3>
                                     </div>
-                                )}
-                                
-                                {/* Overlay UI */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-oxford/90 via-oxford/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-8">
-                                    <div className="flex items-center gap-2 mb-2 text-sandstone">
-                                        {item.type === "image" ? <ImageIcon size={16} /> : <Film size={16} />}
-                                        <span className="text-[10px] font-black uppercase tracking-widest">{item.type}</span>
-                                    </div>
-                                    <h3 className="text-white font-bold text-lg leading-tight">{item.alt}</h3>
-                                </div>
-                            </motion.div>
-                        ))}
+                                </motion.div>
+                            ))}
+                        </div>
                     </div>
                 </section>
             </main>
@@ -154,6 +188,7 @@ export default function JalPakhwadaPage() {
                                     className="max-w-full max-h-full rounded-2xl shadow-2xl"
                                 >
                                     <source src={selectedItem.src} type="video/mp4" />
+                                    Your browser does not support the video tag.
                                 </video>
                             )}
                             <div className="mt-8 text-center">
