@@ -506,9 +506,10 @@ export default function LPSContent() {
                                 <div className="h-64 overflow-hidden relative">
                                     <div className="absolute inset-0 bg-oxford/20 group-hover:bg-transparent transition-colors z-10" />
                                     {facility.img ? (
-                                        <img
+                                        <Image
                                             src={facility.img}
                                             alt={facility.name}
+                                            fill
                                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                         />
                                     ) : (

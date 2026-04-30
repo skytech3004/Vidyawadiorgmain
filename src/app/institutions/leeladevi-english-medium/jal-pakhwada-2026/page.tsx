@@ -81,7 +81,12 @@ export default function JalPakhwadaPage() {
                                     />
                                 ) : (
                                     <div className="w-full h-full relative bg-oxford/10">
-                                        <video className="w-full h-full object-cover">
+                                        <video 
+                                            className="w-full h-full object-cover"
+                                            muted
+                                            playsInline
+                                            preload="metadata"
+                                        >
                                             <source src={item.src} type="video/mp4" />
                                         </video>
                                         <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
@@ -145,6 +150,7 @@ export default function JalPakhwadaPage() {
                                 <video
                                     autoPlay
                                     controls
+                                    playsInline
                                     className="max-w-full max-h-full rounded-2xl shadow-2xl"
                                 >
                                     <source src={selectedItem.src} type="video/mp4" />

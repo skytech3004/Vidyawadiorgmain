@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { ChevronDown, ChevronRight, Trophy, GraduationCap, Medal, Star } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 interface Topper {
     _id: string;
@@ -168,10 +169,11 @@ export default function StudentResultsTable({ institution, title }: Props) {
                                                     {group.data.filter(r => (r.class === "XII" || r.class === "X") && r.percentage >= 90).slice(0, 5).map((topper, i) => (
                                                         <div key={topper._id} className="bg-gray-50 p-6 rounded-3xl border border-transparent hover:border-sandstone/30 hover:shadow-xl transition-all text-center group/card">
                                                             <div className="w-20 h-20 rounded-full bg-white mx-auto mb-4 overflow-hidden border-2 border-sandstone shadow-md relative">
-                                                                <img 
+                                                                <Image 
                                                                     src={topper.image || "https://cdn-icons-png.flaticon.com/512/4288/4288270.png"} 
                                                                     alt={topper.name}
-                                                                    className="w-full h-full object-cover"
+                                                                    fill
+                                                                    className="object-cover"
                                                                 />
                                                                 <div className="absolute inset-0 bg-oxford/10 group-hover/card:bg-transparent transition-colors" />
                                                             </div>
