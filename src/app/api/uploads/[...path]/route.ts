@@ -19,6 +19,12 @@ export async function GET(
             return new NextResponse("File Not Found", { status: 404 });
         }
 
+        const stats = fs.statSync(absolutePath);
+        if (stats.isDirectory()) {
+            console.error(`==> [PROXY] 404: Requested path is a directory: ${absolutePath}`);
+            return new NextResponse("Directory Access Not Allowed", { status: 404 });
+        }
+
         console.log(`==> [PROXY] 200: Serving file from disk`);
         const fileBuffer = fs.readFileSync(absolutePath);
         const extension = filePath.split(".").pop()?.toLowerCase();
@@ -31,6 +37,7 @@ export async function GET(
             jpeg: "image/jpeg",
             png: "image/png",
             svg: "image/svg+xml",
+            pdf: "application/pdf",
         };
 
         const contentType = contentTypes[extension || ""] || "application/octet-stream";

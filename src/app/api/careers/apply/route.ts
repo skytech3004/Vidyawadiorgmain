@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
             phone,
             experience,
             jobTitle,
-            resume: relativePath,
+            resume: `/api${relativePath}`,
         });
 
         return NextResponse.json({
