@@ -3,9 +3,10 @@
 import React from "react";
 import { Info } from "lucide-react";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function FloatingButtons() {
+    const pathname = usePathname();
     const whatsappNumber = "+916377204218";
     const whatsappMessage = "Hello Vidyawadi, I would like to inquire about admissions.";
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
@@ -14,6 +15,8 @@ export default function FloatingButtons() {
     const handleInquireClick = () => {
         router.push("/apply");
     };
+
+    if (pathname?.startsWith("/admin")) return null;
 
     return (
         <>

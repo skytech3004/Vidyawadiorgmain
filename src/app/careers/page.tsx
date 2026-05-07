@@ -31,6 +31,15 @@ export default function CareersPage() {
         fetchCareers();
     }, []);
 
+    useEffect(() => {
+        // Auto-open popup after 1 second
+        const timer = setTimeout(() => {
+            setIsPopupOpen(true);
+            setSelectedJob("General Application");
+        }, 1000);
+        return () => clearTimeout(timer);
+    }, []);
+
     // Group careers by category
     const groupedCareers = careers.reduce((acc: any, career: any) => {
         if (!acc[career.category]) {
