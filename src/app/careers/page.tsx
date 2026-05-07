@@ -4,11 +4,14 @@ import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
-import { Briefcase, CheckCircle2, Mail, Loader2 } from "lucide-react";
+import { Briefcase, CheckCircle2, Mail, Loader2, ArrowRight } from "lucide-react";
+import CareerApplyPopup from "@/components/CareerApplyPopup";
 
 export default function CareersPage() {
     const [careers, setCareers] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [selectedJob, setSelectedJob] = useState<string | null>(null);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
 
     useEffect(() => {
         const fetchCareers = async () => {
@@ -107,22 +110,39 @@ export default function CareersPage() {
                                         {category}
                                     </h3>
 
-                                    <div className="space-y-8">
+                                    <div className="space-y-12">
                                         {jobs.map((job: any) => (
-                                            <div key={job._id} className="group">
-                                                <h4 className="text-xl font-bold text-oxford mb-2 group-hover:text-sandstone transition-colors">
-                                                    {job.title}
-                                                </h4>
-                                                {job.subjects && (
-                                                    <p className="text-gray-600 font-medium mb-2">
-                                                        <span className="text-gray-400">Subjects:</span> {job.subjects}
-                                                    </p>
-                                                )}
-                                                {job.requirements && (
-                                                    <p className="text-gray-500 text-sm leading-relaxed">
-                                                        {job.requirements}
-                                                    </p>
-                                                )}
+                                            <div key={job._id} className="group border-b border-gray-50 pb-8 last:border-0 last:pb-0">
+                                                <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
+                                                    <div className="flex-1 space-y-4">
+                                                        <h4 className="text-xl md:text-2xl font-bold text-oxford group-hover:text-sandstone transition-colors">
+                                                            {job.title}
+                                                        </h4>
+                                                        {job.subjects && (
+                                                            <p className="text-gray-600 font-bold text-sm bg-gray-50 px-3 py-1 rounded-lg inline-block">
+                                                                <span className="text-gray-400 font-black uppercase tracking-widest text-[10px] mr-2">Subjects:</span> {job.subjects}
+                                                            </p>
+                                                        )}
+                                                        {job.requirements && (
+                                                            <div 
+                                                                className="text-gray-500 text-sm leading-relaxed prose prose-sm max-w-none 
+                                                                    prose-headings:text-oxford prose-headings:font-black prose-headings:uppercase prose-headings:tracking-widest
+                                                                    prose-ul:list-disc prose-ul:pl-4 prose-li:mb-1"
+                                                                dangerouslySetInnerHTML={{ __html: job.requirements }}
+                                                            />
+                                                        )}
+                                                    </div>
+                                                    <button 
+                                                        onClick={() => {
+                                                            setSelectedJob(`${job.title}${job.subjects ? ` (${job.subjects})` : ""}`);
+                                                            setIsPopupOpen(true);
+                                                        }}
+                                                        className="md:shrink-0 flex items-center gap-2 bg-oxford text-white px-6 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-sandstone hover:text-oxford transition-all active:scale-95 shadow-lg shadow-oxford/10"
+                                                    >
+                                                        Apply Now
+                                                        <ArrowRight size={16} />
+                                                    </button>
+                                                </div>
                                             </div>
                                         ))}
                                     </div>
@@ -157,17 +177,34 @@ export default function CareersPage() {
                         <div className="bg-white/5 border border-white/10 rounded-2xl p-8 relative z-10 text-center">
                             <p className="text-sandstone font-black tracking-widest text-sm uppercase mb-4">Salary no constraint for deserving candidates</p>
                             <h4 className="text-2xl font-bold mb-6">Interested candidates may send their resume to</h4>
-                            <a
-                                href="mailto:marudharmahila@gmail.com"
-                                className="inline-flex items-center gap-3 bg-sandstone hover:bg-sandstone-dark text-white px-8 py-4 rounded-full font-bold transition-all hover:scale-105"
-                            >
-                                <Mail size={20} />
-                                marudharmahila@gmail.com
-                            </a>
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                                <a
+                                    href="mailto:marudharmahila@gmail.com"
+                                    className="inline-flex items-center gap-3 bg-sandstone hover:bg-sandstone-dark text-white px-8 py-4 rounded-full font-bold transition-all hover:scale-105"
+                                >
+                                    <Mail size={20} />
+                                    marudharmahila@gmail.com
+                                </a>
+                                <button
+                                    onClick={() => {
+                                        setSelectedJob("General Application");
+                                        setIsPopupOpen(true);
+                                    }}
+                                    className="inline-flex items-center gap-3 bg-white/10 hover:bg-white/20 text-white border border-white/20 px-8 py-4 rounded-full font-bold transition-all"
+                                >
+                                    Quick Apply Now
+                                </button>
+                            </div>
                         </div>
                     </motion.div>
                 </div>
             </section>
+
+            <CareerApplyPopup 
+                isOpen={isPopupOpen} 
+                onClose={() => setIsPopupOpen(false)} 
+                jobTitle={selectedJob || "General Application"} 
+            />
 
             <Footer />
         </main>

@@ -105,15 +105,19 @@ export default function CareerForm({ onClose, onSuccess, career }: CareerFormPro
                                 />
                             </div>
 
-                            <div className="space-y-2 md:col-span-2">
-                                <label className="text-sm font-bold text-oxford">Specific Requirements (Optional)</label>
-                                <textarea
-                                    value={formData.requirements}
-                                    onChange={(e) => setFormData({ ...formData, requirements: e.target.value })}
-                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-sandstone focus:ring-2 focus:ring-sandstone/20 outline-none transition-all h-24 resize-none"
-                                    placeholder="e.g. Minimum 3 years of experience..."
-                                />
-                            </div>
+                             <div className="space-y-2 md:col-span-2">
+                                 <div className="flex justify-between items-center">
+                                     <label className="text-sm font-bold text-oxford">Specific Requirements (HTML Supported) *</label>
+                                     <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Use &lt;h1&gt;, &lt;li&gt;, &lt;br&gt; for formatting</span>
+                                 </div>
+                                 <textarea
+                                     required
+                                     value={formData.requirements}
+                                     onChange={(e) => setFormData({ ...formData, requirements: e.target.value })}
+                                     className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-sandstone focus:ring-2 focus:ring-sandstone/20 outline-none transition-all h-48 font-mono text-xs"
+                                     placeholder="e.g. <p>Join us for...</p> <ul><li>3 years exp</li></ul>"
+                                 />
+                             </div>
 
                             <div className="space-y-2">
                                 <label className="text-sm font-bold text-oxford">Display Order</label>

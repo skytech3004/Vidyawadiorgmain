@@ -86,7 +86,7 @@ export default function Navbar() {
                 <div className="max-w-[1600px] mx-auto flex justify-between items-center text-[13px] font-medium px-4">
                     <div className="flex items-center gap-6 pl-32">
                         <a href="tel:+916377204218" className="flex items-center gap-2 hover:text-sandstone transition-colors group">
-                            <Phone size={14} className="text-sandstone group-hover:scale-110 transition-transform" />
+                            <Phone size={12} className="text-sandstone group-hover:scale-110 transition-transform" />
                             <span>Have any Question?</span>
                         </a>
                         {/* <a href="mailto:info@vidyawadi.org" className="flex items-center gap-2 hover:text-sandstone transition-colors group">
@@ -103,10 +103,10 @@ export default function Navbar() {
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <a href="https://www.facebook.com/profile.php?id=61583590541462" className="hover:text-sandstone transition-colors"><Facebook size={20} /></a>
-                        <a href="https://www.instagram.com/vidyawadiofficial" target="_blank" rel="noopener noreferrer" className="hover:text-sandstone transition-colors"><Instagram size={20} /></a>
-                        <a href="https://www.linkedin.com/company/111560973/admin/page-posts/published/" className="hover:text-sandstone transition-colors"><Linkedin size={20} /></a>
-                        <a href="https://www.youtube.com/@Vidyawadi-MMSS" target="_blank" rel="noopener noreferrer" className="hover:text-sandstone transition-colors"><Youtube size={20} /></a>
+                        <a href="https://www.facebook.com/profile.php?id=61583590541462" className="hover:text-sandstone transition-colors"><Facebook size={18} /></a>
+                        <a href="https://www.instagram.com/vidyawadiofficial" target="_blank" rel="noopener noreferrer" className="hover:text-sandstone transition-colors"><Instagram size={18} /></a>
+                        <a href="https://www.linkedin.com/company/111560973/admin/page-posts/published/" className="hover:text-sandstone transition-colors"><Linkedin size={18} /></a>
+                        <a href="https://www.youtube.com/@Vidyawadi-MMSS" target="_blank" rel="noopener noreferrer" className="hover:text-sandstone transition-colors"><Youtube size={18} /></a>
 
                         {/* <div className="w-px h-3 bg-white/20 mx-2" > */}
                         {/* <span className="uppercase tracking-widest text-[10px] font-bold">Enrollment Open</span> */}
@@ -185,7 +185,7 @@ export default function Navbar() {
                                             )}
                                         >
                                             {link.name}
-                                            {link.subLinks && <ChevronDown size={12} className={cn("transition-transform", activeDropdown === link.name && "rotate-180")} />}
+                                            {link.subLinks && <ChevronDown size={10} className={cn("transition-transform", activeDropdown === link.name && "rotate-180")} />}
                                         </a>
 
                                         {/* Dropdown Menu */}
@@ -212,7 +212,7 @@ export default function Navbar() {
                                                                         )}
                                                                     >
                                                                         <span>{sub.name}</span>
-                                                                        {sub.isBrochure && <Download size={14} />}
+                                                                        {sub.isBrochure && <Download size={12} />}
                                                                     </a>
                                                                 </div>
                                                             ))}
@@ -247,7 +247,7 @@ export default function Navbar() {
                             )}
                             onClick={() => setIsOpen(!isOpen)}
                         >
-                            {isOpen ? <X size={26} /> : <Menu size={26} />}
+                            {isOpen ? <X size={22} /> : <Menu size={22} />}
                         </button>
                     </div>
                 </div>
@@ -273,7 +273,7 @@ export default function Navbar() {
                                 </p>
                             </div>
                             <button onClick={() => setIsOpen(false)} className="text-white p-2 hover:bg-white/10 rounded-full transition-colors">
-                                <X size={28} />
+                                <X size={24} />
                             </button>
                         </div>
 
@@ -292,7 +292,7 @@ export default function Navbar() {
                                         </a>
                                         {link.subLinks && (
                                             <ChevronDown
-                                                size={20}
+                                                size={18}
                                                 className={cn(
                                                     "text-white/40 transition-transform duration-300",
                                                     activeDropdown === link.name && "rotate-180 text-sandstone"
@@ -326,7 +326,7 @@ export default function Navbar() {
                                                                 )}
                                                             >
                                                                 <span className="flex-1">{sub.name}</span>
-                                                                {sub.isBrochure && <Download size={16} />}
+                                                                {sub.isBrochure && <Download size={14} />}
                                                             </a>
                                                         ))}
                                                     </div>

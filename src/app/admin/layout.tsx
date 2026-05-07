@@ -25,12 +25,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const sidebarItems = [
     { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
-    { name: "Admissions", href: "/admin/admissions", icon: FileText },
     { name: "Institutions", href: "/admin/institutions", icon: School },
     { name: "Blog Manager", href: "/admin/blog", icon: FileText },
     { name: "Gallery", href: "/admin/gallery", icon: ImageIcon },
     { name: "Inquiries", href: "/admin/inquiries", icon: MessageSquare },
     { name: "Careers", href: "/admin/careers", icon: Briefcase },
+    { name: "Career Apps", href: "/admin/career-applications", icon: FileText },
     { name: "Settings", href: "/admin/settings", icon: Settings },
     { name: "Activity Logs", href: "/admin/logs", icon: Activity },
 ];
