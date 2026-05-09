@@ -64,6 +64,7 @@ export default function InstitutionManager() {
 
     useEffect(() => {
         if (instId) {
+            fetchData();
             fetchResults();
             fetchFaculty();
             if (HAS_LABS.includes(instId)) fetchLabs();
