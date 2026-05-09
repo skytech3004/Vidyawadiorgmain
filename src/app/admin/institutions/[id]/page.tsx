@@ -22,6 +22,7 @@ import {
     Youtube,
     Trophy,
     Plus,
+    Trash2,
     Edit3,
     ArrowLeft,
     Users,
@@ -141,6 +142,33 @@ export default function InstitutionManager() {
                 [field]: value
             }
         }));
+    };
+
+    const handleFeeChange = (field: string, value: any) => {
+        setFormData((prev: any) => ({
+            ...prev,
+            feeStructure: {
+                ...prev?.feeStructure,
+                [field]: value
+            }
+        }));
+    };
+
+    const handleClassFeeChange = (index: number, field: string, value: any) => {
+        const newClasses = [...(formData.feeStructure?.classes || [])];
+        newClasses[index] = { ...newClasses[index], [field]: value };
+        handleFeeChange("classes", newClasses);
+    };
+
+    const addFeeClass = () => {
+        const newClasses = [...(formData.feeStructure?.classes || []), { section: "", className: "", totalFee: 0, admissionFee: "" }];
+        handleFeeChange("classes", newClasses);
+    };
+
+    const removeFeeClass = (index: number) => {
+        const newClasses = [...(formData.feeStructure?.classes || [])];
+        newClasses.splice(index, 1);
+        handleFeeChange("classes", newClasses);
     };
 
     const handleSimpleChange = (field: string, value: string) => {
@@ -298,6 +326,141 @@ export default function InstitutionManager() {
                     </div>
                 </Link>
             )}
+
+            {/* Fee Structure Section */}
+            <div className="bg-white rounded-[3rem] border border-gray-100 shadow-sm overflow-hidden mt-10">
+                <div className="p-8 border-b border-gray-50 bg-gray-50/30 flex items-center justify-between">
+                    <div>
+                        <h2 className="text-xl font-black text-oxford uppercase tracking-tight flex items-center gap-3">
+                            <Save className="text-sandstone" />
+                            Fee Structure Management
+                        </h2>
+                        <p className="text-sm text-gray-500 mt-1">Manage academic fees and installments for {institutionInfo?.name}.</p>
+                    </div>
+                    <div className="flex items-center gap-4">
+                        <div className="flex-1">
+                            <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Installments</label>
+                            <div className="relative">
+                                <select 
+                                    value={formData.feeStructure?.installments || 2}
+                                    onChange={(e) => handleFeeChange("installments", parseInt(e.target.value))}
+                                    className="w-full px-4 py-3 bg-white border border-gray-100 rounded-2xl focus:ring-2 focus:ring-sandstone/20 transition-all font-bold text-oxford appearance-none"
+                                >
+                                    {[1, 2, 3, 4, 6, 12].map(n => (
+                                        <option key={n} value={n}>{n} Installments</option>
+                                    ))}
+                                </select>
+                                <RefreshCcw className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={18} />
+                            </div>
+                        </div>
+                        <button
+                            onClick={handleSave}
+                            disabled={saving}
+                            className="px-6 py-3 bg-oxford text-white font-black uppercase tracking-widest text-[10px] rounded-xl hover:bg-black transition-all shadow-lg flex items-center gap-2 disabled:opacity-70"
+                        >
+                            {saving ? <RefreshCcw size={14} className="animate-spin" /> : <Save size={14} />}
+                            Save Fees
+                        </button>
+                    </div>
+                </div>
+
+                <div className="p-8">
+                    <div className="mb-6 flex items-center justify-between">
+                        <div className="space-y-1">
+                            <label className="text-[10px] font-black uppercase tracking-widest text-oxford block">Academic Year</label>
+                            <input 
+                                type="text"
+                                value={formData.feeStructure?.year || "2026-27"}
+                                onChange={(e) => handleFeeChange("year", e.target.value)}
+                                placeholder="e.g. 2026-27"
+                                className="px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm font-bold text-oxford focus:border-sandstone outline-none w-40"
+                            />
+                        </div>
+                        <button 
+                            onClick={addFeeClass}
+                            className="px-4 py-2 bg-sandstone/10 text-oxford rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2 hover:bg-sandstone transition-all"
+                        >
+                            <Plus size={14} /> Add Class
+                        </button>
+                    </div>
+
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-left">
+                            <thead>
+                                <tr className="border-b border-gray-100">
+                                    <th className="py-4 text-[10px] font-black uppercase tracking-widest text-gray-400">Section</th>
+                                    <th className="py-4 text-[10px] font-black uppercase tracking-widest text-gray-400">Class Name</th>
+                                    <th className="py-4 text-[10px] font-black uppercase tracking-widest text-gray-400">Total Fee (₹)</th>
+                                    <th className="py-4 text-[10px] font-black uppercase tracking-widest text-gray-400">Installment (Calculated)</th>
+                                    <th className="py-4 text-[10px] font-black uppercase tracking-widest text-gray-400">Admission Fee</th>
+                                    <th className="py-4 text-[10px] font-black uppercase tracking-widest text-gray-400 text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-gray-50">
+                                {formData.feeStructure?.classes?.map((item: any, idx: number) => (
+                                    <tr key={idx} className="group">
+                                        <td className="py-4 pr-4">
+                                            <input 
+                                                type="text"
+                                                value={item.section || ""}
+                                                onChange={(e) => handleClassFeeChange(idx, "section", e.target.value)}
+                                                placeholder="e.g. Hindi Medium"
+                                                className="w-full px-4 py-2 bg-gray-50 border border-gray-100 rounded-xl text-sm font-bold text-oxford focus:bg-white focus:border-sandstone outline-none transition-all"
+                                            />
+                                        </td>
+                                        <td className="py-4 pr-4">
+                                            <input 
+                                                type="text"
+                                                value={item.className}
+                                                onChange={(e) => handleClassFeeChange(idx, "className", e.target.value)}
+                                                placeholder="e.g. Nursery"
+                                                className="w-full px-4 py-2 bg-gray-50 border border-gray-100 rounded-xl text-sm font-bold text-oxford focus:bg-white focus:border-sandstone outline-none transition-all"
+                                            />
+                                        </td>
+                                        <td className="py-4 px-4">
+                                            <input 
+                                                type="number"
+                                                value={item.totalFee}
+                                                onChange={(e) => handleClassFeeChange(idx, "totalFee", parseInt(e.target.value))}
+                                                className="w-32 px-4 py-2 bg-gray-50 border border-gray-100 rounded-xl text-sm font-black text-oxford focus:bg-white focus:border-sandstone outline-none transition-all"
+                                            />
+                                        </td>
+                                        <td className="py-4 px-4">
+                                            <div className="px-4 py-2 bg-sandstone/5 rounded-xl text-sm font-bold text-sandstone-dark border border-sandstone/10">
+                                                ₹{(item.totalFee / (formData.feeStructure?.installments || 2)).toLocaleString()} × {formData.feeStructure?.installments || 2}
+                                            </div>
+                                        </td>
+                                        <td className="py-4 px-4">
+                                            <input 
+                                                type="text"
+                                                value={item.admissionFee}
+                                                onChange={(e) => handleClassFeeChange(idx, "admissionFee", e.target.value)}
+                                                placeholder="e.g. ₹2,500"
+                                                className="w-full px-4 py-2 bg-gray-50 border border-gray-100 rounded-xl text-sm font-bold text-oxford focus:bg-white focus:border-sandstone outline-none transition-all"
+                                            />
+                                        </td>
+                                        <td className="py-4 text-right">
+                                            <button 
+                                                onClick={() => removeFeeClass(idx)}
+                                                className="p-2 text-red-300 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
+                                            >
+                                                <Trash2 size={18} />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                                {(!formData.feeStructure?.classes || formData.feeStructure.classes.length === 0) && (
+                                    <tr>
+                                        <td colSpan={6} className="py-12 text-center text-gray-400 italic text-sm">
+                                            No fee records found. Click "Add Class" to begin.
+                                        </td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
             {/* Quick Actions Helper */}
             <div className="bg-sandstone/10 p-8 rounded-[3rem] border border-sandstone/20 flex flex-col md:flex-row items-center gap-8">

@@ -250,8 +250,24 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
     const [visibleFacultyCount, setVisibleFacultyCount] = useState(10);
     const [labs, setLabs] = useState<any[]>([]);
     const [loadingLabs, setLoadingLabs] = useState(true);
+    const [institution, setInstitution] = useState<any>(null);
+    const [loadingInstitution, setLoadingInstitution] = useState(true);
 
     useEffect(() => {
+        const fetchInstitution = async () => {
+            try {
+                const res = await fetch("/api/institutions/college");
+                const data = await res.json();
+                if (data.success) {
+                    setInstitution(data.institution);
+                }
+            } catch (error) {
+                console.error("Failed to fetch college institution data", error);
+            } finally {
+                setLoadingInstitution(false);
+            }
+        };
+
         const fetchLabs = async () => {
             try {
                 const res = await fetch("/api/infrastructure?institution=college");
@@ -263,6 +279,7 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                 setLoadingLabs(false);
             }
         };
+        fetchInstitution();
         fetchLabs();
     }, []);
 
@@ -916,112 +933,158 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                     </div>
 
                     <div className="space-y-16">
-                        {/* UG Courses */}
-                        <div>
-                            <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3">
-                                <GraduationCap className="text-sandstone" />
-                                UG Courses Fee Structure (2026–27)
-                            </h3>
-                            <div className="overflow-x-auto rounded-[2rem] shadow-xl border border-gray-100 bg-white">
-                                <table className="w-full text-left border-collapse min-w-[800px]">
-                                    <thead>
-                                        <tr className="bg-oxford text-white">
-                                            <th className="p-6 text-xs font-black uppercase tracking-widest">Course</th>
-                                            <th className="p-6 text-xs font-black uppercase tracking-widest text-sandstone">Total Fee</th>
-                                            <th className="p-6 text-xs font-black uppercase tracking-widest">Admission Fee</th>
-                                            <th className="p-6 text-xs font-black uppercase tracking-widest text-sandstone">Per Semester</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="divide-y divide-gray-50">
-                                        {[
-                                            { name: "B.A.", prev: "22800", hikeP: "8%", hikeA: "1824", total: "24600", admin: "3500", sem: "12300" },
-                                            { name: "B.Com.", prev: "22000", hikeP: "8%", hikeA: "1760", total: "23800", admin: "3500", sem: "11900" },
-                                            { name: "B.Sc. (Biology)", prev: "32500", hikeP: "5%", hikeA: "1625", total: "34100", admin: "3500", sem: "17050" },
-                                            { name: "B.Sc. (Maths)", prev: "31500", hikeP: "5%", hikeA: "1575", total: "33100", admin: "3500", sem: "16550" }
-                                        ].map((row, i) => (
-                                            <tr key={i} className="hover:bg-sandstone/5 transition-colors group">
-                                                <td className="p-6 font-bold text-oxford group-hover:text-sandstone transition-colors">{row.name}</td>
-                                                <td className="p-6 font-black text-oxford text-lg">₹{row.total}</td>
-                                                <td className="p-6 font-medium text-gray-500">₹{row.admin}</td>
-                                                <td className="p-6 font-black text-sandstone text-xl">₹{row.sem}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div className="grid lg:grid-cols-2 gap-16">
-                            {/* PG Courses */}
-                            <div>
-                                <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3">
-                                    <BookOpen className="text-sandstone" />
-                                    PG Courses Fee Structure
-                                </h3>
-                                <div className="overflow-x-auto rounded-[2rem] shadow-xl border border-gray-100 bg-white">
-                                    <table className="w-full text-left border-collapse">
-                                        <thead>
-                                            <tr className="bg-oxford text-white">
-                                                <th className="p-6 text-xs font-black uppercase tracking-widest">Course</th>
-                                                <th className="p-6 text-xs font-black uppercase tracking-widest">Total Fee</th>
-                                                <th className="p-6 text-xs font-black uppercase tracking-widest text-sandstone">Per Semester</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className="divide-y divide-gray-50">
-                                            {[
-                                                { name: "M.Sc. Chemistry", total: "31200", sem: "15600" },
-                                                { name: "M.Sc. Mathematics", total: "25000", sem: "12500" },
-                                                { name: "M.A. Hindi", total: "15000", sem: "7500" },
-                                                { name: "M.A. English", total: "15000", sem: "7500" },
-                                                { name: "M.A. History", total: "15000", sem: "7500" },
-                                                { name: "M.A. Political Science", total: "15000", sem: "7500" },
-                                                { name: "M.A. Geography", total: "17000", sem: "8500" },
-                                                { name: "M.Com. (Business Admin.)", total: "15000", sem: "7500" }
-                                            ].map((row, i) => (
-                                                <tr key={i} className="hover:bg-sandstone/5 transition-colors group">
-                                                    <td className="p-6 font-bold text-oxford group-hover:text-sandstone transition-colors">{row.name}</td>
-                                                    <td className="p-6 font-medium text-gray-500 text-lg">₹{row.total}</td>
-                                                    <td className="p-6 font-black text-sandstone text-lg">₹{row.sem}</td>
+                        {institution?.feeStructure?.classes ? (
+                            Object.entries(
+                                institution.feeStructure.classes.reduce((acc: any, cls: any) => {
+                                    const section = cls.section || "General";
+                                    if (!acc[section]) acc[section] = [];
+                                    acc[section].push(cls);
+                                    return acc;
+                                }, {})
+                            ).map(([section, classes]: [string, any], sectionIdx: number) => (
+                                <div key={sectionIdx}>
+                                    <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3">
+                                        {sectionIdx % 2 === 0 ? <GraduationCap className="text-sandstone" /> : <BookOpen className="text-sandstone" />}
+                                        {section} Fee Structure ({institution.feeStructure.year || "2026–27"})
+                                    </h3>
+                                    <div className="overflow-x-auto rounded-[2rem] shadow-xl border border-gray-100 bg-white mb-8">
+                                        <table className="w-full text-left border-collapse min-w-[800px]">
+                                            <thead>
+                                                <tr className="bg-oxford text-white">
+                                                    <th className="p-6 text-xs font-black uppercase tracking-widest">Course</th>
+                                                    <th className="p-6 text-xs font-black uppercase tracking-widest text-sandstone">Total Fee</th>
+                                                    <th className="p-6 text-xs font-black uppercase tracking-widest">Admission Fee</th>
+                                                    <th className="p-6 text-xs font-black uppercase tracking-widest text-sandstone">Per Installment</th>
                                                 </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody className="divide-y divide-gray-50">
+                                                {classes.map((row: any, i: number) => {
+                                                    const installments = institution.feeStructure.installments || 2;
+                                                    const installmentAmount = Math.round(row.totalFee / installments);
+                                                    return (
+                                                        <tr key={i} className="hover:bg-sandstone/5 transition-colors group">
+                                                            <td className="p-6 font-bold text-oxford group-hover:text-sandstone transition-colors">{row.className}</td>
+                                                            <td className="p-6 font-black text-oxford text-lg">₹{row.totalFee.toLocaleString()}</td>
+                                                            <td className="p-6 font-medium text-gray-500">{row.admissionFee || "N/A"}</td>
+                                                            <td className="p-6 font-black text-sandstone text-xl">₹{installmentAmount.toLocaleString()}</td>
+                                                        </tr>
+                                                    );
+                                                })}
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
+                            ))
+                        ) : (
+                            /* Fallback to original hardcoded content if dynamic data is missing */
+                            <>
+                                {/* UG Courses */}
+                                <div>
+                                    <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3">
+                                        <GraduationCap className="text-sandstone" />
+                                        UG Courses Fee Structure (2026–27)
+                                    </h3>
+                                    <div className="overflow-x-auto rounded-[2rem] shadow-xl border border-gray-100 bg-white">
+                                        <table className="w-full text-left border-collapse min-w-[800px]">
+                                            <thead>
+                                                <tr className="bg-oxford text-white">
+                                                    <th className="p-6 text-xs font-black uppercase tracking-widest">Course</th>
+                                                    <th className="p-6 text-xs font-black uppercase tracking-widest text-sandstone">Total Fee</th>
+                                                    <th className="p-6 text-xs font-black uppercase tracking-widest">Admission Fee</th>
+                                                    <th className="p-6 text-xs font-black uppercase tracking-widest text-sandstone">Per Semester</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="divide-y divide-gray-50">
+                                                {[
+                                                    { name: "B.A.", prev: "22800", hikeP: "8%", hikeA: "1824", total: "24600", admin: "3500", sem: "12300" },
+                                                    { name: "B.Com.", prev: "22000", hikeP: "8%", hikeA: "1760", total: "23800", admin: "3500", sem: "11900" },
+                                                    { name: "B.Sc. (Biology)", prev: "32500", hikeP: "5%", hikeA: "1625", total: "34100", admin: "3500", sem: "17050" },
+                                                    { name: "B.Sc. (Maths)", prev: "31500", hikeP: "5%", hikeA: "1575", total: "33100", admin: "3500", sem: "16550" }
+                                                ].map((row, i) => (
+                                                    <tr key={i} className="hover:bg-sandstone/5 transition-colors group">
+                                                        <td className="p-6 font-bold text-oxford group-hover:text-sandstone transition-colors">{row.name}</td>
+                                                        <td className="p-6 font-black text-oxford text-lg">₹{row.total}</td>
+                                                        <td className="p-6 font-medium text-gray-500">₹{row.admin}</td>
+                                                        <td className="p-6 font-black text-sandstone text-xl">₹{row.sem}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
 
-                            {/* Integrated Courses */}
-                            <div>
-                                <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3">
-                                    <Star className="text-sandstone" />
-                                    Integrated Course (via NTA)
-                                </h3>
-                                <div className="bg-white rounded-[2rem] shadow-xl border border-gray-100 p-8">
-                                    <p className="text-gray-500 font-medium mb-6">Approximate semester fee values listed below:</p>
-                                    <div className="grid grid-cols-2 gap-4">
-                                        {[
-                                            { sem: "Semester 1", fee: "27730" },
-                                            { sem: "Semester 2", fee: "27514" },
-                                            { sem: "Semester 3", fee: "27514" },
-                                            { sem: "Semester 4", fee: "27514" },
-                                            { sem: "Semester 5", fee: "27730" },
-                                            { sem: "Semester 6", fee: "27514" },
-                                            { sem: "Semester 7", fee: "27514" },
-                                            { sem: "Semester 8", fee: "27514" }
-                                        ].map((row, i) => (
-                                            <div key={i} className="flex justify-between items-center p-4 bg-gray-50 rounded-xl border border-gray-100 shadow-sm hover:border-sandstone/30 transition-colors">
-                                                <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">{row.sem}</span>
-                                                <span className="font-black text-oxford text-lg">₹{row.fee}</span>
+                                <div className="grid lg:grid-cols-2 gap-16">
+                                    {/* PG Courses */}
+                                    <div>
+                                        <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3">
+                                            <BookOpen className="text-sandstone" />
+                                            PG Courses Fee Structure
+                                        </h3>
+                                        <div className="overflow-x-auto rounded-[2rem] shadow-xl border border-gray-100 bg-white">
+                                            <table className="w-full text-left border-collapse">
+                                                <thead>
+                                                    <tr className="bg-oxford text-white">
+                                                        <th className="p-6 text-xs font-black uppercase tracking-widest">Course</th>
+                                                        <th className="p-6 text-xs font-black uppercase tracking-widest">Total Fee</th>
+                                                        <th className="p-6 text-xs font-black uppercase tracking-widest text-sandstone">Per Semester</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody className="divide-y divide-gray-50">
+                                                    {[
+                                                        { name: "M.Sc. Chemistry", total: "31200", sem: "15600" },
+                                                        { name: "M.Sc. Mathematics", total: "25000", sem: "12500" },
+                                                        { name: "M.A. Hindi", total: "15000", sem: "7500" },
+                                                        { name: "M.A. English", total: "15000", sem: "7500" },
+                                                        { name: "M.A. History", total: "15000", sem: "7500" },
+                                                        { name: "M.A. Political Science", total: "15000", sem: "7500" },
+                                                        { name: "M.A. Geography", total: "17000", sem: "8500" },
+                                                        { name: "M.Com. (Business Admin.)", total: "15000", sem: "7500" }
+                                                    ].map((row, i) => (
+                                                        <tr key={i} className="hover:bg-sandstone/5 transition-colors group">
+                                                            <td className="p-6 font-bold text-oxford group-hover:text-sandstone transition-colors">{row.name}</td>
+                                                            <td className="p-6 font-medium text-gray-500 text-lg">₹{row.total}</td>
+                                                            <td className="p-6 font-black text-sandstone text-lg">₹{row.sem}</td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    {/* Integrated Courses */}
+                                    <div>
+                                        <h3 className="text-2xl font-bold text-oxford mb-6 flex items-center gap-3">
+                                            <Star className="text-sandstone" />
+                                            Integrated Course (via NTA)
+                                        </h3>
+                                        <div className="bg-white rounded-[2rem] shadow-xl border border-gray-100 p-8">
+                                            <p className="text-gray-500 font-medium mb-6">Approximate semester fee values listed below:</p>
+                                            <div className="grid grid-cols-2 gap-4">
+                                                {[
+                                                    { sem: "Semester 1", fee: "27730" },
+                                                    { sem: "Semester 2", fee: "27514" },
+                                                    { sem: "Semester 3", fee: "27514" },
+                                                    { sem: "Semester 4", fee: "27514" },
+                                                    { sem: "Semester 5", fee: "27730" },
+                                                    { sem: "Semester 6", fee: "27514" },
+                                                    { sem: "Semester 7", fee: "27514" },
+                                                    { sem: "Semester 8", fee: "27514" }
+                                                ].map((row, i) => (
+                                                    <div key={i} className="flex justify-between items-center p-4 bg-gray-50 rounded-xl border border-gray-100 shadow-sm hover:border-sandstone/30 transition-colors">
+                                                        <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">{row.sem}</span>
+                                                        <span className="font-black text-oxford text-lg">₹{row.fee}</span>
+                                                    </div>
+                                                ))}
                                             </div>
-                                        ))}
-                                    </div>
-                                    <div className="mt-8 p-4 bg-sandstone/10 rounded-xl border border-sandstone/20 flex items-start gap-3">
-                                        <div className="text-sandstone shrink-0 mt-0.5"><CheckCircle2 size={16} /></div>
-                                        <p className="text-sm font-bold text-oxford/70">As per NCTE / Govt. norms</p>
+                                            <div className="mt-8 p-4 bg-sandstone/10 rounded-xl border border-sandstone/20 flex items-start gap-3">
+                                                <div className="text-sandstone shrink-0 mt-0.5"><CheckCircle2 size={16} /></div>
+                                                <p className="text-sm font-bold text-oxford/70">As per NCTE / Govt. norms</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-
+                            </>
+                        )}
                     </div>
                 </div>
             </section>

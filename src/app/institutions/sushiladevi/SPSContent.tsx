@@ -136,6 +136,26 @@ export default function SPSContent() {
     const [selectedVideo, setSelectedVideo] = useState<any>(null);
     const [selectedStudent, setSelectedStudent] = useState<any>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [institution, setInstitution] = useState<any>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetchInstitution();
+    }, []);
+
+    const fetchInstitution = async () => {
+        try {
+            const res = await fetch("/api/institutions/primary");
+            const data = await res.json();
+            if (data.success) {
+                setInstitution(data.institution);
+            }
+        } catch (error) {
+            console.error("Failed to fetch institution data", error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const openModal = (student: any) => {
         setSelectedStudent(student);
@@ -331,14 +351,6 @@ export default function SPSContent() {
                             ))}
                         </div>
                     </div>
-
-                </div>
-                <div className="max-w-7xl mx-auto mt-24 px-6 border-t border-gray-100 pt-24">
-                    <div className="text-center mb-16">
-                        <span className="text-sandstone font-bold uppercase tracking-widest text-sm block mb-2">Academic Achievements</span>
-                        <h2 className="text-3xl md:text-5xl font-black text-oxford">Result Highlights</h2>
-                    </div>
-                    <StudentResultsTable institution="primary" title="Board Exam Toppers" />
                 </div>
             </section>
 
@@ -347,7 +359,14 @@ export default function SPSContent() {
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Investment in Excellence</span>
-                        <h2 className="text-4xl md:text-6xl font-extrabold text-oxford leading-tight text-center">Fee Structure 2026–27</h2>
+                        <h2 className="text-4xl md:text-6xl font-extrabold text-oxford leading-tight text-center">
+                            Fee Structure {institution?.feeStructure?.year || "2026–27"}
+                        </h2>
+                        {institution?.feeStructure?.installments && (
+                            <p className="text-sandstone font-bold mt-4 uppercase tracking-widest text-sm">
+                                {institution.feeStructure.installments} Easy Installments
+                            </p>
+                        )}
                         <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
                     </div>
 
@@ -368,29 +387,54 @@ export default function SPSContent() {
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-gray-100">
-                                        {[
-                                            { class: "Nursery", inst: "₹4,425 × 4", total: "₹17,700" },
-                                            { class: "KG – Prep", inst: "₹4,600 × 4", total: "₹18,400" },
-                                            { class: "Class I – II", inst: "₹5,325 × 4", total: "₹21,300" },
-                                            { class: "Class III – IV", inst: "₹5,850 × 4", total: "₹23,400" },
-                                            { class: "Class V", inst: "₹8,050 × 4", total: "₹32,200" },
-                                            { class: "Class VI", inst: "₹8,475 × 4", total: "₹33,900" },
-                                            { class: "Class VII – VIII", inst: "₹9,600 × 4", total: "₹38,400" },
-                                            { class: "Class IX – X", inst: "₹9,900 × 4", total: "₹39,600" },
-                                        ].map((row, i) => (
-                                            <tr key={i} className="hover:bg-sandstone/5 group/row transition-colors cursor-pointer capitalize">
-                                                <td className="py-4 px-4 font-bold text-oxford group-hover/row:text-sandstone transition-colors">{row.class}</td>
-                                                <td className="py-4 px-4 text-gray-500 text-sm group-hover/row:text-sandstone transition-colors">{row.inst}</td>
-                                                <td className="py-4 px-4 text-right font-black text-oxford group-hover/row:text-sandstone transition-colors">{row.total}</td>
-                                            </tr>
-                                        ))}
+                                        {institution?.feeStructure?.classes ? (
+                                            institution.feeStructure.classes.map((row: any, i: number) => {
+                                                const installments = institution.feeStructure.installments || 2;
+                                                const installmentAmount = Math.round(row.totalFee / installments);
+                                                return (
+                                                    <tr key={i} className="hover:bg-sandstone/5 group/row transition-colors cursor-pointer capitalize">
+                                                        <td className="py-4 px-4 font-bold text-oxford group-hover/row:text-sandstone transition-colors">{row.className}</td>
+                                                        <td className="py-4 px-4 text-gray-500 text-sm group-hover/row:text-sandstone transition-colors">
+                                                            ₹{installmentAmount.toLocaleString()} × {installments}
+                                                        </td>
+                                                        <td className="py-4 px-4 text-right font-black text-oxford group-hover/row:text-sandstone transition-colors">
+                                                            ₹{row.totalFee.toLocaleString()}
+                                                        </td>
+                                                    </tr>
+                                                );
+                                            })
+                                        ) : (
+                                            [
+                                                { class: "Nursery", inst: "₹4,425 × 4", total: "₹17,700" },
+                                                { class: "KG – Prep", inst: "₹4,600 × 4", total: "₹18,400" },
+                                                { class: "Class I – II", inst: "₹5,325 × 4", total: "₹21,300" },
+                                                { class: "Class III – IV", inst: "₹5,850 × 4", total: "₹23,400" },
+                                                { class: "Class V", inst: "₹8,050 × 4", total: "₹32,200" },
+                                                { class: "Class VI", inst: "₹8,475 × 4", total: "₹33,900" },
+                                                { class: "Class VII – VIII", inst: "₹9,600 × 4", total: "₹38,400" },
+                                                { class: "Class IX – X", inst: "₹9,900 × 4", total: "₹39,600" },
+                                            ].map((row, i) => (
+                                                <tr key={i} className="hover:bg-sandstone/5 group/row transition-colors cursor-pointer capitalize opacity-50">
+                                                    <td className="py-4 px-4 font-bold text-oxford group-hover/row:text-sandstone transition-colors">{row.class}</td>
+                                                    <td className="py-4 px-4 text-gray-500 text-sm group-hover/row:text-sandstone transition-colors">{row.inst}</td>
+                                                    <td className="py-4 px-4 text-right font-black text-oxford group-hover/row:text-sandstone transition-colors">{row.total}</td>
+                                                </tr>
+                                            ))
+                                        )}
                                     </tbody>
                                 </table>
                             </div>
                             <div className="mt-8 p-6 bg-white rounded-2xl border border-gray-100 flex flex-col sm:flex-row justify-between items-center sm:items-start gap-4">
                                 <div>
                                     <h4 className="font-bold text-oxford text-sm mb-1 uppercase tracking-wider">Admission Fee</h4>
-                                    <p className="text-xs text-gray-500">Nursery to V: ₹2,500 | VI to X: ₹5,000</p>
+                                    <p className="text-xs text-gray-500">
+                                        {institution?.feeStructure?.classes ? 
+                                            institution.feeStructure.classes
+                                                .filter((c: any) => c.admissionFee)
+                                                .map((c: any) => `${c.className}: ${c.admissionFee}`)
+                                                .join(" | ")
+                                            : "Nursery to V: ₹2,500 | VI to X: ₹5,000"}
+                                    </p>
                                 </div>
                             </div>
                         </div>

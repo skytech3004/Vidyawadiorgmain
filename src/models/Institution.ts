@@ -1,5 +1,12 @@
 import mongoose from "mongoose";
 
+const FeeClassSchema = new mongoose.Schema({
+    section: { type: String, default: "" },
+    className: { type: String, required: true },
+    totalFee: { type: Number, required: true },
+    admissionFee: { type: String, default: "" }
+});
+
 const InstitutionSchema = new mongoose.Schema({
     id: {
         type: String,
@@ -52,6 +59,11 @@ const InstitutionSchema = new mongoose.Schema({
         twitter: String,
     },
     gallery: [String],
+    feeStructure: {
+        year: String,
+        installments: { type: Number, default: 2 },
+        classes: [FeeClassSchema]
+    }
 }, { timestamps: true });
 
 export default mongoose.models.Institution || mongoose.model("Institution", InstitutionSchema);
