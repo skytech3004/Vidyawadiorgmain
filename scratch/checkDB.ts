@@ -15,8 +15,7 @@ async function check() {
         return;
     }
     await mongoose.connect(uri);
-    console.log("Connected to MongoDB");
-
+    
     const db = mongoose.connection.db!;
     const collections = await db.collections();
     const instCollection = collections.find(c => c.collectionName === "institutions");
@@ -27,16 +26,12 @@ async function check() {
     }
 
     const data = await instCollection.find({}).toArray();
-    console.log("Found " + data.length + " institutions");
     
     data.forEach(inst => {
-        console.log("-------------------");
-        console.log("ID:", inst.id);
-        console.log("Name:", inst.name);
-        console.log("Fee Structure Keys:", inst.feeStructure ? Object.keys(inst.feeStructure) : "None");
-        if (inst.feeStructure && inst.feeStructure.classes) {
-            console.log("Classes Count:", inst.feeStructure.classes.length);
-        }
+        console.log("--- Document ---");
+        console.log("Field 'id':", inst.id);
+        console.log("Field '_id':", inst._id.toString());
+        console.log("Are they same?", inst.id === inst._id.toString());
     });
 
     process.exit(0);

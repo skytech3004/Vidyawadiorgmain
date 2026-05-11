@@ -63,7 +63,8 @@ const InstitutionSchema = new mongoose.Schema({
         year: String,
         installments: { type: Number, default: 2 },
         classes: [FeeClassSchema]
-    }
-}, { timestamps: true });
+    },
+    prospectus: String
+}, { timestamps: true, id: false });
 
 export default mongoose.models.Institution || mongoose.model("Institution", InstitutionSchema);

@@ -348,6 +348,25 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                             <a href="mailto:ldpsvidhyawadi@gmail.com" className="hover:text-sandstone transition-colors">ldpsvidhyawadi@gmail.com</a>
                         </div>
                     </motion.div>
+
+                    {institution?.prospectus && (
+                        <motion.div 
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.3 }}
+                            className="mt-10 flex flex-wrap gap-4"
+                        >
+                            <a 
+                                href={institution.prospectus} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="px-10 py-4 bg-sandstone text-oxford rounded-full font-black uppercase tracking-widest text-xs flex items-center gap-3 hover:bg-white hover:scale-105 transition-all shadow-2xl"
+                            >
+                                <BookOpen size={18} />
+                                Download Prospectus
+                            </a>
+                        </motion.div>
+                    )}
                 </div>
             </section>
 

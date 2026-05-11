@@ -53,7 +53,12 @@ export default function Footer() {
                         <ul className="space-y-4">
                             <li className="flex gap-4 text-white/60">
                                 <MapPin className="text-sandstone shrink-0" size={20} />
-                                <span className="text-sm">
+                                <a 
+                                    href="https://maps.app.goo.gl/VF1X1XZURqp2BL4y6" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="text-sm hover:text-sandstone transition-colors"
+                                >
                                     Marudhar Mahila Shikshan Sangh
                                     Vidyawadi<br />
 
@@ -61,7 +66,7 @@ export default function Footer() {
                                     Tehsil- Bali, Dist. Pali,<br />
                                     State - Rajasthan (India)<br />
                                     PIN – 306115
-                                </span>
+                                </a>
                             </li>
                             <li className="flex gap-4 text-white/60">
                                 <Phone className="text-sandstone shrink-0" size={20} />

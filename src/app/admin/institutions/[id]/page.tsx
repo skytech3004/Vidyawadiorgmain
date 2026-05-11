@@ -30,6 +30,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import ImageUploadField from "@/components/admin/ImageUploadField";
+import FileUploadField from "@/components/admin/FileUploadField";
 
 const INSTITUTIONS = [
     { id: "marudhar", name: "Marudhar Balika Vidyapeeth", color: "from-sandstone to-sandstone-dark" },
@@ -460,6 +461,38 @@ export default function InstitutionManager() {
                             </tbody>
                         </table>
                     </div>
+                </div>
+            </div>
+
+            {/* Prospectus Section */}
+            <div className="bg-white rounded-[3rem] border border-gray-100 shadow-sm overflow-hidden mt-10 p-8">
+                <div className="flex items-center gap-4 mb-8">
+                    <div className="w-12 h-12 bg-sandstone/10 rounded-2xl flex items-center justify-center text-sandstone">
+                        <Save size={24} />
+                    </div>
+                    <div>
+                        <h3 className="text-2xl font-black text-oxford uppercase tracking-tight">Institutional Prospectus</h3>
+                        <p className="text-sm text-gray-400">Upload the latest prospectus for this institution.</p>
+                    </div>
+                </div>
+
+                <FileUploadField 
+                    label="Prospectus PDF"
+                    value={formData.prospectus || ""}
+                    onChange={(url) => handleSimpleChange("prospectus", url)}
+                    folder={`prospectus/${instId}`}
+                    description="Upload the official prospectus in PDF format (Max 5MB)."
+                />
+                
+                <div className="mt-8 flex justify-end">
+                    <button
+                        onClick={handleSave}
+                        disabled={saving}
+                        className="px-8 py-3 bg-oxford text-white font-black uppercase tracking-widest text-xs rounded-xl hover:bg-black transition-all shadow-lg flex items-center gap-2 disabled:opacity-70"
+                    >
+                        {saving ? <RefreshCcw size={16} className="animate-spin" /> : <Save size={16} />}
+                        Save Prospectus
+                    </button>
                 </div>
             </div>
 

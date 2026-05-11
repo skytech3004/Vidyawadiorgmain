@@ -55,6 +55,7 @@ const HostelSchema = new mongoose.Schema({
         content: String,
     },
     gallery: [String],
+    prospectus: String,
 }, { timestamps: true });
 
 export default mongoose.models.Hostel || mongoose.model("Hostel", HostelSchema);

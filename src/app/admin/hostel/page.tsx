@@ -21,6 +21,7 @@ import {
     UserPlus,
     ImageIcon
 } from "lucide-react";
+import FileUploadField from "@/components/admin/FileUploadField";
 
 const DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
 
@@ -107,6 +108,13 @@ export default function HostelManager() {
         setHostelData((prev: any) => ({ ...prev, [section]: newItems }));
     };
 
+    const handleSimpleChange = (field: string, value: any) => {
+        setHostelData((prev: any) => ({
+            ...prev,
+            [field]: value
+        }));
+    };
+
     const updateMenuDay = (day: string, idx: number, value: string) => {
         const newDayMenu = [...(hostelData.foodMenu.weeklyMenu[day] || [])];
         newDayMenu[idx] = value;
@@ -151,6 +159,27 @@ export default function HostelManager() {
                     </button>
                 </div>
             </div>
+
+            {/* Prospectus Section */}
+            <section className="bg-white p-10 rounded-[3rem] shadow-sm border border-gray-100 mb-10">
+                <div className="flex items-center gap-4 mb-8">
+                    <div className="w-12 h-12 bg-sandstone/10 rounded-2xl flex items-center justify-center text-sandstone">
+                        <FileText size={24} />
+                    </div>
+                    <div>
+                        <h3 className="text-2xl font-black text-oxford uppercase tracking-tight">Hostel Prospectus</h3>
+                        <p className="text-sm text-gray-400">Upload the latest residential prospectus.</p>
+                    </div>
+                </div>
+
+                <FileUploadField 
+                    label="Prospectus PDF"
+                    value={hostelData.prospectus || ""}
+                    onChange={(url) => handleSimpleChange("prospectus", url)}
+                    folder="prospectus/hostel"
+                    description="Upload the official hostel prospectus in PDF format (Max 5MB)."
+                />
+            </section>
 
             <div className="space-y-12">
                 {/* Food Menu Section */}

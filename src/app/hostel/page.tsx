@@ -77,10 +77,24 @@ const SectionHeader = ({ title, subtitle, light = false }: any) => (
 export default function Page() {
     const [activeRoomType, setActiveRoomType] = useState("non-ac");
     const [activeAccordion, setActiveAccordion] = useState<string | null>("entry");
+    const [hostelData, setHostelData] = useState<any>(null);
 
     React.useEffect(() => {
         window.scrollTo(0, 0);
         document.documentElement.scrollTo(0, 0);
+
+        const fetchHostelData = async () => {
+            try {
+                const res = await fetch("/api/hostel");
+                const data = await res.json();
+                if (data.success) {
+                    setHostelData(data.hostel);
+                }
+            } catch (err) {
+                console.error("Failed to fetch hostel data", err);
+            }
+        };
+        fetchHostelData();
     }, []);
 
     const rules = [
@@ -146,14 +160,28 @@ export default function Page() {
                             Students can experience a home away from home where traditional values meet modern excellence.
                         </p>
                         <div className="flex flex-wrap justify-center gap-6">
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="px-10 py-5 bg-sandstone text-oxford font-black uppercase tracking-widest rounded-2xl shadow-2xl flex items-center gap-3 group"
-                            >
-                                <Download size={20} className="group-hover:translate-y-1 transition-transform" />
-                                Download Prospectus
-                            </motion.button>
+                            {hostelData?.prospectus ? (
+                                <motion.a
+                                    href={hostelData.prospectus}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="px-10 py-5 bg-sandstone text-oxford font-black uppercase tracking-widest rounded-2xl shadow-2xl flex items-center gap-3 group"
+                                >
+                                    <Download size={20} className="group-hover:translate-y-1 transition-transform" />
+                                    Download Prospectus
+                                </motion.a>
+                            ) : (
+                                <motion.button
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="px-10 py-5 bg-sandstone text-oxford font-black uppercase tracking-widest rounded-2xl shadow-2xl flex items-center gap-3 group"
+                                >
+                                    <Download size={20} className="group-hover:translate-y-1 transition-transform" />
+                                    Download Prospectus
+                                </motion.button>
+                            )}
                             <a href="/apply/hostel" className="contents">
                                 <motion.button
                                     whileHover={{ scale: 1.05 }}

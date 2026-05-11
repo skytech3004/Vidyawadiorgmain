@@ -115,6 +115,20 @@ export default function MarudharContent() {
                             <a href="https://www.vidyawadi.org" target="_blank" rel="noopener noreferrer" className="hover:text-sandstone transition-colors">www.vidyawadi.org</a>
                         </div>
                     </div>
+
+                    {institution?.prospectus && (
+                        <div className="mt-12 flex flex-wrap gap-4">
+                            <a 
+                                href={institution.prospectus} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="px-8 py-3 bg-sandstone text-oxford rounded-full font-bold uppercase tracking-wider text-sm flex items-center gap-2 hover:bg-white transition-all shadow-lg"
+                            >
+                                <BookOpen size={18} />
+                                Download Prospectus
+                            </a>
+                        </div>
+                    )}
                 </div>
             </section>
             {/* About Section */}

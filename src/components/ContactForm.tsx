@@ -144,6 +144,21 @@ export default function ContactForm() {
                                 </div>
                             </div>
                         </div>
+
+                        {/* Map Embed */}
+                        <div className="rounded-[2rem] overflow-hidden border border-white/10 h-[300px] relative group shadow-2xl">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.42159496464!2d73.2384166!3d25.357194!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3941818a77a9437b%3A0x8e83315668e169d!2sMarudhar%20Mahila%20Shikshan%20Sangh%20Vidyawadi!5e0!3m2!1sen!2sin!4v1715451234567" 
+                                width="100%" 
+                                height="100%" 
+                                style={{ border: 0 }} 
+                                allowFullScreen 
+                                loading="lazy" 
+                                referrerPolicy="no-referrer-when-downgrade"
+                                className="filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
+                            ></iframe>
+                            <div className="absolute inset-0 pointer-events-none border-2 border-white/5 rounded-[2rem]"></div>
+                        </div>
                     </div>
 
                     {/* Form */}
