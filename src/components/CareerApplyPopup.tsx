@@ -205,7 +205,7 @@ export default function CareerApplyPopup({ jobTitle, isOpen, onClose }: CareerAp
                                                     <>
                                                         <Upload size={40} className="text-gray-300" />
                                                         <p className="text-sm font-bold text-gray-500">Upload your Resume</p>
-                                                        <p className="text-[10px] text-gray-400 uppercase tracking-widest">PDF, DOC, DOCX (Max 5MB)</p>
+                                                        <p className="text-[10px] text-gray-400 uppercase tracking-widest">PDF, DOC, DOCX (Max 50MB)</p>
                                                     </>
                                                 )}
                                             </div>

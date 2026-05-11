@@ -19,7 +19,7 @@ export default function FileUploadField({
     onChange,
     folder = "prospectus",
     className = "",
-    description = "PDF format recommended, under 5MB.",
+    description = "PDF format recommended, under 50MB.",
     accept = ".pdf,.doc,.docx"
 }: FileUploadFieldProps) {
     const [uploading, setUploading] = useState(false);
@@ -29,9 +29,9 @@ export default function FileUploadField({
         const file = e.target.files?.[0];
         if (!file) return;
 
-        // Basic validation (5MB for PDFs)
-        if (file.size > 5 * 1024 * 1024) {
-            setError("File size exceeds 5MB limit.");
+        // Basic validation (50MB for PDFs)
+        if (file.size > 50 * 1024 * 1024) {
+            setError("File size exceeds 50MB limit.");
             return;
         }
 

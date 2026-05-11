@@ -177,7 +177,7 @@ export default function HostelManager() {
                     value={hostelData.prospectus || ""}
                     onChange={(url) => handleSimpleChange("prospectus", url)}
                     folder="prospectus/hostel"
-                    description="Upload the official hostel prospectus in PDF format (Max 5MB)."
+                    description="Upload the official hostel prospectus in PDF format (Max 50MB)."
                 />
             </section>
 

@@ -481,7 +481,7 @@ export default function InstitutionManager() {
                     value={formData.prospectus || ""}
                     onChange={(url) => handleSimpleChange("prospectus", url)}
                     folder={`prospectus/${instId}`}
-                    description="Upload the official prospectus in PDF format (Max 5MB)."
+                    description="Upload the official prospectus in PDF format (Max 50MB)."
                 />
                 
                 <div className="mt-8 flex justify-end">
