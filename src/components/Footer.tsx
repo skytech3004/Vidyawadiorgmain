@@ -54,18 +54,15 @@ export default function Footer() {
                             <li className="flex gap-4 text-white/60">
                                 <MapPin className="text-sandstone shrink-0" size={20} />
                                 <a 
-                                    href="https://maps.app.goo.gl/VF1X1XZURqp2BL4y6" 
+                                    href="https://www.google.com/maps/search/Leeladevi+Parasmal+Sancheti+Girls+College+Vidyawadi+Rani,+Khimel+-+Rani+Station+Rd,+Industrial+Area,+Rani,+Rajasthan+306115,+India" 
                                     target="_blank" 
                                     rel="noopener noreferrer"
                                     className="text-sm hover:text-sandstone transition-colors"
                                 >
-                                    Marudhar Mahila Shikshan Sangh
-                                    Vidyawadi<br />
-
-                                    Post -Khimel, St. Rani,<br />
-                                    Tehsil- Bali, Dist. Pali,<br />
-                                    State - Rajasthan (India)<br />
-                                    PIN – 306115
+                                    Leeladevi Parasmal Sancheti Girls College<br />
+                                    Vidyawadi Rani, Khimel - Rani Station Rd,<br />
+                                    Industrial Area, Rani,<br />
+                                    Rajasthan 306115, India
                                 </a>
                             </li>
                             <li className="flex gap-4 text-white/60">
