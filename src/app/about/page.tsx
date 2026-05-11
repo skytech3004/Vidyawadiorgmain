@@ -54,7 +54,7 @@ export default function AboutPage() {
                             <div className="text-sm font-bold text-oxford/60 uppercase tracking-widest">Acres Campus</div>
                         </div>
                         <div>
-                            <div className="text-4xl font-black text-sandstone mb-2">2000+</div>
+                            <div className="text-4xl font-black text-sandstone mb-2">2500+</div>
                             <div className="text-sm font-bold text-oxford/60 uppercase tracking-widest">Students</div>
                         </div>
                         <div>

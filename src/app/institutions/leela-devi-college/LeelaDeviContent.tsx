@@ -350,15 +350,15 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                     </motion.div>
 
                     {institution?.prospectus && (
-                        <motion.div 
+                        <motion.div
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.3 }}
                             className="mt-10 flex flex-wrap gap-4"
                         >
-                            <a 
-                                href={institution.prospectus} 
-                                target="_blank" 
+                            <a
+                                href={institution.prospectus}
+                                target="_blank"
                                 rel="noopener noreferrer"
                                 className="px-10 py-4 bg-sandstone text-oxford rounded-full font-black uppercase tracking-widest text-xs flex items-center gap-3 hover:bg-white hover:scale-105 transition-all shadow-2xl"
                             >
@@ -482,7 +482,7 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                             </p>
                             <p>
                                 Our institution is affiliated with <b>Jai Narain Vyas University (JNVU), Jodhpur</b>, and is recognized by the University Grants Commission (UGC).
-                                We are proud to hold a <b>NAAC B++ grade</b> (valid through March 2028), reflecting our commitment to quality education.
+                                We are proud to hold a <b>NAAC B++ grade</b> , reflecting our commitment to quality education.
                             </p>
                             <div className="pt-6 grid grid-cols-2 gap-4">
                                 <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100">

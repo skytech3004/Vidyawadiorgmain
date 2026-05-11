@@ -147,13 +147,13 @@ export default function ContactForm() {
 
                         {/* Map Embed */}
                         <div className="rounded-[2rem] overflow-hidden border border-white/10 h-[300px] relative group shadow-2xl">
-                            <iframe 
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.122119932158!2d73.2354722!3d25.3582222!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x394181f6236b3281%3A0xc34586d1a52089f2!2sLeeladevi%20Parasmal%20Sancheti%20Girls%20College!5e0!3m2!1sen!2sin!4v1715451234567" 
-                                width="100%" 
-                                height="100%" 
-                                style={{ border: 0 }} 
-                                allowFullScreen 
-                                loading="lazy" 
+                            <iframe
+                                src="https://www.google.com/maps?q=Leeladevi+Parasmal+Sancheti+Girls+College&output=embed"
+                                width="100%"
+                                height="100%"
+                                style={{ border: 0 }}
+                                allowFullScreen
+                                loading="lazy"
                                 referrerPolicy="no-referrer-when-downgrade"
                                 className="filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
                             ></iframe>
