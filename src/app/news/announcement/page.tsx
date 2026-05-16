@@ -131,17 +131,19 @@ export default function AnnouncementPage() {
                             <div className="h-[700px] overflow-hidden relative mask-gradient-b">
                                 <div className={`flex flex-col gap-6 ${events.length > 4 ? 'animate-scroll-up' : ''}`} style={{ height: "max-content" }}>
                                     {(events.length > 4 ? [...events, ...events, ...events] : events).map((item, index) => {
+                                        const isNews = item.type === 'news';
+                                        const displayColor = isNews ? '#14b8a6' : '#002147';
                                         const recent = isRecentlyUploaded(item.createdAt);
                                         return (
                                             <div key={`${item._id}-${index}`} className="p-6 rounded-3xl bg-white shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 relative overflow-hidden group">
                                                 {recent && (
-                                                    <div className="absolute top-0 right-0 bg-teal-blue text-white text-[10px] font-black px-3 py-1 rounded-bl-xl flex items-center gap-1 animate-pulse">
+                                                    <div className="absolute top-0 right-0 bg-red-600 text-white text-[10px] font-black px-3 py-1 rounded-bl-xl flex items-center gap-1 animate-pulse z-10">
                                                         <Bell size={10} /> NEW
                                                     </div>
                                                 )}
                                                 
                                                 <div className="flex items-center gap-3 mb-4">
-                                                    <span className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }}></span>
+                                                    <span className="w-3 h-3 rounded-full" style={{ backgroundColor: displayColor }}></span>
                                                     <p className="text-sm font-bold text-gray-400">
                                                         {new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                                                     </p>
@@ -222,21 +224,25 @@ export default function AnnouncementPage() {
                                                     <span className={`text-xs font-bold ${isToday ? 'bg-oxford text-white w-6 h-6 flex items-center justify-center rounded-full' : 'text-oxford'}`}>{day}</span>
                                                     
                                                     <div className="mt-2 space-y-1">
-                                                        {dayEvents.map(e => (
-                                                            <div key={e._id} className="hidden sm:block">
-                                                                <div 
-                                                                    className="px-2 py-1 rounded text-[10px] font-bold truncate transition-transform hover:scale-105 cursor-pointer"
-                                                                    style={{ backgroundColor: e.color + '15', color: e.color, borderLeft: `3px solid ${e.color}` }}
-                                                                    title={e.title}
-                                                                >
-                                                                    {e.title}
+                                                        {dayEvents.map(e => {
+                                                            const isNews = e.type === 'news';
+                                                            const displayColor = isNews ? '#14b8a6' : '#002147';
+                                                            return (
+                                                                <div key={e._id} className="hidden sm:block">
+                                                                    <div 
+                                                                        className="px-2 py-1 rounded text-[10px] font-bold truncate transition-transform hover:scale-105 cursor-pointer"
+                                                                        style={{ backgroundColor: displayColor + '15', color: displayColor, borderLeft: `3px solid ${displayColor}` }}
+                                                                        title={e.title}
+                                                                    >
+                                                                        {e.title}
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        ))}
+                                                            );
+                                                        })}
                                                         {/* Mobile Dot Indicator */}
                                                         <div className="flex sm:hidden gap-1 mt-1">
                                                             {dayEvents.map(e => (
-                                                                <span key={e._id} className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: e.color }}></span>
+                                                                <span key={e._id} className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: e.type === 'news' ? '#14b8a6' : '#002147' }}></span>
                                                             ))}
                                                         </div>
                                                     </div>

@@ -86,7 +86,7 @@ export default function HomeNewsEvents() {
                 </span>
                 <div className="flex gap-0.5 mt-0.5">
                     {dayEvents.slice(0, 3).map((e, idx) => (
-                        <span key={idx} className="h-1 w-1 rounded-full" style={{ backgroundColor: e.color }}></span>
+                        <span key={idx} className="h-1 w-1 rounded-full" style={{ backgroundColor: e.type === 'news' ? '#14b8a6' : '#002147' }}></span>
                     ))}
                 </div>
                 {/* Tooltip on hover if multiple events */}
@@ -94,7 +94,7 @@ export default function HomeNewsEvents() {
                     <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-20 bg-white shadow-xl border border-gray-100 rounded-lg p-2 w-max max-w-[200px]">
                         {dayEvents.map(e => (
                             <div key={e._id} className="text-[10px] font-bold text-oxford mb-1 last:mb-0 flex items-center gap-1">
-                                <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: e.color }}></span>
+                                <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: e.type === 'news' ? '#14b8a6' : '#002147' }}></span>
                                 <span className="truncate">{e.title}</span>
                             </div>
                         ))}
@@ -128,12 +128,15 @@ export default function HomeNewsEvents() {
                             >
                                 {/* Duplication for smooth loop if enough items */}
                                 {(events.length > 3 ? [...events, ...events, ...events] : events).map((event, idx) => {
+                                    const isNews = event.type === 'news';
+                                    const displayColor = isNews ? '#14b8a6' : '#002147';
                                     const recent = isRecentlyUploaded(event.createdAt);
+                                    
                                     return (
                                         <div key={`${event._id}-${idx}`} className="group p-6 bg-white border border-oxford/10 rounded-2xl flex flex-col sm:flex-row gap-6 items-start sm:items-center hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:border-oxford/30 transition-all duration-300 relative overflow-hidden">
                                             {/* Recent Tag */}
                                             {recent && (
-                                                <div className="absolute top-0 right-0 bg-teal-blue text-white text-[10px] font-black px-3 py-1 rounded-bl-xl flex items-center gap-1 animate-pulse">
+                                                <div className="absolute top-0 right-0 bg-red-600 text-white text-[10px] font-black px-3 py-1 rounded-bl-xl flex items-center gap-1 animate-pulse z-10">
                                                     <Bell size={10} /> NEW
                                                 </div>
                                             )}
@@ -141,14 +144,14 @@ export default function HomeNewsEvents() {
                                             {/* Avatar / Icon */}
                                             <div 
                                                 className="h-14 w-14 rounded-2xl flex items-center justify-center font-bold text-xl shrink-0 transition-transform group-hover:scale-110 shadow-sm"
-                                                style={{ backgroundColor: event.color + '15', color: event.color }}
+                                                style={{ backgroundColor: displayColor + '15', color: displayColor }}
                                             >
-                                                {event.type === 'news' ? 'N' : 'E'}
+                                                {isNews ? 'N' : 'E'}
                                             </div>
 
                                             <div className="flex-1">
                                                 <div className="flex items-center gap-2 mb-1">
-                                                    <span className="text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-md" style={{ backgroundColor: event.color + '10', color: event.color }}>
+                                                    <span className="text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-md" style={{ backgroundColor: displayColor + '10', color: displayColor }}>
                                                         {event.type}
                                                     </span>
                                                     {event.institution !== 'all' && (

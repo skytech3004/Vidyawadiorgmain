@@ -219,7 +219,13 @@ export default function EventsPage() {
                                             {item.location && <div className="text-xs text-gray-400 flex items-center gap-1 mt-1"><MapPin size={12} /> {item.location}</div>}
                                         </td>
                                         <td className="p-6">
-                                            <span className="px-3 py-1 rounded-full text-xs font-bold uppercase" style={{ backgroundColor: item.color + '20', color: item.color }}>
+                                            <span 
+                                                className="px-3 py-1 rounded-full text-xs font-bold uppercase" 
+                                                style={{ 
+                                                    backgroundColor: (item.type === 'news' ? '#14b8a6' : '#002147') + '20', 
+                                                    color: (item.type === 'news' ? '#14b8a6' : '#002147') 
+                                                }}
+                                            >
                                                 {item.type}
                                             </span>
                                         </td>
@@ -379,18 +385,6 @@ export default function EventsPage() {
                                     />
                                 </div>
 
-                                <div>
-                                    <label className="block text-sm font-bold text-gray-700 mb-2">Custom Color</label>
-                                    <div className="flex items-center gap-4">
-                                        <input
-                                            type="color"
-                                            value={formData.color}
-                                            onChange={(e) => setFormData({ ...formData, color: e.target.value })}
-                                            className="w-12 h-12 rounded-lg cursor-pointer border-0"
-                                        />
-                                        <span className="text-xs text-gray-400">Choose a color to represent this item on the calendar</span>
-                                    </div>
-                                </div>
 
                                 <div className="pt-6 border-t border-gray-100 flex justify-end gap-3 mt-8">
                                     <button
