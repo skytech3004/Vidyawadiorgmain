@@ -31,6 +31,7 @@ const sidebarItems = [
     { name: "Inquiries", href: "/admin/inquiries", icon: MessageSquare },
     { name: "Careers", href: "/admin/careers", icon: Briefcase },
     { name: "Career Apps", href: "/admin/career-applications", icon: FileText },
+    { name: "Events & News", href: "/admin/events", icon: Calendar },
     { name: "Settings", href: "/admin/settings", icon: Settings },
     { name: "Activity Logs", href: "/admin/logs", icon: Activity },
 ];

@@ -3,10 +3,43 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { Calendar as CalendarIcon, Clock, MapPin, Bell, ChevronLeft, ChevronRight } from 'lucide-react';
+
+interface SchoolEvent {
+    _id: string;
+    title: string;
+    description: string;
+    date: string;
+    time: string;
+    location: string;
+    type: 'event' | 'news';
+    institution: string;
+    link: string;
+    color: string;
+    createdAt: string;
+}
 
 export default function AnnouncementPage() {
-    const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+    const [events, setEvents] = useState<SchoolEvent[]>([]);
+    const [loading, setLoading] = useState(true);
     const [currentDate, setCurrentDate] = useState(new Date());
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            try {
+                const res = await fetch("/api/events?limit=20");
+                const data = await res.json();
+                if (data.success) {
+                    setEvents(data.events);
+                }
+            } catch (error) {
+                console.error("Error fetching events:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchEvents();
+    }, []);
 
     // Calendar Logic
     const getDaysInMonth = (date: Date) => {
@@ -14,7 +47,8 @@ export default function AnnouncementPage() {
     };
 
     const getFirstDayOfMonth = (date: Date) => {
-        return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+        const day = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+        return day === 0 ? 6 : day - 1; // Adjust to start Monday
     };
 
     const daysInMonth = getDaysInMonth(currentDate);
@@ -35,7 +69,7 @@ export default function AnnouncementPage() {
     }
 
     // Next Month Days (to fill remaining slots)
-    const totalSlots = 42; // 6 rows * 7 columns
+    const totalSlots = 42; 
     const usedSlots = prevMonthDays.length + currentMonthDays.length;
     const remainingSlots = totalSlots - usedSlots;
     const nextMonthDays = [];
@@ -56,191 +90,166 @@ export default function AnnouncementPage() {
         setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
     };
 
-    const toggleDropdown = (id: string) => {
-        setOpenDropdown(openDropdown === id ? null : id);
+    const getEventsForDay = (day: number) => {
+        return events.filter(e => {
+            const d = new Date(e.date);
+            return d.getDate() === day && d.getMonth() === currentDate.getMonth() && d.getFullYear() === currentDate.getFullYear();
+        });
     };
 
-    // Events Data (Mock Data - ideally filtered by date)
-    const events = [
-        { id: '1', title: 'Meeting with friends', desc: 'Travel Destination Discussion', time: '10:00 - 11:00', date: 'Jan 10, 2026', day: 3, month: 0, year: 2026, type: 'oxford', dotClass: 'bg-oxford', textClass: 'hover:text-oxford' },
-        { id: '2', title: 'Visiting online course', desc: 'Checks updates for design course', time: '05:40 - 13:00', date: 'Jan 10, 2026', day: 7, month: 0, year: 2026, type: 'teal-blue', dotClass: 'bg-teal-blue', textClass: 'hover:text-teal-blue' },
-        { id: '3', title: 'Development meet', desc: 'Discussion with developer', time: '10:00 - 11:00', date: 'Jan 14, 2026', day: 19, month: 0, year: 2026, type: 'sandstone', dotClass: 'bg-sandstone', textClass: 'hover:text-sandstone-dark' }
-    ];
-
-    const getEventForDay = (day: number) => {
-        // Simple check for demo purposes (year/month ignoring for simplicity in this specific recurring calendar view)
-        // In a real app, you'd match year and month too.
-        // For this demo, let's just match the day if it's the current month (or any month for persistent demo events)
-        // But better to check month.
-        return events.find(e => e.day === day && e.month === currentDate.getMonth() && e.year === currentDate.getFullYear());
-    };
-
-    // Styling constants for brand colors
-    const colors = {
-        oxford: { bg: 'bg-oxford', text: 'text-oxford', lightBg: 'bg-oxford/10' },
-        'teal-blue': { bg: 'bg-teal-blue', text: 'text-teal-blue', lightBg: 'bg-teal-blue/10' },
-        sandstone: { bg: 'bg-sandstone', text: 'text-oxford', lightBg: 'bg-sandstone/20' } // sandstone text might be hard to read, using oxford for contrast or custom
+    const isRecentlyUploaded = (createdAt: string) => {
+        const created = new Date(createdAt).getTime();
+        const now = new Date().getTime();
+        const diffHours = (now - created) / (1000 * 60 * 60);
+        return diffHours < 48;
     };
 
     return (
-        <main className="min-h-screen flex flex-col">
+        <main className="min-h-screen flex flex-col bg-stone-50">
             <Navbar />
 
-            <section className="relative bg-oxford flex-grow pt-32 pb-12">
-                {/* Background Decor */}
-                <div className="bg-teal-blue w-full sm:w-40 h-40 rounded-full absolute top-1 opacity-20 max-sm:right-0 sm:left-56 z-0"></div>
-                <div className="bg-sandstone w-full sm:w-40 h-24 absolute top-0 -left-0 opacity-10 z-0"></div>
-                <div className="bg-white w-full sm:w-40 h-24 absolute top-40 -left-0 opacity-5 z-0"></div>
+            <section className="relative pt-32 pb-20">
+                <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                    {/* Page Header */}
+                    <div className="mb-16 text-center">
+                        <h1 className="text-4xl md:text-5xl font-playfair font-bold text-oxford mb-4">News and Announcement</h1>
+                        <div className="w-24 h-1 bg-sandstone mx-auto rounded-full"></div>
+                    </div>
 
-                <div className="w-full relative z-10 backdrop-blur-3xl">
-                    <div className="w-full max-w-7xl mx-auto px-2 lg:px-8">
-                        {/* Page Header */}
-                        <div className="mb-12 text-center">
-                            <h1 className="text-4xl md:text-5xl font-playfair font-bold text-white mb-4">News and Announcement</h1>
-                            <div className="w-24 h-1 bg-sandstone mx-auto rounded-full"></div>
-                        </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
 
-                        <div className="grid grid-cols-12 gap-8 max-w-4xl mx-auto xl:max-w-full">
-
-                            {/* Left Side: Events List */}
-                            <div className="col-span-12 xl:col-span-5">
-                                <h2 className="font-manrope text-3xl leading-tight text-white mb-1.5 font-bold">Upcoming Events</h2>
-                                <p className="text-lg font-normal text-white/80 mb-8">Don’t miss schedule</p>
-                                {/* Scrollable Container */}
-                                <div className="h-[600px] overflow-hidden relative mask-gradient-b rounded-[40px]">
-                                    {/* Gradient Masks for smooth fade in/out */}
-                                    {/* <div className="absolute top-0 left-0 right-0 h-10 bg-gradient-to-b from-oxford to-transparent z-10 pointer-events-none"></div> */}
-                                    {/* <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-oxford to-transparent z-10 pointer-events-none"></div> */}
-
-                                    <div
-                                        className="flex flex-col gap-5 animate-scroll-up"
-                                        style={{ height: "max-content" }}
-                                    >
-                                        {/* Duplicating events for seamless loop */}
-                                        {[...events, ...events, ...events].map((item, index) => (
-                                            <div key={`${item.id}-${index}`} className="p-6 rounded-[40px] bg-white shadow-sm border border-oxford shrink-0">
-                                                <div className="flex items-center justify-between mb-3">
-                                                    <div className="flex items-center gap-2.5">
-                                                        <span className={`w-2.5 h-2.5 rounded-full ${item.dotClass}`}></span>
-                                                        <p className="text-base font-medium text-gray-900">{item.date} - {item.time}</p>
-                                                    </div>
-                                                    <div className="dropdown relative inline-flex">
-                                                        <button
-                                                            type="button"
-                                                            onClick={() => toggleDropdown(`${item.id}-${index}`)} // Ensure unique ID for dropdown toggle
-                                                            className={`dropdown-toggle inline-flex justify-center py-2.5 px-1 items-center gap-2 text-sm text-black rounded-full cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 ${item.textClass}`}
-                                                        >
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="4" viewBox="0 0 12 4" fill="none">
-                                                                <path d="M1.85624 2.00085H1.81458M6.0343 2.00085H5.99263M10.2124 2.00085H10.1707" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"></path>
-                                                            </svg>
-                                                        </button>
-                                                        {openDropdown === `${item.id}-${index}` && (
-                                                            <div className="dropdown-menu rounded-xl shadow-lg bg-white absolute top-full -left-10 w-max mt-2 z-20">
-                                                                <ul className="py-2">
-                                                                    <li>
-                                                                        <a className="block px-6 py-2 text-xs hover:bg-gray-100 text-gray-600 font-medium" href="#">
-                                                                            Edit
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a className="block px-6 py-2 text-xs hover:bg-gray-100 text-gray-600 font-medium" href="#">
-                                                                            Remove
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                </div>
-                                                <h6 className="text-xl leading-8 font-bold text-oxford mb-1">{item.title}</h6>
-                                                <p className="text-base font-normal text-gray-600">{item.desc}</p>
-                                            </div>
-                                        ))}
-                                    </div>
+                        {/* Left Side: Events List */}
+                        <div className="lg:col-span-5">
+                            <div className="flex items-center justify-between mb-8">
+                                <div>
+                                    <h2 className="text-2xl font-bold text-oxford">Upcoming Schedule</h2>
+                                    <p className="text-gray-500">Stay updated with latest happenings</p>
                                 </div>
+                                {loading && <div className="h-5 w-5 border-2 border-sandstone border-t-transparent rounded-full animate-spin"></div>}
                             </div>
 
-                            {/* Calendar Section */}
-                            <div className="col-span-12 xl:col-span-7 px-2.5 py-5 sm:p-8 bg-gradient-to-b from-white/25 to-white xl:bg-white rounded-2xl max-xl:row-start-1 shadow-sm border border-white/50">
-                                <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-5">
+                            <div className="h-[700px] overflow-hidden relative mask-gradient-b">
+                                <div className={`flex flex-col gap-6 ${events.length > 4 ? 'animate-scroll-up' : ''}`} style={{ height: "max-content" }}>
+                                    {(events.length > 4 ? [...events, ...events, ...events] : events).map((item, index) => {
+                                        const recent = isRecentlyUploaded(item.createdAt);
+                                        return (
+                                            <div key={`${item._id}-${index}`} className="p-6 rounded-3xl bg-white shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 relative overflow-hidden group">
+                                                {recent && (
+                                                    <div className="absolute top-0 right-0 bg-teal-blue text-white text-[10px] font-black px-3 py-1 rounded-bl-xl flex items-center gap-1 animate-pulse">
+                                                        <Bell size={10} /> NEW
+                                                    </div>
+                                                )}
+                                                
+                                                <div className="flex items-center gap-3 mb-4">
+                                                    <span className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }}></span>
+                                                    <p className="text-sm font-bold text-gray-400">
+                                                        {new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                                                    </p>
+                                                </div>
+
+                                                <h3 className="text-xl font-bold text-oxford mb-2 group-hover:text-teal-blue transition-colors">{item.title}</h3>
+                                                <p className="text-gray-600 text-sm mb-4 line-clamp-2">{item.description}</p>
+
+                                                <div className="flex flex-wrap gap-4 text-xs font-bold text-gray-400">
+                                                    {item.time && (
+                                                        <div className="flex items-center gap-1.5">
+                                                            <Clock size={14} className="text-sandstone" />
+                                                            <span>{item.time}</span>
+                                                        </div>
+                                                    )}
+                                                    {item.location && (
+                                                        <div className="flex items-center gap-1.5">
+                                                            <MapPin size={14} className="text-sandstone" />
+                                                            <span>{item.location}</span>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                    
+                                    {!loading && events.length === 0 && (
+                                        <div className="p-10 text-center text-gray-400 font-medium bg-white rounded-3xl border border-dashed border-gray-200">
+                                            No events scheduled.
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Calendar Section */}
+                        <div className="lg:col-span-7">
+                            <div className="bg-white rounded-[2.5rem] shadow-xl shadow-oxford/5 border border-gray-100 p-8">
+                                <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-8">
                                     <div className="flex items-center gap-4">
-                                        <h5 className="text-xl leading-8 font-bold text-oxford">{months[currentDate.getMonth()]} {currentDate.getFullYear()}</h5>
-                                        <div className="flex items-center">
-                                            <button onClick={prevMonth} className="text-oxford p-1 rounded transition-all duration-300 hover:text-white hover:bg-oxford">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                                    <path d="M10.0002 11.9999L6 7.99971L10.0025 3.99719" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"></path>
-                                                </svg>
+                                        <h3 className="text-2xl font-black text-oxford uppercase tracking-tight">{months[currentDate.getMonth()]} {currentDate.getFullYear()}</h3>
+                                        <div className="flex items-center gap-1">
+                                            <button onClick={prevMonth} className="p-2 hover:bg-gray-100 rounded-xl transition-all text-oxford">
+                                                <ChevronLeft size={20} />
                                             </button>
-                                            <button onClick={nextMonth} className="text-oxford p-1 rounded transition-all duration-300 hover:text-white hover:bg-oxford">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                                    <path d="M6.00236 3.99707L10.0025 7.99723L6 11.9998" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"></path>
-                                                </svg>
+                                            <button onClick={nextMonth} className="p-2 hover:bg-gray-100 rounded-xl transition-all text-oxford">
+                                                <ChevronRight size={20} />
                                             </button>
                                         </div>
                                     </div>
-                                    <div className="flex items-center rounded-md p-1 bg-gray-50 gap-px">
-                                        {/* <button className="py-2.5 px-5 rounded-lg bg-gray-50 text-oxford text-sm font-medium transition-all duration-300 hover:bg-oxford hover:text-white">Day</button> */}
-                                        {/* <button className="py-2.5 px-5 rounded-lg bg-oxford text-white text-sm font-medium transition-all duration-300 hover:bg-oxford hover:text-white">Week</button> */}
-                                        <button className="py-2.5 px-5 rounded-lg bg-oxford text-white text-sm font-medium transition-all duration-300 hover:bg-oxford hover:text-white">Month</button>
+                                    <div className="flex bg-gray-50 p-1 rounded-xl">
+                                        <button className="px-6 py-2 bg-oxford text-white rounded-lg text-sm font-bold shadow-lg shadow-oxford/20">Month View</button>
                                     </div>
                                 </div>
-                                <div className="border border-indigo-100 rounded-xl">
-                                    <div className="grid grid-cols-7 rounded-t-3xl border-b border-indigo-100">
-                                        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day, idx) => (
-                                            <div key={day} className={`py-3.5 ${idx < 6 ? 'border-r' : ''} ${idx === 0 ? 'rounded-tl-xl' : ''} ${idx === 6 ? 'rounded-tr-xl' : ''} border-indigo-100 bg-gray-50 flex items-center justify-center text-sm font-medium text-oxford`}>{day}</div>
+
+                                <div className="border border-gray-100 rounded-3xl overflow-hidden shadow-sm">
+                                    <div className="grid grid-cols-7 bg-gray-50 border-b border-gray-100">
+                                        {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => (
+                                            <div key={day} className="py-4 text-center text-xs font-black text-gray-400 uppercase tracking-widest">{day}</div>
                                         ))}
                                     </div>
-                                    <div className="grid grid-cols-7 rounded-b-xl">
-
+                                    
+                                    <div className="grid grid-cols-7">
                                         {/* Prev Month Days */}
                                         {prevMonthDays.map((day) => (
-                                            <div key={`prev-${day}`} className="flex xl:aspect-square max-xl:min-h-[60px] p-3.5 bg-gray-50 border-r border-b border-indigo-100 transition-all duration-300 hover:bg-indigo-50">
-                                                <span className="text-xs font-semibold text-gray-400">{day}</span>
+                                            <div key={`prev-${day}`} className="h-24 sm:h-32 p-3 bg-gray-50/50 border-r border-b border-gray-100">
+                                                <span className="text-xs font-bold text-gray-300">{day}</span>
                                             </div>
                                         ))}
 
                                         {/* Current Month Days */}
                                         {currentMonthDays.map((day) => {
-                                            const event = getEventForDay(day);
+                                            const dayEvents = getEventsForDay(day);
                                             const isToday = day === new Date().getDate() && currentDate.getMonth() === new Date().getMonth() && currentDate.getFullYear() === new Date().getFullYear();
 
-                                            // Determine branding colors for event if it exists
-                                            let bgClass = "bg-white";
-                                            let textClass = "text-oxford";
-
                                             return (
-                                                <div key={`curr-${day}`} className="flex flex-col xl:aspect-square max-xl:min-h-[60px] p-3.5 bg-white relative border-r border-b border-indigo-100 transition-all duration-300 hover:bg-indigo-50 cursor-pointer group">
-                                                    <div className="flex items-start justify-between">
-                                                        <span className={`text-xs font-semibold ${isToday ? 'bg-oxford text-white w-6 h-6 flex items-center justify-center rounded-full' : 'text-gray-900'}`}>{day}</span>
-                                                        {event && (
-                                                            <span className={`w-2 h-2 rounded-full ${colors[event.type as keyof typeof colors].bg} xl:hidden`}></span>
-                                                        )}
+                                                <div key={`curr-${day}`} className="h-24 sm:h-32 p-3 bg-white border-r border-b border-gray-100 relative group transition-colors hover:bg-stone-50/50">
+                                                    <span className={`text-xs font-bold ${isToday ? 'bg-oxford text-white w-6 h-6 flex items-center justify-center rounded-full' : 'text-oxford'}`}>{day}</span>
+                                                    
+                                                    <div className="mt-2 space-y-1">
+                                                        {dayEvents.map(e => (
+                                                            <div key={e._id} className="hidden sm:block">
+                                                                <div 
+                                                                    className="px-2 py-1 rounded text-[10px] font-bold truncate transition-transform hover:scale-105 cursor-pointer"
+                                                                    style={{ backgroundColor: e.color + '15', color: e.color, borderLeft: `3px solid ${e.color}` }}
+                                                                    title={e.title}
+                                                                >
+                                                                    {e.title}
+                                                                </div>
+                                                            </div>
+                                                        ))}
+                                                        {/* Mobile Dot Indicator */}
+                                                        <div className="flex sm:hidden gap-1 mt-1">
+                                                            {dayEvents.map(e => (
+                                                                <span key={e._id} className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: e.color }}></span>
+                                                            ))}
+                                                        </div>
                                                     </div>
-
-                                                    {event && (
-                                                        <>
-                                                            {/* Dot for all screens near the date or separate */}
-                                                            <div className="mt-1 xl:mt-2 hidden xl:block">
-                                                                <span className={`block w-1.5 h-1.5 rounded-full ${colors[event.type as keyof typeof colors].bg} mb-1`}></span>
-                                                            </div>
-
-                                                            <div className={`absolute top-9 bottom-1 left-3.5 right-1 p-1.5 xl:px-2.5 h-max rounded ${colors[event.type as keyof typeof colors].lightBg} group-hover:block hidden xl:block`}>
-                                                                <p className={`hidden xl:block text-xs font-bold mb-px whitespace-nowrap truncate ${colors[event.type as keyof typeof colors].text}`}>{event.title}</p>
-                                                                <span className={`hidden xl:block text-[10px] font-normal whitespace-nowrap ${colors[event.type as keyof typeof colors].text}`}>{event.time}</span>
-                                                            </div>
-                                                        </>
-                                                    )}
                                                 </div>
                                             );
                                         })}
 
                                         {/* Next Month Days */}
                                         {nextMonthDays.map((day) => (
-                                            <div key={`next-${day}`} className="flex xl:aspect-square max-xl:min-h-[60px] p-3.5 bg-gray-50 border-r border-b border-indigo-100 transition-all duration-300 hover:bg-indigo-50 cursor-pointer">
-                                                <span className="text-xs font-semibold text-gray-400">{day}</span>
+                                            <div key={`next-${day}`} className="h-24 sm:h-32 p-3 bg-gray-50/50 border-r border-b border-gray-100">
+                                                <span className="text-xs font-bold text-gray-300">{day}</span>
                                             </div>
                                         ))}
-
                                     </div>
                                 </div>
                             </div>
