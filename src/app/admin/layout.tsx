@@ -19,7 +19,8 @@ import {
     Menu,
     X,
     Activity,
-    Briefcase
+    Briefcase,
+    Calendar
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
