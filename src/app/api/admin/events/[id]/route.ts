@@ -16,14 +16,13 @@ async function verifyAuth(req: NextRequest) {
     }
 }
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
     try {
         const payload = await verifyAuth(request);
         if (!payload) {
             return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
         }
-
-        const { id } = params;
+        const { id } = await params;
         await connectDB();
         const data = await request.json();
 
@@ -54,14 +53,13 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
     try {
         const payload = await verifyAuth(request);
         if (!payload) {
             return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
         }
-
-        const { id } = params;
+        const { id } = await params;
         await connectDB();
         const deletedEvent = await Event.findByIdAndDelete(id);
 
