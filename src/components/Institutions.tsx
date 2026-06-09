@@ -27,7 +27,7 @@ const institutions: Institution[] = [
         stats: "NAAC B++ Grade",
         image: "/leeladevi.jpg",
         tags: ["UG/PG/INTEGRATED COURSES", "Boarding Available"],
-        href: "/institutions/leela-devi-college",
+        href: "https://vidyawadicollege.org",
         isBrochure: false
     },
     {
