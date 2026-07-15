@@ -48,7 +48,7 @@ const institutions: Institution[] = [
         icon: <GraduationCap className="w-6 h-6" />,
         stats: "English Medium Only",
         image: "/lps.jpg",
-        href: "/institutions/leeladevi-english-medium",
+        href: "https://lpsvidyawadi.com/",
         tags: ["CBSE Standards", "Boarding Available"],
         isBrochure: false
     },
@@ -59,7 +59,7 @@ const institutions: Institution[] = [
         icon: <GraduationCap className="w-6 h-6" />,
         stats: "English Medium Only",
         image: "/shushiladevi.jpg",
-        href: "/institutions/sushiladevi",
+        href: "https://lpsvidyawadi.com/",
         tags: ["CBSE Standards", "Boarding Available"],
         isBrochure: false
     },
@@ -155,7 +155,7 @@ export default function Institutions() {
                                         </a>
                                     ) : (
                                         inst.href ? (
-                                            <Link href={inst.href} className="flex items-center gap-2 font-black text-xs uppercase tracking-widest text-oxford group-hover:gap-4 transition-all overflow-hidden relative pr-8">
+                                            <Link href={inst.href} target="_blank" className="flex items-center gap-2 font-black text-xs uppercase tracking-widest text-oxford group-hover:gap-4 transition-all overflow-hidden relative pr-8">
                                                 Explore More
                                                 <ArrowRight size={16} className="absolute right-0 group-hover:-right-2 transition-all" />
                                             </Link>
