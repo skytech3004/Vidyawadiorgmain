@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import connectDB from "@/lib/mongodb";
 import Amenity from "@/models/Amenity";
+import { AMENITY_DEMO_ITEMS } from "@/lib/amenities-data";
 
 export const metadata = {
     title: "Amenities | Vidyawadi",
@@ -48,50 +49,13 @@ type Amenity = {
     order: number;
 };
 
-const fallbackAmenities: Amenity[] = [
-    {
-        _id: "library",
-        title: "Library",
-        description: "Best course books, reference books, and inspirational titles.",
-        image: "https://placehold.co/800x800/0c2c55/c9a870?text=Library",
-        order: 0,
-    },
-    {
-        _id: "sports-complex",
-        title: "Sports Complex",
-        description: "Stadium, athletics track, indoor games, and training spaces.",
-        image: "https://placehold.co/800x800/0c2c55/c9a870?text=Sports+Complex",
-        order: 1,
-    },
-    {
-        _id: "hostel-life",
-        title: "Hostel Life",
-        description: "Comfortable residential facilities with discipline and care.",
-        image: "https://placehold.co/800x800/0c2c55/c9a870?text=Hostel+Life",
-        order: 2,
-    },
-    {
-        _id: "transport",
-        title: "Transportation",
-        description: "Reliable transport for day scholars from nearby areas.",
-        image: "https://placehold.co/800x800/0c2c55/c9a870?text=Transportation",
-        order: 3,
-    },
-    {
-        _id: "security",
-        title: "Campus Security",
-        description: "CCTV and monitored facilities across the campus.",
-        image: "https://placehold.co/800x800/0c2c55/c9a870?text=Security",
-        order: 4,
-    },
-    {
-        _id: "food-zone",
-        title: "Food Zone",
-        description: "Hygienic mess and canteen services for students.",
-        image: "https://placehold.co/800x800/0c2c55/c9a870?text=Food+Zone",
-        order: 5,
-    },
-];
+const fallbackAmenities: Amenity[] = AMENITY_DEMO_ITEMS.map((item, idx) => ({
+    _id: `demo-${idx}`,
+    title: item.title,
+    description: item.description,
+    image: item.image,
+    order: item.order,
+}));
 
 async function getAmenities(): Promise<Amenity[]> {
     try {

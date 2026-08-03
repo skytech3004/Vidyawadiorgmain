@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import Amenity from "@/models/Amenity";
 import { jwtVerify } from "jose";
+import { seedAmenitiesIfEmpty } from "@/lib/amenities-seed";
 
 async function verifyAuth(req: NextRequest) {
     const token = req.cookies.get("adminToken")?.value;
@@ -23,7 +24,7 @@ export async function GET(request: NextRequest) {
             return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
         }
 
-        await connectDB();
+        await seedAmenitiesIfEmpty();
         const amenities = await Amenity.find({}).sort({ order: 1, createdAt: 1 });
         return NextResponse.json({ success: true, amenities });
     } catch (error: unknown) {
