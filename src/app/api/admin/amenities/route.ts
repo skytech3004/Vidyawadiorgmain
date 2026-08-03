@@ -3,6 +3,7 @@ import connectDB from "@/lib/mongodb";
 import Amenity from "@/models/Amenity";
 import { jwtVerify } from "jose";
 import { seedAmenitiesIfEmpty } from "@/lib/amenities-seed";
+import { revalidatePath } from "next/cache";
 
 async function verifyAuth(req: NextRequest) {
     const token = req.cookies.get("adminToken")?.value;
@@ -50,6 +51,7 @@ export async function POST(request: NextRequest) {
             order: data.order || 0,
         });
 
+        revalidatePath("/amenities");
         return NextResponse.json({ success: true, amenity }, { status: 201 });
     } catch (error: unknown) {
         const message = error instanceof Error ? error.message : "Unknown error";

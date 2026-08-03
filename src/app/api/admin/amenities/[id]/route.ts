@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import Amenity from "@/models/Amenity";
 import { jwtVerify } from "jose";
+import { revalidatePath } from "next/cache";
 
 async function verifyAuth(req: NextRequest) {
     const token = req.cookies.get("adminToken")?.value;
@@ -42,6 +43,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
             return NextResponse.json({ success: false, error: "Amenity not found" }, { status: 404 });
         }
 
+        revalidatePath("/amenities");
         return NextResponse.json({ success: true, amenity });
     } catch (error: unknown) {
         const message = error instanceof Error ? error.message : "Unknown error";
@@ -65,6 +67,7 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
             return NextResponse.json({ success: false, error: "Amenity not found" }, { status: 404 });
         }
 
+        revalidatePath("/amenities");
         return NextResponse.json({ success: true, message: "Amenity deleted successfully" });
     } catch (error: unknown) {
         console.error("Error deleting amenity:", error);

@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import Image from "next/image";
+import { unstable_noStore as noStore } from "next/cache";
 import connectDB from "@/lib/mongodb";
 import Amenity from "@/models/Amenity";
 import { AMENITY_DEMO_ITEMS } from "@/lib/amenities-data";
@@ -11,6 +12,8 @@ export const metadata = {
     title: "Amenities | Vidyawadi",
     description: "Explore the amenities and campus facilities at Vidyawadi.",
 };
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 function AmenityCard({
     title,
@@ -59,6 +62,7 @@ const fallbackAmenities: Amenity[] = AMENITY_DEMO_ITEMS.map((item, idx) => ({
 
 async function getAmenities(): Promise<Amenity[]> {
     try {
+        noStore();
         await connectDB();
         const amenities = await Amenity.find({}).sort({ order: 1, createdAt: 1 });
         if (amenities.length > 0) {
