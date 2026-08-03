@@ -2,18 +2,9 @@ import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import {
-    BookOpen,
-    Dumbbell,
-    ShieldCheck,
-    Wifi,
-    Bus,
-    Utensils,
-    Camera,
-    CreditCard,
-    Home,
-    Trophy,
-} from "lucide-react";
+import Image from "next/image";
+import connectDB from "@/lib/mongodb";
+import Amenity from "@/models/Amenity";
 
 export const metadata = {
     title: "Amenities | Vidyawadi",
@@ -21,41 +12,115 @@ export const metadata = {
 };
 
 function AmenityCard({
-    icon,
     title,
-    bullets,
+    description,
+    image,
 }: {
-    icon: React.ReactNode;
     title: string;
-    bullets: string[];
+    description: string;
+    image: string;
 }) {
     return (
         <div className="group relative bg-white/5 backdrop-blur-md rounded-[2rem] border border-white/10 overflow-hidden shadow-xl">
             <div className="absolute inset-0 bg-gradient-to-br from-oxford/40 via-transparent to-sandstone/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="relative p-8">
-                <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 text-sandstone flex items-center justify-center">
-                    {icon}
+            <div className="relative p-5 sm:p-6">
+                <div className="relative aspect-square rounded-[1.5rem] overflow-hidden bg-white/10 border border-white/10">
+                    <Image
+                        src={image}
+                        alt={title}
+                        fill
+                        unoptimized
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
                 </div>
-                <h3 className="mt-6 text-2xl font-black text-white leading-tight">{title}</h3>
-                <ul className="mt-4 space-y-3">
-                    {bullets.map((b, i) => (
-                        <li key={i} className="flex gap-3 text-white/75 text-sm leading-relaxed">
-                            <span className="mt-2 w-2 h-2 rounded-full bg-sandstone/70 shrink-0" />
-                            <span>{b}</span>
-                        </li>
-                    ))}
-                </ul>
+                <h3 className="mt-5 text-2xl font-black text-white leading-tight">{title}</h3>
+                <p className="mt-3 text-white/75 text-sm leading-relaxed">{description}</p>
             </div>
         </div>
     );
 }
 
-export default function AmenitiesPage() {
+type Amenity = {
+    _id: string;
+    title: string;
+    description: string;
+    image: string;
+    order: number;
+};
+
+const fallbackAmenities: Amenity[] = [
+    {
+        _id: "library",
+        title: "Library",
+        description: "Best course books, reference books, and inspirational titles.",
+        image: "https://placehold.co/800x800/0c2c55/c9a870?text=Library",
+        order: 0,
+    },
+    {
+        _id: "sports-complex",
+        title: "Sports Complex",
+        description: "Stadium, athletics track, indoor games, and training spaces.",
+        image: "https://placehold.co/800x800/0c2c55/c9a870?text=Sports+Complex",
+        order: 1,
+    },
+    {
+        _id: "hostel-life",
+        title: "Hostel Life",
+        description: "Comfortable residential facilities with discipline and care.",
+        image: "https://placehold.co/800x800/0c2c55/c9a870?text=Hostel+Life",
+        order: 2,
+    },
+    {
+        _id: "transport",
+        title: "Transportation",
+        description: "Reliable transport for day scholars from nearby areas.",
+        image: "https://placehold.co/800x800/0c2c55/c9a870?text=Transportation",
+        order: 3,
+    },
+    {
+        _id: "security",
+        title: "Campus Security",
+        description: "CCTV and monitored facilities across the campus.",
+        image: "https://placehold.co/800x800/0c2c55/c9a870?text=Security",
+        order: 4,
+    },
+    {
+        _id: "food-zone",
+        title: "Food Zone",
+        description: "Hygienic mess and canteen services for students.",
+        image: "https://placehold.co/800x800/0c2c55/c9a870?text=Food+Zone",
+        order: 5,
+    },
+];
+
+async function getAmenities(): Promise<Amenity[]> {
+    try {
+        await connectDB();
+        const amenities = await Amenity.find({}).sort({ order: 1, createdAt: 1 });
+        if (amenities.length > 0) {
+            return amenities.map((item) => ({
+                _id: String(item._id),
+                title: item.title,
+                description: item.description,
+                image: item.image,
+                order: item.order ?? 0,
+            }));
+        }
+    } catch (error) {
+        console.error("Error loading amenities:", error);
+    }
+
+    return fallbackAmenities;
+}
+
+export default async function AmenitiesPage() {
+    const amenities = await getAmenities();
+    const displayAmenities = [...amenities].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+
     return (
         <main className="min-h-screen bg-oxford text-white">
             <Navbar />
 
-            {/* Hero */}
             <section className="relative pt-32 pb-20 px-6 overflow-hidden">
                 <div className="absolute inset-0">
                     <div className="absolute -top-32 -right-32 w-[500px] h-[500px] bg-sandstone/15 rounded-full blur-3xl" />
@@ -93,108 +158,17 @@ export default function AmenitiesPage() {
                 </div>
             </section>
 
-            {/* Cards */}
             <section className="px-6 pb-20">
                 <div className="max-w-7xl mx-auto">
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <AmenityCard
-                            icon={<BookOpen size={26} className="text-sandstone" />}
-                            title="Library"
-                            bullets={[
-                                "Best course books, reference books, and inspirational titles.",
-                                "Upgrading the library is an ongoing process.",
-                                "A well-equipped library supports all-round development.",
-                            ]}
-                        />
-
-                        <AmenityCard
-                            icon={<Dumbbell size={26} className="text-sandstone" />}
-                            title="Sports Complex"
-                            bullets={[
-                                "Stadium to accommodate 300 people.",
-                                "National standard athletics track and national level courts (basketball, volleyball).",
-                                "Indoor gymnasium hall with gymnastic, badminton, table-tennis & Yoga education.",
-                                "Football & Hockey Grounds.",
-                            ]}
-                        />
-
-                        <AmenityCard
-                            icon={<Trophy size={26} className="text-sandstone" />}
-                            title="Horse Riding & Skill Development"
-                            bullets={[
-                                "Horse riding available as part of campus activities.",
-                                "Training and coaching for holistic growth (arts, culture, and practical skills).",
-                                "Skill development includes baking, embroidery, stitching, personal grooming and more.",
-                            ]}
-                        />
-
-                        <AmenityCard
-                            icon={<Home size={26} className="text-sandstone" />}
-                            title="Hostel Life"
-                            bullets={[
-                                "7 hostels accommodating 700 students.",
-                                "A disciplined lifestyle focused on study and personality development.",
-                                "Mess serves Jain food cooked in a hygienic environment (capacity: 400).",
-                            ]}
-                        />
-
-                        <AmenityCard
-                            icon={<Wifi size={26} className="text-sandstone" />}
-                            title="Internet Facilities"
-                            bullets={[
-                                "Internet through leased line and Wi-Fi for continuous connectivity.",
-                                "Campus and hostels are Wi-Fi enabled for round-the-clock access.",
-                                "Supports preparation for seminars, projects and research-oriented work.",
-                            ]}
-                        />
-
-                        <AmenityCard
-                            icon={<Bus size={26} className="text-sandstone" />}
-                            title="Transportation Facility"
-                            bullets={[
-                                "Bus facility for day scholars commuting from villages up to 50 km.",
-                                "Marked routes and pickup points with communicated pickup timing.",
-                                "Careful selection of reliable drivers for student safety.",
-                            ]}
-                        />
-
-                        <AmenityCard
-                            icon={<Camera size={26} className="text-sandstone" />}
-                            title="Campus Security (Camera Systems)"
-                            bullets={[
-                                "Video surveillance installed across the campus facilities.",
-                                "Cameras cover dormitories, libraries, sports complexes and key campus areas.",
-                                "Designed to ensure safety for students, faculty and facilities.",
-                            ]}
-                        />
-
-                        <AmenityCard
-                            icon={<ShieldCheck size={26} className="text-sandstone" />}
-                            title="Safety & Discipline"
-                            bullets={[
-                                "Hostel life revolves around discipline, duty and devotion.",
-                                "Infringement of hostel discipline is viewed seriously by authorities.",
-                                "A structured environment for focused learning and well-being.",
-                            ]}
-                        />
-
-                        <AmenityCard
-                            icon={<CreditCard size={26} className="text-sandstone" />}
-                            title="ATM Facility"
-                            bullets={[
-                                "An on-campus automated teller machine for basic banking transactions.",
-                            ]}
-                        />
-
-                        <AmenityCard
-                            icon={<Utensils size={26} className="text-sandstone" />}
-                            title="Food Zone"
-                            bullets={[
-                                "Day scholars are supported with a canteen facility for breakfast and evening tea with snacks.",
-                                "Canteen management works under the trust’s oversight with focus on quality and hygiene.",
-                                "Hostel mess serves Jain food in a hygienic environment.",
-                            ]}
-                        />
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {displayAmenities.map((item) => (
+                            <AmenityCard
+                                key={item._id}
+                                title={item.title}
+                                description={item.description}
+                                image={item.image}
+                            />
+                        ))}
                     </div>
                 </div>
             </section>
@@ -203,4 +177,3 @@ export default function AmenitiesPage() {
         </main>
     );
 }
-

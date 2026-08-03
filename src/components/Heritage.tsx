@@ -1,50 +1,49 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TimelineSVG from "./TimelineSVG";
 import { useTimelineAnimation } from "@/hooks/useTimelineAnimation";
+import { HERITAGE_DEMO_ITEMS } from "@/lib/heritage-data";
 
-const timelineEvents = [
-    {
-        year: "1956",
-        title: "The Foundation",
-        description: "Vidyawadi School was established with 5 students, and Subhadra ma'am was the only teacher in the beginning, in a small building.",
-        side: "left"
-    },
-    {
-        year: "1975",
-        title: "Campus Expansion",
-        description: "New academic block and science laboratories inaugurated by the Governor.",
-        side: "right"
-    },
-    {
-        year: "1985",
-        title: "NCC Introduction",
-        description: "NCC unit established, promoting discipline, patriotism, and leadership.",
-        side: "left"
-    },
-    {
-        year: "1995",
-        title: "Equestrian Center",
-        description: "First school in the region to introduce a dedicated horse riding program.",
-        side: "right"
-    },
-    {
-        year: "2010",
-        title: "Digital Revolution",
-        description: "Integration of smart classes and a comprehensive digital learning system.",
-        side: "left"
-    },
-    {
-        year: "2026",
-        title: "70 Years of Excellence",
-        description: "Celebrating our platinum jubilee with over 5,000 alumni worldwide.",
-        side: "right"
-    }
-];
+interface HeritageEvent {
+    _id?: string;
+    year: string;
+    title: string;
+    description: string;
+    side: "left" | "right";
+    order: number;
+}
+
+const fallbackTimelineEvents: HeritageEvent[] = HERITAGE_DEMO_ITEMS;
 
 export default function Heritage() {
     const { pathRef } = useTimelineAnimation();
+    const [timelineEvents, setTimelineEvents] = useState<HeritageEvent[]>(fallbackTimelineEvents);
+
+    useEffect(() => {
+        const controller = new AbortController();
+
+        const loadHeritage = async () => {
+            try {
+                const res = await fetch("/api/heritage", { signal: controller.signal });
+                const data = await res.json();
+
+                if (data.success && Array.isArray(data.heritage) && data.heritage.length > 0) {
+                    setTimelineEvents(data.heritage);
+                }
+            } catch (error) {
+                if ((error as Error).name !== "AbortError") {
+                    console.error("Error loading heritage timeline:", error);
+                }
+            }
+        };
+
+        loadHeritage();
+
+        return () => controller.abort();
+    }, []);
+
+    const displayEvents = [...timelineEvents].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 
     return (
         <section id="heritage" className="py-32 bg-white relative scroll-mt-24 overflow-hidden">
@@ -60,9 +59,9 @@ export default function Heritage() {
                 </div>
 
                 <div className="relative space-y-32">
-                    {timelineEvents.map((event, i) => (
+                    {displayEvents.map((event) => (
                         <div
-                            key={event.year}
+                            key={event._id || `${event.year}-${event.title}`}
                             className={`flex flex-col md:flex-row items-center gap-12 ${event.side === 'right' ? 'md:flex-row-reverse' : ''
                                 }`}
                         >

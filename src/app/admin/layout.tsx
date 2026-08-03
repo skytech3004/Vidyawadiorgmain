@@ -7,20 +7,18 @@ import {
     LayoutDashboard,
     FileText,
     Image as ImageIcon,
-    Users,
-    Trophy,
     MessageSquare,
     LogOut,
     ChevronRight,
     School,
-    Bed,
     Settings,
-    Heart,
     Menu,
     X,
     Activity,
     Briefcase,
-    Calendar
+    Calendar,
+    Landmark,
+    Building2
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -33,6 +31,8 @@ const sidebarItems = [
     { name: "Careers", href: "/admin/careers", icon: Briefcase },
     { name: "Career Apps", href: "/admin/career-applications", icon: FileText },
     { name: "Events & News", href: "/admin/events", icon: Calendar },
+    { name: "Heritage", href: "/admin/heritage", icon: Landmark },
+    { name: "Amenities", href: "/admin/amenities", icon: Building2 },
     { name: "Settings", href: "/admin/settings", icon: Settings },
     { name: "Activity Logs", href: "/admin/logs", icon: Activity },
 ];
@@ -41,11 +41,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     const pathname = usePathname();
     const router = useRouter();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-    // Close menu on route change
-    useEffect(() => {
-        setIsMobileMenuOpen(false);
-    }, [pathname]);
 
     // Handle body scroll
     useEffect(() => {
@@ -104,6 +99,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                                 <Link
                                     key={item.href}
                                     href={item.href}
+                                    onClick={() => setIsMobileMenuOpen(false)}
                                     className={`relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all group overflow-hidden ${isActive
                                         ? "text-oxford font-bold shadow-lg"
                                         : "text-white/60 hover:text-white hover:bg-white/5"
@@ -134,7 +130,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                             try {
                                 await fetch("/api/auth/logout", { method: "POST" });
                                 router.push("/admin/login");
-                            } catch (err) {
+                            } catch {
                                 router.push("/admin/login");
                             }
                         }}

@@ -106,7 +106,7 @@ export default function Navbar() {
                         <a href="https://www.facebook.com/profile.php?id=61583590541462" className="hover:text-sandstone transition-colors"><Facebook size={18} /></a>
                         <a href="https://www.instagram.com/vidyawadiofficial" target="_blank" rel="noopener noreferrer" className="hover:text-sandstone transition-colors"><Instagram size={18} /></a>
                         <a href="https://www.linkedin.com/company/111560973/admin/page-posts/published/" className="hover:text-sandstone transition-colors"><Linkedin size={18} /></a>
-                        <a href="https://www.youtube.com/@Vidyawadi-MMSS" target="_blank" rel="noopener noreferrer" className="hover:text-sandstone transition-colors"><Youtube size={18} /></a>
+                        <a href="https://www.youtube.com/@MMSSVIDYAWADIOFFICIAL" target="_blank" rel="noopener noreferrer" className="hover:text-sandstone transition-colors"><Youtube size={18} /></a>
 
                         {/* <div className="w-px h-3 bg-white/20 mx-2" > */}
                         {/* <span className="uppercase tracking-widest text-[10px] font-bold">Enrollment Open</span> */}

@@ -148,7 +148,7 @@ export default function ContactForm() {
                         {/* Map Embed */}
                         <div className="rounded-[2rem] overflow-hidden border border-white/10 h-[300px] relative group shadow-2xl">
                             <iframe
-                                src="https://www.google.com/maps?q=Leeladevi+Parasmal+Sancheti+Girls+College&output=embed"
+                                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d4276.270059479093!2d73.2881943!3d25.3202156!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3942859aa355749b%3A0xb76d3435af9ad639!2sLeela%20Devi%20Parasmal%20Sancheti%20Kanya%20Mahavidyalaya%2C%20Vidyawadi!5e1!3m2!1sen!2sin!4v1785582267868!5m2!1sen!2sin"
                                 width="100%"
                                 height="100%"
                                 style={{ border: 0 }}

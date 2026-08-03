@@ -26,7 +26,7 @@ export default function Footer() {
                             <a href="https://www.linkedin.com/company/111560973/admin/page-posts/published/" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-sandstone hover:text-oxford transition-all">
                                 <Linkedin size={18} />
                             </a>
-                            <a href="https://www.youtube.com/@Vidyawadi-MMSS" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-sandstone hover:text-oxford transition-all">
+                            <a href="https://www.youtube.com/@MMSSVIDYAWADIOFFICIAL" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-sandstone hover:text-oxford transition-all">
                                 <Youtube size={18} />
                             </a>
                         </div>
@@ -54,7 +54,7 @@ export default function Footer() {
                             <li className="flex gap-4 text-white/60">
                                 <MapPin className="text-sandstone shrink-0" size={20} />
                                 <a 
-                                    href="https://www.google.com/maps/search/Leeladevi+Parasmal+Sancheti+Girls+College+Vidyawadi+Rani,+Khimel+-+Rani+Station+Rd,+Industrial+Area,+Rani,+Rajasthan+306115,+India" 
+                                    href="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d4276.270059479093!2d73.2881943!3d25.3202156!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3942859aa355749b%3A0xb76d3435af9ad639!2sLeela%20Devi%20Parasmal%20Sancheti%20Kanya%20Mahavidyalaya%2C%20Vidyawadi!5e1!3m2!1sen!2sin!4v1785582267868!5m2!1sen!2sin" 
                                     target="_blank" 
                                     rel="noopener noreferrer"
                                     className="text-sm hover:text-sandstone transition-colors"
