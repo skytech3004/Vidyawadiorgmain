@@ -18,7 +18,8 @@ import {
     Briefcase,
     Calendar,
     Landmark,
-    Building2
+    Building2,
+    Award
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -33,6 +34,8 @@ const sidebarItems = [
     { name: "Events & News", href: "/admin/events", icon: Calendar },
     { name: "Heritage", href: "/admin/heritage", icon: Landmark },
     { name: "Amenities", href: "/admin/amenities", icon: Building2 },
+    { name: "Facilities", href: "/admin/facilities", icon: Building2 },
+    { name: "Awards", href: "/admin/awards", icon: Award },
     { name: "Settings", href: "/admin/settings", icon: Settings },
     { name: "Activity Logs", href: "/admin/logs", icon: Activity },
 ];

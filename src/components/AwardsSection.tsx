@@ -4,28 +4,70 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { HOME_AWARD_DEMO_ITEMS } from "@/lib/home-demo-data";
 
-const award = {
-    id: 1,
-    title: "Awarded by Marwad Ratna",
-    organization: "Excellence in Education",
-    year: "2025",
-    images: ["/award1.jpg", "/award.jpg", "/award3.jpg"],
-};
+interface AwardRecord {
+    _id: string;
+    title: string;
+    organization: string;
+    year: string;
+    images: string[];
+    order?: number;
+}
+
+const fallbackAwards: AwardRecord[] = HOME_AWARD_DEMO_ITEMS.map((item, index) => ({
+    _id: `fallback-award-${index + 1}`,
+    ...item,
+}));
 
 export default function AwardsSection() {
+    const [awards, setAwards] = useState<AwardRecord[]>(fallbackAwards);
     const [currentSlide, setCurrentSlide] = useState(0);
 
     useEffect(() => {
+        let isMounted = true;
+
+        const loadAwards = async () => {
+            try {
+                const res = await fetch("/api/awards", { cache: "no-store" });
+                const data = await res.json();
+                if (isMounted && data.success && Array.isArray(data.awards) && data.awards.length > 0) {
+                    setAwards(data.awards);
+                }
+            } catch (error) {
+                console.error("Error loading awards:", error);
+            }
+        };
+
+        loadAwards();
+        return () => {
+            isMounted = false;
+        };
+    }, []);
+
+    const award = [...awards].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))[0] ?? fallbackAwards[0];
+
+    useEffect(() => {
+        if (!award.images?.length) return;
+
         const timer = setInterval(() => {
             setCurrentSlide((prev) => (prev + 1) % award.images.length);
         }, 6000);
 
         return () => clearInterval(timer);
-    }, []);
+    }, [award.images]);
 
-    const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % award.images.length);
-    const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + award.images.length) % award.images.length);
+    const nextSlide = () => {
+        if (!award.images?.length) return;
+        setCurrentSlide((prev) => (prev + 1) % award.images.length);
+    };
+
+    const prevSlide = () => {
+        if (!award.images?.length) return;
+        setCurrentSlide((prev) => (prev - 1 + award.images.length) % award.images.length);
+    };
+
+    const slides = award.images?.length ? award.images : ["/award1.jpg"];
 
     return (
         <section className="py-24 px-6 bg-stone-50 overflow-hidden">
@@ -50,7 +92,7 @@ export default function AwardsSection() {
                 </div>
 
                 <motion.div
-                    key={award.id}
+                    key={award._id}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -74,7 +116,7 @@ export default function AwardsSection() {
                         <div className="relative w-full aspect-[21/9] md:aspect-[3/1] rounded-2xl overflow-hidden group shadow-2xl border-4 border-white bg-mint/20">
                             <AnimatePresence mode="wait">
                                 <motion.div
-                                    key={currentSlide}
+                                    key={`${award._id}-${currentSlide}`}
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0 }}
@@ -82,15 +124,15 @@ export default function AwardsSection() {
                                     className="absolute inset-0 flex items-center justify-center"
                                 >
                                     <Image
-                                        src={award.images[currentSlide]}
+                                        src={slides[currentSlide % slides.length]}
                                         alt=""
                                         fill
                                         className="object-cover blur-xl opacity-35 scale-110 pointer-events-none select-none"
                                         unoptimized
                                     />
                                     <Image
-                                        src={award.images[currentSlide]}
-                                        alt={`School Banner ${currentSlide + 1}`}
+                                        src={slides[currentSlide % slides.length]}
+                                        alt={`${award.title} ${currentSlide + 1}`}
                                         fill
                                         sizes="(max-width: 768px) 100vw, 1200px"
                                         className="object-contain relative z-10"
@@ -120,7 +162,7 @@ export default function AwardsSection() {
                             </div>
 
                             <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2">
-                                {award.images.map((_, idx) => (
+                                {slides.map((_, idx) => (
                                     <button
                                         key={idx}
                                         type="button"

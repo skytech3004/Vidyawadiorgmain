@@ -1,105 +1,61 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
-import {
-    Dna,
-    BookOpen,
-    Home,
-    Palette, Medal,
-    Crown
-} from "lucide-react";
+import { HOME_FACILITY_DEMO_ITEMS } from "@/lib/home-demo-data";
 
 interface Facility {
+    _id: string;
     title: string;
     description: string;
-    icon: React.ReactNode | string;
+    icon: string;
     theme?: string;
     features?: string[];
-    image?: string;
+    image: string;
+    order?: number;
 }
 
-const facilities: Facility[] = [
-    {
-        title: "NCC Training Camp",
-        description: "Discipline-based military training including rifle shooting, teamwork, and leadership development under expert supervision.",
-        icon: "🎯",
-        image: "/images/uploads/vidywadi_main/shooting.jpeg",
+const fallbackFacilities: Facility[] = HOME_FACILITY_DEMO_ITEMS.map((item, index) => ({
+    _id: `fallback-${index + 1}`,
+    ...item,
+}));
 
-        theme: "bg-oxford",
-        features: ["Rifle Shooting", "Discipline & Leadership", "Field Training"]
-    },
-    {
-        title: "NCC Training",
-        description: "Building discipline and leadership through Army and Navy wings.",
-        icon: "🎖️",
-        image: "/images/english school/a9fa45d8-e14b-4e5f-b4c0-64cc9c49e22f.jpg",
-        theme: "bg-sandstone",
-        features: ["Army Wing", "Navy Wing"]
-    },
-    {
-        title: "Science Labs",
-        description: "Advanced physics, chemistry, and biology labs for practical excellence.",
-        icon: <Dna className="w-12 h-12 text-white/30" />,
-        image: "/Chemistry Laboratory.jpg",
-        theme: "bg-teal-blue",
-        features: ["Physics", "Chemistry", "Biology"]
-    },
-    {
-        title: "Digital Library",
-        description: "10,000+ books and global digital resources for research.",
-        icon: <BookOpen className="w-12 h-12 text-white/30" />,
-        theme: "bg-oxford-dark",
-        image: "/uploads/mess/aa.jpg",
-
-        features: ["Digital Access", "Offline Study"]
-    },
-    {
-        title: "Skill Center",
-        description: "Life skills training including Baking, Culinary, and Grooming.",
-        icon: <Crown className="w-12 h-12 text-white/30" />,
-        image: "/skill.jpg",
-
-        theme: "bg-sandstone-dark",
-        features: ["Baking", "Culinary", "Grooming"]
-    },
-    {
-        title: "Arts & Culture",
-        description: "Creative spaces for music, dance, and fine arts excellence.",
-        icon: <Palette className="w-12 h-12 text-white/30" />,
-        image: "/Music Laboratory.jpg",
-        theme: "bg-oxford",
-        features: ["Music", "Dance", "Art"]
-    },
-    {
-        title: "Self Defense",
-        description: "Empowering girls with Karate and advanced self-defense techniques.",
-        icon: "🥋",
-        image: "/karate.png",
-
-        theme: "bg-teal-blue",
-        features: ["Karate", "Safety Drills"]
-    },
-    {
-        title: "Hostel Life",
-        description: "Safe and nurturing environment with 24/7 care and security.",
-        icon: <Home className="w-12 h-12 text-white/30" />,
-        image: "/hostel.jpg",
-        theme: "bg-sandstone",
-        features: ["24/7 Care", "Security"]
-    },
-    {
-        title: "NSS",
-        description: "National Service Scheme for community service and leadership development.",
-        icon: <Medal className="w-12 h-12 text-white/30" />,
-        image: "/NSS.jpg",
-        theme: "bg-sandstone",
-        features: ["24/7 Care", "Security"]
-    }
-];
+function getGradient(theme?: string) {
+    if (theme === "bg-sandstone") return "from-sandstone to-sandstone-dark";
+    if (theme === "bg-sandstone-dark") return "from-sandstone-dark to-oxford";
+    if (theme === "bg-teal-blue") return "from-teal-blue to-oxford";
+    if (theme === "bg-oxford-dark") return "from-oxford-dark to-oxford";
+    return "from-oxford to-oxford-dark";
+}
 
 export default function Facilities() {
+    const [facilities, setFacilities] = useState<Facility[]>(fallbackFacilities);
+
+    useEffect(() => {
+        let isMounted = true;
+
+        const loadFacilities = async () => {
+            try {
+                const res = await fetch("/api/facilities", { cache: "no-store" });
+                const data = await res.json();
+                if (isMounted && data.success && Array.isArray(data.facilities) && data.facilities.length > 0) {
+                    setFacilities(data.facilities);
+                }
+            } catch (error) {
+                console.error("Error loading facilities:", error);
+            }
+        };
+
+        loadFacilities();
+        return () => {
+            isMounted = false;
+        };
+    }, []);
+
+    const displayFacilities = [...facilities].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+
     return (
         <section id="facilities" data-theme="light" className="py-24 px-6 bg-[#fcf9f2] scroll-mt-24 font-inter">
             <div className="max-w-7xl mx-auto">
@@ -120,40 +76,31 @@ export default function Facilities() {
                 </motion.div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-                    {facilities.map((fac, i) => (
+                    {displayFacilities.map((fac, i) => (
                         <motion.div
-                            key={fac.title}
+                            key={fac._id}
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1, duration: 0.5 }}
                             className="group relative h-[500px] rounded-[2.5rem] overflow-hidden shadow-2xl transition-all duration-700 hover:shadow-sandstone/20"
                         >
-                            {/* Image Background */}
                             <div className="absolute inset-0 z-0">
-                                {fac.image ? (
-                                    <img
-                                        src={fac.image}
-                                        alt={fac.title}
-                                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                                    />
-                                ) : (
-                                    <div className={cn(
-                                        "w-full h-full flex items-center justify-center bg-gradient-to-br",
-                                        fac.theme === "bg-sandstone" ? "from-sandstone to-sandstone-dark" : "from-oxford to-oxford-dark"
-                                    )}>
-                                        <div className="scale-150 opacity-20">{fac.icon}</div>
-                                    </div>
-                                )}
-                                <div className="absolute inset-0 bg-gradient-to-t from-oxford-dark/95 via-oxford-dark/40 to-transparent z-10" />
+                                <Image
+                                    src={fac.image}
+                                    alt={fac.title}
+                                    fill
+                                    unoptimized
+                                    className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                                />
+                                <div className={cn("absolute inset-0 bg-gradient-to-t z-10", getGradient(fac.theme), "opacity-90")} />
                             </div>
 
-                            {/* Content Overlay */}
                             <div className="absolute inset-0 z-20 p-10 flex flex-col justify-end transform transition-transform duration-500 group-hover:translate-y-[-10px]">
                                 <div className="mb-6 transform transition-all duration-500 delay-100 group-hover:translate-y-[-10px]">
                                     <div className="flex items-center gap-4 mb-4">
-                                        <div className="p-3 bg-sandstone/10 backdrop-blur-md rounded-2xl text-sandstone border border-sandstone/20">
-                                            {typeof fac.icon === 'string' ? <span className="text-2xl">{fac.icon}</span> : React.cloneElement(fac.icon as any, { className: "w-6 h-6" })}
+                                        <div className="p-3 bg-sandstone/10 backdrop-blur-md rounded-2xl text-sandstone border border-sandstone/20 min-w-14 flex items-center justify-center">
+                                            <span className="text-xs font-black uppercase tracking-[0.2em] text-white">{fac.icon || fac.title.slice(0, 2)}</span>
                                         </div>
                                         <h3 className="text-3xl font-black text-white uppercase tracking-tight leading-none">
                                             {fac.title}
@@ -164,7 +111,7 @@ export default function Facilities() {
                                     </p>
 
                                     <div className="flex flex-wrap gap-2 mb-8 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-300 transform translate-y-4 group-hover:translate-y-0">
-                                        {fac.features?.map(feat => (
+                                        {fac.features?.map((feat) => (
                                             <span key={feat} className="px-4 py-1.5 rounded-full text-[10px] uppercase tracking-[0.2em] font-black bg-white/10 backdrop-blur-md border border-white/10 text-white">
                                                 {feat}
                                             </span>
@@ -178,7 +125,6 @@ export default function Facilities() {
                                 </div>
                             </div>
 
-                            {/* Corner Accent */}
                             <div className="absolute top-0 right-0 w-32 h-32 bg-sandstone/10 backdrop-blur-3xl rounded-bl-[5rem] z-10 translate-x-16 -translate-y-16 group-hover:translate-x-8 group-hover:-translate-y-8 transition-transform duration-700" />
                         </motion.div>
                     ))}
