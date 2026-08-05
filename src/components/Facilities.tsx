@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { HOME_FACILITY_DEMO_ITEMS } from "@/lib/home-demo-data";
 
 interface Facility {
     _id: string;
@@ -17,11 +16,6 @@ interface Facility {
     order?: number;
 }
 
-const fallbackFacilities: Facility[] = HOME_FACILITY_DEMO_ITEMS.map((item, index) => ({
-    _id: `fallback-${index + 1}`,
-    ...item,
-}));
-
 function getGradient(theme?: string) {
     if (theme === "bg-sandstone") return "from-sandstone to-sandstone-dark";
     if (theme === "bg-sandstone-dark") return "from-sandstone-dark to-oxford";
@@ -31,7 +25,7 @@ function getGradient(theme?: string) {
 }
 
 export default function Facilities() {
-    const [facilities, setFacilities] = useState<Facility[]>(fallbackFacilities);
+    const [facilities, setFacilities] = useState<Facility[]>([]);
 
     useEffect(() => {
         let isMounted = true;
@@ -76,7 +70,13 @@ export default function Facilities() {
                 </motion.div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-                    {displayFacilities.map((fac, i) => (
+                    {displayFacilities.length === 0 ? (
+                        <div className="col-span-full rounded-[2rem] border border-dashed border-oxford/10 bg-white p-10 text-center text-gray-500 shadow-sm">
+                            <h3 className="text-2xl font-black text-oxford mb-3">No facilities found</h3>
+                            <p>Add facility records in the admin panel and they will load from the database here.</p>
+                        </div>
+                    ) : (
+                        displayFacilities.map((fac, i) => (
                         <motion.div
                             key={fac._id}
                             initial={{ opacity: 0, y: 30 }}
@@ -127,7 +127,8 @@ export default function Facilities() {
 
                             <div className="absolute top-0 right-0 w-32 h-32 bg-sandstone/10 backdrop-blur-3xl rounded-bl-[5rem] z-10 translate-x-16 -translate-y-16 group-hover:translate-x-8 group-hover:-translate-y-8 transition-transform duration-700" />
                         </motion.div>
-                    ))}
+                        ))
+                    )}
                 </div>
             </div>
         </section>

@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import HomeFacility from "@/models/HomeFacility";
 import { seedHomeFacilitiesIfEmpty } from "@/lib/home-seed";
-import { HOME_FACILITY_DEMO_ITEMS } from "@/lib/home-demo-data";
 
 export async function GET() {
     try {
@@ -12,13 +11,6 @@ export async function GET() {
         return NextResponse.json({ success: true, facilities });
     } catch (error) {
         console.error("Error fetching facilities:", error);
-        return NextResponse.json({
-            success: true,
-            facilities: HOME_FACILITY_DEMO_ITEMS.map((item, index) => ({
-                _id: `demo-facility-${index + 1}`,
-                ...item,
-            })),
-            fallback: true,
-        });
+        return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });
     }
 }

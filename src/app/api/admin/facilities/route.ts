@@ -3,8 +3,6 @@ import { jwtVerify } from "jose";
 import { revalidatePath } from "next/cache";
 import connectDB from "@/lib/mongodb";
 import HomeFacility from "@/models/HomeFacility";
-import { seedHomeFacilitiesIfEmpty } from "@/lib/home-seed";
-import { HOME_FACILITY_DEMO_ITEMS } from "@/lib/home-demo-data";
 
 async function verifyAuth(req: NextRequest) {
     const token = req.cookies.get("adminToken")?.value;
@@ -26,21 +24,9 @@ export async function GET(request: NextRequest) {
             return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
         }
 
-        try {
-            await seedHomeFacilitiesIfEmpty();
-            const facilities = await HomeFacility.find({}).sort({ order: 1, createdAt: 1 });
-            return NextResponse.json({ success: true, facilities });
-        } catch (dbError) {
-            console.error("Falling back to demo facilities:", dbError);
-            return NextResponse.json({
-                success: true,
-                facilities: HOME_FACILITY_DEMO_ITEMS.map((item, index) => ({
-                    _id: `demo-facility-${index + 1}`,
-                    ...item,
-                })),
-                fallback: true,
-            });
-        }
+        await connectDB();
+        const facilities = await HomeFacility.find({}).sort({ order: 1, createdAt: 1 });
+        return NextResponse.json({ success: true, facilities });
     } catch (error) {
         console.error("Error fetching facilities:", error);
         return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });

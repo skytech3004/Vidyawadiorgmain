@@ -12,7 +12,6 @@ import Academics from "@/components/Academics";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import HomeNewsEvents from "@/components/HomeNewsEvents";
-import AdmissionsPopup from "@/components/AdmissionsPopup";
 import GallerySection from "@/components/GallerySection";
 import AwardsSection from "@/components/AwardsSection";
 
@@ -22,7 +21,6 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen">
-      <AdmissionsPopup />
       <Navbar />
       <Hero />
       <About />

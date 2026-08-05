@@ -148,6 +148,9 @@ export default function AwardsAdminPage() {
                 <div>
                     <h1 className="text-3xl sm:text-4xl font-black text-oxford mb-2">Awards Manager</h1>
                     <p className="text-gray-500 font-medium">Manage the homepage award spotlight and its image carousel</p>
+                    <p className="mt-2 text-xs text-gray-400 font-medium">
+                        Tip: lower `Order` values appear first on the homepage. If two items share the same order, the newest entry wins.
+                    </p>
                 </div>
                 <button
                     onClick={() => handleOpenModal()}
