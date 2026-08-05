@@ -1,0 +1,39 @@
+
+> vidyawadi-school@0.1.0 dev
+> next dev
+
+▲ Next.js 16.1.4 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.56.1:3000
+- Environments: .env.local, .env
+
+✓ Starting...
+○ Compiling middleware ...
+✓ Ready in 37.9s
+○ Compiling / ...
+ GET / 200 in 27.6s (compile: 26.9s, render: 645ms)
+○ Compiling /_not-found/page ...
+ GET /api/facilities 200 in 20.7s (compile: 20.6s, render: 64ms)
+ GET /api/admin/settings 200 in 21.0s (compile: 20.4s, render: 641ms)
+ GET /api/awards 200 in 21.0s (compile: 20.4s, render: 519ms)
+ GET /ritu_vaishnav_created.mp4 404 in 23.4s (compile: 4.2s, render: 19.2s)
+ GET /sw.js 404 in 199ms (compile: 51ms, render: 149ms)
+○ Compiling /gallery ...
+==> [PROXY] Requested: gallery/1772675194066-Picture27.jpg
+==> [PROXY] Looking at: F:\videos\vidyawadi-school\public\uploads\gallery\1772675194066-Picture27.jpg
+==> [PROXY] Requested: gallery/1772676622191-_CDS7370.JPG
+==> [PROXY] Looking at: F:\videos\vidyawadi-school\public\uploads\gallery\1772676622191-_CDS7370.JPG
+==> [PROXY] Requested: gallery/1772676889187-Fine-Arts-Laboratory.jpg
+==> [PROXY] Looking at: F:\videos\vidyawadi-school\public\uploads\gallery\1772676889187-Fine-Arts-Laboratory.jpg
+==> [PROXY] Requested: gallery/1772676559116-_29012022131408638.jpg
+==> [PROXY] Looking at: F:\videos\vidyawadi-school\public\uploads\gallery\1772676559116-_29012022131408638.jpg
+ GET /uploads/gallery/1772675194066-Picture27.jpg 404 in 12.0s (compile: 11.6s, render: 346ms)
+ GET /uploads/gallery/1772676622191-_CDS7370.JPG 404 in 12.0s (compile: 11.6s, render: 347ms)
+ GET /uploads/gallery/1772676889187-Fine-Arts-Laboratory.jpg 404 in 12.0s (compile: 11.6s, render: 348ms)
+ GET /uploads/gallery/1772676559116-_29012022131408638.jpg 404 in 12.0s (compile: 11.6s, render: 349ms)
+ GET /gallery 200 in 11.8s (compile: 11.6s, render: 184ms)
+ GET /gallery?category=Events 200 in 11.7s (compile: 11.6s, render: 120ms)
+ GET /gallery?category=Others 200 in 151ms (compile: 51ms, render: 101ms)
+ GET /gallery?category=Infrastructure 200 in 150ms (compile: 102ms, render: 49ms)
+ GET /gallery?category=Fun+&+Food+Fest= 200 in 146ms (compile: 30ms, render: 117ms)
+ GET /gallery?category=Laboratories 200 in 93ms (compile: 30ms, render: 63ms)

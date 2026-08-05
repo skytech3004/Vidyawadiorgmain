@@ -1,0 +1,11 @@
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+⚠ Cross origin request detected from 127.0.0.1 to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+==> [PROXY] 404: File not found on disk at F:\videos\vidyawadi-school\public\uploads\gallery\1772675194066-Picture27.jpg
+==> [PROXY] 404: File not found on disk at F:\videos\vidyawadi-school\public\uploads\gallery\1772676622191-_CDS7370.JPG
+==> [PROXY] 404: File not found on disk at F:\videos\vidyawadi-school\public\uploads\gallery\1772676889187-Fine-Arts-Laboratory.jpg
+==> [PROXY] 404: File not found on disk at F:\videos\vidyawadi-school\public\uploads\gallery\1772676559116-_29012022131408638.jpg
+⨯ The requested resource isn't a valid image for /uploads/gallery/1772676889187-Fine-Arts-Laboratory.jpg received null
+⨯ The requested resource isn't a valid image for /uploads/gallery/1772676622191-_CDS7370.JPG received null
+⨯ The requested resource isn't a valid image for /uploads/gallery/1772675194066-Picture27.jpg received null
+⨯ The requested resource isn't a valid image for /uploads/gallery/1772676559116-_29012022131408638.jpg received null
