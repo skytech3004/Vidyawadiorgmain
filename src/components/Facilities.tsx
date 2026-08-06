@@ -16,14 +16,6 @@ interface Facility {
     order?: number;
 }
 
-function getGradient(theme?: string) {
-    if (theme === "bg-sandstone") return "from-sandstone to-sandstone-dark";
-    if (theme === "bg-sandstone-dark") return "from-sandstone-dark to-oxford";
-    if (theme === "bg-teal-blue") return "from-teal-blue to-oxford";
-    if (theme === "bg-oxford-dark") return "from-oxford-dark to-oxford";
-    return "from-oxford to-oxford-dark";
-}
-
 export default function Facilities() {
     const [facilities, setFacilities] = useState<Facility[]>([]);
 
@@ -77,56 +69,69 @@ export default function Facilities() {
                         </div>
                     ) : (
                         displayFacilities.map((fac, i) => (
-                        <motion.div
-                            key={fac._id}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.1, duration: 0.5 }}
-                            className="group relative h-[500px] rounded-[2.5rem] overflow-hidden shadow-2xl transition-all duration-700 hover:shadow-sandstone/20"
-                        >
-                            <div className="absolute inset-0 z-0">
-                                <Image
-                                    src={fac.image}
-                                    alt={fac.title}
-                                    fill
-                                    unoptimized
-                                    className="object-cover transition-transform duration-1000 group-hover:scale-110"
-                                />
-                                <div className={cn("absolute inset-0 bg-gradient-to-t z-10", getGradient(fac.theme), "opacity-90")} />
-                            </div>
-
-                            <div className="absolute inset-0 z-20 p-10 flex flex-col justify-end transform transition-transform duration-500 group-hover:translate-y-[-10px]">
-                                <div className="mb-6 transform transition-all duration-500 delay-100 group-hover:translate-y-[-10px]">
-                                    <div className="flex items-center gap-4 mb-4">
-                                        <div className="p-3 bg-sandstone/10 backdrop-blur-md rounded-2xl text-sandstone border border-sandstone/20 min-w-14 flex items-center justify-center">
-                                            <span className="text-xs font-black uppercase tracking-[0.2em] text-white">{fac.icon || fac.title.slice(0, 2)}</span>
+                            <motion.div
+                                key={fac._id}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1, duration: 0.5 }}
+                                className="group relative h-[500px] rounded-[2.5rem] overflow-hidden shadow-2xl transition-all duration-700 hover:shadow-sandstone/20"
+                            >
+                                <div className="absolute inset-0 z-0">
+                                    {fac.image ? (
+                                        <Image
+                                            src={fac.image}
+                                            alt={fac.title}
+                                            fill
+                                            unoptimized
+                                            className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                                        />
+                                    ) : (
+                                        <div
+                                            className={cn(
+                                                "w-full h-full flex items-center justify-center bg-gradient-to-br",
+                                                fac.theme === "bg-sandstone"
+                                                    ? "from-sandstone to-sandstone-dark"
+                                                    : "from-oxford to-oxford-dark"
+                                            )}
+                                        >
+                                            <div className="scale-150 opacity-20 text-white">{fac.icon}</div>
                                         </div>
-                                        <h3 className="text-3xl font-black text-white uppercase tracking-tight leading-none">
-                                            {fac.title}
-                                        </h3>
-                                    </div>
-                                    <p className="text-white/80 text-lg leading-relaxed mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
-                                        {fac.description}
-                                    </p>
-
-                                    <div className="flex flex-wrap gap-2 mb-8 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-300 transform translate-y-4 group-hover:translate-y-0">
-                                        {fac.features?.map((feat) => (
-                                            <span key={feat} className="px-4 py-1.5 rounded-full text-[10px] uppercase tracking-[0.2em] font-black bg-white/10 backdrop-blur-md border border-white/10 text-white">
-                                                {feat}
-                                            </span>
-                                        ))}
-                                    </div>
-
-                                    <button className="flex items-center gap-4 text-sandstone font-black text-sm uppercase tracking-widest group/btn bg-white/5 hover:bg-sandstone hover:text-oxford px-6 py-4 rounded-2xl transition-all duration-300 w-fit backdrop-blur-sm border border-sandstone/30">
-                                        Explore Excellence
-                                        <div className="w-8 h-px bg-current group-hover/btn:w-12 transition-all duration-300" />
-                                    </button>
+                                    )}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-oxford-dark/95 via-oxford-dark/40 to-transparent z-10" />
                                 </div>
-                            </div>
 
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-sandstone/10 backdrop-blur-3xl rounded-bl-[5rem] z-10 translate-x-16 -translate-y-16 group-hover:translate-x-8 group-hover:-translate-y-8 transition-transform duration-700" />
-                        </motion.div>
+                                <div className="absolute inset-0 z-20 p-10 flex flex-col justify-end transform transition-transform duration-500 group-hover:translate-y-[-10px]">
+                                    <div className="mb-6 transform transition-all duration-500 delay-100 group-hover:translate-y-[-10px]">
+                                        <div className="flex items-center gap-4 mb-4">
+                                            <div className="p-3 bg-sandstone/10 backdrop-blur-md rounded-2xl text-sandstone border border-sandstone/20 min-w-14 flex items-center justify-center">
+                                                <span className="text-xs font-black uppercase tracking-[0.2em] text-white">{fac.icon || fac.title.slice(0, 2)}</span>
+                                            </div>
+                                            <h3 className="text-3xl font-black text-white uppercase tracking-tight leading-none">
+                                                {fac.title}
+                                            </h3>
+                                        </div>
+                                        <p className="text-white/80 text-lg leading-relaxed mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
+                                            {fac.description}
+                                        </p>
+
+                                        <div className="flex flex-wrap gap-2 mb-8 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-300 transform translate-y-4 group-hover:translate-y-0">
+                                            {fac.features?.map((feat) => (
+                                                <span key={feat} className="px-4 py-1.5 rounded-full text-[10px] uppercase tracking-[0.2em] font-black bg-white/10 backdrop-blur-md border border-white/10 text-white">
+                                                    {feat}
+                                                </span>
+                                            ))}
+                                        </div>
+
+                                        <button className="flex items-center gap-4 text-sandstone font-black text-sm uppercase tracking-widest group/btn bg-white/5 hover:bg-sandstone hover:text-oxford px-6 py-4 rounded-2xl transition-all duration-300 w-fit backdrop-blur-sm border border-sandstone/30">
+                                            Explore Excellence
+                                            <div className="w-8 h-px bg-current group-hover/btn:w-12 transition-all duration-300" />
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-sandstone/10 backdrop-blur-3xl rounded-bl-[5rem] z-10 translate-x-16 -translate-y-16 group-hover:translate-x-8 group-hover:-translate-y-8 transition-transform duration-700" />
+                            </motion.div>
                         ))
                     )}
                 </div>

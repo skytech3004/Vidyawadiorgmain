@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, ImagePlus } from "lucide-react";
+import { ChevronLeft, ChevronRight, ImagePlus, X } from "lucide-react";
 
 interface AwardRecord {
     _id: string;
@@ -15,120 +15,89 @@ interface AwardRecord {
     createdAt?: string;
 }
 
-function AwardCard({ award, index }: { award: AwardRecord; index: number }) {
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const slides = award.images?.length ? award.images : [];
-    const hasSlides = slides.length > 0;
+type LightboxState = {
+    awardIndex: number;
+    imageIndex: number;
+} | null;
 
-    useEffect(() => {
-        if (!hasSlides) return;
-
-        const timer = setInterval(() => {
-            setCurrentSlide((prev) => (prev + 1) % slides.length);
-        }, 6000);
-
-        return () => clearInterval(timer);
-    }, [hasSlides, slides.length]);
-
-    const nextSlide = () => {
-        if (!hasSlides) return;
-        setCurrentSlide((prev) => (prev + 1) % slides.length);
-    };
-
-    const prevSlide = () => {
-        if (!hasSlides) return;
-        setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-    };
+function AwardSlideCard({
+    award,
+    onOpenLightbox,
+}: {
+    award: AwardRecord;
+    onOpenLightbox: (imageIndex: number) => void;
+}) {
+    const images = award.images ?? [];
 
     return (
         <motion.div
             initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.55, delay: index * 0.06 }}
-            className="w-full bg-white rounded-[2.5rem] border border-oxford/5 shadow-2xl overflow-hidden"
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -24 }}
+            transition={{ duration: 0.55, ease: "easeOut" }}
+            className="group relative overflow-hidden rounded-[2.5rem] bg-oxford shadow-2xl transition-all duration-700 hover:shadow-sandstone/20"
         >
-            <div className="p-7 md:p-10 pb-5 text-center w-full bg-white border-b border-oxford/5">
-                <span className="text-sandstone font-black text-sm md:text-base uppercase tracking-[0.35em] mb-3 block">
-                    {award.year}
-                </span>
-                <h3 className="text-2xl md:text-3xl font-black text-oxford mb-4 leading-tight uppercase line-clamp-2">
-                    {award.title}
-                </h3>
-                <div className="w-16 h-1 bg-sandstone rounded-full mb-5 mx-auto" />
-                <p className="text-sm md:text-base text-gray-500 font-bold uppercase tracking-widest line-clamp-2">
-                    {award.organization}
-                </p>
+            <div className="absolute inset-0 z-0">
+                <div className="absolute inset-0 bg-gradient-to-br from-oxford via-oxford-dark to-oxford" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(232,196,131,0.12),transparent_45%)]" />
             </div>
 
-            <div className="relative w-full aspect-[21/9] md:aspect-[3/1] overflow-hidden group bg-mint/20">
-                {hasSlides ? (
-                    <>
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={`${award._id}-${currentSlide}`}
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 0.8 }}
-                                className="absolute inset-0 flex items-center justify-center"
+            <div className="relative z-10 p-6 md:p-10">
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                    <span className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-4 py-2 text-[10px] font-black uppercase tracking-[0.35em] text-white/90 backdrop-blur-md">
+                        {award.year}
+                    </span>
+                    <span className="inline-flex items-center rounded-full border border-sandstone/20 bg-sandstone/15 px-4 py-2 text-[10px] font-black uppercase tracking-[0.25em] text-sandstone backdrop-blur-md">
+                        {images.length} {images.length === 1 ? "Image" : "Images"}
+                    </span>
+                </div>
+
+                <div className="mt-8 max-w-4xl">
+                    <div className="w-14 h-1 bg-sandstone rounded-full mb-5" />
+                    <h3 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight leading-tight">
+                        {award.title}
+                    </h3>
+                    <p className="mt-4 text-white/80 text-base md:text-lg font-semibold uppercase tracking-[0.22em]">
+                        {award.organization}
+                    </p>
+                </div>
+
+                {images.length > 0 ? (
+                    <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {images.map((image, index) => (
+                            <button
+                                key={`${award._id}-${index}`}
+                                type="button"
+                                onClick={() => onOpenLightbox(index)}
+                                className="group/card relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-lg aspect-[4/3] text-left"
+                                aria-label={`Open image ${index + 1} for ${award.title}`}
                             >
                                 <Image
-                                    src={slides[currentSlide % slides.length]}
-                                    alt=""
+                                    src={image}
+                                    alt={`${award.title} ${index + 1}`}
                                     fill
-                                    className="object-cover blur-xl opacity-35 scale-110 pointer-events-none select-none"
+                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                    className="object-cover transition-transform duration-700 group-hover/card:scale-110"
                                     unoptimized
                                 />
-                                <Image
-                                    src={slides[currentSlide % slides.length]}
-                                    alt={`${award.title} ${currentSlide + 1}`}
-                                    fill
-                                    sizes="(max-width: 768px) 100vw, 1200px"
-                                    className="object-contain relative z-10"
-                                    priority={index === 0 && currentSlide === 0}
-                                />
-                            </motion.div>
-                        </AnimatePresence>
-
-                        <div className="absolute inset-y-0 left-0 z-30 flex items-center px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <button
-                                type="button"
-                                onClick={prevSlide}
-                                className="w-10 h-10 rounded-full bg-navy/60 backdrop-blur-sm flex items-center justify-center text-white hover:bg-navy transition-all"
-                            >
-                                <ChevronLeft size={24} />
+                                <div className="absolute inset-0 bg-gradient-to-t from-oxford-dark/80 via-transparent to-transparent opacity-90" />
+                                <div className="absolute inset-x-0 bottom-0 p-4">
+                                    <div className="flex items-center justify-between gap-3">
+                                        <span className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.3em] text-white backdrop-blur-md">
+                                            Image {index + 1}
+                                        </span>
+                                        <span className="inline-flex items-center rounded-full bg-sandstone/15 px-3 py-1 text-[10px] font-black uppercase tracking-[0.25em] text-sandstone backdrop-blur-md">
+                                            View
+                                        </span>
+                                    </div>
+                                </div>
                             </button>
-                        </div>
-
-                        <div className="absolute inset-y-0 right-0 z-30 flex items-center px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <button
-                                type="button"
-                                onClick={nextSlide}
-                                className="w-10 h-10 rounded-full bg-navy/60 backdrop-blur-sm flex items-center justify-center text-white hover:bg-navy transition-all"
-                            >
-                                <ChevronRight size={24} />
-                            </button>
-                        </div>
-
-                        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2">
-                            {slides.map((_, idx) => (
-                                <button
-                                    key={idx}
-                                    type="button"
-                                    onClick={() => setCurrentSlide(idx)}
-                                    className={`w-2 h-2 rounded-full transition-all duration-300 ${currentSlide === idx ? "bg-navy scale-150" : "bg-teal/30 hover:bg-teal"}`}
-                                    aria-label={`Go to banner ${idx + 1}`}
-                                />
-                            ))}
-                        </div>
-                    </>
+                        ))}
+                    </div>
                 ) : (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-center bg-gradient-to-br from-oxford/5 to-sandstone/10 px-6">
-                        <ImagePlus size={40} className="text-sandstone" />
-                        <p className="text-sm font-bold uppercase tracking-widest text-oxford/60">
-                            No award images uploaded yet
-                        </p>
+                    <div className="mt-8 rounded-[2rem] border border-dashed border-white/15 bg-white/5 p-10 text-center text-white/70">
+                        <ImagePlus size={40} className="mx-auto mb-3 text-sandstone" />
+                        <p className="text-sm font-bold uppercase tracking-widest">No award images uploaded yet</p>
                     </div>
                 )}
             </div>
@@ -138,15 +107,23 @@ function AwardCard({ award, index }: { award: AwardRecord; index: number }) {
 
 export default function AwardsSection() {
     const [awards, setAwards] = useState<AwardRecord[]>([]);
+    const [activeAwardIndex, setActiveAwardIndex] = useState(0);
+    const [lightbox, setLightbox] = useState<LightboxState>(null);
 
     useEffect(() => {
         let isMounted = true;
 
         const loadAwards = async () => {
             try {
-                const res = await fetch("/api/awards", { cache: "no-store" });
+                const isLocalDev =
+                    window.location.hostname === "localhost" ||
+                    window.location.hostname === "127.0.0.1" ||
+                    window.location.hostname === "::1";
+                const url = isLocalDev ? "/api/awards" : "https://www.vidyawadi.org/api/awards";
+                const res = await fetch(url, { cache: "no-store" });
                 const data = await res.json();
-                if (isMounted && data.success && Array.isArray(data.awards) && data.awards.length > 0) {
+
+                if (isMounted && data.success && Array.isArray(data.awards)) {
                     setAwards(data.awards);
                 }
             } catch (error) {
@@ -169,10 +146,107 @@ export default function AwardsSection() {
         return bCreatedAt - aCreatedAt;
     });
 
+    useEffect(() => {
+        if (sortedAwards.length < 2) return;
+
+        const timer = setInterval(() => {
+            setActiveAwardIndex((prev) => (prev + 1) % sortedAwards.length);
+        }, 8000);
+
+        return () => clearInterval(timer);
+    }, [sortedAwards.length]);
+
+    useEffect(() => {
+        if (!lightbox) return;
+
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Escape") {
+                setLightbox(null);
+            }
+            if (event.key === "ArrowRight") {
+                setLightbox((prev) => {
+                    if (!prev) return prev;
+                    const images = sortedAwards[prev.awardIndex]?.images ?? [];
+                    if (images.length === 0) return prev;
+                    return {
+                        ...prev,
+                        imageIndex: (prev.imageIndex + 1) % images.length,
+                    };
+                });
+            }
+            if (event.key === "ArrowLeft") {
+                setLightbox((prev) => {
+                    if (!prev) return prev;
+                    const images = sortedAwards[prev.awardIndex]?.images ?? [];
+                    if (images.length === 0) return prev;
+                    return {
+                        ...prev,
+                        imageIndex: (prev.imageIndex - 1 + images.length) % images.length,
+                    };
+                });
+            }
+        };
+
+        document.body.style.overflow = "hidden";
+        window.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.body.style.overflow = "";
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [lightbox, sortedAwards]);
+
+    const safeActiveAwardIndex = sortedAwards.length > 0 ? activeAwardIndex % sortedAwards.length : 0;
+    const activeAward = sortedAwards[safeActiveAwardIndex] ?? null;
+
+    const nextAward = () => {
+        if (sortedAwards.length < 2) return;
+        setActiveAwardIndex((prev) => (prev + 1) % sortedAwards.length);
+    };
+
+    const prevAward = () => {
+        if (sortedAwards.length < 2) return;
+        setActiveAwardIndex((prev) => (prev - 1 + sortedAwards.length) % sortedAwards.length);
+    };
+
+    const openLightbox = (awardIndex: number, imageIndex: number) => {
+        setLightbox({ awardIndex, imageIndex });
+    };
+
+    const closeLightbox = () => {
+        setLightbox(null);
+    };
+
+    const activeLightboxAward = lightbox ? sortedAwards[lightbox.awardIndex] : null;
+    const activeLightboxImages = activeLightboxAward?.images ?? [];
+    const activeLightboxImage = lightbox ? activeLightboxImages[lightbox.imageIndex] : null;
+
+    const nextLightbox = () => {
+        if (!lightbox || activeLightboxImages.length === 0) return;
+        setLightbox((prev) => {
+            if (!prev) return prev;
+            return {
+                ...prev,
+                imageIndex: (prev.imageIndex + 1) % activeLightboxImages.length,
+            };
+        });
+    };
+
+    const prevLightbox = () => {
+        if (!lightbox || activeLightboxImages.length === 0) return;
+        setLightbox((prev) => {
+            if (!prev) return prev;
+            return {
+                ...prev,
+                imageIndex: (prev.imageIndex - 1 + activeLightboxImages.length) % activeLightboxImages.length,
+            };
+        });
+    };
+
     return (
         <section className="py-24 px-6 bg-stone-50 overflow-hidden">
             <div className="max-w-7xl mx-auto">
-                <div className="text-center mb-20">
+                <div className="text-center mb-16 md:mb-20">
                     <motion.span
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -191,19 +265,121 @@ export default function AwardsSection() {
                     </motion.h2>
                 </div>
 
-                {sortedAwards.length > 0 ? (
-                    <div className="grid grid-cols-1 gap-10">
-                        {sortedAwards.map((award, index) => (
-                            <AwardCard key={award._id} award={award} index={index} />
-                        ))}
+                {activeAward ? (
+                    <div className="relative max-w-6xl mx-auto">
+                        <AnimatePresence mode="wait">
+                            <AwardSlideCard
+                                key={activeAward._id}
+                                award={activeAward}
+                                onOpenLightbox={(imageIndex) => openLightbox(safeActiveAwardIndex, imageIndex)}
+                            />
+                        </AnimatePresence>
+
+                        {sortedAwards.length > 1 && (
+                            <>
+                                <div className="absolute inset-y-1/2 left-4 z-30 -translate-y-1/2 hidden md:flex items-center">
+                                    <button
+                                        type="button"
+                                        onClick={prevAward}
+                                        className="w-12 h-12 rounded-full bg-navy/70 backdrop-blur-sm flex items-center justify-center text-white hover:bg-navy transition-all shadow-lg"
+                                        aria-label="Previous award"
+                                    >
+                                        <ChevronLeft size={24} />
+                                    </button>
+                                </div>
+
+                                <div className="absolute inset-y-1/2 right-4 z-30 -translate-y-1/2 hidden md:flex items-center">
+                                    <button
+                                        type="button"
+                                        onClick={nextAward}
+                                        className="w-12 h-12 rounded-full bg-navy/70 backdrop-blur-sm flex items-center justify-center text-white hover:bg-navy transition-all shadow-lg"
+                                        aria-label="Next award"
+                                    >
+                                        <ChevronRight size={24} />
+                                    </button>
+                                </div>
+
+                                <div className="mt-8 flex items-center justify-center gap-3 flex-wrap">
+                                    {sortedAwards.map((award, idx) => (
+                                        <button
+                                            key={award._id}
+                                            type="button"
+                                            onClick={() => setActiveAwardIndex(idx)}
+                                            className={`h-3 rounded-full transition-all duration-300 ${safeActiveAwardIndex === idx ? "w-10 bg-sandstone" : "w-3 bg-sandstone/30 hover:bg-sandstone/60"}`}
+                                            aria-label={`Go to award ${idx + 1}`}
+                                            title={award.title}
+                                        />
+                                    ))}
+                                </div>
+                            </>
+                        )}
                     </div>
                 ) : (
                     <div className="w-full max-w-4xl mx-auto rounded-[2rem] border border-dashed border-oxford/10 bg-white/70 p-10 text-center text-gray-500 shadow-sm">
                         <h3 className="text-2xl font-black text-oxford mb-3">No award records found</h3>
-                        <p>Add an award in the admin panel and it will appear here directly from the database.</p>
+                        <p>Fetch the awards API and the carousel will render the database awards here.</p>
                     </div>
                 )}
             </div>
+
+            <AnimatePresence>
+                {lightbox && activeLightboxAward && activeLightboxImage && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[120] bg-oxford/95 backdrop-blur-md flex items-center justify-center p-4"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label={`${activeLightboxAward.title} gallery`}
+                    >
+                        <div className="absolute inset-0" onClick={closeLightbox} />
+                        <div className="relative w-full max-w-6xl h-[80vh] flex items-center justify-center">
+                            <button
+                                type="button"
+                                onClick={closeLightbox}
+                                className="absolute top-4 right-4 z-20 w-11 h-11 rounded-full bg-white/10 text-white border border-white/20 hover:bg-white/20 transition-colors flex items-center justify-center"
+                                aria-label="Close fullscreen view"
+                            >
+                                <X size={22} />
+                            </button>
+
+                            <div className="absolute inset-y-0 left-0 z-20 flex items-center">
+                                <button
+                                    type="button"
+                                    onClick={prevLightbox}
+                                    className="w-12 h-12 rounded-full bg-white/10 text-white border border-white/20 hover:bg-white/20 transition-colors flex items-center justify-center"
+                                    aria-label="Previous image"
+                                >
+                                    <ChevronLeft size={24} />
+                                </button>
+                            </div>
+
+                            <div className="absolute inset-y-0 right-0 z-20 flex items-center">
+                                <button
+                                    type="button"
+                                    onClick={nextLightbox}
+                                    className="w-12 h-12 rounded-full bg-white/10 text-white border border-white/20 hover:bg-white/20 transition-colors flex items-center justify-center"
+                                    aria-label="Next image"
+                                >
+                                    <ChevronRight size={24} />
+                                </button>
+                            </div>
+
+                            <div className="relative w-full h-full rounded-[2rem] overflow-hidden border border-white/10 bg-black/20 shadow-2xl">
+                                <Image
+                                    src={activeLightboxImage}
+                                    alt={`${activeLightboxAward.title} fullscreen ${lightbox.imageIndex + 1}`}
+                                    fill
+                                    sizes="100vw"
+                                    className="object-contain bg-black/20"
+                                    priority
+                                />
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     );
 }
