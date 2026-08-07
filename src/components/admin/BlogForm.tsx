@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Save, X, Type, Link, Tag, User, Eye, EyeOff } from "lucide-react";
+import TiptapEditor from "@/components/admin/TiptapEditor";
+import { AlertCircle, CheckCircle2, Loader2, MessageSquare,  Edit3, LayoutTemplate } from "lucide-react";
 
 interface BlogFormProps {
     initialData?: any;
@@ -141,20 +143,22 @@ export default function BlogForm({ initialData, isEditing }: BlogFormProps) {
                     </div>
 
                     {/* Content */}
-                    <div className="space-y-2 md:col-span-2">
-                        <label className="text-sm font-bold text-oxford uppercase tracking-wider flex items-center gap-2">
-                            Post Content (Markdown or HTML)
-                        </label>
-                        <textarea
-                            required
-                            rows={15}
-                            value={formData.content}
-                            onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-sandstone focus:ring-2 focus:ring-sandstone/20 outline-none transition-all bg-gray-50/50 font-mono text-sm"
-                            placeholder="Write your story here..."
-                        />
-                    </div>
+                   <div className="space-y-2 md:col-span-2">
+    <label className="text-sm font-bold text-oxford uppercase tracking-wider flex items-center gap-2">
+        <Edit3 size={16} className="text-sandstone" />
+        Post Content
+    </label>
 
+    <TiptapEditor
+        value={formData.content}
+        onChange={(value) =>
+            setFormData({
+                ...formData,
+                content: value,
+            })
+        }
+    />
+</div>
                     {/* Published Status */}
                     <div className="md:col-span-2 pt-4">
                         <label className="flex items-center gap-3 cursor-pointer group">
