@@ -6,45 +6,12 @@ import Footer from "@/components/Footer";
 import HostelGallery from "@/components/HostelGallery3D";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-    ShieldCheck,
-    Utensils,
-    Lightbulb,
-    Wind,
-    Wifi,
-    Shirt,
-    Phone,
-    Heart,
-    Plus,
-    Minus,
-    ChevronRight,
-    Download,
-    MessageSquare,
-    MapPin,
-    GraduationCap,
-    Trophy,
-    Users as UsersIcon,
-    ArrowRight,
-    Star,
-    HeartHandshake,
-    Music,
-    Palette,
-    Dumbbell,
-    Coffee,
-    Stethoscope,
-    Calendar,
-    CircleCheck,
-    CreditCard,
-    Banknote,
-    School,
-    Bed,
-    History,
-    FileCheck,
-    Clock,
-    Scale,
-    Umbrella,
-    Droplets,
-    Thermometer,
-    ShoppingBag
+    ShieldCheck, Utensils, Lightbulb, Wind, Wifi, Shirt, Phone, Heart,
+    Plus, Minus, ChevronRight, Download, MessageSquare, MapPin, GraduationCap,
+    Trophy, Users as UsersIcon, ArrowRight, Star, HeartHandshake, Music,
+    Palette, Dumbbell, Coffee, Stethoscope, Calendar, CircleCheck, CreditCard,
+    Banknote, School, Bed, History, FileCheck, Clock, Scale, Umbrella, Droplets,
+    Thermometer, ShoppingBag
 } from "lucide-react";
 
 const SectionHeader = ({ title, subtitle, light = false }: any) => (
@@ -75,8 +42,7 @@ const SectionHeader = ({ title, subtitle, light = false }: any) => (
 );
 
 export default function Page() {
-    const [activeRoomType, setActiveRoomType] = useState("non-ac");
-    const [activeAccordion, setActiveAccordion] = useState<string | null>("entry");
+    const [activeAccordion, setActiveAccordion] = useState<string | null>(null);
     const [hostelData, setHostelData] = useState<any>(null);
 
     React.useEffect(() => {
@@ -89,6 +55,9 @@ export default function Page() {
                 const data = await res.json();
                 if (data.success) {
                     setHostelData(data.hostel);
+                    if (data.hostel?.rules?.length > 0) {
+                        setActiveAccordion(data.hostel.rules[0].id);
+                    }
                 }
             } catch (err) {
                 console.error("Failed to fetch hostel data", err);
@@ -97,32 +66,32 @@ export default function Page() {
         fetchHostelData();
     }, []);
 
-    const rules = [
+    const defaultRules = [
         {
             id: "entry",
             title: "Entry Policy",
-            icon: <History size={20} />,
+            icon: "History",
             content: "An Entry Pass is required for all visitors, which must be signed by the Hostel Incharge & Chief Resident Officer. Parents are welcome to meet their children only on Sundays between 9:30 AM and 6:00 PM."
         },
         {
             id: "exit",
             title: "Exit Policy",
-            icon: <FileCheck size={20} />,
+            icon: "FileCheck",
             content: "Students are permitted to exit the campus only with approved relatives. An Exit Pass is mandatory and requires official approvals from the administration."
-        },
-        {
-            id: "discipline",
-            title: "Discipline Rules",
-            icon: <Scale size={20} />,
-            content: "We maintain a focused environment: Mobiles are not allowed for school students. Dress code prohibits shorts, sleeveless, or tight clothing. Cosmetics, jewellery, cameras, and large sums of currency are restricted. Morning Yoga and Sports are mandatory for all residents."
-        },
-        {
-            id: "holidays",
-            title: "Holidays & Breaks",
-            icon: <Umbrella size={20} />,
-            content: "The hostel follows a specific holiday calendar including Diwali, Winter Break, and Summer Break. Please note that board exam students may be required to stay during winter breaks for preparation."
         }
     ];
+
+    const rules = hostelData?.rules?.length > 0 ? hostelData.rules : defaultRules;
+
+    const defaultFeatures = [
+        { icon: "MapPin", text: "65-Acre Safe Campus" },
+        { icon: "Dumbbell", text: "International Sports Stadium" },
+        { icon: "Users", text: "Class-wise Accommodation" },
+        { icon: "Star", text: "Warden & Maid Support" }
+    ];
+    const features = hostelData?.about?.features?.length > 0 ? hostelData.about.features : defaultFeatures;
+
+    const IconMap: any = { MapPin, Dumbbell, Users: UsersIcon, Star, ShieldCheck, History, FileCheck, Scale, Umbrella };
 
     return (
         <main className="min-h-screen bg-white font-devanagari">
@@ -153,9 +122,6 @@ export default function Page() {
                         <span className="inline-block px-4 py-1.5 bg-sandstone text-oxford text-[10px] font-black uppercase tracking-[0.2em] rounded-full mb-6">
                             Education with Sanskar
                         </span>
-                        {/* <h1 className="text-5xl md:text-8xl mb-8 leading-tight">
-                            Hostel <span className="text-sandstone">Life</span>
-                        </h1> */}
                         <p className="text-lg md:text-2xl font-light mb-12 max-w-2xl mx-auto text-white/90">
                             Students can experience a home away from home where traditional values meet modern excellence.
                         </p>
@@ -182,7 +148,7 @@ export default function Page() {
                                     Download Prospectus
                                 </motion.button>
                             )}
-                            <a href="/apply/hostel" className="contents">
+                            <a href="/apply" className="contents">
                                 <motion.button
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
@@ -196,7 +162,6 @@ export default function Page() {
                     </motion.div>
                 </div>
 
-                {/* Scroll Indicator */}
                 <motion.div
                     animate={{ y: [0, 10, 0] }}
                     transition={{ duration: 2, repeat: Infinity }}
@@ -225,10 +190,12 @@ export default function Page() {
                             <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl">
                                 <img src="/f837631c-4bc9-4494-b8f1-fff9b07554d8.jpg" alt="Campus Gardens" className="w-full h-full object-cover" />
                             </div>
-                            <div className="absolute -bottom-10 -right-10 bg-oxford p-10 rounded-[2.5rem] shadow-2xl text-white">
-                                <div className="text-5xl text-sandstone mb-2">800+</div>
-                                <div className="text-xs font-black uppercase tracking-widest text-white/60">Student Capacity</div>
-                            </div>
+                            {hostelData?.about?.stats?.[0] && (
+                                <div className="absolute -bottom-10 -right-10 bg-oxford p-10 rounded-[2.5rem] shadow-2xl text-white">
+                                    <div className="text-5xl text-sandstone mb-2">{hostelData.about.stats[0].value}</div>
+                                    <div className="text-xs font-black uppercase tracking-widest text-white/60">{hostelData.about.stats[0].label}</div>
+                                </div>
+                            )}
                         </motion.div>
 
                         <div className="space-y-8">
@@ -236,40 +203,26 @@ export default function Page() {
                                 <span className="block text-xs font-black uppercase tracking-[0.3em] text-sandstone mb-4">
                                     About The Hostel
                                 </span>
-                                <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight">
-                                    Your Second Home for <br />
-                                    <span>Holistic Growth.</span>
+                                <h2 className="text-4xl md:text-5xl font-bold text-oxford leading-tight whitespace-pre-wrap">
+                                    {hostelData?.about?.title || "Your Second Home for \nHolistic Growth."}
                                 </h2>
                             </div>
 
-                            <p className="text-lg text-gray-500 font-light leading-relaxed">
-                                Spread across a lush 65-acre campus, Vidyawadi offers a secure and nurturing residential environment. With 8 double-storied hostel buildings, we provide class-wise accommodation for students from Nursery to Graduation.
-                            </p>
+                            <div 
+                                className="text-lg text-gray-500 font-light leading-relaxed whitespace-pre-wrap prose prose-lg prose-sandstone max-w-none"
+                                dangerouslySetInnerHTML={{ __html: hostelData?.about?.description || "Spread across a lush 65-acre campus, Vidyawadi offers a secure and nurturing residential environment. With 8 double-storied hostel buildings, we provide class-wise accommodation for students from Nursery to Graduation." }}
+                            />
 
                             <div className="grid grid-cols-2 gap-6 pt-4">
-                                {[
-                                    { icon: <MapPin size={18} />, text: "65-Acre Safe Campus" },
-                                    { icon: <Dumbbell size={18} />, text: "International Sports Stadium" },
-                                    { icon: <UsersIcon size={18} />, text: "Class-wise Accommodation" },
-                                    { icon: <Star size={18} />, text: "Warden & Maid Support" }
-                                ].map((item, i) => (
-                                    <div key={i} className="flex items-center gap-3 text-oxford font-bold text-sm">
-                                        <div className="text-sandstone">{item.icon}</div>
-                                        {item.text}
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div className="p-8 bg-slate-50 rounded-3xl border border-gray-100 flex items-start gap-4">
-                                <div className="bg-sandstone/20 p-3 rounded-xl text-sandstone">
-                                    <ShieldCheck size={24} />
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-oxford mb-1">Professional Caretaking</h4>
-                                    <p className="text-sm text-gray-500 leading-relaxed">
-                                        Each hostel is managed by 2 dedicated wardens, 2 maids, and a dedicated sweeper to ensure constant support and hygiene.
-                                    </p>
-                                </div>
+                                {features.map((item: any, i: number) => {
+                                    const IconCmp = IconMap[item.icon] || MapPin;
+                                    return (
+                                        <div key={i} className="flex items-center gap-3 text-oxford font-bold text-sm">
+                                            <div className="text-sandstone"><IconCmp size={18} /></div>
+                                            {item.text}
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </div>
                     </div>
@@ -277,28 +230,20 @@ export default function Page() {
             </section>
 
             {/* 3. Hostel Gallery */}
-            <HostelGallery />
+            <HostelGallery customImages={hostelData?.gallery} />
 
-            {/* 3. Facilities Section */}
+            {/* 4. Facilities Section */}
             <section className="py-24 px-6 bg-slate-50">
                 <div className="max-w-7xl mx-auto">
                     <SectionHeader title="Hostel Facilities" subtitle="World-Class Amenities" />
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {[
+                        {(hostelData?.facilities?.length > 0 ? hostelData.facilities : [
                             { image: "/uploads/mess/security.jpg", title: "Safety & CCTV", desc: "Round-the-clock security with full CCTV coverage." },
                             { image: "/images/jain_meals.png", title: "Pure Jain Food", desc: "Nutritious Satvik meals with 5 servings per day." },
                             { image: "/uploads/mess/RO.jpg", title: "RO Drinking Water", desc: "Pure and safe RO purified drinking water available 24/7." },
-                            { image: "/uploads/mess/HOT.jpg", title: "Hot Water", desc: "Constant supply of hot water during winter months." },
-                            { image: "/uploads/mess/aa.jpg", title: "Digital Library", desc: "24/7 access to educational resources and quiet study space." },
-                            { image: "/uploads/mess/yoga.jpeg", title: "Yoga & Meditation", desc: "Daily morning sessions for physical and mental well-being." },
-                            { image: "/uploads/mess/sport.jpg", title: "Sports Facilities", desc: "International standard stadium and sports ground." },
-                            { image: "/uploads/mess/Health.jpg", title: "Health Care 24x7", desc: "On-campus medical assistance and annual checkups." },
-                            { image: "/uploads/mess/ac.jpg", title: "AC / Air Cooled", desc: "Well-ventilated rooms with central cooling options." },
-                            { image: "/uploads/mess/laundry.jpg", title: "Laundry Services", desc: "Professional and hassle-free laundry services for all students." },
-                            { image: "/uploads/mess/tuck.jpg", title: "Tuck Shop", desc: "On-campus tuck shop for all daily essentials and stationery." }
-
-                        ].map((item: any, i) => (
+                            { image: "/uploads/mess/HOT.jpg", title: "Hot Water", desc: "Constant supply of hot water during winter months." }
+                        ]).map((item: any, i: number) => (
                             <motion.div
                                 key={i}
                                 initial={{ opacity: 0, y: 20 }}
@@ -316,7 +261,7 @@ export default function Page() {
                                         />
                                     ) : (
                                         <div className="w-full h-full bg-slate-100 flex items-center justify-center text-sandstone group-hover:scale-110 transition-transform duration-700">
-                                            {React.cloneElement(item.icon, { size: 64 })}
+                                            <ShieldCheck size={64} />
                                         </div>
                                     )}
                                     <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
@@ -336,73 +281,6 @@ export default function Page() {
                 </div>
             </section>
 
-            {/* 4. Room Section (Tabs) */}
-            {/* <section className="py-24 px-6 bg-white overflow-hidden">
-                <div className="max-w-7xl mx-auto">
-                    <SectionHeader title="Our Accommodations" subtitle="Total 8 Hostels: 4 AC + 4 Non-AC" />
-
-                    <div className="flex justify-center mb-16">
-                        <div className="bg-slate-100 p-2 rounded-2xl flex gap-2">
-                            <button
-                                onClick={() => setActiveRoomType("non-ac")}
-                                className={`px-8 py-3 rounded-xl font-black uppercase tracking-widest text-xs transition-all ${activeRoomType === "non-ac" ? "bg-white text-oxford shadow-lg" : "text-gray-400 hover:text-oxford"}`}
-                            >
-                                Non-AC Hostels (4)
-                            </button>
-                            <button
-                                onClick={() => setActiveRoomType("ac")}
-                                className={`px-8 py-3 rounded-xl font-black uppercase tracking-widest text-xs transition-all ${activeRoomType === "ac" ? "bg-white text-oxford shadow-lg" : "text-gray-400 hover:text-oxford"}`}
-                            >
-                                AC Hostels (4)
-                            </button>
-                        </div>
-                    </div>
-
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={activeRoomType}
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -20 }}
-                            transition={{ duration: 0.5 }}
-                            className="grid lg:grid-cols-2 gap-12 items-center"
-                        >
-                            <div className="relative h-[340px] sm:h-[420px] md:h-[480px] rounded-[3rem] overflow-hidden shadow-2xl">
-                                <img
-                                    src={activeRoomType === "ac" ? "/f837631c-4bc9-4494-b8f1-fff9b07554d8.jpg" : "/hostel.jpg"}
-                                    className="w-full h-full object-cover object-center"
-                                    loading="eager"
-                                />
-                            </div>
-                            <div className="space-y-8">
-                                <h3 className="text-3xl md:text-5xl font-bold text-oxford">
-                                    {activeRoomType === "ac" ? "AC Hostel Suites" : "Non-AC Hostel Rooms"}
-                                </h3>
-                                <div className="grid grid-cols-2 gap-x-8 gap-y-4">
-                                    {[
-                                        { icon: <Bed size={16} />, label: "Comfortable Bed" },
-                                        { icon: <ArrowRight size={16} />, label: "Study Table & Chair" },
-                                        { icon: <ShieldCheck size={16} />, label: "Personal Cupboard" },
-                                        { icon: <ArrowRight size={16} />, label: "Mattress & Pillow" }
-                                    ].map((item, i) => (
-                                        <div key={i} className="flex items-center font-medium  gap-3 text-sm text-gray-500">
-                                            <div className="text-sandstone">{item.icon}</div>
-                                            {item.label}
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className="p-8 bg-sandstone/5 rounded-3xl border border-sandstone/10">
-                                    <h4 className="font-black uppercase tracking-widest text-xs text-sandstone mb-4">What to bring</h4>
-                                    <p className="text-sm text-gray-500 leading-relaxed">
-                                        Students must bring: 2 Bedsheets, Pillow Cover, Quilt/Blanket, Towel, Napkins, Bucket & Mug, Toiletries, Personal Medicines.
-                                    </p>
-                                </div>
-                            </div>
-                        </motion.div>
-                    </AnimatePresence>
-                </div>
-            </section> */}
-
             {/* 5. Fee Structure Section */}
             <section className="py-24 px-6 bg-slate-50">
                 <div className="max-w-7xl mx-auto">
@@ -417,28 +295,23 @@ export default function Page() {
                                     <th className="p-10 text-xs font-black uppercase tracking-widest">Premium (AC)</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-slate-100">                                 {[
-                                { class: "Nursery to Class 5", nonAc: "₹87,500", ac: "₹1,20,500" },
-                                { class: "Class 6", nonAc: "₹87,500", ac: "₹1,22,500" },
-                                { class: "Class 7 to 9", nonAc: "₹90,500", ac: "₹1,22,500" },
-                                { class: "Class 10 to XII", nonAc: "₹95,500", ac: "₹1,22,500" },
-                                { class: "College (UG/PG)", nonAc: "₹95,500", ac: "₹1,22,500" },
-                                { class: "B.Ed (1st & 2nd Year)", nonAc: "₹95,500", ac: "-" },
-                                { class: "B.Ed 3rd Year", nonAc: "₹61,500", ac: "-" },
-                                { class: "B.Ed 4th Year", nonAc: "₹56,500", ac: "-" }
-                            ].map((row, i) => (
-                                <tr key={i} className="hover:bg-sandstone/5 group transition-colors cursor-pointer">
-                                    <td className="p-10 font-bold text-oxford group-hover:text-sandstone transition-colors">{row.class}</td>
-                                    <td className="p-10 text-gray-500 font-medium">{row.nonAc} / Year</td>
-                                    <td className="p-10">
-                                        {row.ac !== "-" ? (
-                                            <span className="text-sandstone-dark font-black">{row.ac} / Year</span>
-                                        ) : (
-                                            <span className="text-gray-300">N/A</span>
-                                        )}
-                                    </td>
-                                </tr>
-                            ))}
+                            <tbody className="divide-y divide-slate-100">                                 
+                                {(hostelData?.fees?.table?.length > 0 ? hostelData.fees.table : [
+                                    { className: "Nursery to Class 5", nonAc: "₹87,500", ac: "₹1,20,500" },
+                                    { className: "Class 6", nonAc: "₹87,500", ac: "₹1,22,500" }
+                                ]).map((row: any, i: number) => (
+                                    <tr key={i} className="hover:bg-sandstone/5 group transition-colors cursor-pointer">
+                                        <td className="p-10 font-bold text-oxford group-hover:text-sandstone transition-colors">{row.className || row.class}</td>
+                                        <td className="p-10 text-gray-500 font-medium">{row.nonAc} / Year</td>
+                                        <td className="p-10">
+                                            {row.ac && row.ac !== "-" ? (
+                                                <span className="text-sandstone-dark font-black">{row.ac} / Year</span>
+                                            ) : (
+                                                <span className="text-gray-300">N/A</span>
+                                            )}
+                                        </td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>
@@ -456,14 +329,11 @@ export default function Page() {
                                 <div className="space-y-3 text-sm text-gray-600 font-medium bg-slate-50 p-5 rounded-2xl border border-gray-100">
                                     <div className="flex justify-between items-center">
                                         <span className="text-gray-500">Non-AC</span>
-                                        <span className="font-black text-oxford text-base">₹10,000 <span className="text-xs text-gray-400 font-normal">/ month</span></span>
+                                        <span className="font-black text-oxford text-base">{hostelData?.fees?.shortDuration?.nonAc || "₹10,000"} <span className="text-xs text-gray-400 font-normal">/ month</span></span>
                                     </div>
                                     <div className="flex justify-between items-center">
                                         <span className="text-gray-500">AC</span>
-                                        <span className="font-black text-oxford text-base">₹12,000 <span className="text-xs text-gray-400 font-normal">/ month</span></span>
-                                    </div>
-                                    <div className="pt-3 mt-1 border-t border-gray-200/60 text-xs text-gray-400 font-semibold tracking-wide text-center uppercase">
-                                        Minimum duration of stay: 3 months
+                                        <span className="font-black text-oxford text-base">{hostelData?.fees?.shortDuration?.ac || "₹12,000"} <span className="text-xs text-gray-400 font-normal">/ month</span></span>
                                     </div>
                                 </div>
                             </div>
@@ -475,17 +345,17 @@ export default function Page() {
                             <div className="w-full">
                                 <h4 className="font-bold text-oxford mb-4 text-xl border-b border-gray-50 pb-3">Cancellation Policy</h4>
                                 <p className="text-sm text-gray-500 mb-5 leading-relaxed">
-                                    In the event of cancellation after the payment of the deposit, a deduction of <span className="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded-full whitespace-nowrap">₹10,000</span> shall be applicable.
+                                    In the event of cancellation after the payment of the deposit, a deduction of <span className="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded-full whitespace-nowrap">{hostelData?.fees?.cancellation?.penalty || "₹10,000"}</span> shall be applicable.
                                 </p>
                                 <p className="text-sm text-gray-500 mb-4 font-semibold">The last dates for cancellation are as follows:</p>
                                 <div className="space-y-3 text-sm text-gray-600 font-medium bg-slate-50 p-5 rounded-2xl border border-gray-100">
                                     <div className="flex justify-between items-center bg-white p-3 rounded-xl border border-gray-50 shadow-sm">
                                         <span className="flex items-center gap-2"><School size={16} className="text-sandstone" /> School</span>
-                                        <span className="font-black text-oxford">August 15</span>
+                                        <span className="font-black text-oxford">{hostelData?.fees?.cancellation?.schoolDate || "August 15"}</span>
                                     </div>
                                     <div className="flex justify-between items-center bg-white p-3 rounded-xl border border-gray-50 shadow-sm">
                                         <span className="flex items-center gap-2"><GraduationCap size={16} className="text-sandstone" /> College</span>
-                                        <span className="font-black text-oxford">October 30</span>
+                                        <span className="font-black text-oxford">{hostelData?.fees?.cancellation?.collegeDate || "October 30"}</span>
                                     </div>
                                 </div>
                             </div>
@@ -494,21 +364,23 @@ export default function Page() {
                 </div>
             </section>
 
-            {/* 6. Rules & Policies Section (Accordion) */}
+            {/* 6. Rules & Policies Section */}
             <section className="py-24 px-6 bg-white overflow-hidden">
                 <div className="max-w-4xl mx-auto">
                     <SectionHeader title="Rules & Policies" subtitle="Nurturing Discipline" />
 
                     <div className="space-y-4">
-                        {rules.map((rule) => (
-                            <div key={rule.id} className="border border-slate-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                        {rules.map((rule: any, idx: number) => {
+                            const IconCmp = IconMap[rule.icon] || History;
+                            return (
+                            <div key={rule.id || rule._id || idx} className="border border-slate-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
                                 <button
                                     onClick={() => setActiveAccordion(activeAccordion === rule.id ? null : rule.id)}
                                     className="w-full flex items-center justify-between p-8 text-left bg-white group"
                                 >
                                     <div className="flex items-center gap-4">
                                         <div className={`p-3 rounded-xl transition-colors ${activeAccordion === rule.id ? "bg-sandstone text-white" : "bg-slate-50 text-sandstone group-hover:bg-sandstone/10"}`}>
-                                            {rule.icon}
+                                            <IconCmp size={20} />
                                         </div>
                                         <span className="text-xl font-bold text-oxford">{rule.title}</span>
                                     </div>
@@ -524,14 +396,15 @@ export default function Page() {
                                             exit={{ height: 0, opacity: 0 }}
                                             transition={{ duration: 0.3 }}
                                         >
-                                            <div className="p-8 pt-0 text-gray-500 font-light leading-relaxed border-t border-slate-50">
-                                                {rule.content}
-                                            </div>
+                                            <div 
+                                                className="p-8 pt-0 text-gray-500 font-light leading-relaxed border-t border-slate-50 whitespace-pre-wrap prose prose-sandstone max-w-none"
+                                                dangerouslySetInnerHTML={{ __html: rule.content }}
+                                            />
                                         </motion.div>
                                     )}
                                 </AnimatePresence>
                             </div>
-                        ))}
+                        )})}
                     </div>
                 </div>
             </section>
@@ -548,11 +421,10 @@ export default function Page() {
                         <div className="bg-white/5 backdrop-blur-md rounded-[3rem] p-12 border border-white/10">
                             <h3 className="text-3xl text-white mb-8">Scholarships & Discounts</h3>
                             <div className="space-y-6">
-                                {[
+                                {(hostelData?.scholarships?.length > 0 ? hostelData.scholarships : [
                                     { title: "Merit Scholarship", desc: "10% discount for students securing 95% and above." },
-                                    { title: "Sports Excellence", desc: "Special scholarships for National level sports players." },
-                                    { title: "Sibling Support", desc: "10% sibling discount applicable for the third child." }
-                                ].map((item, i) => (
+                                    { title: "Sports Excellence", desc: "Special scholarships for National level sports players." }
+                                ]).map((item: any, i: number) => (
                                     <div key={i} className="flex gap-6 items-start">
                                         <div className="bg-sandstone/20 p-3 rounded-xl text-sandstone shrink-0">
                                             <Trophy size={20} />
@@ -572,29 +444,25 @@ export default function Page() {
                             <div className="space-y-4 mb-10 text-sm">
                                 <div className="flex justify-between py-3 border-b border-slate-100">
                                     <span className="text-gray-400 font-bold uppercase tracking-widest text-[10px]">Account Name</span>
-                                    <span className="text-oxford font-black">Marudhar Mahila Shikshan Sangh</span>
+                                    <span className="text-oxford font-black">{hostelData?.banking?.accountName || "Marudhar Mahila Shikshan Sangh"}</span>
                                 </div>
                                 <div className="flex justify-between py-3 border-b border-slate-100">
                                     <span className="text-gray-400 font-bold uppercase tracking-widest text-[10px]">Bank & Branch</span>
-                                    <span className="text-oxford font-black">ICICI Bank – Rani Branch</span>
+                                    <span className="text-oxford font-black">{hostelData?.banking?.bankAndBranch || "ICICI Bank – Rani Branch"}</span>
                                 </div>
                                 <div className="flex justify-between py-3 border-b border-slate-100">
                                     <span className="text-gray-400 font-bold uppercase tracking-widest text-[10px]">A/c Number</span>
-                                    <span className="text-sandstone-dark font-black tracking-widest">684605601184</span>
+                                    <span className="text-sandstone-dark font-black tracking-widest">{hostelData?.banking?.accountNumber || "684605601184"}</span>
                                 </div>
                                 <div className="flex justify-between py-3 border-b border-slate-100">
                                     <span className="text-gray-400 font-bold uppercase tracking-widest text-[10px]">IFSC Code</span>
-                                    <span className="text-oxford font-black tracking-widest">ICIC0006846</span>
+                                    <span className="text-oxford font-black tracking-widest">{hostelData?.banking?.ifscCode || "ICIC0006846"}</span>
                                 </div>
                             </div>
                             <div className="flex gap-4">
                                 <button className="flex-1 bg-oxford text-white py-4 rounded-2xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform">
                                     <Phone size={16} />
                                     Call Now
-                                </button>
-                                <button className="flex-1 bg-sandstone text-oxford py-4 rounded-2xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform">
-                                    <Download size={16} />
-                                    Bank Card
                                 </button>
                             </div>
                         </div>

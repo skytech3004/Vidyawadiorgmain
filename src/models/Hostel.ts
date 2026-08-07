@@ -1,61 +1,60 @@
 import mongoose from "mongoose";
 
 const HostelSchema = new mongoose.Schema({
-    amenities: [{
-        id: String,
-        label: String,
-        desc: String,
-        image: String,
-    }],
-    chetnaPrabha: {
-        title: String,
-        description: String,
-        subtitle: String,
-        items: [{
+    prospectus: { type: String, default: "" },
+    about: {
+        title: { type: String, default: "Your Second Home for Holistic Growth." },
+        description: { type: String, default: "Spread across a lush 65-acre campus..." },
+        stats: [{
+            value: String,
             label: String,
-            image: String,
+        }],
+        features: [{
+            icon: String,
+            text: String,
         }]
     },
-    pillarsOfCare: [{
-        id: String,
-        label: String,
-        desc: String,
-        image: String,
+    gallery: [{
+        src: String,
+        title: String,
     }],
-    happinessCouncil: {
+    facilities: [{
+        image: String,
         title: String,
-        description: String,
-        items: [{
-            label: String,
-            image: String,
-        }]
-    },
-    foodMenu: {
-        title: String,
-        description: String,
-        secondaryDescription: String,
-        images: [String],
-        weeklyMenu: {
-            monday: [String],
-            tuesday: [String],
-            wednesday: [String],
-            thursday: [String],
-            friday: [String],
-            saturday: [String],
-            sunday: [String],
+        desc: String,
+    }],
+    fees: {
+        table: [{
+            className: String,
+            nonAc: String,
+            ac: String,
+        }],
+        shortDuration: {
+            nonAc: { type: String, default: "₹10,000" },
+            ac: { type: String, default: "₹12,000" },
+        },
+        cancellation: {
+            penalty: { type: String, default: "₹10,000" },
+            schoolDate: { type: String, default: "August 15" },
+            collegeDate: { type: String, default: "October 30" },
         }
     },
-    rules: {
+    rules: [{
+        id: String,
+        title: String,
         content: String,
-    },
-    fees: {
-        content: String,
-    },
-    admission: {
-        content: String,
-    },
-    gallery: [String],
-    prospectus: String,
+        icon: String,
+    }],
+    scholarships: [{
+        title: String,
+        desc: String,
+    }],
+    banking: {
+        accountName: { type: String, default: "Marudhar Mahila Shikshan Sangh" },
+        bankAndBranch: { type: String, default: "ICICI Bank – Rani Branch" },
+        accountNumber: { type: String, default: "684605601184" },
+        ifscCode: { type: String, default: "ICIC0006846" },
+    }
 }, { timestamps: true });
 
 export default mongoose.models.Hostel || mongoose.model("Hostel", HostelSchema);

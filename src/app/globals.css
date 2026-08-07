@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+@plugin "@tailwindcss/typography";
 @theme {
   --color-sandstone: #E2C792;
   --color-sandstone-light: #F0DDB8;

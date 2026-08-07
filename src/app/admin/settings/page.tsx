@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 
 import BulkImageUpload from "@/components/admin/BulkImageUpload";
+import FileUploadField from "@/components/admin/FileUploadField";
 import { cn } from "@/lib/utils";
 
 export default function SettingsManagerPage() {
@@ -35,7 +36,8 @@ export default function SettingsManagerPage() {
         smtp_user: "",
         smtp_password: "",
         smtp_from_email: "",
-        smtp_secure: "true"
+        smtp_secure: "true",
+        brochure_pdf_url: ""
     });
     const [heroSettings, setHeroSettings] = useState({
         hero_type: "video",
@@ -65,7 +67,8 @@ export default function SettingsManagerPage() {
                     smtp_user: data.settings.smtp_user || "",
                     smtp_password: data.settings.smtp_password || "",
                     smtp_from_email: data.settings.smtp_from_email || "",
-                    smtp_secure: data.settings.smtp_secure || "true"
+                    smtp_secure: data.settings.smtp_secure || "true",
+                    brochure_pdf_url: data.settings.brochure_pdf_url || ""
                 });
                 setHeroSettings({
                     hero_type: data.settings.hero_type || "video",
@@ -269,6 +272,48 @@ export default function SettingsManagerPage() {
                             </button>
                         </div>
                     </form>
+                </div>
+            </div>
+
+            {/* Brochure Section */}
+            <div className="bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden mt-10">
+                <div className="p-8 border-b border-gray-50 bg-gray-50/30">
+                    <h2 className="text-xl font-black text-oxford uppercase tracking-tight flex items-center gap-3">
+                        <Upload className="text-sandstone" />
+                        Brochure PDF Upload
+                    </h2>
+                    <p className="text-sm text-gray-500 mt-1">Upload or replace the downloadable brochure PDF used across the website.</p>
+                </div>
+
+                <div className="p-8">
+                    <FileUploadField
+                        label="Brochure PDF"
+                        value={settings.brochure_pdf_url}
+                        onChange={(url) => setSettings({ ...settings, brochure_pdf_url: url })}
+                        folder="brochure"
+                        accept=".pdf"
+                        description="Upload the latest brochure PDF. The navbar download link will update from this file."
+                    />
+
+                    <div className="pt-6 border-t border-gray-100 flex justify-end">
+                        <button
+                            onClick={handleSave}
+                            disabled={saving}
+                            className="px-8 py-4 bg-oxford text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-black transition-all shadow-xl shadow-oxford/20 flex items-center justify-center gap-3 disabled:opacity-70"
+                        >
+                            {saving ? (
+                                <>
+                                    <Loader2 size={18} className="animate-spin text-sandstone" />
+                                    Saving...
+                                </>
+                            ) : (
+                                <>
+                                    <Save size={18} className="text-sandstone" />
+                                    Save Brochure
+                                </>
+                            )}
+                        </button>
+                    </div>
                 </div>
             </div>
 

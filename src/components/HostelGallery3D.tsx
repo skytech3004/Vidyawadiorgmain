@@ -4,7 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-const images = [
+const defaultImages = [
     { src: "/hostel.jpg", title: "Premium Residence" },
     { src: "/Cafeteria.png", title: "Student Cafeteria" },
     { src: "/Hostels.png", title: "Hostel View" },
@@ -12,10 +12,10 @@ const images = [
     { src: "/Hostels_2.png", title: "Modern Facilities" },
     { src: "/Hostels_3.png", title: "Nurturing Environment" },
     { src: "/Hostels_4.png", title: "Safe & Secure" },
-
 ];
 
-const HostelGallery = () => {
+const HostelGallery = ({ customImages }: { customImages?: any[] }) => {
+    const images = customImages && customImages.length > 0 ? customImages : defaultImages;
     return (
         <section className="py-24 px-6 bg-white overflow-hidden">
             <div className="max-w-7xl mx-auto">

@@ -1,12 +1,39 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { motion } from "framer-motion";
 import { Shield, Users, Landmark, Heart } from "lucide-react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+
+interface InspirationData {
+    title: string;
+    name: string;
+    description: string;
+    image: string;
+}
 
 export default function TrustPage() {
+    const [inspiration, setInspiration] = useState<InspirationData | null>(null);
+
+    useEffect(() => {
+        const fetchInspiration = async () => {
+            try {
+                const isLocalDev = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+                const url = isLocalDev ? "/api/inspiration" : "https://www.vidyawadi.org/api/inspiration";
+                const res = await fetch(url, { cache: "no-store" });
+                const json = await res.json();
+                if (json.success && json.data) {
+                    setInspiration(json.data);
+                }
+            } catch (error) {
+                console.error("Failed to fetch inspiration data", error);
+            }
+        };
+        fetchInspiration();
+    }, []);
+
     return (
         <main className="min-h-screen bg-white">
             <Navbar />
@@ -37,6 +64,44 @@ export default function TrustPage() {
                     </motion.h1>
                 </div>
             </div>
+
+            {/* Inspiration Section */}
+            {inspiration && (
+                <section className="py-24 bg-stone-50 border-b border-gray-100">
+                    <div className="max-w-6xl mx-auto px-6">
+                        <div className="grid lg:grid-cols-12 gap-16 items-center">
+                            <div className="lg:col-span-5 relative">
+                                <div className="absolute -inset-4 bg-sandstone/10 rounded-[3rem] transform -rotate-3" />
+                                <div className="relative aspect-[3/4] rounded-[2.5rem] overflow-hidden shadow-2xl bg-slate-200">
+                                    {inspiration.image ? (
+                                        <Image 
+                                            src={inspiration.image} 
+                                            alt={inspiration.name}
+                                            fill
+                                            className="object-cover"
+                                            unoptimized
+                                        />
+                                    ) : (
+                                        <div className="w-full h-full flex items-center justify-center text-gray-400 font-bold">No Image</div>
+                                    )}
+                                </div>
+                            </div>
+                            <div className="lg:col-span-7">
+                                <span className="text-sandstone font-black uppercase tracking-[0.3em] text-sm mb-4 block">
+                                    {inspiration.title}
+                                </span>
+                                <h2 className="text-4xl md:text-5xl font-black text-oxford mb-8">
+                                    {inspiration.name}
+                                </h2>
+                                <div 
+                                    className="text-oxford/70 text-lg leading-relaxed space-y-6 prose prose-lg prose-sandstone max-w-none"
+                                    dangerouslySetInnerHTML={{ __html: inspiration.description }}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            )}
 
             {/* About the Trust */}
             <section className="py-24">

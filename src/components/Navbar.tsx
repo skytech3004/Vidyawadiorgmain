@@ -14,44 +14,47 @@ import Image from "next/image";
 import Link from "next/link";
 
 
-const navLinks = [
-    { name: "Home", href: "/" },
-    {
-        name: "About Us",
-        href: "/about",
-        subLinks: [
-            { name: "About Vidyawadi", href: "/about" },
-            { name: "About the Trust", href: "/about/trust" },
-            { name: "Vision & Mission", href: "/about/vision-mission" },
-            { name: "Legacy Since 1956", href: "/about/legacy" },
-            { name: "Management", href: "/about/management" }
-        ]
-    },
-    {
-        name: "Admissions",
-        href: "#Admissions",
-        subLinks: [
-            { name: "Download Brochure (PDF)", href: "/brochures/prospectus.pdf", isBrochure: true },
-            { name: "Leeladevi Parasmal Sancheti Kanya Mahavidyalaya", href: "https://vidyawadicollege.org" },
-            { name: "Marudhar Balika Vidyapeeth (Sr. Sec.) Vidyawadi Hindi/English Medium (RBSE)", href: "/institutions/marudhar-balika-vidyapeeth" },
-            { name: "Leeladevi Parasmal Sancheti English Medium Sr.Sec.School", href: "/institutions/leeladevi-english-medium" },
-            { name: "Sushiladevi Prakashraj Modi Primary School", href: "/institutions/sushiladevi" }
-        ]
-    },
-    { name: "Amenities", href: "/amenities" },
-    { name: "Hostel", href: "/hostel" },
-    { name: "Gallery", href: "/gallery" },
-    { name: "Blog", href: "/blog" },
-    { name: "Contact", href: "/contact" },
-    { name: "Careers", href: "/careers" },
-
-];
-
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [isDarkSection, setIsDarkSection] = useState(true);
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+    const [brochureUrl, setBrochureUrl] = useState("/brochures/prospectus.pdf");
+
+    const navLinks = [
+        { name: "Home", href: "/" },
+        {
+            name: "About Us",
+            href: "/about",
+            subLinks: [
+                { name: "About Vidyawadi", href: "/about" },
+                { name: "About the Trust", href: "/about/trust" },
+                { name: "Vision & Mission", href: "/about/vision-mission" },
+                { name: "Legacy Since 1956", href: "/about/legacy" },
+                { name: "Management", href: "/about/management" },
+                { name: "Management's Message", href: "/about/management-message" },
+                { name: "Principal's Message", href: "/about/principal-message" },
+                { name: "CEO's Message", href: "/about/ceo-message" }
+            ]
+        },
+        {
+            name: "Admissions",
+            href: "#Admissions",
+            subLinks: [
+                { name: "Download Brochure (PDF)", href: brochureUrl, isBrochure: true },
+                { name: "Leeladevi Parasmal Sancheti Kanya Mahavidyalaya", href: "https://vidyawadicollege.org" },
+                { name: "Marudhar Balika Vidyapeeth (Sr. Sec.) Vidyawadi Hindi/English Medium (RBSE)", href: "/institutions/marudhar-balika-vidyapeeth" },
+                { name: "Leeladevi Parasmal Sancheti English Medium Sr.Sec.School", href: "/institutions/leeladevi-english-medium" },
+                { name: "Sushiladevi Prakashraj Modi Primary School", href: "/institutions/sushiladevi" }
+            ]
+        },
+        { name: "Amenities", href: "/amenities" },
+        { name: "Hostel", href: "/hostel" },
+        { name: "Gallery", href: "/gallery" },
+        { name: "Blog", href: "/blog" },
+        { name: "Contact", href: "/contact" },
+        { name: "Careers", href: "/careers" },
+    ];
 
     useEffect(() => {
         const handleScroll = () => {
@@ -72,6 +75,17 @@ export default function Navbar() {
         );
 
         document.querySelectorAll("section[id]").forEach((section) => observer.observe(section));
+
+        fetch("/api/site-content")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data?.success && data?.brochurePdfUrl) {
+                    setBrochureUrl(data.brochurePdfUrl);
+                }
+            })
+            .catch(() => {
+                setBrochureUrl("/brochures/prospectus.pdf");
+            });
 
         return () => {
             window.removeEventListener("scroll", handleScroll);

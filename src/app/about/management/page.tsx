@@ -1,13 +1,29 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Staff from "@/components/Staff";
 import { motion } from "framer-motion";
-import { Users, ShieldCheck, Heart, GraduationCap } from "lucide-react";
+import { Users, ShieldCheck, Heart, GraduationCap, Phone } from "lucide-react";
 
 export default function ManagementPage() {
+    const [adminStaff, setAdminStaff] = useState([]);
+
+    useEffect(() => {
+        const fetchAdminStaff = async () => {
+            try {
+                const res = await fetch("/api/admin-staff");
+                const data = await res.json();
+                if (data.success) {
+                    setAdminStaff(data.staff);
+                }
+            } catch (err) {
+                console.error("Failed to fetch admin staff", err);
+            }
+        };
+        fetchAdminStaff();
+    }, []);
     return (
         <main className="min-h-screen bg-white">
             <Navbar />
@@ -172,6 +188,57 @@ export default function ManagementPage() {
                             </motion.div>
                         ))}
                     </div>
+
+                    {/* Admin Staff Section */}
+                    {adminStaff.length > 0 && (
+                        <div className="mt-32">
+                            <div className="text-center mb-16">
+                                <motion.h2
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    className="text-3xl md:text-4xl font-black text-oxford mb-4"
+                                >
+                                    ADMINISTRATIVE STAFF
+                                </motion.h2>
+                                <motion.div
+                                    initial={{ scaleX: 0 }}
+                                    whileInView={{ scaleX: 1 }}
+                                    viewport={{ once: true }}
+                                    className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full"
+                                />
+                            </div>
+                            
+                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {adminStaff.map((staff: any, i) => (
+                                    <motion.div
+                                        key={staff._id || i}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: i * 0.1 }}
+                                        className="bg-stone-50 border border-oxford/5 p-8 rounded-[2rem] hover:shadow-xl hover:border-sandstone/30 transition-all duration-300 group"
+                                    >
+                                        <div className="w-16 h-16 rounded-2xl bg-oxford text-sandstone flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                            <Users size={32} />
+                                        </div>
+                                        <h4 className="text-xl font-black text-oxford uppercase tracking-tight mb-2">
+                                            {staff.name}
+                                        </h4>
+                                        <div className="inline-block px-4 py-1.5 bg-sandstone/10 text-sandstone text-[10px] font-black uppercase tracking-widest rounded-full mb-6">
+                                            {staff.designation}
+                                        </div>
+                                        {staff.contactNumber && (
+                                            <div className="flex items-center gap-3 text-oxford/60 font-medium text-sm">
+                                                <Phone size={16} className="text-sandstone" />
+                                                {staff.contactNumber}
+                                            </div>
+                                        )}
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </section>
 

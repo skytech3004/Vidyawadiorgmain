@@ -63,36 +63,29 @@ function AwardSlideCard({
                 </div>
 
                 {images.length > 0 ? (
-                    <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {images.map((image, index) => (
-                            <button
-                                key={`${award._id}-${index}`}
-                                type="button"
-                                onClick={() => onOpenLightbox(index)}
-                                className="group/card relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-lg aspect-[4/3] text-left"
-                                aria-label={`Open image ${index + 1} for ${award.title}`}
-                            >
-                                <Image
-                                    src={image}
-                                    alt={`${award.title} ${index + 1}`}
-                                    fill
-                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                                    className="object-cover transition-transform duration-700 group-hover/card:scale-110"
-                                    unoptimized
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-oxford-dark/80 via-transparent to-transparent opacity-90" />
-                                <div className="absolute inset-x-0 bottom-0 p-4">
-                                    <div className="flex items-center justify-between gap-3">
-                                        <span className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.3em] text-white backdrop-blur-md">
-                                            Image {index + 1}
-                                        </span>
-                                        <span className="inline-flex items-center rounded-full bg-sandstone/15 px-3 py-1 text-[10px] font-black uppercase tracking-[0.25em] text-sandstone backdrop-blur-md">
-                                            View
-                                        </span>
-                                    </div>
-                                </div>
-                            </button>
-                        ))}
+                    <div className="mt-8 relative w-full aspect-[21/9] md:aspect-[3/1] rounded-[2rem] overflow-hidden shadow-2xl border-2 border-white/10 bg-oxford-dark cursor-pointer" onClick={() => onOpenLightbox(0)}>
+                        {/* Blurred background image to prevent blank spaces on different aspect ratios */}
+                        <Image 
+                            src={images[0]}
+                            alt=""
+                            fill
+                            className="object-cover blur-2xl opacity-40 scale-110 pointer-events-none select-none"
+                            unoptimized
+                        />
+                        {/* Main fully visible image */}
+                        <Image 
+                            src={images[0]}
+                            alt={`${award.title} Image`}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 1200px"
+                            className="object-contain relative z-10 p-2"
+                            unoptimized
+                        />
+                        <div className="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity z-20 flex items-center justify-center">
+                            <span className="bg-white/20 backdrop-blur-md text-white font-bold uppercase tracking-widest text-xs px-6 py-3 rounded-full border border-white/30 shadow-xl">
+                                Click to Expand
+                            </span>
+                        </div>
                     </div>
                 ) : (
                     <div className="mt-8 rounded-[2rem] border border-dashed border-white/15 bg-white/5 p-10 text-center text-white/70">
