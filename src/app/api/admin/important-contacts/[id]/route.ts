@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/lib/mongodb";
-import AdminStaff from "@/models/AdminStaff";
+import ImportantContact from "@/models/ImportantContact";
 import { jwtVerify } from "jose";
 
 async function verifyAuth(req: NextRequest) {
@@ -27,20 +27,20 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
         await dbConnect();
         const data = await req.json();
 
-        const member = await AdminStaff.findByIdAndUpdate(
+        const contact = await ImportantContact.findByIdAndUpdate(
             id,
             {
-                name: data.name,
-                designation: data.designation,
-                contactNumber: data.contactNumber,
+                office: data.office,
+                phone: data.phone || "",
+                email: data.email || "",
                 order: Number(data.order) || 0,
             },
             { new: true }
         );
 
-        return NextResponse.json({ success: true, member });
+        return NextResponse.json({ success: true, contact });
     } catch (error: any) {
-        console.error("ADMIN_STAFF_PUT_ERROR:", error);
+        console.error("IMPORTANT_CONTACTS_PUT_ERROR:", error);
         return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });
     }
 }
@@ -54,10 +54,10 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
 
         const { id } = await params;
         await dbConnect();
-        await AdminStaff.findByIdAndDelete(id);
+        await ImportantContact.findByIdAndDelete(id);
         return NextResponse.json({ success: true });
     } catch (error: any) {
-        console.error("ADMIN_STAFF_DELETE_ERROR:", error);
+        console.error("IMPORTANT_CONTACTS_DELETE_ERROR:", error);
         return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });
     }
 }

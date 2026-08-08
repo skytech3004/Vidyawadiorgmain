@@ -14,6 +14,7 @@ import Footer from "@/components/Footer";
 import HomeNewsEvents from "@/components/HomeNewsEvents";
 import GallerySection from "@/components/GallerySection";
 import AwardsSection from "@/components/AwardsSection";
+import Script from "next/script";
 
 export default async function Home() {
   // Initialize DB table on first load
@@ -37,6 +38,19 @@ export default async function Home() {
       {/* <Staff /> */}
       <BlogSection />
       {/* <Academics /> */}
+      
+    <section className="py-12 md:py-16 lg:py-20 bg-white">
+      <div className="container mx-auto px-4 w-full">
+        <div className="sk-ww-google-reviews" data-embed-id="25634352"></div>
+        <Script
+          src="https://widgets.sociablekit.com/google-reviews/widget.js"
+          strategy="lazyOnload"
+        />
+      </div>
+    </section>
+
+
+
       <ContactForm />
       <Footer />
     </main>

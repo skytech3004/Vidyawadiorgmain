@@ -31,7 +31,7 @@ export default function Navbar() {
                 { name: "About the Trust", href: "/about/trust" },
                 { name: "Vision & Mission", href: "/about/vision-mission" },
                 { name: "Legacy Since 1956", href: "/about/legacy" },
-                { name: "Management", href: "/about/management" },
+                { name: "Management Committee", href: "/about/management" },
                 { name: "Management's Message", href: "/about/management-message" },
                 { name: "Principal's Message", href: "/about/principal-message" },
                 { name: "CEO's Message", href: "/about/ceo-message" }

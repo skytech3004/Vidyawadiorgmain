@@ -1,29 +1,14 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Staff from "@/components/Staff";
 import { motion } from "framer-motion";
-import { Users, ShieldCheck, Heart, GraduationCap, Phone } from "lucide-react";
+import { Users, ShieldCheck, Heart, GraduationCap } from "lucide-react";
 
 export default function ManagementPage() {
-    const [adminStaff, setAdminStaff] = useState([]);
-
-    useEffect(() => {
-        const fetchAdminStaff = async () => {
-            try {
-                const res = await fetch("/api/admin-staff");
-                const data = await res.json();
-                if (data.success) {
-                    setAdminStaff(data.staff);
-                }
-            } catch (err) {
-                console.error("Failed to fetch admin staff", err);
-            }
-        };
-        fetchAdminStaff();
-    }, []);
     return (
         <main className="min-h-screen bg-white">
             <Navbar />
@@ -48,7 +33,8 @@ export default function ManagementPage() {
                         transition={{ delay: 0.1 }}
                         className="text-5xl md:text-7xl font-black text-white"
                     >
-                        MANAGEMENT & LEADERSHIP
+                        Management Committee
+
                     </motion.h1>
                 </div>
             </div>
@@ -56,13 +42,52 @@ export default function ManagementPage() {
             {/* Leadership Message */}
             <section className="py-24">
                 <div className="max-w-6xl mx-auto px-6">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-4xl font-black text-oxford mb-12 text-center"
+                    >
+                        Guided by Excellence
+                    </motion.h2>
+
+                    {/* Heritage & Management */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="mb-24 text-center"
+                    >
+                        <div className="relative w-full max-w-5xl mx-auto h-48 sm:h-56 md:h-72 rounded-3xl overflow-hidden shadow-2xl border border-oxford/5 mb-12">
+                            <Image
+                                src="/uploads/about-messages/1766389601754-managementbanner.jpg"
+                                alt="Vidyawadi Management Committee"
+                                fill
+                                className="object-cover object-center"
+                                sizes="(max-width: 768px) 100vw, 1024px"
+                            />
+                        </div>
+
+                        <h3 className="text-3xl md:text-4xl font-black text-[#0c2c55] mb-8">
+                            A Sixty-Five Year&apos;s Old Educational Institution
+                        </h3>
+
+                        <div className="text-oxford/80 text-lg md:text-xl leading-relaxed max-w-5xl mx-auto space-y-6">
+                            <p>
+                                Going strong and growing stronger. Ethical management is its back bone. Those interested in the well being of the institution, become its member.
+                            </p>
+                            <p>
+                                These members not only help Vidyawadi financially but also spend a great deal of time in planning about how to take the institution further without harming its original ethos and values, i.e., the love for culture, values, morals, yet-modern.
+                            </p>
+                        </div>
+                    </motion.div>
+
                     <div className="grid lg:grid-cols-2 gap-16 items-center">
                         <motion.div
                             initial={{ opacity: 0, x: -30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                         >
-                            <h2 className="text-4xl font-black text-oxford mb-8">Guided by Excellence</h2>
                             <p className="text-oxford/70 text-lg leading-relaxed mb-6">
                                 The management of Vidyawadi is committed to creating an environment where girls can flourish.
                                 Our leadership team consists of experienced educationists, social workers, and industry leaders who bring a wealth of knowledge and a shared passion for women's empowerment.
@@ -188,57 +213,6 @@ export default function ManagementPage() {
                             </motion.div>
                         ))}
                     </div>
-
-                    {/* Admin Staff Section */}
-                    {adminStaff.length > 0 && (
-                        <div className="mt-32">
-                            <div className="text-center mb-16">
-                                <motion.h2
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    className="text-3xl md:text-4xl font-black text-oxford mb-4"
-                                >
-                                    ADMINISTRATIVE STAFF
-                                </motion.h2>
-                                <motion.div
-                                    initial={{ scaleX: 0 }}
-                                    whileInView={{ scaleX: 1 }}
-                                    viewport={{ once: true }}
-                                    className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full"
-                                />
-                            </div>
-                            
-                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {adminStaff.map((staff: any, i) => (
-                                    <motion.div
-                                        key={staff._id || i}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: i * 0.1 }}
-                                        className="bg-stone-50 border border-oxford/5 p-8 rounded-[2rem] hover:shadow-xl hover:border-sandstone/30 transition-all duration-300 group"
-                                    >
-                                        <div className="w-16 h-16 rounded-2xl bg-oxford text-sandstone flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                                            <Users size={32} />
-                                        </div>
-                                        <h4 className="text-xl font-black text-oxford uppercase tracking-tight mb-2">
-                                            {staff.name}
-                                        </h4>
-                                        <div className="inline-block px-4 py-1.5 bg-sandstone/10 text-sandstone text-[10px] font-black uppercase tracking-widest rounded-full mb-6">
-                                            {staff.designation}
-                                        </div>
-                                        {staff.contactNumber && (
-                                            <div className="flex items-center gap-3 text-oxford/60 font-medium text-sm">
-                                                <Phone size={16} className="text-sandstone" />
-                                                {staff.contactNumber}
-                                            </div>
-                                        )}
-                                    </motion.div>
-                                ))}
-                            </div>
-                        </div>
-                    )}
                 </div>
             </section>
 

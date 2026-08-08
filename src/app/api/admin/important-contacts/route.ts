@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/lib/mongodb";
-import AdminStaff from "@/models/AdminStaff";
+import ImportantContact from "@/models/ImportantContact";
+import { seedImportantContactsIfEmpty } from "@/lib/important-contacts-seed";
 import { jwtVerify } from "jose";
 
 export const dynamic = "force-dynamic";
@@ -26,8 +27,9 @@ export async function GET(req: NextRequest) {
         }
 
         await dbConnect();
-        const staff = await AdminStaff.find({}).sort({ order: 1, createdAt: 1 });
-        return NextResponse.json({ success: true, staff });
+        await seedImportantContactsIfEmpty();
+        const contacts = await ImportantContact.find({}).sort({ order: 1, createdAt: 1 });
+        return NextResponse.json({ success: true, contacts });
     } catch (error: any) {
         return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });
     }
@@ -43,20 +45,20 @@ export async function POST(req: NextRequest) {
         await dbConnect();
         const data = await req.json();
 
-        if (!data.name || !data.designation || !data.contactNumber) {
-            return NextResponse.json({ success: false, error: "Missing required fields" }, { status: 400 });
+        if (!data.office) {
+            return NextResponse.json({ success: false, error: "Office name is required" }, { status: 400 });
         }
 
-        const member = await AdminStaff.create({
-            name: data.name,
-            designation: data.designation,
-            contactNumber: data.contactNumber,
+        const contact = await ImportantContact.create({
+            office: data.office,
+            phone: data.phone || "",
+            email: data.email || "",
             order: Number(data.order) || 0,
         });
 
-        return NextResponse.json({ success: true, member });
+        return NextResponse.json({ success: true, contact });
     } catch (error: any) {
-        console.error("ADMIN_STAFF_POST_ERROR:", error);
+        console.error("IMPORTANT_CONTACTS_POST_ERROR:", error);
         return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });
     }
 }

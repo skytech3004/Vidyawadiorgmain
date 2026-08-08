@@ -1,30 +1,40 @@
 "use client";
 
-import React from "react";
-import { Phone, Mail } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { Phone, Mail, Loader2 } from "lucide-react";
+import { IMPORTANT_CONTACT_DEFAULTS } from "@/lib/important-contacts-data";
 
 interface ContactEntry {
+    _id?: string;
     office: string;
     phone?: string;
     email?: string;
 }
 
-const contactData: ContactEntry[] = [
-    { office: "Secretary - Marudhar Mahila Shikshan Sangh", email: "kailashkaveria@yahoo.com" },
-    { office: "CEO", phone: "6377204201", email: "ceo@vidyawadi.org" },
-    { office: "Principal College", phone: "6377204203", email: "principal.college@vidyawadi.org" },
-    { office: "Principal Hindi School", phone: "6377204205", email: "priya.sangeeta@vidyawadi.org" },
-    { office: "Principal English School", phone: "6377203204", email: "principal_lps@vidyawadi.org" },
-    { office: "Chief Resident Officer", phone: "6377204202", email: "" },
-    { office: "Hostel Assistant", phone: "6377204218" },
-    { office: "Accounts Department", phone: "6377204212", email: "niranjan.gehlot@vidyawadi.org" },
-    { office: "Admin Department", phone: "6377204206", email: "administration.manager@vidyawadi.org" },
-    { office: "College Office", phone: "6377204208", email: "deepak.sisodiya@vidyawadi.org" },
-    { office: "Hindi School Office", phone: "6377204207", email: "himmatsingh.rathore@vidyawadi.org" },
-    { office: "English School Office", phone: "6377204209", email: "brajmohan.agarawal@vidyawadi.org" },
-];
-
 export default function ContactDirectory() {
+    const [contacts, setContacts] = useState<ContactEntry[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchContacts = async () => {
+            try {
+                const res = await fetch("/api/important-contacts");
+                const data = await res.json();
+                if (data.success && data.contacts?.length > 0) {
+                    setContacts(data.contacts);
+                } else {
+                    setContacts(IMPORTANT_CONTACT_DEFAULTS);
+                }
+            } catch {
+                setContacts(IMPORTANT_CONTACT_DEFAULTS);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchContacts();
+    }, []);
+
     return (
         <section className="py-20 px-6 bg-oxford-dark border-t border-white/5">
             <div className="max-w-7xl mx-auto">
@@ -33,44 +43,50 @@ export default function ContactDirectory() {
                     <p className="text-white/60">Direct lines to our departments and administration</p>
                 </div>
 
-                <div className="overflow-x-auto rounded-3xl border border-white/10 bg-white/5">
-                    <table className="w-full text-left border-collapse">
-                        <thead>
-                            <tr className="bg-white/10 text-sandstone uppercase text-sm tracking-widest border-b border-white/10">
-                                <th className="p-6 font-bold">Name of Office</th>
-                                <th className="p-6 font-bold">Phone No.</th>
-                                <th className="p-6 font-bold">Email</th>
-                            </tr>
-                        </thead>
-                        <tbody className="divide-y divide-white/10 text-white/80">
-                            {contactData.map((contact, index) => (
-                                <tr key={index} className="hover:bg-white/5 transition-colors">
-                                    <td className="p-6 font-medium text-white">{contact.office}</td>
-                                    <td className="p-6 whitespace-nowrap">
-                                        {contact.phone ? (
-                                            <a href={`tel:+91${contact.phone}`} className="flex items-center gap-2 hover:text-sandstone transition-colors group">
-                                                <Phone size={16} className="text-white/40 group-hover:text-sandstone" />
-                                                <span>{contact.phone}</span>
-                                            </a>
-                                        ) : (
-                                            <span className="text-white/20">-</span>
-                                        )}
-                                    </td>
-                                    <td className="p-6">
-                                        {contact.email ? (
-                                            <a href={`mailto:${contact.email}`} className="flex items-center gap-2 hover:text-sandstone transition-colors group break-all md:break-normal">
-                                                <Mail size={16} className="text-white/40 group-hover:text-sandstone shrink-0" />
-                                                <span>{contact.email}</span>
-                                            </a>
-                                        ) : (
-                                            <span className="text-white/20">-</span>
-                                        )}
-                                    </td>
+                {loading ? (
+                    <div className="flex justify-center py-16">
+                        <Loader2 className="animate-spin text-sandstone" size={40} />
+                    </div>
+                ) : (
+                    <div className="overflow-x-auto rounded-3xl border border-white/10 bg-white/5">
+                        <table className="w-full text-left border-collapse">
+                            <thead>
+                                <tr className="bg-white/10 text-sandstone uppercase text-sm tracking-widest border-b border-white/10">
+                                    <th className="p-6 font-bold">Name of Office</th>
+                                    <th className="p-6 font-bold">Phone No.</th>
+                                    <th className="p-6 font-bold">Email</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                            </thead>
+                            <tbody className="divide-y divide-white/10 text-white/80">
+                                {contacts.map((contact, index) => (
+                                    <tr key={contact._id || index} className="hover:bg-white/5 transition-colors">
+                                        <td className="p-6 font-medium text-white">{contact.office}</td>
+                                        <td className="p-6 whitespace-nowrap">
+                                            {contact.phone ? (
+                                                <a href={`tel:+91${contact.phone}`} className="flex items-center gap-2 hover:text-sandstone transition-colors group">
+                                                    <Phone size={16} className="text-white/40 group-hover:text-sandstone" />
+                                                    <span>{contact.phone}</span>
+                                                </a>
+                                            ) : (
+                                                <span className="text-white/20">-</span>
+                                            )}
+                                        </td>
+                                        <td className="p-6">
+                                            {contact.email ? (
+                                                <a href={`mailto:${contact.email}`} className="flex items-center gap-2 hover:text-sandstone transition-colors group break-all md:break-normal">
+                                                    <Mail size={16} className="text-white/40 group-hover:text-sandstone shrink-0" />
+                                                    <span>{contact.email}</span>
+                                                </a>
+                                            ) : (
+                                                <span className="text-white/20">-</span>
+                                            )}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
             </div>
         </section>
     );
