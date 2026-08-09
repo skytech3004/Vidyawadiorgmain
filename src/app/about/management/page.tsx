@@ -217,7 +217,7 @@ export default function ManagementPage() {
             </section>
 
             {/* Meet the Faculty / Management Team */}
-            <Staff />
+           
 
             <Footer />
         </main>
