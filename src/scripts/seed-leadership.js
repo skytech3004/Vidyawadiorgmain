@@ -19,7 +19,7 @@ const LeadershipMessage = mongoose.models.LeadershipMessage || mongoose.model("L
 const messages = [
     {
         role: "president",
-        title: "Management's Message",
+        title: "President's Message",
         photo: "/f837631c-4bc9-4494-b8f1-fff9b07554d8.jpg",
         content: `On behalf of the Management Committee, I extend a warm welcome to Leela Devi Parasmal Sancheti Kanya Mahavidyalaya. We are proud of our heritage and the values we instill in our students. 
 
@@ -29,7 +29,7 @@ Our management is committed to continuous improvement, maintaining high academic
     },
     {
         role: "secretary",
-        title: "Principal's Message",
+        title: "Secretary's Message",
         photo: "/hostel.jpg",
         content: `Welcome to Leela Devi Parasmal Sancheti Kanya Mahavidyalaya. As the Principal, it is my privilege to lead this esteemed institution dedicated to the holistic development of young women.
 

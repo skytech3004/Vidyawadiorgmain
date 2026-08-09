@@ -66,7 +66,7 @@ export default function PrincipalMessagePage() {
                                     transition={{ delay: 0.1 }}
                                     className="text-5xl md:text-7xl font-black text-white"
                                 >
-PRINCIPAL'S MESSAGE                                </motion.h1>
+Secretary's Message                                </motion.h1>
                             </div>
                         </div>
             

@@ -32,8 +32,8 @@ export default function Navbar() {
                 { name: "Vision & Mission", href: "/about/vision-mission" },
                 { name: "Legacy Since 1956", href: "/about/legacy" },
                 { name: "Management Committee", href: "/about/management" },
-                { name: "Management's Message", href: "/about/management-message" },
-                { name: "Principal's Message", href: "/about/principal-message" },
+                { name: "President's Message", href: "/about/management-message" },
+                { name: "Secretary's Message", href: "/about/principal-message" },
                 { name: "CEO's Message", href: "/about/ceo-message" }
             ]
         },
@@ -48,12 +48,24 @@ export default function Navbar() {
                 { name: "Sushiladevi Prakashraj Modi Primary School", href: "/institutions/sushiladevi" }
             ]
         },
+
+      
         { name: "Amenities", href: "/amenities" },
         { name: "Hostel", href: "/hostel" },
         { name: "Gallery", href: "/gallery" },
-        { name: "Blog", href: "/blog" },
+        
         { name: "Contact", href: "/contact" },
         { name: "Careers", href: "/careers" },
+            { name: "Alumni", href: "/alumni" },
+               {
+            name: "More",
+            href: "#More",
+            subLinks: [
+                { name: "Blog", href: "/blog" },
+                { name: "News & Events", href: "/news-events" },
+                { name: "Magazine", href: "/magazine" },
+            ]
+        },
     ];
 
     useEffect(() => {

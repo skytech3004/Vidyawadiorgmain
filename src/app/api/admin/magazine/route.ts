@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
-import Event from "@/models/Event";
+import Magazine from "@/models/Magazine";
 import { jwtVerify } from "jose";
 
 async function verifyAuth(req: NextRequest) {
@@ -11,7 +11,7 @@ async function verifyAuth(req: NextRequest) {
         const secret = new TextEncoder().encode(process.env.JWT_SECRET || "fallback_secret");
         const { payload } = await jwtVerify(token, secret);
         return payload;
-    } catch (error) {
+    } catch {
         return null;
     }
 }
@@ -24,11 +24,11 @@ export async function GET(request: NextRequest) {
         }
 
         await connectDB();
-        const events = await Event.find({}).sort({ date: -1 });
+        const magazines = await Magazine.find({}).sort({ issueDate: -1 });
 
-        return NextResponse.json({ success: true, events });
+        return NextResponse.json({ success: true, magazines });
     } catch (error: any) {
-        console.error("Error fetching events:", error);
+        console.error("Error fetching magazines:", error);
         return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });
     }
 }
@@ -43,22 +43,29 @@ export async function POST(request: NextRequest) {
         await connectDB();
         const data = await request.json();
 
-        const newEvent = await Event.create({
+        if (!data.title || !data.pdfUrl || !data.issueDate) {
+            return NextResponse.json(
+                { success: false, error: "Title, PDF, and issue date are required" },
+                { status: 400 }
+            );
+        }
+
+        const magazine = await Magazine.create({
             title: data.title,
-            description: data.description,
-            date: new Date(data.date),
-            time: data.time || "",
-            location: data.location || "",
-            type: data.type || "event",
-            institution: data.institution || "all",
-            link: data.link || "",
-            image: data.image || "",
-            color: data.color || (data.type === 'news' ? '#14b8a6' : '#002147') // teal-blue for news, oxford for event
+            description: data.description || "",
+            coverImage: data.coverImage || "",
+            pdfUrl: data.pdfUrl,
+            issueDate: new Date(data.issueDate),
+            volume: data.volume || "",
+            published: data.published !== undefined ? data.published : true,
         });
 
-        return NextResponse.json({ success: true, event: newEvent }, { status: 201 });
+        return NextResponse.json({ success: true, magazine }, { status: 201 });
     } catch (error: any) {
-        console.error("Error creating event:", error);
-        return NextResponse.json({ success: false, error: error.message || "Failed to create event" }, { status: 500 });
+        console.error("Error creating magazine:", error);
+        return NextResponse.json(
+            { success: false, error: error.message || "Failed to create magazine" },
+            { status: 500 }
+        );
     }
 }

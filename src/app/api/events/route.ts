@@ -8,11 +8,15 @@ export async function GET(request: NextRequest) {
         
         const { searchParams } = new URL(request.url);
         const institution = searchParams.get('institution');
-        const limit = parseInt(searchParams.get('limit') || '10');
+        const type = searchParams.get('type');
+        const limit = parseInt(searchParams.get('limit') || '50');
 
         let query: any = {};
         if (institution && institution !== 'all') {
             query.$or = [{ institution: institution }, { institution: 'all' }];
+        }
+        if (type && (type === 'event' || type === 'news')) {
+            query.type = type;
         }
 
         // Fetch events sorted by date descending

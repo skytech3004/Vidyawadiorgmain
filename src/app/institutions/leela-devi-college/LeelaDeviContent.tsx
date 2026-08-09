@@ -370,7 +370,7 @@ export default function LeelaDeviContent({ initialCollegeFaculty = [] }: { initi
                 </div>
             </section>
 
-            {/* Principal's Message Section */}
+            {/* Secretary's Message Section */}
             <section className="py-24 px-6 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
                     <motion.div

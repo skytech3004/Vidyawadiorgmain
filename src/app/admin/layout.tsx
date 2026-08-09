@@ -21,7 +21,8 @@ import {
     Building2,
     Award,
     MessageSquareHeart,
-    Phone
+    Phone,
+    BookOpen
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -34,6 +35,7 @@ const sidebarItems = [
     { name: "Careers", href: "/admin/careers", icon: Briefcase },
     { name: "Career Apps", href: "/admin/career-applications", icon: FileText },
     { name: "Events & News", href: "/admin/events", icon: Calendar },
+    { name: "Magazine", href: "/admin/magazine", icon: BookOpen },
     { name: "Heritage", href: "/admin/heritage", icon: Landmark },
     { name: "Amenities", href: "/admin/amenities", icon: Building2 },
     { name: "Facilities", href: "/admin/facilities", icon: Building2 },

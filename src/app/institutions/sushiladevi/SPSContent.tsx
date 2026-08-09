@@ -230,7 +230,7 @@ export default function SPSContent() {
                 </div>
             </section>
 
-            {/* About Section (Principal's Message & Vision) */}
+            {/* About Section (Secretary's Message & Vision) */}
             <section className="py-24 px-6 bg-white relative overflow-hidden">
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
                     <div>

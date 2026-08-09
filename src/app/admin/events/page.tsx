@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, Plus, Edit2, Trash2, X, MapPin, Clock, Tag, ExternalLink } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
+import ImageUploadField from "@/components/admin/ImageUploadField";
 
 interface SchoolEvent {
     _id: string;
@@ -15,6 +16,7 @@ interface SchoolEvent {
     type: 'event' | 'news';
     institution: string;
     link: string;
+    image: string;
     color: string;
     createdAt: string;
 }
@@ -36,6 +38,7 @@ export default function EventsPage() {
         type: "event" as 'event' | 'news',
         institution: "all",
         link: "",
+        image: "",
         color: "#002147"
     });
 
@@ -73,6 +76,7 @@ export default function EventsPage() {
                 type: event.type,
                 institution: event.institution,
                 link: event.link,
+                image: event.image || "",
                 color: event.color
             });
         } else {
@@ -86,6 +90,7 @@ export default function EventsPage() {
                 type: "event",
                 institution: "all",
                 link: "",
+                image: "",
                 color: "#002147"
             });
         }
@@ -370,6 +375,15 @@ export default function EventsPage() {
                                             onChange={(e) => setFormData({ ...formData, link: e.target.value })}
                                             className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:border-sandstone focus:ring-2 focus:ring-sandstone/20 transition-all font-medium"
                                             placeholder="https://..."
+                                        />
+                                    </div>
+                                    <div className="md:col-span-2">
+                                        <ImageUploadField
+                                            label="Cover Image (optional)"
+                                            value={formData.image}
+                                            onChange={(url) => setFormData({ ...formData, image: url })}
+                                            folder="events"
+                                            description="Recommended 16:9, under 2MB."
                                         />
                                     </div>
                                 </div>

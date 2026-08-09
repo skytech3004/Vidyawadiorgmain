@@ -34,6 +34,10 @@ const EventSchema = new mongoose.Schema({
         type: String,
         default: "",
     },
+    image: {
+        type: String,
+        default: "",
+    },
     color: {
         type: String,
         default: "#002147", // Default oxford blue

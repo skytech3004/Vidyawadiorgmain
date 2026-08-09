@@ -18,8 +18,8 @@ type MessageForm = {
 };
 
 const MESSAGE_SECTIONS: Array<{ role: MessageRole; label: string; helper: string }> = [
-    { role: "president", label: "Management's Message", helper: "Opening message from the Management" },
-    { role: "secretary", label: "Principal's Message", helper: "Official note from the Principal" },
+    { role: "president", label: "President's Message", helper: "Opening message from the Management" },
+    { role: "secretary", label: "Secretary's Message", helper: "Official note from the Principal" },
     { role: "ceo", label: "CEO's Message", helper: "Leadership note from the CEO" },
 ];
 
