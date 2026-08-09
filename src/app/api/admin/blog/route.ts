@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/lib/mongodb";
 import Post from "@/models/Post";
 import { jwtVerify } from "jose";
+import { revalidatePath } from "next/cache";
 
 async function verifyAuth(req: NextRequest) {
     const token = req.cookies.get("adminToken")?.value;
@@ -47,6 +48,8 @@ export async function POST(req: NextRequest) {
         }
 
         const post = await Post.create(data);
+        revalidatePath("/blog");
+        revalidatePath(`/blog/${post.slug}`);
         return NextResponse.json({ success: true, post });
     } catch (error: any) {
         console.error("BLOG_POST_ERROR:", error);

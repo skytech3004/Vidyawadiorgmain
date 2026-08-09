@@ -178,9 +178,15 @@ interface TiptapEditorProps {
     value: string;
     onChange: (value: string) => void;
     placeholder?: string;
+    minHeightClass?: string;
 }
 
-export default function TiptapEditor({ value, onChange, placeholder }: TiptapEditorProps) {
+export default function TiptapEditor({
+    value,
+    onChange,
+    placeholder,
+    minHeightClass = "min-h-[250px]",
+}: TiptapEditorProps) {
     const editor = useEditor({
         extensions: [
             StarterKit,
@@ -207,7 +213,7 @@ export default function TiptapEditor({ value, onChange, placeholder }: TiptapEdi
         },
         editorProps: {
             attributes: {
-                class: "prose prose-sm sm:prose lg:prose-lg xl:prose-xl mx-auto focus:outline-none p-6 min-h-[250px] max-w-none text-slate-700",
+                class: `prose prose-sm sm:prose lg:prose-lg xl:prose-xl mx-auto focus:outline-none p-6 ${minHeightClass} max-w-none text-slate-700`,
             },
         },
     });

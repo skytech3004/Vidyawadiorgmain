@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/lib/mongodb";
 import Post from "@/models/Post";
 import { jwtVerify } from "jose";
+import { revalidatePath } from "next/cache";
 
 async function verifyAuth(req: NextRequest) {
     const token = req.cookies.get("adminToken")?.value;
@@ -50,6 +51,9 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
         if (!post) {
             return NextResponse.json({ success: false, error: "Post not found" }, { status: 404 });
         }
+
+        revalidatePath("/blog");
+        revalidatePath(`/blog/${post.slug}`);
         return NextResponse.json({ success: true, post });
     } catch (error: any) {
         return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });
@@ -69,6 +73,9 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
         if (!post) {
             return NextResponse.json({ success: false, error: "Post not found" }, { status: 404 });
         }
+
+        revalidatePath("/blog");
+        revalidatePath(`/blog/${post.slug}`);
         return NextResponse.json({ success: true, message: "Post deleted" });
     } catch (error: any) {
         return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });

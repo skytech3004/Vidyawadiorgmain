@@ -131,8 +131,8 @@ export default function BlogManagerPage() {
                                         <td className="p-6">
                                             <div className="flex items-center gap-4">
                                                 <div className="w-12 h-12 rounded-xl bg-gray-100 overflow-hidden flex-shrink-0">
-                                                    {post.coverImage ? (
-                                                        <img src={post.coverImage} alt="" className="w-full h-full object-cover" />
+                                                    {post.image ? (
+                                                        <img src={post.image} alt="" className="w-full h-full object-cover" />
                                                     ) : (
                                                         <div className="w-full h-full bg-sandstone/10 flex items-center justify-center">
                                                             <ImageIcon className="text-sandstone/40" size={20} />
@@ -157,7 +157,7 @@ export default function BlogManagerPage() {
                                             </span>
                                         </td>
                                         <td className="p-6">
-                                            {post.isPublished ? (
+                                            {post.published ? (
                                                 <div className="flex items-center gap-2 text-green-600">
                                                     <CheckCircle2 size={16} />
                                                     <span className="text-xs font-bold">Published</span>

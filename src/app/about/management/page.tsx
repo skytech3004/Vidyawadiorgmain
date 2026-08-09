@@ -69,7 +69,7 @@ export default function ManagementPage() {
                         </div>
 
                         <h3 className="text-3xl md:text-4xl font-black text-[#0c2c55] mb-8">
-                            A Sixty-Five Year&apos;s Old Educational Institution
+                            A Seventy  Year&apos;s Old Educational Institution
                         </h3>
 
                         <div className="text-oxford/80 text-lg md:text-xl leading-relaxed max-w-5xl mx-auto space-y-6">
