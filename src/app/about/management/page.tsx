@@ -152,7 +152,7 @@ export default function ManagementPage() {
                             viewport={{ once: true }}
                             className="text-4xl md:text-5xl font-black text-oxford mb-4"
                         >
-                            OFFICE BEARERS (2024-2027)
+                            Management Committee
                         </motion.h2>
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}

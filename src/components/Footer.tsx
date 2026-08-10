@@ -54,12 +54,12 @@ export default function Footer() {
                             <li className="flex gap-4 text-white/60">
                                 <MapPin className="text-sandstone shrink-0" size={20} />
                                 <a 
-                                    href="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d4276.270059479093!2d73.2881943!3d25.3202156!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3942859aa355749b%3A0xb76d3435af9ad639!2sLeela%20Devi%20Parasmal%20Sancheti%20Kanya%20Mahavidyalaya%2C%20Vidyawadi!5e1!3m2!1sen!2sin!4v1785582267868!5m2!1sen!2sin" 
+                                    href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4278.042026208816!2d73.28908237538582!3d25.32044957763185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3942859ebbab7653%3A0xb50d6fa510d0f965!2sMarudhar%20Mahila%20Shikshan%20Sangh%20Vidyawadi!5e1!3m2!1sen!2sin!4v1786381808474!5m2!1sen!2sin" 
                                     target="_blank" 
                                     rel="noopener noreferrer"
                                     className="text-sm hover:text-sandstone transition-colors"
                                 >
-                                    Leeladevi Parasmal Sancheti Girls College<br />
+                                    Marudhar Mahila Shikshan Sangh Vidyawadi<br />
                                     Vidyawadi Rani, Khimel - Rani Station Rd,<br />
                                     Industrial Area, Rani,<br />
                                     Rajasthan 306115, India

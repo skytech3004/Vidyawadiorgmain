@@ -19,8 +19,9 @@ export default function ContactPage() {
           Given the home page doesn't have extra padding, I'll follow suit but wrap in min-h-screen.
       */}
             <div className="pt-24">
-                <ContactForm />
+               
                 <ContactDirectory />
+                 <ContactForm />
             </div>
             <Footer />
         </main>
