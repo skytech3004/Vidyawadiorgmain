@@ -29,6 +29,8 @@ import { motion, AnimatePresence } from "framer-motion";
 const sidebarItems = [
     { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
     { name: "Institutions", href: "/admin/institutions", icon: School },
+    { name: "Alumni Management", href: "/admin/alumni", icon: School },
+
     { name: "Blog Manager", href: "/admin/blog", icon: FileText },
     { name: "Gallery", href: "/admin/gallery", icon: ImageIcon },
     { name: "Inquiries", href: "/admin/inquiries", icon: MessageSquare },
