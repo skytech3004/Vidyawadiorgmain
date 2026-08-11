@@ -31,7 +31,7 @@ export default function StudentResultsTable({ institution, title }: Props) {
         const fetchResults = async () => {
             setLoading(true);
             try {
-                const res = await fetch(`/api/results?institution=${institution}`);
+                const res = await fetch(`/api/results?institution=${institution}`, { cache: "no-store" });
                 const data = await res.json();
                 if (data.success) {
                     setResults(data.results);

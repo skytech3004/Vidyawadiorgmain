@@ -51,6 +51,7 @@ const InstitutionSchema = new mongoose.Schema({
         address: String,
         phone: String,
         email: String,
+        webUrl: String,
     },
     socialLinks: {
         facebook: String,

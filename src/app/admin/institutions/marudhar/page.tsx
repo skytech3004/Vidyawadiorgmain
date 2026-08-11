@@ -240,15 +240,24 @@ export default function MarudharVisualEditor() {
             const data = await res.json();
             if (data.success) {
                 setMessage({ type: "success", text: "Changes saved successfully!" });
+                setFormData(data.institution);
                 setTimeout(() => setMessage({ type: "", text: "" }), 4000);
+                return true;
             } else {
                 setMessage({ type: "error", text: data.error || "Save failed" });
+                return false;
             }
         } catch (error) {
             setMessage({ type: "error", text: "An error occurred while saving" });
+            return false;
         } finally {
             setSaving(false);
         }
+    };
+
+    const handleDoneAndSave = async () => {
+        const ok = await handleSave();
+        if (ok) setActiveSection(null);
     };
 
     // Safe getters with public-page fallbacks
@@ -552,14 +561,15 @@ export default function MarudharVisualEditor() {
                         {label}
                     </span>
                     <button
-                        onClick={() => toggleSectionEdit(id)}
+                        onClick={() => (isSelected ? handleDoneAndSave() : toggleSectionEdit(id))}
+                        disabled={saving && isSelected}
                         className={`px-4 py-1.5 font-bold text-xs uppercase tracking-wider rounded-lg shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1 border ${
                             isSelected
                                 ? "bg-oxford text-white border-oxford/20 hover:bg-black"
                                 : "bg-sandstone text-oxford border-sandstone-dark/10 hover:bg-white"
                         }`}
                     >
-                        {isSelected ? <><X size={12} /> Done</> : <><Edit3 size={12} /> Edit Section</>}
+                        {isSelected ? (saving ? <><Loader2 size={12} className="animate-spin" /> Saving...</> : <><Save size={12} /> Save & Done</>) : <><Edit3 size={12} /> Edit Section</>}
                     </button>
                 </div>
 

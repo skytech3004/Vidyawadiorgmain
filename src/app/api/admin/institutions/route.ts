@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/lib/mongodb";
 import Institution from "@/models/Institution";
 import { jwtVerify } from "jose";
+import { revalidatePath } from "next/cache";
 
 async function verifyAuth(req: NextRequest) {
     const token = req.cookies.get("adminToken")?.value;
@@ -15,6 +16,13 @@ async function verifyAuth(req: NextRequest) {
         return null;
     }
 }
+
+const PUBLIC_PATHS: Record<string, string> = {
+    marudhar: "/institutions/marudhar-balika-vidyapeeth",
+    english: "/institutions/leeladevi-english-medium",
+    primary: "/institutions/sushiladevi",
+    college: "/institutions/leela-devi-college",
+};
 
 export async function GET(req: NextRequest) {
     try {
@@ -45,15 +53,34 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ success: false, error: "Missing Institution ID" }, { status: 400 });
         }
 
+        // Strip Mongo metadata so findOneAndUpdate cannot fail on immutable _id / __v
+        const {
+            _id,
+            __v,
+            createdAt,
+            updatedAt,
+            ...safeData
+        } = data;
+
         const institution = await Institution.findOneAndUpdate(
-            { id: data.id },
-            data,
-            { upsert: true, new: true }
+            { id: safeData.id },
+            { $set: safeData },
+            { upsert: true, new: true, runValidators: true }
         );
+
+        // Bust public institution page cache after successful save
+        revalidatePath(`/api/institutions/${safeData.id}`);
+        const publicPath = PUBLIC_PATHS[safeData.id];
+        if (publicPath) {
+            revalidatePath(publicPath);
+        }
 
         return NextResponse.json({ success: true, institution });
     } catch (error: any) {
         console.error("INSTITUTION_POST_ERROR:", error);
-        return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });
+        return NextResponse.json(
+            { success: false, error: error?.message || "Internal Server Error" },
+            { status: 500 }
+        );
     }
 }

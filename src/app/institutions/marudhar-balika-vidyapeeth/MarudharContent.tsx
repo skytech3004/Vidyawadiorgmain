@@ -2,12 +2,13 @@
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { BookOpen, Trophy, School, Star, Microscope, Medal, Phone, MapPin, Globe, CheckCircle2 } from "lucide-react";
 import StudentResultsTable from "@/components/StudentResultsTable";
 import StudentModal, { StudentProps } from "@/components/StudentModal";
 import FacultyGrid from "@/components/FacultyGrid";
+import { getAllMarudharSections } from "@/lib/marudharContent";
 
 interface Facility {
     _id?: string;
@@ -29,7 +30,7 @@ export default function MarudharContent() {
     useEffect(() => {
         const fetchInstitution = async () => {
             try {
-                const res = await fetch("/api/institutions/marudhar");
+                const res = await fetch("/api/institutions/marudhar", { cache: "no-store" });
                 const data = await res.json();
                 if (data.success) {
                     setInstitution(data.institution);
@@ -43,7 +44,7 @@ export default function MarudharContent() {
 
         const fetchFacilities = async () => {
             try {
-                const res = await fetch("/api/infrastructure?institution=marudhar");
+                const res = await fetch("/api/infrastructure?institution=marudhar", { cache: "no-store" });
                 const data = await res.json();
                 if (data.success) {
                     setFacilities(data.results as Facility[]);
@@ -58,6 +59,33 @@ export default function MarudharContent() {
         fetchInstitution();
         fetchFacilities();
     }, []);
+
+    // Resolve CMS sections saved by admin (falls back to defaults when empty)
+    const sections = useMemo(
+        () => getAllMarudharSections(institution),
+        [institution]
+    );
+    const {
+        hero: heroData,
+        principal: principalData,
+        whyChooseUs: whyChooseUsData,
+        resultsStats: resultsStatsData,
+        scholarships: scholarshipsData,
+        beyondAcademics: beyondAcademicsData,
+        whatWeDo: whatWeDoData,
+        uniformInstructions: uniformInstructionsData,
+        cta: ctaData,
+    } = sections;
+
+    const heroPhones = String(heroData.phone || "")
+        .split(/[,/|]/)
+        .map((p: string) => p.trim())
+        .filter(Boolean);
+
+    const principalParagraphs = String(principalData.message || "")
+        .split(/\n+/)
+        .map((p: string) => p.trim())
+        .filter(Boolean);
 
     const openModal = (student: StudentProps) => {
         setSelectedStudent(student);
@@ -84,16 +112,15 @@ export default function MarudharContent() {
                         className="flex flex-col md:flex-row gap-8 items-center mb-10"
                     >
                         <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-sandstone overflow-hidden bg-white shrink-0">
-                            {/* User: Add your image path here */}
-                            <img src="/marudhar_balika.jpg" alt="Marudhar Balika Vidyapeeth Logo" className="w-full h-full object-cover" />
+                            <img src={heroData.logo} alt={`${heroData.name} Logo`} className="w-full h-full object-cover" />
                         </div>
                         <div>
-                            <span className="text-sandstone font-bold uppercase tracking-widest text-sm mb-4 block">Hindi & English Medium Senior Secondary School (RBSE)</span>
+                            <span className="text-sandstone font-bold uppercase tracking-widest text-sm mb-4 block">{heroData.affiliation}</span>
                             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 leading-tight">
-                                Marudhar Balika Vidyapeeth
+                                {heroData.name}
                             </h1>
                             <p className="text-xl md:text-2xl text-white/90 font-light max-w-3xl">
-                                Empowering Girls Through Education, Excellence & Values
+                                {heroData.tagline}
                             </p>
                         </div>
                     </motion.div>
@@ -101,18 +128,28 @@ export default function MarudharContent() {
                     <div className="grid md:grid-cols-3 gap-6 text-sm font-medium text-white/80">
                         <div className="flex items-start gap-3">
                             <MapPin className="text-sandstone shrink-0" size={20} />
-                            <span>Khimel, Station Rani – 306115,<br />District Pali (Rajasthan)</span>
+                            <span className="whitespace-pre-line">{String(heroData.address).replace(/,\s*/g, ",\n")}</span>
                         </div>
                         <div className="flex items-start gap-3">
                             <Phone className="text-sandstone shrink-0" size={20} />
                             <div className="flex flex-col">
-                                <a href="tel:6377204205" className="hover:text-sandstone transition-colors">6377204205</a>
-                                <a href="tel:6377204207" className="hover:text-sandstone transition-colors">6377204207</a>
+                                {heroPhones.map((phone: string) => (
+                                    <a key={phone} href={`tel:${phone.replace(/\s/g, "")}`} className="hover:text-sandstone transition-colors">
+                                        {phone}
+                                    </a>
+                                ))}
                             </div>
                         </div>
                         <div className="flex items-start gap-3">
                             <Globe className="text-sandstone shrink-0" size={20} />
-                            <a href="https://www.vidyawadi.org" target="_blank" rel="noopener noreferrer" className="hover:text-sandstone transition-colors">www.vidyawadi.org</a>
+                            <a
+                                href={heroData.webUrl?.startsWith("http") ? heroData.webUrl : `https://${heroData.webUrl}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-sandstone transition-colors"
+                            >
+                                {String(heroData.webUrl).replace(/^https?:\/\//, "")}
+                            </a>
                         </div>
                     </div>
 
@@ -140,38 +177,23 @@ export default function MarudharContent() {
                         <div className="h-1.5 w-24 bg-sandstone mt-6 rounded-full mb-10" />
                         <div className="prose text-gray-600 leading-relaxed space-y-4 mb-8">
                             <p className="text-lg text-oxford/80">
-                                “Education is the most powerful weapon which you can use to change the world.” – Nelson Mandela
+                                {principalData.quote}
                             </p>
-                            <p>
-                                Dear Students, Parents and Well-Wishers,
-                            </p>
-                            <p>
-                                It gives me immense pleasure to welcome you to <span className="text-oxford font-bold">Marudhar Balika Vidyapeeth (Sr. Sec.) School, Vidyawadi</span>. Our institution stands as a symbol of <span className="text-oxford font-bold">dedication, discipline and excellence</span> in girls’ education. We believe that education is not merely the acquisition of knowledge, but the development of character, confidence and compassion.
-                            </p>
-                            <p>
-                                Our aim is to provide a <span className="text-oxford font-bold">safe, supportive and inspiring environment</span> where every child can discover her potential and grow into a responsible and capable individual. We focus on <span className="text-oxford font-bold">academic excellence</span> along with moral values, leadership qualities and life skills. With the support of qualified and committed teachers, we strive to nurture creativity, critical thinking and a spirit of inquiry among our students.
-                            </p>
-                            <p>
-                                In this rapidly changing world, we continuously update our teaching methods and <span className="text-oxford font-bold">integrate digital learning</span> to prepare our students for future challenges. We encourage participation in co-curricular and extracurricular activities to ensure the <span className="text-oxford font-bold">holistic development</span> of every learner.
-                            </p>
-                            <p>
-                                I am confident that with the cooperation of parents and the dedication of our staff, we will continue to scale new heights of success and bring pride to our institution.
-                            </p>
-                            <p>
-                                Let us work together to <span className="text-oxford font-bold">empower our daughters with knowledge, confidence and strong values</span> so that they may shine brightly in every sphere of life.
-                            </p>
+                            {principalParagraphs.map((para: string, i: number) => (
+                                <p key={i}>{para}</p>
+                            ))}
                         </div>
 
                         <div className="flex items-center gap-4">
                             <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-sandstone shadow-lg">
                                 <img
-                                    src="/hindi-principal.png"
-                                    alt="Principal Priya Sangeeta"
+                                    src={principalData.photo}
+                                    alt={principalData.name}
                                     className="w-full h-full object-cover"
                                 />
                             </div>
                             <div className="font-bold text-oxford">
-                                <p className="text-lg">Ms. Priya Sangeeta</p>
+                                <p className="text-lg">{principalData.name}</p>
                                 <p className="text-xs text-sandstone uppercase tracking-widest">Principal</p>
                             </div>
                         </div>
@@ -186,11 +208,7 @@ export default function MarudharContent() {
                             </h3>
                             <div className="h-1 bg-sandstone w-16 mx-auto mb-8 rounded-full" />
                             <ul className="space-y-4">
-                                {[
-                                    { title: "Discover Yourself", desc: "Explore unique talents and interests." },
-                                    { title: "Be Your Own Light", desc: "Lead with integrity and wisdom." },
-                                    { title: "Make Your Own Path", desc: "Inspire independent thinking and courage." }
-                                ].map((item, i) => (
+                                {principalData.coreValues.map((item: any, i: number) => (
                                     <li key={i} className="flex items-start gap-3 text-gray-700">
                                         <CheckCircle2 size={18} className="text-green-600 shrink-0 mt-1" />
                                         <div>
@@ -206,7 +224,7 @@ export default function MarudharContent() {
                             <div className="absolute top-0 right-0 w-32 h-32 bg-sandstone/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
                             <h3 className="text-xl font-bold mb-4 relative z-10">Our School</h3>
                             <p className="text-white/80 text-sm leading-relaxed relative z-10">
-                                Marudhar Balika Vidyapeeth is known for its reputation and adherence to quality education, State of the Art Infrastructure, and a nurturing environment. We offer a comprehensive curriculum and engage students in traditional and innovative educational methods to empower them for future success.
+                                {heroData.name} is known for its reputation and adherence to quality education, State of the Art Infrastructure, and a nurturing environment. We offer a comprehensive curriculum and engage students in traditional and innovative educational methods to empower them for future success.
                             </p>
                         </div>
                     </div>
@@ -217,14 +235,14 @@ export default function MarudharContent() {
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
                     <div>
                         <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Why Choose Us?</span>
-                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight">Shaping Bright Futures</h2>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight">{whyChooseUsData.title}</h2>
                         <div className="h-1.5 w-24 bg-sandstone mt-6 rounded-full mb-10" />
                         <div className="prose text-gray-600 leading-relaxed space-y-4">
                             <p>
-                                Marudhar Balika Vidyapeeth is a premier girls’ senior secondary school dedicated to academic excellence, character building, and all-round development. Managed by Marudhar Mahila Shikshan Sangh, Vidyawadi, our institution provides quality education in Hindi & English Medium under RBSE.
+                                {whyChooseUsData.description}
                             </p>
                             <p className="text-lg font-medium text-oxford">
-                                &ldquo;We believe that educated girls build stronger families, communities, and the nation.&rdquo;
+                                &ldquo;{whyChooseUsData.quote}&rdquo;
                             </p>
                         </div>
                         <a href="/apply" className="inline-block mt-8 px-8 py-3 bg-oxford text-white rounded-full font-bold uppercase tracking-wider text-sm hover:bg-sandstone hover:text-oxford transition-all">
@@ -240,14 +258,7 @@ export default function MarudharContent() {
                             </h3>
                             <div className="h-1 bg-sandstone w-16 mx-auto mb-8 rounded-full" />
                             <ul className="space-y-4">
-                                {[
-                                    "100% Board Results",
-                                    "Experienced & Dedicated Faculty",
-                                    "Focus on Girls’ Empowerment",
-                                    "Strong Academic & Co-curricular Balance",
-                                    "Safe & Supportive Environment",
-                                    "Proven Record of State & National Achievements"
-                                ].map((item, i) => (
+                                {whyChooseUsData.bullets.map((item: string, i: number) => (
                                     <li key={i} className="flex items-center gap-3 text-gray-700">
                                         <CheckCircle2 size={18} className="text-green-600 shrink-0" />
                                         <span>{item}</span>
@@ -274,6 +285,10 @@ export default function MarudharContent() {
                             <div className="col-span-full py-12 text-center text-gray-500">
                                 <div className="w-12 h-12 border-4 border-sandstone border-t-transparent rounded-full animate-spin mx-auto mb-4" />
                                 <p className="font-bold">Loading Facilities...</p>
+                            </div>
+                        ) : facilities.length === 0 ? (
+                            <div className="col-span-full py-12 text-center text-gray-500">
+                                <p className="font-bold">No facilities published yet.</p>
                             </div>
                         ) : facilities.map((facility, i) => {
                             // Dynamically resolve icon from lucide-react if needed
@@ -341,12 +356,7 @@ export default function MarudharContent() {
                     </div>
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                        {[
-                            { class: "XII Arts", score: "100%" },
-                            { class: "XII Science", score: "100%" },
-                            { class: "XII Commerce", score: "100%" },
-                            { class: "X & VIII (All)", score: "100%" },
-                        ].map((stat, i) => (
+                        {resultsStatsData.stats.map((stat: any, i: number) => (
                             <div key={i} className="bg-white p-10 rounded-[2rem] shadow-xl border border-oxford/5 text-center hover:-translate-y-2 transition-transform">
                                 <h3 className="text-sandstone-dark font-bold uppercase text-xs tracking-[0.2em] mb-4">{stat.class}</h3>
                                 <p className="text-4xl font-black text-oxford">{stat.score}</p>
@@ -358,14 +368,14 @@ export default function MarudharContent() {
                     <div className="grid md:grid-cols-2 gap-8">
                         <div className="bg-oxford text-white p-8 rounded-2xl flex flex-col justify-center items-center text-center">
                             <Star size={48} className="text-sandstone mb-4" />
-                            <h3 className="text-3xl font-bold mb-2">34 Students</h3>
+                            <h3 className="text-3xl font-bold mb-2">{resultsStatsData.students90Count} Students</h3>
                             <p className="text-white/80">Scored above 90% in board exams</p>
-                            <h2 className="text-3xl font-bold mb-2">In 2025</h2>
+                            <h2 className="text-3xl font-bold mb-2">In {resultsStatsData.students90Year}</h2>
                         </div>
                         <div className="bg-oxford text-white p-8 rounded-2xl flex flex-col justify-center items-center text-center">
                             <Medal size={48} className="text-sandstone mb-4" />
                             <h3 className="text-3xl font-bold mb-2">Perfect Scores</h3>
-                            <p className="text-white/80">Multiple students achieved 100/100 marks in subjects</p>
+                            <p className="text-white/80">{resultsStatsData.perfectScoresDesc}</p>
                         </div>
                     </div>
                 </div>
@@ -392,7 +402,7 @@ export default function MarudharContent() {
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <span className="text-sandstone-dark font-bold uppercase tracking-[0.4em] text-sm block mb-4">Investment in Education</span>
-                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight text-center">Fee Structure 2026–27</h2>
+                        <h2 className="text-4xl md:text-6xl font-bold text-oxford leading-tight text-center">Fee Structure {institution?.feeStructure?.year || "2026–27"}</h2>
                         <div className="h-1.5 w-24 bg-sandstone mx-auto mt-6 rounded-full mb-8" />
                     </div>
 
@@ -549,7 +559,7 @@ export default function MarudharContent() {
                             <div className="h-1 bg-sandstone w-16 mx-auto mt-6 rounded-full" />
                         </div>
                         <p className="text-gray-600 mb-12 max-w-3xl mx-auto text-center">
-                            Under this scheme, three meritorious students who secured positions in the State Merit List were awarded ₹15,000 each.
+                            Under this scheme, three meritorious students who secured positions in the State Merit List were awarded {scholarshipsData.ewsAmount} each.
                         </p>
 
                         <div className="grid lg:grid-cols-3 gap-8">
@@ -564,11 +574,7 @@ export default function MarudharContent() {
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-oxford/10 text-gray-700">
-                                        {[
-                                            { name: "Mahima Surana", class: "XII Arts", percent: "96.00%", amount: "₹15,000", img: "/images/mahima_surana.png" },
-                                            { name: "Kirtika Kanwar", class: "XII Science", percent: "95.80%", amount: "₹15,000", img: "/images/kitika_kuwar.png" },
-                                            { name: "Himanshi Kanwar", class: "XII Arts", percent: "95.40%", amount: "₹15,000", img: "/images/himanshi_kanwar.png" }
-                                        ].map((student, i) => (
+                                        {scholarshipsData.ewsStudents.map((student: any, i: number) => (
                                             <tr
                                                 key={i}
                                                 className="hover:bg-oxford/5 transition-colors cursor-pointer"
@@ -593,7 +599,7 @@ export default function MarudharContent() {
                             <div className="bg-oxford text-white p-8 rounded-2xl flex flex-col justify-center items-center text-center relative overflow-hidden">
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-sandstone/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
                                 <Trophy size={64} className="text-sandstone mb-6" />
-                                <h4 className="text-4xl font-black mb-2">₹45,000</h4>
+                                <h4 className="text-4xl font-black mb-2">{scholarshipsData.ewsTotalDistributed}</h4>
                                 <p className="text-white/80 font-medium">Total Scholarship Distributed</p>
                                 <div className="mt-6 px-4 py-2 bg-white/10 rounded-lg text-sm font-bold uppercase tracking-wider">
                                     State Level Recognition
@@ -800,12 +806,7 @@ export default function MarudharContent() {
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-white/10 text-sm">
-                                            {[
-                                                { camp: "ATC", date: "17 May 2026 – 27 Session May 2025", loc: "Jodhpur" },
-                                                { camp: "Pre TSC – I", date: "04 July 2025 – 13 July 2025", loc: "Jodhpur" },
-                                                { camp: "Pre TSC – II", date: "21 July 2025 – 30 July 2025", loc: "Sri Ganganagar" },
-                                                { camp: "IG SC TSC", date: "02 Aug 2025 – 11 Aug 2025", loc: "Udaipur" }
-                                            ].map((row, i) => (
+                                            {beyondAcademicsData.nccCamps.map((row: any, i: number) => (
                                                 <tr key={i}>
                                                     <td className="p-4 font-medium">{row.camp}</td>
                                                     <td className="p-4">{row.date}</td>
@@ -842,12 +843,7 @@ export default function MarudharContent() {
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-white/10">
-                                            {[
-                                                { name: "Kanchan Kanwar", cls: "IX A", sport: "Volleyball", img: "/images/kanchan_kawar.png" },
-                                                { name: "Umrao Kanwar", cls: "X B", sport: "Volleyball", img: "/images/kamraw_kawar.png" },
-                                                { name: "Durvisha Solanki", cls: "XII B", sport: "Rifle Shooting", img: "/images/duvisha_solanki.png" },
-                                                { name: "Hemu Kanwar", cls: "XI B", sport: "Wrestling", img: "/images/hemu_kawar.png" }
-                                            ].map((row, i) => (
+                                            {beyondAcademicsData.sportsNational.map((row: any, i: number) => (
                                                 <tr
                                                     key={i}
                                                     className="hover:bg-white/5 transition-colors cursor-pointer"
@@ -889,9 +885,7 @@ export default function MarudharContent() {
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-white/10">
-                                            {[
-                                                { name: "Kanchan Kanwar", cls: "IX A", sport: "Athletics (Shot Put)", img: "/images/kanchan_kawar.png" }
-                                            ].map((row, i) => (
+                                            {beyondAcademicsData.sportsState.map((row: any, i: number) => (
                                                 <tr
                                                     key={i}
                                                     className="hover:bg-white/5 transition-colors cursor-pointer"
@@ -939,12 +933,7 @@ export default function MarudharContent() {
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-white/10">
-                                            {[
-                                                { name: "Prithvi Charan", cls: "VIII A", ach: "Quiz Competition", img: "/images/puthvi_charn.png" },
-                                                { name: "Vedika Sharma", cls: "XII A", ach: "Smart Fire Safety Device", img: "/images/devika_sharma.png" },
-                                                { name: "Garima Kanwar", cls: "VIII A", ach: "Smart Fire Safety Device Model", img: "/images/garima_kawar.png" },
-                                                { name: "Heena Kanwar", cls: "VII B", ach: "Geometrical Park Model", img: "/images/hina_kawar.png" }
-                                            ].map((row, i) => (
+                                            {beyondAcademicsData.scienceDistrict.map((row: any, i: number) => (
                                                 <tr
                                                     key={i}
                                                     className="hover:bg-white/5 transition-colors cursor-pointer"
@@ -987,14 +976,7 @@ export default function MarudharContent() {
                     </div>
 
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
-                        {[
-                            { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773142123/WhatsApp_Video_2026-03-10_at_12.21.30_r1zahz.mp4", title: "Campus Activity" },
-                            { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773126080/WhatsApp_Video_2026-03-10_at_12.13.55_1_nmxdbj.mp4", title: "Student Life" },
-                            { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773126079/WhatsApp_Video_2026-03-10_at_12.13.55_hbh5uh.mp4", title: "Learning & Growth" },
-                            { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773126078/WhatsApp_Video_2026-03-10_at_12.13.54_zzosza.mp4", title: "Extracurriculars" },
-                            { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773126078/WhatsApp_Video_2026-03-10_at_12.13.46_tlxxqk.mp4", title: "Special Events" },
-                            { url: "https://res.cloudinary.com/dmzmfjkgy/video/upload/v1773126078/WhatsApp_Video_2026-03-10_at_12.13.55_2_zjupvk.mp4", title: "Sports & Fitness" }
-                        ].map((video, i) => (
+                        {whatWeDoData.videos.map((video: any, i: number) => (
                             <div key={i} className="group overflow-hidden rounded-[2rem] bg-white shadow-xl hover:shadow-2xl transition-all border border-oxford/5">
                                 <div className="h-64 sm:h-80 xl:h-64 overflow-hidden relative">
                                     <video
@@ -1008,9 +990,6 @@ export default function MarudharContent() {
                                         Your browser does not support the video tag.
                                     </video>
                                 </div>
-                                {/* <div className="p-4 relative text-center bg-oxford text-white">
-                                    <h3 className="font-bold text-sm md:text-base">{video.title}</h3>
-                                </div> */}
                             </div>
                         ))}
                     </div>
@@ -1034,10 +1013,10 @@ export default function MarudharContent() {
                                 <ul className="space-y-3 text-sm">
                                     <li className="flex gap-3 items-start">
                                         <CheckCircle2 size={18} className="text-green-600 mt-0.5 shrink-0" />
-                                        <span>Maroon checked shirt and grey tunic, black ribbon or hair band, black shoes and grey socks.</span>
+                                        <span>{uniformInstructionsData.class6to8}</span>
                                     </li>
                                     <li className="flex gap-3 items-start text-oxford/80 ml-7">
-                                        <span>Two days a week (Wednesday &amp; Saturday): White skirt and white shirt, white ribbon, black shoes and white socks.</span>
+                                        <span>{uniformInstructionsData.class6to8WedSat}</span>
                                     </li>
                                 </ul>
                             </div>
@@ -1047,10 +1026,10 @@ export default function MarudharContent() {
                                 <ul className="space-y-3 text-sm">
                                     <li className="flex gap-3 items-start">
                                         <CheckCircle2 size={18} className="text-green-600 mt-0.5 shrink-0" />
-                                        <span>Maroon checked kurta, white salwar and white dupatta, black ribbon, black shoes and grey socks.</span>
+                                        <span>{uniformInstructionsData.class9to12}</span>
                                     </li>
                                     <li className="flex gap-3 items-start text-oxford/80 ml-7">
-                                        <span>Two days a week (Wednesday &amp; Saturday): White salwar Kurta and maroon dupatta, white ribbon, black shoes and white socks.</span>
+                                        <span>{uniformInstructionsData.class9to12WedSat}</span>
                                     </li>
                                 </ul>
                             </div>
@@ -1060,7 +1039,7 @@ export default function MarudharContent() {
                                     <Medal size={20} className="text-sandstone" />
                                     Winter Code
                                 </h4>
-                                <p className="text-sm mt-2 ml-7">Class VI to XII: Navy Blue Blazer</p>
+                                <p className="text-sm mt-2 ml-7">{uniformInstructionsData.winterCode}</p>
                             </div>
                         </div>
                     </div>
@@ -1068,12 +1047,7 @@ export default function MarudharContent() {
                     <div className="space-y-8">
                         <h2 className="text-3xl md:text-4xl font-bold text-oxford">General Instructions</h2>
                         <div className="grid gap-4">
-                            {[
-                                { title: "Regularity", desc: "Minimum 75% attendance is mandatory." },
-                                { title: "Mobile Phones", desc: "Strictly prohibited on campus." },
-                                { title: "Bullying", desc: "Zero tolerance policy for any form of harassment." },
-                                { title: "Hygiene", desc: "Nails trimmed, clean uniform, no makeup/jewellery." }
-                            ].map((rule, i) => (
+                            {uniformInstructionsData.rules.map((rule: any, i: number) => (
                                 <div key={i} className="flex gap-4 items-start">
                                     <div className="w-8 h-8 rounded-full bg-sandstone/10 flex items-center justify-center shrink-0 mt-1">
                                         <span className="text-oxford font-bold text-xs">{i + 1}</span>
@@ -1095,16 +1069,16 @@ export default function MarudharContent() {
             {/* CTA */}
             <section className="py-20 px-6 bg-sandstone">
                 <div className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-4xl font-black text-oxford mb-6 uppercase tracking-tight">Admissions Open</h2>
+                    <h2 className="text-4xl font-black text-oxford mb-6 uppercase tracking-tight">{ctaData.title}</h2>
                     <p className="text-xl text-oxford/80 font-medium mb-10">
-                        Give your daughter the opportunity to grow into a confident, educated, and successful individual.
+                        {ctaData.description}
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4">
-                        <a href="tel:6377204205" className="px-8 py-4 bg-oxford text-white rounded-full font-bold uppercase tracking-wider shadow-lg hover:bg-white hover:text-oxford transition-all">
-                            Call: 6377204205
+                        <a href={`tel:${String(ctaData.phone).replace(/\s/g, "")}`} className="px-8 py-4 bg-oxford text-white rounded-full font-bold uppercase tracking-wider shadow-lg hover:bg-white hover:text-oxford transition-all">
+                            Call: {ctaData.phone}
                         </a>
                         <a href="#contact" className="px-8 py-4 bg-white text-oxford rounded-full font-bold uppercase tracking-wider shadow-lg hover:shadow-xl transition-all">
-                            Visit Campus
+                            {ctaData.visitText}
                         </a>
                     </div>
                 </div>
