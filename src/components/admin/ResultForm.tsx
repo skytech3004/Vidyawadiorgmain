@@ -190,7 +190,9 @@ export default function ResultForm({ initialData, isEditing }: ResultFormProps) 
                             value={formData.image}
                             onChange={(url: string) => setFormData({ ...formData, image: url })}
                             folder="toppers"
-                            description="Clear portrait recommended. Under 2MB. JPG, PNG, WEBP."
+                            accept="image/jpeg,.jpg,.jpeg,image/png,image/webp"
+                            convertToJpg
+                            description="Clear portrait recommended. Under 2MB. Saved as JPG."
                         />
                     </div>
                 </div>

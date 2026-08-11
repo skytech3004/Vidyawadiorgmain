@@ -10,6 +10,10 @@ interface ImageUploadFieldProps {
     folder?: string;
     className?: string;
     description?: string;
+    /** File input accept attribute, e.g. "image/jpeg,.jpg,.jpeg" */
+    accept?: string;
+    /** Convert uploaded image to JPG on the server */
+    convertToJpg?: boolean;
 }
 
 export default function ImageUploadField({
@@ -18,7 +22,9 @@ export default function ImageUploadField({
     onChange,
     folder = "uploads",
     className = "",
-    description = "Square aspect ratio recommended, under 2MB. formats: JPG, PNG, WEBP."
+    description = "Square aspect ratio recommended, under 2MB. formats: JPG, PNG, WEBP.",
+    accept = "image/*",
+    convertToJpg = false,
 }: ImageUploadFieldProps) {
     const [uploading, setUploading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -30,6 +36,13 @@ export default function ImageUploadField({
         // Basic validation
         if (file.size > 2 * 1024 * 1024) {
             setError("File size exceeds 2MB limit.");
+            e.target.value = "";
+            return;
+        }
+
+        if (convertToJpg && !file.type.startsWith("image/")) {
+            setError("Please upload an image file.");
+            e.target.value = "";
             return;
         }
 
@@ -39,6 +52,9 @@ export default function ImageUploadField({
         const uploadData = new FormData();
         uploadData.append("file", file);
         uploadData.append("folder", folder);
+        if (convertToJpg) {
+            uploadData.append("convertToJpg", "true");
+        }
 
         try {
             const res = await fetch("/api/admin/upload", {
@@ -57,6 +73,7 @@ export default function ImageUploadField({
             setError("A network error occurred during upload.");
         } finally {
             setUploading(false);
+            e.target.value = "";
         }
     };
 
@@ -126,7 +143,7 @@ export default function ImageUploadField({
                             <input
                                 type="file"
                                 className="hidden"
-                                accept="image/*"
+                                accept={accept}
                                 onChange={handleUpload}
                                 disabled={uploading}
                             />

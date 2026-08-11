@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 import path from "path";
 import { jwtVerify } from "jose";
+import sharp from "sharp";
 
 async function verifyAuth(req: NextRequest) {
     const token = req.cookies.get("adminToken")?.value;
@@ -40,6 +41,7 @@ export async function POST(req: NextRequest) {
 
         const file = formData.get("file") as File;
         const folder = (formData.get("folder") as string || "uploads").replace(/^\/+|\/+$/g, "");
+        const convertToJpg = String(formData.get("convertToJpg") || "") === "true";
 
         if (!file) {
             console.warn("==> [UPLOAD] No file found in form data");
@@ -49,15 +51,36 @@ export async function POST(req: NextRequest) {
         console.log(`==> [UPLOAD] Processing file: ${file.name} | Size: ${(file.size / 1024 / 1024).toFixed(2)} MB | Folder: ${folder}`);
 
         const bytes = await file.arrayBuffer();
-        const buffer = Buffer.from(bytes);
+        let buffer: Buffer = Buffer.from(bytes);
 
         // Sanitize filename: remove non-ASCII characters and add timestamp
         const sanitizedBase = file.name
             .replace(/[^\x00-\x7F]/g, "") // Remove non-ASCII (Gujarati etc)
             .replace(/\s+/g, "-")
             .replace(/[^a-zA-Z0-9.\-_]/g, "");
+
+        let filename = `${Date.now()}-${sanitizedBase}`;
+
+        // Convert student/result photos to JPG
+        if (convertToJpg || folder === "toppers") {
+            try {
+                buffer = await sharp(buffer)
+                    .rotate()
+                    .jpeg({ quality: 85, mozjpeg: true })
+                    .toBuffer();
+
+                const baseName = sanitizedBase.replace(/\.[^.]+$/, "") || "photo";
+                filename = `${Date.now()}-${baseName}.jpg`;
+                console.log(`==> [UPLOAD] Converted to JPG: ${filename}`);
+            } catch (convertError: any) {
+                console.error("==> [UPLOAD] JPG conversion failed:", convertError.message);
+                return NextResponse.json({
+                    success: false,
+                    error: "Could not convert image to JPG. Please upload a valid JPG/PNG/WEBP photo."
+                }, { status: 400 });
+            }
+        }
         
-        const filename = `${Date.now()}-${sanitizedBase}`;
         const relativePath = `uploads/${folder}/${filename}`.replace(/\/+/g, "/");
         
         // Root public path (for persistence)
