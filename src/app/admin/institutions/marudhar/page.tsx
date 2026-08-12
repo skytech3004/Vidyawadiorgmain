@@ -940,17 +940,26 @@ export default function MarudharVisualEditor() {
         if (sectionId === "results-stats") {
             return (
                 <div className="space-y-6">
-                    <div className="bg-sandstone/10 p-6 rounded-2xl border border-sandstone/20 text-center">
+                    <div className="bg-sandstone/10 p-6 rounded-2xl border border-sandstone/20 text-center space-y-3">
                         <Trophy className="mx-auto text-sandstone mb-3" size={32} />
                         <h4 className="font-bold text-oxford mb-1">Toppers Merit Lists</h4>
-                        <p className="text-xs text-gray-500 mb-4">Board toppers database records are managed in the results board panel.</p>
-                        <Link
-                            href={`/admin/results?institution=${instId}`}
-                            className="inline-flex items-center gap-1.5 px-6 py-2.5 bg-oxford text-white font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-black transition-all shadow-md"
-                        >
-                            Open Board Merit Manager
-                            <ExternalLink size={12} />
-                        </Link>
+                        <p className="text-xs text-gray-500 mb-4">Board toppers and perfect score records are managed in the results panel.</p>
+                        <div className="flex flex-col sm:flex-row gap-2 justify-center">
+                            <Link
+                                href={`/admin/results?institution=${instId}&resultType=Board`}
+                                className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 bg-oxford text-white font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-black transition-all shadow-md"
+                            >
+                                Board Exam Toppers
+                                <ExternalLink size={12} />
+                            </Link>
+                            <Link
+                                href={`/admin/results?institution=${instId}&resultType=Perfect`}
+                                className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 bg-white text-oxford border border-oxford/10 font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-gray-50 transition-all shadow-sm"
+                            >
+                                Perfect Score Achievers
+                                <ExternalLink size={12} />
+                            </Link>
+                        </div>
                     </div>
 
                     <div className="pt-4 border-t border-gray-100 space-y-4">

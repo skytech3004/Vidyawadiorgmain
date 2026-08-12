@@ -9,8 +9,8 @@ export default function NewResultPage() {
     return (
         <div className="space-y-8">
             <div>
-                <h2 className="text-3xl font-black text-oxford uppercase tracking-tight">Add board Result</h2>
-                <p className="text-sm text-gray-500">Add a new board exam topper or result highlight.</p>
+                <h2 className="text-3xl font-black text-oxford uppercase tracking-tight">Add Result</h2>
+                <p className="text-sm text-gray-500">Add a board exam topper or perfect score achiever.</p>
             </div>
             <Suspense fallback={
                 <div className="flex flex-col items-center justify-center p-20">

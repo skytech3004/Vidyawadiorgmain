@@ -18,6 +18,7 @@ const TopperSchema = new mongoose.Schema({
         required: true,
     },
     stream: String,
+    subject: String, // used for Perfect Score Achievers (e.g. Hindi Literature)
     image: String,
     institution: {
         type: String,
@@ -29,7 +30,7 @@ const TopperSchema = new mongoose.Schema({
     },
     resultType: {
         type: String,
-        default: "Board", // e.g., 'Board', 'Non-Board', 'Sports', 'Competitive'
+        default: "Board", // e.g., 'Board', 'Perfect', 'Non-Board', 'Sports', 'Competitive'
     }
 }, { timestamps: true });
 

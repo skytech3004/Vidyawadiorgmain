@@ -32,7 +32,7 @@ export async function GET(req: NextRequest) {
         if (institution) query.institution = institution;
         if (resultType) query.resultType = resultType;
 
-        const results = await Topper.find(query).sort({ year: -1, class: 1, order: 1 });
+        const results = await Topper.find(query).sort({ percentage: -1, year: -1, class: 1, order: 1 });
         return NextResponse.json({ success: true, results });
     } catch (error: any) {
         return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });

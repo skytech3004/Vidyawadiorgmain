@@ -17,8 +17,9 @@ export default function ResultForm({ initialData, isEditing }: ResultFormProps) 
         name: "",
         percentage: "",
         class: "XII",
-        year: new Date().getFullYear().toString(),
+        year: "2025-26",
         stream: "",
+        subject: "",
         image: "",
         institution: "marudhar",
         order: 0,
@@ -47,16 +48,22 @@ export default function ResultForm({ initialData, isEditing }: ResultFormProps) 
         setLoading(true);
 
         const url = isEditing ? `/api/admin/results/${initialData._id}` : "/api/admin/results";
+        const rawPercentage = String(formData.percentage ?? "").replace(/%/g, "").trim();
+        const payload = {
+            ...formData,
+            percentage: Number(rawPercentage) || 0,
+            subject: formData.resultType === "Perfect" ? (formData.subject || "") : (formData.subject || undefined),
+        };
 
         try {
             const res = await fetch(url, {
                 method: isEditing ? "PUT" : "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(payload),
             });
 
             if (res.ok) {
-                router.push("/admin/results");
+                router.push(`/admin/results?resultType=${payload.resultType || "Board"}`);
                 router.refresh();
             }
         } catch (error) {
@@ -172,16 +179,43 @@ export default function ResultForm({ initialData, isEditing }: ResultFormProps) 
                         </label>
                         <select
                             value={formData.resultType || "Board"}
-                            onChange={(e) => setFormData({ ...formData, resultType: e.target.value })}
+                            onChange={(e) => {
+                                const resultType = e.target.value;
+                                setFormData({
+                                    ...formData,
+                                    resultType,
+                                    percentage: resultType === "Perfect" && !formData.percentage
+                                        ? "100"
+                                        : formData.percentage,
+                                });
+                            }}
                             className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-sandstone focus:ring-2 focus:ring-sandstone/20 outline-none transition-all bg-gray-50/50"
                         >
-                            <option value="Board">Board Topper (VIII, X, XII)</option>
+                            <option value="Board">Board Exam Toppers</option>
+                            <option value="Perfect">Perfect Score Achievers (100/100)</option>
                             <option value="Non-Board">Non-Board Topper (I-VII, IX, XI)</option>
                             <option value="Sports">Sports Achievement</option>
                             <option value="Competitive">Competitive Exams (NEET, JEE, etc.)</option>
                             <option value="Scholarship">Scholarships & Awards</option>
                         </select>
                     </div>
+
+                    {/* Subject — Perfect Score Achievers */}
+                    {formData.resultType === "Perfect" && (
+                        <div className="space-y-2 md:col-span-2">
+                            <label className="text-sm font-bold text-oxford uppercase tracking-wider flex items-center gap-2">
+                                Subject (100/100)
+                            </label>
+                            <input
+                                type="text"
+                                required
+                                value={formData.subject || ""}
+                                onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-sandstone focus:ring-2 focus:ring-sandstone/20 outline-none transition-all bg-gray-50/50"
+                                placeholder="e.g. Hindi Literature, Chemistry, Biology"
+                            />
+                        </div>
+                    )}
 
                     {/* Student Photo Upload */}
                     <div className="md:col-span-2">

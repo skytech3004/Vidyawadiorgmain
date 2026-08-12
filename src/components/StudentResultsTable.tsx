@@ -31,7 +31,7 @@ export default function StudentResultsTable({ institution, title }: Props) {
         const fetchResults = async () => {
             setLoading(true);
             try {
-                const res = await fetch(`/api/results?institution=${institution}`, { cache: "no-store" });
+                const res = await fetch(`/api/results?institution=${institution}&resultType=Board`, { cache: "no-store" });
                 const data = await res.json();
                 if (data.success) {
                     setResults(data.results);
@@ -67,12 +67,15 @@ export default function StudentResultsTable({ institution, title }: Props) {
             .map(year => ({
                 year,
                 data: groups[year].sort((a, b) => {
-                    // Sort by class (XII, then X, then others) and then percentage
+                    // Highest percentage first
+                    const pctDiff = Number(b.percentage) - Number(a.percentage);
+                    if (pctDiff !== 0) return pctDiff;
+                    // Then class (XII, X, others)
                     if (a.class === "XII" && b.class !== "XII") return -1;
                     if (a.class !== "XII" && b.class === "XII") return 1;
                     if (a.class === "X" && b.class !== "X") return -1;
                     if (a.class !== "X" && b.class === "X") return 1;
-                    return b.percentage - a.percentage;
+                    return 0;
                 })
             }));
     }, [results]);

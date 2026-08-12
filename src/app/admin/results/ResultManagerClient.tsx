@@ -1,0 +1,324 @@
+"use client";
+
+import React, { useEffect, useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import {
+    Plus,
+    Search,
+    Trash2,
+    Loader2,
+    Trophy,
+    Edit2,
+    School,
+    GraduationCap,
+    Calendar,
+    User as UserIcon,
+    Medal
+} from "lucide-react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+
+const classes = ["All", "X", "XII"];
+const institutions = [
+    { label: "All", value: "All" },
+    { label: "Marudhar", value: "marudhar" },
+    { label: "LPS", value: "lps" },
+    { label: "College", value: "college" },
+];
+
+const resultTypes = [
+    { label: "Board Exam Toppers", value: "Board", icon: Trophy },
+    { label: "Perfect Score Achievers", value: "Perfect", icon: Medal },
+];
+
+export default function ResultManagerPage() {
+    const searchParams = useSearchParams();
+    const [results, setResults] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [search, setSearch] = useState("");
+    const [selectedClass, setSelectedClass] = useState("All");
+    const [selectedInst, setSelectedInst] = useState(searchParams.get("institution") || "All");
+    const [selectedType, setSelectedType] = useState(searchParams.get("resultType") || "Board");
+
+    const fetchResults = async () => {
+        setLoading(true);
+        try {
+            const res = await fetch("/api/admin/results");
+            const data = await res.json();
+            if (data.success) {
+                setResults(data.results);
+            }
+        } catch (error) {
+            console.error("Fetch error:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchResults();
+    }, []);
+
+    useEffect(() => {
+        const inst = searchParams.get("institution");
+        const type = searchParams.get("resultType");
+        if (inst) setSelectedInst(inst);
+        if (type) setSelectedType(type);
+    }, [searchParams]);
+
+    const handleDelete = async (id: string) => {
+        if (!confirm("Are you sure you want to delete this result?")) return;
+
+        try {
+            const res = await fetch(`/api/admin/results/${id}`, { method: "DELETE" });
+            const data = await res.json();
+
+            if (data.success) {
+                setResults(results.filter(item => item._id !== id));
+            } else {
+                alert(`Error: ${data.error || "Failed to delete result record."}`);
+            }
+        } catch (error) {
+            console.error("Delete error:", error);
+            alert("A network error occurred while trying to delete the result.");
+        }
+    };
+
+    const filteredResults = useMemo(() => {
+        return results
+            .filter(item => {
+                const matchesSearch = item.name.toLowerCase().includes(search.toLowerCase());
+                const matchesClass = selectedClass === "All" || item.class === selectedClass;
+                const matchesInst = selectedInst === "All" ||
+                    item.institution?.toLowerCase() === selectedInst.toLowerCase();
+                const itemType = item.resultType || "Board";
+                const matchesType = itemType === selectedType;
+                return matchesSearch && matchesClass && matchesInst && matchesType;
+            })
+            .sort((a, b) => {
+                const pctDiff = Number(b.percentage) - Number(a.percentage);
+                if (pctDiff !== 0) return pctDiff;
+                return (a.order || 0) - (b.order || 0);
+            });
+    }, [results, search, selectedClass, selectedInst, selectedType]);
+
+    const typeCounts = useMemo(() => {
+        const counts: Record<string, number> = { Board: 0, Perfect: 0 };
+        results.forEach(item => {
+            const type = item.resultType || "Board";
+            if (counts[type] !== undefined) counts[type] += 1;
+        });
+        return counts;
+    }, [results]);
+
+    return (
+        <div className="space-y-8">
+            <div className="grid sm:grid-cols-2 gap-4">
+                {resultTypes.map(type => {
+                    const Icon = type.icon;
+                    const active = selectedType === type.value;
+                    return (
+                        <button
+                            key={type.value}
+                            onClick={() => setSelectedType(type.value)}
+                            className={`flex items-center gap-4 p-5 rounded-[1.75rem] border text-left transition-all ${
+                                active
+                                    ? "bg-oxford text-white border-oxford shadow-lg shadow-oxford/20"
+                                    : "bg-white text-oxford border-gray-100 hover:border-sandstone/40"
+                            }`}
+                        >
+                            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${
+                                active ? "bg-white/10 text-sandstone" : "bg-sandstone/10 text-sandstone"
+                            }`}>
+                                <Icon size={22} />
+                            </div>
+                            <div>
+                                <p className="font-black uppercase tracking-tight text-sm sm:text-base">{type.label}</p>
+                                <p className={`text-[10px] font-bold uppercase tracking-widest mt-1 ${
+                                    active ? "text-white/60" : "text-gray-400"
+                                }`}>
+                                    {typeCounts[type.value] || 0} records · highest % first
+                                </p>
+                            </div>
+                        </button>
+                    );
+                })}
+            </div>
+
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+                <div className="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">
+                    <div className="relative w-full sm:w-64">
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+                        <input
+                            type="text"
+                            placeholder="Search student..."
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            className="w-full pl-12 pr-4 py-3 bg-white border border-gray-100 rounded-2xl focus:outline-none focus:border-sandstone transition-colors shadow-sm"
+                        />
+                    </div>
+
+                    <div className="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 w-full no-scrollbar">
+                        <div className="flex bg-gray-100 p-1 rounded-xl">
+                            {classes.map(cl => (
+                                <button
+                                    key={cl}
+                                    onClick={() => setSelectedClass(cl)}
+                                    className={`px-4 py-1.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all ${selectedClass === cl
+                                        ? "bg-white text-oxford shadow-sm"
+                                        : "text-gray-400 hover:text-oxford"
+                                        }`}
+                                >
+                                    {cl === "All" ? "All Classes" : `Class ${cl}`}
+                                </button>
+                            ))}
+                        </div>
+
+                        <div className="flex bg-gray-100 p-1 rounded-xl">
+                            {institutions.map(inst => {
+                                const count = results.filter(item => {
+                                    const itemType = item.resultType || "Board";
+                                    if (itemType !== selectedType) return false;
+                                    if (inst.value === "All") return true;
+                                    return item.institution?.toLowerCase() === inst.value;
+                                }).length;
+
+                                return (
+                                    <button
+                                        key={inst.value}
+                                        onClick={() => setSelectedInst(inst.value)}
+                                        className={`px-4 py-1.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all ${selectedInst === inst.value
+                                            ? "bg-white text-oxford shadow-sm"
+                                            : "text-gray-400 hover:text-oxford"
+                                            }`}
+                                    >
+                                        {inst.label === "All" ? `All (${count})` : `${inst.label} (${count})`}
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+
+                <Link
+                    href={`/admin/results/new?resultType=${selectedType}${selectedInst !== "All" ? `&institution=${selectedInst}` : ""}`}
+                    className="flex items-center gap-2 px-6 py-3 bg-oxford text-white rounded-2xl font-bold uppercase tracking-wider shadow-lg hover:bg-sandstone transition-colors group whitespace-nowrap"
+                >
+                    <Plus size={20} className="group-hover:rotate-90 transition-transform" />
+                    {selectedType === "Perfect" ? "Add Perfect Score" : "Add Board Topper"}
+                </Link>
+            </div>
+
+            <div className="bg-white rounded-3xl lg:rounded-[2.5rem] overflow-hidden border border-gray-100 shadow-sm">
+                <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse min-w-[600px]">
+                        <thead>
+                            <tr className="bg-gray-50/50 border-b border-gray-100">
+                                <th className="p-4 lg:p-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Student</th>
+                                <th className="p-4 lg:p-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Class & Year</th>
+                                <th className="p-4 lg:p-6 text-[10px] font-black uppercase tracking-widest text-gray-400">
+                                    {selectedType === "Perfect" ? "Subject / Score" : "Percentage"}
+                                </th>
+                                <th className="p-4 lg:p-6 text-[10px] font-black uppercase tracking-widest text-gray-400">Institution</th>
+                                <th className="p-4 lg:p-6 text-[10px] font-black uppercase tracking-widest text-gray-400 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-50">
+                            {loading ? (
+                                <tr>
+                                    <td colSpan={5} className="p-10 lg:p-20 text-center">
+                                        <Loader2 className="animate-spin mx-auto text-sandstone" size={32} />
+                                        <p className="text-sm text-gray-500 mt-4">Loading results...</p>
+                                    </td>
+                                </tr>
+                            ) : filteredResults.length === 0 ? (
+                                <tr>
+                                    <td colSpan={5} className="p-10 lg:p-20 text-center">
+                                        <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                            <Trophy className="text-gray-300" size={32} />
+                                        </div>
+                                        <p className="text-gray-500 font-medium">No results found.</p>
+                                    </td>
+                                </tr>
+                            ) : (
+                                filteredResults.map((item, i) => (
+                                    <motion.tr
+                                        key={item._id}
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: i * 0.03 }}
+                                        className="hover:bg-gray-50/50 transition-colors group"
+                                    >
+                                        <td className="p-4 lg:p-6">
+                                            <div className="flex items-center gap-3 lg:gap-4">
+                                                <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-sandstone/10 flex items-center justify-center overflow-hidden flex-shrink-0 border border-sandstone/20">
+                                                    {item.image ? (
+                                                        <img src={item.image} alt="" className="w-full h-full object-cover" />
+                                                    ) : (
+                                                        <UserIcon className="text-sandstone" size={16} />
+                                                    )}
+                                                </div>
+                                                <div>
+                                                    <span className="font-bold text-sm lg:text-base text-oxford block whitespace-nowrap">{item.name}</span>
+                                                    <span className="text-[9px] lg:text-[10px] font-black uppercase tracking-widest text-gray-400">{item.stream || "-"}</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td className="p-4 lg:p-6">
+                                            <div className="flex flex-col gap-1">
+                                                <div className="flex items-center gap-1.5 lg:gap-2 text-xs font-bold text-oxford shrink-0">
+                                                    <GraduationCap size={14} className="text-gray-400 shrink-0" />
+                                                    Class {item.class}
+                                                </div>
+                                                <div className="flex items-center gap-1.5 lg:gap-2 text-[9px] lg:text-[10px] font-medium text-gray-400 shrink-0">
+                                                    <Calendar size={12} className="shrink-0" />
+                                                    Session {item.year}
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td className="p-4 lg:p-6">
+                                            {selectedType === "Perfect" ? (
+                                                <div className="flex flex-col gap-1">
+                                                    <span className="text-xs font-bold text-oxford">{item.subject || "—"}</span>
+                                                    <span className="px-2 lg:px-3 py-1 bg-green-100 text-green-700 text-xs font-black rounded-lg w-fit">
+                                                        100/100
+                                                    </span>
+                                                </div>
+                                            ) : (
+                                                <span className="px-2 lg:px-3 py-1 bg-sandstone text-oxford text-xs font-black rounded-lg shadow-sm">
+                                                    {item.percentage}%
+                                                </span>
+                                            )}
+                                        </td>
+                                        <td className="p-4 lg:p-6">
+                                            <div className="flex items-center gap-1.5 lg:gap-2">
+                                                <School size={14} className="text-gray-400 shrink-0" />
+                                                <span className="text-[9px] lg:text-[10px] font-black text-gray-400 uppercase tracking-wider shrink-0">{item.institution}</span>
+                                            </div>
+                                        </td>
+                                        <td className="p-4 lg:p-6 text-right">
+                                            <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <Link
+                                                    href={`/admin/results/${item._id}`}
+                                                    className="p-2 hover:bg-white rounded-lg transition-colors border border-transparent hover:border-gray-100 shadow-sm text-oxford"
+                                                >
+                                                    <Edit2 size={16} />
+                                                </Link>
+                                                <button
+                                                    onClick={() => handleDelete(item._id)}
+                                                    className="p-2 hover:bg-red-50 rounded-lg transition-colors border border-transparent hover:border-red-100 shadow-sm text-red-500"
+                                                >
+                                                    <Trash2 size={16} />
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </motion.tr>
+                                ))
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    );
+}

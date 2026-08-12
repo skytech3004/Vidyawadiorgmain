@@ -47,7 +47,7 @@ export default function EditResultPage({ params }: { params: Promise<{ id: strin
     return (
         <div className="space-y-8">
             <div>
-                <h2 className="text-3xl font-black text-oxford uppercase tracking-tight">Edit board Result</h2>
+                <h2 className="text-3xl font-black text-oxford uppercase tracking-tight">Edit Result</h2>
                 <p className="text-sm text-gray-500">Update the details of "{result.name}".</p>
             </div>
             <Suspense fallback={

@@ -6,6 +6,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { BookOpen, Trophy, School, Star, Microscope, Medal, Phone, MapPin, Globe, CheckCircle2 } from "lucide-react";
 import StudentResultsTable from "@/components/StudentResultsTable";
+import PerfectScoreAchievers from "@/components/PerfectScoreAchievers";
 import StudentModal, { StudentProps } from "@/components/StudentModal";
 import FacultyGrid from "@/components/FacultyGrid";
 import { getAllMarudharSections } from "@/lib/marudharContent";
@@ -713,45 +714,10 @@ export default function MarudharContent() {
                             <p className="text-gray-600 mt-2">Students who scored 100 out of 100 marks in Board Exams</p>
                         </div>
 
-                        <div className="overflow-x-auto rounded-3xl border border-oxford/10 shadow-lg bg-white">
-                            <table className="w-full text-left border-collapse min-w-[600px]">
-                                <thead className="bg-oxford text-white">
-                                    <tr>
-                                        <th className="p-6 font-bold uppercase tracking-wider text-sm">Student Name</th>
-                                        <th className="p-6 font-bold uppercase tracking-wider text-sm">Class & Stream</th>
-                                        <th className="p-6 font-bold uppercase tracking-wider text-sm">Subject</th>
-                                        <th className="p-6 font-bold uppercase tracking-wider text-sm text-right">Marks</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="divide-y divide-oxford/10 text-gray-700 font-medium">
-                                    {[
-                                        { name: "Mahima Surana", class: "XII Arts", subject: "Hindi Literature", marks: "100/100", img: "/images/mahima_surana.png" },
-                                        { name: "Vartika", class: "XII Arts", subject: "Hindi Literature", marks: "100/100", img: "/images/vitika.png" },
-                                        { name: "Manisha", class: "XII Science", subject: "Chemistry", marks: "100/100", img: "/images/manisha.png" },
-                                        { name: "Ritika Sherawat", class: "XII Science", subject: "Biology", marks: "100/100", img: "/images/ritika.png" }
-                                    ].map((student, i) => (
-                                        <tr
-                                            key={i}
-                                            className="hover:bg-oxford/5 transition-colors cursor-pointer"
-                                            onClick={() => openModal({ ...student, description: "Achieved 100/100 Perfect Score" })}
-                                        >
-                                            <td className="p-6 font-bold text-oxford flex items-center gap-4">
-                                                <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden border-2 border-white shadow-sm">
-                                                    <img src={student.img} alt={student.name} className="w-full h-full object-cover" />
-                                                </div>
-                                                {student.name}
-                                            </td>
-                                            <td className="p-6">{student.class}</td>
-                                            <td className="p-6">{student.subject}</td>
-                                            <td className="p-6 text-right font-black text-green-600">{student.marks}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                        <p className="text-center text-gray-500 mt-6 max-w-2xl mx-auto text-sm">
-                            &ldquo;These students achieved full marks in their respective subjects, bringing pride to the school through their outstanding academic excellence.&rdquo;
-                        </p>
+                        <PerfectScoreAchievers
+                            institution="marudhar"
+                            onSelect={(student) => openModal(student)}
+                        />
                     </div>
                 </div>
             </section>
