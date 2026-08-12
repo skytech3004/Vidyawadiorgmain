@@ -74,6 +74,7 @@ export default function MarudharContent() {
         beyondAcademics: beyondAcademicsData,
         whatWeDo: whatWeDoData,
         uniformInstructions: uniformInstructionsData,
+        gargiAward: gargiAwardData,
         cta: ctaData,
     } = sections;
 
@@ -675,31 +676,31 @@ export default function MarudharContent() {
                     <div className="mt-20 bg-oxford text-white rounded-[3rem] p-10 md:p-16 relative overflow-hidden shadow-2xl">
                         <div className="absolute top-0 right-0 w-64 h-64 bg-sandstone/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
                         <div className="relative z-10 text-center">
-                            <span className="text-sandstone-light font-bold uppercase tracking-[0.4em] text-xs block mb-4">Academic Brilliance</span>
+                            <span className="text-sandstone-light font-bold uppercase tracking-[0.4em] text-xs block mb-4">{gargiAwardData.eyebrow}</span>
                             <h3 className="text-4xl font-bold mb-6 flex items-center justify-center gap-3">
                                 <Trophy className="text-sandstone" size={40} />
-                                GARGI Award Recipients
+                                {gargiAwardData.title}
                             </h3>
                             <div className="h-1.5 w-24 bg-sandstone mx-auto mb-10 rounded-full" />
                             <p className="text-xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
-                                We are proud to announce that <span className="font-bold text-sandstone">115 students</span> from our institution have been honored under the GARGI AWARD Scheme for their academic excellence.
+                                {gargiAwardData.description}
                             </p>
 
                             <div className="flex flex-col md:flex-row justify-center gap-6 mb-8">
                                 <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
                                     <p className="text-sm font-medium uppercase tracking-wider text-sandstone mb-1">Class X</p>
-                                    <p className="text-3xl font-black">₹6,000</p>
+                                    <p className="text-3xl font-black">{gargiAwardData.class10Amount}</p>
                                     <p className="text-xs text-white/70 mt-1">Award Amount</p>
                                 </div>
                                 <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
                                     <p className="text-sm font-medium uppercase tracking-wider text-sandstone mb-1">Class XII</p>
-                                    <p className="text-3xl font-black">₹5,000</p>
+                                    <p className="text-3xl font-black">{gargiAwardData.class12Amount}</p>
                                     <p className="text-xs text-white/70 mt-1">Award Amount</p>
                                 </div>
                             </div>
 
                             <p className="text-sm text-white/60">
-                                Eligibility: Students scoring 75% or more marks in board exams.
+                                {gargiAwardData.eligibility}
                             </p>
                         </div>
                     </div>

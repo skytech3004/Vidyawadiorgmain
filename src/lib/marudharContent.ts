@@ -160,6 +160,15 @@ export const MARUDHAR_DEFAULTS = {
         phone: "6377204205",
         visitText: "Visit Campus",
     },
+    gargiAward: {
+        eyebrow: "Academic Brilliance",
+        title: "GARGI Award Recipients",
+        description:
+            "We are proud to announce that 115 students from our institution have been honored under the GARGI AWARD Scheme for their academic excellence.",
+        class10Amount: "₹6,000",
+        class12Amount: "₹5,000",
+        eligibility: "Eligibility: Students scoring 75% or more marks in board exams.",
+    },
 } as const;
 
 export type MarudharSectionId =
@@ -171,6 +180,7 @@ export type MarudharSectionId =
     | "beyond-academics"
     | "what-we-do"
     | "uniform-instructions"
+    | "gargi-award"
     | "cta";
 
 export function parseJSONField(str: string | undefined | null, subKey: string | null, fallback: any) {
@@ -281,6 +291,18 @@ export function getMarudharSectionData(formData: any, sectionId: MarudharSection
         };
     }
 
+    if (sectionId === "gargi-award") {
+        const parsed = parseJSONField(formData.rules?.content, null, {});
+        return {
+            eyebrow: parsed.gargiAward?.eyebrow || defaultData.eyebrow,
+            title: parsed.gargiAward?.title || defaultData.title,
+            description: parsed.gargiAward?.description || defaultData.description,
+            class10Amount: parsed.gargiAward?.class10Amount || defaultData.class10Amount,
+            class12Amount: parsed.gargiAward?.class12Amount || defaultData.class12Amount,
+            eligibility: parsed.gargiAward?.eligibility || defaultData.eligibility,
+        };
+    }
+
     return defaultData;
 }
 
@@ -298,6 +320,7 @@ export function getAllMarudharSections(formData: any) {
             "uniform-instructions",
             MARUDHAR_DEFAULTS.uniformInstructions
         ),
+        gargiAward: getMarudharSectionData(formData, "gargi-award", MARUDHAR_DEFAULTS.gargiAward),
         cta: getMarudharSectionData(formData, "cta", MARUDHAR_DEFAULTS.cta),
     };
 }

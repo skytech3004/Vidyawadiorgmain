@@ -142,6 +142,14 @@ const DEFAULTS = {
         description: "Give your daughter the opportunity to grow into a confident, educated, and successful individual.",
         phone: "6377204205",
         visitText: "Visit Campus"
+    },
+    gargiAward: {
+        eyebrow: "Academic Brilliance",
+        title: "GARGI Award Recipients",
+        description: "We are proud to announce that 115 students from our institution have been honored under the GARGI AWARD Scheme for their academic excellence.",
+        class10Amount: "₹6,000",
+        class12Amount: "₹5,000",
+        eligibility: "Eligibility: Students scoring 75% or more marks in board exams."
     }
 };
 
@@ -357,6 +365,18 @@ export default function MarudharVisualEditor() {
             };
         }
 
+        if (sectionId === "gargi-award") {
+            const parsed = parseJSONField(formData.rules?.content, null, {});
+            return {
+                eyebrow: parsed.gargiAward?.eyebrow || defaultData.eyebrow,
+                title: parsed.gargiAward?.title || defaultData.title,
+                description: parsed.gargiAward?.description || defaultData.description,
+                class10Amount: parsed.gargiAward?.class10Amount || defaultData.class10Amount,
+                class12Amount: parsed.gargiAward?.class12Amount || defaultData.class12Amount,
+                eligibility: parsed.gargiAward?.eligibility || defaultData.eligibility
+            };
+        }
+
         return defaultData;
     };
 
@@ -474,6 +494,21 @@ export default function MarudharVisualEditor() {
                     ...updated.rules,
                     content: JSON.stringify(currentRules)
                 };
+            } else if (sectionId === "gargi-award") {
+                const currentRules = parseJSONField(prev.rules?.content, null, {});
+                currentRules.gargiAward = {
+                    eyebrow: updatedFields.eyebrow,
+                    title: updatedFields.title,
+                    description: updatedFields.description,
+                    class10Amount: updatedFields.class10Amount,
+                    class12Amount: updatedFields.class12Amount,
+                    eligibility: updatedFields.eligibility
+                };
+
+                updated.rules = {
+                    ...updated.rules,
+                    content: JSON.stringify(currentRules)
+                };
             }
 
             return updated;
@@ -517,6 +552,7 @@ export default function MarudharVisualEditor() {
     const beyondAcademicsData = getSectionData("beyond-academics", DEFAULTS.beyondAcademics);
     const whatWeDoData = getSectionData("what-we-do", DEFAULTS.whatWeDo);
     const uniformInstructionsData = getSectionData("uniform-instructions", DEFAULTS.uniformInstructions);
+    const gargiAwardData = getSectionData("gargi-award", DEFAULTS.gargiAward);
     const ctaData = getSectionData("cta", DEFAULTS.cta);
 
     const openTopperModal = (student: StudentProps) => {
@@ -1649,6 +1685,69 @@ export default function MarudharVisualEditor() {
             );
         }
 
+        if (sectionId === "gargi-award") {
+            return (
+                <div className="space-y-6">
+                    <div className="space-y-2">
+                        <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest">Section Eyebrow</label>
+                        <input
+                            type="text"
+                            value={gargiAwardData.eyebrow}
+                            onChange={(e) => updateSectionData("gargi-award", { ...gargiAwardData, eyebrow: e.target.value })}
+                            className="w-full px-4 py-3 border border-gray-100 rounded-xl bg-gray-50 focus:bg-white focus:border-sandstone outline-none transition-all font-bold text-oxford text-sm"
+                        />
+                    </div>
+                    <div className="space-y-2">
+                        <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest">Section Title</label>
+                        <input
+                            type="text"
+                            value={gargiAwardData.title}
+                            onChange={(e) => updateSectionData("gargi-award", { ...gargiAwardData, title: e.target.value })}
+                            className="w-full px-4 py-3 border border-gray-100 rounded-xl bg-gray-50 focus:bg-white focus:border-sandstone outline-none transition-all font-bold text-oxford text-sm"
+                        />
+                    </div>
+                    <div className="space-y-2">
+                        <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest">Description</label>
+                        <textarea
+                            value={gargiAwardData.description}
+                            onChange={(e) => updateSectionData("gargi-award", { ...gargiAwardData, description: e.target.value })}
+                            rows={4}
+                            className="w-full px-4 py-3 border border-gray-100 rounded-xl bg-gray-50 focus:bg-white focus:border-sandstone outline-none transition-all text-sm text-gray-600 font-medium"
+                        />
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                        <div className="space-y-2">
+                            <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest">Class X Award</label>
+                            <input
+                                type="text"
+                                value={gargiAwardData.class10Amount}
+                                onChange={(e) => updateSectionData("gargi-award", { ...gargiAwardData, class10Amount: e.target.value })}
+                                className="w-full px-4 py-3 border border-gray-100 rounded-xl bg-gray-50 focus:bg-white focus:border-sandstone outline-none transition-all text-sm font-bold text-oxford"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest">Class XII Award</label>
+                            <input
+                                type="text"
+                                value={gargiAwardData.class12Amount}
+                                onChange={(e) => updateSectionData("gargi-award", { ...gargiAwardData, class12Amount: e.target.value })}
+                                className="w-full px-4 py-3 border border-gray-100 rounded-xl bg-gray-50 focus:bg-white focus:border-sandstone outline-none transition-all text-sm font-bold text-oxford"
+                            />
+                        </div>
+                    </div>
+                    <div className="space-y-2">
+                        <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest">Eligibility Note</label>
+                        <input
+                            type="text"
+                            value={gargiAwardData.eligibility}
+                            onChange={(e) => updateSectionData("gargi-award", { ...gargiAwardData, eligibility: e.target.value })}
+                            className="w-full px-4 py-3 border border-gray-100 rounded-xl bg-gray-50 focus:bg-white focus:border-sandstone outline-none transition-all text-sm text-gray-700"
+                        />
+                    </div>
+                </div>
+            );
+        }
+
         return null;
     };
 
@@ -2382,7 +2481,46 @@ export default function MarudharVisualEditor() {
                                 </section>
                             )}
 
-                            {/* Section 13: Call To Action (Admissions) */}
+                            {/* Section 13: GARGI Award Recipients */}
+                            {renderAdminSectionWrapper(
+                                "gargi-award",
+                                "GARGI Award Recipients",
+                                <section className="mt-20 bg-oxford text-white rounded-[3rem] p-10 md:p-16 relative overflow-hidden shadow-2xl">
+                                    <div className="absolute top-0 right-0 w-64 h-64 bg-sandstone/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
+                                    <div className="relative z-10 text-center">
+                                        <span className="text-sandstone-light font-bold uppercase tracking-[0.4em] text-xs block mb-4">
+                                            {gargiAwardData.eyebrow}
+                                        </span>
+                                        <h3 className="text-4xl font-bold mb-6 flex items-center justify-center gap-3">
+                                            <Trophy className="text-sandstone" size={40} />
+                                            {gargiAwardData.title}
+                                        </h3>
+                                        <div className="h-1.5 w-24 bg-sandstone mx-auto mb-10 rounded-full" />
+                                        <p className="text-xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
+                                            {gargiAwardData.description}
+                                        </p>
+
+                                        <div className="flex flex-col md:flex-row justify-center gap-6 mb-8">
+                                            <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+                                                <p className="text-sm font-medium uppercase tracking-wider text-sandstone mb-1">Class X</p>
+                                                <p className="text-3xl font-black">{gargiAwardData.class10Amount}</p>
+                                                <p className="text-xs text-white/70 mt-1">Award Amount</p>
+                                            </div>
+                                            <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+                                                <p className="text-sm font-medium uppercase tracking-wider text-sandstone mb-1">Class XII</p>
+                                                <p className="text-3xl font-black">{gargiAwardData.class12Amount}</p>
+                                                <p className="text-xs text-white/70 mt-1">Award Amount</p>
+                                            </div>
+                                        </div>
+
+                                        <p className="text-sm text-white/60">
+                                            {gargiAwardData.eligibility}
+                                        </p>
+                                    </div>
+                                </section>
+                            )}
+
+                            {/* Section 14: Call To Action (Admissions) */}
                             {renderAdminSectionWrapper(
                                 "cta",
                                 "Call To Action (CTA)",
