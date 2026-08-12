@@ -92,6 +92,14 @@ const DEFAULTS = {
         ]
     },
     beyondAcademics: {
+        featuredAchievement: {
+            title: "NCC Achievement - National Thal Sainik Camp",
+            description: "We are proud of our girl for her selection in the National Thal Sainik Camp 2025 (AITSC).",
+            name: "Cadet Harshita",
+            cls: "IX A",
+            badge: "SELECTED FOR AITSC 2025",
+            img: "/images/harishta.png"
+        },
         nccCamps: [
             { camp: "ATC", date: "17 May 2026 – 27 Session May 2025", loc: "Jodhpur" },
             { camp: "Pre TSC – I", date: "04 July 2025 – 13 July 2025", loc: "Jodhpur" },
@@ -328,6 +336,7 @@ export default function MarudharVisualEditor() {
         if (sectionId === "beyond-academics") {
             const parsed = parseJSONField(formData.vision?.content, null, {});
             return {
+                featuredAchievement: parsed.featuredAchievement || defaultData.featuredAchievement,
                 nccCamps: parsed.nccCamps || defaultData.nccCamps,
                 sportsNational: parsed.sportsNational || defaultData.sportsNational,
                 sportsState: parsed.sportsState || defaultData.sportsState,
@@ -446,6 +455,7 @@ export default function MarudharVisualEditor() {
                 };
             } else if (sectionId === "beyond-academics") {
                 const currentVision = parseJSONField(prev.vision?.content, null, {});
+                currentVision.featuredAchievement = updatedFields.featuredAchievement;
                 currentVision.nccCamps = updatedFields.nccCamps;
                 currentVision.sportsNational = updatedFields.sportsNational;
                 currentVision.sportsState = updatedFields.sportsState;
@@ -1100,6 +1110,102 @@ export default function MarudharVisualEditor() {
         if (sectionId === "beyond-academics") {
             return (
                 <div className="space-y-6">
+                    {/* Featured NCC spotlight */}
+                    <div className="space-y-3">
+                        <div className="flex justify-between items-center border-b border-gray-100 pb-2">
+                            <h4 className="font-bold text-oxford text-sm uppercase tracking-tight">Featured NCC Achievement</h4>
+                            <span className="px-3 py-1 bg-sandstone/10 text-oxford rounded-lg text-[9px] font-black uppercase tracking-widest">
+                                Admin Spotlight
+                            </span>
+                        </div>
+                        <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100 space-y-4">
+                            <ImageUploadField
+                                label="Student Image"
+                                value={beyondAcademicsData.featuredAchievement.img}
+                                onChange={(url) => {
+                                    updateSectionData("beyond-academics", {
+                                        ...beyondAcademicsData,
+                                        featuredAchievement: { ...beyondAcademicsData.featuredAchievement, img: url }
+                                    });
+                                }}
+                                folder="beyond-academics/featured"
+                                description="Use the portrait shown on the left card in the admin preview."
+                            />
+                            <div className="space-y-1">
+                                <label className="block text-[9px] font-bold text-gray-400 uppercase">Headline</label>
+                                <input
+                                    type="text"
+                                    value={beyondAcademicsData.featuredAchievement.title}
+                                    onChange={(e) => {
+                                        updateSectionData("beyond-academics", {
+                                            ...beyondAcademicsData,
+                                            featuredAchievement: { ...beyondAcademicsData.featuredAchievement, title: e.target.value }
+                                        });
+                                    }}
+                                    className="w-full px-3 py-2 border border-gray-100 rounded-xl bg-white font-bold text-oxford text-xs"
+                                />
+                            </div>
+                            <div className="space-y-1">
+                                <label className="block text-[9px] font-bold text-gray-400 uppercase">Subheading</label>
+                                <input
+                                    type="text"
+                                    value={beyondAcademicsData.featuredAchievement.description}
+                                    onChange={(e) => {
+                                        updateSectionData("beyond-academics", {
+                                            ...beyondAcademicsData,
+                                            featuredAchievement: { ...beyondAcademicsData.featuredAchievement, description: e.target.value }
+                                        });
+                                    }}
+                                    className="w-full px-3 py-2 border border-gray-100 rounded-xl bg-white text-gray-600 text-xs"
+                                />
+                            </div>
+                            <div className="grid grid-cols-2 gap-3">
+                                <div className="space-y-1">
+                                    <label className="block text-[9px] font-bold text-gray-400 uppercase">Student Name</label>
+                                    <input
+                                        type="text"
+                                        value={beyondAcademicsData.featuredAchievement.name}
+                                        onChange={(e) => {
+                                            updateSectionData("beyond-academics", {
+                                                ...beyondAcademicsData,
+                                                featuredAchievement: { ...beyondAcademicsData.featuredAchievement, name: e.target.value }
+                                            });
+                                        }}
+                                        className="w-full px-3 py-2 border border-gray-100 rounded-xl bg-white font-bold text-oxford text-xs"
+                                    />
+                                </div>
+                                <div className="space-y-1">
+                                    <label className="block text-[9px] font-bold text-gray-400 uppercase">Class</label>
+                                    <input
+                                        type="text"
+                                        value={beyondAcademicsData.featuredAchievement.cls}
+                                        onChange={(e) => {
+                                            updateSectionData("beyond-academics", {
+                                                ...beyondAcademicsData,
+                                                featuredAchievement: { ...beyondAcademicsData.featuredAchievement, cls: e.target.value }
+                                            });
+                                        }}
+                                        className="w-full px-3 py-2 border border-gray-100 rounded-xl bg-white text-gray-600 text-xs"
+                                    />
+                                </div>
+                            </div>
+                            <div className="space-y-1">
+                                <label className="block text-[9px] font-bold text-gray-400 uppercase">Badge Text</label>
+                                <input
+                                    type="text"
+                                    value={beyondAcademicsData.featuredAchievement.badge}
+                                    onChange={(e) => {
+                                        updateSectionData("beyond-academics", {
+                                            ...beyondAcademicsData,
+                                            featuredAchievement: { ...beyondAcademicsData.featuredAchievement, badge: e.target.value }
+                                        });
+                                    }}
+                                    className="w-full px-3 py-2 border border-gray-100 rounded-xl bg-white text-gray-700 text-xs font-bold"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
                     {/* NCC Camps */}
                     <div className="space-y-3">
                         <div className="flex justify-between items-center border-b border-gray-100 pb-2">
@@ -2280,74 +2386,66 @@ export default function MarudharVisualEditor() {
                             {renderAdminSectionWrapper(
                                 "beyond-academics",
                                 "Beyond Academics Achievements",
-                                <section className="py-20 px-6 bg-oxford text-white overflow-hidden">
+                                <section className="py-20 px-6 bg-[#0d2f5c] text-white overflow-hidden">
                                     <div className="max-w-7xl mx-auto">
-                                        <div className="text-center mb-16">
-                                            <span className="text-sandstone font-bold uppercase tracking-widest text-xs block mb-2">Holistic Development</span>
-                                            <h2 className="text-3xl md:text-4xl font-bold text-white text-center">Beyond Academics</h2>
-                                            <div className="h-1.5 w-20 bg-sandstone mx-auto mt-4 rounded-full mb-8" />
-                                            <p className="text-white/80 max-w-xl mx-auto text-xs font-light">
+                                        <div className="text-center mb-12">
+                                            <span className="text-[#f2c57c] font-black uppercase tracking-[0.35em] text-xs block mb-3">
+                                                Holistic Development
+                                            </span>
+                                            <h2 className="text-3xl md:text-5xl font-black text-white text-center">
+                                                Beyond Academics
+                                            </h2>
+                                            <div className="h-1.5 w-20 bg-[#f2c57c] mx-auto mt-5 rounded-full" />
+                                            <p className="text-white/80 max-w-2xl mx-auto text-sm mt-8">
                                                 Fostering discipline, leadership, physical fitness, and a scientific temper through NCC, Sports, and Science events.
                                             </p>
                                         </div>
 
-                                        <div className="grid lg:grid-cols-2 gap-12 mb-16">
-                                            {/* NCC block */}
-                                            <div className="space-y-6">
-                                                <h3 className="text-lg font-bold flex items-center gap-2">
-                                                    <Shield className="text-sandstone" size={20} />
-                                                    National Cadet Corps (NCC)
-                                                </h3>
-                                                <p className="text-white/80 text-xs">Our school houses an active NCC Junior and Senior Wing, participating in major state-level preparation camps.</p>
-                                                <div className="overflow-hidden rounded-xl border border-white/10 bg-white/5">
-                                                    <table className="w-full text-left text-xs text-white/90">
-                                                        <thead className="bg-white/10 font-bold">
-                                                            <tr>
-                                                                <th className="p-3">Camp name</th>
-                                                                <th className="p-3">Duration Details</th>
-                                                                <th className="p-3">Location</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody className="divide-y divide-white/10 text-white/80">
-                                                            {beyondAcademicsData.nccCamps.map((row: any, i: number) => (
-                                                                <tr key={i}>
-                                                                    <td className="p-3 font-bold">{row.camp}</td>
-                                                                    <td className="p-3">{row.date}</td>
-                                                                    <td className="p-3 text-sandstone">{row.loc}</td>
-                                                                </tr>
-                                                            ))}
-                                                        </tbody>
-                                                    </table>
+                                        <div className="rounded-[2rem] border border-white/10 bg-[#173f73] p-6 md:p-8 shadow-2xl">
+                                            <div className="grid lg:grid-cols-[360px_minmax(0,1fr)] gap-8 items-center">
+                                                <div className="text-center flex flex-col items-center justify-center">
+                                                    <div className="w-40 h-40 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-white/15 shadow-xl bg-white/10">
+                                                        <img
+                                                            src={beyondAcademicsData.featuredAchievement.img}
+                                                            alt={beyondAcademicsData.featuredAchievement.name}
+                                                            className="w-full h-full object-cover"
+                                                        />
+                                                    </div>
+                                                    <h3 className="mt-8 text-2xl md:text-3xl font-black text-white">
+                                                        {beyondAcademicsData.featuredAchievement.name}
+                                                    </h3>
+                                                    <p className="mt-2 text-[#f2c57c] text-lg font-medium">
+                                                        Class: {beyondAcademicsData.featuredAchievement.cls}
+                                                    </p>
+                                                    <div className="mt-6 inline-flex px-5 py-3 rounded-xl bg-white/10 border border-white/10 text-white font-black uppercase tracking-wider text-sm">
+                                                        {beyondAcademicsData.featuredAchievement.badge}
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            {/* Sports block */}
-                                            <div className="space-y-6">
-                                                <h3 className="text-lg font-bold flex items-center gap-2">
-                                                    <Trophy className="text-sandstone" size={20} />
-                                                    Sports talents (National / State)
-                                                </h3>
-                                                <div className="space-y-4 text-xs text-white/90">
-                                                    <div className="overflow-hidden rounded-xl border border-white/10 bg-white/5">
-                                                        <table className="w-full text-left">
-                                                            <thead className="bg-white/10">
-                                                                <tr className="font-bold">
-                                                                    <th className="p-3">Name</th>
-                                                                    <th className="p-3">Class</th>
-                                                                    <th className="p-3">Sport Event</th>
+                                                <div className="space-y-4">
+                                                    <h3 className="flex items-center gap-2 text-2xl md:text-3xl font-black text-white">
+                                                        <Trophy className="text-[#f2c57c]" size={32} />
+                                                        {beyondAcademicsData.featuredAchievement.title}
+                                                    </h3>
+                                                    <p className="text-white/90 text-base md:text-lg leading-relaxed max-w-3xl">
+                                                        {beyondAcademicsData.featuredAchievement.description}
+                                                    </p>
+
+                                                    <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 mt-6">
+                                                        <table className="w-full text-left text-sm text-white/90">
+                                                            <thead className="bg-white/10 font-black uppercase tracking-wider text-[#f2c57c] text-xs">
+                                                                <tr>
+                                                                    <th className="p-4">Camp Name</th>
+                                                                    <th className="p-4">Dates</th>
+                                                                    <th className="p-4">Location</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody className="divide-y divide-white/10">
-                                                                {beyondAcademicsData.sportsNational.map((row: any, i: number) => (
-                                                                    <tr key={i}>
-                                                                        <td className="p-3 font-bold flex items-center gap-2">
-                                                                            <div className="w-6 h-6 rounded-full bg-white/10 overflow-hidden shrink-0">
-                                                                                <img src={row.img} alt={row.name} className="w-full h-full object-cover" />
-                                                                            </div>
-                                                                            {row.name}
-                                                                        </td>
-                                                                        <td className="p-3">{row.cls}</td>
-                                                                        <td className="p-3 text-sandstone">{row.sport} (Nat.)</td>
+                                                                {beyondAcademicsData.nccCamps.map((row: any, i: number) => (
+                                                                    <tr key={i} className="hover:bg-white/5 transition-colors">
+                                                                        <td className="p-4 font-bold">{row.camp}</td>
+                                                                        <td className="p-4">{row.date}</td>
+                                                                        <td className="p-4 text-[#f2c57c]">{row.loc}</td>
                                                                     </tr>
                                                                 ))}
                                                             </tbody>
@@ -2357,23 +2455,18 @@ export default function MarudharVisualEditor() {
                                             </div>
                                         </div>
 
-                                        {/* Science models */}
-                                        <div className="pt-8 border-t border-white/10">
-                                            <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
-                                                <Microscope className="text-sandstone" size={20} />
-                                                Science Model Exhibitions & Quizzes
-                                            </h3>
-                                            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-xs">
-                                                {beyondAcademicsData.scienceDistrict.map((row: any, i: number) => (
-                                                    <div key={i} className="bg-white/5 p-4 rounded-xl border border-white/10 text-center">
-                                                        <div className="w-12 h-12 rounded-full bg-white/10 mx-auto mb-3 overflow-hidden">
-                                                            <img src={row.img} alt={row.name} className="w-full h-full object-cover" />
-                                                        </div>
-                                                        <h4 className="font-bold text-white mb-1">{row.name}</h4>
-                                                        <p className="text-sandstone text-[10px] font-black uppercase mb-2">Class {row.cls}</p>
-                                                        <p className="text-white/70 text-[10px]">{row.ach}</p>
-                                                    </div>
-                                                ))}
+                                        <div className="mt-10 grid sm:grid-cols-3 gap-4 text-sm text-white/80">
+                                            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                                                <p className="text-[#f2c57c] font-black uppercase tracking-wider text-[10px] mb-1">NCC</p>
+                                                <p className="font-medium">Editable camp history and achievement spotlight.</p>
+                                            </div>
+                                            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                                                <p className="text-[#f2c57c] font-black uppercase tracking-wider text-[10px] mb-1">Sports</p>
+                                                <p className="font-medium">National and state winners remain editable below.</p>
+                                            </div>
+                                            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                                                <p className="text-[#f2c57c] font-black uppercase tracking-wider text-[10px] mb-1">Science</p>
+                                                <p className="font-medium">Projects and exhibitions are still managed in the editor.</p>
                                             </div>
                                         </div>
                                     </div>
