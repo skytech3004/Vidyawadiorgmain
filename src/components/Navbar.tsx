@@ -44,8 +44,8 @@ export default function Navbar() {
                 { name: "Download Brochure (PDF)", href: brochureUrl, isBrochure: true },
                 { name: "Leeladevi Parasmal Sancheti Kanya Mahavidyalaya", href: "https://vidyawadicollege.org" },
                 { name: "Marudhar Balika Vidyapeeth (Sr. Sec.) Vidyawadi Hindi/English Medium (RBSE)", href: "/institutions/marudhar-balika-vidyapeeth" },
-                { name: "Leeladevi Parasmal Sancheti English Medium Sr.Sec.School", href: "/institutions/leeladevi-english-medium" },
-                { name: "Sushiladevi Prakashraj Modi Primary School", href: "/institutions/sushiladevi" }
+                { name: "Leeladevi Parasmal Sancheti English Medium Sr.Sec.School", href: "https://lpsvidyawadi.com/" },
+                { name: "Sushiladevi Prakashraj Modi Primary School", href: "https://lpsvidyawadi.com/" }
             ]
         },
 
