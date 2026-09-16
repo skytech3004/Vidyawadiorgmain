@@ -21,6 +21,7 @@ const PostSchema = new mongoose.Schema({
     image: String,
     tags: [String],
     author: String,
+    authorImage: String,
     published: {
         type: Boolean,
         default: false,

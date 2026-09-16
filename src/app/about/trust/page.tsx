@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Shield, Users, Landmark, Heart } from "lucide-react";
+import { Shield, Users, Landmark, Heart, User } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
@@ -14,8 +14,17 @@ interface InspirationData {
     image: string;
 }
 
+interface TrustMemberData {
+    _id: string;
+    name: string;
+    title: string;
+    image: string;
+    order: number;
+}
+
 export default function TrustPage() {
     const [inspiration, setInspiration] = useState<InspirationData | null>(null);
+    const [trustMembers, setTrustMembers] = useState<TrustMemberData[]>([]);
 
     useEffect(() => {
         const fetchInspiration = async () => {
@@ -31,7 +40,23 @@ export default function TrustPage() {
                 console.error("Failed to fetch inspiration data", error);
             }
         };
+
+        const fetchTrustMembers = async () => {
+            try {
+                const isLocalDev = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+                const url = isLocalDev ? "/api/trust" : "https://www.vidyawadi.org/api/trust";
+                const res = await fetch(url, { cache: "no-store" });
+                const json = await res.json();
+                if (json.success && Array.isArray(json.data)) {
+                    setTrustMembers(json.data);
+                }
+            } catch (error) {
+                console.error("Failed to fetch trust members", error);
+            }
+        };
+
         fetchInspiration();
+        fetchTrustMembers();
     }, []);
 
     return (
@@ -64,6 +89,68 @@ export default function TrustPage() {
                     </motion.h1>
                 </div>
             </div>
+
+            {/* First Section: Trust / Management Cards */}
+            {trustMembers.length > 0 && (
+                <section className="py-24 bg-white border-b border-stone-100">
+                    <div className="max-w-7xl mx-auto px-6">
+                        <div className="text-center max-w-3xl mx-auto mb-16">
+                            <motion.span
+                                initial={{ opacity: 0, y: 10 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                className="text-sandstone font-black uppercase tracking-[0.3em] text-xs block mb-3"
+                            >
+                                Leadership & Governance
+                            </motion.span>
+                            <motion.h2
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                className="text-4xl md:text-5xl font-black text-oxford"
+                            >
+                                Trust Management & Office Bearers
+                            </motion.h2>
+                            <div className="w-20 h-1 bg-sandstone mx-auto mt-4 rounded-full" />
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                            {trustMembers.map((member, index) => (
+                                <motion.div
+                                    key={member._id}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.08 }}
+                                    className="group bg-slate-50/70 rounded-[2.5rem] border border-gray-100 p-6 hover:bg-white hover:shadow-2xl transition-all duration-500 flex flex-col items-center text-center relative overflow-hidden"
+                                >
+                                    <div className="w-full aspect-square rounded-[2rem] overflow-hidden mb-6 bg-slate-200 shadow-md relative group-hover:shadow-xl transition-all">
+                                        {member.image ? (
+                                            <Image
+                                                src={member.image}
+                                                alt={member.name}
+                                                fill
+                                                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                                unoptimized
+                                            />
+                                        ) : (
+                                            <div className="w-full h-full flex flex-col items-center justify-center bg-oxford/5 text-oxford/40">
+                                                <User size={48} />
+                                            </div>
+                                        )}
+                                    </div>
+                                    <span className="px-4 py-1 rounded-full bg-sandstone/15 text-oxford text-[11px] font-black uppercase tracking-widest mb-3 border border-sandstone/20">
+                                        {member.title}
+                                    </span>
+                                    <h3 className="text-xl font-black text-oxford leading-snug group-hover:text-sandstone transition-colors">
+                                        {member.name}
+                                    </h3>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            )}
 
             {/* Inspiration Section */}
             {inspiration && (

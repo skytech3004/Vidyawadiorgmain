@@ -49,8 +49,8 @@ export default async function BlogPostPage({
                     </Link>
 
                     <div>
-                        <div className="flex flex-wrap items-center gap-6 text-gray-400 text-sm mb-6">
-                            <div className="flex items-center gap-2">
+                        <div className="flex flex-wrap items-center gap-6 text-gray-500 text-sm mb-6">
+                            <div className="flex items-center gap-2 text-xs font-semibold">
                                 <Calendar className="w-4 h-4 text-sandstone" />
                                 {new Date(post.date).toLocaleDateString("en-US", {
                                     day: "numeric",
@@ -58,9 +58,22 @@ export default async function BlogPostPage({
                                     year: "numeric",
                                 })}
                             </div>
-                            <div className="flex items-center gap-2">
-                                <User className="w-4 h-4 text-sandstone" />
-                                {post.author}
+                            <div className="flex items-center gap-3 bg-white px-4 py-1.5 rounded-full border border-gray-200/80 shadow-sm">
+                                {post.authorImage ? (
+                                    <img
+                                        src={post.authorImage}
+                                        alt={post.author}
+                                        className="w-7 h-7 rounded-full object-cover ring-2 ring-sandstone"
+                                    />
+                                ) : (
+                                    <div className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-sandstone">
+                                        <User className="w-4 h-4" />
+                                    </div>
+                                )}
+                                <div>
+                                    <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block leading-none">Written by</span>
+                                    <span className="font-bold text-oxford text-sm">{post.author}</span>
+                                </div>
                             </div>
                         </div>
                         <h1 className="text-4xl md:text-6xl text-oxford mb-8 leading-tight">

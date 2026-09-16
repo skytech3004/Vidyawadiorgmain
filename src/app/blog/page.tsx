@@ -58,8 +58,8 @@ export default async function BlogPage() {
                                     </div>
 
                                     <div className="md:col-span-3 pt-4">
-                                        <div className="flex items-center gap-6 text-gray-400 text-sm mb-4">
-                                            <div className="flex items-center gap-2">
+                                        <div className="flex flex-wrap items-center gap-4 text-gray-500 text-sm mb-4">
+                                            <div className="flex items-center gap-2 text-xs font-medium">
                                                 <Calendar className="w-4 h-4 text-sandstone" />
                                                 {new Date(post.date).toLocaleDateString("en-US", {
                                                     day: "numeric",
@@ -67,9 +67,17 @@ export default async function BlogPage() {
                                                     year: "numeric",
                                                 })}
                                             </div>
-                                            <div className="flex items-center gap-2">
-                                                <User className="w-4 h-4 text-sandstone" />
-                                                {post.author}
+                                            <div className="flex items-center gap-2 bg-slate-100 px-3 py-1 rounded-full border border-slate-200/60">
+                                                {post.authorImage ? (
+                                                    <img
+                                                        src={post.authorImage}
+                                                        alt={post.author}
+                                                        className="w-5 h-5 rounded-full object-cover ring-1 ring-sandstone"
+                                                    />
+                                                ) : (
+                                                    <User className="w-3.5 h-3.5 text-sandstone" />
+                                                )}
+                                                <span className="font-bold text-oxford text-xs">{post.author}</span>
                                             </div>
                                         </div>
 

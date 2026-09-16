@@ -46,6 +46,7 @@ const sidebarItems = [
     { name: "Hostel", href: "/admin/hostel", icon: Building2 },
     { name: "Awards", href: "/admin/awards", icon: Award },
     { name: "Inspiration", href: "/admin/inspiration", icon: FileText },
+    { name: "Trust Management", href: "/admin/trust", icon: Landmark },
     { name: "Settings", href: "/admin/settings", icon: Settings },
     { name: "Activity Logs", href: "/admin/logs", icon: Activity },
 ];

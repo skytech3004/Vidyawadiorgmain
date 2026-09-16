@@ -13,8 +13,10 @@ interface BlogFormProps {
 export default function BlogForm({ initialData, isEditing }: BlogFormProps) {
     const router = useRouter();
     const fileInputRef = useRef<HTMLInputElement>(null);
+    const authorFileInputRef = useRef<HTMLInputElement>(null);
     const [loading, setLoading] = useState(false);
     const [uploading, setUploading] = useState(false);
+    const [authorUploading, setAuthorUploading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [formData, setFormData] = useState(initialData || {
         title: "",
@@ -24,8 +26,46 @@ export default function BlogForm({ initialData, isEditing }: BlogFormProps) {
         image: "",
         tags: [],
         author: "Admin",
+        authorImage: "",
         published: false
     });
+
+    const handleAuthorUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        if (file.size > 2 * 1024 * 1024) {
+            setError("Author image must be under 2MB.");
+            return;
+        }
+
+        setError(null);
+        setAuthorUploading(true);
+
+        const uploadData = new FormData();
+        uploadData.append("file", file);
+        uploadData.append("folder", "blog-authors");
+
+        try {
+            const res = await fetch("/api/admin/upload", {
+                method: "POST",
+                body: uploadData,
+            });
+            const data = await res.json();
+
+            if (data.success) {
+                setFormData((prev: any) => ({ ...prev, authorImage: data.url }));
+            } else {
+                setError(data.error || "Author image upload failed");
+            }
+        } catch (err) {
+            console.error("Upload error:", err);
+            setError("Network error during author image upload");
+        } finally {
+            setAuthorUploading(false);
+            if (authorFileInputRef.current) authorFileInputRef.current.value = "";
+        }
+    };
 
     const handleFeaturedUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -164,18 +204,73 @@ export default function BlogForm({ initialData, isEditing }: BlogFormProps) {
                         </select>
                     </div>
 
-                    {/* Author */}
-                    <div className="space-y-2 md:col-span-2">
-                        <label className="text-sm font-bold text-oxford uppercase tracking-wider flex items-center gap-2">
-                            <User size={16} className="text-sandstone" />
-                            Author
-                        </label>
-                        <input
-                            type="text"
-                            value={formData.author}
-                            onChange={(e) => setFormData({ ...formData, author: e.target.value })}
-                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-sandstone focus:ring-2 focus:ring-sandstone/20 outline-none transition-all bg-gray-50/50"
-                        />
+                    {/* Author Details */}
+                    <div className="space-y-4 md:col-span-2 p-6 bg-slate-50/80 rounded-2xl border border-gray-100">
+                        <div className="flex items-center gap-3 border-b border-gray-200 pb-3">
+                            <User size={18} className="text-sandstone" />
+                            <h3 className="font-bold text-oxford uppercase tracking-wider text-xs">Author / Writer Details</h3>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-6 items-start">
+                            <div className="space-y-2">
+                                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider block">
+                                    Author Name
+                                </label>
+                                <input
+                                    type="text"
+                                    value={formData.author || ""}
+                                    onChange={(e) => setFormData({ ...formData, author: e.target.value })}
+                                    placeholder="Enter writer's name..."
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-sandstone focus:ring-2 focus:ring-sandstone/20 outline-none transition-all bg-white font-medium"
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider block">
+                                    Author Profile Photo
+                                </label>
+                                <div className="flex items-center gap-3">
+                                    <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-200 border-2 border-sandstone shrink-0 flex items-center justify-center text-oxford font-bold text-sm shadow-sm">
+                                        {formData.authorImage ? (
+                                            <img
+                                                src={formData.authorImage}
+                                                alt="Author Avatar"
+                                                className="w-full h-full object-cover"
+                                            />
+                                        ) : (
+                                            <User size={20} className="text-gray-400" />
+                                        )}
+                                    </div>
+                                    <div className="flex-1 flex gap-2">
+                                        <input
+                                            type="text"
+                                            value={formData.authorImage || ""}
+                                            onChange={(e) => setFormData({ ...formData, authorImage: e.target.value })}
+                                            placeholder="Author image URL..."
+                                            className="flex-1 px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:border-sandstone outline-none bg-white"
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => authorFileInputRef.current?.click()}
+                                            disabled={authorUploading}
+                                            className="px-4 py-2.5 rounded-xl bg-oxford text-white text-xs font-bold hover:bg-oxford/90 transition-all flex items-center gap-1.5 shrink-0 disabled:opacity-50"
+                                        >
+                                            {authorUploading ? (
+                                                <Loader2 size={14} className="animate-spin" />
+                                            ) : (
+                                                <Upload size={14} />
+                                            )}
+                                            <span>Upload</span>
+                                        </button>
+                                        <input
+                                            ref={authorFileInputRef}
+                                            type="file"
+                                            accept="image/*"
+                                            className="hidden"
+                                            onChange={handleAuthorUpload}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     {/* Featured Image URL + Upload */}

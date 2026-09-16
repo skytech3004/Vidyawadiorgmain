@@ -10,6 +10,7 @@ export type PublicBlogPost = {
     category: string;
     image: string;
     author: string;
+    authorImage: string;
     excerpt: string;
     date: string;
 };
@@ -33,6 +34,7 @@ function mapPost(post: any): PublicBlogPost {
         category: post.category || "General",
         image: post.image || "/images/english school/Janvee soni.jpg",
         author: post.author || "Admin",
+        authorImage: post.authorImage || "",
         excerpt: toExcerpt(post.content || ""),
         date: post.createdAt
             ? new Date(post.createdAt).toISOString()
