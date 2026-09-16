@@ -49,21 +49,22 @@ export default function Navbar() {
             ]
         },
 
-      
+
         { name: "Amenities", href: "/amenities" },
         { name: "Hostel", href: "/hostel" },
         { name: "Gallery", href: "/gallery" },
-        
+
         { name: "Contact", href: "/contact" },
         { name: "Careers", href: "/careers" },
-            { name: "Alumni", href: "/alumni" },
-               {
+        { name: "Alumni", href: "/alumni" },
+        {
             name: "More",
             href: "#More",
             subLinks: [
                 { name: "Blog", href: "/blog" },
                 { name: "News & Events", href: "/news-events" },
                 { name: "Magazine", href: "/magazine" },
+                { name: "Online Donate", href: "/donate" },
             ]
         },
     ];

@@ -44,7 +44,7 @@ const institutions: Institution[] = [
     {
         title: "Leeladevi Parasmal Sancheti English Medium Sr.Sec.School",
         type: "School",
-        description: "Elite English Medium Senior Secondary School focused on international standards and student-centric learning.",
+        description: " Elite English Medium Senior Secondary School focused on international standards and student-centric learning.",
         icon: <GraduationCap className="w-6 h-6" />,
         stats: "English Medium Only",
         image: "/lps.jpg",
@@ -140,7 +140,7 @@ export default function Institutions() {
                                 <h3 className="text-2xl md:text-3xl font-bold text-oxford mb-4 group-hover:text-sandstone transition-colors leading-tight">
                                     {inst.title}
                                 </h3>
-                                <p className="text-gray-600 leading-relaxed mb-8 line-clamp-2">
+                                <p className="text-gray-600 leading-relaxed mb-8 line-clamp-2 font-bold">
                                     {inst.description}
                                 </p>
 
