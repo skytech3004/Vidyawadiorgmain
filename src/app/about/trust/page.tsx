@@ -109,7 +109,7 @@ export default function TrustPage() {
                                 viewport={{ once: true }}
                                 className="text-4xl md:text-5xl font-black text-oxford"
                             >
-                                Trust Management & Office Bearers
+                                Our Founder Pillers
                             </motion.h2>
                             <div className="w-20 h-1 bg-sandstone mx-auto mt-4 rounded-full" />
                         </div>
@@ -130,7 +130,7 @@ export default function TrustPage() {
                                                 src={member.image}
                                                 alt={member.name}
                                                 fill
-                                                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                                className="object-contain group-hover:scale-105 transition-transform duration-700"
                                                 unoptimized
                                             />
                                         ) : (
@@ -161,11 +161,11 @@ export default function TrustPage() {
                                 <div className="absolute -inset-4 bg-sandstone/10 rounded-[3rem] transform -rotate-3" />
                                 <div className="relative aspect-[3/4] rounded-[2.5rem] overflow-hidden shadow-2xl bg-slate-200">
                                     {inspiration.image ? (
-                                        <Image 
-                                            src={inspiration.image} 
+                                        <Image
+                                            src={inspiration.image}
                                             alt={inspiration.name}
                                             fill
-                                            className="object-cover"
+                                            className="object-contain"
                                             unoptimized
                                         />
                                     ) : (
@@ -180,7 +180,7 @@ export default function TrustPage() {
                                 <h2 className="text-4xl md:text-5xl font-black text-oxford mb-8">
                                     {inspiration.name}
                                 </h2>
-                                <div 
+                                <div
                                     className="text-oxford/70 text-lg leading-relaxed space-y-6 prose prose-lg prose-sandstone max-w-none"
                                     dangerouslySetInnerHTML={{ __html: inspiration.description }}
                                 />
