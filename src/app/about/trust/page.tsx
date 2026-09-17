@@ -109,7 +109,7 @@ export default function TrustPage() {
                                 viewport={{ once: true }}
                                 className="text-4xl md:text-5xl font-black text-oxford"
                             >
-                                Our Founder Pillers
+                                Our Founder Pillars
                             </motion.h2>
                             <div className="w-20 h-1 bg-sandstone mx-auto mt-4 rounded-full" />
                         </div>
